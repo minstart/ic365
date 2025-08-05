@@ -40,7 +40,7 @@
 			</view>
 			<view class="team-task-wrap">
 				<view class="item-title-wrap">
-					<h3 class="item-title team-task-title">组队任务</h3>
+					<h3 class="item-title">组队任务</h3>
 				</view>
 				<ul class="team-task-list-wrap">
 					<li class="team-task-list" v-for="item in teamTask" :colorScheme="item.colorScheme">
@@ -76,8 +76,39 @@
 			</view>
 			<view class="my-team-wrap">
 				<view class="item-title-wrap">
-					<h3 class="item-title my-team-title">组队情况</h3>
+					<h3 class="item-title my-team-title">我的队伍</h3>
+					<view class="item-more" style="color: #79D183;">3名成员</view>
 				</view>
+				<ul class="team-list-wrap">
+					<li class="team-list" v-for="item in myTeam">
+						<image class="list-avatar" :src="item.avatar"></image>
+						<h3 class="list-nickname">{{item.nickname}}同学</h3>
+						<view class="list-time green">{{item.time}}</view>
+					</li>
+					<li class="team-list invite">
+						<view class="list-avatar"></view>
+						<h3 class="list-nickname">邀请好友</h3>
+						<view class="list-time"></view>
+					</li>
+				</ul>
+			</view>
+			<view class="team-dynamics-wrap">
+				<view class="item-title-wrap">
+					<h3 class="item-title">队伍动态</h3>
+				</view>
+				<ul class="dynamics-list-wrap">
+					<li class="dynamics-list" v-for="item in dynamics">
+						<image class="list-avatar" :src="item.avatar"></image>
+						<view class="list-info-wrap">
+							<view class="list-info">
+								<h3 class="list-info-name" v-if="item.nickname">{{item.nickname}}</h3>
+								<span class="list-info-action">{{item.action}}</span>
+								<h3 class="task-name">{{item.taskName}}</h3>
+							</view>
+							<view class="list-subtitle">{{item.subtitle}}</view>
+						</view>
+					</li>
+				</ul>
 			</view>
 		</view>
 	</view>
@@ -136,6 +167,45 @@
 						currencyTypeId: 1,
 						limit: true
 					},
+				],
+				myTeam: [{
+						avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						nickname: "晓东",
+						time: "30分钟"
+					},
+					{
+						avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						nickname: "凛冬",
+						time: "30分钟"
+					},
+					{
+						avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						nickname: "小南",
+						time: "0分钟"
+					}
+				],
+				dynamics:[
+					{
+						avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						nickname: "晓东",
+						action:"完成了",
+						taskName:"分数联系",
+						subtitle:"2小时前 · 获得20知识尘"
+					},
+					{
+						avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						nickname: "小刚",
+						action:"加入了队伍",
+						// taskName:"分数联系",
+						subtitle:"今天 · 08:35"
+					},
+					{
+						avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						// nickname: "晓东",
+						action:"团队达成了",
+						taskName:"周学习目标",
+						subtitle:"昨天 · 获得100智慧星"
+					}
 				]
 			}
 		},
@@ -334,10 +404,6 @@
 
 	// 组队任务 ------Start
 	.team-task-wrap {
-		.team-task-title {
-			background: url("/static/image/3_team_task_title.png") no-repeat top / 100% 100%;
-		}
-
 		.team-task-list-wrap {
 			.team-task-list {
 				border-radius: 1rem;
@@ -434,35 +500,136 @@
 				border-radius: 0.5rem;
 				text-align: center;
 				padding: 1.25rem;
-				.info-num{
+
+				.info-num {
 					padding-bottom: 0.3125rem;
 					line-height: 1.75rem;
 				}
-				.info-title{
+
+				.info-title {
 					color: #666;
 					font-size: 0.875rem;
 				}
+
 				&:nth-child(1) {
 					background-color: #E8F9FF;
 					margin-right: 0.6875rem;
-					.info-num{
+
+					.info-num {
 						color: #11a9d5;
 					}
 				}
 
 				&:nth-child(2) {
 					background-color: #EBFDEA;
-					.info-num{
+
+					.info-num {
 						color: #11CB66;
 					}
 				}
 			}
 		}
 	}
+
 	// 组队情况 ------End
 	// 我的队伍 ------Start
-	.my-team-wrap{
-		
+	.my-team-wrap {
+		.team-list-wrap {
+			overflow: hidden;
+			background: #E4FDE2;
+			border-radius: 1rem;
+			border: 0.125rem solid #56D279;
+			padding: 1.75rem 0.75rem;
+
+			.team-list {
+				float: left;
+				width: calc(100%/3 - 0.35rem);
+				background: #fff;
+				text-align: center;
+				border-radius: 0.5rem;
+				margin: 1.7rem 0 1.875rem 0;
+				padding-bottom: 1rem;
+
+				.list-avatar {
+					width: 3.375rem;
+					height: 3.375rem;
+					border-radius: 50%;
+					margin-top: -1.7rem;
+					display: inline-block;
+				}
+
+				.list-nickname {
+					font-size: 1rem;
+					line-height: 1.375rem;
+					margin-top: 1rem;
+					margin-bottom: 0.25rem;
+				}
+				.list-time{
+					min-height: 1.31rem;
+					color: #999;
+				}
+				.green{
+					color: #0CB96F;
+				}
+
+				&:not(:nth-child(3n)) {
+					margin-right: 0.5rem;
+				}
+			}
+
+			.invite {
+				.list-avatar {
+					background: url("/static/icons/invite.png") no-repeat top /100% 100%;
+				}
+			}
+		}
 	}
 	// 我的队伍 ------End
+	
+	// 队伍动态 ------Start
+	.team-dynamics-wrap{
+		.dynamics-list-wrap{
+			.dynamics-list{
+				display: flex;
+				margin-bottom: 0.75rem;
+				padding:1rem 0.75rem;
+				background-color: #F6F6F6;
+				border-radius: 1rem;
+				.list-avatar{
+					width: 3.375rem;
+					height: 3.375rem;
+					border-radius: 50%;
+					margin-right: 0.5rem;
+				}
+				.list-info-wrap{
+					flex: 1;
+					.list-info{
+						line-height: 1.56rem;
+						color: #222;
+						.list-info-name{
+							font-size: 1.125rem;
+							display: inline-block;
+							margin-right:0.5rem;
+							
+						}
+						.list-info-action{
+							font-size: 1rem;
+							margin-right:0.5rem;
+						}
+						.task-name{
+							font-size: 1.125rem;
+							color: #79d183;
+							display: inline-block;
+						}
+					}
+					.list-subtitle{
+						font-size: 0.875rem;
+						color: #999;
+						margin-top: 0.2rem;
+					}
+				}
+			}
+		}
+	}
+	// 队伍动态 ------End
 </style>
