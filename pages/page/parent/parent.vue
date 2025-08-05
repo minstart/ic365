@@ -60,7 +60,7 @@
 	<view class="plan-recommend-wrap uni-padding-wrap">
 		<view class="ability-analysis-wrap">
 			<view class="item-title-wrap">
-				<h3 class="item-title achievement-title">最新成就</h3>
+				<h3 class="item-title">最新成就</h3>
 				<view class="item-more">
 					<view class="text icon-more" @click="jumpPage({url:''})">详情</view>
 				</view>
@@ -84,7 +84,7 @@
 		</view>
 		<view class="suggestion-wrap">
 			<view class="item-title-wrap">
-				<h3 class="item-title suggestion-title">提升建议</h3>
+				<h3 class="item-title">提升建议</h3>
 				<view class="item-more">
 					<view class="text icon-more" @click="jumpPage({url:''})">全部</view>
 				</view>
@@ -103,7 +103,7 @@
 		<view class="property-wrap">
 			<!-- 学习资产 -->
 			<view class="item-title-wrap">
-				<h3 class="item-title property-title">学习资产</h3>
+				<h3 class="item-title">学习资产</h3>
 				<view class="item-more">
 					<view class="text icon-more" @click="jumpPage({url:''})">兑换记录</view>
 				</view>
@@ -135,7 +135,7 @@
 		</view>
 		<view class="information-wrap">
 			<view class="item-title-wrap">
-				<h3 class="item-title information-title">系统资讯</h3>
+				<h3 class="item-title">系统资讯</h3>
 				<view class="item-more">
 					<view class="text icon-more" @click="jumpPage({url:''})">更多</view>
 				</view>
@@ -505,9 +505,6 @@
 
 	// 能力分析 ------Start
 	.ability-analysis-wrap{
-		.achievement-title {
-			background: url("/static/image/4_ability_analysis_title.png") no-repeat center / 100% 100%;
-		}
 		.charts-box-wrap{
 			margin: 1.125rem 0 2rem 0;
 			padding-bottom: 1rem;
@@ -570,9 +567,6 @@
 	
 	// 提升建议 ------Start
 	.suggestion-wrap{
-		.suggestion-title{
-			background: url("/static/image/4_suggestion_title.png") no-repeat center / 100% 100%;
-		}
 		.suggestion-list-wrap{
 			.suggestion-list{
 				margin: 0.6878rem 0 1.3756rem 0;
@@ -615,9 +609,6 @@
 	
 	// 学习资料 ------Start
 	.property-wrap{
-		.property-title{
-			background: url("/static/image/4_property_title.png") no-repeat center / 100% 100%;
-		}
 		.property{
 			display: flex;
 			margin-bottom: 1.25rem;
@@ -652,9 +643,6 @@
 	
 	// 系统资讯 ------Start
 	.information-wrap{
-		.information-title{
-			background: url("/static/image/4_information_title.png") no-repeat center / 100% 100%;
-		}
 		.information-list-wrap{
 			.information-list{
 				background: #F9F9F9;

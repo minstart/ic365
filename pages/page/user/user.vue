@@ -108,8 +108,8 @@
 			<!-- 兑换商城 ------Start -->
 			<view class="exchange-wrap">
 				<view class="item-title-wrap">
-					<h3 class="item-title exchange-title">兑换商城</h3>
-					<span class="item-subtitle">限时兑换</span>
+					<h3 class="item-title">兑换商城</h3>
+					<view class="item-subtitle">限时兑换</view>
 					<view class="item-more">
 						<view class="text icon-more" @click="jumpPage({url:''})">查看更多</view>
 					</view>
@@ -701,10 +701,6 @@
 	}
 
 	.exchange-wrap {
-		.exchange-title {
-			background: url("/static/image/5_exchange_title.png") no-repeat center / 100% 100%;
-		}
-
 		.exchange-list-wrap {
 			.exchange-list {
 				display: flex;

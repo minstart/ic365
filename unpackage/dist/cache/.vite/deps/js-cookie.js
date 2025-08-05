@@ -1,6 +1,6 @@
 import "./chunk-P2LSHJDD.js";
 
-// C:/Users/Administrator/Desktop/ic365/node_modules/js-cookie/dist/js.cookie.mjs
+// C:/Users/71018/Desktop/ic365/node_modules/js-cookie/dist/js.cookie.mjs
 function assign(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i];

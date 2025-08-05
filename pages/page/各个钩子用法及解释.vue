@@ -9,7 +9,9 @@
 	<view class="item-title-wrap">
 		<h3 class="item-title">最新成就</h3>
 		<view class="item-subtitle">AI智能推荐</view>
-		<view class="item-more" @click="jumpPage({url:''})">查看全部<span class="icon-more"></span></view>
+		<view class="item-more">
+			<view class="text icon-more" @click="jumpPage({url:''})">详情</view>
+		</view>
 	</view>
 </template>
 

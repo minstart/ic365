@@ -86,7 +86,9 @@
 		<view class="plan-recommend-wrap uni-padding-wrap">
 			<view class="item-title-wrap">
 				<h3 class="item-title">最新成就</h3>
-				<view class="item-more" @click="jumpPage({url:''})">查看全部<span class="icon-more"></span></view>
+				<view class="item-more">
+					<view class="text icon-more" @click="jumpPage({url:''})">查看全部</view>
+				</view>
 			</view>
 			<view class="achievement-wrap">
 				<image class="achievement-back" src="/static/image/1_achievement_back.png"></image>
