@@ -1,0 +1,54 @@
+.page-head[data-v-e80b2f0b] {
+  z-index: 999;
+}
+.reserve-seat[data-v-e80b2f0b] {
+  height: 2.6rem;
+}
+.common-page-head[data-v-e80b2f0b] {
+  display: flex;
+  /* 定义弹性容器 */
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+}
+.common-page-head .common-page-head-back[data-v-e80b2f0b],
+.common-page-head .common-page-head-module[data-v-e80b2f0b] {
+  flex: 1;
+  position: relative;
+}
+.common-page-head .common-page-head-back *[data-v-e80b2f0b],
+.common-page-head .common-page-head-module *[data-v-e80b2f0b] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 2rem;
+  height: 2rem;
+}
+.common-page-head .common-page-head-title[data-v-e80b2f0b] {
+  flex: 4;
+  border-width: 0;
+  color: #333;
+}
+.common-page-head .page-head-back-icon[data-v-e80b2f0b] {
+  background: url("../../../static/icons/back_grey.png") no-repeat center / 100% 100%;
+}
+.common-page-head .page-head-module-icon[data-v-e80b2f0b] {
+  width: 2.125rem;
+  height: 2.125rem;
+}
+
+
+.page-body-wrapper {
+        text-align: center;
+}
+.canvas {
+        width: 19.0625rem;
+        height: 19.0625rem;
+        margin: auto;
+        background-color: #fff;
+}

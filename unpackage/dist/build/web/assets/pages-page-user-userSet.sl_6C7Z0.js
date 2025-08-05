@@ -1,0 +1,1 @@
+import{_ as a}from"./_plugin-vue_export-helper.BCo6x5W8.js";const e=a({data:()=>({showSetTabBarPage:!1,notForPc:[{name:"TabBar",url:"set-tabbar"}]}),onLoad(){},onReady(){},methods:{}},[["render",function(a,e,r,o,t,n){return null}]]);export{e as default};

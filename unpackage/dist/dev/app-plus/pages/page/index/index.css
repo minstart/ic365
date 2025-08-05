@@ -1,0 +1,517 @@
+.page-head[data-v-e80b2f0b] {
+  z-index: 999;
+}
+.reserve-seat[data-v-e80b2f0b] {
+  height: 2.6rem;
+}
+.common-page-head[data-v-e80b2f0b] {
+  display: flex;
+  /* 定义弹性容器 */
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+}
+.common-page-head .common-page-head-back[data-v-e80b2f0b],
+.common-page-head .common-page-head-module[data-v-e80b2f0b] {
+  flex: 1;
+  position: relative;
+}
+.common-page-head .common-page-head-back *[data-v-e80b2f0b],
+.common-page-head .common-page-head-module *[data-v-e80b2f0b] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 2rem;
+  height: 2rem;
+}
+.common-page-head .common-page-head-title[data-v-e80b2f0b] {
+  flex: 4;
+  border-width: 0;
+  color: #333;
+}
+.common-page-head .page-head-back-icon[data-v-e80b2f0b] {
+  background: url("../../../static/icons/back_grey.png") no-repeat center / 100% 100%;
+}
+.common-page-head .page-head-module-icon[data-v-e80b2f0b] {
+  width: 2.125rem;
+  height: 2.125rem;
+}
+
+
+body {
+    min-height: 100%;
+    height: auto;
+}
+
+/* 解决头条小程序字体图标不显示问题，因为头条运行时自动插入了span标签，且有全局字体 */
+.uni-icon {
+    font-family: uniicons;
+    font-weight: normal;
+}
+.uni-container {
+    padding: 15px;
+    background-color: #f8f8f8;
+}
+.uni-header-logo {
+
+
+
+    padding: 15px 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.3125rem;
+}
+.uni-header-image {
+    width: 80px;
+    height: 80px;
+}
+.uni-hello-text {
+    margin-bottom: 20px;
+}
+.hello-text {
+    color: #7A7E83;
+    font-size: 14px;
+    line-height: 20px;
+}
+.hello-link {
+    color: #7A7E83;
+    font-size: 14px;
+    line-height: 20px;
+}
+.uni-panel {
+    margin-bottom: 12px;
+}
+.uni-panel-h {
+
+
+
+    background-color: #ffffff;
+    flex-direction: row !important;
+	/* justify-content: space-between !important; */
+    align-items: center !important;
+    padding: 12px;
+}
+/*
+.uni-panel-h:active {
+    background-color: #f8f8f8;
+}
+ */
+.uni-panel-h-on {
+    background-color: #f0f0f0;
+}
+.uni-panel-text {
+    flex: 1;
+    color: #000000;
+    font-size: 14px;
+    font-weight: normal;
+}
+.uni-panel-icon {
+    margin-left: 15px;
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+    transform: rotate(0deg);
+    transition-duration: 0s;
+    transition-property: transform;
+}
+.uni-panel-icon-on {
+    transform: rotate(180deg);
+}
+.uni-navigate-item {
+
+
+
+    flex-direction: row;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-top-style: solid;
+    border-top-color: #f0f0f0;
+    border-top-width: 1px;
+    padding: 12px;
+}
+.uni-navigate-item:active {
+    background-color: #f8f8f8;
+}
+.uni-navigate-text {
+    flex: 1;
+    color: #000000;
+    font-size: 14px;
+    font-weight: normal;
+}
+.uni-navigate-icon {
+    margin-left: 15px;
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.banner-wrap[data-v-5040744a] {
+  padding: 1.25rem 0.75rem 0 0.75rem;
+  padding-top: 1.5rem;
+  background: url("../../../static/image/1_header_banner.png") no-repeat top / 100%;
+}
+.banner-wrap .user-info-wrap[data-v-5040744a] {
+  display: flex;
+  margin-bottom: 3rem;
+}
+.banner-wrap .user-info-wrap .head-pic[data-v-5040744a] {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+  margin-right: 0.5rem;
+}
+.banner-wrap .user-info-wrap .user-info .name[data-v-5040744a] {
+  margin: 0.2rem 0;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list[data-v-5040744a] {
+  overflow: hidden;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list[data-v-5040744a] {
+  float: left;
+  margin-right: 0.8rem;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[data-v-5040744a] {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  margin-right: 0.56rem;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type="star"][data-v-5040744a] {
+  background-image: url("../../../static/icons/star.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type="stone"][data-v-5040744a] {
+  background-image: url("../../../static/icons/stone.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type="dust"][data-v-5040744a] {
+  background-image: url("../../../static/icons/dust.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .number[data-v-5040744a] {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: #EB7D1E;
+}
+.banner-wrap .banner-text-wrap[data-v-5040744a] {
+  color: #00362B;
+  margin-left: 1rem;
+  font-size: 1.1rem;
+}
+.banner-wrap .banner-text-wrap *[data-v-5040744a] {
+  text-shadow: 0px 2px 3px #fff;
+}
+.banner-wrap .banner-text-wrap .banner-text-title[data-v-5040744a] {
+  margin-bottom: 0.6rem;
+  font-size: 1.06rem;
+}
+.banner-wrap .banner-text-wrap .banner-text-content[data-v-5040744a] {
+  margin-bottom: 0.2rem;
+  font-size: 0.93rem;
+  display: block;
+}
+.banner-wrap .banner-text-wrap .banner-text-contentFrom[data-v-5040744a] {
+  font-size: 0.8rem;
+}
+.banner-wrap .activity-wrap[data-v-5040744a] {
+  margin-top: 4.4rem;
+  display: flex;
+}
+.banner-wrap .activity-wrap .activity[data-v-5040744a] {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.6rem;
+  height: 7.375rem;
+}
+.plan-wrap[data-v-5040744a] {
+  margin-bottom: 1rem;
+}
+.plan-wrap .no-plan-list[data-v-5040744a] {
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
+.plan-wrap .plan-list-wrap .plan-list[data-v-5040744a] {
+  margin: 0.75rem 0;
+  position: relative;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-background[data-v-5040744a] {
+  width: 100%;
+  height: 6.5rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-type-back[data-v-5040744a] {
+  width: 1.9rem;
+  height: 1.7rem;
+  line-height: 1.5rem;
+  font-size: 0.75rem;
+  color: #fff;
+  padding-left: 0.3rem;
+  position: absolute;
+  left: -0.2rem;
+  top: 1rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-icon[data-v-5040744a] {
+  width: 4.43rem;
+  height: 4.43rem;
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap[data-v-5040744a] {
+  position: absolute;
+  top: 1rem;
+  right: 0.75rem;
+  width: 13.375rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  display: inline-block;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward[data-v-5040744a] {
+  display: inline-block;
+  padding: 0.375rem 0.5rem;
+  background-color: #fff;
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 500;
+  margin-left: 0.4rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward .plan-reward-icon[data-v-5040744a] {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  margin-right: 0.2rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 0.75rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-require[data-v-5040744a] {
+  position: absolute;
+  top: 2.8rem;
+  right: 0.75rem;
+  width: 13.375rem;
+  font-size: 0.75rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .progress-wrap[data-v-5040744a] {
+  position: absolute;
+  bottom: 1.4rem;
+  right: 0.75rem;
+  width: 13.375rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .time-limited-wrap[data-v-5040744a] {
+  position: absolute;
+  bottom: 1.1rem;
+  right: 0.75rem;
+  width: 13.375rem;
+  overflow: hidden;
+}
+.plan-wrap .plan-list-wrap .plan-list .time-limited-wrap .time-limited[data-v-5040744a] {
+  padding: 0 0.3rem 0 1rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #fff;
+  line-height: 1.3rem;
+  display: inline-block;
+  background: url("../../../static/image/1_time_limited.png") no-repeat left / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"][data-v-5040744a] {
+  background: #FFF2EA;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label1.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #712A02;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #CA8417;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-require[data-v-5040744a] {
+  color: #CA590B;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"][data-v-5040744a] {
+  background: #FFEFF3;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label2.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #FC4148;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #FE6268;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-require[data-v-5040744a] {
+  color: #E95C61;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"][data-v-5040744a] {
+  background: #EBFDEA;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label3.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #004264;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #00A8DC;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-require[data-v-5040744a] {
+  color: #008BD0;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"][data-v-5040744a] {
+  background: #EBFDEA;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label4.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #51750E;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #0A9E19;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-require[data-v-5040744a] {
+  color: #0A9E19;
+}
+.plan-recommend-list-wrap[data-v-5040744a] {
+  display: flex;
+}
+.plan-recommend-list-wrap .plan-recommend-list[data-v-5040744a] {
+  flex: 1;
+  margin-right: 0.68rem;
+}
+.plan-recommend-list-wrap .plan-recommend-list .list-icon[data-v-5040744a] {
+  width: 100%;
+  height: 7.5rem;
+}
+.plan-recommend-list-wrap .plan-recommend-list[data-v-5040744a]:last-child {
+  margin-right: 0;
+}
+.all-achievement[data-v-5040744a] {
+  float: right;
+  color: #999999;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.all-achievement .more-icon[data-v-5040744a] {
+  width: 0.5rem;
+  height: 0.8rem;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.25rem 0.2rem;
+}
+.achievement-wrap[data-v-5040744a] {
+  margin: 1rem 0;
+  position: relative;
+}
+.achievement-wrap .achievement-back[data-v-5040744a] {
+  width: 100%;
+  height: 23.625rem;
+}
+.achievement-wrap .achievement-statistics[data-v-5040744a] {
+  font-size: 1rem;
+  color: #FFFFFF;
+  position: absolute;
+  top: 0.4rem;
+  left: 81%;
+  font-weight: 500;
+}
+.achievement-wrap .recently-achievement[data-v-5040744a] {
+  position: absolute;
+  top: 1.6rem;
+  width: 90%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.achievement-wrap .recently-achievement .achievement-head-pic[data-v-5040744a] {
+  width: 5.25rem;
+  height: 5.25rem;
+  display: inline-block;
+  margin-right: 1rem;
+}
+.achievement-wrap .recently-achievement .achievement-info[data-v-5040744a] {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 13rem;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-name[data-v-5040744a] {
+  font-size: 1.25rem;
+  color: #0E562F;
+  font-weight: 700;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-from[data-v-5040744a] {
+  font-size: 0.9rem;
+  color: #09916A;
+  margin: 0.2rem 0 0.5rem 0;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-time[data-v-5040744a] {
+  color: #065E4F;
+  font-size: 0.81rem;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-time .achievement-rare[data-v-5040744a] {
+  color: #EB7D1E;
+  background: #FFFBDB;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.2rem;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-time .achievement-rare .achievement-rare-icon[data-v-5040744a] {
+  width: 0.75rem;
+  height: 0.75rem;
+  padding-right: 0.1rem;
+}
+.achievement-wrap .more-achievement[data-v-5040744a] {
+  width: 100%;
+  position: absolute;
+  top: 13rem;
+  display: flex;
+}
+.achievement-wrap .more-achievement .achievement-list[data-v-5040744a] {
+  text-align: center;
+  flex: 1;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-pic[data-v-5040744a] {
+  width: 4.625rem;
+  height: 4.625rem;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-back[data-v-5040744a] {
+  width: 3.56rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #79D183;
+  opacity: 0.45;
+  margin: 0.2rem auto;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-name[data-v-5040744a] {
+  color: #0E562F;
+  font-size: 1.06rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-time[data-v-5040744a] {
+  color: #09916A;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+}
