@@ -44,6 +44,7 @@
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
 							</view>
+							
 							<view class="no-list-tip" v-if="searchResult[i].list && searchResult[i].list.length==0">暂无数据</view>
 							<view class="tab-list" v-for="item2 in searchResult[i].list">
 								<image class="list-icon" :src="item2.coverImage" mode=""></image>
