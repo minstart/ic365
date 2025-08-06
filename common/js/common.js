@@ -36,7 +36,7 @@ async function fetchData(data) {
 			method: data.method || 'get',
 			data: data.data
 		}).finally(() => {
-			uni.hideLoading()
+			!data.notLoading && uni.hideLoading()
 		})
 	} catch (error) {
 		console.error('校验加密数据失败:', error);
@@ -125,12 +125,13 @@ export default {
 		// url请求路径
 		// dataType 数据返回类型
 		// method发起请求类型
+		// notLoading 是否显示loading图标
 		// .then() //成功返回
 		// .catch() //失败返回
 		// .finally()
 		commonRequest(data) {
 			this.consoleLog("请求前的传参：", data)
-			uni.showLoading();
+			!data.notLoading && uni.showLoading();
 			return fetchData(data)
 
 			// let successFn = data.success ? data.success : () => {};
@@ -247,7 +248,35 @@ export default {
 			if(type == "all" || type == "toast"){
 				uni.hideToast();
 			}
-		}
+		},
 		
+		// 奖励图标
+		rewardIcon(id) {
+			switch (id) {
+				case 1:
+					// 智慧星
+					return "/static/icons/star.png";
+					break;
+				case 2:
+					// 知识尘
+					return "/static/icons/dust.png";
+					break;
+				case 3:
+					// 启明石
+					return "/static/icons/stone.png";
+					break;
+				case 4:
+					// 丰硕穗
+					break;
+				case 5:
+					// 圣诞欢乐颂
+					return "/static/icons/christmas.png";
+					break;
+				case 6:
+					// 课程
+					break;
+			}
+		},
+				
 	}
 }

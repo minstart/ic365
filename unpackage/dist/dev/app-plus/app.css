@@ -3734,7 +3734,7 @@ body,
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-uni-page-body {
+.page-wrap {
   padding-bottom: 1.875rem;
 }
 ul, li {

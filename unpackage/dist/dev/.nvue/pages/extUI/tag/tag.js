@@ -98,7 +98,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT, CLASS, STYLE */
   )) : createCommentVNode("v-if", true);
 }
-const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
+const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
 const _style_0 = { "example-body": { "": { "flexDirection": "row", "justifyContent": "flex-start", "alignItems": "flex-end", "flexWrap": "wrap" } }, "tag-view": { "": { "marginRight": 10 } } };
 const _sfc_main = {
   components: {},
@@ -403,7 +403,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const tag = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/tag/tag.nvue"]]);
+const tag = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/tag/tag.nvue"]]);
 export {
   tag as default
 };

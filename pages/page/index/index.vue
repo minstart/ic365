@@ -348,7 +348,7 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.msg || "获取用户信息失败!",
+							title: res.message|| "获取用户信息失败!",
 							icon: "none"
 						});
 					}
@@ -367,7 +367,7 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.msg || "获取最新成就失败!",
+							title: res.message|| "获取最新成就失败!",
 							icon: "none"
 						});
 					}
@@ -386,7 +386,7 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.msg || "获取推荐学习失败!",
+							title: res.message|| "获取推荐学习失败!",
 							icon: "none"
 						});
 					}
@@ -468,33 +468,6 @@
 					case 8:
 						// 图形拼图
 						return "/static/image/1_task_jigsaw.png";
-						break;
-				}
-			},
-			// 奖励图标
-			rewardIcon(id) {
-				switch (id) {
-					case 1:
-						// 智慧星
-						return "/static/icons/star.png";
-						break;
-					case 2:
-						// 知识尘
-						return "/static/icons/dust.png";
-						break;
-					case 3:
-						// 启明石
-						return "/static/icons/stone.png";
-						break;
-					case 4:
-						// 丰硕穗
-						break;
-					case 5:
-						// 圣诞欢乐颂
-						return "/static/icons/christmas.png";
-						break;
-					case 6:
-						// 课程
 						break;
 				}
 			},

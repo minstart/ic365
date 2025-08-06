@@ -689,9 +689,6 @@ to {
   margin: 0 auto;
   height: 13.375rem;
 }
-.ability-analysis-wrap .achievement-title[data-v-1185e19c] {
-  background: url("../../../static/image/4_ability_analysis_title.png") no-repeat center / 100% 100%;
-}
 .ability-analysis-wrap .charts-box-wrap[data-v-1185e19c] {
   margin: 1.125rem 0 2rem 0;
   padding-bottom: 1rem;
@@ -737,9 +734,6 @@ to {
   padding-left: 1.4rem;
   background: url("../../../static/icons/improve.png") no-repeat left / 0.875rem 1rem;
 }
-.suggestion-wrap .suggestion-title[data-v-1185e19c] {
-  background: url("../../../static/image/4_suggestion_title.png") no-repeat center / 100% 100%;
-}
 .suggestion-wrap .suggestion-list-wrap .suggestion-list[data-v-1185e19c] {
   margin: 0.6878rem 0 1.3756rem 0;
   overflow: hidden;
@@ -776,9 +770,6 @@ to {
   width: -webkit-fit-content;
   width: fit-content;
 }
-.property-wrap .property-title[data-v-1185e19c] {
-  background: url("../../../static/image/4_property_title.png") no-repeat center / 100% 100%;
-}
 .property-wrap .property[data-v-1185e19c] {
   display: flex;
   margin-bottom: 1.25rem;
@@ -807,9 +798,6 @@ to {
 .property-wrap .property .property-item .item-info-title[data-v-1185e19c] {
   font-size: 0.875rem;
   color: #999999;
-}
-.information-wrap .information-title[data-v-1185e19c] {
-  background: url("../../../static/image/4_information_title.png") no-repeat center / 100% 100%;
 }
 .information-wrap .information-list-wrap .information-list[data-v-1185e19c] {
   background: #F9F9F9;

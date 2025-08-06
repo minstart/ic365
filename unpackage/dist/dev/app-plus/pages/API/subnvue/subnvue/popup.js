@@ -63,16 +63,16 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue = __toESM(require_vue());
   function getCurrentSubNVue() {
     return uni.getSubNVueById(plus.webview.currentWebview().id);
   }
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/popup.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/popup.js
   var import_vue2 = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -81,7 +81,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/popup.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/popup.js
   var _style_0 = { "wrapper": { "": { "flexDirection": "column", "justifyContent": "space-between", "paddingTop": "10rpx", "paddingRight": "15rpx", "paddingBottom": "10rpx", "paddingLeft": "15rpx", "backgroundColor": "#F4F5F6", "borderRadius": "4rpx" } }, "title": { "": { "height": "100rpx", "lineHeight": "100rpx", "borderBottomStyle": "solid", "borderBottomWidth": "1rpx", "borderBottomColor": "#CBCBCB", "flex": 0, "fontSize": "30rpx" } }, "scroller": { "": { "height": "400rpx", "paddingTop": "8rpx", "paddingRight": "15rpx", "paddingBottom": "8rpx", "paddingLeft": "15rpx" } }, "content": { "": { "color": "#555555", "fontSize": "32rpx" } }, "message-wrapper": { "": { "flex": 0, "borderTopStyle": "solid", "borderTopWidth": "1rpx", "borderTopColor": "#CBCBCB", "height": "80rpx", "alignItems": "flex-end" } }, "send-message": { "": { "fontSize": "30rpx", "lineHeight": "80rpx", "color": "#00CE47", "marginLeft": "20rpx" } }, "cell": { "": { "marginTop": "10rpx", "marginRight": "10rpx", "marginBottom": "10rpx", "marginLeft": "10rpx", "paddingTop": "20rpx", "paddingRight": 0, "paddingBottom": "20rpx", "paddingLeft": 0, "top": "10rpx", "alignItems": "center", "justifyContent": "center", "borderRadius": "10rpx", "backgroundColor": "#5989B9" } }, "text": { "": { "fontSize": "30rpx", "textAlign": "center", "color": "#FFFFFF" } } };
   var _sfc_main = {
     data() {
@@ -180,7 +180,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var popup = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/subnvue/subnvue/popup.nvue"]]);
+  var popup = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/subnvue/subnvue/popup.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

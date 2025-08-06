@@ -385,29 +385,6 @@
 				this.userInfo.avatar = '/static/image/head_pic.png';
 				return '/static/image/head_pic.png';
 			},
-			// 奖励图标
-			rewardIcon(id) {
-				switch (id) {
-					case 1:
-						// 智慧星
-						return "/static/icons/star.png";
-					case 2:
-						// 知识尘
-						return "/static/icons/dust.png";
-					case 3:
-						// 启明石
-						return "/static/icons/stone.png";
-					case 4:
-						// 丰硕穗
-						break;
-					case 5:
-						// 圣诞欢乐颂
-						break;
-					case 6:
-						// 课程
-						break;
-				}
-			},
 			clickTab(i) {
 				if (this.current !== i) {
 					this.current = i
