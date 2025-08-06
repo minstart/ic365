@@ -87,7 +87,7 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">最新成就</h3>
 				<view class="item-more">
-					<view class="text icon-more" @click="jumpPage({url:''})">查看全部</view>
+					<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/achievementDetails'})">查看全部</view>
 				</view>
 			</view>
 			<view class="achievement-wrap">

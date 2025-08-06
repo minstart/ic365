@@ -26,27 +26,29 @@
 				"navigationBarTitleText": "补充信息",
 				"navigationStyle": "custom"
 			}
-		}
-
-		, {
+		}, 
+		{
 			"path": "pages/page/study/study",
 			"style": {
 				"navigationBarTitleText": "学习",
 				"navigationStyle": "custom"
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/page/team/team",
 			"style": {
 				"navigationBarTitleText": "队伍",
 				"navigationStyle": "custom"
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/page/parent/parent",
 			"style": {
 				"navigationBarTitleText": "家长",
 				"navigationStyle": "custom"
 			}
-		}, {
+		},
+		{
 			"path": "pages/page/user/user",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -57,6 +59,13 @@
 			"path": "pages/page/user/userSet",
 			"style": {
 				"navigationBarTitleText": "我的设置",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/page/user/achievementDetails",
+			"style": {
+				"navigationBarTitleText": "成就中心",
 				"navigationStyle": "custom"
 			}
 		},

@@ -1521,6 +1521,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     },
     {
+      path: "pages/page/user/achievementDetails",
+      style: {
+        navigationBarTitleText: "\u6210\u5C31\u4E2D\u5FC3",
+        navigationStyle: "custom"
+      }
+    },
+    {
       path: "pages/page/login/login",
       style: {
         navigationBarTitleText: "\u767B\u5F55",

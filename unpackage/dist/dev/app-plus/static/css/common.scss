@@ -64,6 +64,20 @@ ul,li{
 	}
 }
 
+// tab一行显示允许横向滚动
+.tab-overflow-bar{
+	width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding-bottom: 0.5rem;
+	.tab-wrap{
+		
+		width: max-content;
+		.tab{
+			float: left;
+		}
+	}
+}
 
 
 // 修改默认样式颜色为主题色

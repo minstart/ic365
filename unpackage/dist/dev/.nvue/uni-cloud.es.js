@@ -62,6 +62,13 @@ const pages = [
     }
   },
   {
+    path: "pages/page/user/achievementDetails",
+    style: {
+      navigationBarTitleText: "成就中心",
+      navigationStyle: "custom"
+    }
+  },
+  {
     path: "pages/page/login/login",
     style: {
       navigationBarTitleText: "登录",

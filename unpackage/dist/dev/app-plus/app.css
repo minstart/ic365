@@ -3787,6 +3787,19 @@ ul, li {
   padding-right: 0.9rem;
   background: url("static/icons/next.png") no-repeat right/0.5rem 0.8rem;
 }
+.tab-overflow-bar {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.5rem;
+}
+.tab-overflow-bar .tab-wrap {
+  width: -webkit-max-content;
+  width: max-content;
+}
+.tab-overflow-bar .tab-wrap .tab {
+  float: left;
+}
 uni-button {
   background-color: #F5A623 !important;
   font-size: 1rem;
