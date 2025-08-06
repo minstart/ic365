@@ -3751,11 +3751,11 @@ ul, li {
 }
 .no-list-tip {
   text-align: center;
-  padding: 1rem 0;
+  padding: 1.125rem 0;
   color: #999;
 }
 .item-title-wrap {
-  margin: 2.5rem 0 1.125rem 0;
+  margin: 1.125rem 0 1.125rem 0;
   font-weight: 700;
 }
 .item-title-wrap .item-title {

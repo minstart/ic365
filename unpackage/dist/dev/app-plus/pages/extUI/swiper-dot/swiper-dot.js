@@ -63,7 +63,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue = __toESM(require_vue());
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
@@ -76,10 +76,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return typeof component === "string" ? easycom : component;
   }
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/extUI/swiper-dot/swiper-dot.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/extUI/swiper-dot/swiper-dot.js
   var import_vue3 = __toESM(require_vue());
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -88,7 +88,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-section.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-section.js
   var import_vue2 = __toESM(require_vue());
   var _style_0 = { "uni-section": { "": { "backgroundColor": "#ffffff" } }, "uni-section-header": { ".uni-section ": { "position": "relative", "flexDirection": "row", "alignItems": "center", "paddingTop": 12, "paddingRight": 10, "paddingBottom": 12, "paddingLeft": 10, "fontWeight": "normal" } }, "uni-section-header__decoration": { ".uni-section ": { "marginRight": 6, "backgroundColor": "#2979ff" }, ".uni-section .line": { "width": 4, "height": 12, "borderRadius": 10 }, ".uni-section .circle": { "width": 8, "height": 8, "borderTopRightRadius": 50, "borderTopLeftRadius": 50, "borderBottomLeftRadius": 50, "borderBottomRightRadius": 50 }, ".uni-section .square": { "width": 8, "height": 8 } }, "uni-section-header__content": { ".uni-section ": { "flexDirection": "column", "flex": 1, "color": "#333333" } }, "distraction": { ".uni-section .uni-section-header__content ": { "flexDirection": "row", "alignItems": "center" } }, "uni-section-header__content-sub": { ".uni-section ": { "marginTop": 2 } }, "uni-section-header__slot-right": { ".uni-section ": { "fontSize": 14 } }, "uni-section-content": { ".uni-section ": { "fontSize": 14 } } };
   var _sfc_main = {
@@ -210,9 +210,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       )
     ]);
   }
-  var __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  var __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/extUI/swiper-dot/swiper-dot.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/extUI/swiper-dot/swiper-dot.js
   var _style_0$1 = { "uni-swiper__warp": { "": { "flex": 1, "flexDirection": "column", "position": "relative", "overflow": "hidden" } }, "uni-swiper__dots-box": { "": { "position": "absolute", "bottom": 10, "left": 0, "right": 0, "flex": 1, "flexDirection": "row", "justifyContent": "center", "alignItems": "center" } }, "uni-swiper__dots-item": { "": { "width": 8, "borderRadius": 100, "marginLeft": 6, "backgroundColor": "rgba(0,0,0,0.4)", "marginTop:first-child": 0, "marginRight:first-child": 0, "marginBottom:first-child": 0, "marginLeft:first-child": 0 } }, "uni-swiper__dots-default": { "": { "borderRadius": 100 } }, "uni-swiper__dots-long": { "": { "borderRadius": 50 } }, "uni-swiper__dots-bar": { "": { "borderRadius": 50 } }, "uni-swiper__dots-nav": { "": { "bottom": 0, "paddingTop": 8, "paddingRight": 0, "paddingBottom": 8, "paddingLeft": 0, "flex": 1, "flexDirection": "row", "justifyContent": "flex-start", "alignItems": "center", "backgroundColor": "rgba(0,0,0,0.2)" } }, "uni-swiper__dots-nav-item": { "": { "fontSize": 14, "color": "#ffffff", "marginTop": 0, "marginRight": 15, "marginBottom": 0, "marginLeft": 15 } }, "uni-swiper__dots-indexes": { "": { "justifyContent": "center", "alignItems": "center" } }, "uni-swiper__dots-indexes-text": { "": { "color": "#ffffff", "fontSize": 12, "lineHeight": 14 } } };
   var _sfc_main$1 = {
     name: "UniSwiperDot",
@@ -449,7 +449,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       )) : (0, import_vue3.createCommentVNode)("v-if", true)
     ]);
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-swiper-dot/components/uni-swiper-dot/uni-swiper-dot.vue"]]);
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-swiper-dot/components/uni-swiper-dot/uni-swiper-dot.vue"]]);
   var _style_02 = { "swiper-box": { "": { "height": 200 } }, "swiper-item": { "": { "flexDirection": "column", "justifyContent": "center", "alignItems": "center", "height": 200, "color": "#ffffff" } }, "swiper-item0": { "": { "backgroundColor": "#cee1fd" } }, "swiper-item1": { "": { "backgroundColor": "#b2cef7" } }, "swiper-item2": { "": { "backgroundColor": "#cee1fd" } }, "uni-bg-red": { "": { "backgroundColor": "#ff5a5f" } }, "uni-bg-green": { "": { "backgroundColor": "#09bb07" } }, "uni-bg-blue": { "": { "backgroundColor": "#007aff" } }, "example-body": { "": { "flexDirection": "row", "paddingTop": "20rpx", "paddingRight": "20rpx", "paddingBottom": "20rpx", "paddingLeft": "20rpx" } }, "example-body-item": { "": { "flexDirection": "row", "justifyContent": "center", "alignItems": "center", "marginTop": "15rpx", "marginRight": "15rpx", "marginBottom": "15rpx", "marginLeft": "15rpx", "paddingTop": "15rpx", "paddingRight": "15rpx", "paddingBottom": "15rpx", "paddingLeft": "15rpx", "height": "60rpx", "flex": 1, "borderColor": "#e5e5e5", "borderStyle": "solid", "borderWidth": 1, "borderRadius": 5 } }, "example-body-item-text": { "": { "fontSize": "28rpx", "color": "#333333" } }, "example-body-dots": { "": { "width": "16rpx", "height": "16rpx", "borderRadius": 50, "backgroundColor": "#333333", "marginLeft": "10rpx" } }, "active": { "": { "borderStyle": "solid", "borderColor": "#007aff", "borderWidth": 1 } }, "@FONT-FACE": [{ "uni-swiper-dot-box": { "": { "width": 400, "marginTop": 8 } }, "image": { "": { "width": 100 } } }] };
   var _sfc_main2 = {
     components: {},
@@ -755,7 +755,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var swiperDot = /* @__PURE__ */ _export_sfc(_sfc_main2, [["render", _sfc_render2], ["styles", [_style_02]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/swiper-dot/swiper-dot.nvue"]]);
+  var swiperDot = /* @__PURE__ */ _export_sfc(_sfc_main2, [["render", _sfc_render2], ["styles", [_style_02]], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/swiper-dot/swiper-dot.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

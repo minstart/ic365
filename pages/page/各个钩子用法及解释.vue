@@ -13,6 +13,8 @@
 			<view class="text icon-more" @click="jumpPage({url:''})">详情</view>
 		</view>
 	</view>
+	
+	
 </template>
 
 <script>

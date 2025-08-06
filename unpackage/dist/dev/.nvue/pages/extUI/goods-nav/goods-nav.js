@@ -184,7 +184,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-goods-nav/components/uni-goods-nav/uni-goods-nav.vue"]]);
+const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-goods-nav/components/uni-goods-nav/uni-goods-nav.vue"]]);
 const _style_0 = { "example-body": { "": { "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0 } }, "goods-carts": { "": { "flexDirection": "column", "position": "fixed", "left": 0, "right": 0, "bottom": 0 } } };
 const _sfc_main = {
   components: {},
@@ -318,7 +318,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const goodsNav = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/goods-nav/goods-nav.nvue"]]);
+const goodsNav = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/goods-nav/goods-nav.nvue"]]);
 export {
   goodsNav as default
 };

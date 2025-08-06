@@ -136,7 +136,7 @@ function _sfc_render(_ctx, _cache) {
     ])
   ]);
 }
-const font = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/font/font.nvue"]]);
+const font = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/font/font.nvue"]]);
 export {
   font as default
 };

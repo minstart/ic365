@@ -194,7 +194,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     )
   ]);
 }
-const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
+const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
 const _sfc_main = {
   components: {},
   data() {
@@ -345,7 +345,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const numberBox = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/number-box/number-box.nvue"]]);
+const numberBox = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/number-box/number-box.nvue"]]);
 export {
   numberBox as default
 };

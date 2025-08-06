@@ -185,7 +185,7 @@ __renderjsModules.f9cb76fc = (() => {
     default: () => stdin_default
   });
 
-  // C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/js_sdk/u-charts/u-charts.js
+  // C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/js_sdk/u-charts/u-charts.js
   var config = {
     version: "v2.5.0-20230101",
     yAxisWidth: 15,
@@ -7510,7 +7510,7 @@ __renderjsModules.f9cb76fc = (() => {
   };
   var u_charts_default = uCharts;
 
-  // C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/js_sdk/u-charts/config-ucharts.js
+  // C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/js_sdk/u-charts/config-ucharts.js
   var color = ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"];
   var formatDateTime = (timeStamp, returnType) => {
     var date = /* @__PURE__ */ new Date();
@@ -8098,7 +8098,7 @@ __renderjsModules.f9cb76fc = (() => {
   };
   var config_ucharts_default = cfu;
 
-  // C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/js_sdk/u-charts/config-echarts.js
+  // C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/js_sdk/u-charts/config-echarts.js
   var color2 = ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"];
   var cfe = {
     //demotype为自定义图表类型
@@ -8886,7 +8886,7 @@ __renderjsModules["5a1e922e"] = (() => {
     default: () => stdin_default
   });
 
-  // C:/Users/Administrator/Desktop/ic365/uni_modules/uni-swipe-action/components/uni-swipe-action-item/render.js
+  // C:/Users/71018/Desktop/ic365/uni_modules/uni-swipe-action/components/uni-swipe-action-item/render.js
   var MIN_DISTANCE = 10;
   var render_default = {
     showWatch(newVal, oldVal, ownerInstance, instance, self) {
