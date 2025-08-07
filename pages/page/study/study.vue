@@ -214,13 +214,9 @@
 
 		},
 		onShow() {
-			this.uniHide("all")
-			if (store.state.userInfo.info) {
-				this.userInfo = {
-					...this.userInfo,
-					...store.state.userInfo.info
-				}
-			}
+			this.pageOnShowSet({
+				uniHide:"all"
+			})
 		},
 		onHide() {
 

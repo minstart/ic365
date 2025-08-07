@@ -133,12 +133,6 @@
 			return {
 				pageHeadTitle: "标题",
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
-				userInfo: {
-					nickname: "",
-					currencies: {
-
-					}
-				},
 				// 当前挑战
 				currentMission: {},
 
@@ -315,14 +309,9 @@
 
 		},
 		onShow() {
-			this.uniHide("all")
-			if (store.state.userInfo.info) {
-				this.userInfo = {
-					...this.userInfo,
-					...store.state.userInfo.info
-				}
-			}
-
+			this.pageOnShowSet({
+				uniHide:"all"
+			})
 		},
 		onHide() {
 

@@ -12,78 +12,85 @@
 			</viww>
 			<view class="common-page-head-title">{{title}}</view>
 			<view class="common-page-head-module">
-				<image v-if='isModule' :src="moduleIcon" mode=""  @click="clickModule"></image>
+				<image v-if='isModule' :src="moduleIcon" mode="" @click="clickModule"></image>
 			</view>
 		</view>
 	</view>
+	<view class="page-loading" v-if="$store.state.isLoading"></view>
 </template>
 <script>
 	export default {
 		name: "page-head",
 		props: {
-			clickModule:{
-				type:Function,
-				default:()=>{
+			clickModule: {
+				type: Function,
+				default: () => {
 					console.log("默认右侧功能区函数")
 				}
 			},
-			isHide:{
-				default : false
+			isHide: {
+				default: false
 			},
 			title: {
 				// type: String,
 				default: ""
 			},
-			background:{
-				default:"#fff"
+			background: {
+				default: "#fff"
 			},
 			// 是否显示返回按钮
-			isBack:{
-				default:false
+			isBack: {
+				default: false
 			},
 			// 是否显示最右边功能模块
-			isModule:{
-				default:false
+			isModule: {
+				default: false
 			},
-			moduleIcon:{
-				default:"/static/icons/nav-bar.png"
+			moduleIcon: {
+				default: "/static/icons/nav-bar.png"
 			}
 		},
-		data(){
+		data() {
 			return {
-				taskbarHeight : 0
-			} 
+				taskbarHeight: 0
+			}
 		},
-		mounted(){
-			this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight/16 + "rem"
+		mounted() {
+			this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem"
 			// console.log("taskbarHeight",this.taskbarHeight)
 		},
-		methods:{
-			clickBack(){
+		methods: {
+			clickBack() {
 				uni.navigateBack()
 			}
 		}
 	}
 </script>
 <style lang="less">
-	.page-head{
+	.page-head {
 		z-index: 999;
 	}
-	.reserve-seat{
+
+	.reserve-seat {
 		height: 2.6rem;
 	}
-	.common-page-head{
-		display: flex; /* 定义弹性容器 */
+
+	.common-page-head {
+		display: flex;
+		/* 定义弹性容器 */
 		padding: 0;
 		position: fixed;
 		top: 0;
 		width: 100%;
 		background: #fff;
 		z-index: 999;
-		.common-page-head-back,.common-page-head-module{
+
+		.common-page-head-back,
+		.common-page-head-module {
 			flex: 1;
 			position: relative;
-			*{
+
+			* {
 				position: absolute;
 				left: 0;
 				right: 0;
@@ -94,17 +101,74 @@
 				height: 2rem;
 			}
 		}
-		.common-page-head-title{
+
+		.common-page-head-title {
 			flex: 4;
 			border-width: 0;
 			color: #333;
 		}
-		.page-head-back-icon{
+
+		.page-head-back-icon {
 			background: url("/static/icons/back_grey.png") no-repeat center / 100% 100%;
 		}
-		.page-head-module-icon{
+
+		.page-head-module-icon {
 			width: 2.125rem;
 			height: 2.125rem;
+		}
+	}
+
+	.page-loading {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		background: #fff;
+		z-index: 99999999999999999999999999999;
+	}
+
+	.page-loading::before {
+		content: "";
+		width: 1rem;
+		height: 1rem;
+		border-radius: 100%;
+		color: rgba(255, 206, 9, .4);
+		box-shadow: 0 -2.5rem rgba(255, 206, 9, .9),
+			/* top */
+			2.5rem 0px,
+			/* right */
+			0 2.5rem,
+			/* bottom */
+			-2.5rem 0 rgba(255, 206, 9, .7),
+			/* left */
+
+			-1.75rem -1.75rem rgba(255, 206, 9, .8),
+			/* left-top */
+			1.75rem -1.75rem rgba(255, 206, 9, 1),
+			/* right-top */
+			1.75rem 1.75rem,
+			/* right-bottom */
+			-1.75rem 1.75rem;
+		/* left-bottom */
+		animation: spin 1s steps(8) infinite;
+		/* center */
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+
+		100% {
+			transform: rotate(360deg);
 		}
 	}
 </style>

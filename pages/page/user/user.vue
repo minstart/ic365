@@ -22,15 +22,15 @@
 				</view>
 				<view class="property">
 					<view class="property-item">
-						<h3 class="item-info-num">358</h3>
+						<h3 class="item-info-num">{{userInfo.currencies.star||0}}</h3>
 						<view class="item-info-title">智慧星</view>
 					</view>
 					<view class="property-item">
-						<h3 class="item-info-num">58</h3>
+						<h3 class="item-info-num">{{userInfo.currencies.stone||0}}</h3>
 						<view class="item-info-title">启明石</view>
 					</view>
 					<view class="property-item">
-						<h3 class="item-info-num">1256</h3>
+						<h3 class="item-info-num">{{userInfo.currencies.dust||0}}</h3>
 						<view class="item-info-title">知识尘</view>
 					</view>
 				</view>
@@ -50,6 +50,7 @@
 			</view>
 			<view class="tab-list-content">
 				<view class="tab-list" :current='current' v-if="current === 0">
+					<!-- 我的练习 -->
 					<view class="practice-list" v-for="item in practiceList[current].list">
 						<image class="list-icon" src="" mode=""></image>
 						<view class="list-info">
@@ -58,11 +59,35 @@
 						</view>
 					</view>
 				</view>
-				<view class="tab-list" :current='current' v-if="current === 1"><text class="content-text">选项卡2的内容</text>
+				<view class="tab-list" :current='current' v-if="current === 1">
+					<!-- 我的错题 -->
+					<view class="practice-list" v-for="item in practiceList[current].list">
+						<image class="list-icon" src="" mode=""></image>
+						<view class="list-info">
+							<h3 class="title">{{item.title}}</h3>
+							<view class="introduce">{{item.introduce}}</view>
+						</view>
+					</view>
 				</view>
-				<view class="tab-list" :current='current' v-if="current === 2"><text class="content-text">选项卡3的内容</text>
+				<view class="tab-list" :current='current' v-if="current === 2">
+					<!-- 我的兑换 -->
+					<view class="practice-list" v-for="item in practiceList[current].list">
+						<image class="list-icon" src="" mode=""></image>
+						<view class="list-info">
+							<h3 class="title">{{item.title}}</h3>
+							<view class="introduce">{{item.introduce}}</view>
+						</view>
+					</view>
 				</view>
-				<view class="tab-list" :current='current' v-if="current === 3"><text class="content-text">选项卡4的内容</text>
+				<view class="tab-list" :current='current' v-if="current === 3">
+					<!-- 我的任务 -->
+					<view class="practice-list" v-for="item in practiceList[current].list">
+						<image class="list-icon" src="" mode=""></image>
+						<view class="list-info">
+							<h3 class="title">{{item.title}}</h3>
+							<view class="introduce">{{item.introduce}}</view>
+						</view>
+					</view>
 				</view>
 			</view>
 			<!-- 我的tab相关 ------End -->
@@ -74,7 +99,7 @@
 					</h3>
 				</view>
 				<view class="skin-tab-content">
-					<view class="tab-list" :current='current' v-if="skinCurrent === 0">
+					<view class="tab-list" v-for="(item,i) in skinList" :current='i' v-show="skinCurrent === i">
 						<view class="skin-list" v-for="item in skinList[skinCurrent].list">
 							<image class="list-icon" src="" mode=""></image>
 							<view class="list-info ">
@@ -89,18 +114,6 @@
 								</view>
 							</view>
 						</view>
-					</view>
-					<view class="tab-list" :current='skinCurrent' v-if="skinCurrent === 1"><text
-							class="content-text">选项卡2的内容</text>
-					</view>
-					<view class="tab-list" :current='skinCurrent' v-if="skinCurrent === 2"><text
-							class="content-text">选项卡3的内容</text>
-					</view>
-					<view class="tab-list" :current='skinCurrent' v-if="skinCurrent === 3"><text
-							class="content-text">选项卡4的内容</text>
-					</view>
-					<view class="tab-list" :current='skinCurrent' v-if="skinCurrent === 4"><text
-							class="content-text">选项卡5的内容</text>
 					</view>
 				</view>
 			</view>
@@ -147,20 +160,6 @@
 		data() {
 			return {
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
-				userInfo: {
-					nickname: "",
-					userId: "5654654321",
-					title: [{
-							"title": "数学小能手"
-						},
-						{
-							"title": "超级会员"
-						}
-					],
-					currencies: {
-
-					}
-				},
 				current: 0, //选项卡显示下标
 				practiceList: [{
 						title: "我的练习",
@@ -274,6 +273,7 @@
 						try {
 							store.commit("Update_UserInfo", res.data)
 							this.userInfo = res.data;
+							console.log(this.userInfo)
 						} catch (e) {}
 						// 全新用户，需要选年级
 
@@ -292,43 +292,7 @@
 					this.consoleLog("获取用户信息报错：：", error)
 				})
 
-				// 获取任务列表
-				this.commonRequest({
-					url: "/api/mission/getAll"
-				}).then(res => {
-					this.consoleLog("首页任务列表::", JSON.stringify(res))
-					if (res.code == 0) {
-						try {
-							this.plan = res.data;
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.message || "获取用户信息失败!",
-							icon: "none"
-						});
-					}
-				}).catch(error => {
-					this.consoleLog("获取任务列表报错：：", error)
-				})
-
-				// 获取我的成就
-				this.commonRequest({
-					url: "/api/achievement/mine"
-				}).then(res => {
-					this.consoleLog("首页我的成就::", JSON.stringify(res))
-					if (res.code == 0) {
-						try {
-							achievement = res.data;
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.message || "获取最新成就失败!",
-							icon: "none"
-						});
-					}
-				}).catch(error => {
-					this.consoleLog("获取任务列表报错：：", error)
-				})
+				
 			}).catch(err => {
 				// 没有登陆
 				// console.error("data：：：：：2", JSON.stringify(err));
@@ -350,12 +314,9 @@
 
 		},
 		onShow() {
-			if (store.state.userInfo.info) {
-				this.userInfo = {
-					...this.userInfo,
-					...store.state.userInfo.info
-				}
-			}
+			this.pageOnShowSet({
+				uniHide:"all"
+			})
 		},
 		onHide() {
 

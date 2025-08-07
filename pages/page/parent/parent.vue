@@ -164,14 +164,8 @@
 		components: {},
 		data() {
 			return {
-				pageHeadTitle: "标题",
+				pageHeadTitle: "",
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
-				userInfo: {
-					nickname: "",
-					currencies: {
-
-					}
-				},
 				// 柱状图数据
 				chartData: {},
 				// 柱状图设置
@@ -275,7 +269,9 @@
 			this.getServerData();
 		},
 		onShow() {
-
+			this.pageOnShowSet({
+				uniHide:"all"
+			})
 		},
 		onHide() {
 

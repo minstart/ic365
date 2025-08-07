@@ -46,7 +46,7 @@ const store = new Vuex.Store({
 						phone: /^1[3456789]\d{9}$/
 					},
 					baseFontSize:16,
-
+					isLoading:true,//页面是否加载loading样式
 
 
 					hasLogin: false,

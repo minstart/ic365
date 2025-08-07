@@ -46,6 +46,13 @@ async function fetchData(data) {
 export default {
 	data() {
 		return {
+			isLoading: true,
+			userInfo: {
+				nickname: "",
+				currencies: {
+			
+				}
+			},
 			fontSize: 16, //页面默认rem尺寸
 			loading2: false,
 			staticUrl: this.$store.state.configData.staticUrl
@@ -131,7 +138,7 @@ export default {
 		// .catch() //失败返回
 		// .finally()
 		commonRequest(data) {
-			this.consoleLog("请求前的传参：", data);
+			// this.consoleLog("请求前的传参：", data);
 			!data.notLoading && uni.showLoading();
 			return fetchData(data)
 
@@ -274,10 +281,21 @@ export default {
 		// orientation 页面横屏竖屏 portrait（竖屏）或landscape（横屏）
 		pageOnShowSet(data) {
 			if (!data) return;
+			store.state.isLoading = true;
+			setTimeout(()=>{
+				store.state.isLoading = false;
+			},1000)
 			try {
 				data.uniHide && this.uniHide(data.uniHide)
 			} catch (e) {}
 
+			if (store.state.userInfo.info) {
+				this.userInfo = {
+					...this.userInfo,
+					...store.state.userInfo.info
+				}
+			}
+			
 			this.setRootFontSize(data)
 			// 设置横屏还是竖屏，默认竖屏
 			try {

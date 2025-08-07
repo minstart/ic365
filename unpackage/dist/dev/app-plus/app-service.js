@@ -57,7 +57,7 @@ if (uni.restoreGlobal) {
       clickModule: {
         type: Function,
         default: () => {
-          formatAppLog("log", "at components/page-head/page-head.vue:27", "默认右侧功能区函数");
+          formatAppLog("log", "at components/page-head/page-head.vue:28", "默认右侧功能区函数");
         }
       },
       isHide: {
@@ -99,57 +99,69 @@ if (uni.restoreGlobal) {
   function _sfc_render$3l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_viww = vue.resolveComponent("viww");
     return vue.openBlock(), vue.createElementBlock(
-      "view",
-      {
-        class: "common-page-head-view",
-        style: vue.normalizeStyle({ paddingTop: $data.taskbarHeight })
-      },
+      vue.Fragment,
+      null,
       [
-        !$props.isHide ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: "reserve-seat"
-        })) : vue.createCommentVNode("v-if", true),
-        !$props.isHide ? (vue.openBlock(), vue.createElementBlock(
+        vue.createElementVNode(
           "view",
           {
-            key: 1,
-            class: "common-page-head",
-            style: vue.normalizeStyle({ background: $props.background, paddingTop: $data.taskbarHeight })
+            class: "common-page-head-view",
+            style: vue.normalizeStyle({ paddingTop: $data.taskbarHeight })
           },
           [
-            vue.createVNode(_component_viww, { class: "common-page-head-back" }, {
-              default: vue.withCtx(() => [
-                $props.isBack ? (vue.openBlock(), vue.createElementBlock("view", {
-                  key: 0,
-                  class: "page-head-back-icon",
-                  onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
-                })) : vue.createCommentVNode("v-if", true)
-              ]),
-              _: 1
-              /* STABLE */
-            }),
-            vue.createElementVNode(
+            !$props.isHide ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "reserve-seat"
+            })) : vue.createCommentVNode("v-if", true),
+            !$props.isHide ? (vue.openBlock(), vue.createElementBlock(
               "view",
-              { class: "common-page-head-title" },
-              vue.toDisplayString($props.title),
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode("view", { class: "common-page-head-module" }, [
-              $props.isModule ? (vue.openBlock(), vue.createElementBlock("image", {
-                key: 0,
-                src: $props.moduleIcon,
-                mode: "",
-                onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
-              }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
-            ])
+              {
+                key: 1,
+                class: "common-page-head",
+                style: vue.normalizeStyle({ background: $props.background, paddingTop: $data.taskbarHeight })
+              },
+              [
+                vue.createVNode(_component_viww, { class: "common-page-head-back" }, {
+                  default: vue.withCtx(() => [
+                    $props.isBack ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      class: "page-head-back-icon",
+                      onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
+                    })) : vue.createCommentVNode("v-if", true)
+                  ]),
+                  _: 1
+                  /* STABLE */
+                }),
+                vue.createElementVNode(
+                  "view",
+                  { class: "common-page-head-title" },
+                  vue.toDisplayString($props.title),
+                  1
+                  /* TEXT */
+                ),
+                vue.createElementVNode("view", { class: "common-page-head-module" }, [
+                  $props.isModule ? (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 0,
+                    src: $props.moduleIcon,
+                    mode: "",
+                    onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
+                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
+                ])
+              ],
+              4
+              /* STYLE */
+            )) : vue.createCommentVNode("v-if", true)
           ],
           4
           /* STYLE */
-        )) : vue.createCommentVNode("v-if", true)
+        ),
+        _ctx.$store.state.isLoading ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "page-loading"
+        })) : vue.createCommentVNode("v-if", true)
       ],
-      4
-      /* STYLE */
+      64
+      /* STABLE_FRAGMENT */
     );
   }
   const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
@@ -1779,6 +1791,8 @@ if (uni.restoreGlobal) {
         phone: /^1[3456789]\d{9}$/
       },
       baseFontSize: 16,
+      isLoading: true,
+      //页面是否加载loading样式
       hasLogin: false,
       isUniverifyLogin: false,
       loginProvider: "",
@@ -14018,6 +14032,11 @@ if (uni.restoreGlobal) {
   const commonJs = {
     data() {
       return {
+        isLoading: true,
+        userInfo: {
+          nickname: "",
+          currencies: {}
+        },
         fontSize: 16,
         //页面默认rem尺寸
         loading2: false,
@@ -14035,13 +14054,13 @@ if (uni.restoreGlobal) {
         data && (conText = conText + JSON.stringify(data));
         data2 && (conText = conText + JSON.stringify(data2));
         data3 && (conText = conText + JSON.stringify(data3));
-        formatAppLog("log", "at common/js/common.js:73", conText);
+        formatAppLog("log", "at common/js/common.js:80", conText);
         return conText;
       },
       // 设置登录token状态及数据
       setLogin(data) {
         if (!data)
-          return formatAppLog("log", "at common/js/common.js:78", "没有data");
+          return formatAppLog("log", "at common/js/common.js:85", "没有data");
         uni.setStorage({
           key: store.state.userInfo.cookieName,
           data,
@@ -14061,7 +14080,7 @@ if (uni.restoreGlobal) {
               store.state.userInfo.token = res2.data.token;
             },
             fail: function(err) {
-              formatAppLog("log", "at common/js/common.js:106", err);
+              formatAppLog("log", "at common/js/common.js:113", err);
               reject(err);
               _this.removeLogin();
             }
@@ -14086,13 +14105,12 @@ if (uni.restoreGlobal) {
       // .catch() //失败返回
       // .finally()
       commonRequest(data) {
-        this.consoleLog("请求前的传参：", data);
         !data.notLoading && uni.showLoading();
         return fetchData(data);
       },
       uniSetStorage(data) {
         if (!data || !data.key || !data.data) {
-          formatAppLog("log", "at common/js/common.js:171", "存储数据失败：缺少key|data");
+          formatAppLog("log", "at common/js/common.js:178", "存储数据失败：缺少key|data");
           return false;
         }
         if (typeof data.data == "object") {
@@ -14177,7 +14195,7 @@ if (uni.restoreGlobal) {
               store.state.baseFontSize = baseFontSize * scale;
             }
           } catch (e2) {
-            formatAppLog("log", "at common/js/common.js:264", "报错：：：：", e2);
+            formatAppLog("log", "at common/js/common.js:271", "报错：：：：", e2);
           }
         } else if (store.state.baseFontSize) {
           this.fontSize = store.state.baseFontSize;
@@ -14189,9 +14207,19 @@ if (uni.restoreGlobal) {
       pageOnShowSet(data) {
         if (!data)
           return;
+        store.state.isLoading = true;
+        setTimeout(() => {
+          store.state.isLoading = false;
+        }, 1e3);
         try {
           data.uniHide && this.uniHide(data.uniHide);
         } catch (e2) {
+        }
+        if (store.state.userInfo.info) {
+          this.userInfo = {
+            ...this.userInfo,
+            ...store.state.userInfo.info
+          };
         }
         this.setRootFontSize(data);
         try {
@@ -14383,10 +14411,11 @@ if (uni.restoreGlobal) {
         // 		}
         // 	]
         // },
-        userInfo: {
-          nickname: "",
-          currencies: {}
-        },
+        // userInfo: {
+        // 	nickname: "",
+        // 	currencies: {
+        // 	}
+        // },
         pageData: {
           banner: {
             bannerBack: "#3c25b9",
@@ -14407,7 +14436,6 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          this.consoleLog("获取用户信息::", JSON.stringify(res2));
           if (res2.code == 0) {
             try {
               store.commit("Update_UserInfo", res2.data);
@@ -14431,7 +14459,6 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/mission/getAll"
         }).then((res2) => {
-          this.consoleLog("首页任务列表::", JSON.stringify(res2));
           if (res2.code == 0) {
             try {
               this.plan = res2.data;
@@ -14449,7 +14476,6 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/achievement/mine"
         }).then((res2) => {
-          this.consoleLog("最新成就::", JSON.stringify(res2));
           if (res2.code == 0) {
             try {
               this.achievement = res2.data;
@@ -14467,7 +14493,6 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          this.consoleLog("推荐学习::", JSON.stringify(res2));
           if (res2.code == 0) {
             try {
               this.videos = res2.data;
@@ -14495,12 +14520,6 @@ if (uni.restoreGlobal) {
       this.pageOnShowSet({
         uniHide: "all"
       });
-      if (store.state.userInfo.info) {
-        this.userInfo = {
-          ...this.userInfo,
-          ...store.state.userInfo.info
-        };
-      }
     },
     onHide() {
     },
@@ -14562,7 +14581,7 @@ if (uni.restoreGlobal) {
           vue.createCommentVNode(' <view class="head-pic"></view> '),
           vue.createElementVNode("image", {
             class: "head-pic",
-            src: $data.userInfo.avatar || $data.defaultHeadPic,
+            src: _ctx.userInfo.avatar || $data.defaultHeadPic,
             onError: _cache[0] || (_cache[0] = (...args) => $options.defaultHeadPicUrl && $options.defaultHeadPicUrl(...args)),
             alt: ""
           }, null, 40, ["src"]),
@@ -14570,7 +14589,7 @@ if (uni.restoreGlobal) {
             vue.createElementVNode(
               "h3",
               { class: "name" },
-              vue.toDisplayString($data.userInfo.nickname) + "同学",
+              vue.toDisplayString(_ctx.userInfo.nickname) + "同学",
               1
               /* TEXT */
             ),
@@ -14583,7 +14602,7 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode(
                   "h4",
                   { class: "number" },
-                  vue.toDisplayString($data.userInfo.currencies.star || 0),
+                  vue.toDisplayString(_ctx.userInfo.currencies.star || 0),
                   1
                   /* TEXT */
                 )
@@ -14596,7 +14615,7 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode(
                   "h4",
                   { class: "number" },
-                  vue.toDisplayString($data.userInfo.currencies.stone || 0),
+                  vue.toDisplayString(_ctx.userInfo.currencies.stone || 0),
                   1
                   /* TEXT */
                 )
@@ -14609,7 +14628,7 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode(
                   "h4",
                   { class: "number" },
-                  vue.toDisplayString($data.userInfo.currencies.dust || 0),
+                  vue.toDisplayString(_ctx.userInfo.currencies.dust || 0),
                   1
                   /* TEXT */
                 )
@@ -23464,13 +23483,9 @@ ${o3}
       });
     },
     onShow() {
-      this.uniHide("all");
-      if (store.state.userInfo.info) {
-        this.userInfo = {
-          ...this.userInfo,
-          ...store.state.userInfo.info
-        };
-      }
+      this.pageOnShowSet({
+        uniHide: "all"
+      });
     },
     onHide() {
     },
@@ -23707,10 +23722,6 @@ ${o3}
         pageHeadTitle: "标题",
         defaultHeadPic: store.state.defaultHeadPic,
         //默认头像
-        userInfo: {
-          nickname: "",
-          currencies: {}
-        },
         // 当前挑战
         currentMission: {},
         // 组队情况
@@ -23753,10 +23764,10 @@ ${o3}
                     item.eventName = "";
                     item.subtitle = item.time || " · " + item.rewardName || "";
                   }
-                  formatAppLog("log", "at pages/page/team/team.vue:247", item.subtitle);
+                  formatAppLog("log", "at pages/page/team/team.vue:241", item.subtitle);
                 });
               } catch (e2) {
-                formatAppLog("log", "at pages/page/team/team.vue:250", e2);
+                formatAppLog("log", "at pages/page/team/team.vue:244", e2);
               }
             } catch (e2) {
             }
@@ -23793,13 +23804,9 @@ ${o3}
       });
     },
     onShow() {
-      this.uniHide("all");
-      if (store.state.userInfo.info) {
-        this.userInfo = {
-          ...this.userInfo,
-          ...store.state.userInfo.info
-        };
-      }
+      this.pageOnShowSet({
+        uniHide: "all"
+      });
     },
     onHide() {
     },
@@ -23832,7 +23839,7 @@ ${o3}
           vue.createCommentVNode(' <view class="head-pic"></view> '),
           vue.createElementVNode("image", {
             class: "head-pic",
-            src: $data.userInfo.avatar || $data.defaultHeadPic,
+            src: _ctx.userInfo.avatar || $data.defaultHeadPic,
             onError: _cache[0] || (_cache[0] = (...args) => _ctx.defaultHeadPicUrl && _ctx.defaultHeadPicUrl(...args)),
             alt: ""
           }, null, 40, ["src"]),
@@ -23840,7 +23847,7 @@ ${o3}
             vue.createElementVNode(
               "h3",
               { class: "name" },
-              vue.toDisplayString($data.userInfo.nickname) + "同学",
+              vue.toDisplayString(_ctx.userInfo.nickname) + "同学",
               1
               /* TEXT */
             ),
@@ -23853,7 +23860,7 @@ ${o3}
                 vue.createElementVNode(
                   "h4",
                   { class: "number" },
-                  vue.toDisplayString($data.userInfo.currencies.star || 0),
+                  vue.toDisplayString(_ctx.userInfo.currencies.star || 0),
                   1
                   /* TEXT */
                 )
@@ -23866,7 +23873,7 @@ ${o3}
                 vue.createElementVNode(
                   "h4",
                   { class: "number" },
-                  vue.toDisplayString($data.userInfo.currencies.stone || 0),
+                  vue.toDisplayString(_ctx.userInfo.currencies.stone || 0),
                   1
                   /* TEXT */
                 )
@@ -23879,7 +23886,7 @@ ${o3}
                 vue.createElementVNode(
                   "h4",
                   { class: "number" },
-                  vue.toDisplayString($data.userInfo.currencies.dust || 0),
+                  vue.toDisplayString(_ctx.userInfo.currencies.dust || 0),
                   1
                   /* TEXT */
                 )
@@ -26068,13 +26075,9 @@ ${o3}
     components: {},
     data() {
       return {
-        pageHeadTitle: "标题",
+        pageHeadTitle: "",
         defaultHeadPic: store.state.defaultHeadPic,
         //默认头像
-        userInfo: {
-          nickname: "",
-          currencies: {}
-        },
         // 柱状图数据
         chartData: {},
         // 柱状图设置
@@ -26184,6 +26187,9 @@ ${o3}
       this.getServerData();
     },
     onShow() {
+      this.pageOnShowSet({
+        uniHide: "all"
+      });
     },
     onHide() {
     },
@@ -26227,7 +26233,7 @@ ${o3}
             vue.createCommentVNode(' <view class="head-pic"></view> '),
             vue.createElementVNode("image", {
               class: "head-pic",
-              src: $data.userInfo.avatar || $data.defaultHeadPic,
+              src: _ctx.userInfo.avatar || $data.defaultHeadPic,
               onError: _cache[0] || (_cache[0] = (...args) => _ctx.defaultHeadPicUrl && _ctx.defaultHeadPicUrl(...args)),
               alt: ""
             }, null, 40, ["src"]),
@@ -26235,7 +26241,7 @@ ${o3}
               vue.createElementVNode(
                 "h3",
                 { class: "name" },
-                vue.toDisplayString($data.userInfo.nickname) + "同学",
+                vue.toDisplayString(_ctx.userInfo.nickname) + "同学",
                 1
                 /* TEXT */
               ),
@@ -26248,7 +26254,7 @@ ${o3}
                   vue.createElementVNode(
                     "h4",
                     { class: "number" },
-                    vue.toDisplayString($data.userInfo.currencies.star || 0),
+                    vue.toDisplayString(_ctx.userInfo.currencies.star || 0),
                     1
                     /* TEXT */
                   )
@@ -26261,7 +26267,7 @@ ${o3}
                   vue.createElementVNode(
                     "h4",
                     { class: "number" },
-                    vue.toDisplayString($data.userInfo.currencies.stone || 0),
+                    vue.toDisplayString(_ctx.userInfo.currencies.stone || 0),
                     1
                     /* TEXT */
                   )
@@ -26274,7 +26280,7 @@ ${o3}
                   vue.createElementVNode(
                     "h4",
                     { class: "number" },
-                    vue.toDisplayString($data.userInfo.currencies.dust || 0),
+                    vue.toDisplayString(_ctx.userInfo.currencies.dust || 0),
                     1
                     /* TEXT */
                   )
@@ -26520,19 +26526,6 @@ ${o3}
       return {
         defaultHeadPic: store.state.defaultHeadPic,
         //默认头像
-        userInfo: {
-          nickname: "",
-          userId: "5654654321",
-          title: [
-            {
-              "title": "数学小能手"
-            },
-            {
-              "title": "超级会员"
-            }
-          ],
-          currencies: {}
-        },
         current: 0,
         //选项卡显示下标
         practiceList: [
@@ -26643,6 +26636,7 @@ ${o3}
             try {
               store.commit("Update_UserInfo", res2.data);
               this.userInfo = res2.data;
+              formatAppLog("log", "at pages/page/user/user.vue:276", this.userInfo);
             } catch (e2) {
             }
             if (res2.data.grade == 0) {
@@ -26659,45 +26653,9 @@ ${o3}
         }).catch((error) => {
           this.consoleLog("获取用户信息报错：：", error);
         });
-        this.commonRequest({
-          url: "/api/mission/getAll"
-        }).then((res2) => {
-          this.consoleLog("首页任务列表::", JSON.stringify(res2));
-          if (res2.code == 0) {
-            try {
-              this.plan = res2.data;
-            } catch (e2) {
-            }
-          } else {
-            uni.showToast({
-              title: res2.message || "获取用户信息失败!",
-              icon: "none"
-            });
-          }
-        }).catch((error) => {
-          this.consoleLog("获取任务列表报错：：", error);
-        });
-        this.commonRequest({
-          url: "/api/achievement/mine"
-        }).then((res2) => {
-          this.consoleLog("首页我的成就::", JSON.stringify(res2));
-          if (res2.code == 0) {
-            try {
-              achievement = res2.data;
-            } catch (e2) {
-            }
-          } else {
-            uni.showToast({
-              title: res2.message || "获取最新成就失败!",
-              icon: "none"
-            });
-          }
-        }).catch((error) => {
-          this.consoleLog("获取任务列表报错：：", error);
-        });
       }).catch((err) => {
         if (pathUrl.indexOf("/login") == -1) {
-          formatAppLog("log", "at pages/page/user/user.vue:337", "没有登录,跳转到登录页面");
+          formatAppLog("log", "at pages/page/user/user.vue:301", "没有登录,跳转到登录页面");
           uni.redirectTo({
             url: "/pages/page/login/login?pageFrom=" + pathUrl
           });
@@ -26705,12 +26663,9 @@ ${o3}
       });
     },
     onShow() {
-      if (store.state.userInfo.info) {
-        this.userInfo = {
-          ...this.userInfo,
-          ...store.state.userInfo.info
-        };
-      }
+      this.pageOnShowSet({
+        uniHide: "all"
+      });
     },
     onHide() {
     },
@@ -26767,7 +26722,7 @@ ${o3}
           vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
             vue.createElementVNode("image", {
               class: "head-pic",
-              src: $data.userInfo.avatar || $data.defaultHeadPic,
+              src: _ctx.userInfo.avatar || $data.defaultHeadPic,
               onError: _cache[1] || (_cache[1] = (...args) => $options.defaultHeadPicUrl && $options.defaultHeadPicUrl(...args)),
               alt: ""
             }, null, 40, ["src"]),
@@ -26775,14 +26730,14 @@ ${o3}
               vue.createElementVNode(
                 "h3",
                 { class: "name" },
-                vue.toDisplayString($data.userInfo.nickname || "") + "同学",
+                vue.toDisplayString(_ctx.userInfo.nickname || "") + "同学",
                 1
                 /* TEXT */
               ),
               vue.createElementVNode(
                 "view",
                 { class: "school" },
-                vue.toDisplayString($data.userInfo.school || "") + " " + vue.toDisplayString($data.userInfo.className || ""),
+                vue.toDisplayString(_ctx.userInfo.school || "") + " " + vue.toDisplayString(_ctx.userInfo.className || ""),
                 1
                 /* TEXT */
               ),
@@ -26790,7 +26745,7 @@ ${o3}
                 (vue.openBlock(true), vue.createElementBlock(
                   vue.Fragment,
                   null,
-                  vue.renderList($data.userInfo.showAchievementName, (item) => {
+                  vue.renderList(_ctx.userInfo.showAchievementName, (item) => {
                     return vue.openBlock(), vue.createElementBlock(
                       "li",
                       { class: "title" },
@@ -26807,15 +26762,33 @@ ${o3}
           ]),
           vue.createElementVNode("view", { class: "property" }, [
             vue.createElementVNode("view", { class: "property-item" }, [
-              vue.createElementVNode("h3", { class: "item-info-num" }, "358"),
+              vue.createElementVNode(
+                "h3",
+                { class: "item-info-num" },
+                vue.toDisplayString(_ctx.userInfo.currencies.star || 0),
+                1
+                /* TEXT */
+              ),
               vue.createElementVNode("view", { class: "item-info-title" }, "智慧星")
             ]),
             vue.createElementVNode("view", { class: "property-item" }, [
-              vue.createElementVNode("h3", { class: "item-info-num" }, "58"),
+              vue.createElementVNode(
+                "h3",
+                { class: "item-info-num" },
+                vue.toDisplayString(_ctx.userInfo.currencies.stone || 0),
+                1
+                /* TEXT */
+              ),
               vue.createElementVNode("view", { class: "item-info-title" }, "启明石")
             ]),
             vue.createElementVNode("view", { class: "property-item" }, [
-              vue.createElementVNode("h3", { class: "item-info-num" }, "1256"),
+              vue.createElementVNode(
+                "h3",
+                { class: "item-info-num" },
+                vue.toDisplayString(_ctx.userInfo.currencies.dust || 0),
+                1
+                /* TEXT */
+              ),
               vue.createElementVNode("view", { class: "item-info-title" }, "知识尘")
             ])
           ]),
@@ -26824,7 +26797,7 @@ ${o3}
             vue.createElementVNode(
               "h3",
               { class: "userId" },
-              vue.toDisplayString($data.userInfo.userId),
+              vue.toDisplayString(_ctx.userInfo.userId),
               1
               /* TEXT */
             )
@@ -26854,6 +26827,7 @@ ${o3}
             class: "tab-list",
             current: $data.current
           }, [
+            vue.createCommentVNode(" 我的练习 "),
             (vue.openBlock(true), vue.createElementBlock(
               vue.Fragment,
               null,
@@ -26891,21 +26865,114 @@ ${o3}
             class: "tab-list",
             current: $data.current
           }, [
-            vue.createElementVNode("text", { class: "content-text" }, "选项卡2的内容")
+            vue.createCommentVNode(" 我的错题 "),
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($data.practiceList[$data.current].list, (item) => {
+                return vue.openBlock(), vue.createElementBlock("view", { class: "practice-list" }, [
+                  vue.createElementVNode("image", {
+                    class: "list-icon",
+                    src: "",
+                    mode: ""
+                  }),
+                  vue.createElementVNode("view", { class: "list-info" }, [
+                    vue.createElementVNode(
+                      "h3",
+                      { class: "title" },
+                      vue.toDisplayString(item.title),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "introduce" },
+                      vue.toDisplayString(item.introduce),
+                      1
+                      /* TEXT */
+                    )
+                  ])
+                ]);
+              }),
+              256
+              /* UNKEYED_FRAGMENT */
+            ))
           ], 8, ["current"])) : vue.createCommentVNode("v-if", true),
           $data.current === 2 ? (vue.openBlock(), vue.createElementBlock("view", {
             key: 2,
             class: "tab-list",
             current: $data.current
           }, [
-            vue.createElementVNode("text", { class: "content-text" }, "选项卡3的内容")
+            vue.createCommentVNode(" 我的兑换 "),
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($data.practiceList[$data.current].list, (item) => {
+                return vue.openBlock(), vue.createElementBlock("view", { class: "practice-list" }, [
+                  vue.createElementVNode("image", {
+                    class: "list-icon",
+                    src: "",
+                    mode: ""
+                  }),
+                  vue.createElementVNode("view", { class: "list-info" }, [
+                    vue.createElementVNode(
+                      "h3",
+                      { class: "title" },
+                      vue.toDisplayString(item.title),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "introduce" },
+                      vue.toDisplayString(item.introduce),
+                      1
+                      /* TEXT */
+                    )
+                  ])
+                ]);
+              }),
+              256
+              /* UNKEYED_FRAGMENT */
+            ))
           ], 8, ["current"])) : vue.createCommentVNode("v-if", true),
           $data.current === 3 ? (vue.openBlock(), vue.createElementBlock("view", {
             key: 3,
             class: "tab-list",
             current: $data.current
           }, [
-            vue.createElementVNode("text", { class: "content-text" }, "选项卡4的内容")
+            vue.createCommentVNode(" 我的任务 "),
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($data.practiceList[$data.current].list, (item) => {
+                return vue.openBlock(), vue.createElementBlock("view", { class: "practice-list" }, [
+                  vue.createElementVNode("image", {
+                    class: "list-icon",
+                    src: "",
+                    mode: ""
+                  }),
+                  vue.createElementVNode("view", { class: "list-info" }, [
+                    vue.createElementVNode(
+                      "h3",
+                      { class: "title" },
+                      vue.toDisplayString(item.title),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "introduce" },
+                      vue.toDisplayString(item.introduce),
+                      1
+                      /* TEXT */
+                    )
+                  ])
+                ]);
+              }),
+              256
+              /* UNKEYED_FRAGMENT */
+            ))
           ], 8, ["current"])) : vue.createCommentVNode("v-if", true)
         ]),
         vue.createCommentVNode(" 我的tab相关 ------End "),
@@ -26928,87 +26995,68 @@ ${o3}
             ))
           ]),
           vue.createElementVNode("view", { class: "skin-tab-content" }, [
-            $data.skinCurrent === 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 0,
-              class: "tab-list",
-              current: $data.current
-            }, [
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.skinList[$data.skinCurrent].list, (item) => {
-                  return vue.openBlock(), vue.createElementBlock("view", { class: "skin-list" }, [
-                    vue.createElementVNode("image", {
-                      class: "list-icon",
-                      src: "",
-                      mode: ""
-                    }),
-                    vue.createElementVNode("view", { class: "list-info" }, [
-                      vue.createElementVNode("view", { class: "flex-center" }, [
-                        vue.createElementVNode("view", null, [
-                          vue.createElementVNode(
-                            "h3",
-                            { class: "title" },
-                            vue.toDisplayString(item.title),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode(
-                            "view",
-                            { class: "introduce" },
-                            vue.toDisplayString(item.introduce),
-                            1
-                            /* TEXT */
-                          ),
-                          item.obtain == 1 ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 0,
-                            class: "isObtain back-green"
-                          }, "使用中")) : vue.createCommentVNode("v-if", true),
-                          item.obtain == 2 ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 1,
-                            class: "isObtain back-green"
-                          }, "已获取")) : vue.createCommentVNode("v-if", true),
-                          item.obtain == 3 ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 2,
-                            class: "isObtain"
-                          }, "未获得")) : vue.createCommentVNode("v-if", true)
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($data.skinList, (item, i2) => {
+                return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
+                  class: "tab-list",
+                  current: i2
+                }, [
+                  (vue.openBlock(true), vue.createElementBlock(
+                    vue.Fragment,
+                    null,
+                    vue.renderList($data.skinList[$data.skinCurrent].list, (item2) => {
+                      return vue.openBlock(), vue.createElementBlock("view", { class: "skin-list" }, [
+                        vue.createElementVNode("image", {
+                          class: "list-icon",
+                          src: "",
+                          mode: ""
+                        }),
+                        vue.createElementVNode("view", { class: "list-info" }, [
+                          vue.createElementVNode("view", { class: "flex-center" }, [
+                            vue.createElementVNode("view", null, [
+                              vue.createElementVNode(
+                                "h3",
+                                { class: "title" },
+                                vue.toDisplayString(item2.title),
+                                1
+                                /* TEXT */
+                              ),
+                              vue.createElementVNode(
+                                "view",
+                                { class: "introduce" },
+                                vue.toDisplayString(item2.introduce),
+                                1
+                                /* TEXT */
+                              ),
+                              item2.obtain == 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                                key: 0,
+                                class: "isObtain back-green"
+                              }, "使用中")) : vue.createCommentVNode("v-if", true),
+                              item2.obtain == 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                                key: 1,
+                                class: "isObtain back-green"
+                              }, "已获取")) : vue.createCommentVNode("v-if", true),
+                              item2.obtain == 3 ? (vue.openBlock(), vue.createElementBlock("view", {
+                                key: 2,
+                                class: "isObtain"
+                              }, "未获得")) : vue.createCommentVNode("v-if", true)
+                            ])
+                          ])
                         ])
-                      ])
-                    ])
-                  ]);
-                }),
-                256
-                /* UNKEYED_FRAGMENT */
-              ))
-            ], 8, ["current"])) : vue.createCommentVNode("v-if", true),
-            $data.skinCurrent === 1 ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 1,
-              class: "tab-list",
-              current: $data.skinCurrent
-            }, [
-              vue.createElementVNode("text", { class: "content-text" }, "选项卡2的内容")
-            ], 8, ["current"])) : vue.createCommentVNode("v-if", true),
-            $data.skinCurrent === 2 ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 2,
-              class: "tab-list",
-              current: $data.skinCurrent
-            }, [
-              vue.createElementVNode("text", { class: "content-text" }, "选项卡3的内容")
-            ], 8, ["current"])) : vue.createCommentVNode("v-if", true),
-            $data.skinCurrent === 3 ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 3,
-              class: "tab-list",
-              current: $data.skinCurrent
-            }, [
-              vue.createElementVNode("text", { class: "content-text" }, "选项卡4的内容")
-            ], 8, ["current"])) : vue.createCommentVNode("v-if", true),
-            $data.skinCurrent === 4 ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 4,
-              class: "tab-list",
-              current: $data.skinCurrent
-            }, [
-              vue.createElementVNode("text", { class: "content-text" }, "选项卡5的内容")
-            ], 8, ["current"])) : vue.createCommentVNode("v-if", true)
+                      ]);
+                    }),
+                    256
+                    /* UNKEYED_FRAGMENT */
+                  ))
+                ], 8, ["current"])), [
+                  [vue.vShow, $data.skinCurrent === i2]
+                ]);
+              }),
+              256
+              /* UNKEYED_FRAGMENT */
+            ))
           ])
         ]),
         vue.createCommentVNode(" 皮肤tab ------End "),

@@ -281,12 +281,12 @@
 				// 		}
 				// 	]
 				// },
-				userInfo: {
-					nickname: "",
-					currencies: {
+				// userInfo: {
+				// 	nickname: "",
+				// 	currencies: {
 
-					}
-				},
+				// 	}
+				// },
 				pageData: {
 					banner: {
 						bannerBack: "#3c25b9",
@@ -313,7 +313,7 @@
 				this.commonRequest({
 					url: "/api/student/info"
 				}).then(res => {
-					this.consoleLog("获取用户信息::", JSON.stringify(res))
+					// this.consoleLog("获取用户信息::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							store.commit("Update_UserInfo", res.data)
@@ -341,7 +341,7 @@
 				this.commonRequest({
 					url: "/api/mission/getAll"
 				}).then(res => {
-					this.consoleLog("首页任务列表::", JSON.stringify(res))
+					// this.consoleLog("首页任务列表::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							this.plan = res.data;
@@ -360,7 +360,7 @@
 				this.commonRequest({
 					url: "/api/achievement/mine"
 				}).then(res => {
-					this.consoleLog("最新成就::", JSON.stringify(res))
+					// this.consoleLog("最新成就::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							this.achievement = res.data;
@@ -379,7 +379,7 @@
 				this.commonRequest({
 					url: "/api/recommend/videos"
 				}).then(res => {
-					this.consoleLog("推荐学习::", JSON.stringify(res))
+					// this.consoleLog("推荐学习::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							this.videos = res.data;
@@ -417,13 +417,6 @@
 			this.pageOnShowSet({
 				uniHide:"all"
 			})
-			
-			if (store.state.userInfo.info) {
-				this.userInfo = {
-					...this.userInfo,
-					...store.state.userInfo.info
-				}
-			}
 		},
 		onHide() {
 
