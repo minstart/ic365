@@ -1,37 +1,37 @@
 {
-  "hash": "f01c52fe",
+  "hash": "6b784671",
   "configHash": "4f35e1e0",
-  "lockfileHash": "7e108689",
-  "browserHash": "d0d13008",
+  "lockfileHash": "c655d3e6",
+  "browserHash": "e28aecaf",
   "optimized": {
     "axios": {
       "src": "../../../../../node_modules/axios/index.js",
       "file": "axios.js",
-      "fileHash": "c96c76a5",
+      "fileHash": "2de24430",
       "needsInterop": false
     },
     "axios-adapter-uniapp": {
       "src": "../../../../../node_modules/axios-adapter-uniapp/index.js",
       "file": "axios-adapter-uniapp.js",
-      "fileHash": "6ff99373",
+      "fileHash": "6f72c6a9",
       "needsInterop": true
     },
     "crypto-js": {
       "src": "../../../../../node_modules/crypto-js/index.js",
       "file": "crypto-js.js",
-      "fileHash": "73cadc2b",
+      "fileHash": "414b265d",
       "needsInterop": true
     },
     "js-cookie": {
       "src": "../../../../../node_modules/js-cookie/dist/js.cookie.mjs",
       "file": "js-cookie.js",
-      "fileHash": "3e62ebee",
+      "fileHash": "7b01947f",
       "needsInterop": false
     },
     "jsencrypt": {
       "src": "../../../../../node_modules/jsencrypt/lib/index.js",
       "file": "jsencrypt.js",
-      "fileHash": "2597797b",
+      "fileHash": "f60973c9",
       "needsInterop": false
     }
   },

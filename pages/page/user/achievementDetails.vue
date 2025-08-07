@@ -1,5 +1,5 @@
 <template>
-	<view class="page-wrap" style="font-size: 16px;">
+	<view class="page-wrap">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#F4F4F4'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
@@ -162,7 +162,7 @@
 	@import "/static/css/standard.scss";
 	
 	.page-wrap {
-		background-color: #F4F4F4;
+		background: linear-gradient(#F4F4F4,#fff);
 	}
 
 	// 成就中心 ------Start
@@ -270,6 +270,11 @@
 						border-radius: 1rem;
 						background-color: #fff;
 						font-size: 0.625rem;
+						min-width: calc(3.75rem - 0.56rem * 2);
+						text-align: center;
+						&:last-child{
+							margin-right: 0;
+						}
 					}
 
 					.selected {

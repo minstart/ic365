@@ -286,10 +286,10 @@ export default {
 		// orientation 页面横屏竖屏 portrait（竖屏）或landscape（横屏）
 		pageOnShowSet(data) {
 			if (!data) return;
-			store.state.isLoading = true;
-			setTimeout(()=>{
+			// store.state.isLoading = true;
+			// setTimeout(()=>{
 				store.state.isLoading = false;
-			},1000)
+			// },1000)
 			try {
 				data.uniHide && this.uniHide(data.uniHide)
 			} catch (e) {}
