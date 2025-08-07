@@ -62,7 +62,7 @@
 					<view class="plan-list-require">{{item.subTitle}}</view>
 					<!-- 进度条 -->
 					<view class="progress-wrap" v-if="item.startTime==0">
-						<progress :percent="item.processTotal" activeColor="#77D182" stroke-width="8" />
+						<progress :percent="item.processTotal" activeColor="#77D182" backgroundColor="#ffffff" stroke-width="8" />
 					</view>
 					<view class="time-limited-wrap" v-else="calculateDaysUntilDeadline(item.endTime)>0">
 						<view class="time-limited">
@@ -414,8 +414,10 @@
 
 		},
 		onShow() {
-			// this.consoleLog("onshow:",store.state.userInfo)
-			this.uniHide("all")
+			this.pageOnShowSet({
+				uniHide:"all"
+			})
+			
 			if (store.state.userInfo.info) {
 				this.userInfo = {
 					...this.userInfo,

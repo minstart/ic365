@@ -1,6 +1,6 @@
 <template>
-	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
+	<view class="page-wrap" style="font-size: 16px;">
+		<page-head :title='pageHeadTitle' :isBack='true' :background="'#F4F4F4'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
 				<view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
@@ -114,22 +114,21 @@
 						name: "活动成就",
 					},
 					{
-						name: "活动成就",
-					},
-					{
 						name: "未获得",
 					}
 				]
 			}
 		},
 		onLoad() {
-
+			
 		},
 		onReady() {
 
 		},
 		onShow() {
-			this.uniHide("all")
+			this.pageOnShowSet({
+				uniHide:"all"
+			})
 		},
 		onHide() {
 
@@ -161,7 +160,7 @@
 
 <style lang="scss" scoped>
 	@import "/static/css/standard.scss";
-
+	
 	.page-wrap {
 		background-color: #F4F4F4;
 	}
@@ -204,7 +203,8 @@
 			.statistics {
 				position: absolute;
 				top: 1.25rem;
-				right: 1.0625rem
+				right: 1.0625rem;
+				font-size: 1rem;
 			}
 
 			.progress-list-wrap {
@@ -266,14 +266,14 @@
 				.search-tab-wrap {
 					.tab {
 						padding: 0.56rem 0.56rem;
-						margin-right: 1.125rem;
+						margin-right: 0.6875rem;
 						border-radius: 1rem;
 						background-color: #fff;
 						font-size: 0.625rem;
 					}
 
 					.selected {
-						background: $ThemeColor;
+						background: #FFE084;
 					}
 				}
 			}
@@ -316,11 +316,11 @@
 									display: inline-block;
 									margin-right: 1.25rem;
 									padding: 0.375rem 0.5rem 0.375rem 0.5rem;
-									font-size: 0.9375rem;
+									font-size: 0.75rem;
 									border-radius: 1rem;
-
+									overflow: hidden;
 									.icon {
-										display: inline-block;
+										float: left;
 										width: 1.25rem;
 										height: 1.25rem;
 									}
@@ -377,7 +377,7 @@
 									font-size: 0.68rem;
 									color: #676767;
 									vertical-align: bottom;
-									margin-top: 1.25rem;
+									margin-top: 1rem;
 								}
 							}
 						}

@@ -63,7 +63,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue = __toESM(require_vue());
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
@@ -73,10 +73,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   }
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-vertical/swiper-vertical.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-vertical/swiper-vertical.js
   var import_vue2 = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -85,7 +85,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-vertical/swiper-vertical.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-vertical/swiper-vertical.js
   var _style_0 = { "page": { "": { "flex": 1 } }, "swiper": { "": { "flex": 1, "backgroundColor": "#007AFF" } }, "swiper-item": { "": { "flex": 1 } }, "video": { "": { "flex": 1 } } };
   var videoData = [
     {
@@ -272,7 +272,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var swiperVertical = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/swiper-vertical/swiper-vertical.nvue"]]);
+  var swiperVertical = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/swiper-vertical/swiper-vertical.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

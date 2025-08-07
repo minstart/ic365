@@ -79,7 +79,7 @@
 		top: 0;
 		width: 100%;
 		background: #fff;
-		
+		z-index: 999;
 		.common-page-head-back,.common-page-head-module{
 			flex: 1;
 			position: relative;

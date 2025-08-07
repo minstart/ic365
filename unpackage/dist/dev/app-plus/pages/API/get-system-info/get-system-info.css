@@ -12,6 +12,7 @@
   top: 0;
   width: 100%;
   background: #fff;
+  z-index: 999;
 }
 .common-page-head .common-page-head-back[data-v-e80b2f0b],
 .common-page-head .common-page-head-module[data-v-e80b2f0b] {

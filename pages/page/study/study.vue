@@ -1,88 +1,87 @@
 <template>
-	<view class="banner-wrap">
-		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false"
-			:background="'transparent'"></page-head>
-		<view class="user-info-wrap">
-			<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
-			<view class="user-info">
-				<h3 class="name">{{userInfo.nickname}}同学</h3>
-				<ul class="cumulative-list">
-					<li class="list">
-						<view class="icon" iconType="star"></view>
-						<h4 class="number">{{userInfo.currencies.star||0}}</h4>
+	<view class="page-wrap">
+		<view class="banner-wrap">
+			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+			<view class="user-info-wrap">
+				<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+				<view class="user-info">
+					<h3 class="name">{{userInfo.nickname}}同学</h3>
+					<ul class="cumulative-list">
+						<li class="list">
+							<view class="icon" iconType="star"></view>
+							<h4 class="number">{{userInfo.currencies.star||0}}</h4>
+						</li>
+						<li class="list">
+							<view class="icon" iconType="stone"></view>
+							<h4 class="number">{{userInfo.currencies.stone||0}}</h4>
+						</li>
+						<li class="list">
+							<view class="icon" iconType="dust"></view>
+							<h4 class="number">{{userInfo.currencies.dust||0}}</h4>
+						</li>
+					</ul>
+				</view>
+			</view>
+		</view>
+		<view class="uni-padding-wrap">
+			<view class="learning-goal-wrap">
+				<h3 class="learning-goal-title">本周学习目标</h3>
+				<ul class="learning-goal-list-wrap">
+					<!-- v-for="item in learningGoal" -->
+					<li class="learning-goal-list">
+						<h3 class="list-content">
+							<span class="list-num">{{learningGoal.loginDays}}</span>
+							<span class="list-unit">天</span>
+						</h3>
+						<view class="list-title">本周学习</view>
 					</li>
-					<li class="list">
-						<view class="icon" iconType="stone"></view>
-						<h4 class="number">{{userInfo.currencies.stone||0}}</h4>
+					<li class="learning-goal-list">
+						<h3 class="list-content">
+							<span class="list-num">{{learningGoal.questionCount}}</span>
+							<span class="list-unit">题</span>
+						</h3>
+						<view class="list-title">完成练习</view>
 					</li>
-					<li class="list">
-						<view class="icon" iconType="dust"></view>
-						<h4 class="number">{{userInfo.currencies.dust||0}}</h4>
+					<li class="learning-goal-list">
+						<h3 class="list-content">
+							<span class="list-num">{{learningGoal.accuracy}}</span>
+							<span class="list-unit">%</span>
+						</h3>
+						<view class="list-title">正确率</view>
 					</li>
 				</ul>
 			</view>
-		</view>
-	</view>
-	<view class="uni-padding-wrap">
-		<view class="learning-goal-wrap">
-			<h3 class="learning-goal-title">本周学习目标</h3>
-			<ul class="learning-goal-list-wrap">
-				<!-- v-for="item in learningGoal" -->
-				<li class="learning-goal-list">
-					<h3 class="list-content">
-						<span class="list-num">{{learningGoal.loginDays}}</span>
-						<span class="list-unit">天</span>
-					</h3>
-					<view class="list-title">本周学习</view>
+			<view class="learning-method-wrap">
+				<view class="learning-method">
+					<view class="method-img method_left" @click="jumpPage({url:''})"></view>
+				</view>
+				<view class="learning-method">
+					<view class="method-img method_right" @click="jumpPage({url:''})"></view>
+					<view class="method-img method_right" @click="jumpPage({url:''})"></view>
+				</view>
+			</view>
+			<view class="item-title-wrap">
+				<h3 class="item-title">知识点学习</h3>
+			</view>
+			<view class="no-list-tip" v-if="knowledgePoints.length==0">暂无数据</view>
+			<ul class="plan-list-wrap">
+				<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:''})">
+					<image class="list-back" :src='item.coverUrl'></image>
+					<h3 class="list-title">{{item.name}}</h3>
+					<view class="list-subtitle">{{item.subtitle}}</view>
 				</li>
-				<li class="learning-goal-list">
-					<h3 class="list-content">
-						<span class="list-num">{{learningGoal.questionCount}}</span>
-						<span class="list-unit">题</span>
-					</h3>
-					<view class="list-title">完成练习</view>
-				</li>
-				<li class="learning-goal-list">
-					<h3 class="list-content">
-						<span class="list-num">{{learningGoal.accuracy}}</span>
-						<span class="list-unit">%</span>
-					</h3>
-					<view class="list-title">正确率</view>
+			</ul>
+			<view class="item-title-wrap">
+				<h3 class="item-title">推荐课堂</h3>
+			</view>
+			<view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
+			<ul class="classroom-list-wrap">
+				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:''})" v-for="item in classroom">
+					<image class="list-back" :src='item.coverUrl'></image>
+					<h3 class="list-title">{{item.name}}</h3>
 				</li>
 			</ul>
 		</view>
-		<view class="learning-method-wrap">
-			<view class="learning-method">
-				<view class="method-img method_left" @click="jumpPage({url:''})"></view>
-			</view>
-			<view class="learning-method">
-				<view class="method-img method_right" @click="jumpPage({url:''})"></view>
-				<view class="method-img method_right" @click="jumpPage({url:''})"></view>
-			</view>
-		</view>
-		<view class="item-title-wrap">
-			<h3 class="item-title">知识点学习</h3>
-		</view>
-		<ul class="plan-list-wrap">
-			<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:''})">
-				<image class="list-back" :src='item.coverUrl'></image>
-				<h3 class="list-title">{{item.name}}</h3>
-				<view class="list-subtitle">{{item.subtitle}}</view>
-			</li>
-		</ul>
-		<view class="item-title-wrap">
-			<h3 class="item-title">推荐课堂</h3>
-		</view>
-		<ul class="classroom-list-wrap">
-			<li class="classroom-list">
-				<div class="classroom-list-nav" @click="jumpPage({url:''})"></div>
-				<div class="classroom-list-nav" @click="jumpPage({url:''})"></div>
-			</li>
-			<li class="classroom-list">
-				<div class="classroom-list-nav" @click="jumpPage({url:''})"></div>
-				<div class="classroom-list-nav" @click="jumpPage({url:''})"></div>
-			</li>
-		</ul>
 	</view>
 </template>
 
@@ -113,23 +112,8 @@
 					accuracy: ""
 				},
 				// 知识点学习
-				// knowledgePoints:[],
-				knowledgePoints: [{
-					name: "数序",
-					coverUrl: "",
-					subtitle: "",
-					categoryId: 29
-				}, {
-					name: "6和7",
-					coverUrl: "",
-					subtitle: "",
-					categoryId: 21
-				}, {
-					name: "半时",
-					coverUrl: "",
-					subtitle: "",
-					categoryId: 35
-				}]
+				knowledgePoints: [],
+				classroom: [],
 			}
 		},
 		onLoad() {
@@ -196,7 +180,7 @@
 					this.consoleLog("知识点学习::", JSON.stringify(res))
 					if (res.code == 0) {
 						res.data && (this.knowledgePoints = res.data);
-						console.log(this.knowledgePoints)
+						res.data && (this.classroom = res.data);
 					} else {
 						uni.showToast({
 							title: res.message || "知识点学习失败!",
@@ -446,7 +430,8 @@
 				font-size: 0.75rem;
 			}
 
-			&:nth-child(1),&:nth-child(2) {
+			&:nth-child(1),
+			&:nth-child(2) {
 				margin-right: 0.6875rem;
 			}
 		}
@@ -455,44 +440,64 @@
 	// 推荐课堂
 	.classroom-list-wrap {
 		overflow: hidden;
+		display: flex;
+		flex-wrap: wrap;
 
 		.classroom-list {
-			display: flex;
+			width: calc(50% - 0.6875rem / 2);
+			height: 10.375rem;
+			margin: 0 0.6875rem 0.6875rem 0;
+			background: #ccc;
+			border-radius: 1rem;
+			position: relative;
 
-			.classroom-list-nav {
-				flex: 1;
-				height: 10.375rem;
-				margin-bottom: 0.6875rem;
-
-				&:nth-child(1) {
-					margin-right: 0.6875rem;
-				}
+			&:nth-child(2n) {
+				margin-right: 0;
 			}
 
-			&:nth-child(1) {
-				.classroom-list-nav {
-					&:nth-child(1) {
-						background: url("/static/image/2_classroom1.png") no-repeat top / 100%;
-					}
-
-					&:nth-child(2) {
-						background: url("/static/image/2_classroom2.png") no-repeat top / 100%;
-					}
-				}
+			.list-back {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				z-index: 0;
+				top: 0;
+				left: 0;
 			}
 
-			&:nth-child(2) {
-				.classroom-list-nav {
-					&:nth-child(1) {
-						background: url("/static/image/2_classroom3.png") no-repeat top / 100%;
-					}
-
-					&:nth-child(2) {
-						background: url("/static/image/2_classroom4.png") no-repeat top / 100%;
-					}
+			.list-title {
+				position: absolute;
+				left: 1rem;
+				right: 1rem;
+				top: 64%;
+				margin: auto;
+				text-align: center;
+				font-size: 1.125rem;
+			}
+		
+			&[colorTheme="1"]{
+				background: #EBFDEA;
+				.list-title{
+					color:#51750E;
 				}
 			}
-
+			&[colorTheme="2"]{
+				background: #FFEFF3;
+				.list-title{
+					color:#F9626D;
+				}
+			}
+			&[colorTheme="3"]{
+				background:#FFF2EA;
+				.list-title{
+					color:#EF761F;
+				}
+			}
+			&[colorTheme="4"]{
+				background: #E8F9FF;
+				.list-title{
+					color:#0588AE;
+				}
+			}
 		}
 	}
 </style>

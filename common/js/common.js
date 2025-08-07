@@ -46,6 +46,7 @@ async function fetchData(data) {
 export default {
 	data() {
 		return {
+			fontSize: 16, //页面默认rem尺寸
 			loading2: false,
 			staticUrl: this.$store.state.configData.staticUrl
 		}
@@ -97,7 +98,7 @@ export default {
 						// 	uni.setStorage(store.state.userInfo)
 						// }
 						store.state.userInfo.token = res.data.token
-						
+
 						// console.log(store.state.userInfo.info)
 						// store.state.userInfo.info = res.data;
 					},
@@ -130,7 +131,7 @@ export default {
 		// .catch() //失败返回
 		// .finally()
 		commonRequest(data) {
-			this.consoleLog("请求前的传参：", data)
+			this.consoleLog("请求前的传参：", data);
 			!data.notLoading && uni.showLoading();
 			return fetchData(data)
 
@@ -240,16 +241,70 @@ export default {
 			}
 		},
 		// 隐藏弹窗信息
-		uniHide(type){
-			if(!type) return;
-			if(type == "all" || type == "loading"){
+		uniHide(type) {
+			if (!type) return;
+			if (type == "all" || type == "loading") {
 				uni.hideLoading()
 			}
-			if(type == "all" || type == "toast"){
+			if (type == "all" || type == "toast") {
 				uni.hideToast();
 			}
 		},
-		
+		setRootFontSize(data) {
+			const baseWidth = 375; // 基准宽度
+			const baseFontSize = 16; // 基准字体大小
+			let scale = uni.getSystemInfoSync().windowWidth / baseWidth; // 获取当前窗口宽度并计算比例
+
+			if (!data || (data.orientation && data.orientation=="portrait")) {
+				try {
+					if (Number(baseFontSize * scale) > 0) {
+						store.state.baseFontSize = baseFontSize * scale
+					}
+				} catch (e) {
+					console.log('报错：：：：', e)
+				}
+			}else if(store.state.baseFontSize){
+				this.fontSize = store.state.baseFontSize
+			}
+		},
+
+
+		// 页面onShow 钩子触发的函数
+		// uniHide 隐藏弹窗等各种
+		// orientation 页面横屏竖屏 portrait（竖屏）或landscape（横屏）
+		pageOnShowSet(data) {
+			if (!data) return;
+			try {
+				data.uniHide && this.uniHide(data.uniHide)
+			} catch (e) {}
+
+			this.setRootFontSize(data)
+			// 设置横屏还是竖屏，默认竖屏
+			try {
+				if (data.orientation) {
+					// #ifdef APP-PLUS
+					plus.screen.lockOrientation(data.orientation + '-primary');
+					// #endif  
+					if (data.orientation == "portrait") {
+						this.setRootFontSize()
+					} else {
+						this.setRootFontSize()
+					}
+				} else {
+					// #ifdef APP-PLUS
+					plus.screen.lockOrientation('portrait-primary');
+					// #endif  
+					this.setRootFontSize(store.state.baseFontSize)
+				}
+			} catch (e) {
+				// #ifdef APP-PLUS
+				plus.screen.lockOrientation('portrait-primary');
+				// #endif  
+				this.setRootFontSize()
+			}
+
+		},
+
 		// 奖励图标
 		rewardIcon(id) {
 			switch (id) {
@@ -277,6 +332,6 @@ export default {
 					break;
 			}
 		},
-				
+
 	}
 }

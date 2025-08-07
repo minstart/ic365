@@ -16,7 +16,8 @@ const pages = [
     path: "pages/page/index/index",
     style: {
       navigationBarTitleText: "首页",
-      navigationStyle: "custom"
+      navigationStyle: "custom",
+      orientation: "portrait"
     }
   },
   {
@@ -65,7 +66,8 @@ const pages = [
     path: "pages/page/user/achievementDetails",
     style: {
       navigationBarTitleText: "成就中心",
-      navigationStyle: "custom"
+      navigationStyle: "custom",
+      orientation: "landscape"
     }
   },
   {

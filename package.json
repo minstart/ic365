@@ -144,6 +144,7 @@
   "devDependencies": {
     "@dcloudio/uts-win32-x64-msvc": "^3.0.0-alpha-3040820220424002",
     "@types/node": "^24.0.14",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "postcss-px-to-viewport": "^1.1.1"
   }
 }

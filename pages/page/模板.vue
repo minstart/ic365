@@ -27,7 +27,9 @@
 
 		},
 		onShow() {
-			
+			this.pageOnShowSet({
+				uniHide:"all"
+			})
 		},
 		onHide() {
 

@@ -45,6 +45,7 @@ const store = new Vuex.Store({
 					formRules: { //uni-forms校验必填
 						phone: /^1[3456789]\d{9}$/
 					},
+					baseFontSize:16,
 
 
 

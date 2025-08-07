@@ -3755,7 +3755,7 @@ ul, li {
   color: #999;
 }
 .item-title-wrap {
-  margin: 1.125rem 0 1.125rem 0;
+  margin: 1.875rem 0 1.125rem 0;
   font-weight: 700;
 }
 .item-title-wrap .item-title {
@@ -3791,7 +3791,7 @@ ul, li {
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 .tab-overflow-bar .tab-wrap {
   width: -webkit-max-content;

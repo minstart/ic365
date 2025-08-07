@@ -142,7 +142,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     )) : createCommentVNode("v-if", true)
   ]);
 }
-const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
 export {
   __easycom_0 as _
 };

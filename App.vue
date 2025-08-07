@@ -20,15 +20,16 @@
 			store.commit("SET_ENCRYPTENABLED", true) //开启数据加密模式
 			const deviceInfo = uni.getDeviceInfo()
 			const appInfo = uni.getSystemInfoSync()
-			console.log("设备信息：：：",deviceInfo)
-			console.log("安装包版本：：：",appInfo)
+			// console.log("设备信息：：：",deviceInfo)
+			// console.log("安装包版本：：：",appInfo)
+
 			let recordActivity = {
-				deviceModel:deviceInfo.deviceBrand + deviceInfo.deviceModel,
-				osVersion:deviceInfo.system,
-				appVersion:appInfo.appVersion,
-				uniqueId:deviceInfo.deviceId
+				deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
+				osVersion: deviceInfo.system,
+				appVersion: appInfo.appVersion,
+				uniqueId: deviceInfo.deviceId
 			}
-			
+
 			// uni.request({
 			//     url: store.state.configData.staticUrl  + "/api/student/recordActivity", //仅为示例，并非真实接口地址。
 			//     data: recordActivity,
@@ -36,14 +37,14 @@
 			//     //     'custom-header': 'hello' //自定义请求头信息
 			//     // },
 			//     success: (res) => {
-			        
+
 			//     }
 			// });
-			
+
 			// 记录用户设备信息
 			this.commonRequest({
 				url: "/api/student/recordActivity",
-				method:"POST",
+				method: "POST",
 				data: recordActivity
 			}).then(res => {
 				if (res.code == 0) {

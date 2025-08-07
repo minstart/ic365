@@ -1,4 +1,7 @@
 <template>
+	<!-- 如果需要横屏显示的，需要加这个控制rem -->
+	<page-meta :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
+	
 	<page-head :title='pageHeadTitle' :isBack='false'></page-head>
 	<input type="text" v-model="something">
 	<!-- 父页面调用子页面方法 -->
@@ -43,7 +46,10 @@
 		},
 		// onload事件时在网页或者图片完全加载完成后触发的，它适用于整个网页加载时 - 该方法就会执行一次，适合用于进行 页面初始化工作 和获取 一次性数据 。
 		onLoad() {
-
+			this.pageOnShowSet({
+				uniHide:"all",
+				orientation:"landscape" //横屏landscape 不传值默认竖屏
+			})
 		},
 		// 确保 DOM 渲染完成‌：在 onReady 执行时，组件的 DOM 结构已完全生成并挂载到页面，此时可以进行 DOM 操作或获取元素数据。 ‌
 		onReady() {
@@ -51,7 +57,7 @@
 		},
 		// 页面显示
 		onShow() {
-
+			
 		},
 		// 页面隐藏
 		onHide() {
