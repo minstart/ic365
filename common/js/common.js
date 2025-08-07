@@ -220,30 +220,35 @@ export default {
 					case "navigateTo":
 						// 方法用于保留当前页面，跳转到应用内的某个页面
 						uni.navigateTo({
-							url: data.url
+							url: data.url,
+							animationDuration:0
 						});
 						break;
 					case "redirectTo":
 						// 方法用于关闭当前页面，跳转到应用内的某个页面
 						uni.redirectTo({
-							url: data.url
+							url: data.url,
+							animationDuration:0
 						});
 						break;
 					case "reLaunch":
 						// 方法用于关闭所有页面，打开到应用内的某个页面
 						uni.reLaunch({
-							url: data.url
+							url: data.url,
+							animationDuration:0
 						});
 						break;
 					default:
 						uni.navigateTo({
-							url: data.url
+							url: data.url,
+							animationDuration:0
 						});
 						break;
 				}
 			} else {
 				uni.navigateTo({
-					url: data.url
+					url: data.url,
+					animationDuration:0
 				});
 			}
 		},

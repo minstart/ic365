@@ -14149,28 +14149,33 @@ if (uni.restoreGlobal) {
           switch (data.type) {
             case "navigateTo":
               uni.navigateTo({
-                url: data.url
+                url: data.url,
+                animationDuration: 0
               });
               break;
             case "redirectTo":
               uni.redirectTo({
-                url: data.url
+                url: data.url,
+                animationDuration: 0
               });
               break;
             case "reLaunch":
               uni.reLaunch({
-                url: data.url
+                url: data.url,
+                animationDuration: 0
               });
               break;
             default:
               uni.navigateTo({
-                url: data.url
+                url: data.url,
+                animationDuration: 0
               });
               break;
           }
         } else {
           uni.navigateTo({
-            url: data.url
+            url: data.url,
+            animationDuration: 0
           });
         }
       },
@@ -14195,7 +14200,7 @@ if (uni.restoreGlobal) {
               store.state.baseFontSize = baseFontSize * scale;
             }
           } catch (e2) {
-            formatAppLog("log", "at common/js/common.js:271", "报错：：：：", e2);
+            formatAppLog("log", "at common/js/common.js:276", "报错：：：：", e2);
           }
         } else if (store.state.baseFontSize) {
           this.fontSize = store.state.baseFontSize;
