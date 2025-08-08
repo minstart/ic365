@@ -16,8 +16,7 @@ const pages = [
     path: "pages/page/index/index",
     style: {
       navigationBarTitleText: "首页",
-      navigationStyle: "custom",
-      orientation: "portrait"
+      navigationStyle: "custom"
     }
   },
   {
@@ -31,6 +30,13 @@ const pages = [
     path: "pages/page/study/study",
     style: {
       navigationBarTitleText: "学习",
+      navigationStyle: "custom"
+    }
+  },
+  {
+    path: "pages/page/study/wrong_question",
+    style: {
+      navigationBarTitleText: "错题本",
       navigationStyle: "custom"
     }
   },
@@ -66,8 +72,7 @@ const pages = [
     path: "pages/page/user/achievementDetails",
     style: {
       navigationBarTitleText: "成就中心",
-      navigationStyle: "custom",
-      orientation: "landscape"
+      navigationStyle: "custom"
     }
   },
   {

@@ -28,7 +28,7 @@
 			<!-- 搜索相关 -->
 			<view class="search-wrap">
 				<view class="search-btn-wrap">
-					<input class="search-input" type="text" v-model="search" placeholder="搜索成就名称" />
+					<input class="search-input" type="text" v-model="search" placeholder="搜索知识点或题目" />
 					<view class="search-btn">搜索</view>
 				</view>
 				<view class="tab-wrap search-content-wrap">
@@ -307,7 +307,7 @@
 				.search-tab-wrap {
 					.tab {
 						padding: 0.56rem 0.56rem;
-						margin-right: 0.6875rem;
+						margin-right: 0.625rem;
 						border-radius: 1rem;
 						background-color: #fff;
 						font-size: 0.625rem;
@@ -380,8 +380,8 @@
 									padding: 0.43rem;
 									margin-right: 1.3rem;
 									&:nth-child(1){
-										border: 0.1rem solid #1C760D;
-										background: #ACE48C;
+										border: 0.1rem solid #ACE48C;
+										background: #F1FFEE;
 										border-radius: 1rem;
 									}
 									&:nth-child(2){

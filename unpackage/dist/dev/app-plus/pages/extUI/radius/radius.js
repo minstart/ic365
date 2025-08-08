@@ -307,8 +307,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       path: "pages/page/index/index",
       style: {
         navigationBarTitleText: "\u9996\u9875",
-        navigationStyle: "custom",
-        orientation: "portrait"
+        navigationStyle: "custom"
       }
     },
     {
@@ -322,6 +321,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       path: "pages/page/study/study",
       style: {
         navigationBarTitleText: "\u5B66\u4E60",
+        navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/page/study/wrong_question",
+      style: {
+        navigationBarTitleText: "\u9519\u9898\u672C",
         navigationStyle: "custom"
       }
     },
@@ -357,8 +363,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       path: "pages/page/user/achievementDetails",
       style: {
         navigationBarTitleText: "\u6210\u5C31\u4E2D\u5FC3",
-        navigationStyle: "custom",
-        orientation: "landscape"
+        navigationStyle: "custom"
       }
     },
     {

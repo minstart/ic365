@@ -34,6 +34,13 @@ const pages = [
     }
   },
   {
+    path: "pages/page/study/wrong_question",
+    style: {
+      navigationBarTitleText: "错题本",
+      navigationStyle: "custom"
+    }
+  },
+  {
     path: "pages/page/team/team",
     style: {
       navigationBarTitleText: "队伍",
@@ -58,6 +65,13 @@ const pages = [
     path: "pages/page/user/userSet",
     style: {
       navigationBarTitleText: "我的设置",
+      navigationStyle: "custom"
+    }
+  },
+  {
+    path: "pages/page/user/achievementDetails",
+    style: {
+      navigationBarTitleText: "成就中心",
       navigationStyle: "custom"
     }
   },

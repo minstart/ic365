@@ -36,7 +36,7 @@
   color: #333;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
-  background: url("../../../static/icons/back_grey.png") no-repeat center / 100% 100%;
+  background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
 }
 .common-page-head .page-head-module-icon[data-v-e80b2f0b] {
   width: 2.125rem;
@@ -103,8 +103,11 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.item-title-wrap[data-v-70c707a8] {
+  margin-top: 1rem;
+}
 .page-wrap[data-v-70c707a8] {
-  background-color: #F4F4F4;
+  background: #F4F4F4;
 }
 .achievement-statistics-wrap .achievement-statistics[data-v-70c707a8] {
   min-height: 22.06rem;
@@ -187,10 +190,15 @@
 }
 .search-wrap .search-content-wrap .tab-overflow-bar .search-tab-wrap .tab[data-v-70c707a8] {
   padding: 0.56rem 0.56rem;
-  margin-right: 0.6875rem;
+  margin-right: 0.625rem;
   border-radius: 1rem;
   background-color: #fff;
   font-size: 0.625rem;
+  min-width: 2.63rem;
+  text-align: center;
+}
+.search-wrap .search-content-wrap .tab-overflow-bar .search-tab-wrap .tab[data-v-70c707a8]:last-child {
+  margin-right: 0;
 }
 .search-wrap .search-content-wrap .tab-overflow-bar .search-tab-wrap .selected[data-v-70c707a8] {
   background: #FFE084;

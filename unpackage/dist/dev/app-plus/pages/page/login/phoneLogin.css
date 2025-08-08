@@ -36,7 +36,7 @@
   color: #333;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
-  background: url("../../../static/icons/back_grey.png") no-repeat center / 100% 100%;
+  background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
 }
 .common-page-head .page-head-module-icon[data-v-e80b2f0b] {
   width: 2.125rem;
@@ -1396,7 +1396,8 @@ uni-page-body[data-v-3933e925] {
   color: #F5A623;
 }
 .get-verification-code[data-v-3933e925] {
-  background: transparent;
+  background: transparent !important;
+  padding: 0 0.7rem !important;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -1480,8 +1481,11 @@ uni-page-body[data-v-3933e925] {
   text-decoration: none;
 }
 .checkbox-item .agreement-text .link-a span {
-  color: #0034FF;
+  color: #0034FF !important;
   font-size: 0.75rem;
+}
+.uni-link {
+  color: #0034FF !important;
 }
 .uni-data-checklist .checklist-group .checklist-box {
   align-items: flex-start !important;

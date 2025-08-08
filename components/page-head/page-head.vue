@@ -109,7 +109,7 @@
 		}
 
 		.page-head-back-icon {
-			background: url("/static/icons/back_grey.png") no-repeat center / 100% 100%;
+			background: url("/static/icons/back_orange.png") no-repeat center / 100% 100%;
 		}
 
 		.page-head-module-icon {

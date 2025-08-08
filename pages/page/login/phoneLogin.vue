@@ -91,6 +91,11 @@
 			onReady() {
 
 			},
+			onShow() {
+				this.pageOnShowSet({
+					uniHide: "all"
+				})
+			},
 			methods: {
 				forLogin: function(ref) {
 					this.$refs[ref].validateField(["phone"]).then((checkRes) => {
@@ -197,7 +202,8 @@
 		}
 
 		.get-verification-code {
-			background: transparent;
+			background: transparent !important;
+			padding: 0 0.7rem !important;
 			position: absolute;
 			right: 0;
 			bottom: 0;
@@ -207,7 +213,6 @@
 			z-index: 2;
 			border-bottom: 1px solid #dcdfe6;
 			border-radius: 0;
-
 			&::after {
 				border-width: 0;
 			}
@@ -269,14 +274,16 @@
 
 				.link-a {
 					span{
-						color: #0034FF;
+						color: #0034FF !important;
 						font-size: 0.75rem
 					}
 					text-decoration: none;
 				}
 			}
 		}
-
+		.uni-link{
+			color: #0034FF !important;
+		}
 
 		.uni-data-checklist {
 			.checklist-group {

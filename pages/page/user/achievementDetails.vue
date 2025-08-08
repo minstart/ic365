@@ -161,8 +161,12 @@
 <style lang="scss" scoped>
 	@import "/static/css/standard.scss";
 	
+	.item-title-wrap{
+		margin-top: 1rem;
+	}
+	
 	.page-wrap {
-		background: linear-gradient(#F4F4F4,#fff);
+		background: #F4F4F4;
 	}
 
 	// 成就中心 ------Start
@@ -266,7 +270,7 @@
 				.search-tab-wrap {
 					.tab {
 						padding: 0.56rem 0.56rem;
-						margin-right: 0.6875rem;
+						margin-right: 0.625rem;
 						border-radius: 1rem;
 						background-color: #fff;
 						font-size: 0.625rem;

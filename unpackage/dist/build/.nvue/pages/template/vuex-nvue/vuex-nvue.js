@@ -275,6 +275,8 @@ const store = createStore({
     // 状态数据
     configData,
     //接口请求路径
+    defaultHeadPic: "/static/image/head_pic.png",
+    //默认用户头像
     requestHead: {
       Authorization: ""
     },
@@ -293,6 +295,9 @@ const store = createStore({
       //uni-forms校验必填
       phone: /^1[3456789]\d{9}$/
     },
+    baseFontSize: 16,
+    isLoading: true,
+    //页面是否加载loading样式
     hasLogin: false,
     isUniverifyLogin: false,
     loginProvider: "",
@@ -335,7 +340,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:93", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:95", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },
