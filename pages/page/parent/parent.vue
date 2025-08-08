@@ -266,7 +266,12 @@
 
 		},
 		onReady() {
-			this.getServerData();
+			this.verifLogin().then(data => {
+				this.getServerData();
+			}).catch(error => {
+				this.consoleLog("没有登录：：", error)
+			})
+			
 		},
 		onShow() {
 			this.pageOnShowSet({
@@ -276,9 +281,6 @@
 		onHide() {
 
 		},
-		// watch {
-
-		// },
 		created() {
 
 		},

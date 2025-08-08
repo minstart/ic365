@@ -104,7 +104,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .page-wrap[data-v-612ffe2c] {
-  background: linear-gradient(#FFEEE6, #fff);
+  background: linear-gradient(#FFEEE6 0%, #F4F4F4 40%, #F4F4F4 100%);
 }
 .achievement-statistics-wrap .achievement-statistics[data-v-612ffe2c] {
   min-height: 14rem;
@@ -206,7 +206,7 @@
   margin-right: 0.625rem;
   border-radius: 1rem;
   background-color: #fff;
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   min-width: 2.63rem;
   text-align: center;
 }

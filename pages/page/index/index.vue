@@ -301,14 +301,7 @@
 
 		},
 		onReady() {
-			const route = getCurrentPages(); //获取当前页面地址
-			const pathUrl = route[route.length - 1].route;
-			this.getLogin().then(data => {
-				// this.consoleLog(store.state.userInfo.token)
-				// this.consoleLog(store.state.userInfo)
-				// 已经登陆了
-				this.consoleLog("已经登陆了")
-
+			this.verifLogin().then(data => {
 				// 获取用户信息
 				this.commonRequest({
 					url: "/api/student/info"
@@ -320,11 +313,11 @@
 							this.userInfo = res.data;
 						} catch (e) {}
 						// 全新用户，需要选年级
-
+				
 						if (res.data.grade == 0) {
 							uni.redirectTo({
 								url: '/pages/page/index/supplement_info?pageFrom=' +
-									pathUrl
+									data.pathUrl
 							});
 						}
 					} else {
@@ -336,7 +329,7 @@
 				}).catch(error => {
 					this.consoleLog("获取用户信息报错：：", error)
 				})
-
+				
 				// 获取任务列表
 				this.commonRequest({
 					url: "/api/mission/getAll"
@@ -348,14 +341,14 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.message|| "获取用户信息失败!",
+							title: res.message || "获取用户信息失败!",
 							icon: "none"
 						});
 					}
 				}).catch(error => {
 					this.consoleLog("获取任务列表报错：：", error)
 				})
-
+				
 				// 获取我的成就
 				this.commonRequest({
 					url: "/api/achievement/mine"
@@ -367,14 +360,14 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.message|| "获取最新成就失败!",
+							title: res.message || "获取最新成就失败!",
 							icon: "none"
 						});
 					}
 				}).catch(error => {
 					this.consoleLog("获取最新成就失败：：", error)
 				})
-
+				
 				// 获取推荐学习
 				this.commonRequest({
 					url: "/api/recommend/videos"
@@ -386,36 +379,20 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.message|| "获取推荐学习失败!",
+							title: res.message || "获取推荐学习失败!",
 							icon: "none"
 						});
 					}
 				}).catch(error => {
 					this.consoleLog("获取推荐学习失败：：", error)
 				})
-			}).catch(err => {
-				// 没有登陆
-				// console.error("data：：：：：2", JSON.stringify(err));
-				if (pathUrl.indexOf("/login") == -1) {
-					// 没有登录
-					console.log("没有登录,跳转到登录页面")
-					// #ifdef APP-PLUS
-					uni.redirectTo({
-						url: '/pages/page/login/login?pageFrom=' + pathUrl
-					});
-					// #endif
-					// #ifdef H5
-					// uni.redirectTo({
-					// 	url: '/pages/page/login/phoneLogin?pageFrom=' + pathUrl
-					// });
-					// #endif
-				}
-			});
-
+			}).catch(error => {
+				this.consoleLog("没有登录：：", error)
+			})
 		},
 		onShow() {
 			this.pageOnShowSet({
-				uniHide:"all"
+				uniHide: "all"
 			})
 		},
 		onHide() {
@@ -850,7 +827,6 @@
 	}
 
 	.achievement-wrap {
-		margin: 1rem 0;
 		position: relative;
 
 		.achievement-back {

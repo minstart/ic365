@@ -95,6 +95,7 @@
 				searchResult: [{
 						name: "数学",
 						list: [{
+								id:"1",
 								name: "分数运算",
 								topic: "小明有3/4块巧克力，吃了1/2，还剩多少块？",
 								time: "2025.07.22",
@@ -102,6 +103,7 @@
 								correctAnswer: "1/2块"
 							},
 							{
+								id:"2",
 								name: "图形面积",
 								topic: "水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶帆帆帆帆帆帆帆帆帆帆？",
 								time: "2025.07.29",
@@ -139,9 +141,6 @@
 		onHide() {
 
 		},
-		// watch {
-
-		// },
 		created() {
 
 		},
@@ -162,12 +161,24 @@
 			},
 			similarExercises(data){
 				// 同类练习
+				uni.showToast({
+					title: "同类练习" + data.id,
+					icon: "none"
+				})
 			},
 			reAnswer(data){
-				// 从新作答
+				// 重新作答
+				uni.showToast({
+					title: "重新作答" + data.id,
+					icon: "none"
+				})
 			},
 			print(data){
 				// 打印
+				uni.showToast({
+					title: "打印" + data.id,
+					icon: "none"
+				})
 			}
 		}
 	}
@@ -177,7 +188,7 @@
 	@import "/static/css/standard.scss";
 
 	.page-wrap {
-		background: linear-gradient(#FFEEE6, #fff);
+		background: linear-gradient(#FFEEE6 0%, #F4F4F4 40%, #F4F4F4 100%);
 	}
 
 	// 成就中心 ------Start
@@ -310,7 +321,7 @@
 						margin-right: 0.625rem;
 						border-radius: 1rem;
 						background-color: #fff;
-						font-size: 0.625rem;
+						font-size: 0.75rem;
 						min-width: calc(3.75rem - 0.56rem * 2);
 						text-align: center;
 						&:last-child{

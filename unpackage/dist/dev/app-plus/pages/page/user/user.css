@@ -109,12 +109,12 @@ uni-page-body[data-v-351444bc] {
 .page-wrap[data-v-351444bc] {
   background: url("../../../static/image/5_user_back.png") no-repeat top/100%;
 }
-.banner-wrap .btn-user-set-wrap[data-v-351444bc] {
+.banner-wrap .btn-wrap[data-v-351444bc] {
   overflow: hidden;
   width: 21.4375rem;
   margin: 0 auto;
 }
-.banner-wrap .btn-user-set-wrap .btn-user-set[data-v-351444bc] {
+.banner-wrap .btn-wrap .user-set-btn[data-v-351444bc] {
   margin: 1.5625rem 0.5rem 1.06rem 0;
   width: 1.25rem;
   height: 1.25rem;
@@ -159,6 +159,13 @@ uni-page-body[data-v-351444bc] {
   color: #eb7d1e;
   padding: 0.25rem 0.5rem;
   background: #FFFBDB;
+}
+.banner-wrap .user-info-wrap .qr-code[data-v-351444bc] {
+  width: 2rem;
+  height: 2rem;
+  background: url("../../../static/icons/QR_code.png") no-repeat center/100% 100%;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
 }
 .banner-wrap .property[data-v-351444bc] {
   display: flex;

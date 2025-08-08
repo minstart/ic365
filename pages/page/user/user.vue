@@ -3,8 +3,8 @@
 		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false"
 			:background="'transparent'"></page-head>
 		<view class="banner-wrap">
-			<view class="btn-user-set-wrap">
-				<view class="btn-user-set" @click="jumpPage({url:''})"></view>
+			<view class="btn-wrap">
+				<view class="user-set-btn" @click="jumpPage({url:''})"></view>
 			</view>
 			<view class="user-info-wrap">
 				<view class="uni-padding-wrap">
@@ -18,6 +18,9 @@
 								{{item.showAchievementName}}
 							</li>
 						</ul>
+					</view>
+					<view class="flex-center">
+						<view class="qr-code" @click="jumpPage({url:'/pages/page/team/invite_team'})"></view>
 					</view>
 				</view>
 				<view class="property">
@@ -124,7 +127,7 @@
 					<h3 class="item-title">兑换商城</h3>
 					<view class="item-subtitle">限时兑换</view>
 					<view class="item-more">
-						<view class="text icon-more" @click="jumpPage({url:''})">查看更多</view>
+						<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/exchange_mall'})">查看更多</view>
 					</view>
 				</view>
 				<ul class="exchange-list-wrap">
@@ -368,12 +371,12 @@
 	}
 	.banner-wrap {
 
-		.btn-user-set-wrap {
+		.btn-wrap {
 			overflow: hidden;
 			width: 21.4375rem;
 			margin: 0 auto;
 
-			.btn-user-set {
+			.user-set-btn {
 				margin: 1.5625rem 0.5rem 1.06rem 0;
 				width: 1.25rem;
 				height: 1.25rem;
@@ -427,6 +430,13 @@
 						background: #FFFBDB;
 					}
 				}
+			}
+			.qr-code{
+				width: 2rem;
+				height: 2rem;
+				background: url("/static/icons/QR_code.png") no-repeat center / 100% 100%;
+				border-radius: 0.5rem;
+				margin-left: 0.5rem;
 			}
 		}
 

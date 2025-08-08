@@ -339,6 +339,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     },
     {
+      path: "pages/page/team/invite_team",
+      style: {
+        navigationBarTitleText: "\u9080\u8BF7\u7EC4\u961F",
+        navigationStyle: "custom"
+      }
+    },
+    {
       path: "pages/page/parent/parent",
       style: {
         navigationBarTitleText: "\u5BB6\u957F",
@@ -363,6 +370,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       path: "pages/page/user/achievementDetails",
       style: {
         navigationBarTitleText: "\u6210\u5C31\u4E2D\u5FC3",
+        navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/page/user/exchange_mall",
+      style: {
+        navigationBarTitleText: "\u5151\u6362\u5546\u57CE",
         navigationStyle: "custom"
       }
     },

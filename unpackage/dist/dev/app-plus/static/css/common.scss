@@ -27,6 +27,17 @@ ul,li{
 	padding: 1.125rem 0;
 	color: #999;
 }
+.btn-yellow{
+	background: $ThemeColor;
+	color: #fff;
+	font-size: 1rem;
+}
+.btn-white{
+	color: $ThemeColor;
+	background: #fff !important;
+	border: 0.1rem solid $ThemeColor;
+	font-size: 1rem;
+}
 // 单一类型样式 ------End
 
 // 列表标题
@@ -96,4 +107,10 @@ uni-button{
 	.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text{
 		color: $ThemeColor !important;
 	}
+}
+.uni-toast{
+	width: 10rem;
+}
+.uni-toast__content{
+	padding: 0 0.3rem;
 }

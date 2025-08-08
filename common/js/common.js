@@ -50,7 +50,7 @@ export default {
 			userInfo: {
 				nickname: "",
 				currencies: {
-			
+
 				}
 			},
 			fontSize: 16, //页面默认rem尺寸
@@ -110,7 +110,7 @@ export default {
 						// store.state.userInfo.info = res.data;
 					},
 					fail: function(err) {
-						console.log(err)
+						// console.log(err)
 						reject(err);
 						_this.removeLogin()
 					}
@@ -221,34 +221,34 @@ export default {
 						// 方法用于保留当前页面，跳转到应用内的某个页面
 						uni.navigateTo({
 							url: data.url,
-							animationDuration:0
+							animationDuration: 0
 						});
 						break;
 					case "redirectTo":
 						// 方法用于关闭当前页面，跳转到应用内的某个页面
 						uni.redirectTo({
 							url: data.url,
-							animationDuration:0
+							animationDuration: 0
 						});
 						break;
 					case "reLaunch":
 						// 方法用于关闭所有页面，打开到应用内的某个页面
 						uni.reLaunch({
 							url: data.url,
-							animationDuration:0
+							animationDuration: 0
 						});
 						break;
 					default:
 						uni.navigateTo({
 							url: data.url,
-							animationDuration:0
+							animationDuration: 0
 						});
 						break;
 				}
 			} else {
 				uni.navigateTo({
 					url: data.url,
-					animationDuration:0
+					animationDuration: 0
 				});
 			}
 		},
@@ -262,12 +262,13 @@ export default {
 				uni.hideToast();
 			}
 		},
+		// 设置屏幕rem的fontsize(主要用在横屏保持竖屏尺寸)
 		setRootFontSize(data) {
 			const baseWidth = 375; // 基准宽度
 			const baseFontSize = 16; // 基准字体大小
 			let scale = uni.getSystemInfoSync().windowWidth / baseWidth; // 获取当前窗口宽度并计算比例
 
-			if (!data || (data.orientation && data.orientation=="portrait")) {
+			if (!data || (data.orientation && data.orientation == "portrait")) {
 				try {
 					if (Number(baseFontSize * scale) > 0) {
 						store.state.baseFontSize = baseFontSize * scale
@@ -275,7 +276,7 @@ export default {
 				} catch (e) {
 					console.log('报错：：：：', e)
 				}
-			}else if(store.state.baseFontSize){
+			} else if (store.state.baseFontSize) {
 				this.fontSize = store.state.baseFontSize
 			}
 		},
@@ -288,7 +289,7 @@ export default {
 			if (!data) return;
 			// store.state.isLoading = true;
 			// setTimeout(()=>{
-				store.state.isLoading = false;
+			store.state.isLoading = false;
 			// },1000)
 			try {
 				data.uniHide && this.uniHide(data.uniHide)
@@ -300,7 +301,7 @@ export default {
 					...store.state.userInfo.info
 				}
 			}
-			
+
 			this.setRootFontSize(data)
 			// 设置横屏还是竖屏，默认竖屏
 			try {
@@ -328,7 +329,7 @@ export default {
 
 		},
 
-		// 奖励图标
+		// 奖励图标统一返回
 		rewardIcon(id) {
 			switch (id) {
 				case 1:
@@ -356,5 +357,39 @@ export default {
 			}
 		},
 
+		// 校验是否已经登录
+		// success : function 确认已经登录的调用
+		verifLogin(_data) {
+			let _this = this;
+			return new Promise((resolve, reject) => {
+				const route = getCurrentPages(); //获取当前页面地址
+				const pathUrl = route[route.length - 1].route;
+				_this.getLogin().then(data => {
+					// 已经登陆了
+					_this.consoleLog("已经登陆了")
+					data.route = route;
+					data.pathUrl = pathUrl;
+					resolve(data);
+				}).catch(err => {
+					// 没有登陆
+					reject(err);
+					// console.error("data：：：：：2", JSON.stringify(err));
+					if (pathUrl.indexOf("/login") == -1) {
+						// 没有登录
+						console.log("没有登录,跳转到登录页面")
+						// #ifdef APP-PLUS
+						uni.redirectTo({
+							url: '/pages/page/login/login?pageFrom=' + pathUrl
+						});
+						// #endif
+						// #ifdef H5
+						// uni.redirectTo({
+						// 	url: '/pages/page/login/phoneLogin?pageFrom=' + pathUrl
+						// });
+						// #endif
+					}
+				});
+			})
+		}
 	}
 }

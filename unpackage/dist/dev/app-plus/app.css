@@ -3754,6 +3754,17 @@ ul, li {
   padding: 1.125rem 0;
   color: #999;
 }
+.btn-yellow {
+  background: #F5A623;
+  color: #fff;
+  font-size: 1rem;
+}
+.btn-white {
+  color: #F5A623;
+  background: #fff !important;
+  border: 0.1rem solid #F5A623;
+  font-size: 1rem;
+}
 .item-title-wrap {
   margin: 1.875rem 0 1.125rem 0;
   font-weight: 700;
@@ -3812,4 +3823,10 @@ uni-button {
 }
 .uni-padding-wrap .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text {
   color: #F5A623 !important;
+}
+.uni-toast {
+  width: 10rem;
+}
+.uni-toast__content {
+  padding: 0 0.3rem;
 }

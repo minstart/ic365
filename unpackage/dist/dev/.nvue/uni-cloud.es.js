@@ -48,6 +48,13 @@ const pages = [
     }
   },
   {
+    path: "pages/page/team/invite_team",
+    style: {
+      navigationBarTitleText: "邀请组队",
+      navigationStyle: "custom"
+    }
+  },
+  {
     path: "pages/page/parent/parent",
     style: {
       navigationBarTitleText: "家长",
@@ -72,6 +79,13 @@ const pages = [
     path: "pages/page/user/achievementDetails",
     style: {
       navigationBarTitleText: "成就中心",
+      navigationStyle: "custom"
+    }
+  },
+  {
+    path: "pages/page/user/exchange_mall",
+    style: {
+      navigationBarTitleText: "兑换商城",
       navigationStyle: "custom"
     }
   },

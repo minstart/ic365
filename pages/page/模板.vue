@@ -1,6 +1,6 @@
 <template>
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='false'></page-head>
+		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
 	</view>
 </template>
 
@@ -17,7 +17,7 @@
 		
 		data() {
 			return {
-				pageHeadTitle: "标题",
+				pageHeadTitle: "",
 			}
 		},
 		onLoad() {

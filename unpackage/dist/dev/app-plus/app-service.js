@@ -51,7 +51,7 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$3n = {
+  const _sfc_main$3p = {
     name: "page-head",
     props: {
       clickModule: {
@@ -96,7 +96,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_viww = vue.resolveComponent("viww");
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -164,7 +164,7 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
+  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3p, [["render", _sfc_render$3o], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
   var lookup = [
     0,
     0,
@@ -14080,7 +14080,6 @@ if (uni.restoreGlobal) {
               store.state.userInfo.token = res2.data.token;
             },
             fail: function(err) {
-              formatAppLog("log", "at common/js/common.js:113", err);
               reject(err);
               _this.removeLogin();
             }
@@ -14190,6 +14189,7 @@ if (uni.restoreGlobal) {
           uni.hideToast();
         }
       },
+      // 设置屏幕rem的fontsize(主要用在横屏保持竖屏尺寸)
       setRootFontSize(data) {
         const baseWidth = 375;
         const baseFontSize = 16;
@@ -14200,7 +14200,7 @@ if (uni.restoreGlobal) {
               store.state.baseFontSize = baseFontSize * scale;
             }
           } catch (e2) {
-            formatAppLog("log", "at common/js/common.js:276", "报错：：：：", e2);
+            formatAppLog("log", "at common/js/common.js:277", "报错：：：：", e2);
           }
         } else if (store.state.baseFontSize) {
           this.fontSize = store.state.baseFontSize;
@@ -14241,7 +14241,7 @@ if (uni.restoreGlobal) {
           this.setRootFontSize();
         }
       },
-      // 奖励图标
+      // 奖励图标统一返回
       rewardIcon(id2) {
         switch (id2) {
           case 1:
@@ -14255,6 +14255,29 @@ if (uni.restoreGlobal) {
           case 5:
             return "/static/icons/christmas.png";
         }
+      },
+      // 校验是否已经登录
+      // success : function 确认已经登录的调用
+      verifLogin(_data) {
+        let _this = this;
+        return new Promise((resolve, reject) => {
+          const route = getCurrentPages();
+          const pathUrl = route[route.length - 1].route;
+          _this.getLogin().then((data) => {
+            _this.consoleLog("已经登陆了");
+            data.route = route;
+            data.pathUrl = pathUrl;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+            if (pathUrl.indexOf("/login") == -1) {
+              formatAppLog("log", "at common/js/common.js:379", "没有登录,跳转到登录页面");
+              uni.redirectTo({
+                url: "/pages/page/login/login?pageFrom=" + pathUrl
+              });
+            }
+          });
+        });
       }
     }
   };
@@ -14262,7 +14285,7 @@ if (uni.restoreGlobal) {
   const _imports_1$1 = "/static/image/1_study.png";
   const _imports_2$2 = "/static/image/1_achievement_back.png";
   const _imports_3 = "/static/icons/achievement.png";
-  const _sfc_main$3m = {
+  const _sfc_main$3o = {
     mixins: [commonJs],
     components: {},
     props: {},
@@ -14431,10 +14454,7 @@ if (uni.restoreGlobal) {
     onLoad() {
     },
     onReady() {
-      const route = getCurrentPages();
-      const pathUrl = route[route.length - 1].route;
-      this.getLogin().then((data) => {
-        this.consoleLog("已经登陆了");
+      this.verifLogin().then((data) => {
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
@@ -14446,7 +14466,7 @@ if (uni.restoreGlobal) {
             }
             if (res2.data.grade == 0) {
               uni.redirectTo({
-                url: "/pages/page/index/supplement_info?pageFrom=" + pathUrl
+                url: "/pages/page/index/supplement_info?pageFrom=" + data.pathUrl
               });
             }
           } else {
@@ -14509,13 +14529,8 @@ if (uni.restoreGlobal) {
         }).catch((error) => {
           this.consoleLog("获取推荐学习失败：：", error);
         });
-      }).catch((err) => {
-        if (pathUrl.indexOf("/login") == -1) {
-          formatAppLog("log", "at pages/page/index/index.vue:401", "没有登录,跳转到登录页面");
-          uni.redirectTo({
-            url: "/pages/page/login/login?pageFrom=" + pathUrl
-          });
-        }
+      }).catch((error) => {
+        this.consoleLog("没有登录：：", error);
       });
     },
     onShow() {
@@ -14568,7 +14583,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3n(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createElementVNode("view", { class: "banner-wrap" }, [
@@ -14926,7 +14941,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/index.vue"]]);
+  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3o, [["render", _sfc_render$3n], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/index.vue"]]);
   const leftWindow = {
     path: "windows/left-window.vue",
     style: {
@@ -14976,6 +14991,13 @@ if (uni.restoreGlobal) {
       }
     },
     {
+      path: "pages/page/team/invite_team",
+      style: {
+        navigationBarTitleText: "邀请组队",
+        navigationStyle: "custom"
+      }
+    },
+    {
       path: "pages/page/parent/parent",
       style: {
         navigationBarTitleText: "家长",
@@ -15000,6 +15022,13 @@ if (uni.restoreGlobal) {
       path: "pages/page/user/achievementDetails",
       style: {
         navigationBarTitleText: "成就中心",
+        navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/page/user/exchange_mall",
+      style: {
+        navigationBarTitleText: "兑换商城",
         navigationStyle: "custom"
       }
     },
@@ -19535,7 +19564,7 @@ ${o3}
   const {
     t: t$7
   } = initVueI18n(messages$4);
-  const _sfc_main$3l = {
+  const _sfc_main$3n = {
     name: "UniLoadMore",
     emits: ["clickLoadMore"],
     props: {
@@ -19617,7 +19646,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3m(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "uni-load-more",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
@@ -19692,8 +19721,8 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
-  const _sfc_main$3k = {
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+  const _sfc_main$3m = {
     name: "uniDataChecklist",
     mixins: [tr.mixinDatacom || {}],
     emits: ["input", "update:modelValue", "change"],
@@ -20040,7 +20069,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -20253,8 +20282,8 @@ ${o3}
       /* STYLE */
     );
   }
-  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
-  const _sfc_main$3j = {
+  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
+  const _sfc_main$3l = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -20586,7 +20615,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -20642,7 +20671,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   const fontData = [
     {
       "font_class": "arrow-down",
@@ -21293,7 +21322,7 @@ ${o3}
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$3i = {
+  const _sfc_main$3k = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -21347,7 +21376,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -21362,8 +21391,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-  const _sfc_main$3h = {
+  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const _sfc_main$3j = {
     name: "uni-data-select",
     mixins: [tr.mixinDatacom || {}],
     props: {
@@ -21615,7 +21644,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-stat__select" }, [
       $props.label ? (vue.openBlock(), vue.createElementBlock(
@@ -21755,7 +21784,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
+  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -21774,7 +21803,7 @@ ${o3}
     }
     return style;
   }
-  const _sfc_main$3g = {
+  const _sfc_main$3i = {
     name: "uni-easyinput",
     emits: [
       "click",
@@ -22131,7 +22160,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -22256,7 +22285,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -22820,7 +22849,7 @@ ${o3}
       return false;
     }
   };
-  const _sfc_main$3f = {
+  const _sfc_main$3h = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -23122,15 +23151,15 @@ ${o3}
       _isEqual: isEqual
     }
   };
-  function _sfc_render$3e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$3e = {
+  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$3g = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23276,7 +23305,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_data_checkbox = resolveEasycom(vue.resolveDynamicComponent("uni-data-checkbox"), __easycom_1$p);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$9);
@@ -23391,8 +23420,8 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
-  const _sfc_main$3d = {
+  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
+  const _sfc_main$3f = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23508,7 +23537,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createElementVNode("view", { class: "banner-wrap" }, [
@@ -23719,8 +23748,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3d, [["render", _sfc_render$3c], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
-  const _sfc_main$3c = {
+  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
+  const _sfc_main$3e = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23733,6 +23762,7 @@ ${o3}
             name: "数学",
             list: [
               {
+                id: "1",
                 name: "分数运算",
                 topic: "小明有3/4块巧克力，吃了1/2，还剩多少块？",
                 time: "2025.07.22",
@@ -23740,6 +23770,7 @@ ${o3}
                 correctAnswer: "1/2块"
               },
               {
+                id: "2",
                 name: "图形面积",
                 topic: "水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶帆帆帆帆帆帆帆帆帆帆？",
                 time: "2025.07.29",
@@ -23774,8 +23805,6 @@ ${o3}
     },
     onHide() {
     },
-    // watch {
-    // },
     created() {
     },
     mounted() {
@@ -23792,14 +23821,26 @@ ${o3}
         }
       },
       similarExercises(data) {
+        uni.showToast({
+          title: "同类练习" + data.id,
+          icon: "none"
+        });
       },
       reAnswer(data) {
+        uni.showToast({
+          title: "重新作答" + data.id,
+          icon: "none"
+        });
       },
       print(data) {
+        uni.showToast({
+          title: "打印" + data.id,
+          icon: "none"
+        });
       }
     }
   };
-  function _sfc_render$3b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
@@ -23968,8 +24009,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageStudyWrongQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$3c, [["render", _sfc_render$3b], ["__scopeId", "data-v-612ffe2c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/wrong_question.vue"]]);
-  const _sfc_main$3b = {
+  const PagesPageStudyWrongQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__scopeId", "data-v-612ffe2c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/wrong_question.vue"]]);
+  const _sfc_main$3d = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -24071,16 +24112,9 @@ ${o3}
     mounted() {
     },
     computed: {},
-    methods: {
-      invite() {
-        uni.showToast({
-          title: "邀请朋友组队",
-          icon: "none"
-        });
-      }
-    }
+    methods: {}
   };
-  function _sfc_render$3a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
@@ -24344,7 +24378,7 @@ ${o3}
             )),
             vue.createElementVNode("li", {
               class: "team-list invite",
-              onClick: _cache[2] || (_cache[2] = (...args) => $options.invite && $options.invite(...args))
+              onClick: _cache[2] || (_cache[2] = ($event) => _ctx.jumpPage({ url: "/pages/page/team/invite_team" }))
             }, [
               vue.createElementVNode("view", { class: "list-avatar" }),
               vue.createElementVNode("h3", { class: "list-nickname" }, "邀请好友"),
@@ -24415,14 +24449,227 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageTeamTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3b, [["render", _sfc_render$3a], ["__scopeId", "data-v-d282c156"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/team.vue"]]);
-  const _sfc_main$3a = {
+  const PagesPageTeamTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3d, [["render", _sfc_render$3c], ["__scopeId", "data-v-d282c156"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/team.vue"]]);
+  const _sfc_main$3c = {
+    mixins: [commonJs],
+    props: {},
+    components: {},
+    data() {
+      return {
+        pageHeadTitle: "",
+        invitationRewards: [
+          {
+            name: "成功邀请1位好友",
+            cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
+            rewardName: "50智慧星"
+          },
+          {
+            name: "成功邀请3位好友",
+            cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
+            rewardName: "200智慧星+限定称号"
+          },
+          {
+            name: "成功邀请5位好友",
+            cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
+            rewardName: "500智慧星+10启明石"
+          }
+        ],
+        invited: [{
+          userId: "1",
+          cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
+          name: "小红",
+          time: "2023.11.15"
+        }, {
+          userId: "2",
+          cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
+          name: "小黑",
+          time: "2023.12.15"
+        }]
+      };
+    },
+    onLoad() {
+    },
+    onReady() {
+    },
+    onShow() {
+      this.pageOnShowSet({
+        uniHide: "all"
+      });
+    },
+    onHide() {
+    },
+    created() {
+    },
+    mounted() {
+    },
+    computed: {},
+    methods: {
+      shareBtn() {
+        uni.showToast({
+          title: "分享邀请链接",
+          icon: "none"
+        });
+      },
+      copyBtn() {
+        uni.setClipboardData({
+          data: "邀请码1234567899999",
+          success: function() {
+            uni.showToast({
+              title: "已复制邀请码，发送给好友邀请他/她一起来学习吧 ^_^ ",
+              icon: "success",
+              duration: 5e3
+            });
+          },
+          fail: function(err) {
+            formatAppLog("error", "at pages/page/team/invite_team.vue:145", "复制失败:", err);
+          }
+        });
+      },
+      deleteUser(data) {
+        uni.showModal({
+          content: "是否确认删除好友" + data.name + "同学？",
+          confirmText: "确认",
+          success: function(res2) {
+            if (res2.confirm) {
+              uni.showToast({
+                title: "删除好友：" + data.userId,
+                icon: "none"
+              });
+            }
+          }
+        });
+      }
+    }
+  };
+  function _sfc_render$3b(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
+      vue.createVNode(_component_page_head, {
+        title: $data.pageHeadTitle,
+        isBack: true,
+        background: "#FFEEE6"
+      }, null, 8, ["title"]),
+      vue.createElementVNode("view", { class: "banner-back" }),
+      vue.createElementVNode("div", { class: "banner-wrap" }, [
+        vue.createElementVNode("view", { class: "btn-wrap" }, [
+          vue.createElementVNode("view", { class: "set-btn" })
+        ]),
+        vue.createElementVNode("view", { class: "user-info-wrap" }, [
+          vue.createElementVNode("view", { class: "invite-team-icon" }),
+          vue.createElementVNode("h3", { class: "info-title" }, "邀请好友加入队伍"),
+          vue.createElementVNode("view", { class: "info-subtitle" }, "邀请好友一起学习，共同进步,还能获得额外奖励！"),
+          vue.createElementVNode("image", {
+            class: "qr-code",
+            src: ""
+          }),
+          vue.createElementVNode("view", { class: "info-tips" }, "扫描二维码加入我的队伍"),
+          vue.createElementVNode("div", { class: "invitation-code-wrap" }, [
+            vue.createElementVNode("view", { class: "invitation-code-tips" }, "或使用邀请码"),
+            vue.createElementVNode("h3", { class: "my-code" }, "MATH-2023-015")
+          ]),
+          vue.createElementVNode("button", {
+            class: "share-btn btn-yellow",
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.shareBtn && $options.shareBtn(...args))
+          }, "分享邀请链接"),
+          vue.createElementVNode("button", {
+            class: "copy-btn btn-white",
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.copyBtn && $options.copyBtn(...args))
+          }, "复制邀请码")
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
+        vue.createElementVNode("view", { class: "item-title-wrap" }, [
+          vue.createElementVNode("h3", { class: "item-title" }, "邀请奖励")
+        ]),
+        vue.createElementVNode("view", { class: "list-wrap rewar-list-wrap" }, [
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($data.invitationRewards, (item) => {
+              return vue.openBlock(), vue.createElementBlock("view", { class: "list" }, [
+                vue.createElementVNode("image", {
+                  class: "list-icon",
+                  src: item.cover
+                }, null, 8, ["src"]),
+                vue.createElementVNode("view", { class: "list-info" }, [
+                  vue.createElementVNode(
+                    "h3",
+                    { class: "list-info-title" },
+                    vue.toDisplayString(item.name),
+                    1
+                    /* TEXT */
+                  ),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "list-info-subtitle" },
+                    "奖励：" + vue.toDisplayString(item.rewardName),
+                    1
+                    /* TEXT */
+                  )
+                ])
+              ]);
+            }),
+            256
+            /* UNKEYED_FRAGMENT */
+          ))
+        ]),
+        vue.createElementVNode("view", { class: "item-title-wrap" }, [
+          vue.createElementVNode("h3", { class: "item-title" }, "已邀请好友"),
+          vue.createElementVNode("view", { class: "item-more" }, [
+            vue.createElementVNode("view", { class: "text" }, "2/3")
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "list-wrap invited-list-wrap" }, [
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($data.invited, (item) => {
+              return vue.openBlock(), vue.createElementBlock("view", { class: "list" }, [
+                vue.createElementVNode("image", {
+                  class: "list-icon",
+                  src: item.cover
+                }, null, 8, ["src"]),
+                vue.createElementVNode("view", { class: "list-info" }, [
+                  vue.createElementVNode(
+                    "h3",
+                    { class: "list-info-title" },
+                    vue.toDisplayString(item.name) + "同学",
+                    1
+                    /* TEXT */
+                  ),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "list-info-subtitle" },
+                    vue.toDisplayString(item.time) + " 加入",
+                    1
+                    /* TEXT */
+                  )
+                ]),
+                vue.createElementVNode("view", { class: "flex-center" }, [
+                  vue.createElementVNode("view", { class: "list-more" }, [
+                    vue.createElementVNode("view", {
+                      class: "delete-btn",
+                      onClick: ($event) => $options.deleteUser(item)
+                    }, "删除", 8, ["onClick"])
+                  ])
+                ])
+              ]);
+            }),
+            256
+            /* UNKEYED_FRAGMENT */
+          ))
+        ])
+      ])
+    ]);
+  }
+  const PagesPageTeamInviteTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3c, [["render", _sfc_render$3b], ["__scopeId", "data-v-bc1c30b9"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/invite_team.vue"]]);
+  const _sfc_main$3b = {
     name: "loading1",
     data() {
       return {};
     }
   };
-  function _sfc_render$39(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading1" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -24430,14 +24677,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$3a, [["render", _sfc_render$39], ["__scopeId", "data-v-0e645258"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
-  const _sfc_main$39 = {
+  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$3b, [["render", _sfc_render$3a], ["__scopeId", "data-v-0e645258"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
+  const _sfc_main$3a = {
     name: "loading2",
     data() {
       return {};
     }
   };
-  function _sfc_render$38(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$39(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading2" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -24445,14 +24692,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$39, [["render", _sfc_render$38], ["__scopeId", "data-v-3df48dc2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
-  const _sfc_main$38 = {
+  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$3a, [["render", _sfc_render$39], ["__scopeId", "data-v-3df48dc2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
+  const _sfc_main$39 = {
     name: "loading3",
     data() {
       return {};
     }
   };
-  function _sfc_render$37(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$38(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading3" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -24460,14 +24707,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$38, [["render", _sfc_render$37], ["__scopeId", "data-v-27a8293c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
-  const _sfc_main$37 = {
+  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$39, [["render", _sfc_render$38], ["__scopeId", "data-v-27a8293c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
+  const _sfc_main$38 = {
     name: "loading5",
     data() {
       return {};
     }
   };
-  function _sfc_render$36(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$37(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading5" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -24475,14 +24722,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$37, [["render", _sfc_render$36], ["__scopeId", "data-v-2e7deb83"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
-  const _sfc_main$36 = {
+  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$38, [["render", _sfc_render$37], ["__scopeId", "data-v-2e7deb83"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
+  const _sfc_main$37 = {
     name: "loading6",
     data() {
       return {};
     }
   };
-  function _sfc_render$35(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$36(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading6" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -24490,8 +24737,8 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$36, [["render", _sfc_render$35], ["__scopeId", "data-v-ef674bbb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
-  const _sfc_main$35 = {
+  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$37, [["render", _sfc_render$36], ["__scopeId", "data-v-ef674bbb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
+  const _sfc_main$36 = {
     components: { Loading1, Loading2, Loading3, Loading4, Loading5 },
     name: "qiun-loading",
     props: {
@@ -24504,7 +24751,7 @@ ${o3}
       return {};
     }
   };
-  function _sfc_render$34(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$35(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_Loading1 = vue.resolveComponent("Loading1");
     const _component_Loading2 = vue.resolveComponent("Loading2");
     const _component_Loading3 = vue.resolveComponent("Loading3");
@@ -24518,8 +24765,8 @@ ${o3}
       $props.loadingType == 5 ? (vue.openBlock(), vue.createBlock(_component_Loading5, { key: 4 })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$35, [["render", _sfc_render$34], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
-  const _sfc_main$34 = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$36, [["render", _sfc_render$35], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
+  const _sfc_main$35 = {
     name: "qiun-error",
     props: {
       errorMessage: {
@@ -24531,7 +24778,7 @@ ${o3}
       return {};
     }
   };
-  function _sfc_render$33(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$34(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "chartsview" }, [
       vue.createElementVNode("view", { class: "charts-error" }),
       vue.createElementVNode(
@@ -24543,7 +24790,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$l = /* @__PURE__ */ _export_sfc(_sfc_main$34, [["render", _sfc_render$33], ["__scopeId", "data-v-a99d579b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
+  const __easycom_1$l = /* @__PURE__ */ _export_sfc(_sfc_main$35, [["render", _sfc_render$34], ["__scopeId", "data-v-a99d579b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
   const color$1 = ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"];
   const formatDateTime = (timeStamp, returnType) => {
     var date = /* @__PURE__ */ new Date();
@@ -25559,7 +25806,7 @@ ${o3}
     var currentdate = year + seperator + month + seperator + strDate;
     return currentdate;
   }
-  const _sfc_main$33 = {
+  const _sfc_main$34 = {
     name: "qiun-data-charts",
     mixins: [tr.mixinDatacom],
     props: {
@@ -26265,7 +26512,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$32(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$33(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_qiun_loading = resolveEasycom(vue.resolveDynamicComponent("qiun-loading"), __easycom_0$5);
     const _component_qiun_error = resolveEasycom(vue.resolveDynamicComponent("qiun-error"), __easycom_1$l);
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -26323,9 +26570,9 @@ ${o3}
     ], 8, ["id"]);
   }
   if (typeof block0$3 === "function")
-    block0$3(_sfc_main$33);
-  const __easycom_1$k = /* @__PURE__ */ _export_sfc(_sfc_main$33, [["render", _sfc_render$32], ["__scopeId", "data-v-0ca34aee"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
-  const _sfc_main$32 = {
+    block0$3(_sfc_main$34);
+  const __easycom_1$k = /* @__PURE__ */ _export_sfc(_sfc_main$34, [["render", _sfc_render$33], ["__scopeId", "data-v-0ca34aee"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
+  const _sfc_main$33 = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -26440,7 +26687,11 @@ ${o3}
     onLoad() {
     },
     onReady() {
-      this.getServerData();
+      this.verifLogin().then((data) => {
+        this.getServerData();
+      }).catch((error) => {
+        this.consoleLog("没有登录：：", error);
+      });
     },
     onShow() {
       this.pageOnShowSet({
@@ -26449,8 +26700,6 @@ ${o3}
     },
     onHide() {
     },
-    // watch {
-    // },
     created() {
     },
     mounted() {
@@ -26470,7 +26719,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$31(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$32(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_1$k);
     return vue.openBlock(), vue.createElementBlock(
@@ -26775,8 +27024,8 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageParentParent = /* @__PURE__ */ _export_sfc(_sfc_main$32, [["render", _sfc_render$31], ["__scopeId", "data-v-1185e19c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/parent/parent.vue"]]);
-  const _sfc_main$31 = {
+  const PagesPageParentParent = /* @__PURE__ */ _export_sfc(_sfc_main$33, [["render", _sfc_render$32], ["__scopeId", "data-v-1185e19c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/parent/parent.vue"]]);
+  const _sfc_main$32 = {
     mixins: [commonJs],
     data() {
       return {
@@ -26892,7 +27141,7 @@ ${o3}
             try {
               store.commit("Update_UserInfo", res2.data);
               this.userInfo = res2.data;
-              formatAppLog("log", "at pages/page/user/user.vue:276", this.userInfo);
+              formatAppLog("log", "at pages/page/user/user.vue:279", this.userInfo);
             } catch (e2) {
             }
             if (res2.data.grade == 0) {
@@ -26911,7 +27160,7 @@ ${o3}
         });
       }).catch((err) => {
         if (pathUrl.indexOf("/login") == -1) {
-          formatAppLog("log", "at pages/page/user/user.vue:301", "没有登录,跳转到登录页面");
+          formatAppLog("log", "at pages/page/user/user.vue:304", "没有登录,跳转到登录页面");
           uni.redirectTo({
             url: "/pages/page/login/login?pageFrom=" + pathUrl
           });
@@ -26957,7 +27206,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$30(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$31(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
@@ -26968,9 +27217,9 @@ ${o3}
         background: "transparent"
       }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "banner-wrap" }, [
-        vue.createElementVNode("view", { class: "btn-user-set-wrap" }, [
+        vue.createElementVNode("view", { class: "btn-wrap" }, [
           vue.createElementVNode("view", {
-            class: "btn-user-set",
+            class: "user-set-btn",
             onClick: _cache[0] || (_cache[0] = ($event) => _ctx.jumpPage({ url: "" }))
           })
         ]),
@@ -27014,6 +27263,12 @@ ${o3}
                   /* UNKEYED_FRAGMENT */
                 ))
               ])
+            ]),
+            vue.createElementVNode("view", { class: "flex-center" }, [
+              vue.createElementVNode("view", {
+                class: "qr-code",
+                onClick: _cache[2] || (_cache[2] = ($event) => _ctx.jumpPage({ url: "/pages/page/team/invite_team" }))
+              })
             ])
           ]),
           vue.createElementVNode("view", { class: "property" }, [
@@ -27324,7 +27579,7 @@ ${o3}
             vue.createElementVNode("view", { class: "item-more" }, [
               vue.createElementVNode("view", {
                 class: "text icon-more",
-                onClick: _cache[2] || (_cache[2] = ($event) => _ctx.jumpPage({ url: "" }))
+                onClick: _cache[3] || (_cache[3] = ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchange_mall" }))
               }, "查看更多")
             ])
           ]),
@@ -27385,8 +27640,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$31, [["render", _sfc_render$30], ["__scopeId", "data-v-351444bc"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/user.vue"]]);
-  const _sfc_main$30 = {
+  const PagesPageUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$32, [["render", _sfc_render$31], ["__scopeId", "data-v-351444bc"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/user.vue"]]);
+  const _sfc_main$31 = {
     data() {
       return {
         showSetTabBarPage: false,
@@ -27402,11 +27657,11 @@ ${o3}
     },
     methods: {}
   };
-  function _sfc_render$2$(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$30(_ctx, _cache, $props, $setup, $data, $options) {
     return null;
   }
-  const PagesPageUserUserSet = /* @__PURE__ */ _export_sfc(_sfc_main$30, [["render", _sfc_render$2$], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/userSet.vue"]]);
-  const _sfc_main$2$ = {
+  const PagesPageUserUserSet = /* @__PURE__ */ _export_sfc(_sfc_main$31, [["render", _sfc_render$30], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/userSet.vue"]]);
+  const _sfc_main$30 = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -27482,13 +27737,13 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2_(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2$(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
         isBack: true,
-        background: "#F4F4F4"
+        background: "#ECEFFF"
       }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
         vue.createElementVNode("view", { class: "achievement-statistics-wrap" }, [
@@ -27670,7 +27925,241 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageUserAchievementDetails = /* @__PURE__ */ _export_sfc(_sfc_main$2$, [["render", _sfc_render$2_], ["__scopeId", "data-v-70c707a8"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/achievementDetails.vue"]]);
+  const PagesPageUserAchievementDetails = /* @__PURE__ */ _export_sfc(_sfc_main$30, [["render", _sfc_render$2$], ["__scopeId", "data-v-70c707a8"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/achievementDetails.vue"]]);
+  const _sfc_main$2$ = {
+    mixins: [commonJs],
+    props: {},
+    components: {},
+    data() {
+      return {
+        search: "",
+        current: 0,
+        searchResult: [
+          {
+            name: "限时特惠",
+            list: [
+              {
+                id: 1,
+                name: "圣诞特惠",
+                coverImage: "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
+                subtitle: "完成所有图形认知练习",
+                time: "2025.07.22获得",
+                exchange: 1
+              },
+              {
+                id: "2",
+                name: "图形面积",
+                topic: "水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶帆帆帆帆帆帆帆帆帆帆？",
+                time: "2025.07.29",
+                exchange: 2
+              }
+            ]
+          },
+          {
+            name: "虚拟装扮"
+          },
+          {
+            name: "学习工具"
+          },
+          {
+            name: "特权功能"
+          },
+          {
+            name: "可兑换"
+          }
+        ]
+      };
+    },
+    onLoad() {
+    },
+    onReady() {
+    },
+    onShow() {
+      this.pageOnShowSet({
+        uniHide: "all"
+      });
+    },
+    onHide() {
+    },
+    created() {
+    },
+    mounted() {
+    },
+    computed: {
+      tabSelected() {
+        return (index2) => index2 === this.current ? "selected" : "";
+      }
+    },
+    methods: {
+      clickTab(i2) {
+        if (this.current !== i2) {
+          this.current = i2;
+        }
+      },
+      exchange(data) {
+        uni.showToast({
+          title: "兑换" + data.id,
+          icon: "none"
+        });
+      }
+    }
+  };
+  function _sfc_render$2_(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
+      vue.createVNode(_component_page_head, {
+        title: _ctx.pageHeadTitle,
+        isBack: true,
+        background: "#FFF0DC"
+      }, null, 8, ["title"]),
+      vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
+        vue.createElementVNode("view", { class: "achievement-statistics-wrap" }, [
+          vue.createElementVNode("view", {
+            class: "item-title-wrap",
+            style: { "margin": "0.625rem 0 0.5rem 0" }
+          }, [
+            vue.createElementVNode("h3", { class: "item-title" }, "兑换商城")
+          ]),
+          vue.createElementVNode("view", { class: "achievement-statistics" }, [
+            vue.createElementVNode("h3", { class: "achievement-title" }, "我的货币"),
+            vue.createElementVNode("view", { class: "property" }, [
+              vue.createElementVNode("view", { class: "property-item" }, [
+                vue.createElementVNode("h3", { class: "item-info-num" }, "3"),
+                vue.createElementVNode("view", { class: "item-info-title" }, "智慧星")
+              ]),
+              vue.createElementVNode("view", { class: "property-item" }, [
+                vue.createElementVNode("h3", { class: "item-info-num" }, "12"),
+                vue.createElementVNode("view", { class: "item-info-title" }, "启明石")
+              ]),
+              vue.createElementVNode("view", { class: "property-item" }, [
+                vue.createElementVNode("h3", { class: "item-info-num" }, "4"),
+                vue.createElementVNode("view", { class: "item-info-title" }, "知识尘")
+              ])
+            ])
+          ])
+        ]),
+        vue.createCommentVNode(" 搜索相关 "),
+        vue.createElementVNode("view", { class: "search-wrap" }, [
+          vue.createElementVNode("view", { class: "search-btn-wrap" }, [
+            vue.withDirectives(vue.createElementVNode(
+              "input",
+              {
+                class: "search-input",
+                type: "text",
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.search = $event),
+                placeholder: "搜索商品名称"
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, $data.search]
+            ]),
+            vue.createElementVNode("view", { class: "search-btn" }, "搜索")
+          ]),
+          vue.createElementVNode("view", { class: "tab-wrap search-content-wrap" }, [
+            vue.createElementVNode("view", { class: "tab-overflow-bar" }, [
+              vue.createElementVNode("ul", { class: "tab-wrap search-tab-wrap" }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.searchResult, (item, i2) => {
+                    return vue.openBlock(), vue.createElementBlock("li", {
+                      class: vue.normalizeClass(["tab search-tab", $options.tabSelected(i2)]),
+                      current: i2,
+                      onClick: ($event) => $options.clickTab(i2)
+                    }, vue.toDisplayString(item.name), 11, ["current", "onClick"]);
+                  }),
+                  256
+                  /* UNKEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            vue.createElementVNode("view", { class: "tab-content-wrap" }, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($data.searchResult, (item, i2) => {
+                  return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
+                    class: "table-list-wrap",
+                    current: $data.current
+                  }, [
+                    $data.searchResult[i2].list && $data.searchResult[i2].list.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      class: "no-list-tip"
+                    }, "暂无数据 ")) : vue.createCommentVNode("v-if", true),
+                    vue.createElementVNode("view", { class: "item-title-wrap" }, [
+                      vue.createElementVNode(
+                        "h3",
+                        { class: "item-title" },
+                        vue.toDisplayString(item.name),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode("view", { class: "item-more" }, [
+                        vue.createElementVNode("view", {
+                          class: "text",
+                          style: { "color": "#F23E3E", "font-weight": "700" }
+                        }, "剩余2天")
+                      ])
+                    ]),
+                    (vue.openBlock(true), vue.createElementBlock(
+                      vue.Fragment,
+                      null,
+                      vue.renderList($data.searchResult[i2].list, (item2) => {
+                        return vue.openBlock(), vue.createElementBlock("view", { class: "tab-list" }, [
+                          vue.createElementVNode("image", {
+                            class: "list-icon",
+                            src: item2.coverImage,
+                            mode: ""
+                          }, null, 8, ["src"]),
+                          vue.createElementVNode("view", { class: "list-info" }, [
+                            vue.createElementVNode(
+                              "h3",
+                              { class: "info-title" },
+                              vue.toDisplayString(item2.name),
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode(
+                              "view",
+                              { class: "info-subtitle" },
+                              vue.toDisplayString(item2.subtitle),
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode("view", { class: "achievement-type" }, [
+                              vue.createElementVNode("view", { class: "label" }, "1000 / 1500"),
+                              item2.exchange == 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                                key: 0,
+                                class: "exchange",
+                                onClick: ($event) => $options.exchange(item2)
+                              }, "兑换", 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
+                              item2.exchange == 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                                key: 1,
+                                class: "exchange already-redeemed"
+                              }, "已拥有")) : vue.createCommentVNode("v-if", true)
+                            ])
+                          ])
+                        ]);
+                      }),
+                      256
+                      /* UNKEYED_FRAGMENT */
+                    ))
+                  ], 8, ["current"])), [
+                    [vue.vShow, $data.current == i2]
+                  ]);
+                }),
+                256
+                /* UNKEYED_FRAGMENT */
+              ))
+            ])
+          ])
+        ])
+      ])
+    ]);
+  }
+  const PagesPageUserExchangeMall = /* @__PURE__ */ _export_sfc(_sfc_main$2$, [["render", _sfc_render$2_], ["__scopeId", "data-v-77a7c594"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/exchange_mall.vue"]]);
   const ydLogin = requireNativePlugin("YD-Login");
   ydLogin.registerWithBusinessID({
     businessId: "8a0edb8e5b064fffbaf91c2ed8b82930",
@@ -61565,10 +62054,12 @@ This will fail in production if not fixed.`);
   __definePage("pages/page/study/study", PagesPageStudyStudy);
   __definePage("pages/page/study/wrong_question", PagesPageStudyWrongQuestion);
   __definePage("pages/page/team/team", PagesPageTeamTeam);
+  __definePage("pages/page/team/invite_team", PagesPageTeamInviteTeam);
   __definePage("pages/page/parent/parent", PagesPageParentParent);
   __definePage("pages/page/user/user", PagesPageUserUser);
   __definePage("pages/page/user/userSet", PagesPageUserUserSet);
   __definePage("pages/page/user/achievementDetails", PagesPageUserAchievementDetails);
+  __definePage("pages/page/user/exchange_mall", PagesPageUserExchangeMall);
   __definePage("pages/page/login/login", PagesPageLoginLogin);
   __definePage("pages/page/login/phoneLogin", PagesPageLoginPhoneLogin);
   __definePage("pages/component/view/view", PagesComponentViewView);

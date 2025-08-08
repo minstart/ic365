@@ -88,7 +88,7 @@
 						<h3 class="list-nickname">{{item.nickname}}同学</h3>
 						<view class="list-time green">{{item.lastActive}}</view>
 					</li>
-					<li class="team-list invite" @click="invite">
+					<li class="team-list invite"  @click="jumpPage({url:'/pages/page/team/invite_team'})">
 						<view class="list-avatar"></view>
 						<h3 class="list-nickname">邀请好友</h3>
 						<view class="list-time"></view>
@@ -326,12 +326,7 @@
 
 		},
 		methods: {
-			invite(){
-				uni.showToast({
-					title:"邀请朋友组队",
-					icon: "none"
-				});
-			}
+			
 		}
 	}
 </script>

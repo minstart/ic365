@@ -107,7 +107,7 @@
   margin-top: 1rem;
 }
 .page-wrap[data-v-70c707a8] {
-  background: #F4F4F4;
+  background: linear-gradient(#ECEFFF 0%, #F4F4F4 40%, #F4F4F4 100%);
 }
 .achievement-statistics-wrap .achievement-statistics[data-v-70c707a8] {
   min-height: 22.06rem;
@@ -193,7 +193,7 @@
   margin-right: 0.625rem;
   border-radius: 1rem;
   background-color: #fff;
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   min-width: 2.63rem;
   text-align: center;
 }
