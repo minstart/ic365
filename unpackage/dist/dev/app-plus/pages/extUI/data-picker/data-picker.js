@@ -1475,7 +1475,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       path: "pages/page/index/index",
       style: {
         navigationBarTitleText: "\u9996\u9875",
-        navigationStyle: "custom"
+        navigationStyle: "custom",
+        "app-plus": {
+          animationType: "none",
+          animationDuration: 0
+        }
       }
     },
     {
@@ -1497,6 +1501,17 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       style: {
         navigationBarTitleText: "\u9519\u9898\u672C",
         navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/page/study/calendar",
+      style: {
+        navigationBarTitleText: "\u6BCF\u65E5\u6311\u6218",
+        navigationStyle: "custom",
+        "app-plus": {
+          animationType: "none",
+          animationDuration: 0
+        }
       }
     },
     {
@@ -2850,6 +2865,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       maxWidth: 1190,
       navigationBarTextStyle: "black",
       navigationBarBackgroundColor: "#F1F1F1"
+    },
+    "app-plus": {
+      animationType: "none",
+      animationDuration: 0
     }
   };
   var tabBar = {

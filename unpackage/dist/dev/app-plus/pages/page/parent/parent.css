@@ -700,6 +700,9 @@ to {
   margin-right: 1.31rem;
   margin-top: 1rem;
 }
+.study-report-wrap .trend-title span[data-v-1185e19c] {
+  display: inline-block;
+}
 .study-report-wrap .trend-title span[data-v-1185e19c]:nth-child(1) {
   margin-right: 0.375rem;
 }

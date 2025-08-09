@@ -3,6 +3,7 @@
 <!-- isBack 控制返回上一页按钮是否显示 -->
 <!-- isModule 控制标题右侧功能模块是否显示 -->
 <!-- clickModule 右侧功能模块点击函数 -->
+<!-- systemTaskbar 是否计算系统任务栏高度 -->
 <template name="page-head">
 	<view class="common-page-head-view" :style="{paddingTop:taskbarHeight}">
 		<view class="reserve-seat" v-if='!isHide'></view>
@@ -48,6 +49,9 @@
 			},
 			moduleIcon: {
 				default: "/static/icons/nav-bar.png"
+			},
+			systemTaskbar: {
+				default: true
 			}
 		},
 		data() {
@@ -56,12 +60,15 @@
 			}
 		},
 		mounted() {
-			this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem"
+			this.systemTaskbar ? (this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem") : (this.taskbarHeight = "0rem")
 			// console.log("taskbarHeight",this.taskbarHeight)
 		},
 		methods: {
 			clickBack() {
-				uni.navigateBack()
+				uni.navigateBack({
+					animationType: 'fade-in',
+					animationDuration: 0
+				})
 			}
 		}
 	}

@@ -8,7 +8,7 @@ const _sfc_main = {
     clickModule: {
       type: Function,
       default: () => {
-        formatAppLog("log", "at components/page-head/page-head.vue:28", "默认右侧功能区函数");
+        formatAppLog("log", "at components/page-head/page-head.vue:29", "默认右侧功能区函数");
       }
     },
     isHide: {
@@ -31,6 +31,9 @@ const _sfc_main = {
     },
     moduleIcon: {
       default: "/static/icons/nav-bar.png"
+    },
+    systemTaskbar: {
+      default: true
     }
   },
   data() {
@@ -39,11 +42,14 @@ const _sfc_main = {
     };
   },
   mounted() {
-    this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem";
+    this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem" : this.taskbarHeight = "0rem";
   },
   methods: {
     clickBack() {
-      uni.navigateBack();
+      uni.navigateBack({
+        animationType: "fade-in",
+        animationDuration: 0
+      });
     }
   }
 };

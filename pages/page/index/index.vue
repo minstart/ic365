@@ -30,7 +30,7 @@
 				<h5 class="banner-text-contentFrom">{{pageData.banner.contentFrom}}</h5>
 			</view>
 			<view class="activity-wrap">
-				<image class="activity" @click="jumpPage({url:''})" src='/static/image/1_challenge.png'></image>
+				<image class="activity" @click="jumpPage({url:'/pages/page/study/calendar'})" src='/static/image/1_challenge.png'></image>
 				<image class="activity" @click="jumpPage({url:''})" src='/static/image/1_study.png'></image>
 			</view>
 		</view>

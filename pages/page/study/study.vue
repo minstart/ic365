@@ -120,14 +120,7 @@
 
 		},
 		onReady() {
-			const route = getCurrentPages(); //获取当前页面地址
-			const pathUrl = route[route.length - 1].route;
-			this.getLogin().then(data => {
-				// this.consoleLog(store.state.userInfo.token)
-				this.consoleLog(store.state.userInfo)
-				// 已经登陆了
-				this.consoleLog("已经登陆了")
-
+			this.verifLogin().then(data => {
 				// 如果已经有登陆信息，那就不重新获取
 				if (store.state.userInfo.token && store.state.userInfo.info && store.state.userInfo.info
 					.currencies) {
@@ -153,7 +146,7 @@
 						this.consoleLog("获取用户信息报错：：", error)
 					})
 				}
-
+				
 				// 获取用户周报数据
 				this.commonRequest({
 					url: "/api/report/weekly",
@@ -171,7 +164,7 @@
 				}).catch(error => {
 					this.consoleLog("获取用户周报数据报错：：", error)
 				})
-
+				
 				// 知识点学习
 				this.commonRequest({
 					url: "/api/recommend/categories",
@@ -190,32 +183,13 @@
 				}).catch(error => {
 					this.consoleLog("知识点学习报错：：", error)
 				})
-
-
-
-			}).catch(err => {
-				// 没有登陆
-				// console.error("data：：：：：2", JSON.stringify(err));
-				if (pathUrl.indexOf("/login") == -1) {
-					// 没有登录
-					console.log("没有登录,跳转到登录页面")
-					// #ifdef APP-PLUS
-					uni.redirectTo({
-						url: '/pages/page/login/login?pageFrom=' + pathUrl
-					});
-					// #endif
-					// #ifdef H5
-					// uni.redirectTo({
-					// 	url: '/pages/page/login/phoneLogin?pageFrom=' + pathUrl
-					// });
-					// #endif
-				}
-			});
-
+			}).catch(error => {
+				this.consoleLog("没有登录：：", error)
+			})
 		},
 		onShow() {
 			this.pageOnShowSet({
-				uniHide:"all"
+				uniHide: "all"
 			})
 		},
 		onHide() {
@@ -469,29 +443,36 @@
 				text-align: center;
 				font-size: 1.125rem;
 			}
-		
-			&[colorTheme="1"]{
+
+			&[colorTheme="1"] {
 				background: #EBFDEA;
-				.list-title{
-					color:#51750E;
+
+				.list-title {
+					color: #51750E;
 				}
 			}
-			&[colorTheme="2"]{
+
+			&[colorTheme="2"] {
 				background: #FFEFF3;
-				.list-title{
-					color:#F9626D;
+
+				.list-title {
+					color: #F9626D;
 				}
 			}
-			&[colorTheme="3"]{
-				background:#FFF2EA;
-				.list-title{
-					color:#EF761F;
+
+			&[colorTheme="3"] {
+				background: #FFF2EA;
+
+				.list-title {
+					color: #EF761F;
 				}
 			}
-			&[colorTheme="4"]{
+
+			&[colorTheme="4"] {
 				background: #E8F9FF;
-				.list-title{
-					color:#0588AE;
+
+				.list-title {
+					color: #0588AE;
 				}
 			}
 		}

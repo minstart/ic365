@@ -17,7 +17,11 @@
 			"path": "pages/page/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "none", // 设置为"none"以关闭动画
+					"animationDuration": 0 // 动画持续时间设置为0
+				}
 			}
 		},
 		{
@@ -26,7 +30,7 @@
 				"navigationBarTitleText": "补充信息",
 				"navigationStyle": "custom"
 			}
-		}, 
+		},
 		{
 			"path": "pages/page/study/study",
 			"style": {
@@ -42,19 +46,30 @@
 			}
 		},
 		{
+			"path": "pages/page/study/calendar",
+			"style": {
+				"navigationBarTitleText": "每日挑战",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "none", // 设置为"none"以关闭动画
+					"animationDuration": 0 // 动画持续时间设置为0
+				}
+			}
+		},
+		{
 			"path": "pages/page/team/team",
 			"style": {
 				"navigationBarTitleText": "队伍",
 				"navigationStyle": "custom"
 			}
-		}, 
+		},
 		{
 			"path": "pages/page/team/invite_team",
 			"style": {
 				"navigationBarTitleText": "邀请组队",
 				"navigationStyle": "custom"
 			}
-		}, 
+		},
 		{
 			"path": "pages/page/parent/parent",
 			"style": {
@@ -1486,6 +1501,10 @@
 			"maxWidth": 1190,
 			"navigationBarTextStyle": "black",
 			"navigationBarBackgroundColor": "#F1F1F1"
+		},
+		"app-plus": {
+			"animationType": "none", // 设置为"none"以关闭动画
+			"animationDuration": 0 // 动画持续时间设置为0
 		}
 	},
 	"tabBar": {

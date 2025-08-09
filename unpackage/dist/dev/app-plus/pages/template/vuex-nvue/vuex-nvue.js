@@ -140,7 +140,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       clickModule: {
         type: Function,
         default: () => {
-          formatAppLog("log", "at components/page-head/page-head.vue:28", "\u9ED8\u8BA4\u53F3\u4FA7\u529F\u80FD\u533A\u51FD\u6570");
+          formatAppLog("log", "at components/page-head/page-head.vue:29", "\u9ED8\u8BA4\u53F3\u4FA7\u529F\u80FD\u533A\u51FD\u6570");
         }
       },
       isHide: {
@@ -163,6 +163,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       moduleIcon: {
         default: "/static/icons/nav-bar.png"
+      },
+      systemTaskbar: {
+        default: true
       }
     },
     data() {
@@ -171,11 +174,14 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       };
     },
     mounted() {
-      this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem";
+      this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem" : this.taskbarHeight = "0rem";
     },
     methods: {
       clickBack() {
-        uni.navigateBack();
+        uni.navigateBack({
+          animationType: "fade-in",
+          animationDuration: 0
+        });
       }
     }
   };

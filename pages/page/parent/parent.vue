@@ -1,7 +1,6 @@
 <template>
 	<view class="banner-wrap">
-		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false"
-			:background="'transparent'"></page-head>
+		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="user-info-wrap">
 			<!-- <view class="head-pic"></view> -->
 			<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
@@ -29,30 +28,30 @@
 			<view class="report-details" @click="jumpPage({url:'/pages/page/parent/parent_detail'})"></view>
 			<view class="report-info-wrap">
 				<view class="report-info">
-					<h4 class="info-text">2.5小时</h4>
-					<h4 class="info-rowth-rate" state="1">12%</h4>
+					<h4 class="info-text">{{overallReport.studyMinutes}}小时</h4>
+					<h4 class="info-rowth-rate" :state="growthRate.studyMinutes>0?'1':'2'">{{growthRate.studyMinutes}}%</h4>
 				</view>
 				<view class="report-info">
-					<h4 class="info-text">18/20</h4>
-					<h4 class="info-rowth-rate" state="2">5%</h4>
+					<h4 class="info-text">{{overallReport.completedMissions}}/- </h4>
+					<h4 class="info-rowth-rate" :state="growthRate.completedMissions>0?'1':'2'">{{growthRate.completedMissions}}%</h4>
 				</view>
 			</view>
 			<view class="report-info-wrap">
 				<view class="report-info">
-					<h4 class="info-text">86题</h4>
-					<h4 class="info-rowth-rate" state="1">9%</h4>
+					<h4 class="info-text">{{overallReport.questionCount}}题</h4>
+					<h4 class="info-rowth-rate" :state="growthRate.questionCount>0?'1':'2'">{{growthRate.questionCount}}%</h4>
 				</view>
 				<view class="report-info">
-					<h4 class="info-text">92</h4>
-					<h4 class="info-rowth-rate" state="2">7%</h4>
+					<h4 class="info-text">{{overallReport.correctRate}}</h4>
+					<h4 class="info-rowth-rate" :state="growthRate.correctRate>0?'1':'2'">{{growthRate.correctRate}}%</h4>
 				</view>
 			</view>
 			<view class="trend-title">
 				<span>每日平均</span>
-				<span state="1">15%</span>
+				<span class="info-rowth-rate" :state="dailyReport.fluctuation>0?'1':'2'">{{dailyReport.fluctuation}}%</span>
 			</view>
 			<view class="charts-box">
-				<qiun-data-charts type="column" :opts="barChartOpts" :chartData="chartData" />
+				<qiun-data-charts type="column" :opts="barChartOpts" :chartData="dailyReport" />
 			</view>
 		</view>
 	</view>
@@ -67,7 +66,7 @@
 			</view>
 			<view class="charts-box-wrap">
 				<view class="charts-box">
-					<qiun-data-charts type="radar" :opts="RadarChartOpts" :chartData="chartsDataRadar1" />
+					<qiun-data-charts type="radar" :opts="RadarChartOpts" :chartData="radarChart" />
 				</view>
 				<view class="statistics-wrap" style="margin: 0 1.25rem;">
 					<view class="statistics">
@@ -80,7 +79,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 		</view>
 		<view class="suggestion-wrap">
 			<view class="item-title-wrap">
@@ -89,13 +88,14 @@
 					<view class="text icon-more" @click="jumpPage({url:''})">全部</view>
 				</view>
 			</view>
+			<view class="no-list-tip" v-if="suggestionImproveOther.categories.length==0">暂无数据</view>
 			<ul class="suggestion-list-wrap">
-				<li class="suggestion-list" v-for="item in suggestion">
+				<li class="suggestion-list" v-for="item in suggestionImproveOther.categories">
 					<image class="item-icon" src=""></image>
 					<view class="item-info">
-						<h3 class="info-title">{{item.suggestion}}</h3>
-						<view class="info-text">正确率：{{item.accuracy}}% | {{item.suggestion}}</view>
-						<button class="info-btn" @click="jumpPage({url:''})">{{item.btnTitle}}</button>
+						<h3 class="info-title">{{item.name}}</h3>
+						<view class="info-text">正确率：{{item.accuracy}}% | {{suggestionTetx(item.accuracy)}}</view>
+						<button class="info-btn" @click="jumpPage({url:''})">{{item.btnTitle}}专项学习</button>
 					</view>
 				</li>
 			</ul>
@@ -125,11 +125,11 @@
 			<view class="statistics-wrap">
 				<view class="statistics">
 					<span>本周获取</span>
-					<span>+120智慧星</span>
+					<span>{{suggestionImproveOther.currencies._newlyAdded.text}}</span>
 				</view>
 				<view class="statistics">
-					<span>可兑换课程</span>
-					<span>2个</span>
+					<span>可兑换{{suggestionImproveOther.currencies.exchanges.name}}</span>
+					<span>{{suggestionImproveOther.currencies.exchanges.quantity}}个</span>
 				</view>
 			</view>
 		</view>
@@ -154,7 +154,7 @@
 </template>
 
 <script>
-	import store from '@/store/index.js';
+	import store from '/store/index.js';
 	import commonJs from '/common/js/common.js';
 	export default {
 		mixins: [commonJs],
@@ -166,14 +166,17 @@
 			return {
 				pageHeadTitle: "",
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
-				// 柱状图数据
-				chartData: {},
+
+				overallReport: {}, //整体报告
+				growthRate: {}, //对比上周涨幅
+
+				dailyReport: {}, //每日数据(柱状图数据)
 				// 柱状图设置
 				barChartOpts: {
 					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
 						"#ea7ccc"
 					],
-					padding: [15, 15, 0, 5],
+					padding: [30, 15, 10, 5],
 					enableScroll: false,
 					legend: {
 						show: false
@@ -199,6 +202,8 @@
 						}
 					}
 				},
+				// 雷达图数据
+				radarChart: {},
 				// 雷达图设置
 				RadarChartOpts: {
 					legend: {
@@ -210,54 +215,47 @@
 							radius: uni.getSystemInfoSync().windowWidth * 0.3
 						}
 					},
-					
+
 				},
-				// 雷达图数据
-				chartsDataRadar1: {
-					"categories": ["计算", "逻辑", "应用", "速度", "空间"],
-					"series": [{
-						"name": "同龄水平",
-						"data": [90, 110, 165, 195, 187, 172]
-					}, {
-						"name": "当前能力",
-						"data": [190, 210, 105, 35, 27, 102]
-					}]
-				},
-				suggestion:[
-					{
-						icon:"",
-						title:"",
-						accuracy:"65",
-						suggestion:"建议练习",
-						btnTitle:"专项学习"
+
+				// 建议提升和其他
+				suggestionImproveOther: {},
+				// 家长页面统计
+				parent: {},
+
+				suggestion: [{
+						icon: "",
+						title: "",
+						accuracy: "65",
+						suggestion: "建议练习",
+						btnTitle: "专项学习"
 					},
 					{
-						icon:"",
-						title:"",
-						accuracy:"72",
-						suggestion:"概念巩固",
-						btnTitle:"图形面积计算"
+						icon: "",
+						title: "",
+						accuracy: "72",
+						suggestion: "概念巩固",
+						btnTitle: "图形面积计算"
 					},
 				],
 				// 系统资讯
-				information:[
-					{
-						icon:"",
-						title:"限时福利",
-						introduce:"完成3天打卡领取圣诞礼包",
-						id:""
+				information: [{
+						icon: "",
+						title: "限时福利",
+						introduce: "完成3天打卡领取圣诞礼包",
+						id: ""
 					},
 					{
-						icon:"",
-						title:"会员免费体验",
-						introduce:"7天VIP会员显示领取",
-						id:""
+						icon: "",
+						title: "会员免费体验",
+						introduce: "7天VIP会员显示领取",
+						id: ""
 					},
 					{
-						icon:"",
-						title:"限时福利",
-						introduce:"完成3天打卡领取圣诞礼包",
-						id:""
+						icon: "",
+						title: "限时福利",
+						introduce: "完成3天打卡领取圣诞礼包",
+						id: ""
 					}
 				]
 			}
@@ -267,15 +265,77 @@
 		},
 		onReady() {
 			this.verifLogin().then(data => {
-				this.getServerData();
+				// 获取家长版报告数据(统计图)
+				this.commonRequest({
+					url: "/api/report/parent"
+				}).then(res => {
+					if (res.code == 0) {
+						console.log("获取家长版报告数据(统计图)：", res)
+						try {
+							this.overallReport = res.data.overallReport;
+							this.growthRate = res.data.growthRate;
+							this.dailyReport = res.data.dailyReport;
+							this.radarChart = res.data.radarChart || {};
+						} catch (e) {}
+						this.parent = res.data;
+					} else {
+						uni.showToast({
+							title: res.message || "获取家长版报告数据(统计图)失败!",
+							icon: "none"
+						});
+					}
+				}).catch(error => {
+					this.consoleLog("获取家长版报告数据(统计图)失败：：", error)
+				})
+
+				// 获取提升建议和其他
+				this.commonRequest({
+					url: "/api/report/getAdviceAndCurrenciesAndPublish"
+				}).then(res => {
+					if (res.code == 0) {
+						console.log("获取提升建议和其他：", res)
+						try {
+							let _currencies = {};
+
+							//处理后端返回的数据拼凑成前端简易展示数据 ------------Start
+							res.data.currencies.current.forEach(item => {
+								item.type == 1 && (_currencies.star = item.quantity)
+								item.type == 2 && (_currencies.stone = item.quantity)
+								item.type == 3 && (_currencies.dust = item.quantity)
+							})
+							store.state.userInfo.info.currencies = _currencies;
+							this.userInfo = {
+								...this.userInfo,
+								...store.state.userInfo.info
+							}
+							res.data.currencies._current = _currencies;
+							let addCurrencies = [];
+							res.data.currencies.newlyAdded.forEach(item => {
+								addCurrencies.push((item.quantity > 0 ? "+" + item.quantity : item.quantity) + item.name)
+							})
+							res.data.currencies._newlyAdded = {
+								text: addCurrencies.join("，")
+							}
+							//处理后端返回的数据拼凑成前端简易展示数据 ------------End
+							this.suggestionImproveOther = res.data
+						} catch (e) {}
+					} else {
+						uni.showToast({
+							title: res.message || "获取提升建议和其他失败!",
+							icon: "none"
+						});
+					}
+				}).catch(error => {
+					this.consoleLog("获取提升建议和其他失败：：", error)
+				})
+
 			}).catch(error => {
 				this.consoleLog("没有登录：：", error)
 			})
-			
 		},
 		onShow() {
 			this.pageOnShowSet({
-				uniHide:"all"
+				uniHide: "all"
 			})
 		},
 		onHide() {
@@ -288,20 +348,15 @@
 
 		},
 		methods: {
-			getServerData() {
-				//模拟从服务器获取数据时的延时
-				setTimeout(() => {
-					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-					let res = {
-						categories: ["一", "二", "三", "四", "五", "六", "日"],
-						series: [{
-							name: "习题数",
-							data: [35, 36, 31, 33, 13, 34, 3]
-						}]
-					};
-					this.chartData = JSON.parse(JSON.stringify(res));
-				}, 500);
-			},
+			suggestionTetx(num) {
+				if (num > 0 && num <= 50) {
+					return "建议练习"
+				} else if (num>50 && num<=80) {
+					return "概念巩固"
+				} else if (num>80 && num<=100) {
+					return "继续提升"
+				}
+			}
 		}
 	}
 </script>
@@ -312,6 +367,7 @@
 		padding: 1.25rem 0.75rem 0 0.75rem;
 		padding-top: 1.5rem;
 		margin-bottom: 2rem;
+
 		.user-info-wrap {
 			display: flex;
 			margin-bottom: 1.6rem;
@@ -466,6 +522,8 @@
 			margin-top: 1rem;
 
 			span {
+				display: inline-block;
+
 				&:nth-child(1) {
 					margin-right: 0.375rem;
 				}
@@ -486,7 +544,6 @@
 					}
 				}
 			}
-
 		}
 
 		.charts-box {
@@ -499,101 +556,118 @@
 			height: 13.375rem;
 		}
 	}
+
 	// 学习报告  ------End
 
 	// 能力分析 ------Start
-	.ability-analysis-wrap{
-		.charts-box-wrap{
+	.ability-analysis-wrap {
+		.charts-box-wrap {
 			margin: 1.125rem 0 2rem 0;
 			padding-bottom: 1rem;
 			background: url("/static/image/4_ability_analysis_back.png") no-repeat top / 100% 100%;
-			.charts-box{
+
+			.charts-box {
 				padding: 1rem 0;
 				height: 20.375rem;
 			}
-			
+
 		}
 	}
-	.statistics-wrap{
+
+	.statistics-wrap {
 		background: #F9F9F9;
 		font-size: 1rem;
 		color: #333333;
-		.statistics{
+
+		.statistics {
 			overflow: hidden;
 			padding: 0 0.2rem 0 0.65rem;
 			line-height: 3.375rem;
-			span{
+
+			span {
 				&:nth-child(1) {
 					float: left;
 				}
+
 				&:nth-child(2) {
 					float: right;
 				}
 			}
+
 			&:nth-child(1) {
-				span{
+				span {
 					&:nth-child(1) {
 						margin-left: 0.2rem;
 					}
+
 					&:nth-child(2) {
 						color: #79D183;
 					}
 				}
 			}
+
 			&:nth-child(2) {
-				span{
+				span {
 					&:nth-child(1) {
 						margin-left: 0.2rem;
 					}
+
 					&:nth-child(2) {
 						color: #F9626D;
 					}
 				}
 			}
 		}
-		.icon-advantage{
+
+		.icon-advantage {
 			padding-left: 1.4rem;
 			background: url("/static/icons/advantage.png") no-repeat left / 0.875rem 1rem;
 		}
-		.icon-improve{
+
+		.icon-improve {
 			padding-left: 1.4rem;
 			background: url("/static/icons/improve.png") no-repeat left / 0.875rem 1rem;
 		}
 	}
-			
+
 	// 能力分析  ------End
-	
+
 	// 提升建议 ------Start
-	.suggestion-wrap{
-		.suggestion-list-wrap{
-			.suggestion-list{
+	.suggestion-wrap {
+		.suggestion-list-wrap {
+			.suggestion-list {
 				margin: 0.6878rem 0 1.3756rem 0;
 				overflow: hidden;
 				display: flex;
-				.item-icon{
+
+				.item-icon {
 					margin-right: 1.125rem;
 					width: 6.75rem;
 					height: 6.75rem;
 					background: #F2F8FD;
 					border-radius: 0.5rem;
 				}
-				.item-info{
-					flex:1;
+
+				.item-info {
+					flex: 1;
 					padding-top: 0.3rem;
 					text-align: left;
-					.info-title{
+
+					.info-title {
 						font-size: 1.125rem;
 						line-height: 1.56rem;
 					}
-					.info-text{
+
+					.info-text {
 						color: #999999;
 						font-size: 0.875rem;
 						margin: 0.2rem 0 0.875rem 0;
 					}
-					.info-btn{
+
+					.info-btn {
 						line-height: 2rem;
 						font-size: 1rem;
-						color:#fff;
+						color: #fff;
 						margin: 0;
 						border-radius: 1rem;
 						background: #79D183 !important;
@@ -603,68 +677,80 @@
 			}
 		}
 	}
+
 	// 提升建议 ------End
-	
+
 	// 学习资料 ------Start
-	.property-wrap{
-		.property{
+	.property-wrap {
+		.property {
 			display: flex;
 			margin-bottom: 1.25rem;
-			.property-item{
+
+			.property-item {
 				flex: 1;
 				padding-top: 4rem;
 				margin-right: 0.68rem;
 				height: 3.5rem;
 				text-align: center;
+
 				&:nth-child(1) {
 					background: url("/static/image/4_property_item1.png") no-repeat center / 100% 100%;
 				}
+
 				&:nth-child(2) {
 					background: url("/static/image/4_property_item2.png") no-repeat center / 100% 100%;
 				}
+
 				&:nth-child(3) {
 					background: url("/static/image/4_property_item3.png") no-repeat center / 100% 100%;
 					margin-right: 0;
 				}
-				.item-info-num{
+
+				.item-info-num {
 					font-size: 1.5rem;
 					color: #222;
 				}
-				.item-info-title{
+
+				.item-info-title {
 					font-size: 0.875rem;
-					color:#999999;
+					color: #999999;
 				}
 			}
 		}
 	}
+
 	// 学习资料 ------End
-	
+
 	// 系统资讯 ------Start
-	.information-wrap{
-		.information-list-wrap{
-			.information-list{
+	.information-wrap {
+		.information-list-wrap {
+			.information-list {
 				background: #F9F9F9;
 				border-bottom: 0.16rem solid #F6F6F6;
 				display: flex;
-				padding:1.375rem 1.125rem;
-				.list-icon{
+				padding: 1.375rem 1.125rem;
+
+				.list-icon {
 					width: 2.25em;
 					height: 2.25em;
-					display:inline-block;
+					display: inline-block;
 					margin-right: 0.625rem;
 					background: #ccc;
 					border-radius: 0.2rem;
 				}
-				.list-info{
+
+				.list-info {
 					flex: 1;
-					display:inline-block;
+					display: inline-block;
 					background: url("/static/icons/next.png") no-repeat right / 0.5rem 0.85rem;
-					.title{
+
+					.title {
 						font-size: 1.125rem;
 						line-height: 1;
 						margin-bottom: 0.2rem;
 					}
-					.introduce{
+
+					.introduce {
 						color: #999;
 						font-size: 0.875rem;
 					}
@@ -672,5 +758,6 @@
 			}
 		}
 	}
+
 	// 系统资讯 ------End
 </style>

@@ -133,7 +133,7 @@ export default {
 		// url请求路径
 		// dataType 数据返回类型
 		// method发起请求类型
-		// notLoading 是否显示loading图标
+		// notLoading 是否请求过程中显示loading图标
 		// .then() //成功返回
 		// .catch() //失败返回
 		// .finally()
@@ -141,38 +141,11 @@ export default {
 			// this.consoleLog("请求前的传参：", data);
 			!data.notLoading && uni.showLoading();
 			return fetchData(data)
-
-			// let successFn = data.success ? data.success : () => {};
-			// let failFn = data.fail ? data.fail : () => {};
-			// data.url && data.url.indexOf("http") == -1 && (data.url = this.staticUrl + data.url)
-			// 	uni.request({
-			// 		header:data.header||this.$store.state.requestHead,
-			// 		url: data.url,
-			// 		dataType: data.dataType || 'json',
-			// 		method: data.type || "post",
-			// 		timeout: data.timeout || 10000,
-			// 		data: data.data,
-			// 		success: (res) => {
-			// 			console.log('request success：', res)
-			// 			successFn()
-			// 		},
-			// 		fail: (err) => {
-			// 			console.log('request fail：', err);
-			// 			failFn()
-			// 		},
-			// 		complete: () => {
-			// 			// 请求完成(成功失败都返回)
-			// 			this.loading = false;
-			// 			uni.hideLoading();
-			// 		}
-			// 	});
-
-		}
+		},
 
 		// 封装数据储存
 		// key : key名称
 		// data ：存储的数据
-		,
 		uniSetStorage(data) {
 			if (!data || !data.key || !data.data) {
 				console.log("存储数据失败：缺少key|data")
@@ -203,9 +176,8 @@ export default {
 					})
 				}
 			})
-		}
+		},
 		// 清除储存数据
-		,
 		uniClearStorage() {
 			uni.clearStorageSync()
 		},
@@ -213,6 +185,7 @@ export default {
 		// url 跳转页面地址
 		// type uni 跳转页面函数("navigateTo","redirectTo","reLaunch") - 默认navigateTo
 		jumpPage(data) {
+			console.log("jumpPage:::::", data)
 			if (!data) return this.consoleLog("jumpPage()没有传参")
 			if (!data.url) return this.consoleLog("url没有传参")
 			if (data.type) {
@@ -221,34 +194,39 @@ export default {
 						// 方法用于保留当前页面，跳转到应用内的某个页面
 						uni.navigateTo({
 							url: data.url,
-							animationDuration: 0
+							animationType: 'none', // 设置为"none"以关闭动画
+							animationDuration: 0 // 动画持续时间设置为0
 						});
 						break;
 					case "redirectTo":
 						// 方法用于关闭当前页面，跳转到应用内的某个页面
 						uni.redirectTo({
 							url: data.url,
-							animationDuration: 0
+							animationType: 'none', // 设置为"none"以关闭动画
+							animationDuration: 0 // 动画持续时间设置为0
 						});
 						break;
 					case "reLaunch":
 						// 方法用于关闭所有页面，打开到应用内的某个页面
 						uni.reLaunch({
 							url: data.url,
-							animationDuration: 0
+							animationType: 'none', // 设置为"none"以关闭动画
+							animationDuration: 0 // 动画持续时间设置为0
 						});
 						break;
 					default:
 						uni.navigateTo({
 							url: data.url,
-							animationDuration: 0
+							animationType: 'none', // 设置为"none"以关闭动画
+							animationDuration: 0 // 动画持续时间设置为0
 						});
 						break;
 				}
 			} else {
 				uni.navigateTo({
 					url: data.url,
-					animationDuration: 0
+					animationType: 'none', // 设置为"none"以关闭动画
+					animationDuration: 0 // 动画持续时间设置为0
 				});
 			}
 		},
@@ -267,65 +245,96 @@ export default {
 			const baseWidth = 375; // 基准宽度
 			const baseFontSize = 16; // 基准字体大小
 			let scale = uni.getSystemInfoSync().windowWidth / baseWidth; // 获取当前窗口宽度并计算比例
-
+			let _this = this;
 			if (!data || (data.orientation && data.orientation == "portrait")) {
 				try {
-					if (Number(baseFontSize * scale) > 0) {
-						store.state.baseFontSize = baseFontSize * scale
+					let newFontSize = baseFontSize * scale
+					if (newFontSize > 0) {
+						newFontSize < 16 && (newFontSize = 16);
+						store.state.baseFontSize = newFontSize;
+						this.fontSize = newFontSize;
+						console.log("设置store.state.baseFontSize", store.state.baseFontSize)
+					} else {
+						console.log("newFontSize:", newFontSize, store.state.baseFontSize)
 					}
 				} catch (e) {
 					console.log('报错：：：：', e)
 				}
 			} else if (store.state.baseFontSize) {
-				this.fontSize = store.state.baseFontSize
+				console.log("store.state.baseFontSize:", store.state.baseFontSize)
+				if(data.orientation && data.orientation == "landscape"){
+					// 横屏的rem设置有毒
+					var index = 30;
+					let time = setInterval(()=>{
+						index = index - 1;
+						if(index==0){
+							clearInterval(time)
+						}
+						this.fontSize = store.state.baseFontSize-0.01;
+						setTimeout(()=>{
+							this.fontSize = store.state.baseFontSize
+						},10)
+					},100)
+				}else{
+					this.fontSize = store.state.baseFontSize
+				}
+				
+			} else {
+				console.log("baseFontSize::", baseFontSize)
+				this.fontSize = baseFontSize;
 			}
 		},
 
-
 		// 页面onShow 钩子触发的函数
-		// uniHide 隐藏弹窗等各种
+		// uniHide 隐藏各种弹窗等
 		// orientation 页面横屏竖屏 portrait（竖屏）或landscape（横屏）
 		pageOnShowSet(data) {
 			if (!data) return;
-			// store.state.isLoading = true;
-			// setTimeout(()=>{
-			store.state.isLoading = false;
-			// },1000)
-			try {
-				data.uniHide && this.uniHide(data.uniHide)
-			} catch (e) {}
+			return new Promise((resolve, reject) => {
+				// store.state.isLoading = true;
+				// setTimeout(() => {
+					store.state.isLoading = false;
+				// }, 1000)
+				try {
+					data.uniHide && this.uniHide(data.uniHide)
+				} catch (e) {}
 
-			if (store.state.userInfo.info) {
-				this.userInfo = {
-					...this.userInfo,
-					...store.state.userInfo.info
-				}
-			}
-
-			this.setRootFontSize(data)
-			// 设置横屏还是竖屏，默认竖屏
-			try {
-				if (data.orientation) {
-					// #ifdef APP-PLUS
-					plus.screen.lockOrientation(data.orientation + '-primary');
-					// #endif  
-					if (data.orientation == "portrait") {
-						this.setRootFontSize()
-					} else {
-						this.setRootFontSize()
+				if (store.state.userInfo.info) {
+					this.userInfo = {
+						...this.userInfo,
+						...store.state.userInfo.info
 					}
-				} else {
+				}
+
+				// this.setRootFontSize(data)
+				let _this = this
+				// 设置横屏还是竖屏，默认竖屏
+				try {
+					if (data.orientation) {
+						if(data.orientation == "portrait"){
+							
+						}
+						setTimeout(() => {
+							// #ifdef APP-PLUS
+							plus.screen.lockOrientation(data.orientation + '-primary');
+							// #endif  
+						}, data.orientation == "portrait" ? 0 : 500)
+						_this.setRootFontSize(data)
+					} else {
+						// #ifdef APP-PLUS
+						plus.screen.lockOrientation('portrait-primary');
+						// #endif  
+						_this.setRootFontSize(data)
+					}
+				} catch (e) {
 					// #ifdef APP-PLUS
 					plus.screen.lockOrientation('portrait-primary');
 					// #endif  
-					this.setRootFontSize(store.state.baseFontSize)
+					_this.setRootFontSize(data)
 				}
-			} catch (e) {
-				// #ifdef APP-PLUS
-				plus.screen.lockOrientation('portrait-primary');
-				// #endif  
-				this.setRootFontSize()
-			}
+
+				resolve();
+			})
 
 		},
 

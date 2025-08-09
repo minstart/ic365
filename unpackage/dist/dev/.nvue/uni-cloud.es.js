@@ -16,7 +16,11 @@ const pages = [
     path: "pages/page/index/index",
     style: {
       navigationBarTitleText: "首页",
-      navigationStyle: "custom"
+      navigationStyle: "custom",
+      "app-plus": {
+        animationType: "none",
+        animationDuration: 0
+      }
     }
   },
   {
@@ -38,6 +42,17 @@ const pages = [
     style: {
       navigationBarTitleText: "错题本",
       navigationStyle: "custom"
+    }
+  },
+  {
+    path: "pages/page/study/calendar",
+    style: {
+      navigationBarTitleText: "每日挑战",
+      navigationStyle: "custom",
+      "app-plus": {
+        animationType: "none",
+        animationDuration: 0
+      }
     }
   },
   {
@@ -1391,6 +1406,10 @@ const globalStyle = {
     maxWidth: 1190,
     navigationBarTextStyle: "black",
     navigationBarBackgroundColor: "#F1F1F1"
+  },
+  "app-plus": {
+    animationType: "none",
+    animationDuration: 0
   }
 };
 const tabBar = {

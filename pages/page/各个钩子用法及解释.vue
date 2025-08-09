@@ -8,6 +8,10 @@
 	<child-component ref="childRef"></child-component>
 	<button @click="callChildMethod">调用子组件方法</button>
 	
+	<!-- 暂无数据 -->
+	<view class="no-list-tip" v-if="plan.list.length==0">暂无数据</view>
+	
+	
 	<!-- 公共页面项标题 -->
 	<view class="item-title-wrap">
 		<h3 class="item-title">最新成就</h3>
@@ -57,11 +61,23 @@
 		},
 		// 页面显示
 		onShow() {
-			
+			// 页面禁止显示手机任务栏，需要搭配onUnload关闭，page-head systemTaskbar设置为false的时候，顶部标题栏不计算任务栏高度
+			/* #ifndef APP-PLUS-NVUE */
+			try {
+				plus.navigator.setFullscreen(true);
+			} catch (e) {}
+			/* #endif */
 		},
 		// 页面隐藏
 		onHide() {
 
+		},
+		onUnload() {
+			/* #ifndef APP-PLUS-NVUE */
+			try {
+				plus.navigator.setFullscreen(false);
+			} catch (e) {}
+			/* #endif */
 		},
 		// Vue的watch用于监听响应式数据的变化，支持基础类型、对象、数组等多种数据源，可通过配置immediate和deep选项实现立即执行和深度监听
 		watch {

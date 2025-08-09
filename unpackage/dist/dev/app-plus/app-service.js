@@ -31,6 +31,7 @@ if (uni.restoreGlobal) {
 }
 (function(vue) {
   "use strict";
+  const ON_RESIZE = "onResize";
   function requireNativePlugin(name) {
     return weex.requireModule(name);
   }
@@ -44,6 +45,14 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return typeof component === "string" ? easycom : component;
   }
+  const createLifeCycleHook = (lifecycle, flag = 0) => (hook, target = vue.getCurrentInstance()) => {
+    !vue.isInSSRComponentSetup && vue.injectHook(lifecycle, hook, target);
+  };
+  const onResize = /* @__PURE__ */ createLifeCycleHook(
+    ON_RESIZE,
+    2
+    /* HookFlags.PAGE */
+  );
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -51,13 +60,13 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$3p = {
+  const _sfc_main$3t = {
     name: "page-head",
     props: {
       clickModule: {
         type: Function,
         default: () => {
-          formatAppLog("log", "at components/page-head/page-head.vue:28", "默认右侧功能区函数");
+          formatAppLog("log", "at components/page-head/page-head.vue:29", "默认右侧功能区函数");
         }
       },
       isHide: {
@@ -80,6 +89,9 @@ if (uni.restoreGlobal) {
       },
       moduleIcon: {
         default: "/static/icons/nav-bar.png"
+      },
+      systemTaskbar: {
+        default: true
       }
     },
     data() {
@@ -88,15 +100,18 @@ if (uni.restoreGlobal) {
       };
     },
     mounted() {
-      this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem";
+      this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem" : this.taskbarHeight = "0rem";
     },
     methods: {
       clickBack() {
-        uni.navigateBack();
+        uni.navigateBack({
+          animationType: "fade-in",
+          animationDuration: 0
+        });
       }
     }
   };
-  function _sfc_render$3o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3s(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_viww = vue.resolveComponent("viww");
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -164,7 +179,7 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3p, [["render", _sfc_render$3o], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
+  const __easycom_0$8 = /* @__PURE__ */ _export_sfc(_sfc_main$3t, [["render", _sfc_render$3s], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
   var lookup = [
     0,
     0,
@@ -6687,12 +6702,12 @@ if (uni.restoreGlobal) {
   if (rng_pool == null) {
     rng_pool = [];
     rng_pptr = 0;
-    var t$9 = void 0;
+    var t$b = void 0;
     if (typeof window !== "undefined" && crypto && crypto.getRandomValues) {
       var z$1 = new Uint32Array(256);
       crypto.getRandomValues(z$1);
-      for (t$9 = 0; t$9 < z$1.length; ++t$9) {
-        rng_pool[rng_pptr++] = z$1[t$9] & 255;
+      for (t$b = 0; t$b < z$1.length; ++t$b) {
+        rng_pool[rng_pptr++] = z$1[t$b] & 255;
       }
     }
     var count = 0;
@@ -14099,7 +14114,7 @@ if (uni.restoreGlobal) {
       // url请求路径
       // dataType 数据返回类型
       // method发起请求类型
-      // notLoading 是否显示loading图标
+      // notLoading 是否请求过程中显示loading图标
       // .then() //成功返回
       // .catch() //失败返回
       // .finally()
@@ -14107,9 +14122,12 @@ if (uni.restoreGlobal) {
         !data.notLoading && uni.showLoading();
         return fetchData(data);
       },
+      // 封装数据储存
+      // key : key名称
+      // data ：存储的数据
       uniSetStorage(data) {
         if (!data || !data.key || !data.data) {
-          formatAppLog("log", "at common/js/common.js:178", "存储数据失败：缺少key|data");
+          formatAppLog("log", "at common/js/common.js:151", "存储数据失败：缺少key|data");
           return false;
         }
         if (typeof data.data == "object") {
@@ -14133,6 +14151,7 @@ if (uni.restoreGlobal) {
           }
         });
       },
+      // 清除储存数据
       uniClearStorage() {
         uni.clearStorageSync();
       },
@@ -14140,6 +14159,7 @@ if (uni.restoreGlobal) {
       // url 跳转页面地址
       // type uni 跳转页面函数("navigateTo","redirectTo","reLaunch") - 默认navigateTo
       jumpPage(data) {
+        formatAppLog("log", "at common/js/common.js:188", "jumpPage:::::", data);
         if (!data)
           return this.consoleLog("jumpPage()没有传参");
         if (!data.url)
@@ -14149,32 +14169,47 @@ if (uni.restoreGlobal) {
             case "navigateTo":
               uni.navigateTo({
                 url: data.url,
+                animationType: "none",
+                // 设置为"none"以关闭动画
                 animationDuration: 0
+                // 动画持续时间设置为0
               });
               break;
             case "redirectTo":
               uni.redirectTo({
                 url: data.url,
+                animationType: "none",
+                // 设置为"none"以关闭动画
                 animationDuration: 0
+                // 动画持续时间设置为0
               });
               break;
             case "reLaunch":
               uni.reLaunch({
                 url: data.url,
+                animationType: "none",
+                // 设置为"none"以关闭动画
                 animationDuration: 0
+                // 动画持续时间设置为0
               });
               break;
             default:
               uni.navigateTo({
                 url: data.url,
+                animationType: "none",
+                // 设置为"none"以关闭动画
                 animationDuration: 0
+                // 动画持续时间设置为0
               });
               break;
           }
         } else {
           uni.navigateTo({
             url: data.url,
+            animationType: "none",
+            // 设置为"none"以关闭动画
             animationDuration: 0
+            // 动画持续时间设置为0
           });
         }
       },
@@ -14196,50 +14231,77 @@ if (uni.restoreGlobal) {
         let scale = uni.getSystemInfoSync().windowWidth / baseWidth;
         if (!data || data.orientation && data.orientation == "portrait") {
           try {
-            if (Number(baseFontSize * scale) > 0) {
-              store.state.baseFontSize = baseFontSize * scale;
+            let newFontSize = baseFontSize * scale;
+            if (newFontSize > 0) {
+              newFontSize < 16 && (newFontSize = 16);
+              store.state.baseFontSize = newFontSize;
+              this.fontSize = newFontSize;
+              formatAppLog("log", "at common/js/common.js:256", "设置store.state.baseFontSize", store.state.baseFontSize);
+            } else {
+              formatAppLog("log", "at common/js/common.js:258", "newFontSize:", newFontSize, store.state.baseFontSize);
             }
           } catch (e2) {
-            formatAppLog("log", "at common/js/common.js:277", "报错：：：：", e2);
+            formatAppLog("log", "at common/js/common.js:261", "报错：：：：", e2);
           }
         } else if (store.state.baseFontSize) {
-          this.fontSize = store.state.baseFontSize;
+          formatAppLog("log", "at common/js/common.js:264", "store.state.baseFontSize:", store.state.baseFontSize);
+          if (data.orientation && data.orientation == "landscape") {
+            var index2 = 30;
+            let time = setInterval(() => {
+              index2 = index2 - 1;
+              if (index2 == 0) {
+                clearInterval(time);
+              }
+              this.fontSize = store.state.baseFontSize - 0.01;
+              setTimeout(() => {
+                this.fontSize = store.state.baseFontSize;
+              }, 10);
+            }, 100);
+          } else {
+            this.fontSize = store.state.baseFontSize;
+          }
+        } else {
+          formatAppLog("log", "at common/js/common.js:283", "baseFontSize::", baseFontSize);
+          this.fontSize = baseFontSize;
         }
       },
       // 页面onShow 钩子触发的函数
-      // uniHide 隐藏弹窗等各种
+      // uniHide 隐藏各种弹窗等
       // orientation 页面横屏竖屏 portrait（竖屏）或landscape（横屏）
       pageOnShowSet(data) {
         if (!data)
           return;
-        store.state.isLoading = false;
-        try {
-          data.uniHide && this.uniHide(data.uniHide);
-        } catch (e2) {
-        }
-        if (store.state.userInfo.info) {
-          this.userInfo = {
-            ...this.userInfo,
-            ...store.state.userInfo.info
-          };
-        }
-        this.setRootFontSize(data);
-        try {
-          if (data.orientation) {
-            plus.screen.lockOrientation(data.orientation + "-primary");
-            if (data.orientation == "portrait") {
-              this.setRootFontSize();
-            } else {
-              this.setRootFontSize();
-            }
-          } else {
-            plus.screen.lockOrientation("portrait-primary");
-            this.setRootFontSize(store.state.baseFontSize);
+        return new Promise((resolve, reject) => {
+          store.state.isLoading = false;
+          try {
+            data.uniHide && this.uniHide(data.uniHide);
+          } catch (e2) {
           }
-        } catch (e2) {
-          plus.screen.lockOrientation("portrait-primary");
-          this.setRootFontSize();
-        }
+          if (store.state.userInfo.info) {
+            this.userInfo = {
+              ...this.userInfo,
+              ...store.state.userInfo.info
+            };
+          }
+          let _this = this;
+          try {
+            if (data.orientation) {
+              if (data.orientation == "portrait") {
+              }
+              setTimeout(() => {
+                plus.screen.lockOrientation(data.orientation + "-primary");
+              }, data.orientation == "portrait" ? 0 : 500);
+              _this.setRootFontSize(data);
+            } else {
+              plus.screen.lockOrientation("portrait-primary");
+              _this.setRootFontSize(data);
+            }
+          } catch (e2) {
+            plus.screen.lockOrientation("portrait-primary");
+            _this.setRootFontSize(data);
+          }
+          resolve();
+        });
       },
       // 奖励图标统一返回
       rewardIcon(id2) {
@@ -14271,7 +14333,7 @@ if (uni.restoreGlobal) {
           }).catch((err) => {
             reject(err);
             if (pathUrl.indexOf("/login") == -1) {
-              formatAppLog("log", "at common/js/common.js:379", "没有登录,跳转到登录页面");
+              formatAppLog("log", "at common/js/common.js:388", "没有登录,跳转到登录页面");
               uni.redirectTo({
                 url: "/pages/page/login/login?pageFrom=" + pathUrl
               });
@@ -14285,7 +14347,7 @@ if (uni.restoreGlobal) {
   const _imports_1$1 = "/static/image/1_study.png";
   const _imports_2$2 = "/static/image/1_achievement_back.png";
   const _imports_3 = "/static/icons/achievement.png";
-  const _sfc_main$3o = {
+  const _sfc_main$3s = {
     mixins: [commonJs],
     components: {},
     props: {},
@@ -14583,8 +14645,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3n(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+  function _sfc_render$3r(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createElementVNode("view", { class: "banner-wrap" }, [
         vue.createVNode(_component_page_head, {
@@ -14679,7 +14741,7 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("view", { class: "activity-wrap" }, [
           vue.createElementVNode("image", {
             class: "activity",
-            onClick: _cache[1] || (_cache[1] = ($event) => _ctx.jumpPage({ url: "" })),
+            onClick: _cache[1] || (_cache[1] = ($event) => _ctx.jumpPage({ url: "/pages/page/study/calendar" })),
             src: _imports_0$5
           }),
           vue.createElementVNode("image", {
@@ -14941,7 +15003,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3o, [["render", _sfc_render$3n], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/index.vue"]]);
+  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3s, [["render", _sfc_render$3r], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/index.vue"]]);
   const leftWindow = {
     path: "windows/left-window.vue",
     style: {
@@ -14959,7 +15021,11 @@ if (uni.restoreGlobal) {
       path: "pages/page/index/index",
       style: {
         navigationBarTitleText: "首页",
-        navigationStyle: "custom"
+        navigationStyle: "custom",
+        "app-plus": {
+          animationType: "none",
+          animationDuration: 0
+        }
       }
     },
     {
@@ -14981,6 +15047,17 @@ if (uni.restoreGlobal) {
       style: {
         navigationBarTitleText: "错题本",
         navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/page/study/calendar",
+      style: {
+        navigationBarTitleText: "每日挑战",
+        navigationStyle: "custom",
+        "app-plus": {
+          animationType: "none",
+          animationDuration: 0
+        }
       }
     },
     {
@@ -16334,6 +16411,10 @@ if (uni.restoreGlobal) {
       maxWidth: 1190,
       navigationBarTextStyle: "black",
       navigationBarBackgroundColor: "#F1F1F1"
+    },
+    "app-plus": {
+      animationType: "none",
+      animationDuration: 0
     }
   };
   const tabBar = {
@@ -16394,7 +16475,7 @@ if (uni.restoreGlobal) {
     condition
   };
   var define_process_env_UNI_SECURE_NETWORK_CONFIG_default = [];
-  function t$8(e2) {
+  function t$a(e2) {
     return e2 && e2.__esModule && Object.prototype.hasOwnProperty.call(e2, "default") ? e2.default : e2;
   }
   function n(e2, t2, n2) {
@@ -18283,10 +18364,10 @@ ${o3}
     return e2.replace(new RegExp((s2 = t2) && Vt.test(s2) ? s2.replace(zt, "\\$&") : s2, "g"), n2);
     var s2;
   }
-  const Yt = { NONE: "none", REQUEST: "request", RESPONSE: "response", BOTH: "both" }, Qt = "_globalUniCloudStatus", Xt = "_globalUniCloudSecureNetworkCache__{spaceId}", Zt = "uni-secure-network", en$6 = { SYSTEM_ERROR: { code: 2e4, message: "System error" }, APP_INFO_INVALID: { code: 20101, message: "Invalid client" }, GET_ENCRYPT_KEY_FAILED: { code: 20102, message: "Get encrypt key failed" } };
+  const Yt = { NONE: "none", REQUEST: "request", RESPONSE: "response", BOTH: "both" }, Qt = "_globalUniCloudStatus", Xt = "_globalUniCloudSecureNetworkCache__{spaceId}", Zt = "uni-secure-network", en$7 = { SYSTEM_ERROR: { code: 2e4, message: "System error" }, APP_INFO_INVALID: { code: 20101, message: "Invalid client" }, GET_ENCRYPT_KEY_FAILED: { code: 20102, message: "Get encrypt key failed" } };
   function nn(e2) {
     const { errSubject: t2, subject: n2, errCode: s2, errMsg: r2, code: i2, message: o2, cause: a2 } = e2 || {};
-    return new te({ subject: t2 || n2 || Zt, code: s2 || i2 || en$6.SYSTEM_ERROR.code, message: r2 || o2, cause: a2 });
+    return new te({ subject: t2 || n2 || Zt, code: s2 || i2 || en$7.SYSTEM_ERROR.code, message: r2 || o2, cause: a2 });
   }
   let Kn;
   function Hn({ secretType: e2 } = {}) {
@@ -18326,7 +18407,7 @@ ${o3}
       return false;
     if ((c2[h2] || []).find((e3 = {}) => e3.appId === s2 && (e3.platform || "").toLowerCase() === o2.toLowerCase()))
       return true;
-    throw console.error(`此应用[appId: ${s2}, platform: ${o2}]不在云端配置的允许访问的应用列表内，参考：https://uniapp.dcloud.net.cn/uniCloud/secure-network.html#verify-client`), nn(en$6.APP_INFO_INVALID);
+    throw console.error(`此应用[appId: ${s2}, platform: ${o2}]不在云端配置的允许访问的应用列表内，参考：https://uniapp.dcloud.net.cn/uniCloud/secure-network.html#verify-client`), nn(en$7.APP_INFO_INVALID);
   }
   function Vn({ functionName: e2, result: t2, logPvd: n2 }) {
     if (this.__dev__.debugLog && t2 && t2.requestId) {
@@ -18896,7 +18977,7 @@ ${o3}
         }(t3), t3);
       };
     };
-  }), Ks = t$8(Fs);
+  }), Ks = t$a(Fs);
   const js = { auto: "auto", onready: "onready", manual: "manual" };
   function $s(e2) {
     return { props: { localdata: { type: Array, default: () => [] }, options: { type: [Object, Array], default: () => ({}) }, spaceInfo: { type: Object, default: () => ({}) }, collection: { type: [String, Array], default: "" }, action: { type: String, default: "" }, field: { type: String, default: "" }, orderby: { type: String, default: "" }, where: { type: [String, Object], default: "" }, pageData: { type: String, default: "add" }, pageCurrent: { type: Number, default: 1 }, pageSize: { type: Number, default: 20 }, getcount: { type: [Boolean, String], default: false }, gettree: { type: [Boolean, String], default: false }, gettreepath: { type: [Boolean, String], default: false }, startwith: { type: String, default: "" }, limitlevel: { type: Number, default: 10 }, groupby: { type: String, default: "" }, groupField: { type: String, default: "" }, distinct: { type: [Boolean, String], default: false }, foreignKey: { type: String, default: "" }, loadtime: { type: String, default: "auto" }, manual: { type: Boolean, default: false } }, data: () => ({ mixinDatacomLoading: false, mixinDatacomHasMore: false, mixinDatacomResData: [], mixinDatacomErrorMessage: "", mixinDatacomPage: {}, mixinDatacomError: null }), created() {
@@ -19537,34 +19618,34 @@ ${o3}
       }
     };
   }
-  const en$5 = {
+  const en$6 = {
     "uni-load-more.contentdown": "Pull up to show more",
     "uni-load-more.contentrefresh": "loading...",
     "uni-load-more.contentnomore": "No more data"
   };
-  const zhHans$5 = {
+  const zhHans$6 = {
     "uni-load-more.contentdown": "上拉显示更多",
     "uni-load-more.contentrefresh": "正在加载...",
     "uni-load-more.contentnomore": "没有更多数据了"
   };
-  const zhHant$5 = {
+  const zhHant$6 = {
     "uni-load-more.contentdown": "上拉顯示更多",
     "uni-load-more.contentrefresh": "正在加載...",
     "uni-load-more.contentnomore": "沒有更多數據了"
   };
   const messages$4 = {
-    en: en$5,
-    "zh-Hans": zhHans$5,
-    "zh-Hant": zhHant$5
+    en: en$6,
+    "zh-Hans": zhHans$6,
+    "zh-Hant": zhHant$6
   };
   let platform$3;
   setTimeout(() => {
     platform$3 = uni.getSystemInfoSync().platform;
   }, 16);
   const {
-    t: t$7
+    t: t$9
   } = initVueI18n(messages$4);
-  const _sfc_main$3n = {
+  const _sfc_main$3r = {
     name: "UniLoadMore",
     emits: ["clickLoadMore"],
     props: {
@@ -19616,13 +19697,13 @@ ${o3}
         return (Math.floor(this.iconSize / 24) || 1) * 2;
       },
       contentdownText() {
-        return this.contentText.contentdown || t$7("uni-load-more.contentdown");
+        return this.contentText.contentdown || t$9("uni-load-more.contentdown");
       },
       contentrefreshText() {
-        return this.contentText.contentrefresh || t$7("uni-load-more.contentrefresh");
+        return this.contentText.contentrefresh || t$9("uni-load-more.contentrefresh");
       },
       contentnomoreText() {
-        return this.contentText.contentnomore || t$7("uni-load-more.contentnomore");
+        return this.contentText.contentnomore || t$9("uni-load-more.contentnomore");
       }
     },
     mounted() {
@@ -19646,7 +19727,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "uni-load-more",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
@@ -19721,8 +19802,8 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
-  const _sfc_main$3m = {
+  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3r, [["render", _sfc_render$3q], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+  const _sfc_main$3q = {
     name: "uniDataChecklist",
     mixins: [tr.mixinDatacom || {}],
     emits: ["input", "update:modelValue", "change"],
@@ -20069,8 +20150,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3l(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
+  function _sfc_render$3p(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -20282,8 +20363,8 @@ ${o3}
       /* STYLE */
     );
   }
-  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
-  const _sfc_main$3l = {
+  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3q, [["render", _sfc_render$3p], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
+  const _sfc_main$3p = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -20615,7 +20696,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -20671,7 +20752,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_2$a = /* @__PURE__ */ _export_sfc(_sfc_main$3p, [["render", _sfc_render$3o], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   const fontData = [
     {
       "font_class": "arrow-down",
@@ -21322,7 +21403,7 @@ ${o3}
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$3k = {
+  const _sfc_main$3o = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -21376,7 +21457,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -21391,8 +21472,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-  const _sfc_main$3j = {
+  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3o, [["render", _sfc_render$3n], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const _sfc_main$3n = {
     name: "uni-data-select",
     mixins: [tr.mixinDatacom || {}],
     props: {
@@ -21644,7 +21725,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-stat__select" }, [
       $props.label ? (vue.openBlock(), vue.createElementBlock(
@@ -21784,7 +21865,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
+  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -21803,7 +21884,7 @@ ${o3}
     }
     return style;
   }
-  const _sfc_main$3i = {
+  const _sfc_main$3m = {
     name: "uni-easyinput",
     emits: [
       "click",
@@ -22160,7 +22241,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -22285,7 +22366,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -22849,7 +22930,7 @@ ${o3}
       return false;
     }
   };
-  const _sfc_main$3h = {
+  const _sfc_main$3l = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -23151,15 +23232,15 @@ ${o3}
       _isEqual: isEqual
     }
   };
-  function _sfc_render$3g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$3g = {
+  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$3k = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23305,10 +23386,10 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3f(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+  function _sfc_render$3j(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_data_checkbox = resolveEasycom(vue.resolveDynamicComponent("uni-data-checkbox"), __easycom_1$p);
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$9);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$a);
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_1$n);
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_1$m);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_7);
@@ -23420,8 +23501,8 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
-  const _sfc_main$3f = {
+  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
+  const _sfc_main$3j = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23448,11 +23529,7 @@ ${o3}
     onLoad() {
     },
     onReady() {
-      const route = getCurrentPages();
-      const pathUrl = route[route.length - 1].route;
-      this.getLogin().then((data) => {
-        this.consoleLog(store.state.userInfo);
-        this.consoleLog("已经登陆了");
+      this.verifLogin().then((data) => {
         if (store.state.userInfo.token && store.state.userInfo.info && store.state.userInfo.info.currencies) {
           this.userInfo = store.state.userInfo.info;
         } else {
@@ -23509,13 +23586,8 @@ ${o3}
         }).catch((error) => {
           this.consoleLog("知识点学习报错：：", error);
         });
-      }).catch((err) => {
-        if (pathUrl.indexOf("/login") == -1) {
-          formatAppLog("log", "at pages/page/study/study.vue:201", "没有登录,跳转到登录页面");
-          uni.redirectTo({
-            url: "/pages/page/login/login?pageFrom=" + pathUrl
-          });
-        }
+      }).catch((error) => {
+        this.consoleLog("没有登录：：", error);
       });
     },
     onShow() {
@@ -23537,8 +23609,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3e(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+  function _sfc_render$3i(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createElementVNode("view", { class: "banner-wrap" }, [
         vue.createVNode(_component_page_head, {
@@ -23748,8 +23820,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
-  const _sfc_main$3e = {
+  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
+  const _sfc_main$3i = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23840,8 +23912,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+  function _sfc_render$3h(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -24009,7 +24081,2118 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageStudyWrongQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__scopeId", "data-v-612ffe2c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/wrong_question.vue"]]);
+  const PagesPageStudyWrongQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__scopeId", "data-v-612ffe2c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/wrong_question.vue"]]);
+  const _sfc_main$3h = {
+    name: "PageMeta",
+    setup(props, { emit }) {
+      onResize((evt) => {
+        emit("resize", evt);
+      });
+    },
+    props: {
+      backgroundTextStyle: {
+        type: String,
+        default: "dark",
+        validator(value) {
+          return ["dark", "light"].indexOf(value) !== -1;
+        }
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      },
+      backgroundColorTop: {
+        type: String,
+        default: "#ffffff"
+      },
+      backgroundColorBottom: {
+        type: String,
+        default: "#ffffff"
+      },
+      scrollTop: {
+        type: String,
+        default: ""
+      },
+      scrollDuration: {
+        type: Number,
+        default: 300
+      },
+      pageStyle: {
+        type: String,
+        default: ""
+      },
+      enablePullDownRefresh: {
+        type: [Boolean, String],
+        default: false
+      },
+      rootFontSize: {
+        type: String,
+        default: ""
+      }
+    },
+    created() {
+      const page = getCurrentPages()[0];
+      this.$pageVm = page.$vm || page;
+      this._currentWebview = page.$getAppWebview();
+      if (this.enablePullDownRefresh) {
+        this.setPullDownRefresh(this._currentWebview, true);
+      }
+      this.$watch("enablePullDownRefresh", (val) => {
+        this.setPullDownRefresh(this._currentWebview, val);
+      });
+      this.$watch("backgroundTextStyle", () => {
+        this.setBackgroundTextStyle();
+      });
+      this.$watch(() => [
+        this.rootFontSize,
+        this.pageStyle
+      ], () => {
+        this.setPageMeta();
+      });
+      this.$watch(() => [
+        this.backgroundColor,
+        this.backgroundColorTop,
+        this.backgroundColorBottom
+      ], () => {
+        this.setBackgroundColor();
+      });
+      this.$watch(() => [
+        this.scrollTop,
+        this.scrollDuration
+      ], () => {
+        this.pageScrollTo();
+      });
+    },
+    beforeMount() {
+      this.setBackgroundColor();
+      if (this.rootFontSize || this.pageStyle) {
+        this.setPageMeta();
+      }
+      this.backgroundTextStyle && this.setBackgroundTextStyle();
+    },
+    mounted() {
+      this.scrollTop && this.pageScrollTo();
+    },
+    methods: {
+      setPullDownRefresh(webview, enabled) {
+        webview.setStyle({
+          pullToRefresh: {
+            support: enabled,
+            style: plus.os.name === "Android" ? "circle" : "default"
+          }
+        });
+      },
+      setPageMeta() {
+        uni.setPageMeta({
+          pageStyle: this.pageStyle,
+          rootFontSize: this.rootFontSize
+        });
+      },
+      setBackgroundTextStyle() {
+      },
+      setBackgroundColor() {
+      },
+      pageScrollTo() {
+        let scrollTop = String(this.scrollTop);
+        if (scrollTop.indexOf("rpx") !== -1) {
+          scrollTop = uni.upx2px(scrollTop.replace("rpx", ""));
+        }
+        scrollTop = parseFloat(scrollTop);
+        if (isNaN(scrollTop)) {
+          return;
+        }
+        uni.pageScrollTo({
+          scrollTop,
+          duration: this.scrollDuration,
+          success: () => {
+          }
+        });
+      }
+    }
+  };
+  function _sfc_render$3g(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { style: { "display": "none" } }, [
+      vue.renderSlot(_ctx.$slots, "default")
+    ]);
+  }
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__file", "D:/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/page-meta/page-meta.vue"]]);
+  var calendar$1 = {
+    /**
+        * 农历1900-2100的润大小信息表
+        * @Array Of Property
+        * @return Hex
+        */
+    lunarInfo: [
+      19416,
+      19168,
+      42352,
+      21717,
+      53856,
+      55632,
+      91476,
+      22176,
+      39632,
+      21970,
+      // 1900-1909
+      19168,
+      42422,
+      42192,
+      53840,
+      119381,
+      46400,
+      54944,
+      44450,
+      38320,
+      84343,
+      // 1910-1919
+      18800,
+      42160,
+      46261,
+      27216,
+      27968,
+      109396,
+      11104,
+      38256,
+      21234,
+      18800,
+      // 1920-1929
+      25958,
+      54432,
+      59984,
+      28309,
+      23248,
+      11104,
+      100067,
+      37600,
+      116951,
+      51536,
+      // 1930-1939
+      54432,
+      120998,
+      46416,
+      22176,
+      107956,
+      9680,
+      37584,
+      53938,
+      43344,
+      46423,
+      // 1940-1949
+      27808,
+      46416,
+      86869,
+      19872,
+      42416,
+      83315,
+      21168,
+      43432,
+      59728,
+      27296,
+      // 1950-1959
+      44710,
+      43856,
+      19296,
+      43748,
+      42352,
+      21088,
+      62051,
+      55632,
+      23383,
+      22176,
+      // 1960-1969
+      38608,
+      19925,
+      19152,
+      42192,
+      54484,
+      53840,
+      54616,
+      46400,
+      46752,
+      103846,
+      // 1970-1979
+      38320,
+      18864,
+      43380,
+      42160,
+      45690,
+      27216,
+      27968,
+      44870,
+      43872,
+      38256,
+      // 1980-1989
+      19189,
+      18800,
+      25776,
+      29859,
+      59984,
+      27480,
+      23232,
+      43872,
+      38613,
+      37600,
+      // 1990-1999
+      51552,
+      55636,
+      54432,
+      55888,
+      30034,
+      22176,
+      43959,
+      9680,
+      37584,
+      51893,
+      // 2000-2009
+      43344,
+      46240,
+      47780,
+      44368,
+      21977,
+      19360,
+      42416,
+      86390,
+      21168,
+      43312,
+      // 2010-2019
+      31060,
+      27296,
+      44368,
+      23378,
+      19296,
+      42726,
+      42208,
+      53856,
+      60005,
+      54576,
+      // 2020-2029
+      23200,
+      30371,
+      38608,
+      19195,
+      19152,
+      42192,
+      118966,
+      53840,
+      54560,
+      56645,
+      // 2030-2039
+      46496,
+      22224,
+      21938,
+      18864,
+      42359,
+      42160,
+      43600,
+      111189,
+      27936,
+      44448,
+      // 2040-2049
+      /** Add By JJonline@JJonline.Cn**/
+      84835,
+      37744,
+      18936,
+      18800,
+      25776,
+      92326,
+      59984,
+      27424,
+      108228,
+      43744,
+      // 2050-2059
+      41696,
+      53987,
+      51552,
+      54615,
+      54432,
+      55888,
+      23893,
+      22176,
+      42704,
+      21972,
+      // 2060-2069
+      21200,
+      43448,
+      43344,
+      46240,
+      46758,
+      44368,
+      21920,
+      43940,
+      42416,
+      21168,
+      // 2070-2079
+      45683,
+      26928,
+      29495,
+      27296,
+      44368,
+      84821,
+      19296,
+      42352,
+      21732,
+      53600,
+      // 2080-2089
+      59752,
+      54560,
+      55968,
+      92838,
+      22224,
+      19168,
+      43476,
+      41680,
+      53584,
+      62034,
+      // 2090-2099
+      54560
+    ],
+    // 2100
+    /**
+        * 公历每个月份的天数普通表
+        * @Array Of Property
+        * @return Number
+        */
+    solarMonth: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    /**
+        * 天干地支之天干速查表
+        * @Array Of Property trans["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+        * @return Cn string
+        */
+    Gan: ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"],
+    /**
+        * 天干地支之地支速查表
+        * @Array Of Property
+        * @trans["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
+        * @return Cn string
+        */
+    Zhi: ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"],
+    /**
+        * 天干地支之地支速查表<=>生肖
+        * @Array Of Property
+        * @trans["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"]
+        * @return Cn string
+        */
+    Animals: ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"],
+    /**
+        * 24节气速查表
+        * @Array Of Property
+        * @trans["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"]
+        * @return Cn string
+        */
+    solarTerm: ["小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"],
+    /**
+        * 1900-2100各年的24节气日期速查表
+        * @Array Of Property
+        * @return 0x string For splice
+        */
+    sTermInfo: [
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c3598082c95f8c965cc920f",
+      "97bd0b06bdb0722c965ce1cfcc920f",
+      "b027097bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c359801ec95f8c965cc920f",
+      "97bd0b06bdb0722c965ce1cfcc920f",
+      "b027097bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c359801ec95f8c965cc920f",
+      "97bd0b06bdb0722c965ce1cfcc920f",
+      "b027097bd097c36b0b6fc9274c91aa",
+      "9778397bd19801ec9210c965cc920e",
+      "97b6b97bd19801ec95f8c965cc920f",
+      "97bd09801d98082c95f8e1cfcc920f",
+      "97bd097bd097c36b0b6fc9210c8dc2",
+      "9778397bd197c36c9210c9274c91aa",
+      "97b6b97bd19801ec95f8c965cc920e",
+      "97bd09801d98082c95f8e1cfcc920f",
+      "97bd097bd097c36b0b6fc9210c8dc2",
+      "9778397bd097c36c9210c9274c91aa",
+      "97b6b97bd19801ec95f8c965cc920e",
+      "97bcf97c3598082c95f8e1cfcc920f",
+      "97bd097bd097c36b0b6fc9210c8dc2",
+      "9778397bd097c36c9210c9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c3598082c95f8c965cc920f",
+      "97bd097bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c3598082c95f8c965cc920f",
+      "97bd097bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c359801ec95f8c965cc920f",
+      "97bd097bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c359801ec95f8c965cc920f",
+      "97bd097bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf97c359801ec95f8c965cc920f",
+      "97bd097bd07f595b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9210c8dc2",
+      "9778397bd19801ec9210c9274c920e",
+      "97b6b97bd19801ec95f8c965cc920f",
+      "97bd07f5307f595b0b0bc920fb0722",
+      "7f0e397bd097c36b0b6fc9210c8dc2",
+      "9778397bd097c36c9210c9274c920e",
+      "97b6b97bd19801ec95f8c965cc920f",
+      "97bd07f5307f595b0b0bc920fb0722",
+      "7f0e397bd097c36b0b6fc9210c8dc2",
+      "9778397bd097c36c9210c9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bd07f1487f595b0b0bc920fb0722",
+      "7f0e397bd097c36b0b6fc9210c8dc2",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf7f1487f595b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf7f1487f595b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf7f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c965cc920e",
+      "97bcf7f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b97bd19801ec9210c9274c920e",
+      "97bcf7f0e47f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "9778397bd097c36b0b6fc9210c91aa",
+      "97b6b97bd197c36c9210c9274c920e",
+      "97bcf7f0e47f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "9778397bd097c36b0b6fc9210c8dc2",
+      "9778397bd097c36c9210c9274c920e",
+      "97b6b7f0e47f531b0723b0b6fb0722",
+      "7f0e37f5307f595b0b0bc920fb0722",
+      "7f0e397bd097c36b0b6fc9210c8dc2",
+      "9778397bd097c36b0b70c9274c91aa",
+      "97b6b7f0e47f531b0723b0b6fb0721",
+      "7f0e37f1487f595b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc9210c8dc2",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f595b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "9778397bd097c36b0b6fc9274c91aa",
+      "97b6b7f0e47f531b0723b0787b0721",
+      "7f0e27f0e47f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "9778397bd097c36b0b6fc9210c91aa",
+      "97b6b7f0e47f149b0723b0787b0721",
+      "7f0e27f0e47f531b0723b0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "9778397bd097c36b0b6fc9210c8dc2",
+      "977837f0e37f149b0723b0787b0721",
+      "7f07e7f0e47f531b0723b0b6fb0722",
+      "7f0e37f5307f595b0b0bc920fb0722",
+      "7f0e397bd097c35b0b6fc9210c8dc2",
+      "977837f0e37f14998082b0787b0721",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e37f1487f595b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc9210c8dc2",
+      "977837f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "977837f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd097c35b0b6fc920fb0722",
+      "977837f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "977837f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "977837f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f149b0723b0787b0721",
+      "7f0e27f0e47f531b0b0bb0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "977837f0e37f14998082b0723b06bd",
+      "7f07e7f0e37f149b0723b0787b0721",
+      "7f0e27f0e47f531b0723b0b6fb0722",
+      "7f0e397bd07f595b0b0bc920fb0722",
+      "977837f0e37f14898082b0723b02d5",
+      "7ec967f0e37f14998082b0787b0721",
+      "7f07e7f0e47f531b0723b0b6fb0722",
+      "7f0e37f1487f595b0b0bb0b6fb0722",
+      "7f0e37f0e37f14898082b0723b02d5",
+      "7ec967f0e37f14998082b0787b0721",
+      "7f07e7f0e47f531b0723b0b6fb0722",
+      "7f0e37f1487f531b0b0bb0b6fb0722",
+      "7f0e37f0e37f14898082b0723b02d5",
+      "7ec967f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e37f1487f531b0b0bb0b6fb0722",
+      "7f0e37f0e37f14898082b072297c35",
+      "7ec967f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e37f0e37f14898082b072297c35",
+      "7ec967f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e37f0e366aa89801eb072297c35",
+      "7ec967f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f149b0723b0787b0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722",
+      "7f0e37f0e366aa89801eb072297c35",
+      "7ec967f0e37f14998082b0723b06bd",
+      "7f07e7f0e47f149b0723b0787b0721",
+      "7f0e27f0e47f531b0723b0b6fb0722",
+      "7f0e37f0e366aa89801eb072297c35",
+      "7ec967f0e37f14998082b0723b06bd",
+      "7f07e7f0e37f14998083b0787b0721",
+      "7f0e27f0e47f531b0723b0b6fb0722",
+      "7f0e37f0e366aa89801eb072297c35",
+      "7ec967f0e37f14898082b0723b02d5",
+      "7f07e7f0e37f14998082b0787b0721",
+      "7f07e7f0e47f531b0723b0b6fb0722",
+      "7f0e36665b66aa89801e9808297c35",
+      "665f67f0e37f14898082b0723b02d5",
+      "7ec967f0e37f14998082b0787b0721",
+      "7f07e7f0e47f531b0723b0b6fb0722",
+      "7f0e36665b66a449801e9808297c35",
+      "665f67f0e37f14898082b0723b02d5",
+      "7ec967f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e36665b66a449801e9808297c35",
+      "665f67f0e37f14898082b072297c35",
+      "7ec967f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e26665b66a449801e9808297c35",
+      "665f67f0e37f1489801eb072297c35",
+      "7ec967f0e37f14998082b0787b06bd",
+      "7f07e7f0e47f531b0723b0b6fb0721",
+      "7f0e27f1487f531b0b0bb0b6fb0722"
+    ],
+    /**
+        * 数字转中文速查表
+        * @Array Of Property
+        * @trans ['日','一','二','三','四','五','六','七','八','九','十']
+        * @return Cn string
+        */
+    nStr1: ["日", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"],
+    /**
+        * 日期转农历称呼速查表
+        * @Array Of Property
+        * @trans ['初','十','廿','卅']
+        * @return Cn string
+        */
+    nStr2: ["初", "十", "廿", "卅"],
+    /**
+        * 月份转农历称呼速查表
+        * @Array Of Property
+        * @trans ['正','一','二','三','四','五','六','七','八','九','十','冬','腊']
+        * @return Cn string
+        */
+    nStr3: ["正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "冬", "腊"],
+    /**
+        * 返回农历y年一整年的总天数
+        * @param lunar Year
+        * @return Number
+        * @eg:var count = calendar.lYearDays(1987) ;//count=387
+        */
+    lYearDays: function(y2) {
+      var i2;
+      var sum = 348;
+      for (i2 = 32768; i2 > 8; i2 >>= 1) {
+        sum += this.lunarInfo[y2 - 1900] & i2 ? 1 : 0;
+      }
+      return sum + this.leapDays(y2);
+    },
+    /**
+        * 返回农历y年闰月是哪个月；若y年没有闰月 则返回0
+        * @param lunar Year
+        * @return Number (0-12)
+        * @eg:var leapMonth = calendar.leapMonth(1987) ;//leapMonth=6
+        */
+    leapMonth: function(y2) {
+      return this.lunarInfo[y2 - 1900] & 15;
+    },
+    /**
+        * 返回农历y年闰月的天数 若该年没有闰月则返回0
+        * @param lunar Year
+        * @return Number (0、29、30)
+        * @eg:var leapMonthDay = calendar.leapDays(1987) ;//leapMonthDay=29
+        */
+    leapDays: function(y2) {
+      if (this.leapMonth(y2)) {
+        return this.lunarInfo[y2 - 1900] & 65536 ? 30 : 29;
+      }
+      return 0;
+    },
+    /**
+        * 返回农历y年m月（非闰月）的总天数，计算m为闰月时的天数请使用leapDays方法
+        * @param lunar Year
+        * @return Number (-1、29、30)
+        * @eg:var MonthDay = calendar.monthDays(1987,9) ;//MonthDay=29
+        */
+    monthDays: function(y2, m2) {
+      if (m2 > 12 || m2 < 1) {
+        return -1;
+      }
+      return this.lunarInfo[y2 - 1900] & 65536 >> m2 ? 30 : 29;
+    },
+    /**
+        * 返回公历(!)y年m月的天数
+        * @param solar Year
+        * @return Number (-1、28、29、30、31)
+        * @eg:var solarMonthDay = calendar.leapDays(1987) ;//solarMonthDay=30
+        */
+    solarDays: function(y2, m2) {
+      if (m2 > 12 || m2 < 1) {
+        return -1;
+      }
+      var ms2 = m2 - 1;
+      if (ms2 == 1) {
+        return y2 % 4 == 0 && y2 % 100 != 0 || y2 % 400 == 0 ? 29 : 28;
+      } else {
+        return this.solarMonth[ms2];
+      }
+    },
+    /**
+       * 农历年份转换为干支纪年
+       * @param  lYear 农历年的年份数
+       * @return Cn string
+       */
+    toGanZhiYear: function(lYear) {
+      var ganKey = (lYear - 3) % 10;
+      var zhiKey = (lYear - 3) % 12;
+      if (ganKey == 0)
+        ganKey = 10;
+      if (zhiKey == 0)
+        zhiKey = 12;
+      return this.Gan[ganKey - 1] + this.Zhi[zhiKey - 1];
+    },
+    /**
+       * 公历月、日判断所属星座
+       * @param  cMonth [description]
+       * @param  cDay [description]
+       * @return Cn string
+       */
+    toAstro: function(cMonth, cDay) {
+      var s2 = "魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯";
+      var arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
+      return s2.substr(cMonth * 2 - (cDay < arr[cMonth - 1] ? 2 : 0), 2) + "座";
+    },
+    /**
+        * 传入offset偏移量返回干支
+        * @param offset 相对甲子的偏移量
+        * @return Cn string
+        */
+    toGanZhi: function(offset) {
+      return this.Gan[offset % 10] + this.Zhi[offset % 12];
+    },
+    /**
+        * 传入公历(!)y年获得该年第n个节气的公历日期
+        * @param y公历年(1900-2100)；n二十四节气中的第几个节气(1~24)；从n=1(小寒)算起
+        * @return day Number
+        * @eg:var _24 = calendar.getTerm(1987,3) ;//_24=4;意即1987年2月4日立春
+        */
+    getTerm: function(y2, n2) {
+      if (y2 < 1900 || y2 > 2100) {
+        return -1;
+      }
+      if (n2 < 1 || n2 > 24) {
+        return -1;
+      }
+      var _table = this.sTermInfo[y2 - 1900];
+      var _info = [
+        parseInt("0x" + _table.substr(0, 5)).toString(),
+        parseInt("0x" + _table.substr(5, 5)).toString(),
+        parseInt("0x" + _table.substr(10, 5)).toString(),
+        parseInt("0x" + _table.substr(15, 5)).toString(),
+        parseInt("0x" + _table.substr(20, 5)).toString(),
+        parseInt("0x" + _table.substr(25, 5)).toString()
+      ];
+      var _calday = [
+        _info[0].substr(0, 1),
+        _info[0].substr(1, 2),
+        _info[0].substr(3, 1),
+        _info[0].substr(4, 2),
+        _info[1].substr(0, 1),
+        _info[1].substr(1, 2),
+        _info[1].substr(3, 1),
+        _info[1].substr(4, 2),
+        _info[2].substr(0, 1),
+        _info[2].substr(1, 2),
+        _info[2].substr(3, 1),
+        _info[2].substr(4, 2),
+        _info[3].substr(0, 1),
+        _info[3].substr(1, 2),
+        _info[3].substr(3, 1),
+        _info[3].substr(4, 2),
+        _info[4].substr(0, 1),
+        _info[4].substr(1, 2),
+        _info[4].substr(3, 1),
+        _info[4].substr(4, 2),
+        _info[5].substr(0, 1),
+        _info[5].substr(1, 2),
+        _info[5].substr(3, 1),
+        _info[5].substr(4, 2)
+      ];
+      return parseInt(_calday[n2 - 1]);
+    },
+    /**
+        * 传入农历数字月份返回汉语通俗表示法
+        * @param lunar month
+        * @return Cn string
+        * @eg:var cnMonth = calendar.toChinaMonth(12) ;//cnMonth='腊月'
+        */
+    toChinaMonth: function(m2) {
+      if (m2 > 12 || m2 < 1) {
+        return -1;
+      }
+      var s2 = this.nStr3[m2 - 1];
+      s2 += "月";
+      return s2;
+    },
+    /**
+        * 传入农历日期数字返回汉字表示法
+        * @param lunar day
+        * @return Cn string
+        * @eg:var cnDay = calendar.toChinaDay(21) ;//cnMonth='廿一'
+        */
+    toChinaDay: function(d2) {
+      var s2;
+      switch (d2) {
+        case 10:
+          s2 = "初十";
+          break;
+        case 20:
+          s2 = "二十";
+          break;
+        case 30:
+          s2 = "三十";
+          break;
+        default:
+          s2 = this.nStr2[Math.floor(d2 / 10)];
+          s2 += this.nStr1[d2 % 10];
+      }
+      return s2;
+    },
+    /**
+        * 年份转生肖[!仅能大致转换] => 精确划分生肖分界线是“立春”
+        * @param y year
+        * @return Cn string
+        * @eg:var animal = calendar.getAnimal(1987) ;//animal='兔'
+        */
+    getAnimal: function(y2) {
+      return this.Animals[(y2 - 4) % 12];
+    },
+    /**
+        * 传入阳历年月日获得详细的公历、农历object信息 <=>JSON
+        * @param y  solar year
+        * @param m  solar month
+        * @param d  solar day
+        * @return JSON object
+        * @eg:__f__('log','at uni_modules/uni-calendar/components/uni-calendar/calendar.js:379',calendar.solar2lunar(1987,11,01));
+        */
+    solar2lunar: function(y2, m2, d2) {
+      if (y2 < 1900 || y2 > 2100) {
+        return -1;
+      }
+      if (y2 == 1900 && m2 == 1 && d2 < 31) {
+        return -1;
+      }
+      if (!y2) {
+        var objDate = /* @__PURE__ */ new Date();
+      } else {
+        var objDate = new Date(y2, parseInt(m2) - 1, d2);
+      }
+      var i2;
+      var leap = 0;
+      var temp = 0;
+      var y2 = objDate.getFullYear();
+      var m2 = objDate.getMonth() + 1;
+      var d2 = objDate.getDate();
+      var offset = (Date.UTC(objDate.getFullYear(), objDate.getMonth(), objDate.getDate()) - Date.UTC(1900, 0, 31)) / 864e5;
+      for (i2 = 1900; i2 < 2101 && offset > 0; i2++) {
+        temp = this.lYearDays(i2);
+        offset -= temp;
+      }
+      if (offset < 0) {
+        offset += temp;
+        i2--;
+      }
+      var isTodayObj = /* @__PURE__ */ new Date();
+      var isToday = false;
+      if (isTodayObj.getFullYear() == y2 && isTodayObj.getMonth() + 1 == m2 && isTodayObj.getDate() == d2) {
+        isToday = true;
+      }
+      var nWeek = objDate.getDay();
+      var cWeek = this.nStr1[nWeek];
+      if (nWeek == 0) {
+        nWeek = 7;
+      }
+      var year = i2;
+      var leap = this.leapMonth(i2);
+      var isLeap = false;
+      for (i2 = 1; i2 < 13 && offset > 0; i2++) {
+        if (leap > 0 && i2 == leap + 1 && isLeap == false) {
+          --i2;
+          isLeap = true;
+          temp = this.leapDays(year);
+        } else {
+          temp = this.monthDays(year, i2);
+        }
+        if (isLeap == true && i2 == leap + 1) {
+          isLeap = false;
+        }
+        offset -= temp;
+      }
+      if (offset == 0 && leap > 0 && i2 == leap + 1) {
+        if (isLeap) {
+          isLeap = false;
+        } else {
+          isLeap = true;
+          --i2;
+        }
+      }
+      if (offset < 0) {
+        offset += temp;
+        --i2;
+      }
+      var month = i2;
+      var day = offset + 1;
+      var sm = m2 - 1;
+      var gzY = this.toGanZhiYear(year);
+      var firstNode = this.getTerm(y2, m2 * 2 - 1);
+      var secondNode = this.getTerm(y2, m2 * 2);
+      var gzM = this.toGanZhi((y2 - 1900) * 12 + m2 + 11);
+      if (d2 >= firstNode) {
+        gzM = this.toGanZhi((y2 - 1900) * 12 + m2 + 12);
+      }
+      var isTerm = false;
+      var Term = null;
+      if (firstNode == d2) {
+        isTerm = true;
+        Term = this.solarTerm[m2 * 2 - 2];
+      }
+      if (secondNode == d2) {
+        isTerm = true;
+        Term = this.solarTerm[m2 * 2 - 1];
+      }
+      var dayCyclical = Date.UTC(y2, sm, 1, 0, 0, 0, 0) / 864e5 + 25567 + 10;
+      var gzD = this.toGanZhi(dayCyclical + d2 - 1);
+      var astro = this.toAstro(m2, d2);
+      return { "lYear": year, "lMonth": month, "lDay": day, "Animal": this.getAnimal(year), "IMonthCn": (isLeap ? "闰" : "") + this.toChinaMonth(month), "IDayCn": this.toChinaDay(day), "cYear": y2, "cMonth": m2, "cDay": d2, "gzYear": gzY, "gzMonth": gzM, "gzDay": gzD, "isToday": isToday, "isLeap": isLeap, "nWeek": nWeek, "ncWeek": "星期" + cWeek, "isTerm": isTerm, "Term": Term, "astro": astro };
+    },
+    /**
+        * 传入农历年月日以及传入的月份是否闰月获得详细的公历、农历object信息 <=>JSON
+        * @param y  lunar year
+        * @param m  lunar month
+        * @param d  lunar day
+        * @param isLeapMonth  lunar month is leap or not.[如果是农历闰月第四个参数赋值true即可]
+        * @return JSON object
+        * @eg:__f__('log','at uni_modules/uni-calendar/components/uni-calendar/calendar.js:498',calendar.lunar2solar(1987,9,10));
+        */
+    lunar2solar: function(y2, m2, d2, isLeapMonth) {
+      var isLeapMonth = !!isLeapMonth;
+      var leapMonth = this.leapMonth(y2);
+      this.leapDays(y2);
+      if (isLeapMonth && leapMonth != m2) {
+        return -1;
+      }
+      if (y2 == 2100 && m2 == 12 && d2 > 1 || y2 == 1900 && m2 == 1 && d2 < 31) {
+        return -1;
+      }
+      var day = this.monthDays(y2, m2);
+      var _day = day;
+      if (isLeapMonth) {
+        _day = this.leapDays(y2, m2);
+      }
+      if (y2 < 1900 || y2 > 2100 || d2 > _day) {
+        return -1;
+      }
+      var offset = 0;
+      for (var i2 = 1900; i2 < y2; i2++) {
+        offset += this.lYearDays(i2);
+      }
+      var leap = 0;
+      var isAdd = false;
+      for (var i2 = 1; i2 < m2; i2++) {
+        leap = this.leapMonth(y2);
+        if (!isAdd) {
+          if (leap <= i2 && leap > 0) {
+            offset += this.leapDays(y2);
+            isAdd = true;
+          }
+        }
+        offset += this.monthDays(y2, i2);
+      }
+      if (isLeapMonth) {
+        offset += day;
+      }
+      var stmap = Date.UTC(1900, 1, 30, 0, 0, 0);
+      var calObj = new Date((offset + d2 - 31) * 864e5 + stmap);
+      var cY = calObj.getUTCFullYear();
+      var cM = calObj.getUTCMonth() + 1;
+      var cD = calObj.getUTCDate();
+      return this.solar2lunar(cY, cM, cD);
+    }
+  };
+  let Calendar$2 = class Calendar {
+    constructor({
+      date,
+      selected,
+      startDate,
+      endDate,
+      range
+    } = {}) {
+      this.date = this.getDate(/* @__PURE__ */ new Date());
+      this.selected = selected || [];
+      this.startDate = startDate;
+      this.endDate = endDate;
+      this.range = range;
+      this.cleanMultipleStatus();
+      this.weeks = {};
+    }
+    /**
+     * 设置日期
+     * @param {Object} date
+     */
+    setDate(date) {
+      this.selectDate = this.getDate(date);
+      this._getWeek(this.selectDate.fullDate);
+    }
+    /**
+     * 清理多选状态
+     */
+    cleanMultipleStatus() {
+      this.multipleStatus = {
+        before: "",
+        after: "",
+        data: []
+      };
+    }
+    /**
+     * 重置开始日期
+     */
+    resetSatrtDate(startDate) {
+      this.startDate = startDate;
+    }
+    /**
+     * 重置结束日期
+     */
+    resetEndDate(endDate) {
+      this.endDate = endDate;
+    }
+    /**
+     * 获取任意时间
+     */
+    getDate(date, AddDayCount = 0, str = "day") {
+      if (!date) {
+        date = /* @__PURE__ */ new Date();
+      }
+      if (typeof date !== "object") {
+        date = date.replace(/-/g, "/");
+      }
+      const dd = new Date(date);
+      switch (str) {
+        case "day":
+          dd.setDate(dd.getDate() + AddDayCount);
+          break;
+        case "month":
+          if (dd.getDate() === 31 && AddDayCount > 0) {
+            dd.setDate(dd.getDate() + AddDayCount);
+          } else {
+            const preMonth = dd.getMonth();
+            dd.setMonth(preMonth + AddDayCount);
+            const nextMonth = dd.getMonth();
+            if (AddDayCount < 0 && preMonth !== 0 && nextMonth - preMonth > AddDayCount) {
+              dd.setMonth(nextMonth + (nextMonth - preMonth + AddDayCount));
+            }
+            if (AddDayCount > 0 && nextMonth - preMonth > AddDayCount) {
+              dd.setMonth(nextMonth - (nextMonth - preMonth - AddDayCount));
+            }
+          }
+          break;
+        case "year":
+          dd.setFullYear(dd.getFullYear() + AddDayCount);
+          break;
+      }
+      const y2 = dd.getFullYear();
+      const m2 = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+      const d2 = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+      return {
+        fullDate: y2 + "-" + m2 + "-" + d2,
+        year: y2,
+        month: m2,
+        date: d2,
+        day: dd.getDay()
+      };
+    }
+    /**
+     * 获取上月剩余天数
+     */
+    _getLastMonthDays(firstDay, full) {
+      let dateArr = [];
+      for (let i2 = firstDay; i2 > 0; i2--) {
+        const beforeDate = new Date(full.year, full.month - 1, -i2 + 1).getDate();
+        dateArr.push({
+          date: beforeDate,
+          month: full.month - 1,
+          lunar: this.getlunar(full.year, full.month - 1, beforeDate),
+          disable: true
+        });
+      }
+      return dateArr;
+    }
+    /**
+     * 获取本月天数
+     */
+    _currentMonthDys(dateData, full) {
+      let dateArr = [];
+      let fullDate = this.date.fullDate;
+      for (let i2 = 1; i2 <= dateData; i2++) {
+        let nowDate = full.year + "-" + (full.month < 10 ? full.month : full.month) + "-" + (i2 < 10 ? "0" + i2 : i2);
+        let isDay = fullDate === nowDate;
+        let info = this.selected && this.selected.find((item) => {
+          if (this.dateEqual(nowDate, item.date)) {
+            return item;
+          }
+        });
+        let disableBefore = true;
+        let disableAfter = true;
+        if (this.startDate) {
+          disableBefore = this.dateCompare(this.startDate, nowDate);
+        }
+        if (this.endDate) {
+          disableAfter = this.dateCompare(nowDate, this.endDate);
+        }
+        let multiples = this.multipleStatus.data;
+        let checked = false;
+        let multiplesStatus = -1;
+        if (this.range) {
+          if (multiples) {
+            multiplesStatus = multiples.findIndex((item) => {
+              return this.dateEqual(item, nowDate);
+            });
+          }
+          if (multiplesStatus !== -1) {
+            checked = true;
+          }
+        }
+        let data = {
+          fullDate: nowDate,
+          year: full.year,
+          date: i2,
+          multiple: this.range ? checked : false,
+          beforeMultiple: this.dateEqual(this.multipleStatus.before, nowDate),
+          afterMultiple: this.dateEqual(this.multipleStatus.after, nowDate),
+          month: full.month,
+          lunar: this.getlunar(full.year, full.month, i2),
+          disable: !(disableBefore && disableAfter),
+          isDay
+        };
+        if (info) {
+          data.extraInfo = info;
+        }
+        dateArr.push(data);
+      }
+      return dateArr;
+    }
+    /**
+     * 获取下月天数
+     */
+    _getNextMonthDays(surplus, full) {
+      let dateArr = [];
+      for (let i2 = 1; i2 < surplus + 1; i2++) {
+        dateArr.push({
+          date: i2,
+          month: Number(full.month) + 1,
+          lunar: this.getlunar(full.year, Number(full.month) + 1, i2),
+          disable: true
+        });
+      }
+      return dateArr;
+    }
+    /**
+     * 获取当前日期详情
+     * @param {Object} date
+     */
+    getInfo(date) {
+      if (!date) {
+        date = /* @__PURE__ */ new Date();
+      }
+      const dateInfo = this.canlender.find((item) => item.fullDate === this.getDate(date).fullDate);
+      return dateInfo;
+    }
+    /**
+     * 比较时间大小
+     */
+    dateCompare(startDate, endDate) {
+      startDate = new Date(startDate.replace("-", "/").replace("-", "/"));
+      endDate = new Date(endDate.replace("-", "/").replace("-", "/"));
+      if (startDate <= endDate) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    /**
+     * 比较时间是否相等
+     */
+    dateEqual(before, after) {
+      before = new Date(before.replace("-", "/").replace("-", "/"));
+      after = new Date(after.replace("-", "/").replace("-", "/"));
+      if (before.getTime() - after.getTime() === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    /**
+     * 获取日期范围内所有日期
+     * @param {Object} begin
+     * @param {Object} end
+     */
+    geDateAll(begin, end) {
+      var arr = [];
+      var ab = begin.split("-");
+      var ae2 = end.split("-");
+      var db = /* @__PURE__ */ new Date();
+      db.setFullYear(ab[0], ab[1] - 1, ab[2]);
+      var de2 = /* @__PURE__ */ new Date();
+      de2.setFullYear(ae2[0], ae2[1] - 1, ae2[2]);
+      var unixDb = db.getTime() - 24 * 60 * 60 * 1e3;
+      var unixDe = de2.getTime() - 24 * 60 * 60 * 1e3;
+      for (var k = unixDb; k <= unixDe; ) {
+        k = k + 24 * 60 * 60 * 1e3;
+        arr.push(this.getDate(new Date(parseInt(k))).fullDate);
+      }
+      return arr;
+    }
+    /**
+     * 计算阴历日期显示
+     */
+    getlunar(year, month, date) {
+      return calendar$1.solar2lunar(year, month, date);
+    }
+    /**
+     * 设置打点
+     */
+    setSelectInfo(data, value) {
+      this.selected = value;
+      this._getWeek(data);
+    }
+    /**
+     *  获取多选状态
+     */
+    setMultiple(fullDate) {
+      let {
+        before,
+        after
+      } = this.multipleStatus;
+      if (!this.range)
+        return;
+      if (before && after) {
+        this.multipleStatus.before = fullDate;
+        this.multipleStatus.after = "";
+        this.multipleStatus.data = [];
+      } else {
+        if (!before) {
+          this.multipleStatus.before = fullDate;
+        } else {
+          this.multipleStatus.after = fullDate;
+          if (this.dateCompare(this.multipleStatus.before, this.multipleStatus.after)) {
+            this.multipleStatus.data = this.geDateAll(this.multipleStatus.before, this.multipleStatus.after);
+          } else {
+            this.multipleStatus.data = this.geDateAll(this.multipleStatus.after, this.multipleStatus.before);
+          }
+        }
+      }
+      this._getWeek(fullDate);
+    }
+    /**
+     * 获取每周数据
+     * @param {Object} dateData
+     */
+    _getWeek(dateData) {
+      const {
+        year,
+        month
+      } = this.getDate(dateData);
+      let firstDay = new Date(year, month - 1, 1).getDay();
+      let currentDay = new Date(year, month, 0).getDate();
+      let dates = {
+        lastMonthDays: this._getLastMonthDays(firstDay, this.getDate(dateData)),
+        // 上个月末尾几天
+        currentMonthDys: this._currentMonthDys(currentDay, this.getDate(dateData)),
+        // 本月天数
+        nextMonthDays: [],
+        // 下个月开始几天
+        weeks: []
+      };
+      let canlender = [];
+      const surplus = 42 - (dates.lastMonthDays.length + dates.currentMonthDys.length);
+      dates.nextMonthDays = this._getNextMonthDays(surplus, this.getDate(dateData));
+      canlender = canlender.concat(dates.lastMonthDays, dates.currentMonthDys, dates.nextMonthDays);
+      let weeks = {};
+      for (let i2 = 0; i2 < canlender.length; i2++) {
+        if (i2 % 7 === 0) {
+          weeks[parseInt(i2 / 7)] = new Array(7);
+        }
+        weeks[parseInt(i2 / 7)][i2 % 7] = canlender[i2];
+      }
+      this.canlender = canlender;
+      this.weeks = weeks;
+    }
+    //静态方法
+    // static init(date) {
+    // 	if (!this.instance) {
+    // 		this.instance = new Calendar(date);
+    // 	}
+    // 	return this.instance;
+    // }
+  };
+  const en$5 = {
+    "uni-calender.ok": "ok",
+    "uni-calender.cancel": "cancel",
+    "uni-calender.today": "today",
+    "uni-calender.MON": "MON",
+    "uni-calender.TUE": "TUE",
+    "uni-calender.WED": "WED",
+    "uni-calender.THU": "THU",
+    "uni-calender.FRI": "FRI",
+    "uni-calender.SAT": "SAT",
+    "uni-calender.SUN": "SUN"
+  };
+  const zhHans$5 = {
+    "uni-calender.ok": "确定",
+    "uni-calender.cancel": "取消",
+    "uni-calender.today": "今日",
+    "uni-calender.SUN": "日",
+    "uni-calender.MON": "一",
+    "uni-calender.TUE": "二",
+    "uni-calender.WED": "三",
+    "uni-calender.THU": "四",
+    "uni-calender.FRI": "五",
+    "uni-calender.SAT": "六"
+  };
+  const zhHant$5 = {
+    "uni-calender.ok": "確定",
+    "uni-calender.cancel": "取消",
+    "uni-calender.today": "今日",
+    "uni-calender.SUN": "日",
+    "uni-calender.MON": "一",
+    "uni-calender.TUE": "二",
+    "uni-calender.WED": "三",
+    "uni-calender.THU": "四",
+    "uni-calender.FRI": "五",
+    "uni-calender.SAT": "六"
+  };
+  const i18nMessages$1 = {
+    en: en$5,
+    "zh-Hans": zhHans$5,
+    "zh-Hant": zhHant$5
+  };
+  const { t: t$8 } = initVueI18n(i18nMessages$1);
+  const _sfc_main$3g = {
+    emits: ["change"],
+    props: {
+      weeks: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
+      calendar: {
+        type: Object,
+        default: () => {
+          return {};
+        }
+      },
+      selected: {
+        type: Array,
+        default: () => {
+          return [];
+        }
+      },
+      lunar: {
+        type: Boolean,
+        default: false
+      }
+    },
+    computed: {
+      todayText() {
+        return t$8("uni-calender.today");
+      }
+    },
+    methods: {
+      choiceDate(weeks) {
+        this.$emit("change", weeks);
+      }
+    }
+  };
+  function _sfc_render$3f(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-calendar-item__weeks-box", {
+          "uni-calendar-item--disable": $props.weeks.disable,
+          "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
+          "uni-calendar-item--checked": $props.calendar.fullDate === $props.weeks.fullDate && !$props.weeks.isDay,
+          "uni-calendar-item--before-checked": $props.weeks.beforeMultiple,
+          "uni-calendar-item--multiple": $props.weeks.multiple,
+          "uni-calendar-item--after-checked": $props.weeks.afterMultiple
+        }]),
+        onClick: _cache[0] || (_cache[0] = ($event) => $options.choiceDate($props.weeks))
+      },
+      [
+        vue.createElementVNode("view", { class: "uni-calendar-item__weeks-box-item" }, [
+          $props.selected && $props.weeks.extraInfo ? (vue.openBlock(), vue.createElementBlock("text", {
+            key: 0,
+            class: "uni-calendar-item__weeks-box-circle"
+          })) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode(
+            "text",
+            {
+              class: vue.normalizeClass(["uni-calendar-item__weeks-box-text", {
+                "uni-calendar-item--isDay-text": $props.weeks.isDay,
+                "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
+                "uni-calendar-item--checked": $props.calendar.fullDate === $props.weeks.fullDate && !$props.weeks.isDay,
+                "uni-calendar-item--before-checked": $props.weeks.beforeMultiple,
+                "uni-calendar-item--multiple": $props.weeks.multiple,
+                "uni-calendar-item--after-checked": $props.weeks.afterMultiple,
+                "uni-calendar-item--disable": $props.weeks.disable
+              }])
+            },
+            vue.toDisplayString($props.weeks.date),
+            3
+            /* TEXT, CLASS */
+          ),
+          !$props.lunar && !$props.weeks.extraInfo && $props.weeks.isDay ? (vue.openBlock(), vue.createElementBlock(
+            "text",
+            {
+              key: 1,
+              class: vue.normalizeClass(["uni-calendar-item__weeks-lunar-text", {
+                "uni-calendar-item--isDay-text": $props.weeks.isDay,
+                "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
+                "uni-calendar-item--checked": $props.calendar.fullDate === $props.weeks.fullDate && !$props.weeks.isDay,
+                "uni-calendar-item--before-checked": $props.weeks.beforeMultiple,
+                "uni-calendar-item--multiple": $props.weeks.multiple,
+                "uni-calendar-item--after-checked": $props.weeks.afterMultiple
+              }])
+            },
+            vue.toDisplayString($options.todayText),
+            3
+            /* TEXT, CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $props.lunar && !$props.weeks.extraInfo ? (vue.openBlock(), vue.createElementBlock(
+            "text",
+            {
+              key: 2,
+              class: vue.normalizeClass(["uni-calendar-item__weeks-lunar-text", {
+                "uni-calendar-item--isDay-text": $props.weeks.isDay,
+                "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
+                "uni-calendar-item--checked": $props.calendar.fullDate === $props.weeks.fullDate && !$props.weeks.isDay,
+                "uni-calendar-item--before-checked": $props.weeks.beforeMultiple,
+                "uni-calendar-item--multiple": $props.weeks.multiple,
+                "uni-calendar-item--after-checked": $props.weeks.afterMultiple,
+                "uni-calendar-item--disable": $props.weeks.disable
+              }])
+            },
+            vue.toDisplayString($props.weeks.isDay ? $options.todayText : $props.weeks.lunar.IDayCn === "初一" ? $props.weeks.lunar.IMonthCn : $props.weeks.lunar.IDayCn),
+            3
+            /* TEXT, CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $props.weeks.extraInfo && $props.weeks.extraInfo.info ? (vue.openBlock(), vue.createElementBlock(
+            "text",
+            {
+              key: 3,
+              class: vue.normalizeClass(["uni-calendar-item__weeks-lunar-text", {
+                "uni-calendar-item--extra": $props.weeks.extraInfo.info,
+                "uni-calendar-item--isDay-text": $props.weeks.isDay,
+                "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
+                "uni-calendar-item--checked": $props.calendar.fullDate === $props.weeks.fullDate && !$props.weeks.isDay,
+                "uni-calendar-item--before-checked": $props.weeks.beforeMultiple,
+                "uni-calendar-item--multiple": $props.weeks.multiple,
+                "uni-calendar-item--after-checked": $props.weeks.afterMultiple,
+                "uni-calendar-item--disable": $props.weeks.disable
+              }])
+            },
+            vue.toDisplayString($props.weeks.extraInfo.info),
+            3
+            /* TEXT, CLASS */
+          )) : vue.createCommentVNode("v-if", true)
+        ])
+      ],
+      2
+      /* CLASS */
+    );
+  }
+  const CalendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__scopeId", "data-v-65626c58"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item.vue"]]);
+  const { t: t$7 } = initVueI18n(i18nMessages$1);
+  const _sfc_main$3f = {
+    components: {
+      CalendarItem
+    },
+    emits: ["close", "confirm", "change", "monthSwitch"],
+    props: {
+      date: {
+        type: String,
+        default: ""
+      },
+      selected: {
+        type: Array,
+        default() {
+          return [];
+        }
+      },
+      lunar: {
+        type: Boolean,
+        default: false
+      },
+      startDate: {
+        type: String,
+        default: ""
+      },
+      endDate: {
+        type: String,
+        default: ""
+      },
+      range: {
+        type: Boolean,
+        default: false
+      },
+      insert: {
+        type: Boolean,
+        default: true
+      },
+      showMonth: {
+        type: Boolean,
+        default: true
+      },
+      clearDate: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      return {
+        show: false,
+        weeks: [],
+        calendar: {},
+        nowDate: "",
+        aniMaskShow: false
+      };
+    },
+    computed: {
+      /**
+       * for i18n
+       */
+      okText() {
+        return t$7("uni-calender.ok");
+      },
+      cancelText() {
+        return t$7("uni-calender.cancel");
+      },
+      todayText() {
+        return t$7("uni-calender.today");
+      },
+      monText() {
+        return t$7("uni-calender.MON");
+      },
+      TUEText() {
+        return t$7("uni-calender.TUE");
+      },
+      WEDText() {
+        return t$7("uni-calender.WED");
+      },
+      THUText() {
+        return t$7("uni-calender.THU");
+      },
+      FRIText() {
+        return t$7("uni-calender.FRI");
+      },
+      SATText() {
+        return t$7("uni-calender.SAT");
+      },
+      SUNText() {
+        return t$7("uni-calender.SUN");
+      }
+    },
+    watch: {
+      date(newVal) {
+        this.init(newVal);
+      },
+      startDate(val) {
+        this.cale.resetSatrtDate(val);
+        this.cale.setDate(this.nowDate.fullDate);
+        this.weeks = this.cale.weeks;
+      },
+      endDate(val) {
+        this.cale.resetEndDate(val);
+        this.cale.setDate(this.nowDate.fullDate);
+        this.weeks = this.cale.weeks;
+      },
+      selected(newVal) {
+        this.cale.setSelectInfo(this.nowDate.fullDate, newVal);
+        this.weeks = this.cale.weeks;
+      }
+    },
+    created() {
+      this.cale = new Calendar$2({
+        selected: this.selected,
+        startDate: this.startDate,
+        endDate: this.endDate,
+        range: this.range
+      });
+      this.init(this.date);
+    },
+    methods: {
+      // 取消穿透
+      clean() {
+      },
+      bindDateChange(e2) {
+        const value = e2.detail.value + "-1";
+        this.setDate(value);
+        const { year, month } = this.cale.getDate(value);
+        this.$emit("monthSwitch", {
+          year,
+          month
+        });
+      },
+      /**
+       * 初始化日期显示
+       * @param {Object} date
+       */
+      init(date) {
+        this.cale.setDate(date);
+        this.weeks = this.cale.weeks;
+        this.nowDate = this.calendar = this.cale.getInfo(date);
+      },
+      /**
+       * 打开日历弹窗
+       */
+      open() {
+        if (this.clearDate && !this.insert) {
+          this.cale.cleanMultipleStatus();
+          this.init(this.date);
+        }
+        this.show = true;
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.aniMaskShow = true;
+          }, 50);
+        });
+      },
+      /**
+       * 关闭日历弹窗
+       */
+      close() {
+        this.aniMaskShow = false;
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.show = false;
+            this.$emit("close");
+          }, 300);
+        });
+      },
+      /**
+       * 确认按钮
+       */
+      confirm() {
+        this.setEmit("confirm");
+        this.close();
+      },
+      /**
+       * 变化触发
+       */
+      change() {
+        if (!this.insert)
+          return;
+        this.setEmit("change");
+      },
+      /**
+       * 选择月份触发
+       */
+      monthSwitch() {
+        let {
+          year,
+          month
+        } = this.nowDate;
+        this.$emit("monthSwitch", {
+          year,
+          month: Number(month)
+        });
+      },
+      /**
+       * 派发事件
+       * @param {Object} name
+       */
+      setEmit(name) {
+        let {
+          year,
+          month,
+          date,
+          fullDate,
+          lunar,
+          extraInfo
+        } = this.calendar;
+        this.$emit(name, {
+          range: this.cale.multipleStatus,
+          year,
+          month,
+          date,
+          fulldate: fullDate,
+          lunar,
+          extraInfo: extraInfo || {}
+        });
+      },
+      /**
+       * 选择天触发
+       * @param {Object} weeks
+       */
+      choiceDate(weeks) {
+        if (weeks.disable)
+          return;
+        this.calendar = weeks;
+        this.cale.setMultiple(this.calendar.fullDate);
+        this.weeks = this.cale.weeks;
+        this.change();
+      },
+      /**
+       * 回到今天
+       */
+      backToday() {
+        const nowYearMonth = `${this.nowDate.year}-${this.nowDate.month}`;
+        const date = this.cale.getDate(/* @__PURE__ */ new Date());
+        const todayYearMonth = `${date.year}-${date.month}`;
+        this.init(date.fullDate);
+        if (nowYearMonth !== todayYearMonth) {
+          this.monthSwitch();
+        }
+        this.change();
+      },
+      /**
+       * 上个月
+       */
+      pre() {
+        const preDate = this.cale.getDate(this.nowDate.fullDate, -1, "month").fullDate;
+        this.setDate(preDate);
+        this.monthSwitch();
+      },
+      /**
+       * 下个月
+       */
+      next() {
+        const nextDate = this.cale.getDate(this.nowDate.fullDate, 1, "month").fullDate;
+        this.setDate(nextDate);
+        this.monthSwitch();
+      },
+      /**
+       * 设置日期
+       * @param {Object} date
+       */
+      setDate(date) {
+        this.cale.setDate(date);
+        this.weeks = this.cale.weeks;
+        this.nowDate = this.cale.getInfo(date);
+      }
+    }
+  };
+  function _sfc_render$3e(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_calendar_item = vue.resolveComponent("calendar-item");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-calendar" }, [
+      !$props.insert && $data.show ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 0,
+          class: vue.normalizeClass(["uni-calendar__mask", { "uni-calendar--mask-show": $data.aniMaskShow }]),
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.clean && $options.clean(...args))
+        },
+        null,
+        2
+        /* CLASS */
+      )) : vue.createCommentVNode("v-if", true),
+      $props.insert || $data.show ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 1,
+          class: vue.normalizeClass(["uni-calendar__content", { "uni-calendar--fixed": !$props.insert, "uni-calendar--ani-show": $data.aniMaskShow }])
+        },
+        [
+          !$props.insert ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "uni-calendar__header uni-calendar--fixed-top"
+          }, [
+            vue.createElementVNode("view", {
+              class: "uni-calendar__header-btn-box",
+              onClick: _cache[1] || (_cache[1] = (...args) => $options.close && $options.close(...args))
+            }, [
+              vue.createElementVNode(
+                "text",
+                { class: "uni-calendar__header-text uni-calendar--fixed-width" },
+                vue.toDisplayString($options.cancelText),
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", {
+              class: "uni-calendar__header-btn-box",
+              onClick: _cache[2] || (_cache[2] = (...args) => $options.confirm && $options.confirm(...args))
+            }, [
+              vue.createElementVNode(
+                "text",
+                { class: "uni-calendar__header-text uni-calendar--fixed-width" },
+                vue.toDisplayString($options.okText),
+                1
+                /* TEXT */
+              )
+            ])
+          ])) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode("view", { class: "uni-calendar__header" }, [
+            vue.createElementVNode("view", {
+              class: "uni-calendar__header-btn-box",
+              onClick: _cache[3] || (_cache[3] = vue.withModifiers((...args) => $options.pre && $options.pre(...args), ["stop"]))
+            }, [
+              vue.createElementVNode("view", { class: "uni-calendar__header-btn uni-calendar--left" })
+            ]),
+            vue.createElementVNode("picker", {
+              mode: "date",
+              value: $props.date,
+              fields: "month",
+              onChange: _cache[4] || (_cache[4] = (...args) => $options.bindDateChange && $options.bindDateChange(...args))
+            }, [
+              vue.createElementVNode(
+                "text",
+                { class: "uni-calendar__header-text" },
+                vue.toDisplayString(($data.nowDate.year || "") + " / " + ($data.nowDate.month || "")),
+                1
+                /* TEXT */
+              )
+            ], 40, ["value"]),
+            vue.createElementVNode("view", {
+              class: "uni-calendar__header-btn-box",
+              onClick: _cache[5] || (_cache[5] = vue.withModifiers((...args) => $options.next && $options.next(...args), ["stop"]))
+            }, [
+              vue.createElementVNode("view", { class: "uni-calendar__header-btn uni-calendar--right" })
+            ]),
+            vue.createElementVNode(
+              "text",
+              {
+                class: "uni-calendar__backtoday",
+                onClick: _cache[6] || (_cache[6] = (...args) => $options.backToday && $options.backToday(...args))
+              },
+              vue.toDisplayString($options.todayText),
+              1
+              /* TEXT */
+            )
+          ]),
+          vue.createElementVNode("view", { class: "uni-calendar__box" }, [
+            $props.showMonth ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "uni-calendar__box-bg"
+            }, [
+              vue.createElementVNode(
+                "text",
+                { class: "uni-calendar__box-bg-text" },
+                vue.toDisplayString($data.nowDate.month),
+                1
+                /* TEXT */
+              )
+            ])) : vue.createCommentVNode("v-if", true),
+            vue.createElementVNode("view", { class: "uni-calendar__weeks" }, [
+              vue.createElementVNode("view", { class: "uni-calendar__weeks-day" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-calendar__weeks-day-text" },
+                  vue.toDisplayString($options.SUNText),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "uni-calendar__weeks-day" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-calendar__weeks-day-text" },
+                  vue.toDisplayString($options.monText),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "uni-calendar__weeks-day" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-calendar__weeks-day-text" },
+                  vue.toDisplayString($options.TUEText),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "uni-calendar__weeks-day" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-calendar__weeks-day-text" },
+                  vue.toDisplayString($options.WEDText),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "uni-calendar__weeks-day" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-calendar__weeks-day-text" },
+                  vue.toDisplayString($options.THUText),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "uni-calendar__weeks-day" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-calendar__weeks-day-text" },
+                  vue.toDisplayString($options.FRIText),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "uni-calendar__weeks-day" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-calendar__weeks-day-text" },
+                  vue.toDisplayString($options.SATText),
+                  1
+                  /* TEXT */
+                )
+              ])
+            ]),
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($data.weeks, (item, weekIndex) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  class: "uni-calendar__weeks",
+                  key: weekIndex
+                }, [
+                  (vue.openBlock(true), vue.createElementBlock(
+                    vue.Fragment,
+                    null,
+                    vue.renderList(item, (weeks, weeksIndex) => {
+                      return vue.openBlock(), vue.createElementBlock("view", {
+                        class: "uni-calendar__weeks-item",
+                        key: weeksIndex
+                      }, [
+                        vue.createVNode(_component_calendar_item, {
+                          class: "uni-calendar-item--hook",
+                          weeks,
+                          calendar: $data.calendar,
+                          selected: $props.selected,
+                          lunar: $props.lunar,
+                          onChange: $options.choiceDate
+                        }, null, 8, ["weeks", "calendar", "selected", "lunar", "onChange"])
+                      ]);
+                    }),
+                    128
+                    /* KEYED_FRAGMENT */
+                  ))
+                ]);
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ])
+        ],
+        2
+        /* CLASS */
+      )) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-b6ab2cfb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar.vue"]]);
+  function getDate$3(date, AddDayCount = 0) {
+    if (!date) {
+      date = /* @__PURE__ */ new Date();
+    }
+    if (typeof date !== "object") {
+      date = date.replace(/-/g, "/");
+    }
+    const dd = new Date(date);
+    dd.setDate(dd.getDate() + AddDayCount);
+    const y2 = dd.getFullYear();
+    const m2 = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+    const d2 = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+    return {
+      fullDate: y2 + "-" + m2 + "-" + d2,
+      year: y2,
+      month: m2,
+      date: d2,
+      day: dd.getDay()
+    };
+  }
+  const _sfc_main$3e = {
+    mixins: [commonJs],
+    props: {},
+    components: {},
+    data() {
+      return {
+        showCalendar: false,
+        info: {
+          lunar: true,
+          range: true,
+          insert: false,
+          selected: []
+        }
+      };
+    },
+    onLoad() {
+    },
+    onReady() {
+      this.$nextTick(() => {
+        this.showCalendar = true;
+      });
+      setTimeout(() => {
+        this.info.date = getDate$3(/* @__PURE__ */ new Date(), -30).fullDate;
+        this.info.startDate = getDate$3(/* @__PURE__ */ new Date(), -60).fullDate;
+        this.info.endDate = getDate$3(/* @__PURE__ */ new Date(), 30).fullDate;
+        this.info.selected = [
+          {
+            date: getDate$3(/* @__PURE__ */ new Date(), -3).fullDate,
+            info: "打卡"
+          },
+          {
+            date: getDate$3(/* @__PURE__ */ new Date(), -2).fullDate,
+            info: "签到",
+            data: {
+              custom: "自定义信息",
+              name: "自定义消息头"
+            }
+          },
+          {
+            date: getDate$3(/* @__PURE__ */ new Date(), -1).fullDate,
+            info: "已打卡"
+          }
+        ];
+        formatAppLog("log", "at pages/page/study/calendar.vue:93", this.info);
+      }, 2e3);
+      formatAppLog("log", "at pages/page/study/calendar.vue:95", "系统状态栏高度：", uni.getSystemInfoSync().statusBarHeight / 16 + "rem");
+    },
+    onShow() {
+      try {
+        plus.navigator.setFullscreen(true);
+      } catch (e2) {
+      }
+      this.pageOnShowSet({
+        uniHide: "all",
+        orientation: "landscape"
+      }).then((data) => {
+        this.setRootFontSize({
+          orientation: "landscape"
+        });
+      });
+    },
+    onHide() {
+    },
+    onUnload() {
+      try {
+        plus.navigator.setFullscreen(false);
+      } catch (e2) {
+      }
+    },
+    created() {
+    },
+    mounted() {
+    },
+    computed: {},
+    methods: {
+      open() {
+        this.$refs.calendar.open();
+      },
+      close() {
+        formatAppLog("log", "at pages/page/study/calendar.vue:137", "弹窗关闭");
+      },
+      change(e2) {
+        formatAppLog("log", "at pages/page/study/calendar.vue:140", "change 返回:", e2);
+        if (this.info.selected.length > 5)
+          return;
+        this.info.selected.push({
+          date: e2.fulldate,
+          info: "打卡"
+        });
+      },
+      confirm(e2) {
+        formatAppLog("log", "at pages/page/study/calendar.vue:149", "confirm 返回:", e2);
+      },
+      monthSwitch(e2) {
+        formatAppLog("log", "at pages/page/study/calendar.vue:152", "monthSwitchs 返回:", e2);
+      }
+    }
+  };
+  function _sfc_render$3d(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_meta = resolveEasycom(vue.resolveDynamicComponent("page-meta"), __easycom_0$6);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_uni_calendar = resolveEasycom(vue.resolveDynamicComponent("uni-calendar"), __easycom_2$9);
+    return vue.openBlock(), vue.createElementBlock(
+      vue.Fragment,
+      null,
+      [
+        vue.createVNode(_component_page_meta, {
+          modelValue: _ctx.fontSize,
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.fontSize = $event),
+          "page-font-size": _ctx.fontSize + "px",
+          "root-font-size": _ctx.fontSize + "px"
+        }, null, 8, ["modelValue", "page-font-size", "root-font-size"]),
+        vue.createElementVNode("view", { class: "page-wrap" }, [
+          vue.createVNode(_component_page_head, {
+            title: _ctx.pageHeadTitle,
+            isBack: true,
+            background: "linear-gradient(to right,#FFDA8F 0%, #FFDA8F 40%, #F4F4F4 100%)",
+            systemTaskbar: false
+          }, null, 8, ["title", "background"]),
+          vue.createElementVNode(
+            "view",
+            { class: "calendar-back" },
+            vue.toDisplayString(_ctx.fontSize),
+            1
+            /* TEXT */
+          ),
+          $data.showCalendar ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "calendar-wrap"
+          }, [
+            vue.createElementVNode("view", { class: "" }, [
+              vue.createCommentVNode(" 插入模式 "),
+              vue.createVNode(_component_uni_calendar, {
+                class: "uni-calendar--hook",
+                selected: $data.info.selected,
+                showMonth: false,
+                onChange: $options.change,
+                onMonthSwitch: $options.monthSwitch
+              }, null, 8, ["selected", "onChange", "onMonthSwitch"])
+            ])
+          ])) : vue.createCommentVNode("v-if", true)
+        ])
+      ],
+      64
+      /* STABLE_FRAGMENT */
+    );
+  }
+  const PagesPageStudyCalendar = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__scopeId", "data-v-3f5d8074"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/calendar.vue"]]);
   const _sfc_main$3d = {
     mixins: [commonJs],
     props: {},
@@ -24115,7 +26298,7 @@ ${o3}
     methods: {}
   };
   function _sfc_render$3c(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: $data.pageHeadTitle,
@@ -24542,7 +26725,7 @@ ${o3}
     }
   };
   function _sfc_render$3b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: $data.pageHeadTitle,
@@ -26581,8 +28764,12 @@ ${o3}
         pageHeadTitle: "",
         defaultHeadPic: store.state.defaultHeadPic,
         //默认头像
-        // 柱状图数据
-        chartData: {},
+        overallReport: {},
+        //整体报告
+        growthRate: {},
+        //对比上周涨幅
+        dailyReport: {},
+        //每日数据(柱状图数据)
         // 柱状图设置
         barChartOpts: {
           color: [
@@ -26596,7 +28783,7 @@ ${o3}
             "#9A60B4",
             "#ea7ccc"
           ],
-          padding: [15, 15, 0, 5],
+          padding: [30, 15, 10, 5],
           enableScroll: false,
           legend: {
             show: false
@@ -26622,6 +28809,8 @@ ${o3}
             }
           }
         },
+        // 雷达图数据
+        radarChart: {},
         // 雷达图设置
         RadarChartOpts: {
           legend: {
@@ -26634,17 +28823,10 @@ ${o3}
             }
           }
         },
-        // 雷达图数据
-        chartsDataRadar1: {
-          "categories": ["计算", "逻辑", "应用", "速度", "空间"],
-          "series": [{
-            "name": "同龄水平",
-            "data": [90, 110, 165, 195, 187, 172]
-          }, {
-            "name": "当前能力",
-            "data": [190, 210, 105, 35, 27, 102]
-          }]
-        },
+        // 建议提升和其他
+        suggestionImproveOther: {},
+        // 家长页面统计
+        parent: {},
         suggestion: [
           {
             icon: "",
@@ -26688,7 +28870,65 @@ ${o3}
     },
     onReady() {
       this.verifLogin().then((data) => {
-        this.getServerData();
+        this.commonRequest({
+          url: "/api/report/parent"
+        }).then((res2) => {
+          if (res2.code == 0) {
+            formatAppLog("log", "at pages/page/parent/parent.vue:273", "获取家长版报告数据(统计图)：", res2);
+            try {
+              this.overallReport = res2.data.overallReport;
+              this.growthRate = res2.data.growthRate;
+              this.dailyReport = res2.data.dailyReport;
+              this.radarChart = res2.data.radarChart || {};
+            } catch (e2) {
+            }
+            this.parent = res2.data;
+          } else {
+            uni.showToast({
+              title: res2.message || "获取家长版报告数据(统计图)失败!",
+              icon: "none"
+            });
+          }
+        }).catch((error) => {
+          this.consoleLog("获取家长版报告数据(统计图)失败：：", error);
+        });
+        this.commonRequest({
+          url: "/api/report/getAdviceAndCurrenciesAndPublish"
+        }).then((res2) => {
+          if (res2.code == 0) {
+            formatAppLog("log", "at pages/page/parent/parent.vue:296", "获取提升建议和其他：", res2);
+            try {
+              let _currencies = {};
+              res2.data.currencies.current.forEach((item) => {
+                item.type == 1 && (_currencies.star = item.quantity);
+                item.type == 2 && (_currencies.stone = item.quantity);
+                item.type == 3 && (_currencies.dust = item.quantity);
+              });
+              store.state.userInfo.info.currencies = _currencies;
+              this.userInfo = {
+                ...this.userInfo,
+                ...store.state.userInfo.info
+              };
+              res2.data.currencies._current = _currencies;
+              let addCurrencies = [];
+              res2.data.currencies.newlyAdded.forEach((item) => {
+                addCurrencies.push((item.quantity > 0 ? "+" + item.quantity : item.quantity) + item.name);
+              });
+              res2.data.currencies._newlyAdded = {
+                text: addCurrencies.join("，")
+              };
+              this.suggestionImproveOther = res2.data;
+            } catch (e2) {
+            }
+          } else {
+            uni.showToast({
+              title: res2.message || "获取提升建议和其他失败!",
+              icon: "none"
+            });
+          }
+        }).catch((error) => {
+          this.consoleLog("获取提升建议和其他失败：：", error);
+        });
       }).catch((error) => {
         this.consoleLog("没有登录：：", error);
       });
@@ -26705,22 +28945,19 @@ ${o3}
     mounted() {
     },
     methods: {
-      getServerData() {
-        setTimeout(() => {
-          let res2 = {
-            categories: ["一", "二", "三", "四", "五", "六", "日"],
-            series: [{
-              name: "习题数",
-              data: [35, 36, 31, 33, 13, 34, 3]
-            }]
-          };
-          this.chartData = JSON.parse(JSON.stringify(res2));
-        }, 500);
+      suggestionTetx(num) {
+        if (num > 0 && num <= 50) {
+          return "建议练习";
+        } else if (num > 50 && num <= 80) {
+          return "概念巩固";
+        } else if (num > 80 && num <= 100) {
+          return "继续提升";
+        }
       }
     }
   };
   function _sfc_render$32(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_1$k);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -26805,45 +29042,72 @@ ${o3}
             }),
             vue.createElementVNode("view", { class: "report-info-wrap" }, [
               vue.createElementVNode("view", { class: "report-info" }, [
-                vue.createElementVNode("h4", { class: "info-text" }, "2.5小时"),
+                vue.createElementVNode(
+                  "h4",
+                  { class: "info-text" },
+                  vue.toDisplayString($data.overallReport.studyMinutes) + "小时",
+                  1
+                  /* TEXT */
+                ),
                 vue.createElementVNode("h4", {
                   class: "info-rowth-rate",
-                  state: "1"
-                }, "12%")
+                  state: $data.growthRate.studyMinutes > 0 ? "1" : "2"
+                }, vue.toDisplayString($data.growthRate.studyMinutes) + "%", 9, ["state"])
               ]),
               vue.createElementVNode("view", { class: "report-info" }, [
-                vue.createElementVNode("h4", { class: "info-text" }, "18/20"),
+                vue.createElementVNode(
+                  "h4",
+                  { class: "info-text" },
+                  vue.toDisplayString($data.overallReport.completedMissions) + "/- ",
+                  1
+                  /* TEXT */
+                ),
                 vue.createElementVNode("h4", {
                   class: "info-rowth-rate",
-                  state: "2"
-                }, "5%")
+                  state: $data.growthRate.completedMissions > 0 ? "1" : "2"
+                }, vue.toDisplayString($data.growthRate.completedMissions) + "%", 9, ["state"])
               ])
             ]),
             vue.createElementVNode("view", { class: "report-info-wrap" }, [
               vue.createElementVNode("view", { class: "report-info" }, [
-                vue.createElementVNode("h4", { class: "info-text" }, "86题"),
+                vue.createElementVNode(
+                  "h4",
+                  { class: "info-text" },
+                  vue.toDisplayString($data.overallReport.questionCount) + "题",
+                  1
+                  /* TEXT */
+                ),
                 vue.createElementVNode("h4", {
                   class: "info-rowth-rate",
-                  state: "1"
-                }, "9%")
+                  state: $data.growthRate.questionCount > 0 ? "1" : "2"
+                }, vue.toDisplayString($data.growthRate.questionCount) + "%", 9, ["state"])
               ]),
               vue.createElementVNode("view", { class: "report-info" }, [
-                vue.createElementVNode("h4", { class: "info-text" }, "92"),
+                vue.createElementVNode(
+                  "h4",
+                  { class: "info-text" },
+                  vue.toDisplayString($data.overallReport.correctRate),
+                  1
+                  /* TEXT */
+                ),
                 vue.createElementVNode("h4", {
                   class: "info-rowth-rate",
-                  state: "2"
-                }, "7%")
+                  state: $data.growthRate.correctRate > 0 ? "1" : "2"
+                }, vue.toDisplayString($data.growthRate.correctRate) + "%", 9, ["state"])
               ])
             ]),
             vue.createElementVNode("view", { class: "trend-title" }, [
               vue.createElementVNode("span", null, "每日平均"),
-              vue.createElementVNode("span", { state: "1" }, "15%")
+              vue.createElementVNode("span", {
+                class: "info-rowth-rate",
+                state: $data.dailyReport.fluctuation > 0 ? "1" : "2"
+              }, vue.toDisplayString($data.dailyReport.fluctuation) + "%", 9, ["state"])
             ]),
             vue.createElementVNode("view", { class: "charts-box" }, [
               vue.createVNode(_component_qiun_data_charts, {
                 type: "column",
                 opts: $data.barChartOpts,
-                chartData: $data.chartData
+                chartData: $data.dailyReport
               }, null, 8, ["opts", "chartData"])
             ])
           ])
@@ -26864,7 +29128,7 @@ ${o3}
                 vue.createVNode(_component_qiun_data_charts, {
                   type: "radar",
                   opts: $data.RadarChartOpts,
-                  chartData: $data.chartsDataRadar1
+                  chartData: $data.radarChart
                 }, null, 8, ["opts", "chartData"])
               ]),
               vue.createElementVNode("view", {
@@ -26892,11 +29156,15 @@ ${o3}
                 }, "全部")
               ])
             ]),
+            $data.suggestionImproveOther.categories.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "no-list-tip"
+            }, "暂无数据")) : vue.createCommentVNode("v-if", true),
             vue.createElementVNode("ul", { class: "suggestion-list-wrap" }, [
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
-                vue.renderList($data.suggestion, (item) => {
+                vue.renderList($data.suggestionImproveOther.categories, (item) => {
                   return vue.openBlock(), vue.createElementBlock("li", { class: "suggestion-list" }, [
                     vue.createElementVNode("image", {
                       class: "item-icon",
@@ -26906,14 +29174,14 @@ ${o3}
                       vue.createElementVNode(
                         "h3",
                         { class: "info-title" },
-                        vue.toDisplayString(item.suggestion),
+                        vue.toDisplayString(item.name),
                         1
                         /* TEXT */
                       ),
                       vue.createElementVNode(
                         "view",
                         { class: "info-text" },
-                        "正确率：" + vue.toDisplayString(item.accuracy) + "% | " + vue.toDisplayString(item.suggestion),
+                        "正确率：" + vue.toDisplayString(item.accuracy) + "% | " + vue.toDisplayString($options.suggestionTetx(item.accuracy)),
                         1
                         /* TEXT */
                       ),
@@ -26923,7 +29191,7 @@ ${o3}
                           class: "info-btn",
                           onClick: _cache[5] || (_cache[5] = ($event) => _ctx.jumpPage({ url: "" }))
                         },
-                        vue.toDisplayString(item.btnTitle),
+                        vue.toDisplayString(item.btnTitle) + "专项学习",
                         1
                         /* TEXT */
                       )
@@ -26963,11 +29231,29 @@ ${o3}
             vue.createElementVNode("view", { class: "statistics-wrap" }, [
               vue.createElementVNode("view", { class: "statistics" }, [
                 vue.createElementVNode("span", null, "本周获取"),
-                vue.createElementVNode("span", null, "+120智慧星")
+                vue.createElementVNode(
+                  "span",
+                  null,
+                  vue.toDisplayString($data.suggestionImproveOther.currencies._newlyAdded.text),
+                  1
+                  /* TEXT */
+                )
               ]),
               vue.createElementVNode("view", { class: "statistics" }, [
-                vue.createElementVNode("span", null, "可兑换课程"),
-                vue.createElementVNode("span", null, "2个")
+                vue.createElementVNode(
+                  "span",
+                  null,
+                  "可兑换" + vue.toDisplayString($data.suggestionImproveOther.currencies.exchanges.name),
+                  1
+                  /* TEXT */
+                ),
+                vue.createElementVNode(
+                  "span",
+                  null,
+                  vue.toDisplayString($data.suggestionImproveOther.currencies.exchanges.quantity) + "个",
+                  1
+                  /* TEXT */
+                )
               ])
             ])
           ]),
@@ -27207,7 +29493,7 @@ ${o3}
     }
   };
   function _sfc_render$31(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -27738,7 +30024,7 @@ ${o3}
     }
   };
   function _sfc_render$2$(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -28005,7 +30291,7 @@ ${o3}
     }
   };
   function _sfc_render$2_(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -28272,7 +30558,7 @@ ${o3}
     }
   };
   function _sfc_render$2Z(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: $data.pageHeadTitle,
@@ -28541,9 +30827,9 @@ ${o3}
     }
   };
   function _sfc_render$2X(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_1$m);
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$9);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$a);
     const _component_uni_link = resolveEasycom(vue.resolveDynamicComponent("uni-link"), __easycom_1$j);
     const _component_uni_data_checkbox = resolveEasycom(vue.resolveDynamicComponent("uni-data-checkbox"), __easycom_1$p);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_7);
@@ -28674,7 +30960,7 @@ ${o3}
     }
   };
   function _sfc_render$2W(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "view" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -28875,7 +31161,7 @@ ${o3}
     }
   };
   function _sfc_render$2V(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "scroll-view,区域滚动视图" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -28972,7 +31258,7 @@ ${o3}
     }
   };
   function _sfc_render$2U(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "swiper,可滑动视图" }),
       vue.createElementVNode("view", { class: "uni-margin-wrap" }, [
@@ -29087,7 +31373,7 @@ ${o3}
     }
   };
   function _sfc_render$2T(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-body" }, [
       vue.createVNode(_component_page_head, { title: "movable-view,可拖动视图" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -29217,7 +31503,7 @@ ${o3}
     }
   };
   function _sfc_render$2S(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -29269,7 +31555,7 @@ ${o3}
     }
   };
   function _sfc_render$2R(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -29314,7 +31600,7 @@ ${o3}
     }
   };
   function _sfc_render$2Q(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -29396,7 +31682,7 @@ ${o3}
     }
   };
   function _sfc_render$2P(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -29506,7 +31792,7 @@ ${o3}
     }
   };
   function _sfc_render$2O(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -29756,7 +32042,7 @@ ${o3}
     }
   };
   function _sfc_render$2N(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "form" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -29871,7 +32157,7 @@ ${o3}
     }
   };
   function _sfc_render$2M(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -30085,7 +32371,7 @@ ${o3}
     }
   };
   function _sfc_render$2L(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-title uni-common-pl" }, "普通选择器"),
@@ -30229,7 +32515,7 @@ ${o3}
     }
   };
   function _sfc_render$2K(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -30358,7 +32644,7 @@ ${o3}
     }
   };
   function _sfc_render$2J(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -30460,7 +32746,7 @@ ${o3}
     }
   };
   function _sfc_render$2I(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -30545,7 +32831,7 @@ ${o3}
     }
   };
   function _sfc_render$2H(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -30612,7 +32898,7 @@ ${o3}
     }
   };
   function _sfc_render$2G(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-title uni-common-pl" }, "输入区域高度自适应，不会出现滚动条"),
@@ -31069,7 +33355,7 @@ ${o3}
     }
   };
   function _sfc_render$2E(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31108,7 +33394,7 @@ ${o3}
     }
   };
   function _sfc_render$2D(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"])
     ]);
@@ -31122,7 +33408,7 @@ ${o3}
     }
   };
   function _sfc_render$2C(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"])
     ]);
@@ -31137,7 +33423,7 @@ ${o3}
     }
   };
   function _sfc_render$2B(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31196,7 +33482,7 @@ ${o3}
     }
   };
   function _sfc_render$2A(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "page-body" }, [
@@ -31271,7 +33557,7 @@ ${o3}
     }
   };
   function _sfc_render$2y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "ad-view" }, [
@@ -31671,7 +33957,7 @@ ${o3}
     }
   };
   function _sfc_render$2v(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31737,7 +34023,7 @@ ${o3}
     }
   };
   function _sfc_render$2u(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31808,7 +34094,7 @@ ${o3}
     }
   };
   function _sfc_render$2t(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31892,7 +34178,7 @@ ${o3}
     }
   };
   function _sfc_render$2s(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       $data.provider[0] ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -32850,7 +35136,7 @@ ${o3}
     }
   };
   function _sfc_render$2k(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "example" }, [
@@ -33059,7 +35345,7 @@ ${o3}
     }
   };
   function _sfc_render$2i(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -33311,7 +35597,7 @@ ${o3}
     }
   };
   function _sfc_render$2h(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -33434,7 +35720,7 @@ ${o3}
     }
   };
   function _sfc_render$2g(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -33471,7 +35757,7 @@ ${o3}
     }
   };
   function _sfc_render$2f(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -33567,7 +35853,7 @@ ${o3}
     }
   };
   function _sfc_render$2e(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -33645,7 +35931,7 @@ ${o3}
     }
   };
   function _sfc_render$2d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "root" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "page-body" }, [
@@ -33786,7 +36072,7 @@ ${o3}
     }
   };
   function _sfc_render$2b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -33878,7 +36164,7 @@ ${o3}
     }
   };
   function _sfc_render$2a(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -33971,7 +36257,7 @@ ${o3}
     }
   };
   function _sfc_render$29(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -34053,7 +36339,7 @@ ${o3}
     }
   };
   function _sfc_render$28(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -34402,7 +36688,7 @@ ${o3}
     }
   };
   function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -34468,7 +36754,7 @@ ${o3}
     }
   };
   function _sfc_render$26(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -34510,7 +36796,7 @@ ${o3}
     }
   };
   function _sfc_render$25(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -34571,7 +36857,7 @@ ${o3}
     }
   };
   function _sfc_render$24(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -34638,7 +36924,7 @@ ${o3}
     }
   };
   function _sfc_render$23(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -34706,7 +36992,7 @@ ${o3}
     }
   };
   function _sfc_render$22(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -34985,7 +37271,7 @@ ${o3}
     }
   };
   function _sfc_render$21(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -35061,7 +37347,7 @@ ${o3}
     }
   };
   function _sfc_render$20(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -35110,7 +37396,7 @@ ${o3}
     }
   };
   function _sfc_render$1$(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -35173,7 +37459,7 @@ ${o3}
     }
   };
   function _sfc_render$1_(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -35242,7 +37528,7 @@ ${o3}
     }
   };
   function _sfc_render$1Z(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -35322,7 +37608,7 @@ ${o3}
     }
   };
   function _sfc_render$1Y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -35465,7 +37751,7 @@ ${o3}
     }
   };
   function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -35544,7 +37830,7 @@ ${o3}
     }
   };
   function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -35599,7 +37885,7 @@ ${o3}
     }
   };
   function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -35742,7 +38028,7 @@ ${o3}
     }
   };
   function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -36051,7 +38337,7 @@ ${o3}
     }
   };
   function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -36274,7 +38560,7 @@ ${o3}
     }
   };
   function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-padding-wrap" }, [
       vue.createVNode(_component_page_head, { title: "audio" }),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -36370,7 +38656,7 @@ ${o3}
     }
   };
   function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -36495,7 +38781,7 @@ ${o3}
     }
   };
   function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -36636,7 +38922,7 @@ ${o3}
     }
   };
   function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -37576,7 +39862,7 @@ ${o3}
     }
   };
   function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -37665,7 +39951,7 @@ ${o3}
     }
   };
   function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -37773,7 +40059,7 @@ ${o3}
     }
   };
   function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -37916,7 +40202,7 @@ ${o3}
     }
   };
   function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -38063,7 +40349,7 @@ ${o3}
     }
   };
   function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -38174,7 +40460,7 @@ ${o3}
     }
   };
   function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -38254,7 +40540,7 @@ ${o3}
     }
   };
   function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -38312,7 +40598,7 @@ ${o3}
     }
   };
   function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -38418,7 +40704,7 @@ ${o3}
     }
   };
   function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -38943,7 +41229,7 @@ ${o3}
     });
   }
   function _sfc_render$1D(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -39313,7 +41599,7 @@ ${o3}
     }
   };
   function _sfc_render$1C(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -39509,7 +41795,7 @@ ${o3}
     });
   }
   function _sfc_render$1B(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -39635,7 +41921,7 @@ ${o3}
     }
   };
   function _sfc_render$1A(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -39764,7 +42050,7 @@ ${o3}
     }
   };
   function _sfc_render$1z(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "websocket通讯示例" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -39902,7 +42188,7 @@ ${o3}
     }
   };
   function _sfc_render$1y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "websocket通讯示例" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -43934,7 +46220,7 @@ ${o3}
     }
   };
   function _sfc_render$1s(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-pickerview" }, [
       !_ctx.isCloudDataList ? (vue.openBlock(), vue.createElementBlock("scroll-view", {
         key: 0,
@@ -44229,7 +46515,7 @@ ${o3}
     }
   };
   function _sfc_render$1r(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     const _component_data_picker_view = vue.resolveComponent("data-picker-view");
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-tree" }, [
@@ -44818,7 +47104,7 @@ ${o3}
   function _sfc_render$1o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$2);
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_1$m);
-    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$9);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$a);
     const _component_uni_data_checkbox = resolveEasycom(vue.resolveDynamicComponent("uni-data-checkbox"), __easycom_1$p);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_2$7);
     const _component_uni_data_picker = resolveEasycom(vue.resolveDynamicComponent("uni-data-picker"), __easycom_5$1);
@@ -58408,7 +60694,7 @@ ${o3}
     }
   };
   function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -58507,7 +60793,7 @@ ${o3}
     methods: {}
   };
   function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_reciver = vue.resolveComponent("reciver");
     const _component_sender = vue.resolveComponent("sender");
     const _component_sender_bus = vue.resolveComponent("sender-bus");
@@ -58642,7 +60928,7 @@ ${o3}
     }
   };
   function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -58670,7 +60956,7 @@ ${o3}
     }
   };
   function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -58755,7 +61041,7 @@ ${o3}
     }
   };
   function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", { class: "mpvue-picker" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -58819,7 +61105,7 @@ ${o3}
     }
   };
   function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -59491,7 +61777,7 @@ ${o3}
     }
   };
   function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", {
         class: "banner",
@@ -60060,7 +62346,7 @@ ${o3}
     }
   };
   function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "通过scheme打开三方app示例" }),
       vue.createElementVNode("button", {
@@ -60161,7 +62447,7 @@ ${o3}
     }
   };
   function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", {
@@ -61894,7 +64180,7 @@ This will fail in production if not fixed.`);
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-product" }, [
       vue.createVNode(_component_page_head, { title: "Pinia" }),
       vue.createElementVNode(
@@ -61967,7 +64253,7 @@ This will fail in production if not fixed.`);
     }
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-product" }, [
       vue.createVNode(_component_page_head, { title: "vuex:vue页面" }),
       vue.createElementVNode(
@@ -62053,6 +64339,7 @@ This will fail in production if not fixed.`);
   __definePage("pages/page/index/supplement_info", PagesPageIndexSupplementInfo);
   __definePage("pages/page/study/study", PagesPageStudyStudy);
   __definePage("pages/page/study/wrong_question", PagesPageStudyWrongQuestion);
+  __definePage("pages/page/study/calendar", PagesPageStudyCalendar);
   __definePage("pages/page/team/team", PagesPageTeamTeam);
   __definePage("pages/page/team/invite_team", PagesPageTeamInviteTeam);
   __definePage("pages/page/parent/parent", PagesPageParentParent);
