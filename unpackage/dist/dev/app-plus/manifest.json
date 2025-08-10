@@ -223,7 +223,7 @@
   },
   "screenOrientation": [
     "portrait-primary",
-    "portrait-secondary"
+    "landscape-primary"
   ],
   "launch_path": "__uniappview.html"
 }

@@ -92,7 +92,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     )
   ]);
 }
-const swiperPage = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/swiper-list-nvue/swiper-page.nvue"]]);
+const swiperPage = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/swiper-list-nvue/swiper-page.nvue"]]);
 const _style_0 = { "page": { "": { "flex": 1 } }, "header": { "": { "height": 160, "flexDirection": "row", "alignItems": "center", "justifyContent": "center", "backgroundColor": "#f4f4f4" } }, "header-title": { "": { "fontSize": 30, "fontWeight": "bold", "color": "#444444" } }, "flexible-view": { "": { "backgroundColor": "#f823ff" } }, "page-head": { "": { "height": 200, "flexDirection": "column", "alignItems": "center", "justifyContent": "center", "backgroundColor": "#FF0000" } }, "tabs": { "": { "flexDirection": "column", "overflow": "hidden", "backgroundColor": "#ffffff" } }, "tab-bar": { "": { "width": "750rpx", "height": "84rpx", "flexDirection": "row" } }, "scroll-view-indicator": { "": { "position": "relative", "height": 2, "backgroundColor": "rgba(0,0,0,0)" } }, "scroll-view-underline": { "": { "position": "absolute", "top": 0, "bottom": 0, "width": 0, "backgroundColor": "#007AFF" } }, "scroll-view-animation": { "": { "transitionDuration": 200, "transitionProperty": "left" } }, "tab-bar-line": { "": { "height": "1rpx", "backgroundColor": "#cccccc" } }, "tab-view": { "": { "flex": 1 } }, "uni-tab-item": { "": { "flexWrap": "nowrap", "paddingLeft": 25, "paddingRight": 25 } }, "uni-tab-item-title": { "": { "color": "#555555", "fontSize": "30rpx", "height": "80rpx", "lineHeight": "80rpx", "flexWrap": "nowrap" } }, "uni-tab-item-title-active": { "": { "color": "#007AFF" } }, "swiper-item": { "": { "flex": 1, "flexDirection": "column" } }, "swiper-page": { "": { "flex": 1, "flexDirection": "row", "position": "absolute", "left": 0, "top": 0, "right": 0, "bottom": 0 } }, "refresh-view": { "": { "width": "750rpx", "height": 80, "flexDirection": "row", "alignItems": "center", "justifyContent": "center" } }, "@TRANSITION": { "scroll-view-animation": { "duration": 200, "property": "left" } } };
 const dom = weex.requireModule("dom");
 const MAX_CACHE_DATA = 100;
@@ -428,7 +428,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 8, ["id"]);
 }
-const swiperListNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/swiper-list-nvue/swiper-list-nvue.nvue"]]);
+const swiperListNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/swiper-list-nvue/swiper-list-nvue.nvue"]]);
 export {
   swiperListNvue as default
 };

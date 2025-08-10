@@ -1,4 +1,6 @@
 <template>
+	<!-- 如果是跳转到横屏的页面的父级，需要加这个loading页面隐藏navigateBack延迟造成的内容暴露问题 -->
+	<view class="page-loading" v-if="changeWindow"></view>
 	<view class="page-wrap">
 		<view class="banner-wrap">
 			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
@@ -148,6 +150,7 @@
 		},
 		data() {
 			return {
+				changeWindow:false,//旋转时防止返回上一页直接显示内容
 				pageHeadTitle: "",
 				cumulative: [],
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
@@ -396,7 +399,7 @@
 			})
 		},
 		onHide() {
-
+			this.changeWindow = true;
 		},
 		watch: {
 

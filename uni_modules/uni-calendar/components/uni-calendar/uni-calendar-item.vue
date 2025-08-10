@@ -1,15 +1,20 @@
 <template>
 	<view class="uni-calendar-item__weeks-box" :class="{
-		'uni-calendar-item--disable':weeks.disable,
+		'uni-calendar-item--disable uni-calendar-item--disable2':weeks.disable,
 		'uni-calendar-item--isDay':calendar.fullDate === weeks.fullDate && weeks.isDay,
 		'uni-calendar-item--checked':(calendar.fullDate === weeks.fullDate && !weeks.isDay) ,
 		'uni-calendar-item--before-checked':weeks.beforeMultiple,
 		'uni-calendar-item--multiple': weeks.multiple,
 		'uni-calendar-item--after-checked':weeks.afterMultiple,
+		'calendar-selected':selected&&weeks.extraInfo,
+		'uni-calendar-item--disable':new Date() < new Date(weeks.fullDate),
+		'new-disable':disabledDay.indexOf(weeks.fullDate)!=-1,
 		}"
 	 @click="choiceDate(weeks)">
 		<view class="uni-calendar-item__weeks-box-item">
 			<text v-if="selected&&weeks.extraInfo" class="uni-calendar-item__weeks-box-circle"></text>
+			<text v-if="disabledDay.indexOf(weeks.fullDate)!=-1" class="new-disable-icon"></text>
+			<text v-if="calendar.fullDate === weeks.fullDate" class="checked-icon"></text>
 			<text class="uni-calendar-item__weeks-box-text" :class="{
 				'uni-calendar-item--isDay-text': weeks.isDay,
 				'uni-calendar-item--isDay':calendar.fullDate === weeks.fullDate && weeks.isDay,
@@ -17,7 +22,7 @@
 				'uni-calendar-item--before-checked':weeks.beforeMultiple,
 				'uni-calendar-item--multiple': weeks.multiple,
 				'uni-calendar-item--after-checked':weeks.afterMultiple,
-				'uni-calendar-item--disable':weeks.disable,
+				'uni-calendar-item--disable uni-calendar-item--disable2':weeks.disable,
 				}">{{weeks.date}}</text>
 			<text v-if="!lunar&&!weeks.extraInfo && weeks.isDay" class="uni-calendar-item__weeks-lunar-text" :class="{
 				'uni-calendar-item--isDay-text':weeks.isDay,
@@ -34,7 +39,7 @@
 				'uni-calendar-item--before-checked':weeks.beforeMultiple,
 				'uni-calendar-item--multiple': weeks.multiple,
 				'uni-calendar-item--after-checked':weeks.afterMultiple,
-				'uni-calendar-item--disable':weeks.disable,
+				'uni-calendar-item--disable uni-calendar-item--disable2':weeks.disable,
 				}">{{weeks.isDay ? todayText : (weeks.lunar.IDayCn === '初一'?weeks.lunar.IMonthCn:weeks.lunar.IDayCn)}}</text>
 			<text v-if="weeks.extraInfo&&weeks.extraInfo.info" class="uni-calendar-item__weeks-lunar-text" :class="{
 				'uni-calendar-item--extra':weeks.extraInfo.info,
@@ -44,7 +49,7 @@
 				'uni-calendar-item--before-checked':weeks.beforeMultiple,
 				'uni-calendar-item--multiple': weeks.multiple,
 				'uni-calendar-item--after-checked':weeks.afterMultiple,
-				'uni-calendar-item--disable':weeks.disable,
+				'uni-calendar-item--disable uni-calendar-item--disable2':weeks.disable,
 				}">{{weeks.extraInfo.info}}</text>
 		</view>
 	</view>
@@ -79,7 +84,13 @@
 			lunar: {
 				type: Boolean,
 				default: false
-			}
+			},
+			disabledDay: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
 		},
 		computed: {
 			todayText() {
