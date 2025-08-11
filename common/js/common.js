@@ -261,24 +261,23 @@ export default {
 					console.log('报错：：：：', e)
 				}
 			} else if (store.state.baseFontSize) {
-				console.log("store.state.baseFontSize:", store.state.baseFontSize)
-				if(data.orientation && data.orientation == "landscape"){
+				if (data.orientation && data.orientation == "landscape") {
 					// 横屏的rem设置有毒
-					var index = 30;
-					let time = setInterval(()=>{
+					var index = 10;
+					let time = setInterval(() => {
 						index = index - 1;
-						if(index==0){
+						if (index == 0) {
 							clearInterval(time)
 						}
-						this.fontSize = store.state.baseFontSize-0.01;
-						setTimeout(()=>{
+						this.fontSize = store.state.baseFontSize - 0.01;
+						setTimeout(() => {
 							this.fontSize = store.state.baseFontSize
-						},10)
-					},100)
-				}else{
+						}, 10)
+					}, 200)
+				} else {
 					this.fontSize = store.state.baseFontSize
 				}
-				
+
 			} else {
 				console.log("baseFontSize::", baseFontSize)
 				this.fontSize = baseFontSize;
@@ -289,12 +288,9 @@ export default {
 		// uniHide 隐藏各种弹窗等
 		// orientation 页面横屏竖屏 portrait（竖屏）或landscape（横屏）
 		pageOnShowSet(data) {
+			store.state.isLoading = true;
 			if (!data) return;
 			return new Promise((resolve, reject) => {
-				// store.state.isLoading = true;
-				// setTimeout(() => {
-					store.state.isLoading = false;
-				// }, 1000)
 				try {
 					data.uniHide && this.uniHide(data.uniHide)
 				} catch (e) {}
@@ -310,29 +306,37 @@ export default {
 				let _this = this
 				// 设置横屏还是竖屏，默认竖屏
 				try {
+					uni.showLoading({})
 					if (data.orientation) {
-						if(data.orientation == "portrait"){
-							
-						}
 						setTimeout(() => {
 							// #ifdef APP-PLUS
 							plus.screen.lockOrientation(data.orientation + '-primary');
 							// #endif  
-						}, data.orientation == "portrait" ? 0 : 500)
+						}, 300)
 						_this.setRootFontSize(data)
 					} else {
-						// #ifdef APP-PLUS
-						plus.screen.lockOrientation('portrait-primary');
-						// #endif  
+						// setTimeout(() => {
+							// #ifdef APP-PLUS
+							plus.screen.lockOrientation('portrait-primary');
+							// #endif  
+						// }, 0)
 						_this.setRootFontSize(data)
 					}
+					setTimeout(() => {
+						try{
+							this.changeWindow = false;
+						}catch(e){}
+						uni.hideLoading();
+					}, 1000)
 				} catch (e) {
 					// #ifdef APP-PLUS
 					plus.screen.lockOrientation('portrait-primary');
 					// #endif  
 					_this.setRootFontSize(data)
 				}
-
+				setTimeout(() => {
+					store.state.isLoading = false;
+				}, 1000)
 				resolve();
 			})
 

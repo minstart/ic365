@@ -6,7 +6,8 @@ class Calendar {
 		selected,
 		startDate,
 		endDate,
-		range
+		range,
+		disabledDay
 	} = {}) {
 		// 当前日期
 		this.date = this.getDate(new Date()) // 当前初入日期
@@ -22,6 +23,8 @@ class Calendar {
 		// 每周日期
 		this.weeks = {}
 		// this._getWeek(this.date.fullDate)
+		// 禁止日期
+		this.disabledDay = disabledDay || []
 	}
 	/**
 	 * 设置日期
@@ -76,19 +79,19 @@ class Calendar {
 				dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
 				break
 			case 'month':
-				if (dd.getDate() === 31 && AddDayCount>0) {
+				if (dd.getDate() === 31 && AddDayCount > 0) {
 					dd.setDate(dd.getDate() + AddDayCount)
 				} else {
 					const preMonth = dd.getMonth()
 					dd.setMonth(preMonth + AddDayCount) // 获取AddDayCount天后的日期
 					const nextMonth = dd.getMonth()
 					// 处理 pre 切换月份目标月份为2月没有当前日(30 31) 切换错误问题
-					if(AddDayCount<0 && preMonth!==0 && nextMonth-preMonth>AddDayCount){
-						dd.setMonth(nextMonth+(nextMonth-preMonth+AddDayCount))
+					if (AddDayCount < 0 && preMonth !== 0 && nextMonth - preMonth > AddDayCount) {
+						dd.setMonth(nextMonth + (nextMonth - preMonth + AddDayCount))
 					}
 					// 处理 next 切换月份目标月份为2月没有当前日(30 31) 切换错误问题
-					if(AddDayCount>0 && nextMonth-preMonth>AddDayCount){
-						dd.setMonth(nextMonth-(nextMonth-preMonth-AddDayCount))
+					if (AddDayCount > 0 && nextMonth - preMonth > AddDayCount) {
+						dd.setMonth(nextMonth - (nextMonth - preMonth - AddDayCount))
 					}
 				}
 				break
@@ -171,6 +174,15 @@ class Calendar {
 					checked = true
 				}
 			}
+
+			// 禁止日期
+			let datDisable = false;
+			for (let dj = 0; dj < this.disabledDay.length; dj++) {
+				if(this.disabledDay[dj] == nowDate){
+					datDisable = true;
+				}
+			}
+
 			let data = {
 				fullDate: nowDate,
 				year: full.year,
@@ -180,7 +192,7 @@ class Calendar {
 				afterMultiple: this.dateEqual(this.multipleStatus.after, nowDate),
 				month: full.month,
 				lunar: this.getlunar(full.year, full.month, i),
-				disable: !(disableBefore && disableAfter),
+				disable: !(disableBefore && disableAfter) || datDisable,
 				isDay
 			}
 			if (info) {
@@ -305,9 +317,11 @@ class Calendar {
 			} else {
 				this.multipleStatus.after = fullDate
 				if (this.dateCompare(this.multipleStatus.before, this.multipleStatus.after)) {
-					this.multipleStatus.data = this.geDateAll(this.multipleStatus.before, this.multipleStatus.after);
+					this.multipleStatus.data = this.geDateAll(this.multipleStatus.before, this.multipleStatus
+					.after);
 				} else {
-					this.multipleStatus.data = this.geDateAll(this.multipleStatus.after, this.multipleStatus.before);
+					this.multipleStatus.data = this.geDateAll(this.multipleStatus.after, this.multipleStatus
+					.before);
 				}
 			}
 		}

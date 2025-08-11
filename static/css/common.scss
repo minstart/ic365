@@ -38,6 +38,16 @@ ul,li{
 	border: 0.1rem solid $ThemeColor;
 	font-size: 1rem;
 }
+.page-loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 200rem;
+	height: 200rem;
+	overflow: hidden;
+	background: #fff;
+	z-index: 99999999999999999999999999999;
+}
 // 单一类型样式 ------End
 
 // 列表标题
