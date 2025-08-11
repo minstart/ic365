@@ -1,16 +1,17 @@
 <template>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;">
-		<page-head :title='pageHeadTitle' :isBack='true'
-			:background="'linear-gradient(to right,#FFDA8F 0%, #FFDA8F 40%, #F4F4F4 100%)'"
-			:systemTaskbar="false"></page-head>
+		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
 		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
 			<view class="calendar-back"></view>
 			<view class="calendar-wrap" v-if="showCalendar">
+				<h3 class="month-title">
+					<span>{{new Date().getMonth() + 1}}</span>
+					<span>月</span>
+				</h3>
 				<view class="">
 					<!-- 插入模式 -->
-					<uni-calendar class="uni-calendar--hook" :disabledDay="disabledDays" :selected="info.selected"
-						:showMonth="false" @change="change">
+					<uni-calendar class="uni-calendar--hook" :disabledDay="disabledDays" :selected="info.selected" :showMonth="false" @change="change">
 						<template v-slot:date-content="date">
 							<view :class="{'selected': date.isSelected}">
 								{{ date.text1 }}
@@ -48,7 +49,7 @@
 					selected: []
 				},
 				disabledDays: [],
-				checkedDate:""
+				checkedDate: ""
 			}
 		},
 		onLoad() {
@@ -132,7 +133,7 @@
 						item = `${year}-${month}-${day}`
 						dateArray.push(item);
 					} else {
-						if(this.changeDate(item).fullDate == this.changeDate(new Date()).fullDate){
+						if (this.changeDate(item).fullDate == this.changeDate(new Date()).fullDate) {
 							item = `${year}-${month}-${day}`
 							this.checkedDate = item;
 						}
@@ -170,10 +171,10 @@
 				console.log('change 返回:', e)
 				this.checkedDate = e.fulldate;
 			},
-			doingExercises(){
+			doingExercises() {
 				uni.showToast({
-					title:"当前选择的做题日期：" + this.checkedDate,
-					icon:"none"
+					title: "当前选择的做题日期：" + this.checkedDate,
+					icon: "none"
 				})
 			}
 		}
@@ -186,17 +187,37 @@
 		display: flex;
 		padding-bottom: 0;
 		height: calc(100vh - 2.75rem);
+		margin-top: -2.75rem;
+		padding-top: 2.75rem;
 	}
 
 	.calendar-back {
 		width: 12.875rem;
-		height: 100vh;
-		background: url("/static/image/1_2_calendar_back.png") no-repeat center / 100%;
+		height: 100%;
+		background: url("/static/image/1_2_calendar_back.png") no-repeat bottom / 100%;
 	}
 
 	.calendar-wrap {
 		flex: 1;
-		height: 3rem;
+
+		.month-title {
+			color: #fff;
+			margin-top: -1.8rem;
+
+			span {
+				display: inline-block;
+				line-height: 1;
+
+				&:nth-child(1) {
+					font-size: 3.56rem;
+				}
+
+				&:nth-child(2) {
+					font-size: 1.56rem;
+					vertical-align: text-bottom;
+				}
+			}
+		}
 	}
 
 	.example-body {
@@ -224,7 +245,7 @@
 			color: #fff;
 			font-size: 1rem;
 			position: absolute;
-			top: 70%;
+			top: 80%;
 		}
 	}
 </style>
@@ -263,33 +284,22 @@
 		color: #333;
 	}
 
-	.new-disable-icon {
-		position: absolute;
-		width: 0.75rem !important;
-		height: 0.75rem !important;
-		top: -0.2rem !important;
-		right: -0.2rem !important;
-		background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
-	}
-	:global(.uni-calendar-item--isDay){
+
+
+	:global(.uni-calendar-item--isDay) {
 		background-color: #fff !important;
 		color: #333 !important;
 		opacity: 1 !important;
 	}
-	.checked-icon{
-		position: absolute;
-		width: 0.75rem !important;
-		height: 0.75rem !important;
-		top: -0.2rem !important;
-		right: -0.2rem !important;
-		background: url("/static/icons/calendar_checked.png") no-repeat center /100% 100%;
-	}
-	
-	:global(.uni-calendar-item--checked){
+
+
+
+	:global(.uni-calendar-item--checked) {
 		background-color: #fff !important;
 		color: #333 !important;
 		opacity: 1 !important;
 	}
+
 	:global(.uni-calendar-item--hook) {
 		background: #fff;
 		color: #333;
@@ -305,6 +315,11 @@
 		}
 	}
 
+	:global(.uni-calendar__weeks-day) {
+		/* width: 2rem !important; */
+		height: 2rem !important;
+		border-width: 0px !important;
+	}
 
 	:global(.uni-calendar-item__weeks-box-item) {
 		width: 2rem !important;
@@ -320,17 +335,34 @@
 		display: none !important;
 	}
 
+	.new-disable-icon {
+		position: absolute;
+		width: 0.56rem !important;
+		height: 0.68rem !important;
+		top: calc(-0.56rem / 3) !important;
+		right: calc(-0.68rem /3) !important;
+		background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
+	}
+
+	.checked-icon {
+		position: absolute;
+		width:  0.68rem !important;
+		height:  0.68rem !important;
+		top: calc(-0.68rem /3) !important;
+		right: calc(-0.68rem /3) !important;
+		background: url("/static/icons/calendar_checked.png") no-repeat center /100% 100%;
+	}
+
 	.calendar-selected {
 		background: #fff !important;
 		opacity: 1;
 	}
 
-
 	:global(.uni-calendar-item__weeks-box-circle) {
-		width: 0.75rem !important;
-		height: 0.75rem !important;
-		top: -0.2rem !important;
-		right: -0.2rem !important;
+		width: 0.875rem !important;
+		height: 0.875rem !important;
+		top: calc(-0.875rem / 3) !important;
+		right: calc(-0.875rem / 3) !important;
 		background: url("/static/icons/calendar_selected.png") no-repeat top / 100% 100%;
 		background-color: transparent !important;
 	}
