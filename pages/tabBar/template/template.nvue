@@ -170,9 +170,7 @@
 			}
 		},
 		onNavigationBarButtonTap(e) {
-			uni.navigateTo({
-				url: '/pages/about/about'
-			});
+			
 		},
 		// #ifdef H5
 		watch: {

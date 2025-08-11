@@ -327,9 +327,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       };
     },
     onNavigationBarButtonTap(e) {
-      uni.navigateTo({
-        url: "/pages/about/about"
-      });
     },
     methods: {
       goDetailPage(path) {

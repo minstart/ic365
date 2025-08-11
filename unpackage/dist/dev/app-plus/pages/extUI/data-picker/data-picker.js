@@ -1472,6 +1472,30 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
   };
   var pages = [
     {
+      path: "pages/page/guide/judge",
+      style: {
+        enablePullDownRefresh: false,
+        onReachBottomDistance: 100,
+        navigationStyle: "custom",
+        "app-plus": {
+          contentAdjust: false,
+          bounce: "none"
+        }
+      }
+    },
+    {
+      path: "pages/page/guide/guide",
+      style: {
+        enablePullDownRefresh: false,
+        onReachBottomDistance: 100,
+        navigationStyle: "custom",
+        "app-plus": {
+          contentAdjust: false,
+          bounce: "none"
+        }
+      }
+    },
+    {
       path: "pages/page/index/index",
       style: {
         navigationBarTitleText: "\u9996\u9875",
@@ -1868,12 +1892,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       path: "platforms/app-plus/shake/shake",
       style: {
         navigationBarTitleText: "\u6447\u4E00\u6447"
-      }
-    },
-    {
-      path: "pages/about/about",
-      style: {
-        navigationBarTitleText: "\u5173\u4E8E"
       }
     },
     {

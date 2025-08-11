@@ -53,1929 +53,6 @@ if (uni.restoreGlobal) {
     2
     /* HookFlags.PAGE */
   );
-  const _export_sfc = (sfc, props) => {
-    const target = sfc.__vccOpts || sfc;
-    for (const [key, val] of props) {
-      target[key] = val;
-    }
-    return target;
-  };
-  const _sfc_main$3t = {
-    name: "page-head",
-    props: {
-      clickModule: {
-        type: Function,
-        default: () => {
-          formatAppLog("log", "at components/page-head/page-head.vue:29", "默认右侧功能区函数");
-        }
-      },
-      isHide: {
-        default: false
-      },
-      title: {
-        // type: String,
-        default: ""
-      },
-      background: {
-        default: "#fff"
-      },
-      // 是否显示返回按钮
-      isBack: {
-        default: false
-      },
-      // 是否显示最右边功能模块
-      isModule: {
-        default: false
-      },
-      moduleIcon: {
-        default: "/static/icons/nav-bar.png"
-      },
-      systemTaskbar: {
-        default: true
-      }
-    },
-    data() {
-      return {
-        taskbarHeight: 0
-      };
-    },
-    mounted() {
-      this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem" : this.taskbarHeight = "0rem";
-    },
-    methods: {
-      clickBack() {
-        this.$store.state.isLoading = true;
-        uni.navigateBack({
-          animationType: "none",
-          animationDuration: 1e3
-        });
-      }
-    }
-  };
-  function _sfc_render$3s(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_viww = vue.resolveComponent("viww");
-    return vue.openBlock(), vue.createElementBlock(
-      vue.Fragment,
-      null,
-      [
-        vue.createElementVNode(
-          "view",
-          {
-            class: "common-page-head-view",
-            style: vue.normalizeStyle({ paddingTop: $data.taskbarHeight })
-          },
-          [
-            !$props.isHide ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 0,
-              class: "reserve-seat"
-            })) : vue.createCommentVNode("v-if", true),
-            !$props.isHide ? (vue.openBlock(), vue.createElementBlock(
-              "view",
-              {
-                key: 1,
-                class: "common-page-head",
-                style: vue.normalizeStyle({ background: $props.background, paddingTop: $data.taskbarHeight })
-              },
-              [
-                vue.createVNode(_component_viww, { class: "common-page-head-back" }, {
-                  default: vue.withCtx(() => [
-                    $props.isBack ? (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 0,
-                      class: "page-head-back-icon",
-                      onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
-                    })) : vue.createCommentVNode("v-if", true)
-                  ]),
-                  _: 1
-                  /* STABLE */
-                }),
-                vue.createElementVNode(
-                  "view",
-                  { class: "common-page-head-title" },
-                  vue.toDisplayString($props.title),
-                  1
-                  /* TEXT */
-                ),
-                vue.createElementVNode("view", { class: "common-page-head-module" }, [
-                  $props.isModule ? (vue.openBlock(), vue.createElementBlock("image", {
-                    key: 0,
-                    src: $props.moduleIcon,
-                    mode: "",
-                    onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
-                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
-                ])
-              ],
-              4
-              /* STYLE */
-            )) : vue.createCommentVNode("v-if", true)
-          ],
-          4
-          /* STYLE */
-        ),
-        _ctx.$store.state.isLoading ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: "page-loading"
-        })) : vue.createCommentVNode("v-if", true)
-      ],
-      64
-      /* STABLE_FRAGMENT */
-    );
-  }
-  const __easycom_0$8 = /* @__PURE__ */ _export_sfc(_sfc_main$3t, [["render", _sfc_render$3s], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
-  var lookup = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    62,
-    0,
-    62,
-    0,
-    63,
-    52,
-    53,
-    54,
-    55,
-    56,
-    57,
-    58,
-    59,
-    60,
-    61,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    0,
-    0,
-    0,
-    0,
-    63,
-    0,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    41,
-    42,
-    43,
-    44,
-    45,
-    46,
-    47,
-    48,
-    49,
-    50,
-    51
-  ];
-  function base64Decode(source, target) {
-    var sourceLength = source.length;
-    var paddingLength = source[sourceLength - 2] === "=" ? 2 : source[sourceLength - 1] === "=" ? 1 : 0;
-    var tmp;
-    var byteIndex = 0;
-    var baseLength = sourceLength - paddingLength & 4294967292;
-    for (var i2 = 0; i2 < baseLength; i2 += 4) {
-      tmp = lookup[source.charCodeAt(i2)] << 18 | lookup[source.charCodeAt(i2 + 1)] << 12 | lookup[source.charCodeAt(i2 + 2)] << 6 | lookup[source.charCodeAt(i2 + 3)];
-      target[byteIndex++] = tmp >> 16 & 255;
-      target[byteIndex++] = tmp >> 8 & 255;
-      target[byteIndex++] = tmp & 255;
-    }
-    if (paddingLength === 1) {
-      tmp = lookup[source.charCodeAt(i2)] << 10 | lookup[source.charCodeAt(i2 + 1)] << 4 | lookup[source.charCodeAt(i2 + 2)] >> 2;
-      target[byteIndex++] = tmp >> 8 & 255;
-      target[byteIndex++] = tmp & 255;
-    }
-    if (paddingLength === 2) {
-      tmp = lookup[source.charCodeAt(i2)] << 2 | lookup[source.charCodeAt(i2 + 1)] >> 4;
-      target[byteIndex++] = tmp & 255;
-    }
-  }
-  const crypto = {
-    getRandomValues(arr) {
-      if (!(arr instanceof Int8Array || arr instanceof Uint8Array || arr instanceof Int16Array || arr instanceof Uint16Array || arr instanceof Int32Array || arr instanceof Uint32Array || arr instanceof Uint8ClampedArray)) {
-        throw new Error("Expected an integer array");
-      }
-      if (arr.byteLength > 65536) {
-        throw new Error("Can only request a maximum of 65536 bytes");
-      }
-      var crypto2 = requireNativePlugin("DCloud-Crypto");
-      base64Decode(crypto2.getRandomValues(arr.byteLength), new Uint8Array(
-        arr.buffer,
-        arr.byteOffset,
-        arr.byteLength
-      ));
-      return arr;
-    }
-  };
-  /*! js-cookie v3.0.5 | MIT */
-  function assign$2(target) {
-    for (var i2 = 1; i2 < arguments.length; i2++) {
-      var source = arguments[i2];
-      for (var key in source) {
-        target[key] = source[key];
-      }
-    }
-    return target;
-  }
-  var defaultConverter = {
-    read: function(value) {
-      if (value[0] === '"') {
-        value = value.slice(1, -1);
-      }
-      return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
-    },
-    write: function(value) {
-      return encodeURIComponent(value).replace(
-        /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
-        decodeURIComponent
-      );
-    }
-  };
-  function init(converter, defaultAttributes) {
-    function set2(name, value, attributes) {
-      if (typeof document === "undefined") {
-        return;
-      }
-      attributes = assign$2({}, defaultAttributes, attributes);
-      if (typeof attributes.expires === "number") {
-        attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
-      }
-      if (attributes.expires) {
-        attributes.expires = attributes.expires.toUTCString();
-      }
-      name = encodeURIComponent(name).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
-      var stringifiedAttributes = "";
-      for (var attributeName in attributes) {
-        if (!attributes[attributeName]) {
-          continue;
-        }
-        stringifiedAttributes += "; " + attributeName;
-        if (attributes[attributeName] === true) {
-          continue;
-        }
-        stringifiedAttributes += "=" + attributes[attributeName].split(";")[0];
-      }
-      return document.cookie = name + "=" + converter.write(value, name) + stringifiedAttributes;
-    }
-    function get(name) {
-      if (typeof document === "undefined" || arguments.length && !name) {
-        return;
-      }
-      var cookies2 = document.cookie ? document.cookie.split("; ") : [];
-      var jar = {};
-      for (var i2 = 0; i2 < cookies2.length; i2++) {
-        var parts = cookies2[i2].split("=");
-        var value = parts.slice(1).join("=");
-        try {
-          var found = decodeURIComponent(parts[0]);
-          jar[found] = converter.read(value, found);
-          if (name === found) {
-            break;
-          }
-        } catch (e2) {
-        }
-      }
-      return name ? jar[name] : jar;
-    }
-    return Object.create(
-      {
-        set: set2,
-        get,
-        remove: function(name, attributes) {
-          set2(
-            name,
-            "",
-            assign$2({}, attributes, {
-              expires: -1
-            })
-          );
-        },
-        withAttributes: function(attributes) {
-          return init(this.converter, assign$2({}, this.attributes, attributes));
-        },
-        withConverter: function(converter2) {
-          return init(assign$2({}, this.converter, converter2), this.attributes);
-        }
-      },
-      {
-        attributes: { value: Object.freeze(defaultAttributes) },
-        converter: { value: Object.freeze(converter) }
-      }
-    );
-  }
-  var api = init(defaultConverter, { path: "/" });
-  function getDevtoolsGlobalHook$1() {
-    return getTarget$1().__VUE_DEVTOOLS_GLOBAL_HOOK__;
-  }
-  function getTarget$1() {
-    return typeof navigator !== "undefined" && typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {};
-  }
-  const isProxyAvailable$1 = typeof Proxy === "function";
-  const HOOK_SETUP$1 = "devtools-plugin:setup";
-  const HOOK_PLUGIN_SETTINGS_SET$1 = "plugin:settings:set";
-  let ApiProxy$1 = class ApiProxy {
-    constructor(plugin, hook) {
-      this.target = null;
-      this.targetQueue = [];
-      this.onQueue = [];
-      this.plugin = plugin;
-      this.hook = hook;
-      const defaultSettings = {};
-      if (plugin.settings) {
-        for (const id2 in plugin.settings) {
-          const item = plugin.settings[id2];
-          defaultSettings[id2] = item.defaultValue;
-        }
-      }
-      const localSettingsSaveId = `__vue-devtools-plugin-settings__${plugin.id}`;
-      let currentSettings = { ...defaultSettings };
-      try {
-        const raw = localStorage.getItem(localSettingsSaveId);
-        const data = JSON.parse(raw);
-        Object.assign(currentSettings, data);
-      } catch (e2) {
-      }
-      this.fallbacks = {
-        getSettings() {
-          return currentSettings;
-        },
-        setSettings(value) {
-          try {
-            localStorage.setItem(localSettingsSaveId, JSON.stringify(value));
-          } catch (e2) {
-          }
-          currentSettings = value;
-        }
-      };
-      hook.on(HOOK_PLUGIN_SETTINGS_SET$1, (pluginId, value) => {
-        if (pluginId === this.plugin.id) {
-          this.fallbacks.setSettings(value);
-        }
-      });
-      this.proxiedOn = new Proxy({}, {
-        get: (_target, prop) => {
-          if (this.target) {
-            return this.target.on[prop];
-          } else {
-            return (...args) => {
-              this.onQueue.push({
-                method: prop,
-                args
-              });
-            };
-          }
-        }
-      });
-      this.proxiedTarget = new Proxy({}, {
-        get: (_target, prop) => {
-          if (this.target) {
-            return this.target[prop];
-          } else if (prop === "on") {
-            return this.proxiedOn;
-          } else if (Object.keys(this.fallbacks).includes(prop)) {
-            return (...args) => {
-              this.targetQueue.push({
-                method: prop,
-                args,
-                resolve: () => {
-                }
-              });
-              return this.fallbacks[prop](...args);
-            };
-          } else {
-            return (...args) => {
-              return new Promise((resolve) => {
-                this.targetQueue.push({
-                  method: prop,
-                  args,
-                  resolve
-                });
-              });
-            };
-          }
-        }
-      });
-    }
-    async setRealTarget(target) {
-      this.target = target;
-      for (const item of this.onQueue) {
-        this.target.on[item.method](...item.args);
-      }
-      for (const item of this.targetQueue) {
-        item.resolve(await this.target[item.method](...item.args));
-      }
-    }
-  };
-  function setupDevtoolsPlugin$1(pluginDescriptor, setupFn) {
-    const target = getTarget$1();
-    const hook = getDevtoolsGlobalHook$1();
-    const enableProxy = isProxyAvailable$1 && pluginDescriptor.enableEarlyProxy;
-    if (hook && (target.__VUE_DEVTOOLS_PLUGIN_API_AVAILABLE__ || !enableProxy)) {
-      hook.emit(HOOK_SETUP$1, pluginDescriptor, setupFn);
-    } else {
-      const proxy = enableProxy ? new ApiProxy$1(pluginDescriptor, hook) : null;
-      const list = target.__VUE_DEVTOOLS_PLUGINS__ = target.__VUE_DEVTOOLS_PLUGINS__ || [];
-      list.push({
-        pluginDescriptor,
-        setupFn,
-        proxy
-      });
-      if (proxy)
-        setupFn(proxy.proxiedTarget);
-    }
-  }
-  /*!
-   * vuex v4.1.0
-   * (c) 2022 Evan You
-   * @license MIT
-   */
-  var storeKey = "store";
-  function useStore(key) {
-    if (key === void 0)
-      key = null;
-    return vue.inject(key !== null ? key : storeKey);
-  }
-  function find(list, f2) {
-    return list.filter(f2)[0];
-  }
-  function deepCopy$1(obj, cache) {
-    if (cache === void 0)
-      cache = [];
-    if (obj === null || typeof obj !== "object") {
-      return obj;
-    }
-    var hit = find(cache, function(c2) {
-      return c2.original === obj;
-    });
-    if (hit) {
-      return hit.copy;
-    }
-    var copy = Array.isArray(obj) ? [] : {};
-    cache.push({
-      original: obj,
-      copy
-    });
-    Object.keys(obj).forEach(function(key) {
-      copy[key] = deepCopy$1(obj[key], cache);
-    });
-    return copy;
-  }
-  function forEachValue(obj, fn) {
-    Object.keys(obj).forEach(function(key) {
-      return fn(obj[key], key);
-    });
-  }
-  function isObject$3(obj) {
-    return obj !== null && typeof obj === "object";
-  }
-  function isPromise(val) {
-    return val && typeof val.then === "function";
-  }
-  function assert(condition2, msg) {
-    if (!condition2) {
-      throw new Error("[vuex] " + msg);
-    }
-  }
-  function partial(fn, arg) {
-    return function() {
-      return fn(arg);
-    };
-  }
-  function genericSubscribe(fn, subs, options) {
-    if (subs.indexOf(fn) < 0) {
-      options && options.prepend ? subs.unshift(fn) : subs.push(fn);
-    }
-    return function() {
-      var i2 = subs.indexOf(fn);
-      if (i2 > -1) {
-        subs.splice(i2, 1);
-      }
-    };
-  }
-  function resetStore(store2, hot) {
-    store2._actions = /* @__PURE__ */ Object.create(null);
-    store2._mutations = /* @__PURE__ */ Object.create(null);
-    store2._wrappedGetters = /* @__PURE__ */ Object.create(null);
-    store2._modulesNamespaceMap = /* @__PURE__ */ Object.create(null);
-    var state = store2.state;
-    installModule(store2, state, [], store2._modules.root, true);
-    resetStoreState(store2, state, hot);
-  }
-  function resetStoreState(store2, state, hot) {
-    var oldState = store2._state;
-    var oldScope = store2._scope;
-    store2.getters = {};
-    store2._makeLocalGettersCache = /* @__PURE__ */ Object.create(null);
-    var wrappedGetters = store2._wrappedGetters;
-    var computedObj = {};
-    var computedCache = {};
-    var scope = vue.effectScope(true);
-    scope.run(function() {
-      forEachValue(wrappedGetters, function(fn, key) {
-        computedObj[key] = partial(fn, store2);
-        computedCache[key] = vue.computed(function() {
-          return computedObj[key]();
-        });
-        Object.defineProperty(store2.getters, key, {
-          get: function() {
-            return computedCache[key].value;
-          },
-          enumerable: true
-          // for local getters
-        });
-      });
-    });
-    store2._state = vue.reactive({
-      data: state
-    });
-    store2._scope = scope;
-    if (store2.strict) {
-      enableStrictMode(store2);
-    }
-    if (oldState) {
-      if (hot) {
-        store2._withCommit(function() {
-          oldState.data = null;
-        });
-      }
-    }
-    if (oldScope) {
-      oldScope.stop();
-    }
-  }
-  function installModule(store2, rootState, path, module, hot) {
-    var isRoot = !path.length;
-    var namespace = store2._modules.getNamespace(path);
-    if (module.namespaced) {
-      if (store2._modulesNamespaceMap[namespace] && true) {
-        console.error("[vuex] duplicate namespace " + namespace + " for the namespaced module " + path.join("/"));
-      }
-      store2._modulesNamespaceMap[namespace] = module;
-    }
-    if (!isRoot && !hot) {
-      var parentState = getNestedState(rootState, path.slice(0, -1));
-      var moduleName = path[path.length - 1];
-      store2._withCommit(function() {
-        {
-          if (moduleName in parentState) {
-            console.warn(
-              '[vuex] state field "' + moduleName + '" was overridden by a module with the same name at "' + path.join(".") + '"'
-            );
-          }
-        }
-        parentState[moduleName] = module.state;
-      });
-    }
-    var local = module.context = makeLocalContext(store2, namespace, path);
-    module.forEachMutation(function(mutation, key) {
-      var namespacedType = namespace + key;
-      registerMutation(store2, namespacedType, mutation, local);
-    });
-    module.forEachAction(function(action, key) {
-      var type = action.root ? key : namespace + key;
-      var handler = action.handler || action;
-      registerAction(store2, type, handler, local);
-    });
-    module.forEachGetter(function(getter, key) {
-      var namespacedType = namespace + key;
-      registerGetter(store2, namespacedType, getter, local);
-    });
-    module.forEachChild(function(child, key) {
-      installModule(store2, rootState, path.concat(key), child, hot);
-    });
-  }
-  function makeLocalContext(store2, namespace, path) {
-    var noNamespace = namespace === "";
-    var local = {
-      dispatch: noNamespace ? store2.dispatch : function(_type, _payload, _options) {
-        var args = unifyObjectStyle(_type, _payload, _options);
-        var payload = args.payload;
-        var options = args.options;
-        var type = args.type;
-        if (!options || !options.root) {
-          type = namespace + type;
-          if (!store2._actions[type]) {
-            console.error("[vuex] unknown local action type: " + args.type + ", global type: " + type);
-            return;
-          }
-        }
-        return store2.dispatch(type, payload);
-      },
-      commit: noNamespace ? store2.commit : function(_type, _payload, _options) {
-        var args = unifyObjectStyle(_type, _payload, _options);
-        var payload = args.payload;
-        var options = args.options;
-        var type = args.type;
-        if (!options || !options.root) {
-          type = namespace + type;
-          if (!store2._mutations[type]) {
-            console.error("[vuex] unknown local mutation type: " + args.type + ", global type: " + type);
-            return;
-          }
-        }
-        store2.commit(type, payload, options);
-      }
-    };
-    Object.defineProperties(local, {
-      getters: {
-        get: noNamespace ? function() {
-          return store2.getters;
-        } : function() {
-          return makeLocalGetters(store2, namespace);
-        }
-      },
-      state: {
-        get: function() {
-          return getNestedState(store2.state, path);
-        }
-      }
-    });
-    return local;
-  }
-  function makeLocalGetters(store2, namespace) {
-    if (!store2._makeLocalGettersCache[namespace]) {
-      var gettersProxy = {};
-      var splitPos = namespace.length;
-      Object.keys(store2.getters).forEach(function(type) {
-        if (type.slice(0, splitPos) !== namespace) {
-          return;
-        }
-        var localType = type.slice(splitPos);
-        Object.defineProperty(gettersProxy, localType, {
-          get: function() {
-            return store2.getters[type];
-          },
-          enumerable: true
-        });
-      });
-      store2._makeLocalGettersCache[namespace] = gettersProxy;
-    }
-    return store2._makeLocalGettersCache[namespace];
-  }
-  function registerMutation(store2, type, handler, local) {
-    var entry = store2._mutations[type] || (store2._mutations[type] = []);
-    entry.push(function wrappedMutationHandler(payload) {
-      handler.call(store2, local.state, payload);
-    });
-  }
-  function registerAction(store2, type, handler, local) {
-    var entry = store2._actions[type] || (store2._actions[type] = []);
-    entry.push(function wrappedActionHandler(payload) {
-      var res2 = handler.call(store2, {
-        dispatch: local.dispatch,
-        commit: local.commit,
-        getters: local.getters,
-        state: local.state,
-        rootGetters: store2.getters,
-        rootState: store2.state
-      }, payload);
-      if (!isPromise(res2)) {
-        res2 = Promise.resolve(res2);
-      }
-      if (store2._devtoolHook) {
-        return res2.catch(function(err) {
-          store2._devtoolHook.emit("vuex:error", err);
-          throw err;
-        });
-      } else {
-        return res2;
-      }
-    });
-  }
-  function registerGetter(store2, type, rawGetter, local) {
-    if (store2._wrappedGetters[type]) {
-      {
-        console.error("[vuex] duplicate getter key: " + type);
-      }
-      return;
-    }
-    store2._wrappedGetters[type] = function wrappedGetter(store22) {
-      return rawGetter(
-        local.state,
-        // local state
-        local.getters,
-        // local getters
-        store22.state,
-        // root state
-        store22.getters
-        // root getters
-      );
-    };
-  }
-  function enableStrictMode(store2) {
-    vue.watch(function() {
-      return store2._state.data;
-    }, function() {
-      {
-        assert(store2._committing, "do not mutate vuex store state outside mutation handlers.");
-      }
-    }, { deep: true, flush: "sync" });
-  }
-  function getNestedState(state, path) {
-    return path.reduce(function(state2, key) {
-      return state2[key];
-    }, state);
-  }
-  function unifyObjectStyle(type, payload, options) {
-    if (isObject$3(type) && type.type) {
-      options = payload;
-      payload = type;
-      type = type.type;
-    }
-    {
-      assert(typeof type === "string", "expects string as the type, but found " + typeof type + ".");
-    }
-    return { type, payload, options };
-  }
-  var LABEL_VUEX_BINDINGS = "vuex bindings";
-  var MUTATIONS_LAYER_ID$1 = "vuex:mutations";
-  var ACTIONS_LAYER_ID = "vuex:actions";
-  var INSPECTOR_ID$1 = "vuex";
-  var actionId = 0;
-  function addDevtools(app, store2) {
-    setupDevtoolsPlugin$1(
-      {
-        id: "org.vuejs.vuex",
-        app,
-        label: "Vuex",
-        homepage: "https://next.vuex.vuejs.org/",
-        logo: "https://vuejs.org/images/icons/favicon-96x96.png",
-        packageName: "vuex",
-        componentStateTypes: [LABEL_VUEX_BINDINGS]
-      },
-      function(api2) {
-        api2.addTimelineLayer({
-          id: MUTATIONS_LAYER_ID$1,
-          label: "Vuex Mutations",
-          color: COLOR_LIME_500
-        });
-        api2.addTimelineLayer({
-          id: ACTIONS_LAYER_ID,
-          label: "Vuex Actions",
-          color: COLOR_LIME_500
-        });
-        api2.addInspector({
-          id: INSPECTOR_ID$1,
-          label: "Vuex",
-          icon: "storage",
-          treeFilterPlaceholder: "Filter stores..."
-        });
-        api2.on.getInspectorTree(function(payload) {
-          if (payload.app === app && payload.inspectorId === INSPECTOR_ID$1) {
-            if (payload.filter) {
-              var nodes = [];
-              flattenStoreForInspectorTree(nodes, store2._modules.root, payload.filter, "");
-              payload.rootNodes = nodes;
-            } else {
-              payload.rootNodes = [
-                formatStoreForInspectorTree$1(store2._modules.root, "")
-              ];
-            }
-          }
-        });
-        api2.on.getInspectorState(function(payload) {
-          if (payload.app === app && payload.inspectorId === INSPECTOR_ID$1) {
-            var modulePath = payload.nodeId;
-            makeLocalGetters(store2, modulePath);
-            payload.state = formatStoreForInspectorState$1(
-              getStoreModule(store2._modules, modulePath),
-              modulePath === "root" ? store2.getters : store2._makeLocalGettersCache,
-              modulePath
-            );
-          }
-        });
-        api2.on.editInspectorState(function(payload) {
-          if (payload.app === app && payload.inspectorId === INSPECTOR_ID$1) {
-            var modulePath = payload.nodeId;
-            var path = payload.path;
-            if (modulePath !== "root") {
-              path = modulePath.split("/").filter(Boolean).concat(path);
-            }
-            store2._withCommit(function() {
-              payload.set(store2._state.data, path, payload.state.value);
-            });
-          }
-        });
-        store2.subscribe(function(mutation, state) {
-          var data = {};
-          if (mutation.payload) {
-            data.payload = mutation.payload;
-          }
-          data.state = state;
-          api2.notifyComponentUpdate();
-          api2.sendInspectorTree(INSPECTOR_ID$1);
-          api2.sendInspectorState(INSPECTOR_ID$1);
-          api2.addTimelineEvent({
-            layerId: MUTATIONS_LAYER_ID$1,
-            event: {
-              time: Date.now(),
-              title: mutation.type,
-              data
-            }
-          });
-        });
-        store2.subscribeAction({
-          before: function(action, state) {
-            var data = {};
-            if (action.payload) {
-              data.payload = action.payload;
-            }
-            action._id = actionId++;
-            action._time = Date.now();
-            data.state = state;
-            api2.addTimelineEvent({
-              layerId: ACTIONS_LAYER_ID,
-              event: {
-                time: action._time,
-                title: action.type,
-                groupId: action._id,
-                subtitle: "start",
-                data
-              }
-            });
-          },
-          after: function(action, state) {
-            var data = {};
-            var duration2 = Date.now() - action._time;
-            data.duration = {
-              _custom: {
-                type: "duration",
-                display: duration2 + "ms",
-                tooltip: "Action duration",
-                value: duration2
-              }
-            };
-            if (action.payload) {
-              data.payload = action.payload;
-            }
-            data.state = state;
-            api2.addTimelineEvent({
-              layerId: ACTIONS_LAYER_ID,
-              event: {
-                time: Date.now(),
-                title: action.type,
-                groupId: action._id,
-                subtitle: "end",
-                data
-              }
-            });
-          }
-        });
-      }
-    );
-  }
-  var COLOR_LIME_500 = 8702998;
-  var COLOR_DARK = 6710886;
-  var COLOR_WHITE = 16777215;
-  var TAG_NAMESPACED = {
-    label: "namespaced",
-    textColor: COLOR_WHITE,
-    backgroundColor: COLOR_DARK
-  };
-  function extractNameFromPath(path) {
-    return path && path !== "root" ? path.split("/").slice(-2, -1)[0] : "Root";
-  }
-  function formatStoreForInspectorTree$1(module, path) {
-    return {
-      id: path || "root",
-      // all modules end with a `/`, we want the last segment only
-      // cart/ -> cart
-      // nested/cart/ -> cart
-      label: extractNameFromPath(path),
-      tags: module.namespaced ? [TAG_NAMESPACED] : [],
-      children: Object.keys(module._children).map(
-        function(moduleName) {
-          return formatStoreForInspectorTree$1(
-            module._children[moduleName],
-            path + moduleName + "/"
-          );
-        }
-      )
-    };
-  }
-  function flattenStoreForInspectorTree(result, module, filter, path) {
-    if (path.includes(filter)) {
-      result.push({
-        id: path || "root",
-        label: path.endsWith("/") ? path.slice(0, path.length - 1) : path || "Root",
-        tags: module.namespaced ? [TAG_NAMESPACED] : []
-      });
-    }
-    Object.keys(module._children).forEach(function(moduleName) {
-      flattenStoreForInspectorTree(result, module._children[moduleName], filter, path + moduleName + "/");
-    });
-  }
-  function formatStoreForInspectorState$1(module, getters, path) {
-    getters = path === "root" ? getters : getters[path];
-    var gettersKeys = Object.keys(getters);
-    var storeState = {
-      state: Object.keys(module.state).map(function(key) {
-        return {
-          key,
-          editable: true,
-          value: module.state[key]
-        };
-      })
-    };
-    if (gettersKeys.length) {
-      var tree = transformPathsToObjectTree(getters);
-      storeState.getters = Object.keys(tree).map(function(key) {
-        return {
-          key: key.endsWith("/") ? extractNameFromPath(key) : key,
-          editable: false,
-          value: canThrow(function() {
-            return tree[key];
-          })
-        };
-      });
-    }
-    return storeState;
-  }
-  function transformPathsToObjectTree(getters) {
-    var result = {};
-    Object.keys(getters).forEach(function(key) {
-      var path = key.split("/");
-      if (path.length > 1) {
-        var target = result;
-        var leafKey = path.pop();
-        path.forEach(function(p2) {
-          if (!target[p2]) {
-            target[p2] = {
-              _custom: {
-                value: {},
-                display: p2,
-                tooltip: "Module",
-                abstract: true
-              }
-            };
-          }
-          target = target[p2]._custom.value;
-        });
-        target[leafKey] = canThrow(function() {
-          return getters[key];
-        });
-      } else {
-        result[key] = canThrow(function() {
-          return getters[key];
-        });
-      }
-    });
-    return result;
-  }
-  function getStoreModule(moduleMap, path) {
-    var names = path.split("/").filter(function(n2) {
-      return n2;
-    });
-    return names.reduce(
-      function(module, moduleName, i2) {
-        var child = module[moduleName];
-        if (!child) {
-          throw new Error('Missing module "' + moduleName + '" for path "' + path + '".');
-        }
-        return i2 === names.length - 1 ? child : child._children;
-      },
-      path === "root" ? moduleMap : moduleMap.root._children
-    );
-  }
-  function canThrow(cb) {
-    try {
-      return cb();
-    } catch (e2) {
-      return e2;
-    }
-  }
-  var Module = function Module2(rawModule, runtime) {
-    this.runtime = runtime;
-    this._children = /* @__PURE__ */ Object.create(null);
-    this._rawModule = rawModule;
-    var rawState = rawModule.state;
-    this.state = (typeof rawState === "function" ? rawState() : rawState) || {};
-  };
-  var prototypeAccessors$1 = { namespaced: { configurable: true } };
-  prototypeAccessors$1.namespaced.get = function() {
-    return !!this._rawModule.namespaced;
-  };
-  Module.prototype.addChild = function addChild(key, module) {
-    this._children[key] = module;
-  };
-  Module.prototype.removeChild = function removeChild(key) {
-    delete this._children[key];
-  };
-  Module.prototype.getChild = function getChild(key) {
-    return this._children[key];
-  };
-  Module.prototype.hasChild = function hasChild(key) {
-    return key in this._children;
-  };
-  Module.prototype.update = function update(rawModule) {
-    this._rawModule.namespaced = rawModule.namespaced;
-    if (rawModule.actions) {
-      this._rawModule.actions = rawModule.actions;
-    }
-    if (rawModule.mutations) {
-      this._rawModule.mutations = rawModule.mutations;
-    }
-    if (rawModule.getters) {
-      this._rawModule.getters = rawModule.getters;
-    }
-  };
-  Module.prototype.forEachChild = function forEachChild(fn) {
-    forEachValue(this._children, fn);
-  };
-  Module.prototype.forEachGetter = function forEachGetter(fn) {
-    if (this._rawModule.getters) {
-      forEachValue(this._rawModule.getters, fn);
-    }
-  };
-  Module.prototype.forEachAction = function forEachAction(fn) {
-    if (this._rawModule.actions) {
-      forEachValue(this._rawModule.actions, fn);
-    }
-  };
-  Module.prototype.forEachMutation = function forEachMutation(fn) {
-    if (this._rawModule.mutations) {
-      forEachValue(this._rawModule.mutations, fn);
-    }
-  };
-  Object.defineProperties(Module.prototype, prototypeAccessors$1);
-  var ModuleCollection = function ModuleCollection2(rawRootModule) {
-    this.register([], rawRootModule, false);
-  };
-  ModuleCollection.prototype.get = function get(path) {
-    return path.reduce(function(module, key) {
-      return module.getChild(key);
-    }, this.root);
-  };
-  ModuleCollection.prototype.getNamespace = function getNamespace(path) {
-    var module = this.root;
-    return path.reduce(function(namespace, key) {
-      module = module.getChild(key);
-      return namespace + (module.namespaced ? key + "/" : "");
-    }, "");
-  };
-  ModuleCollection.prototype.update = function update$1(rawRootModule) {
-    update2([], this.root, rawRootModule);
-  };
-  ModuleCollection.prototype.register = function register(path, rawModule, runtime) {
-    var this$1$1 = this;
-    if (runtime === void 0)
-      runtime = true;
-    {
-      assertRawModule(path, rawModule);
-    }
-    var newModule = new Module(rawModule, runtime);
-    if (path.length === 0) {
-      this.root = newModule;
-    } else {
-      var parent = this.get(path.slice(0, -1));
-      parent.addChild(path[path.length - 1], newModule);
-    }
-    if (rawModule.modules) {
-      forEachValue(rawModule.modules, function(rawChildModule, key) {
-        this$1$1.register(path.concat(key), rawChildModule, runtime);
-      });
-    }
-  };
-  ModuleCollection.prototype.unregister = function unregister(path) {
-    var parent = this.get(path.slice(0, -1));
-    var key = path[path.length - 1];
-    var child = parent.getChild(key);
-    if (!child) {
-      {
-        console.warn(
-          "[vuex] trying to unregister module '" + key + "', which is not registered"
-        );
-      }
-      return;
-    }
-    if (!child.runtime) {
-      return;
-    }
-    parent.removeChild(key);
-  };
-  ModuleCollection.prototype.isRegistered = function isRegistered(path) {
-    var parent = this.get(path.slice(0, -1));
-    var key = path[path.length - 1];
-    if (parent) {
-      return parent.hasChild(key);
-    }
-    return false;
-  };
-  function update2(path, targetModule, newModule) {
-    {
-      assertRawModule(path, newModule);
-    }
-    targetModule.update(newModule);
-    if (newModule.modules) {
-      for (var key in newModule.modules) {
-        if (!targetModule.getChild(key)) {
-          {
-            console.warn(
-              "[vuex] trying to add a new module '" + key + "' on hot reloading, manual reload is needed"
-            );
-          }
-          return;
-        }
-        update2(
-          path.concat(key),
-          targetModule.getChild(key),
-          newModule.modules[key]
-        );
-      }
-    }
-  }
-  var functionAssert = {
-    assert: function(value) {
-      return typeof value === "function";
-    },
-    expected: "function"
-  };
-  var objectAssert = {
-    assert: function(value) {
-      return typeof value === "function" || typeof value === "object" && typeof value.handler === "function";
-    },
-    expected: 'function or object with "handler" function'
-  };
-  var assertTypes = {
-    getters: functionAssert,
-    mutations: functionAssert,
-    actions: objectAssert
-  };
-  function assertRawModule(path, rawModule) {
-    Object.keys(assertTypes).forEach(function(key) {
-      if (!rawModule[key]) {
-        return;
-      }
-      var assertOptions2 = assertTypes[key];
-      forEachValue(rawModule[key], function(value, type) {
-        assert(
-          assertOptions2.assert(value),
-          makeAssertionMessage(path, key, type, value, assertOptions2.expected)
-        );
-      });
-    });
-  }
-  function makeAssertionMessage(path, key, type, value, expected) {
-    var buf = key + " should be " + expected + ' but "' + key + "." + type + '"';
-    if (path.length > 0) {
-      buf += ' in module "' + path.join(".") + '"';
-    }
-    buf += " is " + JSON.stringify(value) + ".";
-    return buf;
-  }
-  function createStore(options) {
-    return new Store(options);
-  }
-  var Store = function Store2(options) {
-    var this$1$1 = this;
-    if (options === void 0)
-      options = {};
-    {
-      assert(typeof Promise !== "undefined", "vuex requires a Promise polyfill in this browser.");
-      assert(this instanceof Store2, "store must be called with the new operator.");
-    }
-    var plugins = options.plugins;
-    if (plugins === void 0)
-      plugins = [];
-    var strict = options.strict;
-    if (strict === void 0)
-      strict = false;
-    var devtools = options.devtools;
-    this._committing = false;
-    this._actions = /* @__PURE__ */ Object.create(null);
-    this._actionSubscribers = [];
-    this._mutations = /* @__PURE__ */ Object.create(null);
-    this._wrappedGetters = /* @__PURE__ */ Object.create(null);
-    this._modules = new ModuleCollection(options);
-    this._modulesNamespaceMap = /* @__PURE__ */ Object.create(null);
-    this._subscribers = [];
-    this._makeLocalGettersCache = /* @__PURE__ */ Object.create(null);
-    this._scope = null;
-    this._devtools = devtools;
-    var store2 = this;
-    var ref = this;
-    var dispatch2 = ref.dispatch;
-    var commit2 = ref.commit;
-    this.dispatch = function boundDispatch(type, payload) {
-      return dispatch2.call(store2, type, payload);
-    };
-    this.commit = function boundCommit(type, payload, options2) {
-      return commit2.call(store2, type, payload, options2);
-    };
-    this.strict = strict;
-    var state = this._modules.root.state;
-    installModule(this, state, [], this._modules.root);
-    resetStoreState(this, state);
-    plugins.forEach(function(plugin) {
-      return plugin(this$1$1);
-    });
-  };
-  var prototypeAccessors = { state: { configurable: true } };
-  Store.prototype.install = function install(app, injectKey) {
-    app.provide(injectKey || storeKey, this);
-    app.config.globalProperties.$store = this;
-    var useDevtools = this._devtools !== void 0 ? this._devtools : true;
-    if (useDevtools) {
-      addDevtools(app, this);
-    }
-  };
-  prototypeAccessors.state.get = function() {
-    return this._state.data;
-  };
-  prototypeAccessors.state.set = function(v2) {
-    {
-      assert(false, "use store.replaceState() to explicit replace store state.");
-    }
-  };
-  Store.prototype.commit = function commit(_type, _payload, _options) {
-    var this$1$1 = this;
-    var ref = unifyObjectStyle(_type, _payload, _options);
-    var type = ref.type;
-    var payload = ref.payload;
-    var options = ref.options;
-    var mutation = { type, payload };
-    var entry = this._mutations[type];
-    if (!entry) {
-      {
-        console.error("[vuex] unknown mutation type: " + type);
-      }
-      return;
-    }
-    this._withCommit(function() {
-      entry.forEach(function commitIterator(handler) {
-        handler(payload);
-      });
-    });
-    this._subscribers.slice().forEach(function(sub) {
-      return sub(mutation, this$1$1.state);
-    });
-    if (options && options.silent) {
-      console.warn(
-        "[vuex] mutation type: " + type + ". Silent option has been removed. Use the filter functionality in the vue-devtools"
-      );
-    }
-  };
-  Store.prototype.dispatch = function dispatch(_type, _payload) {
-    var this$1$1 = this;
-    var ref = unifyObjectStyle(_type, _payload);
-    var type = ref.type;
-    var payload = ref.payload;
-    var action = { type, payload };
-    var entry = this._actions[type];
-    if (!entry) {
-      {
-        console.error("[vuex] unknown action type: " + type);
-      }
-      return;
-    }
-    try {
-      this._actionSubscribers.slice().filter(function(sub) {
-        return sub.before;
-      }).forEach(function(sub) {
-        return sub.before(action, this$1$1.state);
-      });
-    } catch (e2) {
-      {
-        console.warn("[vuex] error in before action subscribers: ");
-        console.error(e2);
-      }
-    }
-    var result = entry.length > 1 ? Promise.all(entry.map(function(handler) {
-      return handler(payload);
-    })) : entry[0](payload);
-    return new Promise(function(resolve, reject) {
-      result.then(function(res2) {
-        try {
-          this$1$1._actionSubscribers.filter(function(sub) {
-            return sub.after;
-          }).forEach(function(sub) {
-            return sub.after(action, this$1$1.state);
-          });
-        } catch (e2) {
-          {
-            console.warn("[vuex] error in after action subscribers: ");
-            console.error(e2);
-          }
-        }
-        resolve(res2);
-      }, function(error) {
-        try {
-          this$1$1._actionSubscribers.filter(function(sub) {
-            return sub.error;
-          }).forEach(function(sub) {
-            return sub.error(action, this$1$1.state, error);
-          });
-        } catch (e2) {
-          {
-            console.warn("[vuex] error in error action subscribers: ");
-            console.error(e2);
-          }
-        }
-        reject(error);
-      });
-    });
-  };
-  Store.prototype.subscribe = function subscribe(fn, options) {
-    return genericSubscribe(fn, this._subscribers, options);
-  };
-  Store.prototype.subscribeAction = function subscribeAction(fn, options) {
-    var subs = typeof fn === "function" ? { before: fn } : fn;
-    return genericSubscribe(subs, this._actionSubscribers, options);
-  };
-  Store.prototype.watch = function watch$1(getter, cb, options) {
-    var this$1$1 = this;
-    {
-      assert(typeof getter === "function", "store.watch only accepts a function.");
-    }
-    return vue.watch(function() {
-      return getter(this$1$1.state, this$1$1.getters);
-    }, cb, Object.assign({}, options));
-  };
-  Store.prototype.replaceState = function replaceState(state) {
-    var this$1$1 = this;
-    this._withCommit(function() {
-      this$1$1._state.data = state;
-    });
-  };
-  Store.prototype.registerModule = function registerModule(path, rawModule, options) {
-    if (options === void 0)
-      options = {};
-    if (typeof path === "string") {
-      path = [path];
-    }
-    {
-      assert(Array.isArray(path), "module path must be a string or an Array.");
-      assert(path.length > 0, "cannot register the root module by using registerModule.");
-    }
-    this._modules.register(path, rawModule);
-    installModule(this, this.state, path, this._modules.get(path), options.preserveState);
-    resetStoreState(this, this.state);
-  };
-  Store.prototype.unregisterModule = function unregisterModule(path) {
-    var this$1$1 = this;
-    if (typeof path === "string") {
-      path = [path];
-    }
-    {
-      assert(Array.isArray(path), "module path must be a string or an Array.");
-    }
-    this._modules.unregister(path);
-    this._withCommit(function() {
-      var parentState = getNestedState(this$1$1.state, path.slice(0, -1));
-      delete parentState[path[path.length - 1]];
-    });
-    resetStore(this);
-  };
-  Store.prototype.hasModule = function hasModule(path) {
-    if (typeof path === "string") {
-      path = [path];
-    }
-    {
-      assert(Array.isArray(path), "module path must be a string or an Array.");
-    }
-    return this._modules.isRegistered(path);
-  };
-  Store.prototype.hotUpdate = function hotUpdate(newOptions) {
-    this._modules.update(newOptions);
-    resetStore(this, true);
-  };
-  Store.prototype._withCommit = function _withCommit(fn) {
-    var committing = this._committing;
-    this._committing = true;
-    fn();
-    this._committing = committing;
-  };
-  Object.defineProperties(Store.prototype, prototypeAccessors);
-  var mapState$1 = normalizeNamespace(function(namespace, states) {
-    var res2 = {};
-    if (!isValidMap(states)) {
-      console.error("[vuex] mapState: mapper parameter must be either an Array or an Object");
-    }
-    normalizeMap(states).forEach(function(ref) {
-      var key = ref.key;
-      var val = ref.val;
-      res2[key] = function mappedState() {
-        var state = this.$store.state;
-        var getters = this.$store.getters;
-        if (namespace) {
-          var module = getModuleByNamespace(this.$store, "mapState", namespace);
-          if (!module) {
-            return;
-          }
-          state = module.context.state;
-          getters = module.context.getters;
-        }
-        return typeof val === "function" ? val.call(this, state, getters) : state[val];
-      };
-      res2[key].vuex = true;
-    });
-    return res2;
-  });
-  var mapMutations = normalizeNamespace(function(namespace, mutations) {
-    var res2 = {};
-    if (!isValidMap(mutations)) {
-      console.error("[vuex] mapMutations: mapper parameter must be either an Array or an Object");
-    }
-    normalizeMap(mutations).forEach(function(ref) {
-      var key = ref.key;
-      var val = ref.val;
-      res2[key] = function mappedMutation() {
-        var args = [], len = arguments.length;
-        while (len--)
-          args[len] = arguments[len];
-        var commit2 = this.$store.commit;
-        if (namespace) {
-          var module = getModuleByNamespace(this.$store, "mapMutations", namespace);
-          if (!module) {
-            return;
-          }
-          commit2 = module.context.commit;
-        }
-        return typeof val === "function" ? val.apply(this, [commit2].concat(args)) : commit2.apply(this.$store, [val].concat(args));
-      };
-    });
-    return res2;
-  });
-  var mapGetters$1 = normalizeNamespace(function(namespace, getters) {
-    var res2 = {};
-    if (!isValidMap(getters)) {
-      console.error("[vuex] mapGetters: mapper parameter must be either an Array or an Object");
-    }
-    normalizeMap(getters).forEach(function(ref) {
-      var key = ref.key;
-      var val = ref.val;
-      val = namespace + val;
-      res2[key] = function mappedGetter() {
-        if (namespace && !getModuleByNamespace(this.$store, "mapGetters", namespace)) {
-          return;
-        }
-        if (!(val in this.$store.getters)) {
-          console.error("[vuex] unknown getter: " + val);
-          return;
-        }
-        return this.$store.getters[val];
-      };
-      res2[key].vuex = true;
-    });
-    return res2;
-  });
-  var mapActions$1 = normalizeNamespace(function(namespace, actions) {
-    var res2 = {};
-    if (!isValidMap(actions)) {
-      console.error("[vuex] mapActions: mapper parameter must be either an Array or an Object");
-    }
-    normalizeMap(actions).forEach(function(ref) {
-      var key = ref.key;
-      var val = ref.val;
-      res2[key] = function mappedAction() {
-        var args = [], len = arguments.length;
-        while (len--)
-          args[len] = arguments[len];
-        var dispatch2 = this.$store.dispatch;
-        if (namespace) {
-          var module = getModuleByNamespace(this.$store, "mapActions", namespace);
-          if (!module) {
-            return;
-          }
-          dispatch2 = module.context.dispatch;
-        }
-        return typeof val === "function" ? val.apply(this, [dispatch2].concat(args)) : dispatch2.apply(this.$store, [val].concat(args));
-      };
-    });
-    return res2;
-  });
-  var createNamespacedHelpers = function(namespace) {
-    return {
-      mapState: mapState$1.bind(null, namespace),
-      mapGetters: mapGetters$1.bind(null, namespace),
-      mapMutations: mapMutations.bind(null, namespace),
-      mapActions: mapActions$1.bind(null, namespace)
-    };
-  };
-  function normalizeMap(map) {
-    if (!isValidMap(map)) {
-      return [];
-    }
-    return Array.isArray(map) ? map.map(function(key) {
-      return { key, val: key };
-    }) : Object.keys(map).map(function(key) {
-      return { key, val: map[key] };
-    });
-  }
-  function isValidMap(map) {
-    return Array.isArray(map) || isObject$3(map);
-  }
-  function normalizeNamespace(fn) {
-    return function(namespace, map) {
-      if (typeof namespace !== "string") {
-        map = namespace;
-        namespace = "";
-      } else if (namespace.charAt(namespace.length - 1) !== "/") {
-        namespace += "/";
-      }
-      return fn(namespace, map);
-    };
-  }
-  function getModuleByNamespace(store2, helper, namespace) {
-    var module = store2._modulesNamespaceMap[namespace];
-    if (!module) {
-      console.error("[vuex] module namespace not found in " + helper + "(): " + namespace);
-    }
-    return module;
-  }
-  function createLogger(ref) {
-    if (ref === void 0)
-      ref = {};
-    var collapsed = ref.collapsed;
-    if (collapsed === void 0)
-      collapsed = true;
-    var filter = ref.filter;
-    if (filter === void 0)
-      filter = function(mutation, stateBefore, stateAfter) {
-        return true;
-      };
-    var transformer = ref.transformer;
-    if (transformer === void 0)
-      transformer = function(state) {
-        return state;
-      };
-    var mutationTransformer = ref.mutationTransformer;
-    if (mutationTransformer === void 0)
-      mutationTransformer = function(mut) {
-        return mut;
-      };
-    var actionFilter = ref.actionFilter;
-    if (actionFilter === void 0)
-      actionFilter = function(action, state) {
-        return true;
-      };
-    var actionTransformer = ref.actionTransformer;
-    if (actionTransformer === void 0)
-      actionTransformer = function(act) {
-        return act;
-      };
-    var logMutations = ref.logMutations;
-    if (logMutations === void 0)
-      logMutations = true;
-    var logActions = ref.logActions;
-    if (logActions === void 0)
-      logActions = true;
-    var logger = ref.logger;
-    if (logger === void 0)
-      logger = console;
-    return function(store2) {
-      var prevState = deepCopy$1(store2.state);
-      if (typeof logger === "undefined") {
-        return;
-      }
-      if (logMutations) {
-        store2.subscribe(function(mutation, state) {
-          var nextState = deepCopy$1(state);
-          if (filter(mutation, prevState, nextState)) {
-            var formattedTime = getFormattedTime();
-            var formattedMutation = mutationTransformer(mutation);
-            var message = "mutation " + mutation.type + formattedTime;
-            startMessage(logger, message, collapsed);
-            logger.log("%c prev state", "color: #9E9E9E; font-weight: bold", transformer(prevState));
-            logger.log("%c mutation", "color: #03A9F4; font-weight: bold", formattedMutation);
-            logger.log("%c next state", "color: #4CAF50; font-weight: bold", transformer(nextState));
-            endMessage(logger);
-          }
-          prevState = nextState;
-        });
-      }
-      if (logActions) {
-        store2.subscribeAction(function(action, state) {
-          if (actionFilter(action, state)) {
-            var formattedTime = getFormattedTime();
-            var formattedAction = actionTransformer(action);
-            var message = "action " + action.type + formattedTime;
-            startMessage(logger, message, collapsed);
-            logger.log("%c action", "color: #03A9F4; font-weight: bold", formattedAction);
-            endMessage(logger);
-          }
-        });
-      }
-    };
-  }
-  function startMessage(logger, message, collapsed) {
-    var startMessage2 = collapsed ? logger.groupCollapsed : logger.group;
-    try {
-      startMessage2.call(logger, message);
-    } catch (e2) {
-      logger.log(message);
-    }
-  }
-  function endMessage(logger) {
-    try {
-      logger.groupEnd();
-    } catch (e2) {
-      logger.log("—— log end ——");
-    }
-  }
-  function getFormattedTime() {
-    var time = /* @__PURE__ */ new Date();
-    return " @ " + pad$1(time.getHours(), 2) + ":" + pad$1(time.getMinutes(), 2) + ":" + pad$1(time.getSeconds(), 2) + "." + pad$1(time.getMilliseconds(), 3);
-  }
-  function repeat(str, times) {
-    return new Array(times + 1).join(str);
-  }
-  function pad$1(num, maxLength) {
-    return repeat("0", maxLength - num.toString().length) + num;
-  }
-  var index = {
-    version: "4.1.0",
-    Store,
-    storeKey,
-    createStore,
-    useStore,
-    mapState: mapState$1,
-    mapMutations,
-    mapGetters: mapGetters$1,
-    mapActions: mapActions$1,
-    createNamespacedHelpers,
-    createLogger
-  };
-  var define_process_env_default$2 = {};
-  const configData = {
-    staticUrl: "https://ic365.ajulye.com"
-    //请求接口地址
-  };
-  const store = createStore({
-    // 在Vuex中，store的state属性用于存储全局状态数据，通过mutations和actions进行修改
-    // State: 驱动应用的单一状态源
-    state: {
-      // 状态数据
-      configData,
-      //接口请求路径
-      defaultHeadPic: "/static/image/head_pic.png",
-      //默认用户头像
-      requestHead: {
-        Authorization: ""
-      },
-      userInfo: {
-        //储存用户登录信息
-        cookieName: "userInfo",
-        //用于查询cookie储存的key名称
-        token: "",
-        //登陆后的token，没有就说明没登录
-        info: {}
-        //登录用户信息数据存储
-      },
-      crypto,
-      encrypt_enabled: define_process_env_default$2.VUE_APP_ENCRYPT_ENABLED === "true",
-      formRules: {
-        //uni-forms校验必填
-        phone: /^1[3456789]\d{9}$/
-      },
-      baseFontSize: 16,
-      isLoading: true,
-      //页面是否加载loading样式
-      hasLogin: false,
-      isUniverifyLogin: false,
-      loginProvider: "",
-      openid: null,
-      testvuex: false,
-      colorIndex: 0,
-      colorList: ["#FF0000", "#00FF00", "#0000FF"],
-      noMatchLeftWindow: true,
-      active: "componentPage",
-      leftWinActive: "/pages/page/index/index",
-      activeOpen: "",
-      menu: [],
-      univerifyErrorMsg: "",
-      // vuex测试例使用
-      username: "foo",
-      sex: "男",
-      age: 10
-    },
-    // Mutations: 同步修改 State 的方法
-    mutations: {
-      // 复位crypto
-      RESET_CRYPTO: (state) => {
-        api.remove("crypto");
-        state.crypto = {
-          sessionKey: "",
-          aesKey: "",
-          expireTime: 0
-        };
-      },
-      // 设置crypto
-      SET_CRYPTO: (state, crypto2) => {
-        state.crypto = crypto2;
-        api.set("crypto", JSON.stringify(crypto2));
-      },
-      SET_ENCRYPTENABLED: (state, encryptEnabled) => {
-        state.encrypt_enabled = encryptEnabled;
-      },
-      RESET_LOGIN: (state) => {
-        state.userInfo.info = {};
-        state.userInfo.token = "";
-      },
-      SET_LOGIN: (state, data) => {
-        formatAppLog("log", "at store/index.js:95", "data.token::", data.token);
-        state.userInfo.token = data.token;
-        state.userInfo.info = data;
-      },
-      Update_UserInfo: (state, data) => {
-        state.userInfo.info = {
-          ...state.userInfo.info,
-          ...data
-        };
-        uni.setStorage({
-          key: state.userInfo.cookieName,
-          data: state.userInfo,
-          success: function() {
-          }
-        });
-      },
-      // 同步方法
-      login(state, provider) {
-        state.hasLogin = true;
-        state.loginProvider = provider;
-      },
-      logout(state) {
-        state.hasLogin = false;
-        state.openid = null;
-      },
-      setOpenid(state, openid) {
-        state.openid = openid;
-      },
-      setTestTrue(state) {
-        state.testvuex = true;
-      },
-      setTestFalse(state) {
-        state.testvuex = false;
-      },
-      setColorIndex(state, index2) {
-        state.colorIndex = index2;
-      },
-      setMatchLeftWindow(state, matchLeftWindow) {
-        state.noMatchLeftWindow = !matchLeftWindow;
-      },
-      setActive(state, tabPage) {
-        state.active = tabPage;
-      },
-      setLeftWinActive(state, leftWinActive) {
-        state.leftWinActive = leftWinActive;
-      },
-      setActiveOpen(state, activeOpen) {
-        state.activeOpen = activeOpen;
-      },
-      setMenu(state, menu) {
-        state.menu = menu;
-      },
-      setUniverifyLogin(state, payload) {
-        typeof payload !== "boolean" ? payload = !!payload : "";
-        state.isUniverifyLogin = payload;
-      },
-      setUniverifyErrorMsg(state, payload = "") {
-        state.univerifyErrorMsg = payload;
-      },
-      // vuex测试例使用
-      increment(state) {
-        state.age++;
-      },
-      incrementTen(state, payload) {
-        state.age += payload.amount;
-      },
-      resetAge(state) {
-        state.age = 10;
-      }
-    },
-    getters: {
-      // 计算属性，用于从state派生出一些状态
-      currentColor(state) {
-        return state.colorList[state.colorIndex];
-      },
-      // vuex测试例使用
-      doubleAge(state) {
-        return state.age * 2;
-      }
-    },
-    // Actions: 处理异步操作并提交 Mutations
-    actions: {
-      // 异步方法，可以调用mutations或者其他的API调用等
-      // vuex测试例使用
-      incrementAsync(context2, payload) {
-        context2.commit("incrementTen", payload);
-      },
-      // lazy loading openid
-      getUserOpenId: async function({
-        commit,
-        state
-      }) {
-        return await new Promise((resolve, reject) => {
-          if (state.openid) {
-            resolve(state.openid);
-          }
-        });
-      },
-      getPhoneNumber: function({
-        commit
-      }, univerifyInfo) {
-        return new Promise((resolve, reject) => {
-          uni.request({
-            url: "https://97fca9f2-41f6-449f-a35e-3f135d4c3875.bspapp.com/http/univerify-login",
-            method: "POST",
-            data: univerifyInfo,
-            success: (res2) => {
-              const data = res2.data;
-              if (data.success) {
-                resolve(data.phoneNumber);
-              } else {
-                reject(res2);
-              }
-            },
-            fail: (err) => {
-              reject(res);
-            }
-          });
-        });
-      }
-    },
-    modules: {
-      // 模块化，可以将公共函数放在模块中
-    }
-  });
   function bind$2(fn, thisArg) {
     return function wrap() {
       return fn.apply(thisArg, arguments);
@@ -2011,7 +88,7 @@ if (uni.restoreGlobal) {
   const isString$1 = typeOfTest("string");
   const isFunction$1 = typeOfTest("function");
   const isNumber$2 = typeOfTest("number");
-  const isObject$2 = (thing) => thing !== null && typeof thing === "object";
+  const isObject$3 = (thing) => thing !== null && typeof thing === "object";
   const isBoolean$1 = (thing) => thing === true || thing === false;
   const isPlainObject$2 = (val) => {
     if (kindOf$1(val) !== "object") {
@@ -2024,7 +101,7 @@ if (uni.restoreGlobal) {
   const isFile$1 = kindOfTest$1("File");
   const isBlob$1 = kindOfTest$1("Blob");
   const isFileList$1 = kindOfTest$1("FileList");
-  const isStream$1 = (val) => isObject$2(val) && isFunction$1(val.pipe);
+  const isStream$1 = (val) => isObject$3(val) && isFunction$1(val.pipe);
   const isFormData$1 = (thing) => {
     let kind;
     return thing && (typeof FormData === "function" && thing instanceof FormData || isFunction$1(thing.append) && ((kind = kindOf$1(thing)) === "formdata" || // detect form-data instance
@@ -2249,7 +326,7 @@ if (uni.restoreGlobal) {
   const toJSONObject = (obj) => {
     const stack = new Array(10);
     const visit = (source, i2) => {
-      if (isObject$2(source)) {
+      if (isObject$3(source)) {
         if (stack.indexOf(source) >= 0) {
           return;
         }
@@ -2269,7 +346,7 @@ if (uni.restoreGlobal) {
     return visit(obj, 0);
   };
   const isAsyncFn = kindOfTest$1("AsyncFunction");
-  const isThenable = (thing) => thing && (isObject$2(thing) || isFunction$1(thing)) && isFunction$1(thing.then) && isFunction$1(thing.catch);
+  const isThenable = (thing) => thing && (isObject$3(thing) || isFunction$1(thing)) && isFunction$1(thing.then) && isFunction$1(thing.catch);
   const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
     if (setImmediateSupported) {
       return setImmediate;
@@ -2300,7 +377,7 @@ if (uni.restoreGlobal) {
     isString: isString$1,
     isNumber: isNumber$2,
     isBoolean: isBoolean$1,
-    isObject: isObject$2,
+    isObject: isObject$3,
     isPlainObject: isPlainObject$2,
     isReadableStream,
     isRequest,
@@ -4364,6 +2441,1801 @@ if (uni.restoreGlobal) {
   axios.getAdapter = adapters.getAdapter;
   axios.HttpStatusCode = HttpStatusCode$1;
   axios.default = axios;
+  var lookup = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    62,
+    0,
+    62,
+    0,
+    63,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    0,
+    0,
+    0,
+    0,
+    63,
+    0,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ];
+  function base64Decode(source, target) {
+    var sourceLength = source.length;
+    var paddingLength = source[sourceLength - 2] === "=" ? 2 : source[sourceLength - 1] === "=" ? 1 : 0;
+    var tmp;
+    var byteIndex = 0;
+    var baseLength = sourceLength - paddingLength & 4294967292;
+    for (var i2 = 0; i2 < baseLength; i2 += 4) {
+      tmp = lookup[source.charCodeAt(i2)] << 18 | lookup[source.charCodeAt(i2 + 1)] << 12 | lookup[source.charCodeAt(i2 + 2)] << 6 | lookup[source.charCodeAt(i2 + 3)];
+      target[byteIndex++] = tmp >> 16 & 255;
+      target[byteIndex++] = tmp >> 8 & 255;
+      target[byteIndex++] = tmp & 255;
+    }
+    if (paddingLength === 1) {
+      tmp = lookup[source.charCodeAt(i2)] << 10 | lookup[source.charCodeAt(i2 + 1)] << 4 | lookup[source.charCodeAt(i2 + 2)] >> 2;
+      target[byteIndex++] = tmp >> 8 & 255;
+      target[byteIndex++] = tmp & 255;
+    }
+    if (paddingLength === 2) {
+      tmp = lookup[source.charCodeAt(i2)] << 2 | lookup[source.charCodeAt(i2 + 1)] >> 4;
+      target[byteIndex++] = tmp & 255;
+    }
+  }
+  const crypto = {
+    getRandomValues(arr) {
+      if (!(arr instanceof Int8Array || arr instanceof Uint8Array || arr instanceof Int16Array || arr instanceof Uint16Array || arr instanceof Int32Array || arr instanceof Uint32Array || arr instanceof Uint8ClampedArray)) {
+        throw new Error("Expected an integer array");
+      }
+      if (arr.byteLength > 65536) {
+        throw new Error("Can only request a maximum of 65536 bytes");
+      }
+      var crypto2 = requireNativePlugin("DCloud-Crypto");
+      base64Decode(crypto2.getRandomValues(arr.byteLength), new Uint8Array(
+        arr.buffer,
+        arr.byteOffset,
+        arr.byteLength
+      ));
+      return arr;
+    }
+  };
+  /*! js-cookie v3.0.5 | MIT */
+  function assign$2(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2];
+      for (var key in source) {
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  var defaultConverter = {
+    read: function(value) {
+      if (value[0] === '"') {
+        value = value.slice(1, -1);
+      }
+      return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
+    },
+    write: function(value) {
+      return encodeURIComponent(value).replace(
+        /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
+        decodeURIComponent
+      );
+    }
+  };
+  function init(converter, defaultAttributes) {
+    function set2(name, value, attributes) {
+      if (typeof document === "undefined") {
+        return;
+      }
+      attributes = assign$2({}, defaultAttributes, attributes);
+      if (typeof attributes.expires === "number") {
+        attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
+      }
+      if (attributes.expires) {
+        attributes.expires = attributes.expires.toUTCString();
+      }
+      name = encodeURIComponent(name).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
+      var stringifiedAttributes = "";
+      for (var attributeName in attributes) {
+        if (!attributes[attributeName]) {
+          continue;
+        }
+        stringifiedAttributes += "; " + attributeName;
+        if (attributes[attributeName] === true) {
+          continue;
+        }
+        stringifiedAttributes += "=" + attributes[attributeName].split(";")[0];
+      }
+      return document.cookie = name + "=" + converter.write(value, name) + stringifiedAttributes;
+    }
+    function get(name) {
+      if (typeof document === "undefined" || arguments.length && !name) {
+        return;
+      }
+      var cookies2 = document.cookie ? document.cookie.split("; ") : [];
+      var jar = {};
+      for (var i2 = 0; i2 < cookies2.length; i2++) {
+        var parts = cookies2[i2].split("=");
+        var value = parts.slice(1).join("=");
+        try {
+          var found = decodeURIComponent(parts[0]);
+          jar[found] = converter.read(value, found);
+          if (name === found) {
+            break;
+          }
+        } catch (e2) {
+        }
+      }
+      return name ? jar[name] : jar;
+    }
+    return Object.create(
+      {
+        set: set2,
+        get,
+        remove: function(name, attributes) {
+          set2(
+            name,
+            "",
+            assign$2({}, attributes, {
+              expires: -1
+            })
+          );
+        },
+        withAttributes: function(attributes) {
+          return init(this.converter, assign$2({}, this.attributes, attributes));
+        },
+        withConverter: function(converter2) {
+          return init(assign$2({}, this.converter, converter2), this.attributes);
+        }
+      },
+      {
+        attributes: { value: Object.freeze(defaultAttributes) },
+        converter: { value: Object.freeze(converter) }
+      }
+    );
+  }
+  var api = init(defaultConverter, { path: "/" });
+  function getDevtoolsGlobalHook$1() {
+    return getTarget$1().__VUE_DEVTOOLS_GLOBAL_HOOK__;
+  }
+  function getTarget$1() {
+    return typeof navigator !== "undefined" && typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {};
+  }
+  const isProxyAvailable$1 = typeof Proxy === "function";
+  const HOOK_SETUP$1 = "devtools-plugin:setup";
+  const HOOK_PLUGIN_SETTINGS_SET$1 = "plugin:settings:set";
+  let ApiProxy$1 = class ApiProxy {
+    constructor(plugin, hook) {
+      this.target = null;
+      this.targetQueue = [];
+      this.onQueue = [];
+      this.plugin = plugin;
+      this.hook = hook;
+      const defaultSettings = {};
+      if (plugin.settings) {
+        for (const id2 in plugin.settings) {
+          const item = plugin.settings[id2];
+          defaultSettings[id2] = item.defaultValue;
+        }
+      }
+      const localSettingsSaveId = `__vue-devtools-plugin-settings__${plugin.id}`;
+      let currentSettings = { ...defaultSettings };
+      try {
+        const raw = localStorage.getItem(localSettingsSaveId);
+        const data = JSON.parse(raw);
+        Object.assign(currentSettings, data);
+      } catch (e2) {
+      }
+      this.fallbacks = {
+        getSettings() {
+          return currentSettings;
+        },
+        setSettings(value) {
+          try {
+            localStorage.setItem(localSettingsSaveId, JSON.stringify(value));
+          } catch (e2) {
+          }
+          currentSettings = value;
+        }
+      };
+      hook.on(HOOK_PLUGIN_SETTINGS_SET$1, (pluginId, value) => {
+        if (pluginId === this.plugin.id) {
+          this.fallbacks.setSettings(value);
+        }
+      });
+      this.proxiedOn = new Proxy({}, {
+        get: (_target, prop) => {
+          if (this.target) {
+            return this.target.on[prop];
+          } else {
+            return (...args) => {
+              this.onQueue.push({
+                method: prop,
+                args
+              });
+            };
+          }
+        }
+      });
+      this.proxiedTarget = new Proxy({}, {
+        get: (_target, prop) => {
+          if (this.target) {
+            return this.target[prop];
+          } else if (prop === "on") {
+            return this.proxiedOn;
+          } else if (Object.keys(this.fallbacks).includes(prop)) {
+            return (...args) => {
+              this.targetQueue.push({
+                method: prop,
+                args,
+                resolve: () => {
+                }
+              });
+              return this.fallbacks[prop](...args);
+            };
+          } else {
+            return (...args) => {
+              return new Promise((resolve) => {
+                this.targetQueue.push({
+                  method: prop,
+                  args,
+                  resolve
+                });
+              });
+            };
+          }
+        }
+      });
+    }
+    async setRealTarget(target) {
+      this.target = target;
+      for (const item of this.onQueue) {
+        this.target.on[item.method](...item.args);
+      }
+      for (const item of this.targetQueue) {
+        item.resolve(await this.target[item.method](...item.args));
+      }
+    }
+  };
+  function setupDevtoolsPlugin$1(pluginDescriptor, setupFn) {
+    const target = getTarget$1();
+    const hook = getDevtoolsGlobalHook$1();
+    const enableProxy = isProxyAvailable$1 && pluginDescriptor.enableEarlyProxy;
+    if (hook && (target.__VUE_DEVTOOLS_PLUGIN_API_AVAILABLE__ || !enableProxy)) {
+      hook.emit(HOOK_SETUP$1, pluginDescriptor, setupFn);
+    } else {
+      const proxy = enableProxy ? new ApiProxy$1(pluginDescriptor, hook) : null;
+      const list = target.__VUE_DEVTOOLS_PLUGINS__ = target.__VUE_DEVTOOLS_PLUGINS__ || [];
+      list.push({
+        pluginDescriptor,
+        setupFn,
+        proxy
+      });
+      if (proxy)
+        setupFn(proxy.proxiedTarget);
+    }
+  }
+  /*!
+   * vuex v4.1.0
+   * (c) 2022 Evan You
+   * @license MIT
+   */
+  var storeKey = "store";
+  function useStore(key) {
+    if (key === void 0)
+      key = null;
+    return vue.inject(key !== null ? key : storeKey);
+  }
+  function find(list, f2) {
+    return list.filter(f2)[0];
+  }
+  function deepCopy$1(obj, cache) {
+    if (cache === void 0)
+      cache = [];
+    if (obj === null || typeof obj !== "object") {
+      return obj;
+    }
+    var hit = find(cache, function(c2) {
+      return c2.original === obj;
+    });
+    if (hit) {
+      return hit.copy;
+    }
+    var copy = Array.isArray(obj) ? [] : {};
+    cache.push({
+      original: obj,
+      copy
+    });
+    Object.keys(obj).forEach(function(key) {
+      copy[key] = deepCopy$1(obj[key], cache);
+    });
+    return copy;
+  }
+  function forEachValue(obj, fn) {
+    Object.keys(obj).forEach(function(key) {
+      return fn(obj[key], key);
+    });
+  }
+  function isObject$2(obj) {
+    return obj !== null && typeof obj === "object";
+  }
+  function isPromise(val) {
+    return val && typeof val.then === "function";
+  }
+  function assert(condition2, msg) {
+    if (!condition2) {
+      throw new Error("[vuex] " + msg);
+    }
+  }
+  function partial(fn, arg) {
+    return function() {
+      return fn(arg);
+    };
+  }
+  function genericSubscribe(fn, subs, options) {
+    if (subs.indexOf(fn) < 0) {
+      options && options.prepend ? subs.unshift(fn) : subs.push(fn);
+    }
+    return function() {
+      var i2 = subs.indexOf(fn);
+      if (i2 > -1) {
+        subs.splice(i2, 1);
+      }
+    };
+  }
+  function resetStore(store2, hot) {
+    store2._actions = /* @__PURE__ */ Object.create(null);
+    store2._mutations = /* @__PURE__ */ Object.create(null);
+    store2._wrappedGetters = /* @__PURE__ */ Object.create(null);
+    store2._modulesNamespaceMap = /* @__PURE__ */ Object.create(null);
+    var state = store2.state;
+    installModule(store2, state, [], store2._modules.root, true);
+    resetStoreState(store2, state, hot);
+  }
+  function resetStoreState(store2, state, hot) {
+    var oldState = store2._state;
+    var oldScope = store2._scope;
+    store2.getters = {};
+    store2._makeLocalGettersCache = /* @__PURE__ */ Object.create(null);
+    var wrappedGetters = store2._wrappedGetters;
+    var computedObj = {};
+    var computedCache = {};
+    var scope = vue.effectScope(true);
+    scope.run(function() {
+      forEachValue(wrappedGetters, function(fn, key) {
+        computedObj[key] = partial(fn, store2);
+        computedCache[key] = vue.computed(function() {
+          return computedObj[key]();
+        });
+        Object.defineProperty(store2.getters, key, {
+          get: function() {
+            return computedCache[key].value;
+          },
+          enumerable: true
+          // for local getters
+        });
+      });
+    });
+    store2._state = vue.reactive({
+      data: state
+    });
+    store2._scope = scope;
+    if (store2.strict) {
+      enableStrictMode(store2);
+    }
+    if (oldState) {
+      if (hot) {
+        store2._withCommit(function() {
+          oldState.data = null;
+        });
+      }
+    }
+    if (oldScope) {
+      oldScope.stop();
+    }
+  }
+  function installModule(store2, rootState, path, module, hot) {
+    var isRoot = !path.length;
+    var namespace = store2._modules.getNamespace(path);
+    if (module.namespaced) {
+      if (store2._modulesNamespaceMap[namespace] && true) {
+        console.error("[vuex] duplicate namespace " + namespace + " for the namespaced module " + path.join("/"));
+      }
+      store2._modulesNamespaceMap[namespace] = module;
+    }
+    if (!isRoot && !hot) {
+      var parentState = getNestedState(rootState, path.slice(0, -1));
+      var moduleName = path[path.length - 1];
+      store2._withCommit(function() {
+        {
+          if (moduleName in parentState) {
+            console.warn(
+              '[vuex] state field "' + moduleName + '" was overridden by a module with the same name at "' + path.join(".") + '"'
+            );
+          }
+        }
+        parentState[moduleName] = module.state;
+      });
+    }
+    var local = module.context = makeLocalContext(store2, namespace, path);
+    module.forEachMutation(function(mutation, key) {
+      var namespacedType = namespace + key;
+      registerMutation(store2, namespacedType, mutation, local);
+    });
+    module.forEachAction(function(action, key) {
+      var type = action.root ? key : namespace + key;
+      var handler = action.handler || action;
+      registerAction(store2, type, handler, local);
+    });
+    module.forEachGetter(function(getter, key) {
+      var namespacedType = namespace + key;
+      registerGetter(store2, namespacedType, getter, local);
+    });
+    module.forEachChild(function(child, key) {
+      installModule(store2, rootState, path.concat(key), child, hot);
+    });
+  }
+  function makeLocalContext(store2, namespace, path) {
+    var noNamespace = namespace === "";
+    var local = {
+      dispatch: noNamespace ? store2.dispatch : function(_type, _payload, _options) {
+        var args = unifyObjectStyle(_type, _payload, _options);
+        var payload = args.payload;
+        var options = args.options;
+        var type = args.type;
+        if (!options || !options.root) {
+          type = namespace + type;
+          if (!store2._actions[type]) {
+            console.error("[vuex] unknown local action type: " + args.type + ", global type: " + type);
+            return;
+          }
+        }
+        return store2.dispatch(type, payload);
+      },
+      commit: noNamespace ? store2.commit : function(_type, _payload, _options) {
+        var args = unifyObjectStyle(_type, _payload, _options);
+        var payload = args.payload;
+        var options = args.options;
+        var type = args.type;
+        if (!options || !options.root) {
+          type = namespace + type;
+          if (!store2._mutations[type]) {
+            console.error("[vuex] unknown local mutation type: " + args.type + ", global type: " + type);
+            return;
+          }
+        }
+        store2.commit(type, payload, options);
+      }
+    };
+    Object.defineProperties(local, {
+      getters: {
+        get: noNamespace ? function() {
+          return store2.getters;
+        } : function() {
+          return makeLocalGetters(store2, namespace);
+        }
+      },
+      state: {
+        get: function() {
+          return getNestedState(store2.state, path);
+        }
+      }
+    });
+    return local;
+  }
+  function makeLocalGetters(store2, namespace) {
+    if (!store2._makeLocalGettersCache[namespace]) {
+      var gettersProxy = {};
+      var splitPos = namespace.length;
+      Object.keys(store2.getters).forEach(function(type) {
+        if (type.slice(0, splitPos) !== namespace) {
+          return;
+        }
+        var localType = type.slice(splitPos);
+        Object.defineProperty(gettersProxy, localType, {
+          get: function() {
+            return store2.getters[type];
+          },
+          enumerable: true
+        });
+      });
+      store2._makeLocalGettersCache[namespace] = gettersProxy;
+    }
+    return store2._makeLocalGettersCache[namespace];
+  }
+  function registerMutation(store2, type, handler, local) {
+    var entry = store2._mutations[type] || (store2._mutations[type] = []);
+    entry.push(function wrappedMutationHandler(payload) {
+      handler.call(store2, local.state, payload);
+    });
+  }
+  function registerAction(store2, type, handler, local) {
+    var entry = store2._actions[type] || (store2._actions[type] = []);
+    entry.push(function wrappedActionHandler(payload) {
+      var res2 = handler.call(store2, {
+        dispatch: local.dispatch,
+        commit: local.commit,
+        getters: local.getters,
+        state: local.state,
+        rootGetters: store2.getters,
+        rootState: store2.state
+      }, payload);
+      if (!isPromise(res2)) {
+        res2 = Promise.resolve(res2);
+      }
+      if (store2._devtoolHook) {
+        return res2.catch(function(err) {
+          store2._devtoolHook.emit("vuex:error", err);
+          throw err;
+        });
+      } else {
+        return res2;
+      }
+    });
+  }
+  function registerGetter(store2, type, rawGetter, local) {
+    if (store2._wrappedGetters[type]) {
+      {
+        console.error("[vuex] duplicate getter key: " + type);
+      }
+      return;
+    }
+    store2._wrappedGetters[type] = function wrappedGetter(store22) {
+      return rawGetter(
+        local.state,
+        // local state
+        local.getters,
+        // local getters
+        store22.state,
+        // root state
+        store22.getters
+        // root getters
+      );
+    };
+  }
+  function enableStrictMode(store2) {
+    vue.watch(function() {
+      return store2._state.data;
+    }, function() {
+      {
+        assert(store2._committing, "do not mutate vuex store state outside mutation handlers.");
+      }
+    }, { deep: true, flush: "sync" });
+  }
+  function getNestedState(state, path) {
+    return path.reduce(function(state2, key) {
+      return state2[key];
+    }, state);
+  }
+  function unifyObjectStyle(type, payload, options) {
+    if (isObject$2(type) && type.type) {
+      options = payload;
+      payload = type;
+      type = type.type;
+    }
+    {
+      assert(typeof type === "string", "expects string as the type, but found " + typeof type + ".");
+    }
+    return { type, payload, options };
+  }
+  var LABEL_VUEX_BINDINGS = "vuex bindings";
+  var MUTATIONS_LAYER_ID$1 = "vuex:mutations";
+  var ACTIONS_LAYER_ID = "vuex:actions";
+  var INSPECTOR_ID$1 = "vuex";
+  var actionId = 0;
+  function addDevtools(app, store2) {
+    setupDevtoolsPlugin$1(
+      {
+        id: "org.vuejs.vuex",
+        app,
+        label: "Vuex",
+        homepage: "https://next.vuex.vuejs.org/",
+        logo: "https://vuejs.org/images/icons/favicon-96x96.png",
+        packageName: "vuex",
+        componentStateTypes: [LABEL_VUEX_BINDINGS]
+      },
+      function(api2) {
+        api2.addTimelineLayer({
+          id: MUTATIONS_LAYER_ID$1,
+          label: "Vuex Mutations",
+          color: COLOR_LIME_500
+        });
+        api2.addTimelineLayer({
+          id: ACTIONS_LAYER_ID,
+          label: "Vuex Actions",
+          color: COLOR_LIME_500
+        });
+        api2.addInspector({
+          id: INSPECTOR_ID$1,
+          label: "Vuex",
+          icon: "storage",
+          treeFilterPlaceholder: "Filter stores..."
+        });
+        api2.on.getInspectorTree(function(payload) {
+          if (payload.app === app && payload.inspectorId === INSPECTOR_ID$1) {
+            if (payload.filter) {
+              var nodes = [];
+              flattenStoreForInspectorTree(nodes, store2._modules.root, payload.filter, "");
+              payload.rootNodes = nodes;
+            } else {
+              payload.rootNodes = [
+                formatStoreForInspectorTree$1(store2._modules.root, "")
+              ];
+            }
+          }
+        });
+        api2.on.getInspectorState(function(payload) {
+          if (payload.app === app && payload.inspectorId === INSPECTOR_ID$1) {
+            var modulePath = payload.nodeId;
+            makeLocalGetters(store2, modulePath);
+            payload.state = formatStoreForInspectorState$1(
+              getStoreModule(store2._modules, modulePath),
+              modulePath === "root" ? store2.getters : store2._makeLocalGettersCache,
+              modulePath
+            );
+          }
+        });
+        api2.on.editInspectorState(function(payload) {
+          if (payload.app === app && payload.inspectorId === INSPECTOR_ID$1) {
+            var modulePath = payload.nodeId;
+            var path = payload.path;
+            if (modulePath !== "root") {
+              path = modulePath.split("/").filter(Boolean).concat(path);
+            }
+            store2._withCommit(function() {
+              payload.set(store2._state.data, path, payload.state.value);
+            });
+          }
+        });
+        store2.subscribe(function(mutation, state) {
+          var data = {};
+          if (mutation.payload) {
+            data.payload = mutation.payload;
+          }
+          data.state = state;
+          api2.notifyComponentUpdate();
+          api2.sendInspectorTree(INSPECTOR_ID$1);
+          api2.sendInspectorState(INSPECTOR_ID$1);
+          api2.addTimelineEvent({
+            layerId: MUTATIONS_LAYER_ID$1,
+            event: {
+              time: Date.now(),
+              title: mutation.type,
+              data
+            }
+          });
+        });
+        store2.subscribeAction({
+          before: function(action, state) {
+            var data = {};
+            if (action.payload) {
+              data.payload = action.payload;
+            }
+            action._id = actionId++;
+            action._time = Date.now();
+            data.state = state;
+            api2.addTimelineEvent({
+              layerId: ACTIONS_LAYER_ID,
+              event: {
+                time: action._time,
+                title: action.type,
+                groupId: action._id,
+                subtitle: "start",
+                data
+              }
+            });
+          },
+          after: function(action, state) {
+            var data = {};
+            var duration2 = Date.now() - action._time;
+            data.duration = {
+              _custom: {
+                type: "duration",
+                display: duration2 + "ms",
+                tooltip: "Action duration",
+                value: duration2
+              }
+            };
+            if (action.payload) {
+              data.payload = action.payload;
+            }
+            data.state = state;
+            api2.addTimelineEvent({
+              layerId: ACTIONS_LAYER_ID,
+              event: {
+                time: Date.now(),
+                title: action.type,
+                groupId: action._id,
+                subtitle: "end",
+                data
+              }
+            });
+          }
+        });
+      }
+    );
+  }
+  var COLOR_LIME_500 = 8702998;
+  var COLOR_DARK = 6710886;
+  var COLOR_WHITE = 16777215;
+  var TAG_NAMESPACED = {
+    label: "namespaced",
+    textColor: COLOR_WHITE,
+    backgroundColor: COLOR_DARK
+  };
+  function extractNameFromPath(path) {
+    return path && path !== "root" ? path.split("/").slice(-2, -1)[0] : "Root";
+  }
+  function formatStoreForInspectorTree$1(module, path) {
+    return {
+      id: path || "root",
+      // all modules end with a `/`, we want the last segment only
+      // cart/ -> cart
+      // nested/cart/ -> cart
+      label: extractNameFromPath(path),
+      tags: module.namespaced ? [TAG_NAMESPACED] : [],
+      children: Object.keys(module._children).map(
+        function(moduleName) {
+          return formatStoreForInspectorTree$1(
+            module._children[moduleName],
+            path + moduleName + "/"
+          );
+        }
+      )
+    };
+  }
+  function flattenStoreForInspectorTree(result, module, filter, path) {
+    if (path.includes(filter)) {
+      result.push({
+        id: path || "root",
+        label: path.endsWith("/") ? path.slice(0, path.length - 1) : path || "Root",
+        tags: module.namespaced ? [TAG_NAMESPACED] : []
+      });
+    }
+    Object.keys(module._children).forEach(function(moduleName) {
+      flattenStoreForInspectorTree(result, module._children[moduleName], filter, path + moduleName + "/");
+    });
+  }
+  function formatStoreForInspectorState$1(module, getters, path) {
+    getters = path === "root" ? getters : getters[path];
+    var gettersKeys = Object.keys(getters);
+    var storeState = {
+      state: Object.keys(module.state).map(function(key) {
+        return {
+          key,
+          editable: true,
+          value: module.state[key]
+        };
+      })
+    };
+    if (gettersKeys.length) {
+      var tree = transformPathsToObjectTree(getters);
+      storeState.getters = Object.keys(tree).map(function(key) {
+        return {
+          key: key.endsWith("/") ? extractNameFromPath(key) : key,
+          editable: false,
+          value: canThrow(function() {
+            return tree[key];
+          })
+        };
+      });
+    }
+    return storeState;
+  }
+  function transformPathsToObjectTree(getters) {
+    var result = {};
+    Object.keys(getters).forEach(function(key) {
+      var path = key.split("/");
+      if (path.length > 1) {
+        var target = result;
+        var leafKey = path.pop();
+        path.forEach(function(p2) {
+          if (!target[p2]) {
+            target[p2] = {
+              _custom: {
+                value: {},
+                display: p2,
+                tooltip: "Module",
+                abstract: true
+              }
+            };
+          }
+          target = target[p2]._custom.value;
+        });
+        target[leafKey] = canThrow(function() {
+          return getters[key];
+        });
+      } else {
+        result[key] = canThrow(function() {
+          return getters[key];
+        });
+      }
+    });
+    return result;
+  }
+  function getStoreModule(moduleMap, path) {
+    var names = path.split("/").filter(function(n2) {
+      return n2;
+    });
+    return names.reduce(
+      function(module, moduleName, i2) {
+        var child = module[moduleName];
+        if (!child) {
+          throw new Error('Missing module "' + moduleName + '" for path "' + path + '".');
+        }
+        return i2 === names.length - 1 ? child : child._children;
+      },
+      path === "root" ? moduleMap : moduleMap.root._children
+    );
+  }
+  function canThrow(cb) {
+    try {
+      return cb();
+    } catch (e2) {
+      return e2;
+    }
+  }
+  var Module = function Module2(rawModule, runtime) {
+    this.runtime = runtime;
+    this._children = /* @__PURE__ */ Object.create(null);
+    this._rawModule = rawModule;
+    var rawState = rawModule.state;
+    this.state = (typeof rawState === "function" ? rawState() : rawState) || {};
+  };
+  var prototypeAccessors$1 = { namespaced: { configurable: true } };
+  prototypeAccessors$1.namespaced.get = function() {
+    return !!this._rawModule.namespaced;
+  };
+  Module.prototype.addChild = function addChild(key, module) {
+    this._children[key] = module;
+  };
+  Module.prototype.removeChild = function removeChild(key) {
+    delete this._children[key];
+  };
+  Module.prototype.getChild = function getChild(key) {
+    return this._children[key];
+  };
+  Module.prototype.hasChild = function hasChild(key) {
+    return key in this._children;
+  };
+  Module.prototype.update = function update(rawModule) {
+    this._rawModule.namespaced = rawModule.namespaced;
+    if (rawModule.actions) {
+      this._rawModule.actions = rawModule.actions;
+    }
+    if (rawModule.mutations) {
+      this._rawModule.mutations = rawModule.mutations;
+    }
+    if (rawModule.getters) {
+      this._rawModule.getters = rawModule.getters;
+    }
+  };
+  Module.prototype.forEachChild = function forEachChild(fn) {
+    forEachValue(this._children, fn);
+  };
+  Module.prototype.forEachGetter = function forEachGetter(fn) {
+    if (this._rawModule.getters) {
+      forEachValue(this._rawModule.getters, fn);
+    }
+  };
+  Module.prototype.forEachAction = function forEachAction(fn) {
+    if (this._rawModule.actions) {
+      forEachValue(this._rawModule.actions, fn);
+    }
+  };
+  Module.prototype.forEachMutation = function forEachMutation(fn) {
+    if (this._rawModule.mutations) {
+      forEachValue(this._rawModule.mutations, fn);
+    }
+  };
+  Object.defineProperties(Module.prototype, prototypeAccessors$1);
+  var ModuleCollection = function ModuleCollection2(rawRootModule) {
+    this.register([], rawRootModule, false);
+  };
+  ModuleCollection.prototype.get = function get(path) {
+    return path.reduce(function(module, key) {
+      return module.getChild(key);
+    }, this.root);
+  };
+  ModuleCollection.prototype.getNamespace = function getNamespace(path) {
+    var module = this.root;
+    return path.reduce(function(namespace, key) {
+      module = module.getChild(key);
+      return namespace + (module.namespaced ? key + "/" : "");
+    }, "");
+  };
+  ModuleCollection.prototype.update = function update$1(rawRootModule) {
+    update2([], this.root, rawRootModule);
+  };
+  ModuleCollection.prototype.register = function register(path, rawModule, runtime) {
+    var this$1$1 = this;
+    if (runtime === void 0)
+      runtime = true;
+    {
+      assertRawModule(path, rawModule);
+    }
+    var newModule = new Module(rawModule, runtime);
+    if (path.length === 0) {
+      this.root = newModule;
+    } else {
+      var parent = this.get(path.slice(0, -1));
+      parent.addChild(path[path.length - 1], newModule);
+    }
+    if (rawModule.modules) {
+      forEachValue(rawModule.modules, function(rawChildModule, key) {
+        this$1$1.register(path.concat(key), rawChildModule, runtime);
+      });
+    }
+  };
+  ModuleCollection.prototype.unregister = function unregister(path) {
+    var parent = this.get(path.slice(0, -1));
+    var key = path[path.length - 1];
+    var child = parent.getChild(key);
+    if (!child) {
+      {
+        console.warn(
+          "[vuex] trying to unregister module '" + key + "', which is not registered"
+        );
+      }
+      return;
+    }
+    if (!child.runtime) {
+      return;
+    }
+    parent.removeChild(key);
+  };
+  ModuleCollection.prototype.isRegistered = function isRegistered(path) {
+    var parent = this.get(path.slice(0, -1));
+    var key = path[path.length - 1];
+    if (parent) {
+      return parent.hasChild(key);
+    }
+    return false;
+  };
+  function update2(path, targetModule, newModule) {
+    {
+      assertRawModule(path, newModule);
+    }
+    targetModule.update(newModule);
+    if (newModule.modules) {
+      for (var key in newModule.modules) {
+        if (!targetModule.getChild(key)) {
+          {
+            console.warn(
+              "[vuex] trying to add a new module '" + key + "' on hot reloading, manual reload is needed"
+            );
+          }
+          return;
+        }
+        update2(
+          path.concat(key),
+          targetModule.getChild(key),
+          newModule.modules[key]
+        );
+      }
+    }
+  }
+  var functionAssert = {
+    assert: function(value) {
+      return typeof value === "function";
+    },
+    expected: "function"
+  };
+  var objectAssert = {
+    assert: function(value) {
+      return typeof value === "function" || typeof value === "object" && typeof value.handler === "function";
+    },
+    expected: 'function or object with "handler" function'
+  };
+  var assertTypes = {
+    getters: functionAssert,
+    mutations: functionAssert,
+    actions: objectAssert
+  };
+  function assertRawModule(path, rawModule) {
+    Object.keys(assertTypes).forEach(function(key) {
+      if (!rawModule[key]) {
+        return;
+      }
+      var assertOptions2 = assertTypes[key];
+      forEachValue(rawModule[key], function(value, type) {
+        assert(
+          assertOptions2.assert(value),
+          makeAssertionMessage(path, key, type, value, assertOptions2.expected)
+        );
+      });
+    });
+  }
+  function makeAssertionMessage(path, key, type, value, expected) {
+    var buf = key + " should be " + expected + ' but "' + key + "." + type + '"';
+    if (path.length > 0) {
+      buf += ' in module "' + path.join(".") + '"';
+    }
+    buf += " is " + JSON.stringify(value) + ".";
+    return buf;
+  }
+  function createStore(options) {
+    return new Store(options);
+  }
+  var Store = function Store2(options) {
+    var this$1$1 = this;
+    if (options === void 0)
+      options = {};
+    {
+      assert(typeof Promise !== "undefined", "vuex requires a Promise polyfill in this browser.");
+      assert(this instanceof Store2, "store must be called with the new operator.");
+    }
+    var plugins = options.plugins;
+    if (plugins === void 0)
+      plugins = [];
+    var strict = options.strict;
+    if (strict === void 0)
+      strict = false;
+    var devtools = options.devtools;
+    this._committing = false;
+    this._actions = /* @__PURE__ */ Object.create(null);
+    this._actionSubscribers = [];
+    this._mutations = /* @__PURE__ */ Object.create(null);
+    this._wrappedGetters = /* @__PURE__ */ Object.create(null);
+    this._modules = new ModuleCollection(options);
+    this._modulesNamespaceMap = /* @__PURE__ */ Object.create(null);
+    this._subscribers = [];
+    this._makeLocalGettersCache = /* @__PURE__ */ Object.create(null);
+    this._scope = null;
+    this._devtools = devtools;
+    var store2 = this;
+    var ref = this;
+    var dispatch2 = ref.dispatch;
+    var commit2 = ref.commit;
+    this.dispatch = function boundDispatch(type, payload) {
+      return dispatch2.call(store2, type, payload);
+    };
+    this.commit = function boundCommit(type, payload, options2) {
+      return commit2.call(store2, type, payload, options2);
+    };
+    this.strict = strict;
+    var state = this._modules.root.state;
+    installModule(this, state, [], this._modules.root);
+    resetStoreState(this, state);
+    plugins.forEach(function(plugin) {
+      return plugin(this$1$1);
+    });
+  };
+  var prototypeAccessors = { state: { configurable: true } };
+  Store.prototype.install = function install(app, injectKey) {
+    app.provide(injectKey || storeKey, this);
+    app.config.globalProperties.$store = this;
+    var useDevtools = this._devtools !== void 0 ? this._devtools : true;
+    if (useDevtools) {
+      addDevtools(app, this);
+    }
+  };
+  prototypeAccessors.state.get = function() {
+    return this._state.data;
+  };
+  prototypeAccessors.state.set = function(v2) {
+    {
+      assert(false, "use store.replaceState() to explicit replace store state.");
+    }
+  };
+  Store.prototype.commit = function commit(_type, _payload, _options) {
+    var this$1$1 = this;
+    var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+    var mutation = { type, payload };
+    var entry = this._mutations[type];
+    if (!entry) {
+      {
+        console.error("[vuex] unknown mutation type: " + type);
+      }
+      return;
+    }
+    this._withCommit(function() {
+      entry.forEach(function commitIterator(handler) {
+        handler(payload);
+      });
+    });
+    this._subscribers.slice().forEach(function(sub) {
+      return sub(mutation, this$1$1.state);
+    });
+    if (options && options.silent) {
+      console.warn(
+        "[vuex] mutation type: " + type + ". Silent option has been removed. Use the filter functionality in the vue-devtools"
+      );
+    }
+  };
+  Store.prototype.dispatch = function dispatch(_type, _payload) {
+    var this$1$1 = this;
+    var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+    var action = { type, payload };
+    var entry = this._actions[type];
+    if (!entry) {
+      {
+        console.error("[vuex] unknown action type: " + type);
+      }
+      return;
+    }
+    try {
+      this._actionSubscribers.slice().filter(function(sub) {
+        return sub.before;
+      }).forEach(function(sub) {
+        return sub.before(action, this$1$1.state);
+      });
+    } catch (e2) {
+      {
+        console.warn("[vuex] error in before action subscribers: ");
+        console.error(e2);
+      }
+    }
+    var result = entry.length > 1 ? Promise.all(entry.map(function(handler) {
+      return handler(payload);
+    })) : entry[0](payload);
+    return new Promise(function(resolve, reject) {
+      result.then(function(res2) {
+        try {
+          this$1$1._actionSubscribers.filter(function(sub) {
+            return sub.after;
+          }).forEach(function(sub) {
+            return sub.after(action, this$1$1.state);
+          });
+        } catch (e2) {
+          {
+            console.warn("[vuex] error in after action subscribers: ");
+            console.error(e2);
+          }
+        }
+        resolve(res2);
+      }, function(error) {
+        try {
+          this$1$1._actionSubscribers.filter(function(sub) {
+            return sub.error;
+          }).forEach(function(sub) {
+            return sub.error(action, this$1$1.state, error);
+          });
+        } catch (e2) {
+          {
+            console.warn("[vuex] error in error action subscribers: ");
+            console.error(e2);
+          }
+        }
+        reject(error);
+      });
+    });
+  };
+  Store.prototype.subscribe = function subscribe(fn, options) {
+    return genericSubscribe(fn, this._subscribers, options);
+  };
+  Store.prototype.subscribeAction = function subscribeAction(fn, options) {
+    var subs = typeof fn === "function" ? { before: fn } : fn;
+    return genericSubscribe(subs, this._actionSubscribers, options);
+  };
+  Store.prototype.watch = function watch$1(getter, cb, options) {
+    var this$1$1 = this;
+    {
+      assert(typeof getter === "function", "store.watch only accepts a function.");
+    }
+    return vue.watch(function() {
+      return getter(this$1$1.state, this$1$1.getters);
+    }, cb, Object.assign({}, options));
+  };
+  Store.prototype.replaceState = function replaceState(state) {
+    var this$1$1 = this;
+    this._withCommit(function() {
+      this$1$1._state.data = state;
+    });
+  };
+  Store.prototype.registerModule = function registerModule(path, rawModule, options) {
+    if (options === void 0)
+      options = {};
+    if (typeof path === "string") {
+      path = [path];
+    }
+    {
+      assert(Array.isArray(path), "module path must be a string or an Array.");
+      assert(path.length > 0, "cannot register the root module by using registerModule.");
+    }
+    this._modules.register(path, rawModule);
+    installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+    resetStoreState(this, this.state);
+  };
+  Store.prototype.unregisterModule = function unregisterModule(path) {
+    var this$1$1 = this;
+    if (typeof path === "string") {
+      path = [path];
+    }
+    {
+      assert(Array.isArray(path), "module path must be a string or an Array.");
+    }
+    this._modules.unregister(path);
+    this._withCommit(function() {
+      var parentState = getNestedState(this$1$1.state, path.slice(0, -1));
+      delete parentState[path[path.length - 1]];
+    });
+    resetStore(this);
+  };
+  Store.prototype.hasModule = function hasModule(path) {
+    if (typeof path === "string") {
+      path = [path];
+    }
+    {
+      assert(Array.isArray(path), "module path must be a string or an Array.");
+    }
+    return this._modules.isRegistered(path);
+  };
+  Store.prototype.hotUpdate = function hotUpdate(newOptions) {
+    this._modules.update(newOptions);
+    resetStore(this, true);
+  };
+  Store.prototype._withCommit = function _withCommit(fn) {
+    var committing = this._committing;
+    this._committing = true;
+    fn();
+    this._committing = committing;
+  };
+  Object.defineProperties(Store.prototype, prototypeAccessors);
+  var mapState$1 = normalizeNamespace(function(namespace, states) {
+    var res2 = {};
+    if (!isValidMap(states)) {
+      console.error("[vuex] mapState: mapper parameter must be either an Array or an Object");
+    }
+    normalizeMap(states).forEach(function(ref) {
+      var key = ref.key;
+      var val = ref.val;
+      res2[key] = function mappedState() {
+        var state = this.$store.state;
+        var getters = this.$store.getters;
+        if (namespace) {
+          var module = getModuleByNamespace(this.$store, "mapState", namespace);
+          if (!module) {
+            return;
+          }
+          state = module.context.state;
+          getters = module.context.getters;
+        }
+        return typeof val === "function" ? val.call(this, state, getters) : state[val];
+      };
+      res2[key].vuex = true;
+    });
+    return res2;
+  });
+  var mapMutations = normalizeNamespace(function(namespace, mutations) {
+    var res2 = {};
+    if (!isValidMap(mutations)) {
+      console.error("[vuex] mapMutations: mapper parameter must be either an Array or an Object");
+    }
+    normalizeMap(mutations).forEach(function(ref) {
+      var key = ref.key;
+      var val = ref.val;
+      res2[key] = function mappedMutation() {
+        var args = [], len = arguments.length;
+        while (len--)
+          args[len] = arguments[len];
+        var commit2 = this.$store.commit;
+        if (namespace) {
+          var module = getModuleByNamespace(this.$store, "mapMutations", namespace);
+          if (!module) {
+            return;
+          }
+          commit2 = module.context.commit;
+        }
+        return typeof val === "function" ? val.apply(this, [commit2].concat(args)) : commit2.apply(this.$store, [val].concat(args));
+      };
+    });
+    return res2;
+  });
+  var mapGetters$1 = normalizeNamespace(function(namespace, getters) {
+    var res2 = {};
+    if (!isValidMap(getters)) {
+      console.error("[vuex] mapGetters: mapper parameter must be either an Array or an Object");
+    }
+    normalizeMap(getters).forEach(function(ref) {
+      var key = ref.key;
+      var val = ref.val;
+      val = namespace + val;
+      res2[key] = function mappedGetter() {
+        if (namespace && !getModuleByNamespace(this.$store, "mapGetters", namespace)) {
+          return;
+        }
+        if (!(val in this.$store.getters)) {
+          console.error("[vuex] unknown getter: " + val);
+          return;
+        }
+        return this.$store.getters[val];
+      };
+      res2[key].vuex = true;
+    });
+    return res2;
+  });
+  var mapActions$1 = normalizeNamespace(function(namespace, actions) {
+    var res2 = {};
+    if (!isValidMap(actions)) {
+      console.error("[vuex] mapActions: mapper parameter must be either an Array or an Object");
+    }
+    normalizeMap(actions).forEach(function(ref) {
+      var key = ref.key;
+      var val = ref.val;
+      res2[key] = function mappedAction() {
+        var args = [], len = arguments.length;
+        while (len--)
+          args[len] = arguments[len];
+        var dispatch2 = this.$store.dispatch;
+        if (namespace) {
+          var module = getModuleByNamespace(this.$store, "mapActions", namespace);
+          if (!module) {
+            return;
+          }
+          dispatch2 = module.context.dispatch;
+        }
+        return typeof val === "function" ? val.apply(this, [dispatch2].concat(args)) : dispatch2.apply(this.$store, [val].concat(args));
+      };
+    });
+    return res2;
+  });
+  var createNamespacedHelpers = function(namespace) {
+    return {
+      mapState: mapState$1.bind(null, namespace),
+      mapGetters: mapGetters$1.bind(null, namespace),
+      mapMutations: mapMutations.bind(null, namespace),
+      mapActions: mapActions$1.bind(null, namespace)
+    };
+  };
+  function normalizeMap(map) {
+    if (!isValidMap(map)) {
+      return [];
+    }
+    return Array.isArray(map) ? map.map(function(key) {
+      return { key, val: key };
+    }) : Object.keys(map).map(function(key) {
+      return { key, val: map[key] };
+    });
+  }
+  function isValidMap(map) {
+    return Array.isArray(map) || isObject$2(map);
+  }
+  function normalizeNamespace(fn) {
+    return function(namespace, map) {
+      if (typeof namespace !== "string") {
+        map = namespace;
+        namespace = "";
+      } else if (namespace.charAt(namespace.length - 1) !== "/") {
+        namespace += "/";
+      }
+      return fn(namespace, map);
+    };
+  }
+  function getModuleByNamespace(store2, helper, namespace) {
+    var module = store2._modulesNamespaceMap[namespace];
+    if (!module) {
+      console.error("[vuex] module namespace not found in " + helper + "(): " + namespace);
+    }
+    return module;
+  }
+  function createLogger(ref) {
+    if (ref === void 0)
+      ref = {};
+    var collapsed = ref.collapsed;
+    if (collapsed === void 0)
+      collapsed = true;
+    var filter = ref.filter;
+    if (filter === void 0)
+      filter = function(mutation, stateBefore, stateAfter) {
+        return true;
+      };
+    var transformer = ref.transformer;
+    if (transformer === void 0)
+      transformer = function(state) {
+        return state;
+      };
+    var mutationTransformer = ref.mutationTransformer;
+    if (mutationTransformer === void 0)
+      mutationTransformer = function(mut) {
+        return mut;
+      };
+    var actionFilter = ref.actionFilter;
+    if (actionFilter === void 0)
+      actionFilter = function(action, state) {
+        return true;
+      };
+    var actionTransformer = ref.actionTransformer;
+    if (actionTransformer === void 0)
+      actionTransformer = function(act) {
+        return act;
+      };
+    var logMutations = ref.logMutations;
+    if (logMutations === void 0)
+      logMutations = true;
+    var logActions = ref.logActions;
+    if (logActions === void 0)
+      logActions = true;
+    var logger = ref.logger;
+    if (logger === void 0)
+      logger = console;
+    return function(store2) {
+      var prevState = deepCopy$1(store2.state);
+      if (typeof logger === "undefined") {
+        return;
+      }
+      if (logMutations) {
+        store2.subscribe(function(mutation, state) {
+          var nextState = deepCopy$1(state);
+          if (filter(mutation, prevState, nextState)) {
+            var formattedTime = getFormattedTime();
+            var formattedMutation = mutationTransformer(mutation);
+            var message = "mutation " + mutation.type + formattedTime;
+            startMessage(logger, message, collapsed);
+            logger.log("%c prev state", "color: #9E9E9E; font-weight: bold", transformer(prevState));
+            logger.log("%c mutation", "color: #03A9F4; font-weight: bold", formattedMutation);
+            logger.log("%c next state", "color: #4CAF50; font-weight: bold", transformer(nextState));
+            endMessage(logger);
+          }
+          prevState = nextState;
+        });
+      }
+      if (logActions) {
+        store2.subscribeAction(function(action, state) {
+          if (actionFilter(action, state)) {
+            var formattedTime = getFormattedTime();
+            var formattedAction = actionTransformer(action);
+            var message = "action " + action.type + formattedTime;
+            startMessage(logger, message, collapsed);
+            logger.log("%c action", "color: #03A9F4; font-weight: bold", formattedAction);
+            endMessage(logger);
+          }
+        });
+      }
+    };
+  }
+  function startMessage(logger, message, collapsed) {
+    var startMessage2 = collapsed ? logger.groupCollapsed : logger.group;
+    try {
+      startMessage2.call(logger, message);
+    } catch (e2) {
+      logger.log(message);
+    }
+  }
+  function endMessage(logger) {
+    try {
+      logger.groupEnd();
+    } catch (e2) {
+      logger.log("—— log end ——");
+    }
+  }
+  function getFormattedTime() {
+    var time = /* @__PURE__ */ new Date();
+    return " @ " + pad$1(time.getHours(), 2) + ":" + pad$1(time.getMinutes(), 2) + ":" + pad$1(time.getSeconds(), 2) + "." + pad$1(time.getMilliseconds(), 3);
+  }
+  function repeat(str, times) {
+    return new Array(times + 1).join(str);
+  }
+  function pad$1(num, maxLength) {
+    return repeat("0", maxLength - num.toString().length) + num;
+  }
+  var index = {
+    version: "4.1.0",
+    Store,
+    storeKey,
+    createStore,
+    useStore,
+    mapState: mapState$1,
+    mapMutations,
+    mapGetters: mapGetters$1,
+    mapActions: mapActions$1,
+    createNamespacedHelpers,
+    createLogger
+  };
+  var define_process_env_default$2 = {};
+  const configData = {
+    staticUrl: "https://ic365.ajulye.com"
+    //请求接口地址
+  };
+  const store = createStore({
+    // 在Vuex中，store的state属性用于存储全局状态数据，通过mutations和actions进行修改
+    // State: 驱动应用的单一状态源
+    state: {
+      // 状态数据
+      configData,
+      //接口请求路径
+      defaultHeadPic: "/static/image/head_pic.png",
+      //默认用户头像
+      requestHead: {
+        Authorization: ""
+      },
+      userInfo: {
+        //储存用户登录信息
+        cookieName: "userInfo",
+        //用于查询cookie储存的key名称
+        token: "",
+        //登陆后的token，没有就说明没登录
+        info: {}
+        //登录用户信息数据存储
+      },
+      crypto,
+      encrypt_enabled: define_process_env_default$2.VUE_APP_ENCRYPT_ENABLED === "true",
+      formRules: {
+        //uni-forms校验必填
+        phone: /^1[3456789]\d{9}$/
+      },
+      baseFontSize: 16,
+      isLoading: true,
+      //页面是否加载loading样式
+      hasLogin: false,
+      isUniverifyLogin: false,
+      loginProvider: "",
+      openid: null,
+      testvuex: false,
+      colorIndex: 0,
+      colorList: ["#FF0000", "#00FF00", "#0000FF"],
+      noMatchLeftWindow: true,
+      active: "componentPage",
+      leftWinActive: "/pages/page/index/index",
+      activeOpen: "",
+      menu: [],
+      univerifyErrorMsg: "",
+      // vuex测试例使用
+      username: "foo",
+      sex: "男",
+      age: 10
+    },
+    // Mutations: 同步修改 State 的方法
+    mutations: {
+      // 复位crypto
+      RESET_CRYPTO: (state) => {
+        api.remove("crypto");
+        state.crypto = {
+          sessionKey: "",
+          aesKey: "",
+          expireTime: 0
+        };
+      },
+      // 设置crypto
+      SET_CRYPTO: (state, crypto2) => {
+        state.crypto = crypto2;
+        api.set("crypto", JSON.stringify(crypto2));
+      },
+      SET_ENCRYPTENABLED: (state, encryptEnabled) => {
+        state.encrypt_enabled = encryptEnabled;
+      },
+      RESET_LOGIN: (state) => {
+        state.userInfo.info = {};
+        state.userInfo.token = "";
+      },
+      SET_LOGIN: (state, data) => {
+        formatAppLog("log", "at store/index.js:95", "data.token::", data.token);
+        state.userInfo.token = data.token;
+        state.userInfo.info = data;
+      },
+      Update_UserInfo: (state, data) => {
+        state.userInfo.info = {
+          ...state.userInfo.info,
+          ...data
+        };
+        uni.setStorage({
+          key: state.userInfo.cookieName,
+          data: state.userInfo,
+          success: function() {
+          }
+        });
+      },
+      // 同步方法
+      login(state, provider) {
+        state.hasLogin = true;
+        state.loginProvider = provider;
+      },
+      logout(state) {
+        state.hasLogin = false;
+        state.openid = null;
+      },
+      setOpenid(state, openid) {
+        state.openid = openid;
+      },
+      setTestTrue(state) {
+        state.testvuex = true;
+      },
+      setTestFalse(state) {
+        state.testvuex = false;
+      },
+      setColorIndex(state, index2) {
+        state.colorIndex = index2;
+      },
+      setMatchLeftWindow(state, matchLeftWindow) {
+        state.noMatchLeftWindow = !matchLeftWindow;
+      },
+      setActive(state, tabPage) {
+        state.active = tabPage;
+      },
+      setLeftWinActive(state, leftWinActive) {
+        state.leftWinActive = leftWinActive;
+      },
+      setActiveOpen(state, activeOpen) {
+        state.activeOpen = activeOpen;
+      },
+      setMenu(state, menu) {
+        state.menu = menu;
+      },
+      setUniverifyLogin(state, payload) {
+        typeof payload !== "boolean" ? payload = !!payload : "";
+        state.isUniverifyLogin = payload;
+      },
+      setUniverifyErrorMsg(state, payload = "") {
+        state.univerifyErrorMsg = payload;
+      },
+      // vuex测试例使用
+      increment(state) {
+        state.age++;
+      },
+      incrementTen(state, payload) {
+        state.age += payload.amount;
+      },
+      resetAge(state) {
+        state.age = 10;
+      }
+    },
+    getters: {
+      // 计算属性，用于从state派生出一些状态
+      currentColor(state) {
+        return state.colorList[state.colorIndex];
+      },
+      // vuex测试例使用
+      doubleAge(state) {
+        return state.age * 2;
+      }
+    },
+    // Actions: 处理异步操作并提交 Mutations
+    actions: {
+      // 异步方法，可以调用mutations或者其他的API调用等
+      // vuex测试例使用
+      incrementAsync(context2, payload) {
+        context2.commit("incrementTen", payload);
+      },
+      // lazy loading openid
+      getUserOpenId: async function({
+        commit,
+        state
+      }) {
+        return await new Promise((resolve, reject) => {
+          if (state.openid) {
+            resolve(state.openid);
+          }
+        });
+      },
+      getPhoneNumber: function({
+        commit
+      }, univerifyInfo) {
+        return new Promise((resolve, reject) => {
+          uni.request({
+            url: "https://97fca9f2-41f6-449f-a35e-3f135d4c3875.bspapp.com/http/univerify-login",
+            method: "POST",
+            data: univerifyInfo,
+            success: (res2) => {
+              const data = res2.data;
+              if (data.success) {
+                resolve(data.phoneNumber);
+              } else {
+                reject(res2);
+              }
+            },
+            fail: (err) => {
+              reject(res);
+            }
+          });
+        });
+      }
+    },
+    modules: {
+      // 模块化，可以将公共函数放在模块中
+    }
+  });
   var BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
   function int2char(n2) {
     return BI_RM.charAt(n2);
@@ -14114,7 +13986,7 @@ if (uni.restoreGlobal) {
       //公共请求函数
       // url请求路径
       // dataType 数据返回类型
-      // method发起请求类型
+      // method发起请求类型 默认get
       // notLoading 是否请求过程中显示loading图标
       // .then() //成功返回
       // .catch() //失败返回
@@ -14335,14 +14207,14 @@ if (uni.restoreGlobal) {
           const route = getCurrentPages();
           const pathUrl = route[route.length - 1].route;
           _this.getLogin().then((data) => {
-            _this.consoleLog("已经登陆了");
+            formatAppLog("log", "at common/js/common.js:382", "已经登陆了 - 来自common");
             data.route = route;
             data.pathUrl = pathUrl;
             resolve(data);
           }).catch((err) => {
             reject(err);
             if (pathUrl.indexOf("/login") == -1) {
-              formatAppLog("log", "at common/js/common.js:392", "没有登录,跳转到登录页面");
+              formatAppLog("log", "at common/js/common.js:393", "没有登录,跳转到登录页面");
               uni.redirectTo({
                 url: "/pages/page/login/login?pageFrom=" + pathUrl
               });
@@ -14352,11 +14224,457 @@ if (uni.restoreGlobal) {
       }
     }
   };
+  const _export_sfc = (sfc, props) => {
+    const target = sfc.__vccOpts || sfc;
+    for (const [key, val] of props) {
+      target[key] = val;
+    }
+    return target;
+  };
+  const _sfc_main$3t = {
+    mixins: [commonJs],
+    onLoad() {
+      this.checkGuide();
+    },
+    methods: {
+      checkGuide() {
+        try {
+          var launchFlag = uni.getStorageSync("launchFlag");
+          if (launchFlag) {
+            this.verifLogin().then((data) => {
+              this.jumpPage({
+                url: "/pages/page/index/index",
+                type: "reLaunch"
+              });
+            }).catch((error) => {
+              this.consoleLog("没有登录judge：：", error);
+            });
+          } else {
+            uni.redirectTo({
+              url: "/pages/page/guide/guide"
+            });
+          }
+        } catch (e2) {
+        }
+      }
+    }
+  };
+  function _sfc_render$3s(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "content" });
+  }
+  const PagesPageGuideJudge = /* @__PURE__ */ _export_sfc(_sfc_main$3t, [["render", _sfc_render$3s], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/guide/judge.vue"]]);
+  const animation = weex.requireModule("animation");
+  const _sfc_main$3s = {
+    data() {
+      return {
+        //修改图片,文字描述
+        imageList: [
+          {
+            src: "/static/guide/guide1.png"
+          },
+          {
+            src: "/static/guide/guide2.png"
+          },
+          {
+            src: "/static/guide/guide3.png"
+          },
+          {
+            src: "/static/guide/guide4.png"
+          }
+        ],
+        indicatorDots: false,
+        autoplay: false,
+        interval: 1e4,
+        duration: 500,
+        iStatusBarHeight: "0px",
+        hpx: "100%",
+        cur: 0,
+        dotsStyles: ""
+      };
+    },
+    mixins: [commonJs],
+    onLoad() {
+      let that = this;
+      plus.navigator.closeSplashscreen();
+      uni.getSystemInfo({
+        success: function(res2) {
+          that.hpx = res2.windowHeight + "px";
+        }
+      });
+    },
+    onReady() {
+      this.move(0, 1);
+    },
+    methods: {
+      launchApp() {
+        const _this = this;
+        uni.setStorage({
+          key: "launchFlag",
+          data: true,
+          success() {
+            _this.verifLogin().then((data) => {
+              _this.jumpPage({
+                url: "/pages/page/index/index",
+                type: "reLaunch"
+              });
+            }).catch((error) => {
+              _this.consoleLog("没有登录：：", error);
+            });
+          }
+        });
+      },
+      guideAction(event) {
+        let that = this, index2 = event.detail.current;
+        that.cur = index2;
+        if (index2 == 0) {
+          that.move(0, 1);
+          that.moveTwo(150, 0.1);
+          that.moveThree(150, 0.1);
+          that.lefMainAction(0);
+        }
+        if (index2 == 1) {
+          that.moveTwo(0, 1);
+          that.move(150, 0.1);
+          that.moveThree(150, 0.1);
+          that.lefMainAction(uni.upx2px(80) + "px");
+        }
+        if (index2 == 2) {
+          that.moveThree(0, 1);
+          that.moveTwo(150, 0.1);
+          that.move(150, 0.1);
+          that.lefMainAction(uni.upx2px(160) + "px");
+        }
+      },
+      lefMainAction(mum) {
+        var testLM = this.$refs.lefMain;
+        animation.transition(
+          testLM,
+          {
+            styles: {
+              transform: "translate(" + mum + ",0px)"
+            },
+            duration: 400,
+            //ms
+            timingFunction: "ease",
+            delay: 0
+            //ms
+          },
+          function() {
+          }
+        );
+      },
+      move(tran, opa) {
+        var testEl = this.$refs.box1;
+        animation.transition(
+          testEl,
+          {
+            styles: {
+              transform: "translate(" + tran + "px,0px)",
+              transformOrigin: "center center",
+              opacity: opa
+            },
+            duration: 800,
+            //ms
+            timingFunction: "ease",
+            delay: 0
+            //ms
+          },
+          function() {
+          }
+        );
+        var textE2 = this.$refs.box2;
+        animation.transition(
+          textE2,
+          {
+            styles: {
+              transform: "translate(0px," + tran + "px) scale(" + opa + ")",
+              transformOrigin: "center center",
+              opacity: opa
+            },
+            duration: 800,
+            //ms
+            timingFunction: "ease",
+            delay: 0
+            //ms
+          },
+          function() {
+          }
+        );
+      },
+      moveTwo(tran, opa) {
+        var testEl = this.$refs.box3;
+        animation.transition(
+          testEl,
+          {
+            styles: {
+              transform: "translate(" + tran + "px,0px)",
+              transformOrigin: "center center",
+              opacity: opa
+            },
+            duration: 800,
+            //ms
+            timingFunction: "ease",
+            delay: 0
+            //ms
+          },
+          function() {
+          }
+        );
+        var textE2 = this.$refs.box4;
+        animation.transition(
+          textE2,
+          {
+            styles: {
+              transform: "translate(0px," + tran + "px) scale(" + opa + ")",
+              transformOrigin: "center center",
+              opacity: opa
+            },
+            duration: 800,
+            //ms
+            timingFunction: "ease",
+            delay: 0
+            //ms
+          },
+          function() {
+          }
+        );
+      },
+      moveThree(tran, opa) {
+        var testEl = this.$refs.box5;
+        animation.transition(
+          testEl,
+          {
+            styles: {
+              transform: "translate(" + tran + "px,0px)",
+              transformOrigin: "center center",
+              opacity: opa
+            },
+            duration: 800,
+            //ms
+            timingFunction: "ease",
+            delay: 0
+            //ms
+          },
+          function() {
+          }
+        );
+        var textE2 = this.$refs.box6;
+        animation.transition(
+          textE2,
+          {
+            styles: {
+              transform: "translate(0px," + tran + "px) scale(" + opa + ")",
+              transformOrigin: "center center",
+              opacity: opa
+            },
+            duration: 800,
+            //ms
+            timingFunction: "ease",
+            delay: 0
+            //ms
+          },
+          function() {
+          }
+        );
+      }
+    }
+  };
+  function _sfc_render$3r(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode(
+        "view",
+        {
+          class: "swiper-css zqui-rel",
+          style: vue.normalizeStyle({ height: $data.hpx })
+        },
+        [
+          vue.createElementVNode("swiper", {
+            class: "swiper",
+            style: vue.normalizeStyle({ height: $data.hpx }),
+            "indicator-dots": $data.indicatorDots,
+            autoplay: $data.autoplay,
+            interval: $data.interval,
+            duration: $data.duration,
+            onChange: _cache[0] || (_cache[0] = (...args) => $options.guideAction && $options.guideAction(...args))
+          }, [
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($data.imageList, (item, index2) => {
+                return vue.openBlock(), vue.createElementBlock("swiper-item", {
+                  class: "flex1",
+                  key: index2
+                }, [
+                  vue.createElementVNode("view", { class: "swiper-img" })
+                ]);
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ], 44, ["indicator-dots", "autoplay", "interval", "duration"]),
+          vue.createCommentVNode(" 按钮样式切换 "),
+          $data.cur != 3 ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "flex-column dots"
+          }, [
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($data.imageList, (item, index2) => {
+                return vue.openBlock(), vue.createElementBlock(
+                  "view",
+                  {
+                    key: index2,
+                    class: vue.normalizeClass(["dot", { "active": index2 == $data.cur }])
+                  },
+                  null,
+                  2
+                  /* CLASS */
+                );
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ])) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 第四张图使用按钮《立即进入》 "),
+          $data.cur == 3 ? (vue.openBlock(), vue.createElementBlock("button", {
+            key: 1,
+            class: "flex-column cu-btn footer",
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.launchApp && $options.launchApp(...args))
+          }, "开始课题吧！")) : vue.createCommentVNode("v-if", true)
+        ],
+        4
+        /* STYLE */
+      )
+    ]);
+  }
+  const PagesPageGuideGuide = /* @__PURE__ */ _export_sfc(_sfc_main$3s, [["render", _sfc_render$3r], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/guide/guide.vue"]]);
+  const _sfc_main$3r = {
+    name: "page-head",
+    props: {
+      clickModule: {
+        type: Function,
+        default: () => {
+          formatAppLog("log", "at components/page-head/page-head.vue:29", "默认右侧功能区函数");
+        }
+      },
+      isHide: {
+        default: false
+      },
+      title: {
+        // type: String,
+        default: ""
+      },
+      background: {
+        default: "#fff"
+      },
+      // 是否显示返回按钮
+      isBack: {
+        default: false
+      },
+      // 是否显示最右边功能模块
+      isModule: {
+        default: false
+      },
+      moduleIcon: {
+        default: "/static/icons/nav-bar.png"
+      },
+      systemTaskbar: {
+        default: true
+      }
+    },
+    data() {
+      return {
+        taskbarHeight: 0
+      };
+    },
+    mounted() {
+      this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem" : this.taskbarHeight = "0rem";
+    },
+    methods: {
+      clickBack() {
+        this.$store.state.isLoading = true;
+        uni.navigateBack({
+          animationType: "none",
+          animationDuration: 1e3
+        });
+      }
+    }
+  };
+  function _sfc_render$3q(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_viww = vue.resolveComponent("viww");
+    return vue.openBlock(), vue.createElementBlock(
+      vue.Fragment,
+      null,
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: "common-page-head-view",
+            style: vue.normalizeStyle({ paddingTop: $data.taskbarHeight })
+          },
+          [
+            !$props.isHide ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "reserve-seat"
+            })) : vue.createCommentVNode("v-if", true),
+            !$props.isHide ? (vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: 1,
+                class: "common-page-head",
+                style: vue.normalizeStyle({ background: $props.background, paddingTop: $data.taskbarHeight })
+              },
+              [
+                vue.createVNode(_component_viww, { class: "common-page-head-back" }, {
+                  default: vue.withCtx(() => [
+                    $props.isBack ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      class: "page-head-back-icon",
+                      onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
+                    })) : vue.createCommentVNode("v-if", true)
+                  ]),
+                  _: 1
+                  /* STABLE */
+                }),
+                vue.createElementVNode(
+                  "view",
+                  { class: "common-page-head-title" },
+                  vue.toDisplayString($props.title),
+                  1
+                  /* TEXT */
+                ),
+                vue.createElementVNode("view", { class: "common-page-head-module" }, [
+                  $props.isModule ? (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 0,
+                    src: $props.moduleIcon,
+                    mode: "",
+                    onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
+                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true)
+                ])
+              ],
+              4
+              /* STYLE */
+            )) : vue.createCommentVNode("v-if", true)
+          ],
+          4
+          /* STYLE */
+        ),
+        _ctx.$store.state.isLoading ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "page-loading"
+        })) : vue.createCommentVNode("v-if", true)
+      ],
+      64
+      /* STABLE_FRAGMENT */
+    );
+  }
+  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3r, [["render", _sfc_render$3q], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
   const _imports_0$5 = "/static/image/1_challenge.png";
   const _imports_1$1 = "/static/image/1_study.png";
   const _imports_2$2 = "/static/image/1_achievement_back.png";
   const _imports_3 = "/static/icons/achievement.png";
-  const _sfc_main$3s = {
+  const _sfc_main$3q = {
     mixins: [commonJs],
     components: {},
     props: {},
@@ -14657,8 +14975,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3r(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$3p(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -15028,7 +15346,7 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3s, [["render", _sfc_render$3r], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/index.vue"]]);
+  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3q, [["render", _sfc_render$3p], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/index.vue"]]);
   const leftWindow = {
     path: "windows/left-window.vue",
     style: {
@@ -15042,6 +15360,30 @@ if (uni.restoreGlobal) {
     }
   };
   const pages = [
+    {
+      path: "pages/page/guide/judge",
+      style: {
+        enablePullDownRefresh: false,
+        onReachBottomDistance: 100,
+        navigationStyle: "custom",
+        "app-plus": {
+          contentAdjust: false,
+          bounce: "none"
+        }
+      }
+    },
+    {
+      path: "pages/page/guide/guide",
+      style: {
+        enablePullDownRefresh: false,
+        onReachBottomDistance: 100,
+        navigationStyle: "custom",
+        "app-plus": {
+          contentAdjust: false,
+          bounce: "none"
+        }
+      }
+    },
     {
       path: "pages/page/index/index",
       style: {
@@ -15439,12 +15781,6 @@ if (uni.restoreGlobal) {
       path: "platforms/app-plus/shake/shake",
       style: {
         navigationBarTitleText: "摇一摇"
-      }
-    },
-    {
-      path: "pages/about/about",
-      style: {
-        navigationBarTitleText: "关于"
       }
     },
     {
@@ -19670,7 +20006,7 @@ ${o3}
   const {
     t: t$9
   } = initVueI18n(messages$4);
-  const _sfc_main$3r = {
+  const _sfc_main$3p = {
     name: "UniLoadMore",
     emits: ["clickLoadMore"],
     props: {
@@ -19752,7 +20088,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "uni-load-more",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
@@ -19827,8 +20163,8 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3r, [["render", _sfc_render$3q], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
-  const _sfc_main$3q = {
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3p, [["render", _sfc_render$3o], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+  const _sfc_main$3o = {
     name: "uniDataChecklist",
     mixins: [tr.mixinDatacom || {}],
     emits: ["input", "update:modelValue", "change"],
@@ -20175,8 +20511,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3p(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
+  function _sfc_render$3n(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -20388,8 +20724,8 @@ ${o3}
       /* STYLE */
     );
   }
-  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3q, [["render", _sfc_render$3p], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
-  const _sfc_main$3p = {
+  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3o, [["render", _sfc_render$3n], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
+  const _sfc_main$3n = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -20721,7 +21057,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3m(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -20777,7 +21113,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_2$a = /* @__PURE__ */ _export_sfc(_sfc_main$3p, [["render", _sfc_render$3o], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_2$a = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   const fontData = [
     {
       "font_class": "arrow-down",
@@ -21428,7 +21764,7 @@ ${o3}
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$3o = {
+  const _sfc_main$3m = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -21482,7 +21818,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3l(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -21497,8 +21833,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3o, [["render", _sfc_render$3n], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-  const _sfc_main$3n = {
+  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const _sfc_main$3l = {
     name: "uni-data-select",
     mixins: [tr.mixinDatacom || {}],
     props: {
@@ -21750,7 +22086,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-stat__select" }, [
       $props.label ? (vue.openBlock(), vue.createElementBlock(
@@ -21890,7 +22226,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
+  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -21909,7 +22245,7 @@ ${o3}
     }
     return style;
   }
-  const _sfc_main$3m = {
+  const _sfc_main$3k = {
     name: "uni-easyinput",
     emits: [
       "click",
@@ -22266,7 +22602,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -22391,7 +22727,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -22955,7 +23291,7 @@ ${o3}
       return false;
     }
   };
-  const _sfc_main$3l = {
+  const _sfc_main$3j = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -23257,15 +23593,15 @@ ${o3}
       _isEqual: isEqual
     }
   };
-  function _sfc_render$3k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$3k = {
+  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$3i = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23411,8 +23747,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3j(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$3h(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_data_checkbox = resolveEasycom(vue.resolveDynamicComponent("uni-data-checkbox"), __easycom_1$p);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$a);
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_1$n);
@@ -23526,8 +23862,8 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
-  const _sfc_main$3j = {
+  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
+  const _sfc_main$3h = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23634,8 +23970,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3i(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$3g(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createElementVNode("view", { class: "banner-wrap" }, [
         vue.createVNode(_component_page_head, {
@@ -23845,8 +24181,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
-  const _sfc_main$3i = {
+  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
+  const _sfc_main$3g = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -23937,8 +24273,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3h(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$3f(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -24106,8 +24442,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageStudyWrongQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__scopeId", "data-v-612ffe2c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/wrong_question.vue"]]);
-  const _sfc_main$3h = {
+  const PagesPageStudyWrongQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__scopeId", "data-v-612ffe2c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/wrong_question.vue"]]);
+  const _sfc_main$3f = {
     name: "PageMeta",
     setup(props, { emit }) {
       onResize((evt) => {
@@ -24235,12 +24571,12 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { style: { "display": "none" } }, [
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__file", "D:/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/page-meta/page-meta.vue"]]);
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__file", "D:/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/page-meta/page-meta.vue"]]);
   var calendar$1 = {
     /**
         * 农历1900-2100的润大小信息表
@@ -25445,7 +25781,7 @@ ${o3}
     "zh-Hant": zhHant$5
   };
   const { t: t$8 } = initVueI18n(i18nMessages$1);
-  const _sfc_main$3g = {
+  const _sfc_main$3e = {
     emits: ["change"],
     props: {
       weeks: {
@@ -25488,7 +25824,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -25596,11 +25932,11 @@ ${o3}
       /* CLASS */
     );
   }
-  const CalendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__scopeId", "data-v-65626c58"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item.vue"]]);
+  const CalendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__scopeId", "data-v-65626c58"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item.vue"]]);
   const {
     t: t$7
   } = initVueI18n(i18nMessages$1);
-  const _sfc_main$3f = {
+  const _sfc_main$3d = {
     components: {
       CalendarItem
     },
@@ -25879,7 +26215,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-calendar" }, [
       !$props.insert && $data.show ? (vue.openBlock(), vue.createElementBlock(
@@ -26087,8 +26423,8 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-b6ab2cfb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar.vue"]]);
-  const _sfc_main$3e = {
+  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3d, [["render", _sfc_render$3c], ["__scopeId", "data-v-b6ab2cfb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar.vue"]]);
+  const _sfc_main$3c = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -26216,9 +26552,9 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_meta = resolveEasycom(vue.resolveDynamicComponent("page-meta"), __easycom_0$6);
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$3b(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_meta = resolveEasycom(vue.resolveDynamicComponent("page-meta"), __easycom_0$5);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_calendar = resolveEasycom(vue.resolveDynamicComponent("uni-calendar"), __easycom_2$9);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -26301,8 +26637,8 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageStudyCalendar = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__scopeId", "data-v-3f5d8074"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/calendar.vue"]]);
-  const _sfc_main$3d = {
+  const PagesPageStudyCalendar = /* @__PURE__ */ _export_sfc(_sfc_main$3c, [["render", _sfc_render$3b], ["__scopeId", "data-v-3f5d8074"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/calendar.vue"]]);
+  const _sfc_main$3b = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -26406,8 +26742,8 @@ ${o3}
     computed: {},
     methods: {}
   };
-  function _sfc_render$3c(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$3a(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: $data.pageHeadTitle,
@@ -26741,8 +27077,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageTeamTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3d, [["render", _sfc_render$3c], ["__scopeId", "data-v-d282c156"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/team.vue"]]);
-  const _sfc_main$3c = {
+  const PagesPageTeamTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3b, [["render", _sfc_render$3a], ["__scopeId", "data-v-d282c156"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/team.vue"]]);
+  const _sfc_main$3a = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -26833,8 +27169,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$3b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$39(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: $data.pageHeadTitle,
@@ -26954,14 +27290,14 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageTeamInviteTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3c, [["render", _sfc_render$3b], ["__scopeId", "data-v-bc1c30b9"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/invite_team.vue"]]);
-  const _sfc_main$3b = {
+  const PagesPageTeamInviteTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3a, [["render", _sfc_render$39], ["__scopeId", "data-v-bc1c30b9"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/invite_team.vue"]]);
+  const _sfc_main$39 = {
     name: "loading1",
     data() {
       return {};
     }
   };
-  function _sfc_render$3a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$38(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading1" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -26969,14 +27305,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$3b, [["render", _sfc_render$3a], ["__scopeId", "data-v-0e645258"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
-  const _sfc_main$3a = {
+  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$39, [["render", _sfc_render$38], ["__scopeId", "data-v-0e645258"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
+  const _sfc_main$38 = {
     name: "loading2",
     data() {
       return {};
     }
   };
-  function _sfc_render$39(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$37(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading2" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -26984,14 +27320,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$3a, [["render", _sfc_render$39], ["__scopeId", "data-v-3df48dc2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
-  const _sfc_main$39 = {
+  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$38, [["render", _sfc_render$37], ["__scopeId", "data-v-3df48dc2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
+  const _sfc_main$37 = {
     name: "loading3",
     data() {
       return {};
     }
   };
-  function _sfc_render$38(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$36(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading3" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -26999,14 +27335,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$39, [["render", _sfc_render$38], ["__scopeId", "data-v-27a8293c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
-  const _sfc_main$38 = {
+  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$37, [["render", _sfc_render$36], ["__scopeId", "data-v-27a8293c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
+  const _sfc_main$36 = {
     name: "loading5",
     data() {
       return {};
     }
   };
-  function _sfc_render$37(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$35(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading5" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -27014,14 +27350,14 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$38, [["render", _sfc_render$37], ["__scopeId", "data-v-2e7deb83"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
-  const _sfc_main$37 = {
+  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$36, [["render", _sfc_render$35], ["__scopeId", "data-v-2e7deb83"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
+  const _sfc_main$35 = {
     name: "loading6",
     data() {
       return {};
     }
   };
-  function _sfc_render$36(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$34(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading6" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -27029,8 +27365,8 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$37, [["render", _sfc_render$36], ["__scopeId", "data-v-ef674bbb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
-  const _sfc_main$36 = {
+  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$35, [["render", _sfc_render$34], ["__scopeId", "data-v-ef674bbb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
+  const _sfc_main$34 = {
     components: { Loading1, Loading2, Loading3, Loading4, Loading5 },
     name: "qiun-loading",
     props: {
@@ -27043,7 +27379,7 @@ ${o3}
       return {};
     }
   };
-  function _sfc_render$35(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$33(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_Loading1 = vue.resolveComponent("Loading1");
     const _component_Loading2 = vue.resolveComponent("Loading2");
     const _component_Loading3 = vue.resolveComponent("Loading3");
@@ -27057,8 +27393,8 @@ ${o3}
       $props.loadingType == 5 ? (vue.openBlock(), vue.createBlock(_component_Loading5, { key: 4 })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$36, [["render", _sfc_render$35], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
-  const _sfc_main$35 = {
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$34, [["render", _sfc_render$33], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
+  const _sfc_main$33 = {
     name: "qiun-error",
     props: {
       errorMessage: {
@@ -27070,7 +27406,7 @@ ${o3}
       return {};
     }
   };
-  function _sfc_render$34(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$32(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "chartsview" }, [
       vue.createElementVNode("view", { class: "charts-error" }),
       vue.createElementVNode(
@@ -27082,7 +27418,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$l = /* @__PURE__ */ _export_sfc(_sfc_main$35, [["render", _sfc_render$34], ["__scopeId", "data-v-a99d579b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
+  const __easycom_1$l = /* @__PURE__ */ _export_sfc(_sfc_main$33, [["render", _sfc_render$32], ["__scopeId", "data-v-a99d579b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
   const color$1 = ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"];
   const formatDateTime = (timeStamp, returnType) => {
     var date = /* @__PURE__ */ new Date();
@@ -28098,7 +28434,7 @@ ${o3}
     var currentdate = year + seperator + month + seperator + strDate;
     return currentdate;
   }
-  const _sfc_main$34 = {
+  const _sfc_main$32 = {
     name: "qiun-data-charts",
     mixins: [tr.mixinDatacom],
     props: {
@@ -28804,8 +29140,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$33(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_qiun_loading = resolveEasycom(vue.resolveDynamicComponent("qiun-loading"), __easycom_0$5);
+  function _sfc_render$31(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_qiun_loading = resolveEasycom(vue.resolveDynamicComponent("qiun-loading"), __easycom_0$4);
     const _component_qiun_error = resolveEasycom(vue.resolveDynamicComponent("qiun-error"), __easycom_1$l);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "chartsview",
@@ -28862,9 +29198,9 @@ ${o3}
     ], 8, ["id"]);
   }
   if (typeof block0$3 === "function")
-    block0$3(_sfc_main$34);
-  const __easycom_1$k = /* @__PURE__ */ _export_sfc(_sfc_main$34, [["render", _sfc_render$33], ["__scopeId", "data-v-0ca34aee"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
-  const _sfc_main$33 = {
+    block0$3(_sfc_main$32);
+  const __easycom_1$k = /* @__PURE__ */ _export_sfc(_sfc_main$32, [["render", _sfc_render$31], ["__scopeId", "data-v-0ca34aee"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
+  const _sfc_main$31 = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -29065,8 +29401,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$32(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$30(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_1$k);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -29419,8 +29755,8 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageParentParent = /* @__PURE__ */ _export_sfc(_sfc_main$33, [["render", _sfc_render$32], ["__scopeId", "data-v-1185e19c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/parent/parent.vue"]]);
-  const _sfc_main$32 = {
+  const PagesPageParentParent = /* @__PURE__ */ _export_sfc(_sfc_main$31, [["render", _sfc_render$30], ["__scopeId", "data-v-1185e19c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/parent/parent.vue"]]);
+  const _sfc_main$30 = {
     mixins: [commonJs],
     data() {
       return {
@@ -29457,49 +29793,7 @@ ${o3}
           }
         ],
         skinCurrent: 0,
-        skinList: [
-          {
-            title: "星座<br>战衣",
-            list: [
-              {
-                icon: "",
-                title: "狮子座战衣",
-                introduce: "勇敢的狮子座专属",
-                obtain: 1
-              },
-              {
-                icon: "",
-                title: "处女座战衣",
-                introduce: "完美的处女座",
-                obtain: 2
-              },
-              {
-                icon: "",
-                title: "白羊座战衣",
-                introduce: "热情冲动的白羊座",
-                obtain: 3
-              },
-              {
-                icon: "",
-                title: "射手座战衣",
-                introduce: "凑数的射手座战衣",
-                obtain: 3
-              }
-            ]
-          },
-          {
-            title: "生肖<br>守护者"
-          },
-          {
-            title: "数学<br>名人堂"
-          },
-          {
-            title: "皮肤"
-          },
-          {
-            title: "饰品"
-          }
-        ],
+        skinList: [],
         exchangeList: [{
           icon: "",
           title: "圣诞限定皮肤",
@@ -29536,7 +29830,7 @@ ${o3}
             try {
               store.commit("Update_UserInfo", res2.data);
               this.userInfo = res2.data;
-              formatAppLog("log", "at pages/page/user/user.vue:279", this.userInfo);
+              formatAppLog("log", "at pages/page/user/user.vue:234", this.userInfo);
             } catch (e2) {
             }
             if (res2.data.grade == 0) {
@@ -29553,9 +29847,37 @@ ${o3}
         }).catch((error) => {
           this.consoleLog("获取用户信息报错：：", error);
         });
+        this.commonRequest({
+          url: "/api/student/getResourcesGroups"
+        }).then((res2) => {
+          if (res2.code == 0) {
+            this.skinList = res2.data.currencies;
+          } else {
+            uni.showToast({
+              title: res2.message || "获取我资源(战衣/皮肤/名人堂...)失败!",
+              icon: "none"
+            });
+          }
+        }).catch((error) => {
+          this.consoleLog("获取我资源(战衣/皮肤/名人堂...)报错：：", error);
+        });
+        this.commonRequest({
+          url: "/api/exchange/products"
+        }).then((res2) => {
+          if (res2.code == 0) {
+            this.exchangeList = res2.data;
+          } else {
+            uni.showToast({
+              title: res2.message || "获取兑换商品列表失败!",
+              icon: "none"
+            });
+          }
+        }).catch((error) => {
+          this.consoleLog("获取兑换商品列表报错：：", error);
+        });
       }).catch((err) => {
         if (pathUrl.indexOf("/login") == -1) {
-          formatAppLog("log", "at pages/page/user/user.vue:304", "没有登录,跳转到登录页面");
+          formatAppLog("log", "at pages/page/user/user.vue:291", "没有登录,跳转到登录页面");
           uni.redirectTo({
             url: "/pages/page/login/login?pageFrom=" + pathUrl
           });
@@ -29601,8 +29923,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$31(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2$(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -29893,7 +30215,7 @@ ${o3}
                   class: vue.normalizeClass(["skin-tab-list flex-center", $options.selectedClass2(i2)]),
                   current: i2,
                   onClick: ($event) => $options.clickTab2(i2),
-                  innerHTML: item.title
+                  innerHTML: item.resourceTypeName
                 }, null, 10, ["current", "onClick", "innerHTML"]);
               }),
               256
@@ -29912,39 +30234,39 @@ ${o3}
                   (vue.openBlock(true), vue.createElementBlock(
                     vue.Fragment,
                     null,
-                    vue.renderList($data.skinList[$data.skinCurrent].list, (item2) => {
+                    vue.renderList($data.skinList[$data.skinCurrent].resourceDetails, (item2) => {
                       return vue.openBlock(), vue.createElementBlock("view", { class: "skin-list" }, [
                         vue.createElementVNode("image", {
                           class: "list-icon",
-                          src: "",
+                          src: item2.icon,
                           mode: ""
-                        }),
+                        }, null, 8, ["src"]),
                         vue.createElementVNode("view", { class: "list-info" }, [
                           vue.createElementVNode("view", { class: "flex-center" }, [
                             vue.createElementVNode("view", null, [
                               vue.createElementVNode(
                                 "h3",
                                 { class: "title" },
-                                vue.toDisplayString(item2.title),
+                                vue.toDisplayString(item2.name),
                                 1
                                 /* TEXT */
                               ),
                               vue.createElementVNode(
                                 "view",
                                 { class: "introduce" },
-                                vue.toDisplayString(item2.introduce),
+                                vue.toDisplayString(item2.subtitle),
                                 1
                                 /* TEXT */
                               ),
-                              item2.obtain == 1 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              item2.possessed == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
                                 key: 0,
                                 class: "isObtain back-green"
                               }, "使用中")) : vue.createCommentVNode("v-if", true),
-                              item2.obtain == 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              item2.possessed == 1 ? (vue.openBlock(), vue.createElementBlock("view", {
                                 key: 1,
                                 class: "isObtain back-green"
                               }, "已获取")) : vue.createCommentVNode("v-if", true),
-                              item2.obtain == 3 ? (vue.openBlock(), vue.createElementBlock("view", {
+                              item2.possessed == 2 ? (vue.openBlock(), vue.createElementBlock("view", {
                                 key: 2,
                                 class: "isObtain"
                               }, "未获得")) : vue.createCommentVNode("v-if", true)
@@ -29970,7 +30292,6 @@ ${o3}
         vue.createElementVNode("view", { class: "exchange-wrap" }, [
           vue.createElementVNode("view", { class: "item-title-wrap" }, [
             vue.createElementVNode("h3", { class: "item-title" }, "兑换商城"),
-            vue.createElementVNode("view", { class: "item-subtitle" }, "限时兑换"),
             vue.createElementVNode("view", { class: "item-more" }, [
               vue.createElementVNode("view", {
                 class: "text icon-more",
@@ -29993,30 +30314,30 @@ ${o3}
                     vue.createElementVNode(
                       "h3",
                       { class: "info-title" },
-                      vue.toDisplayString(item.title),
+                      vue.toDisplayString(item.productName),
                       1
                       /* TEXT */
                     ),
                     vue.createElementVNode(
                       "view",
                       { class: "info-describe" },
-                      vue.toDisplayString(item.describe),
+                      vue.toDisplayString(item.subtitle),
                       1
                       /* TEXT */
                     ),
                     vue.createElementVNode("view", { class: "rewardBtn-wrap" }, [
-                      item.rewardName ? (vue.openBlock(), vue.createElementBlock("view", {
+                      item.payCurrencyTypeName ? (vue.openBlock(), vue.createElementBlock("view", {
                         key: 0,
                         class: "list-reward"
                       }, [
                         vue.createElementVNode("image", {
                           class: "reward-reward-icon",
-                          src: _ctx.rewardIcon(item.currencyTypeId)
+                          src: _ctx.rewardIcon(item.payCurrencyType)
                         }, null, 8, ["src"]),
                         vue.createElementVNode(
                           "span",
                           null,
-                          vue.toDisplayString(item.rewardName),
+                          vue.toDisplayString(item.quantity) + vue.toDisplayString(item.payCurrencyTypeName),
                           1
                           /* TEXT */
                         )
@@ -30035,8 +30356,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$32, [["render", _sfc_render$31], ["__scopeId", "data-v-351444bc"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/user.vue"]]);
-  const _sfc_main$31 = {
+  const PagesPageUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$30, [["render", _sfc_render$2$], ["__scopeId", "data-v-351444bc"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/user.vue"]]);
+  const _sfc_main$2$ = {
     data() {
       return {
         showSetTabBarPage: false,
@@ -30052,11 +30373,11 @@ ${o3}
     },
     methods: {}
   };
-  function _sfc_render$30(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2_(_ctx, _cache, $props, $setup, $data, $options) {
     return null;
   }
-  const PagesPageUserUserSet = /* @__PURE__ */ _export_sfc(_sfc_main$31, [["render", _sfc_render$30], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/userSet.vue"]]);
-  const _sfc_main$30 = {
+  const PagesPageUserUserSet = /* @__PURE__ */ _export_sfc(_sfc_main$2$, [["render", _sfc_render$2_], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/userSet.vue"]]);
+  const _sfc_main$2_ = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -30132,8 +30453,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2$(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2Z(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -30320,8 +30641,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageUserAchievementDetails = /* @__PURE__ */ _export_sfc(_sfc_main$30, [["render", _sfc_render$2$], ["__scopeId", "data-v-70c707a8"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/achievementDetails.vue"]]);
-  const _sfc_main$2$ = {
+  const PagesPageUserAchievementDetails = /* @__PURE__ */ _export_sfc(_sfc_main$2_, [["render", _sfc_render$2Z], ["__scopeId", "data-v-70c707a8"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/achievementDetails.vue"]]);
+  const _sfc_main$2Z = {
     mixins: [commonJs],
     props: {},
     components: {},
@@ -30399,8 +30720,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2_(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2Y(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: _ctx.pageHeadTitle,
@@ -30554,7 +30875,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageUserExchangeMall = /* @__PURE__ */ _export_sfc(_sfc_main$2$, [["render", _sfc_render$2_], ["__scopeId", "data-v-77a7c594"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/exchange_mall.vue"]]);
+  const PagesPageUserExchangeMall = /* @__PURE__ */ _export_sfc(_sfc_main$2Z, [["render", _sfc_render$2Y], ["__scopeId", "data-v-77a7c594"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/exchange_mall.vue"]]);
   const ydLogin = requireNativePlugin("YD-Login");
   ydLogin.registerWithBusinessID({
     businessId: "8a0edb8e5b064fffbaf91c2ed8b82930",
@@ -30584,7 +30905,7 @@ ${o3}
       });
     }
   });
-  const _sfc_main$2_ = {
+  const _sfc_main$2Y = {
     mixins: [commonJs],
     components: {},
     props: {},
@@ -30666,8 +30987,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2Z(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2X(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-wrap" }, [
       vue.createVNode(_component_page_head, {
         title: $data.pageHeadTitle,
@@ -30687,8 +31008,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2_, [["render", _sfc_render$2Z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/login/login.vue"]]);
-  const _sfc_main$2Z = {
+  const PagesPageLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2Y, [["render", _sfc_render$2X], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/login/login.vue"]]);
+  const _sfc_main$2X = {
     name: "uniLink",
     props: {
       href: {
@@ -30752,7 +31073,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2Y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2W(_ctx, _cache, $props, $setup, $data, $options) {
     return $options.isShowA ? (vue.openBlock(), vue.createElementBlock("a", {
       key: 0,
       class: vue.normalizeClass(["uni-link", { "uni-link--withline": $props.showUnderLine === true || $props.showUnderLine === "true" }]),
@@ -30788,8 +31109,8 @@ ${o3}
       /* CLASS, STYLE */
     ));
   }
-  const __easycom_1$j = /* @__PURE__ */ _export_sfc(_sfc_main$2Z, [["render", _sfc_render$2Y], ["__scopeId", "data-v-5db80ddb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-link/components/uni-link/uni-link.vue"]]);
-  const _sfc_main$2Y = {
+  const __easycom_1$j = /* @__PURE__ */ _export_sfc(_sfc_main$2X, [["render", _sfc_render$2W], ["__scopeId", "data-v-5db80ddb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-link/components/uni-link/uni-link.vue"]]);
+  const _sfc_main$2W = {
     mixins: [commonJs],
     components: {},
     props: {},
@@ -30935,8 +31256,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2X(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2V(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_1$m);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2$a);
     const _component_uni_link = resolveEasycom(vue.resolveDynamicComponent("uni-link"), __easycom_1$j);
@@ -31061,15 +31382,15 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageLoginPhoneLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2Y, [["render", _sfc_render$2X], ["__scopeId", "data-v-3933e925"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/login/phoneLogin.vue"]]);
+  const PagesPageLoginPhoneLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2W, [["render", _sfc_render$2V], ["__scopeId", "data-v-3933e925"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/login/phoneLogin.vue"]]);
   const _imports_0$4 = "/static/plus.png";
-  const _sfc_main$2X = {
+  const _sfc_main$2V = {
     data() {
       return {};
     }
   };
-  function _sfc_render$2W(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2U(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "view" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31236,8 +31557,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentViewView = /* @__PURE__ */ _export_sfc(_sfc_main$2X, [["render", _sfc_render$2W], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/view/view.vue"]]);
-  const _sfc_main$2W = {
+  const PagesComponentViewView = /* @__PURE__ */ _export_sfc(_sfc_main$2V, [["render", _sfc_render$2U], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/view/view.vue"]]);
+  const _sfc_main$2U = {
     data() {
       return {
         scrollTop: 0,
@@ -31269,8 +31590,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2V(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2T(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "scroll-view,区域滚动视图" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31340,8 +31661,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentScrollViewScrollView = /* @__PURE__ */ _export_sfc(_sfc_main$2W, [["render", _sfc_render$2V], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/scroll-view/scroll-view.vue"]]);
-  const _sfc_main$2V = {
+  const PagesComponentScrollViewScrollView = /* @__PURE__ */ _export_sfc(_sfc_main$2U, [["render", _sfc_render$2T], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/scroll-view/scroll-view.vue"]]);
+  const _sfc_main$2T = {
     data() {
       return {
         background: ["color1", "color2", "color3"],
@@ -31366,8 +31687,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2U(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2S(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "swiper,可滑动视图" }),
       vue.createElementVNode("view", { class: "uni-margin-wrap" }, [
@@ -31442,8 +31763,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentSwiperSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$2V, [["render", _sfc_render$2U], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/swiper/swiper.vue"]]);
-  const _sfc_main$2U = {
+  const PagesComponentSwiperSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$2T, [["render", _sfc_render$2S], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/swiper/swiper.vue"]]);
+  const _sfc_main$2S = {
     data() {
       return {
         x: 0,
@@ -31481,8 +31802,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2T(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2R(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page-body" }, [
       vue.createVNode(_component_page_head, { title: "movable-view,可拖动视图" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31568,8 +31889,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentMovableViewMovableView = /* @__PURE__ */ _export_sfc(_sfc_main$2U, [["render", _sfc_render$2T], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/movable-view/movable-view.vue"]]);
-  const _sfc_main$2T = {
+  const PagesComponentMovableViewMovableView = /* @__PURE__ */ _export_sfc(_sfc_main$2S, [["render", _sfc_render$2R], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/movable-view/movable-view.vue"]]);
+  const _sfc_main$2R = {
     data() {
       return {
         title: "text",
@@ -31611,8 +31932,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2S(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2Q(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31643,8 +31964,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentTextText = /* @__PURE__ */ _export_sfc(_sfc_main$2T, [["render", _sfc_render$2S], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/text/text.vue"]]);
-  const _sfc_main$2S = {
+  const PagesComponentTextText = /* @__PURE__ */ _export_sfc(_sfc_main$2R, [["render", _sfc_render$2Q], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/text/text.vue"]]);
+  const _sfc_main$2Q = {
     data() {
       return {
         title: "rich-text",
@@ -31663,8 +31984,8 @@ ${o3}
       };
     }
   };
-  function _sfc_render$2R(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2P(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -31691,8 +32012,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentRichTextRichText = /* @__PURE__ */ _export_sfc(_sfc_main$2S, [["render", _sfc_render$2R], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/rich-text/rich-text.vue"]]);
-  const _sfc_main$2R = {
+  const PagesComponentRichTextRichText = /* @__PURE__ */ _export_sfc(_sfc_main$2Q, [["render", _sfc_render$2P], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/rich-text/rich-text.vue"]]);
+  const _sfc_main$2P = {
     data() {
       return {
         title: "progress",
@@ -31708,8 +32029,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2Q(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2O(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -31758,8 +32079,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentProgressProgress = /* @__PURE__ */ _export_sfc(_sfc_main$2R, [["render", _sfc_render$2Q], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/progress/progress.vue"]]);
-  const _sfc_main$2Q = {
+  const PagesComponentProgressProgress = /* @__PURE__ */ _export_sfc(_sfc_main$2P, [["render", _sfc_render$2O], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/progress/progress.vue"]]);
+  const _sfc_main$2O = {
     data() {
       return {
         title: "button",
@@ -31790,8 +32111,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2P(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2N(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31852,8 +32173,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentButtonButton = /* @__PURE__ */ _export_sfc(_sfc_main$2Q, [["render", _sfc_render$2P], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/button/button.vue"]]);
-  const _sfc_main$2P = {
+  const PagesComponentButtonButton = /* @__PURE__ */ _export_sfc(_sfc_main$2O, [["render", _sfc_render$2N], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/button/button.vue"]]);
+  const _sfc_main$2N = {
     data() {
       return {
         title: "checkbox 复选框",
@@ -31900,8 +32221,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2O(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2M(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -31990,7 +32311,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentCheckboxCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$2P, [["render", _sfc_render$2O], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/checkbox/checkbox.vue"]]);
+  const PagesComponentCheckboxCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$2N, [["render", _sfc_render$2M], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/checkbox/checkbox.vue"]]);
   const graceChecker = {
     error: "",
     check: function(data, rule) {
@@ -32125,7 +32446,7 @@ ${o3}
       return reg.test(checkVal);
     }
   };
-  const _sfc_main$2O = {
+  const _sfc_main$2M = {
     data() {
       return {};
     },
@@ -32150,8 +32471,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2N(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2L(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "form" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -32224,8 +32545,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentFormForm = /* @__PURE__ */ _export_sfc(_sfc_main$2O, [["render", _sfc_render$2N], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/form/form.vue"]]);
-  const _sfc_main$2N = {
+  const PagesComponentFormForm = /* @__PURE__ */ _export_sfc(_sfc_main$2M, [["render", _sfc_render$2L], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/form/form.vue"]]);
+  const _sfc_main$2L = {
     data() {
       return {
         title: "label",
@@ -32265,8 +32586,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2M(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2K(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -32385,7 +32706,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentLabelLabel = /* @__PURE__ */ _export_sfc(_sfc_main$2N, [["render", _sfc_render$2M], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/label/label.vue"]]);
+  const PagesComponentLabelLabel = /* @__PURE__ */ _export_sfc(_sfc_main$2L, [["render", _sfc_render$2K], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/label/label.vue"]]);
   function getDate$2(type) {
     const date = /* @__PURE__ */ new Date();
     let year = date.getFullYear();
@@ -32400,7 +32721,7 @@ ${o3}
     day = day > 9 ? day : "0" + day;
     return `${year}-${month}-${day}`;
   }
-  const _sfc_main$2M = {
+  const _sfc_main$2K = {
     data() {
       return {
         title: "picker",
@@ -32479,8 +32800,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2L(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2J(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-title uni-common-pl" }, "普通选择器"),
@@ -32577,8 +32898,8 @@ ${o3}
       vue.createElementVNode("view", { class: "uni-picker-tips" }, " 注：选择当前时间 ±10 年之间的时间, 不在区间内不能选中 ")
     ]);
   }
-  const PagesComponentPickerPicker = /* @__PURE__ */ _export_sfc(_sfc_main$2M, [["render", _sfc_render$2L], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/picker/picker.vue"]]);
-  const _sfc_main$2L = {
+  const PagesComponentPickerPicker = /* @__PURE__ */ _export_sfc(_sfc_main$2K, [["render", _sfc_render$2J], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/picker/picker.vue"]]);
+  const _sfc_main$2J = {
     data() {
       const date = /* @__PURE__ */ new Date();
       const years = [];
@@ -32623,8 +32944,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2K(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2I(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -32706,8 +33027,8 @@ ${o3}
       ], 40, ["indicator-style", "mask-style", "value"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesComponentPickerViewPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$2L, [["render", _sfc_render$2K], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/picker-view/picker-view.vue"]]);
-  const _sfc_main$2K = {
+  const PagesComponentPickerViewPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$2J, [["render", _sfc_render$2I], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/picker-view/picker-view.vue"]]);
+  const _sfc_main$2I = {
     data() {
       return {
         title: "radio 单选框",
@@ -32752,8 +33073,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2J(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2H(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -32841,8 +33162,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentRadioRadio = /* @__PURE__ */ _export_sfc(_sfc_main$2K, [["render", _sfc_render$2J], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/radio/radio.vue"]]);
-  const _sfc_main$2J = {
+  const PagesComponentRadioRadio = /* @__PURE__ */ _export_sfc(_sfc_main$2I, [["render", _sfc_render$2H], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/radio/radio.vue"]]);
+  const _sfc_main$2H = {
     data() {
       return {
         title: "slider 滑块"
@@ -32854,8 +33175,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2I(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2G(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -32923,8 +33244,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentSliderSlider = /* @__PURE__ */ _export_sfc(_sfc_main$2J, [["render", _sfc_render$2I], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/slider/slider.vue"]]);
-  const _sfc_main$2I = {
+  const PagesComponentSliderSlider = /* @__PURE__ */ _export_sfc(_sfc_main$2H, [["render", _sfc_render$2G], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/slider/slider.vue"]]);
+  const _sfc_main$2G = {
     data() {
       return {
         title: "switch 开关"
@@ -32939,8 +33260,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2H(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2F(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -32992,8 +33313,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentSwitchSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$2I, [["render", _sfc_render$2H], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/switch/switch.vue"]]);
-  const _sfc_main$2H = {
+  const PagesComponentSwitchSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$2G, [["render", _sfc_render$2F], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/switch/switch.vue"]]);
+  const _sfc_main$2F = {
     data() {
       return {
         title: "textarea",
@@ -33006,8 +33327,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2G(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2E(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-title uni-common-pl" }, "输入区域高度自适应，不会出现滚动条"),
@@ -33032,8 +33353,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentTextareaTextarea = /* @__PURE__ */ _export_sfc(_sfc_main$2H, [["render", _sfc_render$2G], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/textarea/textarea.vue"]]);
-  const _sfc_main$2G = {
+  const PagesComponentTextareaTextarea = /* @__PURE__ */ _export_sfc(_sfc_main$2F, [["render", _sfc_render$2E], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/textarea/textarea.vue"]]);
+  const _sfc_main$2E = {
     data() {
       return {
         readOnly: false,
@@ -33137,7 +33458,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2D(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "page-body" }, [
         vue.createElementVNode("view", { class: "wrapper" }, [
@@ -33450,8 +33771,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentEditorEditor = /* @__PURE__ */ _export_sfc(_sfc_main$2G, [["render", _sfc_render$2F], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/editor/editor.vue"]]);
-  const _sfc_main$2F = {
+  const PagesComponentEditorEditor = /* @__PURE__ */ _export_sfc(_sfc_main$2E, [["render", _sfc_render$2D], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/editor/editor.vue"]]);
+  const _sfc_main$2D = {
     data() {
       return {
         title: "navigator"
@@ -33463,8 +33784,8 @@ ${o3}
       })
     }
   };
-  function _sfc_render$2E(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2C(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -33494,45 +33815,45 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentNavigatorNavigator = /* @__PURE__ */ _export_sfc(_sfc_main$2F, [["render", _sfc_render$2E], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/navigator.vue"]]);
-  const _sfc_main$2E = {
+  const PagesComponentNavigatorNavigator = /* @__PURE__ */ _export_sfc(_sfc_main$2D, [["render", _sfc_render$2C], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/navigator.vue"]]);
+  const _sfc_main$2C = {
     data() {
       return {
         title: "新建的页面"
       };
     }
   };
-  function _sfc_render$2D(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2B(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"])
     ]);
   }
-  const PagesComponentNavigatorNavigateNavigate = /* @__PURE__ */ _export_sfc(_sfc_main$2E, [["render", _sfc_render$2D], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/navigate/navigate.vue"]]);
-  const _sfc_main$2D = {
+  const PagesComponentNavigatorNavigateNavigate = /* @__PURE__ */ _export_sfc(_sfc_main$2C, [["render", _sfc_render$2B], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/navigate/navigate.vue"]]);
+  const _sfc_main$2B = {
     data() {
       return {
         title: "当前页"
       };
     }
   };
-  function _sfc_render$2C(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2A(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"])
     ]);
   }
-  const PagesComponentNavigatorRedirectRedirect = /* @__PURE__ */ _export_sfc(_sfc_main$2D, [["render", _sfc_render$2C], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/redirect/redirect.vue"]]);
+  const PagesComponentNavigatorRedirectRedirect = /* @__PURE__ */ _export_sfc(_sfc_main$2B, [["render", _sfc_render$2A], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/redirect/redirect.vue"]]);
   const _imports_0$3 = "/static/uni.png";
-  const _sfc_main$2C = {
+  const _sfc_main$2A = {
     data() {
       return {
         title: "image"
       };
     }
   };
-  function _sfc_render$2B(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2z(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -33567,12 +33888,12 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentImageImage = /* @__PURE__ */ _export_sfc(_sfc_main$2C, [["render", _sfc_render$2B], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/image/image.vue"]]);
+  const PagesComponentImageImage = /* @__PURE__ */ _export_sfc(_sfc_main$2A, [["render", _sfc_render$2z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/image/image.vue"]]);
   const block0$2 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("animate");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["animate"] = "39c049d8";
   };
-  const _sfc_main$2B = {
+  const _sfc_main$2z = {
     data() {
       return {
         title: "canvas",
@@ -33590,8 +33911,8 @@ ${o3}
       });
     }
   };
-  function _sfc_render$2A(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2y(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "page-body" }, [
@@ -33609,9 +33930,9 @@ ${o3}
     ]);
   }
   if (typeof block0$2 === "function")
-    block0$2(_sfc_main$2B);
-  const PagesComponentCanvasCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$2B, [["render", _sfc_render$2A], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/canvas/canvas.vue"]]);
-  const _sfc_main$2A = {
+    block0$2(_sfc_main$2z);
+  const PagesComponentCanvasCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$2z, [["render", _sfc_render$2y], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/canvas/canvas.vue"]]);
+  const _sfc_main$2y = {
     data() {
       return {
         url: "https://hellouniapp.dcloud.net.cn/html/web-view.html"
@@ -33631,7 +33952,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2x(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("web-view", {
         src: $data.url,
@@ -33639,8 +33960,8 @@ ${o3}
       }, null, 40, ["src"])
     ]);
   }
-  const PagesComponentWebViewWebView = /* @__PURE__ */ _export_sfc(_sfc_main$2A, [["render", _sfc_render$2z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view/web-view.vue"]]);
-  const _sfc_main$2z = {
+  const PagesComponentWebViewWebView = /* @__PURE__ */ _export_sfc(_sfc_main$2y, [["render", _sfc_render$2x], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view/web-view.vue"]]);
+  const _sfc_main$2x = {
     data() {
       return {
         title: "AD组件",
@@ -33665,8 +33986,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2w(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "ad-view" }, [
@@ -33704,8 +34025,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentAdAd = /* @__PURE__ */ _export_sfc(_sfc_main$2z, [["render", _sfc_render$2y], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/ad/ad.vue"]]);
-  const _sfc_main$2y = {
+  const PagesComponentAdAd = /* @__PURE__ */ _export_sfc(_sfc_main$2x, [["render", _sfc_render$2w], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/ad/ad.vue"]]);
+  const _sfc_main$2w = {
     methods: {
       getMessage(e2) {
         uni.showModal({
@@ -33715,7 +34036,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2v(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode(
         "web-view",
@@ -33729,8 +34050,8 @@ ${o3}
       )
     ]);
   }
-  const PagesComponentWebViewLocalWebViewLocal = /* @__PURE__ */ _export_sfc(_sfc_main$2y, [["render", _sfc_render$2x], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view-local/web-view-local.vue"]]);
-  const _sfc_main$2x = {
+  const PagesComponentWebViewLocalWebViewLocal = /* @__PURE__ */ _export_sfc(_sfc_main$2w, [["render", _sfc_render$2v], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view-local/web-view-local.vue"]]);
+  const _sfc_main$2v = {
     data() {
       return {
         clickClientX: 0,
@@ -33750,7 +34071,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2u(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode(
         "web-view",
@@ -33765,7 +34086,7 @@ ${o3}
       )
     ]);
   }
-  const PagesComponentWebViewLocalIssue17581 = /* @__PURE__ */ _export_sfc(_sfc_main$2x, [["render", _sfc_render$2w], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view-local/issue-17581.vue"]]);
+  const PagesComponentWebViewLocalIssue17581 = /* @__PURE__ */ _export_sfc(_sfc_main$2v, [["render", _sfc_render$2u], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view-local/issue-17581.vue"]]);
   var isIOS;
   function album() {
     var result = 0;
@@ -33994,7 +34315,7 @@ ${o3}
     requestAndroid,
     gotoAppSetting: gotoAppPermissionSetting
   };
-  const _sfc_main$2w = {
+  const _sfc_main$2u = {
     data() {
       return {
         title: "speech",
@@ -34065,8 +34386,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2v(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2t(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -34087,9 +34408,9 @@ ${o3}
       ])
     ]);
   }
-  const PlatformsAppPlusSpeechSpeech = /* @__PURE__ */ _export_sfc(_sfc_main$2w, [["render", _sfc_render$2v], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/speech/speech.vue"]]);
+  const PlatformsAppPlusSpeechSpeech = /* @__PURE__ */ _export_sfc(_sfc_main$2u, [["render", _sfc_render$2t], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/speech/speech.vue"]]);
   var id$1 = null;
-  const _sfc_main$2v = {
+  const _sfc_main$2t = {
     data() {
       return {
         title: "orientation",
@@ -34131,8 +34452,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2u(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2s(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -34156,10 +34477,10 @@ ${o3}
       ])
     ]);
   }
-  const PlatformsAppPlusOrientationOrientation = /* @__PURE__ */ _export_sfc(_sfc_main$2v, [["render", _sfc_render$2u], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/orientation/orientation.vue"]]);
+  const PlatformsAppPlusOrientationOrientation = /* @__PURE__ */ _export_sfc(_sfc_main$2t, [["render", _sfc_render$2s], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/orientation/orientation.vue"]]);
   var id = null;
   var bright = null;
-  const _sfc_main$2u = {
+  const _sfc_main$2s = {
     data() {
       return {
         title: "proximity",
@@ -34202,8 +34523,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2t(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2r(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -34228,8 +34549,8 @@ ${o3}
       ])
     ]);
   }
-  const PlatformsAppPlusProximityProximity = /* @__PURE__ */ _export_sfc(_sfc_main$2u, [["render", _sfc_render$2t], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/proximity/proximity.vue"]]);
-  const _sfc_main$2t = {
+  const PlatformsAppPlusProximityProximity = /* @__PURE__ */ _export_sfc(_sfc_main$2s, [["render", _sfc_render$2r], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/proximity/proximity.vue"]]);
+  const _sfc_main$2r = {
     data() {
       return {
         title: "push",
@@ -34286,8 +34607,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2s(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+  function _sfc_render$2q(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       $data.provider[0] ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -34323,8 +34644,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PlatformsAppPlusPushPush = /* @__PURE__ */ _export_sfc(_sfc_main$2t, [["render", _sfc_render$2s], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/push/push.vue"]]);
-  const _sfc_main$2s = {
+  const PlatformsAppPlusPushPush = /* @__PURE__ */ _export_sfc(_sfc_main$2r, [["render", _sfc_render$2q], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/push/push.vue"]]);
+  const _sfc_main$2q = {
     data() {
       return {
         img: "https://web-assets.dcloud.net.cn/unidoc/zh/1.jpg",
@@ -34383,7 +34704,7 @@ ${o3}
       this.music.destroy();
     }
   };
-  function _sfc_render$2r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2p(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -34424,195 +34745,7 @@ ${o3}
       /* STYLE */
     );
   }
-  const PlatformsAppPlusShakeShake = /* @__PURE__ */ _export_sfc(_sfc_main$2s, [["render", _sfc_render$2r], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/shake/shake.vue"]]);
-  const _sfc_main$2r = {
-    name: "u-link",
-    props: {
-      href: {
-        type: String,
-        default: ""
-      },
-      text: {
-        type: String,
-        default: ""
-      },
-      inWhiteList: {
-        type: Boolean,
-        default: false
-      }
-    },
-    methods: {
-      openURL() {
-        plus.runtime.openURL(this.href);
-      }
-    }
-  };
-  function _sfc_render$2q(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("text", {
-      style: { "text-decoration": "underline" },
-      href: $props.href,
-      onClick: _cache[0] || (_cache[0] = (...args) => $options.openURL && $options.openURL(...args)),
-      inWhiteList: $props.inWhiteList
-    }, vue.toDisplayString($props.text), 9, ["href", "inWhiteList"]);
-  }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$2r, [["render", _sfc_render$2q], ["__file", "C:/Users/Administrator/Desktop/ic365/components/u-link/u-link.vue"]]);
-  const _sfc_main$2q = {
-    data() {
-      return {
-        providerList: [],
-        version: ""
-      };
-    },
-    onLoad() {
-      this.version = plus.runtime.version;
-      uni.getProvider({
-        service: "share",
-        success: (result) => {
-          const data = [];
-          for (let i2 = 0; i2 < result.provider.length; i2++) {
-            switch (result.provider[i2]) {
-              case "weixin":
-                data.push({
-                  name: "分享到微信好友",
-                  id: "weixin"
-                });
-                data.push({
-                  name: "分享到微信朋友圈",
-                  id: "weixin",
-                  type: "WXSceneTimeline"
-                });
-                break;
-              case "qq":
-                data.push({
-                  name: "分享到QQ",
-                  id: "qq"
-                });
-                break;
-            }
-          }
-          this.providerList = data;
-        },
-        fail: (error) => {
-          formatAppLog("log", "at pages/about/about.vue:78", "获取分享通道失败" + JSON.stringify(error));
-        }
-      });
-    },
-    methods: {
-      save() {
-        uni.showActionSheet({
-          itemList: ["保存图片到相册"],
-          success: () => {
-            plus.gallery.save("https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/app_download.png", function() {
-              uni.showToast({
-                title: "保存成功",
-                icon: "none"
-              });
-            }, function() {
-              uni.showToast({
-                title: "保存失败，请重试！",
-                icon: "none"
-              });
-            });
-          }
-        });
-      },
-      share(e2) {
-        if (this.providerList.length === 0) {
-          uni.showModal({
-            title: "当前环境无分享渠道!",
-            showCancel: false
-          });
-          return;
-        }
-        let itemList = this.providerList.map(function(value) {
-          return value.name;
-        });
-        uni.showActionSheet({
-          itemList,
-          success: (res2) => {
-            let provider = this.providerList[res2.tapIndex].id;
-            uni.share({
-              provider,
-              scene: this.providerList[res2.tapIndex].type && this.providerList[res2.tapIndex].type === "WXSceneTimeline" ? "WXSceneTimeline" : "WXSceneSession",
-              type: provider === "qq" ? 1 : 0,
-              title: "欢迎体验uni-app",
-              summary: "uni-app 是一个使用 Vue.js 开发跨平台应用的前端框架",
-              imageUrl: "https://web-assets.dcloud.net.cn/unidoc/zh/8.jpg",
-              href: "https://m3w.cn/uniapp",
-              success: (res3) => {
-                formatAppLog("log", "at pages/about/about.vue:128", "success:" + JSON.stringify(res3));
-              },
-              fail: (e3) => {
-                uni.showModal({
-                  content: e3.errMsg,
-                  showCancel: false
-                });
-              }
-            });
-          }
-        });
-      }
-    }
-  };
-  function _sfc_render$2p(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_u_link = resolveEasycom(vue.resolveDynamicComponent("u-link"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "about" }, [
-      vue.createElementVNode("view", { class: "content" }, [
-        vue.createElementVNode("view", { class: "qrcode" }, [
-          vue.createElementVNode(
-            "image",
-            {
-              src: "https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/app_download.png",
-              onLongtap: _cache[0] || (_cache[0] = (...args) => $options.save && $options.save(...args))
-            },
-            null,
-            32
-            /* NEED_HYDRATION */
-          ),
-          vue.createElementVNode("text", { class: "tip" }, "扫码体验uni-app")
-        ]),
-        vue.createElementVNode("view", { class: "desc" }, [
-          vue.createElementVNode("text", { class: "code" }, "uni-app"),
-          vue.createTextVNode(" 是一个使用 "),
-          vue.createElementVNode("text", { class: "code" }, "Vue.js"),
-          vue.createTextVNode(" 开发跨平台应用的前端框架。 ")
-        ]),
-        vue.createElementVNode("view", { class: "source" }, [
-          vue.createElementVNode("view", { class: "title" }, "本示例源码获取方式："),
-          vue.createElementVNode("view", { class: "source-list" }, [
-            vue.createElementVNode("view", { class: "source-cell" }, [
-              vue.createElementVNode("text", { space: "nbsp" }, "1. "),
-              vue.createElementVNode("text", null, [
-                vue.createTextVNode("下载 HBuilderX，新建 uni-app 项目时选择 "),
-                vue.createElementVNode("text", { class: "code" }, "Hello uni-app"),
-                vue.createTextVNode(" 模板。")
-              ])
-            ]),
-            vue.createElementVNode("view", { class: "source-cell" }, [
-              vue.createElementVNode("text", { space: "nbsp" }, "2. "),
-              vue.createVNode(_component_u_link, {
-                class: "link",
-                href: "https://github.com/dcloudio/hello-uniapp",
-                text: "https://github.com/dcloudio/hello-uniapp"
-              }, null, 8, ["href", "text"])
-            ])
-          ])
-        ]),
-        vue.createElementVNode("button", {
-          type: "primary",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.share && $options.share(...args))
-        }, "分享")
-      ]),
-      vue.createElementVNode(
-        "view",
-        { class: "version" },
-        " 当前版本：" + vue.toDisplayString($data.version),
-        1
-        /* TEXT */
-      )
-    ]);
-  }
-  const PagesAboutAbout = /* @__PURE__ */ _export_sfc(_sfc_main$2q, [["render", _sfc_render$2p], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/about/about.vue"]]);
+  const PlatformsAppPlusShakeShake = /* @__PURE__ */ _export_sfc(_sfc_main$2q, [["render", _sfc_render$2p], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/shake/shake.vue"]]);
   const _sfc_main$2p = {
     name: "UniRate",
     props: {
@@ -35245,7 +35378,7 @@ ${o3}
     }
   };
   function _sfc_render$2k(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "example" }, [
@@ -35454,7 +35587,7 @@ ${o3}
     }
   };
   function _sfc_render$2i(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -35706,7 +35839,7 @@ ${o3}
     }
   };
   function _sfc_render$2h(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -35829,7 +35962,7 @@ ${o3}
     }
   };
   function _sfc_render$2g(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -35866,7 +35999,7 @@ ${o3}
     }
   };
   function _sfc_render$2f(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -35962,7 +36095,7 @@ ${o3}
     }
   };
   function _sfc_render$2e(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -36040,7 +36173,7 @@ ${o3}
     }
   };
   function _sfc_render$2d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "root" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "page-body" }, [
@@ -36181,7 +36314,7 @@ ${o3}
     }
   };
   function _sfc_render$2b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -36273,7 +36406,7 @@ ${o3}
     }
   };
   function _sfc_render$2a(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -36366,7 +36499,7 @@ ${o3}
     }
   };
   function _sfc_render$29(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -36448,7 +36581,7 @@ ${o3}
     }
   };
   function _sfc_render$28(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -36797,7 +36930,7 @@ ${o3}
     }
   };
   function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -36863,7 +36996,7 @@ ${o3}
     }
   };
   function _sfc_render$26(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -36905,7 +37038,7 @@ ${o3}
     }
   };
   function _sfc_render$25(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -36966,7 +37099,7 @@ ${o3}
     }
   };
   function _sfc_render$24(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -37033,7 +37166,7 @@ ${o3}
     }
   };
   function _sfc_render$23(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -37101,7 +37234,7 @@ ${o3}
     }
   };
   function _sfc_render$22(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -37380,7 +37513,7 @@ ${o3}
     }
   };
   function _sfc_render$21(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -37456,7 +37589,7 @@ ${o3}
     }
   };
   function _sfc_render$20(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -37505,7 +37638,7 @@ ${o3}
     }
   };
   function _sfc_render$1$(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -37568,7 +37701,7 @@ ${o3}
     }
   };
   function _sfc_render$1_(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -37637,7 +37770,7 @@ ${o3}
     }
   };
   function _sfc_render$1Z(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -37717,7 +37850,7 @@ ${o3}
     }
   };
   function _sfc_render$1Y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -37860,7 +37993,7 @@ ${o3}
     }
   };
   function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -37939,7 +38072,7 @@ ${o3}
     }
   };
   function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -37994,7 +38127,7 @@ ${o3}
     }
   };
   function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -38137,7 +38270,7 @@ ${o3}
     }
   };
   function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -38446,7 +38579,7 @@ ${o3}
     }
   };
   function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -38669,7 +38802,7 @@ ${o3}
     }
   };
   function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-padding-wrap" }, [
       vue.createVNode(_component_page_head, { title: "audio" }),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -38765,7 +38898,7 @@ ${o3}
     }
   };
   function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -38890,7 +39023,7 @@ ${o3}
     }
   };
   function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -39031,7 +39164,7 @@ ${o3}
     }
   };
   function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -39971,7 +40104,7 @@ ${o3}
     }
   };
   function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_2$8);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -40060,7 +40193,7 @@ ${o3}
     }
   };
   function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -40168,7 +40301,7 @@ ${o3}
     }
   };
   function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -40311,7 +40444,7 @@ ${o3}
     }
   };
   function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-common-mt" }, [
@@ -40458,7 +40591,7 @@ ${o3}
     }
   };
   function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -40569,7 +40702,7 @@ ${o3}
     }
   };
   function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -40649,7 +40782,7 @@ ${o3}
     }
   };
   function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -40707,7 +40840,7 @@ ${o3}
     }
   };
   function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -40813,7 +40946,7 @@ ${o3}
     }
   };
   function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -41338,7 +41471,7 @@ ${o3}
     });
   }
   function _sfc_render$1D(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -41708,7 +41841,7 @@ ${o3}
     }
   };
   function _sfc_render$1C(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -41904,7 +42037,7 @@ ${o3}
     });
   }
   function _sfc_render$1B(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt" }, [
@@ -42030,7 +42163,7 @@ ${o3}
     }
   };
   function _sfc_render$1A(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -42159,7 +42292,7 @@ ${o3}
     }
   };
   function _sfc_render$1z(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "websocket通讯示例" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -42297,7 +42430,7 @@ ${o3}
     }
   };
   function _sfc_render$1y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "websocket通讯示例" }),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -46329,7 +46462,7 @@ ${o3}
     }
   };
   function _sfc_render$1s(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-pickerview" }, [
       !_ctx.isCloudDataList ? (vue.openBlock(), vue.createElementBlock("scroll-view", {
         key: 0,
@@ -46624,7 +46757,7 @@ ${o3}
     }
   };
   function _sfc_render$1r(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     const _component_data_picker_view = vue.resolveComponent("data-picker-view");
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-tree" }, [
@@ -60803,7 +60936,7 @@ ${o3}
     }
   };
   function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "page" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
@@ -60902,7 +61035,7 @@ ${o3}
     methods: {}
   };
   function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_reciver = vue.resolveComponent("reciver");
     const _component_sender = vue.resolveComponent("sender");
     const _component_sender_bus = vue.resolveComponent("sender-bus");
@@ -61037,7 +61170,7 @@ ${o3}
     }
   };
   function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -61065,7 +61198,7 @@ ${o3}
     }
   };
   function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -61150,7 +61283,7 @@ ${o3}
     }
   };
   function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", { class: "mpvue-picker" }, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -61214,7 +61347,7 @@ ${o3}
     }
   };
   function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_1$o);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
@@ -61886,7 +62019,7 @@ ${o3}
     }
   };
   function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$7);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_0$6);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", {
         class: "banner",
@@ -62455,7 +62588,7 @@ ${o3}
     }
   };
   function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: "通过scheme打开三方app示例" }),
       vue.createElementVNode("button", {
@@ -62556,7 +62689,7 @@ ${o3}
     }
   };
   function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", {
@@ -64289,7 +64422,7 @@ This will fail in production if not fixed.`);
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-product" }, [
       vue.createVNode(_component_page_head, { title: "Pinia" }),
       vue.createElementVNode(
@@ -64362,7 +64495,7 @@ This will fail in production if not fixed.`);
     }
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$8);
+    const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-product" }, [
       vue.createVNode(_component_page_head, { title: "vuex:vue页面" }),
       vue.createElementVNode(
@@ -64444,6 +64577,8 @@ This will fail in production if not fixed.`);
     ]);
   }
   const PagesTemplateCryptoApiCryptoApi = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/crypto-api/crypto-api.vue"]]);
+  __definePage("pages/page/guide/judge", PagesPageGuideJudge);
+  __definePage("pages/page/guide/guide", PagesPageGuideGuide);
   __definePage("pages/page/index/index", PagesPageIndexIndex);
   __definePage("pages/page/index/supplement_info", PagesPageIndexSupplementInfo);
   __definePage("pages/page/study/study", PagesPageStudyStudy);
@@ -64490,7 +64625,6 @@ This will fail in production if not fixed.`);
   __definePage("platforms/app-plus/proximity/proximity", PlatformsAppPlusProximityProximity);
   __definePage("platforms/app-plus/push/push", PlatformsAppPlusPushPush);
   __definePage("platforms/app-plus/shake/shake", PlatformsAppPlusShakeShake);
-  __definePage("pages/about/about", PagesAboutAbout);
   __definePage("platforms/app-plus/feedback/feedback", PlatformsAppPlusFeedbackFeedback);
   __definePage("uni_modules/uni-upgrade-center-app/pages/upgrade-popup", UniModulesUniUpgradeCenterAppPagesUpgradePopup);
   __definePage("pages/API/login/login", PagesAPILoginLogin);

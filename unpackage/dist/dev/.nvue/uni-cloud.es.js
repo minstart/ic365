@@ -13,6 +13,30 @@ const topWindow = {
 };
 const pages = [
   {
+    path: "pages/page/guide/judge",
+    style: {
+      enablePullDownRefresh: false,
+      onReachBottomDistance: 100,
+      navigationStyle: "custom",
+      "app-plus": {
+        contentAdjust: false,
+        bounce: "none"
+      }
+    }
+  },
+  {
+    path: "pages/page/guide/guide",
+    style: {
+      enablePullDownRefresh: false,
+      onReachBottomDistance: 100,
+      navigationStyle: "custom",
+      "app-plus": {
+        contentAdjust: false,
+        bounce: "none"
+      }
+    }
+  },
+  {
     path: "pages/page/index/index",
     style: {
       navigationBarTitleText: "首页",
@@ -409,12 +433,6 @@ const pages = [
     path: "platforms/app-plus/shake/shake",
     style: {
       navigationBarTitleText: "摇一摇"
-    }
-  },
-  {
-    path: "pages/about/about",
-    style: {
-      navigationBarTitleText: "关于"
     }
   },
   {

@@ -132,7 +132,7 @@ export default {
 		//公共请求函数
 		// url请求路径
 		// dataType 数据返回类型
-		// method发起请求类型
+		// method发起请求类型 默认get
 		// notLoading 是否请求过程中显示loading图标
 		// .then() //成功返回
 		// .catch() //失败返回
@@ -379,7 +379,7 @@ export default {
 				const pathUrl = route[route.length - 1].route;
 				_this.getLogin().then(data => {
 					// 已经登陆了
-					_this.consoleLog("已经登陆了")
+					console.log("已经登陆了 - 来自common")
 					data.route = route;
 					data.pathUrl = pathUrl;
 					resolve(data);
@@ -387,6 +387,7 @@ export default {
 					// 没有登陆
 					reject(err);
 					// console.error("data：：：：：2", JSON.stringify(err));
+					// console.log(pathUrl)
 					if (pathUrl.indexOf("/login") == -1) {
 						// 没有登录
 						console.log("没有登录,跳转到登录页面")

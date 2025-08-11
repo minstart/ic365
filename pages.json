@@ -13,6 +13,34 @@
 	},
 	"pages": [
 		// 项目页面 ---------------------------------Start
+		//#ifdef APP-PLUS
+		//pages数组中第一项表示应用启动页
+		//启动页
+		{
+			"path": "pages/page/guide/judge",
+			"style": {
+				"enablePullDownRefresh": false,
+				"onReachBottomDistance": 100,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"contentAdjust": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/page/guide/guide",
+			"style": {
+				"enablePullDownRefresh": false,
+				"onReachBottomDistance": 100,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"contentAdjust": false,
+					"bounce": "none"
+				}
+			}
+		},
+		// #endif
 		{
 			"path": "pages/page/index/index",
 			"style": {
@@ -436,14 +464,6 @@
 				"navigationBarTitleText": "摇一摇"
 			}
 		},
-		// #ifdef H5 || APP-PLUS
-		{
-			"path": "pages/about/about",
-			"style": {
-				"navigationBarTitleText": "关于"
-			}
-		},
-		// #endif
 		{
 			"path": "platforms/app-plus/feedback/feedback",
 			"style": {

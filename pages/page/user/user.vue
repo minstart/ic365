@@ -1,7 +1,6 @@
 <template>
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false"
-			:background="'transparent'"></page-head>
+		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="banner-wrap">
 			<view class="btn-wrap">
 				<view class="user-set-btn" @click="jumpPage({url:''})"></view>
@@ -46,8 +45,7 @@
 		<view class="uni-padding-wrap uni-common-mt tab-wrap">
 			<!-- 我的tab相关 ------Start -->
 			<view class="tab-list-wrap">
-				<view class="tab-list" :class="selectedClass(i)" :current='i' @click="clickTab(i)"
-					v-for="(item,i) in practiceList">
+				<view class="tab-list" :class="selectedClass(i)" :current='i' @click="clickTab(i)" v-for="(item,i) in practiceList">
 					{{item.title}}
 				</view>
 			</view>
@@ -97,22 +95,21 @@
 			<!-- 皮肤tab ------Start -->
 			<view class="skin-tab-wrap">
 				<view class="skin-tab-list-wrap">
-					<h3 class="skin-tab-list flex-center" :class="selectedClass2(i)" :current='i' @click="clickTab2(i)"
-						v-for="(item,i) in skinList" v-html="item.title">
+					<h3 class="skin-tab-list flex-center" :class="selectedClass2(i)" :current='i' @click="clickTab2(i)" v-for="(item,i) in skinList" v-html="item.resourceTypeName">
 					</h3>
 				</view>
 				<view class="skin-tab-content">
 					<view class="tab-list" v-for="(item,i) in skinList" :current='i' v-show="skinCurrent === i">
-						<view class="skin-list" v-for="item in skinList[skinCurrent].list">
-							<image class="list-icon" src="" mode=""></image>
+						<view class="skin-list" v-for="item in skinList[skinCurrent].resourceDetails">
+							<image class="list-icon" :src="item.icon" mode=""></image>
 							<view class="list-info ">
 								<view class="flex-center">
 									<view>
-										<h3 class="title">{{item.title}}</h3>
-										<view class="introduce">{{item.introduce}}</view>
-										<view class="isObtain back-green" v-if="item.obtain==1">使用中</view>
-										<view class="isObtain back-green" v-if="item.obtain==2">已获取</view>
-										<view class="isObtain" v-if="item.obtain==3">未获得</view>
+										<h3 class="title">{{item.name}}</h3>
+										<view class="introduce">{{item.subtitle}}</view>
+										<view class="isObtain back-green" v-if="item.possessed==2">使用中</view>
+										<view class="isObtain back-green" v-if="item.possessed==1">已获取</view>
+										<view class="isObtain" v-if="item.possessed==0">未获得</view>
 									</view>
 								</view>
 							</view>
@@ -125,22 +122,22 @@
 			<view class="exchange-wrap">
 				<view class="item-title-wrap">
 					<h3 class="item-title">兑换商城</h3>
-					<view class="item-subtitle">限时兑换</view>
 					<view class="item-more">
 						<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/exchange_mall'})">查看更多</view>
 					</view>
 				</view>
+				<!-- 暂无数据 -->
+				<view class="no-list-tip" v-if="exchangeList.length==0">暂无数据</view>
 				<ul class="exchange-list-wrap">
-					<li class="exchange-list" v-for="item in exchangeList" :type="item.missionTypeId"
-						:colorscheme="item.colorScheme">
-						<image class="list-icon"></image>
+					<li class="exchange-list" v-for="item in exchangeList" :type="item.missionTypeId" :colorscheme="item.colorScheme">
+						<image class="list-icon" :src="item.icon"></image>
 						<view class="list-info">
-							<h3 class="info-title">{{item.title}}</h3>
-							<view class="info-describe">{{item.describe}}</view>
+							<h3 class="info-title">{{item.productName}}</h3>
+							<view class="info-describe">{{item.subtitle}}</view>
 							<view class="rewardBtn-wrap">
-								<view class="list-reward" v-if="item.rewardName">
-									<image class="reward-reward-icon" :src="rewardIcon(item.currencyTypeId)"></image>
-									<span>{{item.rewardName}}</span>
+								<view class="list-reward" v-if="item.payCurrencyTypeName">
+									<image class="reward-reward-icon" :src="rewardIcon(item.payCurrencyType)"></image>
+									<span>{{item.quantity}}{{item.payCurrencyTypeName}}</span>
 								</view>
 								<view class="exchange-btn">立即兑换</view>
 							</view>
@@ -151,7 +148,7 @@
 			<!-- 兑换商城 ------End -->
 		</view>
 	</view>
-	
+
 </template>
 
 <script>
@@ -192,66 +189,8 @@
 				],
 
 				skinCurrent: 0,
-				skinList: [{
-						title: "星座<br>战衣",
-						list: [{
-								icon: "",
-								title: "狮子座战衣",
-								introduce: "勇敢的狮子座专属",
-								obtain: 1
-							},
-							{
-								icon: "",
-								title: "处女座战衣",
-								introduce: "完美的处女座",
-								obtain: 2
-							},
-							{
-								icon: "",
-								title: "白羊座战衣",
-								introduce: "热情冲动的白羊座",
-								obtain: 3
-							},
-							{
-								icon: "",
-								title: "射手座战衣",
-								introduce: "凑数的射手座战衣",
-								obtain: 3
-							}
-						]
-					},
-					{
-						title: "生肖<br>守护者",
-					},
-					{
-						title: "数学<br>名人堂",
-					},
-					{
-						title: "皮肤",
-					},
-					{
-						title: "饰品",
-					}
-				],
-				exchangeList: [{
-					icon: "",
-					title: "圣诞限定皮肤",
-					describe: "节日专属智算365皮肤",
-					rewardName: "1500知识尘",
-					currencyTypeId: 1,
-					isExchange: 1,
-					missionTypeId: 1,
-					colorScheme: 2
-				}, {
-					icon: "",
-					title: "圣诞限定皮肤",
-					describe: "节日专属智算365皮肤",
-					rewardName: "1500知识尘",
-					currencyTypeId: 1,
-					isExchange: 1,
-					missionTypeId: 1,
-					colorScheme: 3
-				}, ]
+				skinList: [],
+				exchangeList: []
 			}
 		},
 
@@ -295,7 +234,39 @@
 					this.consoleLog("获取用户信息报错：：", error)
 				})
 
+				// 获取我资源(战衣/皮肤/名人堂...)
+				this.commonRequest({
+					url: "/api/student/getResourcesGroups"
+				}).then(res => {
+					if (res.code == 0) {
+						this.skinList = res.data.currencies;
+					} else {
+						uni.showToast({
+							title: res.message || "获取我资源(战衣/皮肤/名人堂...)失败!",
+							icon: "none"
+						});
+					}
+
+				}).catch(error => {
+					this.consoleLog("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
+				})
 				
+				// 获取兑换商品列表
+				this.commonRequest({
+					url: "/api/exchange/products"
+				}).then(res => {
+					if (res.code == 0) {
+						this.exchangeList = res.data;
+					} else {
+						uni.showToast({
+							title: res.message || "获取兑换商品列表失败!",
+							icon: "none"
+						});
+					}
+				
+				}).catch(error => {
+					this.consoleLog("获取兑换商品列表报错：：", error)
+				})
 			}).catch(err => {
 				// 没有登陆
 				// console.error("data：：：：：2", JSON.stringify(err));
@@ -318,7 +289,7 @@
 		},
 		onShow() {
 			this.pageOnShowSet({
-				uniHide:"all"
+				uniHide: "all"
 			})
 		},
 		onHide() {
@@ -366,9 +337,11 @@
 	uni-page-body {
 		background-color: #F4F4F4 !important;
 	}
-	.page-wrap{
+
+	.page-wrap {
 		background: url("/static/image/5_user_back.png") no-repeat top / 100%;
 	}
+
 	.banner-wrap {
 
 		.btn-wrap {
@@ -431,7 +404,8 @@
 					}
 				}
 			}
-			.qr-code{
+
+			.qr-code {
 				width: 2rem;
 				height: 2rem;
 				background: url("/static/icons/QR_code.png") no-repeat center / 100% 100%;
@@ -603,7 +577,8 @@
 				min-height: 100%;
 				background: #fff;
 				border-radius: 1rem;
-
+				max-height: 40rem;
+				overflow: auto;
 				.skin-list {
 					background-color: #F1F4FB;
 					border-radius: 1rem;

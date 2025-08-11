@@ -113,9 +113,6 @@ const _sfc_main = {
     };
   },
   onNavigationBarButtonTap(e) {
-    uni.navigateTo({
-      url: "/pages/about/about"
-    });
   },
   methods: {
     triggerCollapse(e, id) {
