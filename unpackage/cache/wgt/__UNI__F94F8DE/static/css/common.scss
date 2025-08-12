@@ -27,6 +27,27 @@ ul,li{
 	padding: 1.125rem 0;
 	color: #999;
 }
+.btn-yellow{
+	background: $ThemeColor;
+	color: #fff;
+	font-size: 1rem;
+}
+.btn-white{
+	color: $ThemeColor;
+	background: #fff !important;
+	border: 0.1rem solid $ThemeColor;
+	font-size: 1rem;
+}
+.page-loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 200rem;
+	height: 200rem;
+	overflow: hidden;
+	background: #fff;
+	z-index: 99999999999999999999999999999;
+}
 // 单一类型样式 ------End
 
 // 列表标题
@@ -45,13 +66,13 @@ ul,li{
 		display: inline-block;
 		color: #999999;
 		font-size: 0.875rem;
-		line-height: 2.125rem;
+		line-height: 2.175rem;
 		vertical-align: top;
 		margin-left: 0.5rem;
 	}
 	.item-more{
 		float: right;
-		line-height: 2.125rem;
+		line-height: 2.175rem;
 		color: #999;
 		font-size: 0.875rem;
 		.text{
@@ -96,4 +117,10 @@ uni-button{
 	.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text{
 		color: $ThemeColor !important;
 	}
+}
+.uni-toast{
+	width: 10rem;
+}
+.uni-toast__content{
+	padding: 0 0.3rem;
 }

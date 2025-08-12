@@ -47,6 +47,18 @@
       "orientation": [
         "portrait-primary"
       ],
+      "splashscreen": {
+        "androidStyle": "default",
+        "android": {
+          "hdpi": "static/guide/guide_480x762.png",
+          "xhdpi": "static/guide/guide_720x1242.png",
+          "xxhdpi": "static/guide/guide_1080x1882.png"
+        },
+        "iosStyle": "storyboard",
+        "ios": {
+          "storyboard": "static/guide/CustomStoryboard.zip"
+        }
+      },
       "google": {
         "permissions": [
           "<uses-feature android:name=\"android.hardware.camera\"/>",

@@ -1,6 +1,6 @@
 <template>
-	<page-head :title='pageHeadTitle' :isBack='true'></page-head>
-	<view class="uni-padding-wrap uni-common-mt">
+	<view class="page-wrap uni-padding-wrap">
+		<page-head :title='pageHeadTitle' :isBack='false' :background="'transparent'"></page-head>
 		<uni-forms ref="baseForm" :rules="rules" :model="baseFormData" labelWidth="80px">
 			<uni-forms-item label="性别" required name="gender">
 				<uni-data-checkbox v-model="baseFormData.gender" primaryColor="#F5A623" :localdata="genders" />
@@ -148,14 +148,16 @@
 							if (res.code == 0) {
 								_this.$store.commit("Update_UserInfo", _this.baseFormData)
 								uni.showToast({
-									title: res.message || "更新用户信息成功!",
+									title: res.message || "更新成功",
 									icon: "success",
 									duration: 2000,
 									success: function() {
 										setTimeout(() => {
-											uni.reLaunch({
-												url: "/pages/page/index/index"
-											});
+											uni.showToast({title:"执行到这里了2"})
+											_this.jumpPage({
+												url:"/pages/page/index/index",
+												type:"reLaunch"
+											})
 										}, 2000)
 									}
 								});
@@ -185,7 +187,9 @@
 </script>
 
 <style lang="scss" >
-	@import "/static/css/standard.scss";
+	.page-wrap {
+		background: url("/static/image/0_login_back.png") no-repeat top / 100%;
+	}
 	.uni-form-item {
 		.title {
 			flex: 1;
@@ -211,8 +215,6 @@
 	
 	.submit-btn{
 		width: 90%;
-		// background-color: $ThemeColor !important;
-		// font-size: 1rem;
 	}
 </style>
 

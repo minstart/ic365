@@ -3825,13 +3825,13 @@ uni-button {
   background-color: #F5A623 !important;
   font-size: 1rem;
 }
-.uni-padding-wrap .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner {
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner {
   border-color: #F5A623 !important;
 }
-.uni-padding-wrap .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner .radio__inner-icon {
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner .radio__inner-icon {
   background-color: #F5A623 !important;
 }
-.uni-padding-wrap .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text {
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text {
   color: #F5A623 !important;
 }
 .uni-toast {

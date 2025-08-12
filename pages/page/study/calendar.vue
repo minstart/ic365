@@ -64,8 +64,6 @@
 				this.info.date = this.changeDate(new Date(), -30).fullDate
 				this.info.startDate = this.changeDate(new Date(), -60).fullDate
 				this.info.endDate = this.changeDate(new Date(), 30).fullDate
-
-
 				this.info.selected = [{
 						date: this.changeDate("2025-8-1").fullDate
 					},
@@ -172,9 +170,8 @@
 				this.checkedDate = e.fulldate;
 			},
 			doingExercises() {
-				uni.showToast({
-					title: "当前选择的做题日期：" + this.checkedDate,
-					icon: "none"
+				this.jumpPage({
+					url:"/pages/page/study/answer_questions?date="+this.checkedDate
 				})
 			}
 		}

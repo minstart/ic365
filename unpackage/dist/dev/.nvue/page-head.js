@@ -1,7 +1,7 @@
 import { f as formatAppLog } from "./uni-app.es.js";
 import { resolveComponent, openBlock, createElementBlock, Fragment, createElementVNode, normalizeStyle, createCommentVNode, createVNode, withCtx, toDisplayString } from "vue";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper.js";
-const _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": 2.6 } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 999 } }, "common-page-head-back": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": 2.125, "height": 2.125 } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 200, "height": 200, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
+const _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": 2.6 } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 999 } }, "common-page-head-back": { ".common-page-head ": { "height": 2.75, "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": 2.125, "height": 2.125 } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
 const _sfc_main = {
   name: "page-head",
   props: {
@@ -90,23 +90,41 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 _: 1
                 /* STABLE */
               }),
-              createElementVNode("view", { class: "common-page-head-title" }, [
-                createElementVNode(
-                  "u-text",
-                  null,
-                  toDisplayString($props.title),
-                  1
-                  /* TEXT */
-                )
-              ]),
-              createElementVNode("view", { class: "common-page-head-module" }, [
-                $props.isModule ? (openBlock(), createElementBlock("u-image", {
-                  key: 0,
-                  src: $props.moduleIcon,
-                  mode: "",
-                  onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
-                }, null, 8, ["src"])) : createCommentVNode("v-if", true)
-              ])
+              createElementVNode(
+                "view",
+                {
+                  class: "common-page-head-title",
+                  style: normalizeStyle(!$props.title && "height:0;")
+                },
+                [
+                  createElementVNode(
+                    "u-text",
+                    null,
+                    toDisplayString($props.title),
+                    1
+                    /* TEXT */
+                  )
+                ],
+                4
+                /* STYLE */
+              ),
+              createElementVNode(
+                "view",
+                {
+                  class: "common-page-head-module",
+                  style: normalizeStyle(!$props.isModule && "height:0;")
+                },
+                [
+                  $props.isModule ? (openBlock(), createElementBlock("u-image", {
+                    key: 0,
+                    src: $props.moduleIcon,
+                    mode: "",
+                    onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
+                  }, null, 8, ["src"])) : createCommentVNode("v-if", true)
+                ],
+                4
+                /* STYLE */
+              )
             ],
             4
             /* STYLE */

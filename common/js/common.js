@@ -263,7 +263,7 @@ export default {
 			} else if (store.state.baseFontSize) {
 				if (data.orientation && data.orientation == "landscape") {
 					// 横屏的rem设置有毒
-					var index = 10;
+					var index = 6;
 					let time = setInterval(() => {
 						index = index - 1;
 						if (index == 0) {
@@ -312,7 +312,7 @@ export default {
 							// #ifdef APP-PLUS
 							plus.screen.lockOrientation(data.orientation + '-primary');
 							// #endif  
-						}, 300)
+						}, 400)
 						_this.setRootFontSize(data)
 					} else {
 						// setTimeout(() => {

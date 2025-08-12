@@ -13,10 +13,38 @@ const topWindow = {
 };
 const pages = [
   {
+    path: "pages/page/guide/judge",
+    style: {
+      enablePullDownRefresh: false,
+      onReachBottomDistance: 100,
+      navigationStyle: "custom",
+      "app-plus": {
+        contentAdjust: false,
+        bounce: "none"
+      }
+    }
+  },
+  {
+    path: "pages/page/guide/guide",
+    style: {
+      enablePullDownRefresh: false,
+      onReachBottomDistance: 100,
+      navigationStyle: "custom",
+      "app-plus": {
+        contentAdjust: false,
+        bounce: "none"
+      }
+    }
+  },
+  {
     path: "pages/page/index/index",
     style: {
       navigationBarTitleText: "首页",
-      navigationStyle: "custom"
+      navigationStyle: "custom",
+      "app-plus": {
+        animationType: "none",
+        animationDuration: 0
+      }
     }
   },
   {
@@ -41,9 +69,27 @@ const pages = [
     }
   },
   {
+    path: "pages/page/study/calendar",
+    style: {
+      navigationBarTitleText: "每日挑战",
+      navigationStyle: "custom",
+      "app-plus": {
+        animationType: "none",
+        animationDuration: 0
+      }
+    }
+  },
+  {
     path: "pages/page/team/team",
     style: {
       navigationBarTitleText: "队伍",
+      navigationStyle: "custom"
+    }
+  },
+  {
+    path: "pages/page/team/invite_team",
+    style: {
+      navigationBarTitleText: "邀请组队",
       navigationStyle: "custom"
     }
   },
@@ -72,6 +118,13 @@ const pages = [
     path: "pages/page/user/achievementDetails",
     style: {
       navigationBarTitleText: "成就中心",
+      navigationStyle: "custom"
+    }
+  },
+  {
+    path: "pages/page/user/exchange_mall",
+    style: {
+      navigationBarTitleText: "兑换商城",
       navigationStyle: "custom"
     }
   },
@@ -380,12 +433,6 @@ const pages = [
     path: "platforms/app-plus/shake/shake",
     style: {
       navigationBarTitleText: "摇一摇"
-    }
-  },
-  {
-    path: "pages/about/about",
-    style: {
-      navigationBarTitleText: "关于"
     }
   },
   {
@@ -1377,6 +1424,10 @@ const globalStyle = {
     maxWidth: 1190,
     navigationBarTextStyle: "black",
     navigationBarBackgroundColor: "#F1F1F1"
+  },
+  "app-plus": {
+    animationType: "none",
+    animationDuration: 0
   }
 };
 const tabBar = {

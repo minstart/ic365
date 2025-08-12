@@ -1,14 +1,14 @@
 import { f as formatAppLog } from "./uni-app.es.js";
 import { resolveComponent, openBlock, createElementBlock, Fragment, createElementVNode, normalizeStyle, createCommentVNode, createVNode, withCtx, toDisplayString } from "vue";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper.js";
-const _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": 2.6 } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 999 } }, "common-page-head-back": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_grey.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": 2.125, "height": 2.125 } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29, "content::before": '""', "width::before": 1, "height::before": 1, "borderRadius::before": 100, "color::before": "rgba(255,206,9,0.4)", "boxShadow::before": "0 -2.5rem rgba(255, 206, 9, 0.9),  2.5rem 0px,  0 2.5rem,  -2.5rem 0 rgba(255, 206, 9, 0.7),  -1.75rem -1.75rem rgba(255, 206, 9, 0.8),  1.75rem -1.75rem #ffce09,  1.75rem 1.75rem,  -1.75rem 1.75rem", "animation::before": "spin 1s steps(8) infinite", "position::before": "absolute", "top::before": 0, "right::before": 0, "bottom::before": 0, "left::before": 0 } }, "@FONT-FACE": [{}] };
+const _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": 2.6 } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 999 } }, "common-page-head-back": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": 2.125, "height": 2.125 } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 200, "height": 200, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
 const _sfc_main = {
   name: "page-head",
   props: {
     clickModule: {
       type: Function,
       default: () => {
-        formatAppLog("log", "at components/page-head/page-head.vue:28", "默认右侧功能区函数");
+        formatAppLog("log", "at components/page-head/page-head.vue:29", "默认右侧功能区函数");
       }
     },
     isHide: {
@@ -31,6 +31,9 @@ const _sfc_main = {
     },
     moduleIcon: {
       default: "/static/icons/nav-bar.png"
+    },
+    systemTaskbar: {
+      default: true
     }
   },
   data() {
@@ -39,11 +42,15 @@ const _sfc_main = {
     };
   },
   mounted() {
-    this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem";
+    this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem" : this.taskbarHeight = "0rem";
   },
   methods: {
     clickBack() {
-      uni.navigateBack();
+      this.$store.state.isLoading = true;
+      uni.navigateBack({
+        animationType: "none",
+        animationDuration: 1e3
+      });
     }
   }
 };

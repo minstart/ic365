@@ -303,6 +303,7 @@
 		onLoad() {
 
 		},
+		
 		onReady() {
 			this.verifLogin().then(data => {
 				// 获取用户信息

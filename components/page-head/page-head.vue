@@ -11,8 +11,8 @@
 			<viww class="common-page-head-back">
 				<view class="page-head-back-icon" v-if='isBack' @click="clickBack(backData)"></view>
 			</viww>
-			<view class="common-page-head-title">{{title}}</view>
-			<view class="common-page-head-module">
+			<view class="common-page-head-title" :style="!title&&'height:0;'">{{title}}</view>
+			<view class="common-page-head-module" :style="!isModule&&'height:0;'">
 				<image v-if='isModule' :src="moduleIcon" mode="" @click="clickModule"></image>
 			</view>
 		</view>
@@ -96,11 +96,14 @@
 		background: #fff;
 		z-index: 999;
 
+		.common-page-head-back {
+			height: 2.75rem;
+		}
+
 		.common-page-head-back,
 		.common-page-head-module {
 			flex: 1;
 			position: relative;
-
 			* {
 				position: absolute;
 				left: 0;
@@ -133,8 +136,8 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		width: 200rem;
-		height: 200rem;
+		width: 100vw;
+		height: 100vh;
 		overflow: hidden;
 		background: #fff;
 		z-index: 99999999999999999999999999999;
@@ -142,26 +145,26 @@
 
 	.page-loading::before {
 		// content: "";
-		// width: 1rem;
-		// height: 1rem;
+		// width: 16px;
+		// height: 16px;
 		// border-radius: 100%;
 		// color: rgba(255, 206, 9, .4);
-		// box-shadow: 0 -2.5rem rgba(255, 206, 9, .9),
+		// box-shadow: 0 -40px rgba(255, 206, 9, .9),
 		// 	/* top */
-		// 	2.5rem 0px,
+		// 	40px 0px,
 		// 	/* right */
-		// 	0 2.5rem,
+		// 	0 40px,
 		// 	/* bottom */
-		// 	-2.5rem 0 rgba(255, 206, 9, .7),
+		// 	-40px 0 rgba(255, 206, 9, .7),
 		// 	/* left */
 
-		// 	-1.75rem -1.75rem rgba(255, 206, 9, .8),
+		// 	-28px -28px rgba(255, 206, 9, .8),
 		// 	/* left-top */
-		// 	1.75rem -1.75rem rgba(255, 206, 9, 1),
+		// 	28px -28px rgba(255, 206, 9, 1),
 		// 	/* right-top */
-		// 	1.75rem 1.75rem,
+		// 	28px 28px,
 		// 	/* right-bottom */
-		// 	-1.75rem 1.75rem;
+		// 	-28px 28px;
 		// /* left-bottom */
 		// animation: spin 1s steps(8) infinite;
 		// /* center */

@@ -85,6 +85,17 @@
 			}
 		},
 		{
+			"path": "pages/page/study/answer_questions",
+			"style": {
+				"navigationBarTitleText": "答题",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "none", // 设置为"none"以关闭动画
+					"animationDuration": 0 // 动画持续时间设置为0
+				}
+			}
+		},
+		{
 			"path": "pages/page/team/team",
 			"style": {
 				"navigationBarTitleText": "队伍",

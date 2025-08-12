@@ -107,16 +107,14 @@ uni-button{
 	background-color: $ThemeColor !important;
 	font-size: 1rem;
 }
-.uni-padding-wrap{
-	.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner{
-		border-color: $ThemeColor !important;
-	}
-	.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner .radio__inner-icon{
-		background-color : $ThemeColor !important;
-	}
-	.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text{
-		color: $ThemeColor !important;
-	}
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner{
+	border-color: $ThemeColor !important;
+}
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .radio__inner .radio__inner-icon{
+	background-color : $ThemeColor !important;
+}
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text{
+	color: $ThemeColor !important;
 }
 .uni-toast{
 	width: 10rem;

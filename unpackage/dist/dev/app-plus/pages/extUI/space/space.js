@@ -371,6 +371,17 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     },
     {
+      path: "pages/page/study/answer_questions",
+      style: {
+        navigationBarTitleText: "\u7B54\u9898",
+        navigationStyle: "custom",
+        "app-plus": {
+          animationType: "none",
+          animationDuration: 0
+        }
+      }
+    },
+    {
       path: "pages/page/team/team",
       style: {
         navigationBarTitleText: "\u961F\u4F0D",

@@ -54,7 +54,8 @@
 			}
 		},
 		// onload事件时在网页或者图片完全加载完成后触发的，它适用于整个网页加载时 - 该方法就会执行一次，适合用于进行 页面初始化工作 和获取 一次性数据 。
-		onLoad() {
+		// 子级页面接收通过url带过来的参数
+		onLoad(option) {
 			this.pageOnShowSet({
 				uniHide:"all",
 				orientation:"landscape" //横屏landscape 不传值默认竖屏

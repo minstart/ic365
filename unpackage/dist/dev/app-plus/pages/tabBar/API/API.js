@@ -126,7 +126,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
 
   // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
   var import_vue3 = __toESM(require_vue());
-  var _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": 2.6 } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 999 } }, "common-page-head-back": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": 2.125, "height": 2.125 } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 200, "height": 200, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
+  var _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": 2.6 } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 999 } }, "common-page-head-back": { ".common-page-head ": { "height": 2.75, "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": 2.125, "height": 2.125 } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
   var _sfc_main2 = {
     name: "page-head",
     props: {
@@ -215,23 +215,41 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                   _: 1
                   /* STABLE */
                 }),
-                (0, import_vue3.createElementVNode)("view", { class: "common-page-head-title" }, [
-                  (0, import_vue3.createElementVNode)(
-                    "u-text",
-                    null,
-                    (0, import_vue3.toDisplayString)($props.title),
-                    1
-                    /* TEXT */
-                  )
-                ]),
-                (0, import_vue3.createElementVNode)("view", { class: "common-page-head-module" }, [
-                  $props.isModule ? ((0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)("u-image", {
-                    key: 0,
-                    src: $props.moduleIcon,
-                    mode: "",
-                    onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
-                  }, null, 8, ["src"])) : (0, import_vue3.createCommentVNode)("v-if", true)
-                ])
+                (0, import_vue3.createElementVNode)(
+                  "view",
+                  {
+                    class: "common-page-head-title",
+                    style: (0, import_vue3.normalizeStyle)(!$props.title && "height:0;")
+                  },
+                  [
+                    (0, import_vue3.createElementVNode)(
+                      "u-text",
+                      null,
+                      (0, import_vue3.toDisplayString)($props.title),
+                      1
+                      /* TEXT */
+                    )
+                  ],
+                  4
+                  /* STYLE */
+                ),
+                (0, import_vue3.createElementVNode)(
+                  "view",
+                  {
+                    class: "common-page-head-module",
+                    style: (0, import_vue3.normalizeStyle)(!$props.isModule && "height:0;")
+                  },
+                  [
+                    $props.isModule ? ((0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)("u-image", {
+                      key: 0,
+                      src: $props.moduleIcon,
+                      mode: "",
+                      onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
+                    }, null, 8, ["src"])) : (0, import_vue3.createCommentVNode)("v-if", true)
+                  ],
+                  4
+                  /* STYLE */
+                )
               ],
               4
               /* STYLE */
