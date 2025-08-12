@@ -171,7 +171,7 @@
 			},
 			doingExercises() {
 				this.jumpPage({
-					url:"/pages/page/study/answer_questions?date="+this.checkedDate
+					url:"/pages/page/study/answer_questions?date="+this.checkedDate+"&isEveryDay=true"
 				})
 			}
 		}

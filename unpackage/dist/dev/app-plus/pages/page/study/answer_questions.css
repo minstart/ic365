@@ -141,7 +141,7 @@
   font-size: 1.25rem;
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-image-wrap[data-v-772e1c56] {
-  margin: 0.2rem 0;
+  margin-top: 0.2rem;
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-image-wrap .topic-image[data-v-772e1c56] {
   width: 20rem;
@@ -156,6 +156,7 @@
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-options-wrap[data-v-772e1c56] {
   overflow: hidden;
+  margin-top: 0.5rem;
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-options-wrap .topic-options[data-v-772e1c56] {
   float: left;

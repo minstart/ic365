@@ -6,16 +6,16 @@
 			<view class="content-wrap">
 				<view class="category-wrap">
 					<view class="subject-grade-wrap">
-						<span class="subject">数学</span>
+						<span class="subject">{{categoryTree.subject}}</span>
 						<span> · </span>
-						<span class="grade">一年级下册</span>
+						<span class="grade">{{categoryTree.grade}}年级{{categoryTree.semester}}</span>
 					</view>
 					<view class="tree-wrap" v-for="(item,i) in categoryTree.category">
-						<h3 class="tree-title">{{item.name}}</h3>
+						<h3 class="tree-title">{{item.categoryName}}</h3>
 						<view class="tree-list" v-for="(item2,i2) in item.children">
-							<view class="tree-list-title">{{item2.name}}</view>
+							<view class="tree-list-title">{{item2.categoryName}}</view>
 							<div class="tree-list" v-for="(item3,i3) in item2.children">
-								<view class="tree-list-title">{{item3.name}}</view>
+								<view class="tree-list-title">{{item3.categoryName}}</view>
 							</div>
 						</view>
 					</view>
@@ -33,7 +33,7 @@
 									{{item.optionName}}.{{item.option}}
 								</view>
 							</view>
-							<button class="topic-submit" @click="submit">提交</button>
+							<button class="topic-submit" @click="submit" v-if="!answered">提交</button>
 						</view>
 						<view class="analysis-wrap"></view>
 					</view>
@@ -57,53 +57,49 @@
 		data() {
 			return {
 				taskbarHeight2: "", //计算任务栏高度，避开左侧摄像头位置
-				current:"",//选中的答案下标
-				answer:"",//选中的答案
+				isEveryDay: false, //是否是每日一题，默认不是
+				answered:false, //是否已经回答了问题
+				time:0,//答题计时器
+				current: "", //选中的答案下标
+				answer: "", //选中的答案
 				categoryTree: { //左侧类目树状图
 					subject: "数学", //学科
-					grade: "一",
-					semester: "上册", //接口会返回 fall 上册, spring 下册
-					category: [{
-						name: "1-5的认识和加减法",
-						children: []
-					}]
+					grade: "",
+					semester: "", //接口会返回 fall 上册, spring 下册
+					category: [{}]
 				},
-				topic: {
-					"answer": "C",
-					"analysis": "图片一中苹果的数量为5个，故选C。",
-					"videoId": 6800,
-					"content": "苹果对应的数字是多少？", //题目内容
-					"options": [
-						"3",
-						"4",
-						"5",
-						"6"
-					],
-					"contentImages": [
-						"https://ic365.ajulye.com/media/picture/2508/b9b4fdc88bda4448ab5c95bf47b3977c.png"
-					],
-				}
+				topic: {}
 			}
 		},
 		onLoad(option) {
-			// this.verifLogin().then(data => {
-			// 	// 获取今日题目
-			// 	this.commonRequest({
-			// 		url: "/api/question/today"
-			// 	}).then(res => {
-			// 		console.log(res)
-			// 		if (res.code == 0) {
+			console.log(option)
+			this.verifLogin().then(data => {
+				option.isEveryDay && (this.isEveryDay = option.isEveryDay);
+				if (option.isEveryDay) {
 
-			// 		} else {
-			// 			uni.showToast({
-			// 				title: res.message || "获取今日题目失败!",
-			// 				icon: "none"
-			// 			});
-			// 		}
-			// 	}).catch(error => {
-			// 		this.consoleLog("获取今日题目报错：：", error)
-			// 	})
-			// })
+					// 获取今日题目
+					this.commonRequest({
+						url: "/api/question/today"
+					}).then(res => {
+						console.log(res)
+						try {
+							this.categoryTree.grade = this.changeGrade(res.data.grade);
+							this.categoryTree.semester = res.data.semester == "fall" ? "上册" : (res.data.semester == "spring" ? "下册" : "");
+							this.categoryTree.category[0].categoryName = res.data.categoryName;
+							this.topic = res.data;
+							
+							let time = setInterval(()=>{
+								if(this.answered){
+									clearInterval(time)
+								}
+								this.time = this.time + 1;
+							},1000)
+						} catch (e) {}
+					}).catch(error => {
+						this.consoleLog("获取今日题目报错：：", error)
+					})
+				}
+			})
 		},
 		onReady() {
 			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight / 16 + "rem";
@@ -117,9 +113,7 @@
 			this.pageOnShowSet({
 				uniHide: "all",
 				orientation: "landscape"
-			}).then(data => {
-
-			})
+			}).then(data => {})
 		},
 		onHide() {
 
@@ -148,34 +142,38 @@
 			changeOptions(arr) {
 				let _arr = [];
 				let optionName = ["A", "B", "C", "D", "E", "F"]
-				arr.forEach((item, i) => {
-					_arr.push({
-						optionName: optionName[i],
-						option: item
+				try {
+					arr.forEach((item, i) => {
+						_arr.push({
+							optionName: optionName[i],
+							option: item
+						})
 					})
-				})
-				return _arr;
+					return _arr;
+				} catch (e) {
+					return arr;
+				}
 			},
 			changeGrade(id) {
 				let arr = ["一", "二", "三", "四", "五", "六"]
 				return arr[Number(id) - 1]
 			},
-			clickOption(item,i) {
-				if (this.current !== i) {
+			clickOption(item, i) {
+				if (this.current !== i && !this.answered) {
 					this.current = i;
 					this.answer = item;
 				}
 			},
-			submit(){
-				uni.showActionSheet({
-				    itemList: ['选项1', '选项2', '选项3'],
-				    success: function(res) {
-				        console.log('选择了第' + (res.tapIndex + 1) + '个选项');
-				    }
+			submit() {
+				if (!this.answer.optionName) return uni.showToast({
+					title: "请选择答案",
+					icon: "none"
 				});
-				// uni.showToast({
-				// 	title:"提交的答案：" + this.answer.optionName + this.answer.option
-				// })
+				this.answered = true;
+				uni.showToast({
+					title: "提交的答案：" + this.answer.optionName + this.answer.option + "，用时：" + this.time + "秒",
+					icon:"none"
+				})
 			}
 		}
 	}
@@ -200,6 +198,7 @@
 				max-height: calc(100vh - 2.75rem);
 				overflow: auto;
 				padding-right: 0.2rem;
+
 				.subject-grade-wrap {
 					font-size: 0.75rem;
 					color: #000;
@@ -219,6 +218,7 @@
 				flex: 1;
 				margin-top: -2.75rem;
 				background: #fff;
+
 				.topic-function-wrap {
 					background: #FFEDBB;
 					height: 2.75rem;
@@ -227,33 +227,42 @@
 				.topic-content-wrap {
 					display: flex;
 					height: calc(100vh - 2.75rem - 1rem);
-					.topic{
+
+					.topic {
 						height: 100%;
 						flex: 1;
 						position: relative;
 						padding: 0.5rem 1.25rem;
 						border-right: 0.18rem solid #FFF5F3;
 						overflow-y: auto;
-						.topic-text{
+
+						.topic-text {
 							font-size: 1.25rem;
 						}
-						.topic-image-wrap{
-							margin: 0.2rem 0;
-							.topic-image{
+
+						.topic-image-wrap {
+							margin-top: 0.2rem;
+
+							.topic-image {
 								width: 20rem;
 								height: auto;
-								div{
+
+								div {
 									display: none !important;
 								}
-								img{
+
+								img {
 									width: 100%;
-									height:auto;
+									height: auto;
 								}
 							}
 						}
-						.topic-options-wrap{
+
+						.topic-options-wrap {
 							overflow: hidden;
-							.topic-options{
+							margin-top: 0.5rem;
+
+							.topic-options {
 								float: left;
 								width: calc(8.5rem - 0.625rem * 2);
 								font-size: 0.9375rem;
@@ -261,27 +270,28 @@
 								color: #000;
 								padding: 0 0.625rem;
 								border-radius: 0.5rem;
-								border:0.08rem solid #C2C2C2;
+								border: 0.08rem solid #C2C2C2;
 								margin: 0 0.85rem 0.85rem 0;
 							}
-							.selected{
+
+							.selected {
 								border-color: #428BFE;
 								background: #EDF3FF;
 							}
 						}
-						.topic-submit{
+
+						.topic-submit {
 							width: 5.625rem;
 							height: 2.25rem;
 							line-height: 2.25rem;
 							font-weight: 500;
 							font-size: 1rem;
-							background: linear-gradient(to right,#FDB150,#FFDB9B);
+							background: linear-gradient(to right, #FDB150, #FFDB9B);
 							float: right;
 						}
 					}
-					.analysis-wrap{
-						
-					}
+
+					.analysis-wrap {}
 				}
 
 				// 右侧解析 ------ Start
@@ -294,13 +304,15 @@
 			// 右侧解析 ------ End
 		}
 	}
-	:global(.topic-image > div){
+
+	:global(.topic-image > div) {
 		display: none;
 	}
-	:global(.topic-image > img){
+
+	:global(.topic-image > img) {
 		opacity: 1;
 		width: 100%;
 		height: auto;
-		position:relative;
+		position: relative;
 	}
 </style>
