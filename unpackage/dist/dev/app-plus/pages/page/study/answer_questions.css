@@ -358,8 +358,15 @@
   background: url("../../../static/icons/error.png") no-repeat center/100% 100%;
 }
 .popup-video-wrap .video-view[data-v-772e1c56] {
-  width: 100% !important;
-  height: 100% !important;
+  width: 80% !important;
+  height: 80% !important;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
 }
 .topic-image > div {
   display: none;

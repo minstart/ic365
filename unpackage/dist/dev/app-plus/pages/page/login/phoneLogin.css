@@ -1462,6 +1462,7 @@ uni-page-body[data-v-3933e925] {
   font-size: 0.75rem;
   z-index: 2;
   line-height: 1.5;
+  padding-bottom: 1rem;
 }
 .checkbox-item .agreement-text .link-a {
   text-decoration: none;

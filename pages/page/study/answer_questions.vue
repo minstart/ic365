@@ -70,10 +70,10 @@
 			</view>
 		</view>
 	</view>
-	<uni-popup ref="popup" type="center" :mask-click="false" border-radius="10px 10px 0 0" :animation="false">
+	<uni-popup ref="popup" type="center" :mask-click="true" border-radius="10px 10px 0 0" :animation="false">
 		<view class="popup-video-wrap">
 			<view class="close-icon" @click="closePopupVideo"></view>
-			<video id="video1" class="video-view" :src="analysis.video" autoplay="false" duration=""></video>
+			<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" ></video>
 		</view>
 	</uni-popup>
 </template>
@@ -97,8 +97,8 @@
 				time: 0, //答题计时器
 				current: "", //选中的答案下标
 				answer: {
-					optionName: "A",
-					option: "随便填的答案"
+					optionName: "",
+					option: ""
 				}, //选中的答案
 				categoryTree: { //左侧类目树状图
 					subject: "数学", //学科
@@ -299,12 +299,12 @@
 					console.log("获取视频解析地址::", res.data)
 					try {
 						this.analysis.video = res.data
-						// this.showVideo = true;
 						this.$refs.popup.open('center')
+						// this.showVideo = true;
 						let _this = this;
 						// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---Start
 						setTimeout(()=>{
-							_this.context.play()
+							// _this.context.play()
 						},1000)
 						// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---End
 					} catch (e) {}
@@ -594,15 +594,15 @@
 		}
 
 		.video-view {
-			width: 100% !important;
-			height: 100% !important;
-			// position: absolute;
-			// left: 0;
-			// right: 0;
-			// top: 0;
-			// bottom: 0;
-			// margin: auto;
-			// z-index: 2;
+			width: 80% !important;
+			height: 80% !important;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			z-index: 2;
 		}
 	}
 

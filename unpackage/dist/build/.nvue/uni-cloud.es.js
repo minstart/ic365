@@ -80,6 +80,17 @@ const pages = [
     }
   },
   {
+    path: "pages/page/study/answer_questions",
+    style: {
+      navigationBarTitleText: "答题",
+      navigationStyle: "custom",
+      "app-plus": {
+        animationType: "none",
+        animationDuration: 0
+      }
+    }
+  },
+  {
     path: "pages/page/team/team",
     style: {
       navigationBarTitleText: "队伍",

@@ -68,6 +68,11 @@
 					pageHeadTitle: ""
 				}
 			},
+			onShow() {
+				this.pageOnShowSet({
+					uniHide: "all"
+				})
+			},
 			onLoad() {
 				// this.consoleLog("neOneLogin::", neOneLogin)
 				// neOneLogin.getToken();

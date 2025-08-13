@@ -20,7 +20,7 @@
 					<uni-data-checkbox multiple v-model="baseFormData.agreement" :localdata="agreements" />
 				</uni-forms-item>
 				<button class="submit-btn" type="primary" @click="submit('baseForm')">立即登录</button>
-				<view class="change-login">手机号码一键登录</view>
+				<view class="change-login" @click="changeLogin">手机号码一键登录</view>
 
 			</uni-forms>
 
@@ -97,6 +97,12 @@
 				})
 			},
 			methods: {
+				changeLogin() {
+					this.jumpPage({
+						url:"/pages/page/login/login",
+						type:"reLaunch"
+					})
+				},
 				forLogin: function(ref) {
 					this.$refs[ref].validateField(["phone"]).then((checkRes) => {
 						this.isForLogin = true;
@@ -271,7 +277,7 @@
 				font-size: 0.75rem;
 				z-index: 2;
 				line-height: 1.5;
-
+				padding-bottom: 1rem;
 				.link-a {
 					span{
 						color: #0034FF !important;

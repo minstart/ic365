@@ -61,7 +61,10 @@
 
 			// this.removeLogin()//清除登录状态
 			// store.commit('RESET_CRYPTO') //清除crypto加密储存数据
-
+			// //测试用 - 清除缓存进入启动页
+			// uni.removeStorage({
+			// 	key: 'launchFlag'
+			// })
 
 			// #ifdef H5
 			//H5调试 页面，模拟已经登陆的状态

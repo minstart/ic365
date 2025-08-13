@@ -102,6 +102,10 @@
 
 		},
 		onShow() {
+			this.pageOnShowSet({
+				uniHide: "all"
+			})
+			
 			this.commonRequest({
 				url: "/api/student/info"
 			}).then(res => {
