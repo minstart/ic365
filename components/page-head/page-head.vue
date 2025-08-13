@@ -94,7 +94,7 @@
 		top: 0;
 		width: 100%;
 		background: #fff;
-		z-index: 999;
+		z-index: 99;
 
 		.common-page-head-back {
 			height: 2.75rem;

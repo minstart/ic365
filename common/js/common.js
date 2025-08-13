@@ -131,6 +131,7 @@ export default {
 
 		//公共请求函数
 		// url请求路径
+		// data 参数
 		// dataType 数据返回类型
 		// method发起请求类型 默认get
 		// notLoading 是否请求过程中显示loading图标
