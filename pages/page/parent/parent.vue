@@ -30,26 +30,26 @@
 			<view class="report-info-wrap">
 				<view class="report-info">
 					<h4 class="info-text">{{overallReport.studyMinutes}}小时</h4>
-					<h4 class="info-rowth-rate" :state="growthRate.studyMinutes>0?'1':'2'">{{growthRate.studyMinutes}}%</h4>
+					<h4 class="info-rowth-rate" :state="growthRate.studyMinutes>=0?'1':'2'">{{growthRate.studyMinutes||0}}%</h4>
 				</view>
 				<view class="report-info">
-					<h4 class="info-text">{{overallReport.completedMissions}}/- </h4>
-					<h4 class="info-rowth-rate" :state="growthRate.completedMissions>0?'1':'2'">{{growthRate.completedMissions}}%</h4>
+					<h4 class="info-text">{{overallReport.completedMissions}}/{{overallReport.missionCount}} </h4>
+					<h4 class="info-rowth-rate" :state="growthRate.completedMissions>=0?'1':'2'">{{growthRate.completedMissions||0}}%</h4>
 				</view>
 			</view>
 			<view class="report-info-wrap">
 				<view class="report-info">
 					<h4 class="info-text">{{overallReport.questionCount}}题</h4>
-					<h4 class="info-rowth-rate" :state="growthRate.questionCount>0?'1':'2'">{{growthRate.questionCount}}%</h4>
+					<h4 class="info-rowth-rate" :state="growthRate.questionCount>=0?'1':'2'">{{growthRate.questionCount||0}}%</h4>
 				</view>
 				<view class="report-info">
 					<h4 class="info-text">{{overallReport.correctRate}}</h4>
-					<h4 class="info-rowth-rate" :state="growthRate.correctRate>0?'1':'2'">{{growthRate.correctRate}}%</h4>
+					<h4 class="info-rowth-rate" :state="growthRate.correctRate>=0?'1':'2'">{{growthRate.correctRate||0}}%</h4>
 				</view>
 			</view>
 			<view class="trend-title">
 				<span>每日平均</span>
-				<span class="info-rowth-rate" :state="dailyReport.fluctuation>0?'1':'2'">{{dailyReport.fluctuation}}%</span>
+				<span class="info-rowth-rate" :state="dailyReport.fluctuation>=0?'1':'2'">{{dailyReport.fluctuation||0}}%</span>
 			</view>
 			<view class="charts-box">
 				<qiun-data-charts type="column" :opts="barChartOpts" :chartData="dailyReport" />
@@ -72,11 +72,11 @@
 				<view class="statistics-wrap" style="margin: 0 1.25rem;">
 					<view class="statistics">
 						<span class="icon-advantage">优势能力</span>
-						<span>计算（92分）</span>
+						<span>{{radarChartAnalysis.max.name}}（{{radarChartAnalysis.max.score}}分）</span>
 					</view>
 					<view class="statistics">
 						<span class="icon-improve">待提升能力</span>
-						<span>空间想象（62分）</span>
+						<span>{{radarChartAnalysis.min.name}}（{{radarChartAnalysis.min.score}}分）</span>
 					</view>
 				</view>
 			</view>
@@ -94,7 +94,7 @@
 				<li class="suggestion-list" v-for="item in suggestionImproveOther.categories">
 					<image class="item-icon" src=""></image>
 					<view class="item-info">
-						<h3 class="info-title">{{item.name}}</h3>
+						<h3 class="info-title">{{item.name||""}}</h3>
 						<view class="info-text">正确率：{{item.accuracy}}% | {{suggestionTetx(item.accuracy)}}</view>
 						<button class="info-btn" @click="jumpPage({url:''})">{{item.btnTitle}}专项学习</button>
 					</view>
@@ -111,15 +111,15 @@
 			</view>
 			<view class="property">
 				<view class="property-item">
-					<h3 class="item-info-num">358</h3>
+					<h3 class="item-info-num">{{userInfo.currencies.star||0}}</h3>
 					<view class="item-info-title">智慧星</view>
 				</view>
 				<view class="property-item">
-					<h3 class="item-info-num">58</h3>
+					<h3 class="item-info-num">{{userInfo.currencies.stone||0}}</h3>
 					<view class="item-info-title">启明石</view>
 				</view>
 				<view class="property-item">
-					<h3 class="item-info-num">1256</h3>
+					<h3 class="item-info-num">{{userInfo.currencies.dust||0}}</h3>
 					<view class="item-info-title">知识尘</view>
 				</view>
 			</view>
@@ -128,7 +128,7 @@
 					<span>本周获取</span>
 					<span>{{suggestionImproveOther.currencies._newlyAdded.text}}</span>
 				</view>
-				<view class="statistics">
+				<view class="statistics" v-if="suggestionImproveOther.currencies.exchanges&&suggestionImproveOther.currencies.exchanges.name">
 					<span>可兑换{{suggestionImproveOther.currencies.exchanges.name}}</span>
 					<span>{{suggestionImproveOther.currencies.exchanges.quantity}}个</span>
 				</view>
@@ -143,10 +143,10 @@
 			</view>
 			<ul class="information-list-wrap">
 				<li class="information-list" v-for="item in information" @click="jumpPage({url:''})">
-					<image class="list-icon" src="" mode=""></image>
+					<image class="list-icon" :src="item.icon" mode=""></image>
 					<view class="list-info">
 						<h3 class="title">{{item.title}}</h3>
-						<view class="introduce">{{item.introduce}}</view>
+						<view class="subtitle">{{item.subtitle}}</view>
 					</view>
 				</li>
 			</ul>
@@ -203,6 +203,10 @@
 						}
 					}
 				},
+				radarChartAnalysis: {
+					max: {},
+					min: {}
+				},
 				// 雷达图数据
 				radarChart: {},
 				// 雷达图设置
@@ -224,41 +228,8 @@
 				// 家长页面统计
 				parent: {},
 
-				suggestion: [{
-						icon: "",
-						title: "",
-						accuracy: "65",
-						suggestion: "建议练习",
-						btnTitle: "专项学习"
-					},
-					{
-						icon: "",
-						title: "",
-						accuracy: "72",
-						suggestion: "概念巩固",
-						btnTitle: "图形面积计算"
-					},
-				],
 				// 系统资讯
-				information: [{
-						icon: "",
-						title: "限时福利",
-						introduce: "完成3天打卡领取圣诞礼包",
-						id: ""
-					},
-					{
-						icon: "",
-						title: "会员免费体验",
-						introduce: "7天VIP会员显示领取",
-						id: ""
-					},
-					{
-						icon: "",
-						title: "限时福利",
-						introduce: "完成3天打卡领取圣诞礼包",
-						id: ""
-					}
-				]
+				information: []
 			}
 		},
 		onLoad() {
@@ -277,6 +248,23 @@
 							this.growthRate = res.data.growthRate;
 							this.dailyReport = res.data.dailyReport;
 							this.radarChart = res.data.radarChart || {};
+							try {
+								let newRadarChart = [];
+								res.data.radarChart.categories.forEach((item, i) => {
+									newRadarChart.push({
+										name: item,
+										score: res.data.radarChart.series[1].data[i]
+									})
+								})
+
+								const sortedArray = [...newRadarChart].sort((x, y) => x.score - y.score);
+								this.radarChartAnalysis = {
+									min: sortedArray[0],
+									max: sortedArray[sortedArray.length - 1]
+								}
+							} catch (e) {
+								console.log(e)
+							}
 						} catch (e) {}
 						this.parent = res.data;
 					} else {
@@ -312,11 +300,12 @@
 							res.data.currencies._current = _currencies;
 							let addCurrencies = [];
 							res.data.currencies.newlyAdded.forEach(item => {
-								addCurrencies.push((item.quantity > 0 ? "+" + item.quantity : item.quantity) + item.name)
+								addCurrencies.push((item.quantity > 0 ? "+" + item.quantity : item.quantity) + item.name || "")
 							})
 							res.data.currencies._newlyAdded = {
 								text: addCurrencies.join("，")
 							}
+							this.information = res.data.publishes;
 							//处理后端返回的数据拼凑成前端简易展示数据 ------------End
 							this.suggestionImproveOther = res.data
 						} catch (e) {}
@@ -352,9 +341,9 @@
 			suggestionTetx(num) {
 				if (num > 0 && num <= 50) {
 					return "建议练习"
-				} else if (num>50 && num<=80) {
+				} else if (num > 50 && num <= 80) {
 					return "概念巩固"
-				} else if (num>80 && num<=100) {
+				} else if (num > 80 && num <= 100) {
 					return "继续提升"
 				}
 			}
@@ -751,7 +740,7 @@
 						margin-bottom: 0.2rem;
 					}
 
-					.introduce {
+					.subtitle {
 						color: #999;
 						font-size: 0.875rem;
 					}

@@ -2,7 +2,7 @@
   z-index: 999;
 }
 .reserve-seat[data-v-e80b2f0b] {
-  height: 2.6rem;
+  height: 2.75rem;
 }
 .common-page-head[data-v-e80b2f0b] {
   display: flex;
@@ -368,17 +368,17 @@
 }
 .calendar-wrap .month-title[data-v-3f5d8074] {
   color: #fff;
-  margin-top: -1.8rem;
+  margin-top: -1.6875rem;
 }
 .calendar-wrap .month-title span[data-v-3f5d8074] {
   display: inline-block;
   line-height: 1;
 }
 .calendar-wrap .month-title span[data-v-3f5d8074]:nth-child(1) {
-  font-size: 3.56rem;
+  font-size: 3.5625rem;
 }
 .calendar-wrap .month-title span[data-v-3f5d8074]:nth-child(2) {
-  font-size: 1.56rem;
+  font-size: 1.5625rem;
   vertical-align: text-bottom;
 }
 .example-body[data-v-3f5d8074] {
@@ -392,7 +392,7 @@
 }
 .btn-wrap[data-v-3f5d8074] {
   position: relative;
-  width: 7.62rem;
+  width: 7.625rem;
   margin: 0 1rem;
 }
 .btn-wrap .next-btn[data-v-3f5d8074] {
@@ -443,7 +443,7 @@
 .uni-calendar-item--hook {
 		background: #fff;
 		color: #333;
-		margin: calc(0.56rem / 2);
+		margin: calc(0.5625rem / 2);
 		border-radius: 0.5rem;
 		font-weight: 700;
 		opacity: 0.5;
@@ -454,7 +454,7 @@
 }
 }
 .uni-calendar__weeks-day {
-		/* width: 2rem !important; */
+		/* width: 64rpx !important; */
 		height: 2rem !important;
 		border-width: 0px !important;
 }
@@ -464,25 +464,25 @@
 		position: unset !important;
 }
 .uni-calendar__weeks-item {
-		/* max-width: calc(2rem + 0.56rem * 2); */
+		/* max-width: calc(64rpx + 18rpx * 2); */
 }
 .uni-calendar-item--isDay-text:last-child {
 		display: none !important;
 }
 .new-disable-icon {
 		position: absolute;
-		width: 0.56rem !important;
-		height: 0.68rem !important;
-		top: calc(-0.56rem / 3) !important;
-		right: calc(-0.68rem /3) !important;
+		width: 0.5625rem !important;
+		height: 0.6875rem !important;
+		top: calc(-0.5625rem / 3) !important;
+		right: calc(-0.6875rem /3) !important;
 		background: url("../../../static/icons/calendar_disable.png") no-repeat center /100% 100%;
 }
 .checked-icon {
 		position: absolute;
-		width:  0.68rem !important;
-		height:  0.68rem !important;
-		top: calc(-0.68rem /3) !important;
-		right: calc(-0.68rem /3) !important;
+		width:  0.6875rem !important;
+		height:  0.6875rem !important;
+		top: calc(-0.6875rem /3) !important;
+		right: calc(-0.6875rem /3) !important;
 		background: url("../../../static/icons/calendar_checked.png") no-repeat center /100% 100%;
 }
 .calendar-selected {

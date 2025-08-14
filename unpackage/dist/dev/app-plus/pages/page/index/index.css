@@ -2,7 +2,7 @@
   z-index: 999;
 }
 .reserve-seat[data-v-e80b2f0b] {
-  height: 2.6rem;
+  height: 2.75rem;
 }
 .common-page-head[data-v-e80b2f0b] {
   display: flex;
@@ -191,7 +191,7 @@ body {
   margin-right: 0.5rem;
 }
 .banner-wrap .user-info-wrap .user-info .name[data-v-5040744a] {
-  margin: 0.2rem 0;
+  margin: 0.25rem 0;
 }
 .banner-wrap .user-info-wrap .user-info .cumulative-list[data-v-5040744a] {
   overflow: hidden;

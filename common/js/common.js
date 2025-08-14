@@ -191,7 +191,10 @@ export default {
 		jumpPage(data) {
 			console.log("jumpPage:::::", data)
 			if (!data) return this.consoleLog("jumpPage()没有传参")
-			if (!data.url) return this.consoleLog("url没有传参")
+			if (!data.url) return this.consoleLog("url没有传参"),uni.showToast({
+				title:"没有填写跳转地址",
+				icon:"none"
+			})
 			if (data.type) {
 				switch (data.type) {
 					case "navigateTo":
@@ -409,6 +412,34 @@ export default {
 					}
 				});
 			})
-		}
+		},
+	
+		/**
+		 * 获取任意时间(转换时间)
+		 */
+		changeDate(date, AddDayCount = 0) {
+			if (!date) {
+				date = new Date()
+			}
+			if(typeof date == "number"){
+				
+			} else if (typeof date !== 'object') {
+				date = date.replace(/-/g, '/')
+			}
+			const dd = new Date(date)
+		
+			dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
+		
+			const y = dd.getFullYear()
+			const m = dd.getMonth() + 1 < 10 ? '0' + (dd.getMonth() + 1) : dd.getMonth() + 1 // 获取当前月份的日期，不足10补0
+			const d = dd.getDate() < 10 ? '0' + dd.getDate() : dd.getDate() // 获取当前几号，不足10补0
+			return {
+				fullDate: y + '-' + m + '-' + d,
+				year: y,
+				month: m,
+				date: d,
+				day: dd.getDay()
+			}
+		},
 	}
 }

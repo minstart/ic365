@@ -72,10 +72,9 @@
 						date: this.changeDate("2025-8-4").fullDate
 					}
 				]
-
 				console.log(this.info)
 			}, 2000)
-			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight / 16 + "rem";
+			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
 		},
 		onShow() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -141,31 +140,6 @@
 
 				return dateArray; // 返回包含所有日期的数组
 			},
-			/**
-			 * 获取任意时间
-			 */
-			changeDate(date, AddDayCount = 0) {
-				if (!date) {
-					date = new Date()
-				}
-				if (typeof date !== 'object') {
-					date = date.replace(/-/g, '/')
-				}
-				const dd = new Date(date)
-
-				dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
-
-				const y = dd.getFullYear()
-				const m = dd.getMonth() + 1 < 10 ? '0' + (dd.getMonth() + 1) : dd.getMonth() + 1 // 获取当前月份的日期，不足10补0
-				const d = dd.getDate() < 10 ? '0' + dd.getDate() : dd.getDate() // 获取当前几号，不足10补0
-				return {
-					fullDate: y + '-' + m + '-' + d,
-					year: y,
-					month: m,
-					date: d,
-					day: dd.getDay()
-				}
-			},
 			change(e) {
 				console.log('change 返回:', e)
 				this.checkedDate = e.fulldate;
@@ -184,13 +158,13 @@
 		background: linear-gradient(to right, #FFDA8F 0%, #FFDA8F 40%, #F4F4F4 100%);
 		display: flex;
 		padding-bottom: 0;
-		height: calc(100vh - 2.75rem);
-		margin-top: -2.75rem;
-		padding-top: 2.75rem;
+		height: calc(100vh - 88rpx);
+		margin-top: -88rpx;
+		padding-top: 88rpx;
 	}
 
 	.calendar-back {
-		width: 12.875rem;
+		width: 412rpx;
 		height: 100%;
 		background: url("/static/image/1_2_calendar_back.png") no-repeat bottom / 100%;
 	}
@@ -200,18 +174,18 @@
 
 		.month-title {
 			color: #fff;
-			margin-top: -1.8rem;
+			margin-top: -54rpx;
 
 			span {
 				display: inline-block;
 				line-height: 1;
 
 				&:nth-child(1) {
-					font-size: 3.56rem;
+					font-size: 114rpx;
 				}
 
 				&:nth-child(2) {
-					font-size: 1.56rem;
+					font-size: 50rpx;
 					vertical-align: text-bottom;
 				}
 			}
@@ -233,15 +207,15 @@
 
 	.btn-wrap {
 		position: relative;
-		width: 7.62rem;
-		margin: 0 1rem;
+		width: 244rpx;
+		margin: 0 32rpx;
 
 		.next-btn {
-			width: 7.625rem;
-			height: 2.5rem;
+			width: 244rpx;
+			height: 80rpx;
 			font-weight: 700;
 			color: #fff;
-			font-size: 1rem;
+			font-size: 32rpx;
 			position: absolute;
 			top: 80%;
 		}
@@ -301,32 +275,32 @@
 	:global(.uni-calendar-item--hook) {
 		background: #fff;
 		color: #333;
-		margin: calc(0.56rem / 2);
-		border-radius: 0.5rem;
+		margin: calc(18rpx / 2);
+		border-radius: 16rpx;
 		font-weight: 700;
 		opacity: 0.5;
 		position: relative;
 
 		.uni-calendar-item__weeks-box-text {
-			font-size: 0.875rem !important;
+			font-size: 28rpx !important;
 			font-weight: 700;
 		}
 	}
 
 	:global(.uni-calendar__weeks-day) {
-		/* width: 2rem !important; */
-		height: 2rem !important;
+		/* width: 64rpx !important; */
+		height: 64rpx !important;
 		border-width: 0px !important;
 	}
 
 	:global(.uni-calendar-item__weeks-box-item) {
-		width: 2rem !important;
-		height: 2rem !important;
+		width: 64rpx !important;
+		height: 64rpx !important;
 		position: unset !important;
 	}
 
 	:global(.uni-calendar__weeks-item) {
-		/* max-width: calc(2rem + 0.56rem * 2); */
+		/* max-width: calc(64rpx + 18rpx * 2); */
 	}
 
 	:global(.uni-calendar-item--isDay-text:last-child) {
@@ -335,19 +309,19 @@
 
 	.new-disable-icon {
 		position: absolute;
-		width: 0.56rem !important;
-		height: 0.68rem !important;
-		top: calc(-0.56rem / 3) !important;
-		right: calc(-0.68rem /3) !important;
+		width: 18rpx !important;
+		height: 22rpx !important;
+		top: calc(-18rpx / 3) !important;
+		right: calc(-22rpx /3) !important;
 		background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
 	}
 
 	.checked-icon {
 		position: absolute;
-		width:  0.68rem !important;
-		height:  0.68rem !important;
-		top: calc(-0.68rem /3) !important;
-		right: calc(-0.68rem /3) !important;
+		width:  22rpx !important;
+		height:  22rpx !important;
+		top: calc(-22rpx /3) !important;
+		right: calc(-22rpx /3) !important;
 		background: url("/static/icons/calendar_checked.png") no-repeat center /100% 100%;
 	}
 
@@ -357,10 +331,10 @@
 	}
 
 	:global(.uni-calendar-item__weeks-box-circle) {
-		width: 0.875rem !important;
-		height: 0.875rem !important;
-		top: calc(-0.875rem / 3) !important;
-		right: calc(-0.875rem / 3) !important;
+		width: 28rpx !important;
+		height: 28rpx !important;
+		top: calc(-28rpx / 3) !important;
+		right: calc(-28rpx / 3) !important;
 		background: url("/static/icons/calendar_selected.png") no-repeat top / 100% 100%;
 		background-color: transparent !important;
 	}

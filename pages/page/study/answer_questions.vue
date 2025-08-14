@@ -47,7 +47,7 @@
 									<view class="title">我的答案</view>
 								</view>
 								<view class="answer-text">{{answer.optionName}}.{{answer.option}}</view>
-								<view class="analysis-text">
+								<view class="analysis-text" @click="textAnalysis">
 									<view class="analysis-icon"></view>
 									<span>{{answer.optionName == topic.answer ? '答对了!看看解析来巩固一下!' : '答错了! 看看解析也许会有用!'}}
 									</span>
@@ -74,7 +74,7 @@
 	<uni-popup ref="popup" type="center" :mask-click="true" border-radius="10px 10px 0 0" :animation="false">
 		<view class="popup-video-wrap">
 			<view class="close-icon" @click="closePopupVideo"></view>
-			<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" ></video>
+			<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" show-fullscreen-btn="false"></video>
 		</view>
 	</uni-popup>
 </template>
@@ -114,7 +114,7 @@
 				},
 				showVideo: false, //是否展示是视频弹窗（uni-popup 有毒）
 				topic: {},
-				context:{}
+				context: {}
 			}
 		},
 		onLoad(option) {
@@ -248,31 +248,7 @@
 					this.answer = item;
 				}
 			},
-			/**
-			 * 获取任意时间
-			 */
-			changeDate(date, AddDayCount = 0) {
-				if (!date) {
-					date = new Date()
-				}
-				if (typeof date !== 'object') {
-					date = date.replace(/-/g, '/')
-				}
-				const dd = new Date(date)
 
-				dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
-
-				const y = dd.getFullYear()
-				const m = dd.getMonth() + 1 < 10 ? '0' + (dd.getMonth() + 1) : dd.getMonth() + 1 // 获取当前月份的日期，不足10补0
-				const d = dd.getDate() < 10 ? '0' + dd.getDate() : dd.getDate() // 获取当前几号，不足10补0
-				return {
-					fullDate: y + '-' + m + '-' + d,
-					year: y,
-					month: m,
-					date: d,
-					day: dd.getDay()
-				}
-			},
 			submit() {
 				if (!this.answer.optionName) return uni.showToast({
 					title: "请选择答案",
@@ -312,10 +288,16 @@
 					this.consoleLog("获取视频解析地址报错", error)
 				})
 			},
-			AIAnalysis(){
+			AIAnalysis() {
 				uni.showToast({
-					title:"AI解析",
-					icon:"none"
+					title: "AI解析",
+					icon: "none"
+				})
+			},
+			textAnalysis(){
+				uni.showToast({
+					title: "文本或者图片解析",
+					icon: "none"
 				})
 			},
 			closePopupVideo() {

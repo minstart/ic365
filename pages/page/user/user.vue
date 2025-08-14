@@ -52,9 +52,10 @@
 			</view>
 			<view class="tab-list-content">
 				<view class="tab-list" :current='current' v-if="current === 0">
+					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的练习 -->
 					<view class="practice-list" v-for="item in practiceList[current].list">
-						<image class="list-icon" src="" mode=""></image>
+						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">{{item.introduce}}</view>
@@ -62,9 +63,10 @@
 					</view>
 				</view>
 				<view class="tab-list" :current='current' v-if="current === 1">
+					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的错题 -->
 					<view class="practice-list" v-for="item in practiceList[current].list">
-						<image class="list-icon" src="" mode=""></image>
+						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">{{item.introduce}}</view>
@@ -74,7 +76,7 @@
 				<view class="tab-list" :current='current' v-if="current === 2">
 					<!-- 我的兑换 -->
 					<view class="practice-list" v-for="item in practiceList[current].list">
-						<image class="list-icon" src="" mode=""></image>
+						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">{{item.introduce}}</view>
@@ -82,9 +84,10 @@
 					</view>
 				</view>
 				<view class="tab-list" :current='current' v-if="current === 3">
+					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的任务 -->
 					<view class="practice-list" v-for="item in practiceList[current].list">
-						<image class="list-icon" src="" mode=""></image>
+						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">{{item.introduce}}</view>
@@ -165,27 +168,41 @@
 				practiceList: [{
 						title: "我的练习",
 						list: [{
-								icon: "",
-								title: "最近练习",
-								introduce: "查看最近的练习记录",
-								unRead: "3条新记录"
-							},
-							{
-								icon: "",
+								coverUrl: "/static/icons/recently_practiced.png",
 								title: "最近练习",
 								introduce: "查看最近的练习记录",
 								unRead: ""
+							},
+							{
+								coverUrl: "/static/icons/collecting_exercises.png",
+								title: "收藏练习",
+								introduce: "",
+								unRead: ""
 							}
+
 						]
 					},
 					{
 						title: "我的错题",
+						list: []
 					},
 					{
 						title: "我的兑换",
+						list: [{
+								coverUrl: "/static/icons/exchange_records.png",
+								title: "兑换物品",
+								introduce: ""
+							},
+							{
+								coverUrl: "/static/icons/exchange_mall.png",
+								title: "兑换商城",
+								introduce: ""
+							}
+						]
 					},
 					{
 						title: "我的任务",
+						list: []
 					}
 				],
 
@@ -201,12 +218,7 @@
 		onReady() {
 			const route = getCurrentPages(); //获取当前页面地址
 			const pathUrl = route[route.length - 1].route;
-			this.getLogin().then(data => {
-				// this.consoleLog(store.state.userInfo.token)
-				// this.consoleLog(store.state.userInfo)
-				// 已经登陆了
-				this.consoleLog("已经登陆了")
-
+			this.verifLogin().then(data => {
 				// 获取用户信息
 				this.commonRequest({
 					url: "/api/student/info"
@@ -251,46 +263,86 @@
 				}).catch(error => {
 					this.consoleLog("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
 				})
-				
+
 				// 获取兑换商品列表
 				this.commonRequest({
 					url: "/api/exchange/products"
 				}).then(res => {
-					if (res.code == 0) {
-						this.exchangeList = res.data;
-					} else {
-						uni.showToast({
-							title: res.message || "获取兑换商品列表失败!",
-							icon: "none"
-						});
-					}
-				
+					console.log("获取兑换商品列表:",res.data)
+					this.exchangeList = res.data;
 				}).catch(error => {
 					this.consoleLog("获取兑换商品列表报错：：", error)
 				})
-			}).catch(err => {
-				// 没有登陆
-				// console.error("data：：：：：2", JSON.stringify(err));
-				if (pathUrl.indexOf("/login") == -1) {
-					// 没有登录
-					console.log("没有登录,跳转到登录页面")
-					// #ifdef APP-PLUS
-					uni.redirectTo({
-						url: '/pages/page/login/login?pageFrom=' + pathUrl
-					});
-					// #endif
-					// #ifdef H5
-					// uni.redirectTo({
-					// 	url: '/pages/page/login/phoneLogin?pageFrom=' + pathUrl
-					// });
-					// #endif
-				}
-			});
 
+				// 获取最近题目和收藏题目数量
+				this.commonRequest({
+					url: "/api/question/getRecentlyAndCollection"
+				}).then(res => {
+					console.log(res.data)
+					res.data.recently > 0 ? (this.practiceList[0].list[0].unRead = res.data.recently + "条新记录") : (this.practiceList[0].list[0].unRead = "");
+					this.practiceList[0].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习"
+					// res.data.recently
+					// collection
+				}).catch(error => {
+					this.consoleLog("获取最近题目和收藏题目数量报错：：", error)
+				})
+
+				// 我的错题
+				this.commonRequest({
+					url: "/api/wrong-records/category-stats"
+				}).then(res => {
+					console.log("我的错题：", res.data)
+					// res.data.forEach(item => {
+					// 	this.practiceList[1].list.push({
+					// 		coverUrl: item.coverUrl,
+					// 		title: item.categoryName,
+					// 		introduce: item.total + "道错题待复习",
+					// 		unRead: item.highFrequencyErrTotal + "道高频错题"
+					// 	})
+					// })
+				}).catch(error => {
+					this.consoleLog("我的错题报错：：", error)
+				})
+
+
+				// 获取我的兑换统计
+				this.commonRequest({
+					url: "/api/exchange/stat"
+				}).then(res => {
+					console.log("获取我的兑换统计：", res.data)
+					this.practiceList[2].list[0].introduce = "已兑换" + (res.data.exchangeTotal || 0) + "件物品"
+					this.practiceList[2].list[1].introduce = (res.data.availableExchangeCount || 0) + "件商品可兑换"
+					// res.data.recently
+					// collection
+				}).catch(error => {
+					this.consoleLog("获取我的兑换统计报错：：", error)
+				})
+
+				// 我的任务
+				this.commonRequest({
+					url: "/api/mission/mine-stat"
+				}).then(res => {
+					console.log("我的任务：", res.data)
+					// res.data.forEach(item => {
+					// 	this.practiceList[3].list.push({
+					// 		coverUrl: item.cover,
+					// 		title: item.name,
+					// 		totalCount: item.totalCount,
+					// 		completedCount: item.completedCount,
+					// 	})
+					// })
+				}).catch(error => {
+					this.consoleLog("我的任务报错：：", error)
+				})
+			})
 		},
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
+			}).then(data => {
+				// this.verifLogin().then(data => {
+
+				// })
 			})
 		},
 		onHide() {
@@ -498,12 +550,11 @@
 			padding: 1.375rem 1.125rem;
 
 			.list-icon {
-				width: 2.25em;
-				height: 2.25em;
+				width: 72rpx;
+				height: 72rpx;
 				display: inline-block;
-				margin-right: 0.625rem;
-				background: #ccc;
-				border-radius: 0.2rem;
+				margin-right: 20rpx;
+				border-radius: 6rpx;
 			}
 
 			.list-info {
@@ -580,6 +631,7 @@
 				border-radius: 1rem;
 				max-height: 40rem;
 				overflow: auto;
+
 				.skin-list {
 					background-color: #F1F4FB;
 					border-radius: 1rem;

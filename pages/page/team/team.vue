@@ -241,7 +241,7 @@
 										item.eventName = "";
 										item.subtitle = item.time || "" + " · " + item.rewardName || "";
 									}
-									console.log(item.subtitle)
+									// console.log(item.subtitle)
 								})
 							} catch (e) {
 								console.log(e)

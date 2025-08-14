@@ -109,7 +109,7 @@
 									<image class="achievement-rare-icon" src="/static/icons/achievement.png"></image>
 									稀有成就
 								</view>
-								{{item.obtainTime}}
+								{{changeDate(item.obtainTimeUnix*1000).fullDate}}
 							</view>
 						</view>
 					</view>
@@ -119,7 +119,7 @@
 						<image class="achievement-list-pic" :src="item.imgPath || defaultAchievementIcon" @error="defaultAchievementMoreIconUrl(i)"></image>
 						<view class="achievement-list-back"></view>
 						<view class="achievement-list-name">{{item.name}}</view>
-						<view class="achievement-list-time">{{item.obtainTime}}</view>
+						<view class="achievement-list-time">{{changeDate(item.obtainTimeUnix*1000).fullDate}}</view>
 					</li>
 				</ul>
 			</view>
@@ -290,7 +290,7 @@
 				this.commonRequest({
 					url: "/api/achievement/mine"
 				}).then(res => {
-					// this.consoleLog("最新成就::", JSON.stringify(res))
+					this.consoleLog("最新成就::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							this.achievement = res.data;
@@ -401,28 +401,28 @@
 
 <style lang="less" scoped>
 	.banner-wrap {
-		padding: 1.25rem 0.75rem 0 0.75rem;
-		padding-top: 1.5rem;
+		padding: 40rpx 24rpx 0 24rpx;
+		padding-top: 48rpx;
 		// display: flex;
 		background: url("/static/image/1_header_banner.png") no-repeat top / 100%;
 
 		.user-info-wrap {
 			display: flex;
-			margin-bottom: 3rem;
+			margin-bottom: 96rpx;
 
 			.head-pic {
-				width: 3rem;
-				height: 3rem;
+				width: 96rpx;
+				height: 96rpx;
 				border-radius: 50%;
 				background: #fff;
 				overflow: hidden;
 				// flex: 1;
-				margin-right: 0.5rem;
+				margin-right: 16rpx;
 			}
 
 			.user-info {
 				.name {
-					margin: 0.2rem 0;
+					margin: 8rpx 0;
 				}
 
 				.cumulative-list {

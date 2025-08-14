@@ -60,7 +60,7 @@
 			}
 		},
 		mounted() {
-			this.systemTaskbar ? (this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight / 16 + "rem") : (this.taskbarHeight = "0rem")
+			this.systemTaskbar ? (this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx") : (this.taskbarHeight = "0rem")
 			// console.log("taskbarHeight",this.taskbarHeight)
 		},
 		methods: {
@@ -83,7 +83,7 @@
 	}
 
 	.reserve-seat {
-		height: 2.6rem;
+		height: 88rpx;
 	}
 
 	.common-page-head {
@@ -97,7 +97,7 @@
 		z-index: 99;
 
 		.common-page-head-back {
-			height: 2.75rem;
+			height: 88rpx;
 		}
 
 		.common-page-head-back,
@@ -111,8 +111,8 @@
 				bottom: 0;
 				top: 0;
 				margin: auto;
-				width: 2rem;
-				height: 2rem;
+				width: 64rpx;
+				height: 64rpx;
 			}
 		}
 
@@ -127,8 +127,8 @@
 		}
 
 		.page-head-module-icon {
-			width: 2.125rem;
-			height: 2.125rem;
+			width: 68rpx;
+			height: 68rpx;
 		}
 	}
 

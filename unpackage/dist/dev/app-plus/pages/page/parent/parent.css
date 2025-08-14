@@ -2,7 +2,7 @@
   z-index: 999;
 }
 .reserve-seat[data-v-e80b2f0b] {
-  height: 2.6rem;
+  height: 2.75rem;
 }
 .common-page-head[data-v-e80b2f0b] {
   display: flex;
@@ -848,7 +848,7 @@ to {
   line-height: 1;
   margin-bottom: 0.2rem;
 }
-.information-wrap .information-list-wrap .information-list .list-info .introduce[data-v-1185e19c] {
+.information-wrap .information-list-wrap .information-list .list-info .subtitle[data-v-1185e19c] {
   color: #999;
   font-size: 0.875rem;
 }
