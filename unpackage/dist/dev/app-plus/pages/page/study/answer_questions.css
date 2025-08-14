@@ -309,7 +309,7 @@
 .page-wrap .content-wrap .topic-wrap .analysis-wrap .other-analysis-wrap .play-video-btn[data-v-772e1c56] {
   width: 6rem;
   height: 4rem;
-  background: #333;
+  background: url("../../../static/image/play_video_btn.png") no-repeat center/100% 100%;
 }
 .page-wrap .content-wrap .topic-wrap .analysis-wrap .lingbao-wrap[data-v-772e1c56] {
   position: absolute;

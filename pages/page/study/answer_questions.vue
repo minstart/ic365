@@ -1,4 +1,5 @@
 <template>
+	<view class="page-loading" v-if="pageMask"></view>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
@@ -60,7 +61,7 @@
 									<view class="play-video-btn" @click="playVideo"></view>
 								</view>
 								<view class="lingbao-wrap">
-									<view class="lingbao-icon"></view>
+									<view class="lingbao-icon" @click="AIAnalysis"></view>
 									<view class="lingbao-image"></view>
 								</view>
 							</view>
@@ -285,7 +286,6 @@
 			},
 
 			playVideo() {
-				console.log(this.topic.videoId)
 				// #ifdef H5
 				this.$refs.popup.open('center')
 				// #endif
@@ -296,20 +296,26 @@
 						id: this.topic.videoId
 					}
 				}).then(res => {
-					console.log("获取视频解析地址::", res.data)
+					// console.log("获取视频解析地址::", res.data)
 					try {
 						this.analysis.video = res.data
 						this.$refs.popup.open('center')
 						// this.showVideo = true;
 						let _this = this;
 						// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---Start
-						setTimeout(()=>{
-							// _this.context.play()
-						},1000)
+						// setTimeout(()=>{
+						// 	 _this.context.play()
+						// },1000)
 						// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---End
 					} catch (e) {}
 				}).catch(error => {
 					this.consoleLog("获取视频解析地址报错", error)
+				})
+			},
+			AIAnalysis(){
+				uni.showToast({
+					title:"AI解析",
+					icon:"none"
 				})
 			},
 			closePopupVideo() {
@@ -527,7 +533,7 @@
 						.play-video-btn {
 							width: 6rem;
 							height: 4rem;
-							background: #333;
+							background: url('/static/image/play_video_btn.png') no-repeat center / 100% 100%;
 						}
 					}
 

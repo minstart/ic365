@@ -1,7 +1,8 @@
 <template>
+	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
-		<view class="uni-padding-wrap">
+		<view class="banner-wrap">
+			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
 				<!-- <view class="head-pic"></view> -->
 				<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
@@ -9,21 +10,23 @@
 					<h3 class="name">{{userInfo.nickname}}同学</h3>
 					<ul class="cumulative-list">
 						<li class="list">
-							<view class="icon" type="star"></view>
+							<view class="icon" iconType="star"></view>
 							<h4 class="number">{{userInfo.currencies.star||0}}</h4>
 						</li>
 						<li class="list">
-							<view class="icon" type="stone"></view>
+							<view class="icon" iconType="stone"></view>
 							<h4 class="number">{{userInfo.currencies.stone||0}}</h4>
 						</li>
 						<li class="list">
-							<view class="icon" type="dust"></view>
+							<view class="icon" iconType="dust"></view>
 							<h4 class="number">{{userInfo.currencies.dust||0}}</h4>
 						</li>
 					</ul>
 				</view>
 				<view class="btn-setUp" @click="jumpPage({url:''})"></view>
 			</view>
+		</view>
+		<view class="uni-padding-wrap">
 			<!-- 当前挑战 -->
 			<view class="challenge-wrap">
 				<h3 class="progress">团队进度： {{currentMission.processTotal}}</h3>
@@ -88,7 +91,7 @@
 						<h3 class="list-nickname">{{item.nickname}}同学</h3>
 						<view class="list-time green">{{item.lastActive}}</view>
 					</li>
-					<li class="team-list invite"  @click="jumpPage({url:'/pages/page/team/invite_team'})">
+					<li class="team-list invite" @click="jumpPage({url:'/pages/page/team/invite_team'})">
 						<view class="list-avatar"></view>
 						<h3 class="list-nickname">邀请好友</h3>
 						<view class="list-time"></view>
@@ -310,7 +313,7 @@
 		},
 		onShow() {
 			this.pageOnShowSet({
-				uniHide:"all"
+				uniHide: "all"
 			})
 		},
 		onHide() {
@@ -326,71 +329,76 @@
 
 		},
 		methods: {
-			
+
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.user-info-wrap {
-		display: flex;
-		padding: 0.6875rem 1.6875rem;
+	.banner-wrap {
+		border-radius: 0.6rem;
+		padding: 1.25rem 0.75rem 0 0.75rem;
+		padding-top: 1.5rem;
 
-		.head-pic {
-			width: 3rem;
-			height: 3rem;
-			border-radius: 50%;
-			background: #fff;
-			overflow: hidden;
-			// flex: 1;
-			margin-right: 0.5rem;
-		}
+		.user-info-wrap {
+			display: flex;
+			margin-bottom: 1.6rem;
 
-		.user-info {
-			.name {
-				margin: 0.2rem 0;
+			.head-pic {
+				width: 3rem;
+				height: 3rem;
+				border-radius: 50%;
+				background: #fff;
+				overflow: hidden;
+				margin-right: 0.5rem;
 			}
 
-			.cumulative-list {
-				overflow: hidden;
+			.user-info {
+				.name {
+					margin: 0.2rem 0;
+				}
 
-				.list {
-					float: left;
-					margin-right: 0.8rem;
+				.cumulative-list {
+					overflow: hidden;
 
-					.icon {
-						width: 0.75rem;
-						height: 0.75rem;
-						display: inline-block;
-						margin-right: 0.56rem;
+					.list {
+						float: left;
+						margin-right: 0.8rem;
 
-						&[type="star"] {
-							background-image: url("/static/icons/star.png");
-							background-repeat: no-repeat;
-							background-position: center;
-							background-size: 100% 100%;
+						.icon {
+							width: 0.75rem;
+							height: 0.75rem;
+							display: inline-block;
+							margin-right: 0.56rem;
+
+							&[iconType="star"] {
+								background-image: url("/static/icons/star.png");
+								background-repeat: no-repeat;
+								background-position: center;
+								background-size: 100% 100%;
+							}
+
+							&[iconType="stone"] {
+								background-image: url("/static/icons/stone.png");
+								background-repeat: no-repeat;
+								background-position: center;
+								background-size: 100% 100%;
+							}
+
+							&[iconType="dust"] {
+								background-image: url("/static/icons/dust.png");
+								background-repeat: no-repeat;
+								background-position: center;
+								background-size: 100% 100%;
+							}
+
 						}
 
-						&[type="stone"] {
-							background-image: url("/static/icons/stone.png");
-							background-repeat: no-repeat;
-							background-position: center;
-							background-size: 100% 100%;
+						.number {
+							display: inline-block;
+							font-size: 0.875rem;
+							color: #EB7D1E;
 						}
-
-						&[type="dust"] {
-							background-image: url("/static/icons/dust.png");
-							background-repeat: no-repeat;
-							background-position: center;
-							background-size: 100% 100%;
-						}
-
-					}
-
-					.number {
-						display: inline-block;
-						font-size: 0.875rem;
-						color: #EB7D1E;
 					}
 				}
 			}

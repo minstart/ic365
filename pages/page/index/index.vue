@@ -1,6 +1,5 @@
 <template>
-	<!-- 如果是跳转到横屏的页面的父级，需要加这个loading页面隐藏navigateBack延迟造成的内容暴露问题 -->
-	<view class="page-loading" v-if="changeWindow"></view>
+	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
 		<view class="banner-wrap">
 			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
@@ -33,7 +32,7 @@
 			</view>
 			<view class="activity-wrap">
 				<image class="activity" @click="jumpPage({url:'/pages/page/study/calendar'})" src='/static/image/1_challenge.png'></image>
-				<image class="activity" @click="jumpPage({url:''})" src='/static/image/1_study.png'></image>
+				<image class="activity" @click="jumpPage({url:'/pages/page/team/team',type:'reLaunch'})" src='/static/image/1_study.png'></image>
 			</view>
 		</view>
 		<view class="plan-wrap uni-padding-wrap">
@@ -150,7 +149,6 @@
 		},
 		data() {
 			return {
-				changeWindow:false,//旋转时防止返回上一页直接显示内容
 				pageHeadTitle: "",
 				cumulative: [],
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
@@ -185,71 +183,6 @@
 				// }],
 				// 学习模块
 				plan: {},
-				plan: {
-					"total": 4,
-					"finished": 1,
-					"list": [{
-						"missionId": 7,
-						"missionTypeId": 1,
-						"name": "每日口算",
-						"subTitle": "完成10道口算题",
-						"typeName": "日常",
-						"startTime": 0,
-						"endTime": 0,
-						"rewardName": "15知识尘",
-						"currencyTypeId": 2,
-						"status": "FINISHED",
-						"processTotal": 100,
-						"finishedTime": 0,
-						"cover": "https://ic365.ajulye.com/material/mission/001@2x.png",
-						"colorScheme": 1
-					}, {
-						"missionId": 8,
-						"missionTypeId": 7,
-						"name": "分数认识",
-						"subTitle": "知识点学习",
-						"typeName": "星座",
-						"startTime": 0,
-						"endTime": 0,
-						"rewardName": "10智慧星",
-						"currencyTypeId": 2,
-						"status": null,
-						"processTotal": null,
-						"finishedTime": null,
-						"cover": "https://ic365.ajulye.com/material/mission/002@2x.png",
-						"colorScheme": 3
-					}, {
-						"missionId": 9,
-						"missionTypeId": 7,
-						"name": "圣诞欢乐颂",
-						"subTitle": "解决5道圣诞主题数学题",
-						"typeName": "星座",
-						"startTime": 1752969600,
-						"endTime": 1754006400,
-						"rewardName": "圣诞主题皮肤",
-						"currencyTypeId": 5,
-						"status": null,
-						"processTotal": null,
-						"finishedTime": null,
-						"cover": "https://ic365.ajulye.com/material/mission/003@2x.png",
-						"colorScheme": 2
-					}, {
-						"missionId": 10,
-						"missionTypeId": 8,
-						"name": "图形拼图",
-						"subTitle": "知识点学习",
-						"typeName": "特定",
-						"startTime": 0,
-						"endTime": 0,
-						"rewardName": "",
-						"currencyTypeId": 0,
-						"status": null,
-						"processTotal": null,
-						"finishedTime": null,
-						"cover": "https://ic365.ajulye.com/material/mission/004@2x.png",
-						"colorScheme": 4
-					}]
-				},
 				// 最新成就
 				achievement: {},
 				// achievement: {
@@ -400,7 +333,7 @@
 			})
 		},
 		onHide() {
-			this.changeWindow = true;
+
 		},
 		watch: {
 

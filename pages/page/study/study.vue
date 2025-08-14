@@ -1,4 +1,5 @@
 <template>
+	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<view class="banner-wrap">
 			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
@@ -78,7 +79,7 @@
 			<ul class="classroom-list-wrap">
 				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:''})" v-for="item in classroom">
 					<image class="list-back" :src='item.coverUrl'></image>
-					<h3 class="list-title">{{item.name}}</h3>
+					<!-- <h3 class="list-title">{{item.name}}</h3> -->
 				</li>
 			</ul>
 		</view>
@@ -146,7 +147,7 @@
 						this.consoleLog("获取用户信息报错：：", error)
 					})
 				}
-				
+
 				// 获取用户周报数据
 				this.commonRequest({
 					url: "/api/report/weekly",
@@ -164,24 +165,35 @@
 				}).catch(error => {
 					this.consoleLog("获取用户周报数据报错：：", error)
 				})
-				
+
 				// 知识点学习
 				this.commonRequest({
 					url: "/api/recommend/categories",
 					method: "get"
 				}).then(res => {
 					this.consoleLog("知识点学习::", JSON.stringify(res))
+					res.data && (this.knowledgePoints = res.data);
+				}).catch(error => {
+					this.consoleLog("知识点学习报错：：", error)
+				})
+
+				// 推荐课堂 - 目前使用推荐学习的接口
+				this.commonRequest({
+					url: "/api/recommend/videos"
+				}).then(res => {
+					// this.consoleLog("推荐学习::", JSON.stringify(res))
 					if (res.code == 0) {
-						res.data && (this.knowledgePoints = res.data);
-						res.data && (this.classroom = res.data);
+						try {
+							res.data && (this.classroom = res.data);
+						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.message || "知识点学习失败!",
+							title: res.message || "获取推荐学习失败!",
 							icon: "none"
 						});
 					}
 				}).catch(error => {
-					this.consoleLog("知识点学习报错：：", error)
+					this.consoleLog("获取推荐学习失败：：", error)
 				})
 			}).catch(error => {
 				this.consoleLog("没有登录：：", error)

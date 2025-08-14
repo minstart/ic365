@@ -3,7 +3,7 @@
 	<page-meta :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	
 	<!-- 如果是跳转到横屏的页面的父级，需要加这个loading页面隐藏navigateBack延迟造成的内容暴露问题 -->
-	<view class="page-loading" v-if="changeWindow"></view>
+	<view class="page-loading" v-if="pageMask"></view>
 	
 	<!-- 公共顶部导航栏组件 -->
 	<page-head :title='pageHeadTitle' :isBack='false'></page-head>

@@ -46,6 +46,7 @@ async function fetchData(data) {
 export default {
 	data() {
 		return {
+			pageMask:true, //页面遮罩，配合组件page-head使用
 			isLoading: true,
 			userInfo: {
 				nickname: "",
@@ -69,6 +70,9 @@ export default {
 		// this.pageHeadTitle = "修改后的标题"
 		// console.log("this.$store.state::",this.$store.state)
 		// console.log(this.$store.mutation.login())
+	},
+	onHide(){
+		this.pageMask = true;
 	},
 	methods: {
 		// 打印数据
@@ -207,6 +211,7 @@ export default {
 						});
 						break;
 					case "reLaunch":
+						// 如果是跳转到导航栏的页面，用这个
 						// 方法用于关闭所有页面，打开到应用内的某个页面
 						uni.reLaunch({
 							url: data.url,
@@ -289,6 +294,7 @@ export default {
 		// orientation 页面横屏竖屏 portrait（竖屏）或landscape（横屏）
 		pageOnShowSet(data) {
 			store.state.isLoading = true;
+			this.pageMask = true;
 			if (!data) return;
 			return new Promise((resolve, reject) => {
 				try {
@@ -324,7 +330,7 @@ export default {
 					}
 					setTimeout(() => {
 						try{
-							this.changeWindow = false;
+							this.pageMask = false;
 						}catch(e){}
 						uni.hideLoading();
 					}, 1000)
@@ -339,7 +345,6 @@ export default {
 				}, 1000)
 				resolve();
 			})
-
 		},
 
 		// 奖励图标统一返回

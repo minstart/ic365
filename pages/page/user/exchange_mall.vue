@@ -1,4 +1,5 @@
 <template>
+	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFF0DC'"></page-head>
 		<view class="uni-padding-wrap">

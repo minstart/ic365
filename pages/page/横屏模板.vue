@@ -1,4 +1,5 @@
 <template>
+	<view class="page-loading" v-if="pageMask"></view>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>

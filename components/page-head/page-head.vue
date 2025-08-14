@@ -17,7 +17,7 @@
 			</view>
 		</view>
 	</view>
-	<view class="page-loading" v-if="$store.state.isLoading"></view>
+	<!-- <view class="page-loading" v-if="$store.state.isLoading"></view> -->
 </template>
 <script>
 	export default {

@@ -89,11 +89,16 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.user-info-wrap[data-v-d282c156] {
-  display: flex;
-  padding: 0.6875rem 1.6875rem;
+.banner-wrap[data-v-d282c156] {
+  border-radius: 0.6rem;
+  padding: 1.25rem 0.75rem 0 0.75rem;
+  padding-top: 1.5rem;
 }
-.user-info-wrap .head-pic[data-v-d282c156] {
+.banner-wrap .user-info-wrap[data-v-d282c156] {
+  display: flex;
+  margin-bottom: 1.6rem;
+}
+.banner-wrap .user-info-wrap .head-pic[data-v-d282c156] {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -101,41 +106,41 @@
   overflow: hidden;
   margin-right: 0.5rem;
 }
-.user-info-wrap .user-info .name[data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .name[data-v-d282c156] {
   margin: 0.2rem 0;
 }
-.user-info-wrap .user-info .cumulative-list[data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .cumulative-list[data-v-d282c156] {
   overflow: hidden;
 }
-.user-info-wrap .user-info .cumulative-list .list[data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list[data-v-d282c156] {
   float: left;
   margin-right: 0.8rem;
 }
-.user-info-wrap .user-info .cumulative-list .list .icon[data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[data-v-d282c156] {
   width: 0.75rem;
   height: 0.75rem;
   display: inline-block;
   margin-right: 0.56rem;
 }
-.user-info-wrap .user-info .cumulative-list .list .icon[type=star][data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[iconType=star][data-v-d282c156] {
   background-image: url("../../../static/icons/star.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
 }
-.user-info-wrap .user-info .cumulative-list .list .icon[type=stone][data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[iconType=stone][data-v-d282c156] {
   background-image: url("../../../static/icons/stone.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
 }
-.user-info-wrap .user-info .cumulative-list .list .icon[type=dust][data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[iconType=dust][data-v-d282c156] {
   background-image: url("../../../static/icons/dust.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
 }
-.user-info-wrap .user-info .cumulative-list .list .number[data-v-d282c156] {
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .number[data-v-d282c156] {
   display: inline-block;
   font-size: 0.875rem;
   color: #EB7D1E;

@@ -1,4 +1,5 @@
 <template>
+	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
 		<view class="banner-back"></view>
@@ -137,7 +138,7 @@
 				    success: function () {
 				        uni.showToast({
 				            title: '已复制邀请码，发送给好友邀请他/她一起来学习吧 ^_^ ',
-				            icon: 'success',
+				            icon: 'none',
 				            duration: 5000
 				        });
 				    },
