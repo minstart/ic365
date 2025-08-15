@@ -4,22 +4,22 @@
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFF0DC'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
-				<view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
+				<view class="item-title-wrap" style="margin:20rpx 0 16rpx 0;">
 					<h3 class="item-title">兑换商城</h3>
 				</view>
 				<view class="achievement-statistics">
 					<h3 class="achievement-title">我的货币</h3>
 					<view class="property">
 						<view class="property-item">
-							<h3 class="item-info-num">3</h3>
+							<h3 class="item-info-num">{{userInfo.currencies.star||0}}</h3>
 							<view class="item-info-title">智慧星</view>
 						</view>
 						<view class="property-item">
-							<h3 class="item-info-num">12</h3>
+							<h3 class="item-info-num">{{userInfo.currencies.stone||0}}</h3>
 							<view class="item-info-title">启明石</view>
 						</view>
 						<view class="property-item">
-							<h3 class="item-info-num">4</h3>
+							<h3 class="item-info-num">{{userInfo.currencies.dust||0}}</h3>
 							<view class="item-info-title">知识尘</view>
 						</view>
 					</view>
@@ -55,9 +55,11 @@
 									<h3 class="info-title">{{item2.name}}</h3>
 									<view class="info-subtitle">{{item2.subtitle}}</view>
 									<view class="achievement-type">
-										<view class="label">1000 / 1500</view>
-										<view class="exchange" v-if="item2.exchange==1" @click="exchange(item2)">兑换</view>
-										<view class="exchange already-redeemed" v-if="item2.exchange==2">已拥有</view>
+										<view class="label" v-if="item2.payCurrencyTypeName">
+											<image class="reward-reward-icon" :src="rewardIcon(item2.payCurrencyType)"></image>
+											<span>{{item2.quantity}}{{item2.payCurrencyTypeName}}</span>
+										</view>
+										<view class="exchange-btn" :class="item2.obtained&&'already-redeemed'" @click="() => exchange(item2)">{{!item2.obtained?'立即兑换':'已拥有'}}</view>
 									</view>
 								</view>
 							</view>
@@ -82,47 +84,55 @@
 
 		data() {
 			return {
+				userInfo: {
+					nickname: "",
+					currencies: {
+
+					}
+				},
 				search: "",
 				current: 0,
-				searchResult: [{
-						name: "限时特惠",
-						list: [{
-								id:1,
-								name: "圣诞特惠",
-								coverImage: "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
-								subtitle: "完成所有图形认知练习",
-								time: "2025.07.22获得",
-								exchange: 1,
-							},
-							{
-								id: "2",
-								name: "图形面积",
-								topic: "水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶帆帆帆帆帆帆帆帆帆帆？",
-								time: "2025.07.29",
-								exchange: 2,
-							},
-						]
-					},
-					{
-						name: "虚拟装扮",
-					},
-					{
-						name: "学习工具",
-					},
-					{
-						name: "特权功能",
-					},
-					{
-						name: "可兑换",
-					}
-				]
+				searchResultTab: [],
+				searchResult: {}
 			}
 		},
 		onLoad() {
 
 		},
 		onReady() {
+			this.verifLogin().then(data => {
+				if (store.state.userInfo.token && store.state.userInfo.info && store.state.userInfo.info.currencies) {
+					this.userInfo = store.state.userInfo.info
+				} else {
+					// 获取用户信息
+					this.commonRequest({
+						url: "/api/student/info"
+					}).then(res => {
+						console.log("获取用户信息::", res)
+						try {
+							store.commit("Update_UserInfo", res.data)
+							this.userInfo = res.data;
+						} catch (e) {}
 
+					}).catch(error => {
+						this.consoleLog("获取用户信息报错：：", error)
+					})
+				}
+				
+				// 兑换资源类型(Tab)
+				this.commonRequest({
+					url: "/api/exchange/group-types"
+				}).then(res => {
+					console.log("兑换资源类型(Tab)::", res)
+					for(let i in res.data){
+						this.searchResultTab.push({
+							
+						})
+					}
+				}).catch(error => {
+					this.consoleLog("兑换资源类型(Tab)报错：：", error)
+				})
+			})
 		},
 		onShow() {
 			this.pageOnShowSet({
@@ -157,7 +167,7 @@
 					icon: "none"
 				})
 			}
-		
+
 		}
 	}
 </script>
@@ -303,9 +313,11 @@
 						background-color: #fff;
 						border-radius: 1rem;
 						margin-bottom: 0.75rem;
-						&:last-child{
+
+						&:last-child {
 							margin-bottom: 0;
 						}
+
 						.list-icon {
 							width: 5.5rem;
 							height: 6.75rem;
@@ -340,18 +352,34 @@
 									color: #ff926b;
 									font-size: 0.8125rem;
 									border-radius: 0.5rem;
+
+									.reward-reward-icon {
+										width: 0.75rem;
+										height: 0.75rem;
+										display: inline-block;
+										margin-right: 0.2rem;
+									}
+
+									span {
+										display: inline-block;
+										vertical-align: top;
+									}
 								}
 
-								.exchange {
+								.exchange-btn {
 									float: right;
-									background: #79D183;
-									color: #fff;
-									font-size: 1rem;
 									border-radius: 1rem;
 									border: 0.1rem solid #79D183;
 									width: 4.25rem;
 									line-height: 1.625rem;
 									text-align: center;
+
+									background-color: #79D183;
+									font-size: 1rem;
+									color: #fff;
+									display: inline-block;
+									padding: 0.31rem 0.81rem;
+									border-radius: 1rem;
 								}
 
 								.already-redeemed {

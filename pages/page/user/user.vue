@@ -75,7 +75,7 @@
 				</view>
 				<view class="tab-list" :current='current' v-if="current === 2">
 					<!-- 我的兑换 -->
-					<view class="practice-list" v-for="item in practiceList[current].list">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
@@ -90,7 +90,12 @@
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
-							<view class="introduce">{{item.introduce}}</view>
+							<view class="introduce">
+								<span>{{item.introduce}}</span>
+								<view class="progress-wrap">
+									<progress :percent="item.completedCount / item.totalCount * 100" :activeColor="item.colorValue||'#77D182'" backgroundColor="#ffffff" stroke-width="10" />
+								</view>
+							</view>
 						</view>
 					</view>
 				</view>
@@ -133,7 +138,7 @@
 				<!-- 暂无数据 -->
 				<view class="no-list-tip" v-if="exchangeList.length==0">暂无数据</view>
 				<ul class="exchange-list-wrap">
-					<li class="exchange-list" v-for="item in exchangeList" :type="item.missionTypeId" :colorscheme="item.colorScheme">
+					<li class="exchange-list" v-for="(item,i) in exchangeList" :type="item.missionTypeId" :colorscheme="item.colorScheme">
 						<image class="list-icon" :src="item.icon"></image>
 						<view class="list-info">
 							<h3 class="info-title">{{item.productName}}</h3>
@@ -143,7 +148,7 @@
 									<image class="reward-reward-icon" :src="rewardIcon(item.payCurrencyType)"></image>
 									<span>{{item.quantity}}{{item.payCurrencyTypeName}}</span>
 								</view>
-								<view class="exchange-btn">立即兑换</view>
+								<view class="exchange-btn" :class="item.obtained&&'already-redeemed'" @click="() => exchange(item)">{{!item.obtained?'立即兑换':'已拥有'}}</view>
 							</view>
 						</view>
 					</li>
@@ -196,7 +201,8 @@
 							{
 								coverUrl: "/static/icons/exchange_mall.png",
 								title: "兑换商城",
-								introduce: ""
+								introduce: "",
+								jumpUrl: "/pages/page/user/exchange_mall"
 							}
 						]
 					},
@@ -268,7 +274,7 @@
 				this.commonRequest({
 					url: "/api/exchange/products"
 				}).then(res => {
-					console.log("获取兑换商品列表:",res.data)
+					console.log("获取兑换商品列表:", res.data)
 					this.exchangeList = res.data;
 				}).catch(error => {
 					this.consoleLog("获取兑换商品列表报错：：", error)
@@ -278,11 +284,9 @@
 				this.commonRequest({
 					url: "/api/question/getRecentlyAndCollection"
 				}).then(res => {
-					console.log(res.data)
+					console.log("获取最近题目和收藏题目数量", res.data)
 					res.data.recently > 0 ? (this.practiceList[0].list[0].unRead = res.data.recently + "条新记录") : (this.practiceList[0].list[0].unRead = "");
 					this.practiceList[0].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习"
-					// res.data.recently
-					// collection
 				}).catch(error => {
 					this.consoleLog("获取最近题目和收藏题目数量报错：：", error)
 				})
@@ -291,15 +295,15 @@
 				this.commonRequest({
 					url: "/api/wrong-records/category-stats"
 				}).then(res => {
-					console.log("我的错题：", res.data)
-					// res.data.forEach(item => {
-					// 	this.practiceList[1].list.push({
-					// 		coverUrl: item.coverUrl,
-					// 		title: item.categoryName,
-					// 		introduce: item.total + "道错题待复习",
-					// 		unRead: item.highFrequencyErrTotal + "道高频错题"
-					// 	})
-					// })
+					// console.log("我的错题：", res.data)
+					res.data.forEach(item => {
+						this.practiceList[1].list.push({
+							coverUrl: item.coverUrl,
+							title: item.categoryName,
+							introduce: item.total + "道错题待复习",
+							unRead: item.highFrequencyErrTotal + "道高频错题"
+						})
+					})
 				}).catch(error => {
 					this.consoleLog("我的错题报错：：", error)
 				})
@@ -323,14 +327,15 @@
 					url: "/api/mission/mine-stat"
 				}).then(res => {
 					console.log("我的任务：", res.data)
-					// res.data.forEach(item => {
-					// 	this.practiceList[3].list.push({
-					// 		coverUrl: item.cover,
-					// 		title: item.name,
-					// 		totalCount: item.totalCount,
-					// 		completedCount: item.completedCount,
-					// 	})
-					// })
+					res.data.forEach(item => {
+						this.practiceList[3].list.push({
+							coverUrl: item.cover,
+							title: item.name,
+							introduce: "已完成" + item.completedCount + "/" + item.totalCount + "个任务",
+							totalCount: item.totalCount,
+							completedCount: item.completedCount,
+						})
+					})
 				}).catch(error => {
 					this.consoleLog("我的任务报错：：", error)
 				})
@@ -383,6 +388,14 @@
 					this.skinCurrent = i
 				}
 			},
+			exchange(item) {
+				if (item.obtained) return false;
+				item.obtained = true
+				uni.showToast({
+					title: "点击了兑换商城的id" + item.productionId,
+					icon: "none"
+				})
+			}
 		}
 	}
 </script>
@@ -498,7 +511,7 @@
 				}
 
 				.item-info-title {
-					font-size: 0.875rem;
+					font-size: 28rpx;
 					color: #999999;
 				}
 			}
@@ -524,7 +537,7 @@
 	.tab-wrap {
 		.tab-list-wrap {
 			display: flex;
-			margin-bottom: 0.875rem;
+			margin-bottom: 28rpx;
 
 			.tab-list {
 				flex: 1;
@@ -571,7 +584,17 @@
 
 				.introduce {
 					color: #999;
-					font-size: 0.875rem;
+					font-size: 28rpx;
+					display: flex;
+
+					.progress-wrap {
+						width: 200rpx;
+						height: 10px;
+						border-radius: 16rpx;
+						margin: auto 0;
+						overflow: hidden;
+						margin-left: 40rpx;
+					}
 				}
 
 				.unRead {
@@ -703,7 +726,7 @@
 					}
 
 					.info-describe {
-						font-size: 0.875rem;
+						font-size: 28rpx;
 						color: #999;
 						line-height: 1.25rem;
 						margin-bottom: 0.93rem;
@@ -744,6 +767,14 @@
 							position: absolute;
 							right: 0;
 							bottom: -0.25rem;
+						}
+
+						.already-redeemed {
+							background: #EEFFF0;
+							color: #79D183;
+							font-size: 1rem;
+							border-radius: 1rem;
+							border: 0.1rem solid #79D183;
 						}
 					}
 				}

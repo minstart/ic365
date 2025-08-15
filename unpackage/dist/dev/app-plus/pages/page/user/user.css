@@ -241,6 +241,15 @@ uni-page-body[data-v-351444bc] {
 .tab-wrap .practice-list .list-info .introduce[data-v-351444bc] {
   color: #999;
   font-size: 0.875rem;
+  display: flex;
+}
+.tab-wrap .practice-list .list-info .introduce .progress-wrap[data-v-351444bc] {
+  width: 6.25rem;
+  height: 10px;
+  border-radius: 0.5rem;
+  margin: auto 0;
+  overflow: hidden;
+  margin-left: 1.25rem;
 }
 .tab-wrap .practice-list .list-info .unRead[data-v-351444bc] {
   position: absolute;
@@ -383,6 +392,13 @@ uni-page-body[data-v-351444bc] {
   position: absolute;
   right: 0;
   bottom: -0.25rem;
+}
+.exchange-wrap .exchange-list-wrap .exchange-list .list-info .rewardBtn-wrap .already-redeemed[data-v-351444bc] {
+  background: #EEFFF0;
+  color: #79D183;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 0.1rem solid #79D183;
 }
 .exchange-wrap .exchange-list-wrap .exchange-list[colorscheme="1"] .list-reward[data-v-351444bc] {
   background: #FFF2EA !important;

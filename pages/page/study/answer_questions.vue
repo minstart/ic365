@@ -179,7 +179,7 @@
 		},
 		onReady() {
 			this.context = uni.createVideoContext("video1", this);
-			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight / 16 + "rem";
+			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
 		},
 		onShow() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -324,7 +324,7 @@
 			// 左侧树状菜单 ------ Start
 			.category-wrap {
 				max-width: 9.625rem;
-				width: 30%;
+				width: 200rpx;
 				max-height: calc(100vh - 2.75rem);
 				overflow: auto;
 				padding-right: 0.2rem;
@@ -342,7 +342,6 @@
 					}
 				}
 			}
-
 			// 左侧树状菜单 ------ End
 			.topic-wrap {
 				flex: 1;
@@ -353,19 +352,18 @@
 					background: #FFEDBB;
 					height: 2.75rem;
 				}
-
+				// 中间答题 ------ Start
 				.topic-content-wrap {
 					display: flex;
 					height: calc(100vh - 2.75rem - 1rem);
-
 					.topic {
 						height: 100%;
+						width: 600rpx;
 						flex: 1;
 						position: relative;
 						padding: 0.5rem 1.25rem;
 						border-right: 0.18rem solid #FFF5F3;
 						overflow-y: auto;
-
 						.topic-text {
 							font-size: 1.25rem;
 						}
@@ -458,7 +456,7 @@
 					}
 
 				}
-
+				// 中间答题 ------ End
 				// 右侧解析 ------ Start
 				.analysis-wrap {
 					width: 9.5rem;

@@ -3734,6 +3734,9 @@ body,
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+* {
+  overflow-wrap: break-word;
+}
 .page-wrap {
   padding-bottom: 1.875rem;
 }

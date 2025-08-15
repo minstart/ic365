@@ -232,16 +232,29 @@
   font-size: 0.8125rem;
   border-radius: 0.5rem;
 }
-.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .exchange[data-v-77a7c594] {
+.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .label .reward-reward-icon[data-v-77a7c594] {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  margin-right: 0.2rem;
+}
+.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .label span[data-v-77a7c594] {
+  display: inline-block;
+  vertical-align: top;
+}
+.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .exchange-btn[data-v-77a7c594] {
   float: right;
-  background: #79D183;
-  color: #fff;
-  font-size: 1rem;
   border-radius: 1rem;
   border: 0.1rem solid #79D183;
   width: 4.25rem;
   line-height: 1.625rem;
   text-align: center;
+  background-color: #79D183;
+  font-size: 1rem;
+  color: #fff;
+  display: inline-block;
+  padding: 0.31rem 0.81rem;
+  border-radius: 1rem;
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .already-redeemed[data-v-77a7c594] {
   background: #EEFFF0;

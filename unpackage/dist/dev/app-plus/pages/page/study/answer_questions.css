@@ -150,7 +150,7 @@
 }
 .page-wrap .content-wrap .category-wrap[data-v-772e1c56] {
   max-width: 9.625rem;
-  width: 30%;
+  width: 6.25rem;
   max-height: calc(100vh - 2.75rem);
   overflow: auto;
   padding-right: 0.2rem;
@@ -179,6 +179,7 @@
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic[data-v-772e1c56] {
   height: 100%;
+  width: 18.75rem;
   flex: 1;
   position: relative;
   padding: 0.5rem 1.25rem;
