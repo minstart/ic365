@@ -29,8 +29,7 @@
       "concatenate": true
     },
     "splashscreen": {
-      "target": "id:1",
-      "autoclose": true,
+      "autoclose": false,
       "waiting": true,
       "delay": 0
     },

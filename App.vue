@@ -45,16 +45,11 @@
 			this.commonRequest({
 				url: "/api/student/recordActivity",
 				method: "POST",
+				notLoading:true,
 				data: recordActivity
 			}).then(res => {
-				if (res.code == 0) {
-					// this.consoleLog("加载app时传输用户设备信息：",res)
-				} else {
-					uni.showToast({
-						title: res.message || "记录用户设备信息失败!",
-						icon: "none"
-					});
-				}
+				// this.consoleLog("加载app时传输用户设备信息：",res)
+
 			}).catch(error => {
 				// this.consoleLog("记录用户设备信息报错：：", error)
 			})

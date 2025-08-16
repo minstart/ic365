@@ -37,6 +37,11 @@
   flex: 4;
   border-width: 0;
   color: #333;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.375rem;
+  padding-bottom: 0.1rem;
+  background: url("../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
   background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
@@ -99,6 +104,7 @@
   min-height: 22.06rem;
   background: url("../../../static/image/5_achievement_back.png") no-repeat top/100%;
   position: relative;
+  margin-top: 1.125rem;
 }
 .achievement-statistics-wrap .achievement-statistics .achievement-title[data-v-70c707a8] {
   color: #fff;

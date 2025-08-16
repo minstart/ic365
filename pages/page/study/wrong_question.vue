@@ -4,23 +4,23 @@
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
-				<view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
+			<!-- 	<view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
 					<h3 class="item-title">错题本</h3>
-				</view>
+				</view> -->
 				<view class="achievement-statistics">
 					<h3 class="achievement-title">错题统计</h3>
 					<h3 class="statistics">共28道错题</h3>
 					<view class="property">
 						<view class="property-item">
-							<h3 class="item-info-num">3</h3>
+							<h3 class="item-info-num">{{wrongRecordsCount.highFrequencyErrCount||0}}</h3>
 							<view class="item-info-title">高频错题</view>
 						</view>
 						<view class="property-item">
-							<h3 class="item-info-num">12</h3>
+							<h3 class="item-info-num">{{wrongRecordsCount.weeklyNewCount}}</h3>
 							<view class="item-info-title">本周新增</view>
 						</view>
 						<view class="property-item">
-							<h3 class="item-info-num">4</h3>
+							<h3 class="item-info-num">{{wrongRecordsCount.masteredCount}}</h3>
 							<view class="item-info-title">已掌握</view>
 						</view>
 					</view>
@@ -29,34 +29,33 @@
 			<!-- 搜索相关 -->
 			<view class="search-wrap">
 				<view class="search-btn-wrap">
-					<input class="search-input" type="text" v-model="search" placeholder="搜索知识点或题目" />
-					<view class="search-btn">搜索</view>
+					<input class="search-input" type="text" v-model="keyword" placeholder="搜索知识点或题目" />
+					<view class="search-btn" @click="getProducts({reset:true})">搜索</view>
 				</view>
 				<view class="tab-wrap search-content-wrap">
 					<view class="tab-overflow-bar">
-						<ul class="tab-wrap search-tab-wrap">
-							<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in searchResult"
-								:current='i' @click="clickTab(i)">
-								{{item.name}}
-							</li>
-						</ul>
+						<view class="tab-overflow-bar">
+							<ul class="tab-wrap search-tab-wrap">
+								<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in productsTab" :current='i' @click="clickTab(item,i)">
+									{{item.name}}
+								</li>
+							</ul>
+						</view>
 					</view>
 					<view class="tab-content-wrap">
-						<view class="table-list-wrap" v-for="(item,i) in searchResult" :current='current'
-							v-show='current == i'>
-							<view class="no-list-tip" v-if="searchResult[i].list && searchResult[i].list.length==0">暂无数据
-							</view>
-							<view class="tab-list" v-for="item2 in searchResult[i].list">
+						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
+							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
+							<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
 								<view class="topic-title-wrap">
-									<h3 class="topic-title">{{item2.name}}</h3>
-									<view class="topic-time">{{item2.time}}</view>
+									<h3 class="topic-title">{{item2.title}}</h3>
+									<view class="topic-time">{{changeTime(item2.createTime,2)}}</view>
 								</view>
 								<view class="topic-wrap">
 									<view class="topic">{{item2.topic}}</view>
 									<view class="topic-answer-wrap">
 										<view class="topic-answer">
 											<view class="topic-answer-title">你的答案</view>
-											<view class="answer">{{item2.myAnswer}}</view>
+											<view class="answer">{{item2.userAnswer}}</view>
 										</view>
 										<view class="topic-answer">
 											<view class="topic-answer-title">正确答案</view>
@@ -91,41 +90,13 @@
 
 		data() {
 			return {
-				search: "",
+				wrongRecordsCount:{},
+				pageHeadTitle:"错题本",
+				keyword: "",
 				current: 0,
-				searchResult: [{
-						name: "数学",
-						list: [{
-								id:"1",
-								name: "分数运算",
-								topic: "小明有3/4块巧克力，吃了1/2，还剩多少块？",
-								time: "2025.07.22",
-								myAnswer: "1/4块",
-								correctAnswer: "1/2块"
-							},
-							{
-								id:"2",
-								name: "图形面积",
-								topic: "水水水水水水水水水水水水水水水水水水水顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶帆帆帆帆帆帆帆帆帆帆？",
-								time: "2025.07.29",
-								myAnswer: "？？？错误答案",
-								correctAnswer: "！！！正确答案"
-							},
-						]
-					},
-					{
-						name: "逻辑",
-					},
-					{
-						name: "图形",
-					},
-					{
-						name: "高频错题",
-					},
-					{
-						name: "未复习",
-					}
-				]
+				selectProductsId: "",
+				productsTab: [],//tab选项
+				productsList: {},//tab列表
 			}
 		},
 		onLoad() {
@@ -137,6 +108,44 @@
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
+			}).then(res=>{
+				this.verifLogin().then(data => {
+					// 错题统计
+					this.commonRequest({
+						url: "/api/wrong-records/stats"
+					}).then(res => {
+						this.consoleLog("错题统计::", JSON.stringify(res))
+							try {
+								this.wrongRecordsCount = res.data;
+							} catch (e) {}
+					}).catch(error => {
+						this.consoleLog("错题统计报错：：", error)
+					})
+					
+					this.commonRequest({
+						url: "/api/wrong-records/getCategories"
+					}).then(res => {
+						console.log("获取错题类目分组(Tab)::", res)
+						for (let i in res.data) {
+							try {
+								!this.selectProductsId && (this.selectProductsId = i);
+								this.productsTab.push({
+									id: i,
+									name: res.data[i],
+									page: 1
+								})
+								this.productsList["products" + i] = {
+									requested:false,
+									list:[]
+								}
+							} catch (e) {}
+						}
+						this.getProducts()
+					}).catch(error => {
+						this.consoleLog("获取错题类目分组(Tab)报错：：", error)
+					})
+				})
+				
 			})
 		},
 		onHide() {
@@ -155,32 +164,63 @@
 			},
 		},
 		methods: {
-			clickTab(i) {
+			clickTab(item,i) {
 				if (this.current !== i) {
-					this.current = i
+					this.selectProductsId = item.id;
+					this.current = i;
+					this.getProducts()
 				}
 			},
 			similarExercises(data){
 				// 同类练习
 				uni.showToast({
-					title: "同类练习" + data.id,
+					title: "同类练习" + data.recordId,
 					icon: "none"
 				})
 			},
 			reAnswer(data){
 				// 重新作答
 				uni.showToast({
-					title: "重新作答" + data.id,
+					title: "重新作答" + data.recordId,
 					icon: "none"
 				})
 			},
 			print(data){
 				// 打印
 				uni.showToast({
-					title: "打印" + data.id,
+					title: "打印" + data.recordId,
 					icon: "none"
 				})
+			},
+			// 获取商品
+			getProducts(data) {
+				if (!this.selectProductsId) return;
+				if(data && data.reset){
+					this.productsTab.forEach(item=>{
+						this.productsList["products" + item.id].requested = false;
+						this.productsList["products" + item.id].list = [];
+					})
+				}
+				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
+					console.log(this.keyword,this.selectProductsId)
+					// 错题列表
+					this.commonRequest({
+						url: "/api/exchange/products",
+						data: {
+							keyword: this.keyword,
+							type: this.selectProductsId,
+							size: "10"
+						}
+					}).then(res => {
+						console.log("错题列表:", res.data)
+						this.productsList["products" + this.selectProductsId].requested = true;
+						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
+					}).catch(error => {
+						this.consoleLog("错题列表报错：：", error)
+					})
+				}
 			}
+			
 		}
 	}
 </script>
@@ -192,13 +232,13 @@
 		background: linear-gradient(#FFEEE6 0%, #F4F4F4 40%, #F4F4F4 100%);
 	}
 
-	// 成就中心 ------Start
+	// 错题本 ------Start
 	.achievement-statistics-wrap {
 		.achievement-statistics {
 			min-height: 14rem;
 			background: url("/static/image/2_2_banner_back.png") no-repeat top /100%;
 			position: relative;
-
+			margin-top: 36rpx;
 			.achievement-title {
 				color: #fff;
 				font-size: 1.25rem;
@@ -281,7 +321,7 @@
 		}
 	}
 
-	// 成就中心 ------End
+	// 错题本 ------End
 
 	// 搜索功能及搜索列表
 	.search-wrap {

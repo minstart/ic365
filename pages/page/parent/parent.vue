@@ -60,7 +60,7 @@
 	<view class="plan-recommend-wrap uni-padding-wrap">
 		<view class="ability-analysis-wrap">
 			<view class="item-title-wrap">
-				<h3 class="item-title">最新成就</h3>
+				<h3 class="item-title">能力分析</h3>
 				<view class="item-more">
 					<view class="text icon-more" @click="jumpPage({url:''})">详情</view>
 				</view>
@@ -89,7 +89,7 @@
 					<view class="text icon-more" @click="jumpPage({url:''})">全部</view>
 				</view>
 			</view>
-			<view class="no-list-tip" v-if="suggestionImproveOther.categories.length==0">暂无数据</view>
+			<view class="no-list-tip" v-if="suggestionImproveOther.categories && suggestionImproveOther.categories.length==0">暂无数据</view>
 			<ul class="suggestion-list-wrap">
 				<li class="suggestion-list" v-for="item in suggestionImproveOther.categories">
 					<image class="item-icon" src=""></image>

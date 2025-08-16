@@ -29,7 +29,7 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
 	async config => {
-			// console.log("config::::", JSON.stringify(config))
+			// console.log("config::::", config)
 			const crypto = Cookies.get('crypto') ? JSON.parse(Cookies.get('crypto')) : ""
 			const newConfig = {
 				...config
@@ -59,7 +59,7 @@ service.interceptors.request.use(
 									data: aesEncrypt(newConfig.data, newCrypto.aesKey)
 								}
 							}
-							// console.log("请求参数2：newConfig:::", JSON.stringify(newConfig))
+							// console.log("请求参数2：newConfig:::", newConfig)
 							return newConfig
 						}
 					// } catch (e) {
@@ -77,6 +77,7 @@ service.interceptors.request.use(
 					}
 				}
 			}
+			
 			// console.log("请求参数：newConfig:::", JSON.stringify(newConfig))
 			return newConfig
 		},

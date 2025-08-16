@@ -441,5 +441,33 @@ export default {
 				day: dd.getDay()
 			}
 		},
+		// 转换服务端返回的时间转换成YYYY-MM-DD
+		// type不传 返回格式：YYYY-MM-DD，type:1 => YYYY-MM-DD  type:2 直接删除T返回
+		changeTime(time,type){
+			if(typeof type != "undefined" && type == 2) return time.replace("T", "");
+			if(time.indexOf("T")!=1||time.indexOf(":")!=1){
+				let date = new Date(time);
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1; // 月份是从0开始的，所以要加1
+				let day = date.getDate();
+				return `${year}-${month}-${day}`;
+			}else{
+				return time;
+			}
+		},
+		// 计算倒计时（剩余时间）
+		calculateDaysUntilDeadline(endTime) {
+			if(endTime.indexOf("-")!=-1){
+				endTime = new Date(endTime).getTime()
+			}
+			// 获取当前时间的时间戳
+			const now = new Date().getTime();
+			// 计算两个时间戳的差值（毫秒）
+			const diff = endTime - now;
+			// 将差值转换为天数（需要除以一天的毫秒数86400000）
+			const daysUntilDeadline = Math.floor(diff / (1000 * 60 * 60 * 24));
+		
+			return daysUntilDeadline;
+		}
 	}
 }

@@ -152,6 +152,17 @@
 				// 提交数据
 				submit(ref) {
 					let _this = this;
+					const deviceInfo = uni.getDeviceInfo()
+					const appInfo = uni.getSystemInfoSync()
+					// console.log("设备信息：：：",deviceInfo)
+					// console.log("安装包版本：：：",appInfo)
+					
+					let recordActivity = {
+						deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
+						osVersion: deviceInfo.system,
+						appVersion: appInfo.appVersion,
+						uniqueId: deviceInfo.deviceId
+					}
 					this.$refs[ref].validate().then(res => {
 						this.commonRequest({
 								url: "/api/auth/loginWithPhone",
@@ -166,6 +177,15 @@
 										duration: 2000,
 										success: function() {
 											_this.setLogin(res.data)
+											try{
+												// 记录用户设备信息
+												_this.commonRequest({
+													url: "/api/student/recordActivity",
+													method: "POST",
+													notLoading:true,
+													data: recordActivity
+												})
+											}catch(e){}
 											setTimeout(() => {
 												uni.reLaunch({
 													url: "/pages/page/index/index"

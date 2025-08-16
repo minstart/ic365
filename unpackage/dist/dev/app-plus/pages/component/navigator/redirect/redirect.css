@@ -37,6 +37,11 @@
   flex: 4;
   border-width: 0;
   color: #333;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.375rem;
+  padding-bottom: 0.1rem;
+  background: url("../../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
   background: url("../../../../static/icons/back_orange.png") no-repeat center / 100% 100%;

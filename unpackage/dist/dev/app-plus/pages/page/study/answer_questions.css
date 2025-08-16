@@ -37,6 +37,11 @@
   flex: 4;
   border-width: 0;
   color: #333;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.375rem;
+  padding-bottom: 0.1rem;
+  background: url("../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
   background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
@@ -150,7 +155,7 @@
 }
 .page-wrap .content-wrap .category-wrap[data-v-772e1c56] {
   max-width: 9.625rem;
-  width: 6.25rem;
+  width: 9.375rem;
   max-height: calc(100vh - 2.75rem);
   overflow: auto;
   padding-right: 0.2rem;
@@ -263,9 +268,9 @@
   float: right;
 }
 .page-wrap .content-wrap .topic-wrap .analysis-wrap[data-v-772e1c56] {
-  width: 9.5rem;
+  width: 10.5rem;
   height: calc(100% - 1.25rem);
-  padding: 1.25rem 0 0 0.625rem;
+  padding: 1.25rem 0 0 0.4375rem;
   position: relative;
 }
 .page-wrap .content-wrap .topic-wrap .analysis-wrap .analysis-title[data-v-772e1c56] {

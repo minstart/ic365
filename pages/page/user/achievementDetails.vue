@@ -4,9 +4,9 @@
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#ECEFFF'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
-				<view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
+				<!-- <view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
 					<h3 class="item-title">成就中心</h3>
-				</view>
+				</view> -->
 				<view class="achievement-statistics">
 					<view class="achievement-progress-wrap">
 						<view class="progress-icon" :style="'left:50'+'%'"></view>
@@ -15,9 +15,9 @@
 						</view>
 					</view>
 					<h3 class="achievement-title">成就等级</h3>
-					<h3 class="statistics">10/24 完成</h3>
+					<h3 class="statistics">{{progress.obtainedCount}}/{{progress.totalCount}} 完成</h3>
 					<ul class="progress-list-wrap">
-						<li class="progress-list" v-for="(item,i) in progress" :style="'margin-top:'+ -i * 1.2 + 'rem'">
+						<li class="progress-list" v-for="(item,i) in progress.list" :style="'margin-top:'+ -i * 1.2 + 'rem'">
 							<i>{{item}}</i>
 						</li>
 					</ul>
@@ -28,26 +28,23 @@
 			<view class="search-wrap">
 				<view class="search-btn-wrap">
 					<input class="search-input" type="text" v-model="search" placeholder="搜索成就名称" />
-					<view class="search-btn">搜索</view>
+					<view class="search-btn" @click="getProducts({reset:true})">搜索</view>
 				</view>
 				<view class="tab-wrap search-content-wrap">
 					<view class="tab-overflow-bar">
 						<ul class="tab-wrap search-tab-wrap">
-							<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in searchResult"
-								:current='i' @click="clickTab(i)">
+							<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in productsTab" :current='i' @click="clickTab(item,i)">
 								{{item.name}}
 							</li>
 						</ul>
 					</view>
 					<view class="tab-content-wrap">
-						<view class="table-list-wrap" v-for="(item,i) in searchResult" :current='current'
-							v-show='current == i'>
+						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
 							</view>
-							
-							<view class="no-list-tip" v-if="searchResult[i].list && searchResult[i].list.length==0">暂无数据</view>
-							<view class="tab-list" v-for="item2 in searchResult[i].list">
+							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
+							<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
 								<image class="list-icon" :src="item2.coverImage" mode=""></image>
 								<view class="list-info">
 									<h3 class="info-title">{{item2.name}}</h3>
@@ -82,53 +79,63 @@
 
 		data() {
 			return {
-				progress: ["12个", "4个", "5个", "2个", "0个"],
-				search: "",
+				progress: {},
 				current: 0,
-				searchResult: [{
-						name: "学习成就",
-						list: [{
-								name: "学习新秀",
-								coverImage: "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
-								subtitle: "完成所有图形认知练习",
-								time: "2025.07.22获得",
-								labelType: 1,
-								label: "铜质成就"
-							},
-							{
-								name: "学习新秀2",
-								coverImage: "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
-								subtitle: "完成所有图形认知练习",
-								time: "3/5 进度",
-								labelType: 2,
-								label: "银质成就"
-							}
-						]
-					},
-					{
-						name: "挑战成就",
-					},
-					{
-						name: "团队成就",
-					},
-					{
-						name: "活动成就",
-					},
-					{
-						name: "未获得",
-					}
-				]
+				pageHeadTitle: "成就中心",
+				keyword: "",
+				current: 0,
+				selectProductsId: "",
+				productsTab: [],
+				productsList: {}
 			}
 		},
 		onLoad() {
-			
+
 		},
 		onReady() {
-
+			this.verifLogin().then(data => {
+				// 兑换资源类型(Tab)
+				this.commonRequest({
+					url: "/api/achievement/group-types"
+				}).then(res => {
+					console.log("兑换资源类型(Tab)::", res)
+					for (let i in res.data) {
+						try {
+							!this.selectProductsId && (this.selectProductsId = i);
+							this.productsTab.push({
+								id: i,
+								name: res.data[i],
+								page: 1
+							})
+							this.productsList["products" + i] = {
+								requested: false,
+								list: []
+							}
+						} catch (e) {}
+					}
+					this.getProducts()
+				}).catch(error => {
+					this.consoleLog("兑换资源类型(Tab)报错：：", error)
+				})
+			})
 		},
 		onShow() {
 			this.pageOnShowSet({
-				uniHide:"all"
+				uniHide: "all"
+			}).then(res => {
+				// 兑换资源类型(Tab)
+				this.commonRequest({
+					url: "/api/achievement/stats"
+				}).then(res => {
+					console.log(res.data)
+					this.progress = res.data
+					this.progress.list = [];
+					this.progress.list.push(res.data.groupTypeCounts["铜质"] || 0)
+					this.progress.list.push(res.data.groupTypeCounts["银质"] || 0)
+					this.progress.list.push(res.data.groupTypeCounts["金质"] || 0)
+					this.progress.list.push(res.data.groupTypeCounts["钻石"] || 0)
+					this.progress.list.push(res.data.groupTypeCounts["稀有"] || 0)
+				})
 			})
 		},
 		onHide() {
@@ -150,9 +157,38 @@
 			},
 		},
 		methods: {
-			clickTab(i) {
+			clickTab(item, i) {
 				if (this.current !== i) {
-					this.current = i
+					this.selectProductsId = item.id;
+					this.current = i;
+					this.getProducts()
+				}
+			},
+			// 获取商品
+			getProducts(data) {
+				if (!this.selectProductsId) return;
+				if (data && data.reset) {
+					this.productsTab.forEach(item => {
+						this.productsList["products" + item.id].requested = false;
+						this.productsList["products" + item.id].list = [];
+					})
+				}
+				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
+					// 获取兑换商品列表
+					this.commonRequest({
+						url: "/api/achievement/list",
+						data: {
+							keyword: this.keyword,
+							type: this.selectProductsId,
+							size: "10"
+						}
+					}).then(res => {
+						console.log("获取兑换商品列表:", res.data)
+						this.productsList["products" + this.selectProductsId].requested = true;
+						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
+					}).catch(error => {
+						this.consoleLog("获取兑换商品列表报错：：", error)
+					})
 				}
 			}
 		}
@@ -161,13 +197,13 @@
 
 <style lang="scss" scoped>
 	@import "/static/css/standard.scss";
-	
-	.item-title-wrap{
+
+	.item-title-wrap {
 		margin-top: 1rem;
 	}
-	
+
 	.page-wrap {
-		background:linear-gradient(#ECEFFF 0%, #F4F4F4 40%, #F4F4F4 100%);
+		background: linear-gradient(#ECEFFF 0%, #F4F4F4 40%, #F4F4F4 100%);
 	}
 
 	// 成就中心 ------Start
@@ -176,6 +212,7 @@
 			min-height: 22.06rem;
 			background: url("/static/image/5_achievement_back.png") no-repeat top /100%;
 			position: relative;
+			margin-top: 36rpx;
 
 			.achievement-title {
 				color: #fff;
@@ -277,7 +314,8 @@
 						font-size: 0.75rem;
 						min-width: calc(3.75rem - 0.56rem * 2);
 						text-align: center;
-						&:last-child{
+
+						&:last-child {
 							margin-right: 0;
 						}
 					}
@@ -329,6 +367,7 @@
 									font-size: 0.75rem;
 									border-radius: 1rem;
 									overflow: hidden;
+
 									.icon {
 										float: left;
 										width: 1.25rem;

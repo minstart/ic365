@@ -37,6 +37,11 @@
   flex: 4;
   border-width: 0;
   color: #333;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.375rem;
+  padding-bottom: 0.1rem;
+  background: url("../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
   background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
@@ -479,8 +484,8 @@
 }
 .checked-icon {
 		position: absolute;
-		width:  0.6875rem !important;
-		height:  0.6875rem !important;
+		width: 0.6875rem !important;
+		height: 0.6875rem !important;
 		top: calc(-0.6875rem /3) !important;
 		right: calc(-0.6875rem /3) !important;
 		background: url("../../../static/icons/calendar_checked.png") no-repeat center /100% 100%;

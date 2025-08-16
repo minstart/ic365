@@ -4,9 +4,6 @@
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFF0DC'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
-				<view class="item-title-wrap" style="margin:20rpx 0 16rpx 0;">
-					<h3 class="item-title">兑换商城</h3>
-				</view>
 				<view class="achievement-statistics">
 					<h3 class="achievement-title">我的货币</h3>
 					<view class="property">
@@ -28,31 +25,30 @@
 			<!-- 搜索相关 -->
 			<view class="search-wrap">
 				<view class="search-btn-wrap">
-					<input class="search-input" type="text" v-model="search" placeholder="搜索商品名称" />
-					<view class="search-btn">搜索</view>
+					<input class="search-input" type="text" v-model="keyword" placeholder="搜索商品名称" />
+					<view class="search-btn" @click="getProducts({reset:true})">搜索</view>
 				</view>
 				<view class="tab-wrap search-content-wrap">
 					<view class="tab-overflow-bar">
 						<ul class="tab-wrap search-tab-wrap">
-							<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in searchResult" :current='i' @click="clickTab(i)">
+							<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in productsTab" :current='i' @click="clickTab(item,i)">
 								{{item.name}}
 							</li>
 						</ul>
 					</view>
 					<view class="tab-content-wrap">
-						<view class="table-list-wrap" v-for="(item,i) in searchResult" :current='current' v-show='current == i'>
-							<view class="no-list-tip" v-if="searchResult[i].list && searchResult[i].list.length==0">暂无数据
-							</view>
+						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
-								<view class="item-more">
-									<view class="text" style="color:#F23E3E;font-weight: 700;">剩余2天</view>
-								</view>
 							</view>
-							<view class="tab-list" v-for="item2 in searchResult[i].list">
-								<image class="list-icon" :src="item2.coverImage" mode=""></image>
+							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
+							<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
+								<image class="list-icon" :src="item2.icon" mode=""></image>
 								<view class="list-info">
-									<h3 class="info-title">{{item2.name}}</h3>
+									<h3 class="info-title">{{item2.productName}}</h3>
+									<view class="item-more" v-if="item2.endTime">
+										<view class="text" style="color:#F23E3E;font-weight: 700;">剩余{{calculateDaysUntilDeadline(changeTime(item2.endTime))}}天</view>
+									</view>
 									<view class="info-subtitle">{{item2.subtitle}}</view>
 									<view class="achievement-type">
 										<view class="label" v-if="item2.payCurrencyTypeName">
@@ -90,10 +86,12 @@
 
 					}
 				},
-				search: "",
+				pageHeadTitle: "兑换商城",
+				keyword: "",
 				current: 0,
-				searchResultTab: [],
-				searchResult: {}
+				selectProductsId: "",
+				productsTab: [],
+				productsList: {}
 			}
 		},
 		onLoad() {
@@ -101,34 +99,26 @@
 		},
 		onReady() {
 			this.verifLogin().then(data => {
-				if (store.state.userInfo.token && store.state.userInfo.info && store.state.userInfo.info.currencies) {
-					this.userInfo = store.state.userInfo.info
-				} else {
-					// 获取用户信息
-					this.commonRequest({
-						url: "/api/student/info"
-					}).then(res => {
-						console.log("获取用户信息::", res)
-						try {
-							store.commit("Update_UserInfo", res.data)
-							this.userInfo = res.data;
-						} catch (e) {}
-
-					}).catch(error => {
-						this.consoleLog("获取用户信息报错：：", error)
-					})
-				}
-				
 				// 兑换资源类型(Tab)
 				this.commonRequest({
 					url: "/api/exchange/group-types"
 				}).then(res => {
 					console.log("兑换资源类型(Tab)::", res)
-					for(let i in res.data){
-						this.searchResultTab.push({
-							
-						})
+					for (let i in res.data) {
+						try {
+							!this.selectProductsId && (this.selectProductsId = i);
+							this.productsTab.push({
+								id: i,
+								name: res.data[i],
+								page: 1
+							})
+							this.productsList["products" + i] = {
+								requested: false,
+								list: []
+							}
+						} catch (e) {}
 					}
+					this.getProducts()
 				}).catch(error => {
 					this.consoleLog("兑换资源类型(Tab)报错：：", error)
 				})
@@ -155,17 +145,61 @@
 			},
 		},
 		methods: {
-			clickTab(i) {
+			clickTab(item, i) {
 				if (this.current !== i) {
-					this.current = i
+					this.selectProductsId = item.id;
+					this.current = i;
+					this.getProducts()
 				}
 			},
 			exchange(data) {
-				// 同类练习
-				uni.showToast({
-					title: "兑换" + data.id,
-					icon: "none"
+				if (data.obtained) return console.log("已拥有：", data.id);
+				// 兑换商品
+				this.commonRequest({
+					url: "/api/exchange/redeem",
+					data: {
+						productionId: data.id,
+					}
+				}).then(res => {
+					// 点击兑换商品
+					uni.showToast({
+						title: "兑换成功",
+						icon: "success"
+					})
+					data.obtained = true;
+				}).catch(error => {
+					this.consoleLog("兑换商品报错：：", error)
 				})
+
+			},
+			// 获取商品
+			getProducts(data) {
+				if (!this.selectProductsId) return;
+				if (data && data.reset) {
+					this.productsTab.forEach(item => {
+						this.productsList["products" + item.id].requested = false;
+						this.productsList["products" + item.id].list = [];
+					})
+				}
+				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
+					console.log(this.keyword,this.selectProductsId)
+					// 获取兑换商品列表
+					this.commonRequest({
+						url: "/api/exchange/products",
+						method:"POST",
+						data: {
+							keyword: this.keyword,
+							type: this.selectProductsId,
+							size: "10"
+						}
+					}).then(res => {
+						console.log("获取兑换商品列表:", res.data)
+						this.productsList["products" + this.selectProductsId].requested = true;
+						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
+					}).catch(error => {
+						this.consoleLog("获取兑换商品列表报错：：", error)
+					})
+				}
 			}
 
 		}
@@ -183,12 +217,13 @@
 		margin-top: 1rem;
 	}
 
-	// 成就中心 ------Start
+	// 兑换商城 ------Start
 	.achievement-statistics-wrap {
 		.achievement-statistics {
 			min-height: 14rem;
 			background: url("/static/image/5_2_banner_back.png") no-repeat top /100%;
 			position: relative;
+			margin-top: 36rpx;
 
 			.achievement-title {
 				color: #fff;
@@ -249,7 +284,7 @@
 		}
 	}
 
-	// 成就中心 ------End
+	// 兑换商城 ------End
 
 	// 搜索功能及搜索列表
 	.search-wrap {
@@ -322,7 +357,9 @@
 							width: 5.5rem;
 							height: 6.75rem;
 							margin-right: 0.75rem;
-							background: #ccc;
+							// background: #ccc;
+							border-radius: 20rpx;
+							overflow: hidden;
 						}
 
 						.list-info {
@@ -331,13 +368,13 @@
 							.info-title {
 								margin-top: 0.5rem;
 								line-height: 1.56rem;
-								font-size: 1.125rem;
+								font-size: 36rpx;
 							}
 
 							.info-subtitle {
 								color: #999;
-								font-size: 0.875rem;
-								margin: 0.125rem 0 1.125rem 0;
+								font-size: 28rpx;
+								margin: 4rpx 0 30rpx 0;
 							}
 
 							.achievement-type {
@@ -345,13 +382,14 @@
 
 								.label {
 									float: left;
-									line-height: 1.75rem;
+									line-height: 56rpx;
 									width: 6.25rem;
 									text-align: center;
 									background-color: #FFF3EC;
 									color: #ff926b;
 									font-size: 0.8125rem;
 									border-radius: 0.5rem;
+									margin-top: 4rpx;
 
 									.reward-reward-icon {
 										width: 0.75rem;
@@ -369,16 +407,15 @@
 								.exchange-btn {
 									float: right;
 									border-radius: 1rem;
-									border: 0.1rem solid #79D183;
+									border: 2rpx solid #79D183;
 									width: 4.25rem;
-									line-height: 1.625rem;
+									line-height: 64rpx;
 									text-align: center;
-
 									background-color: #79D183;
-									font-size: 1rem;
+									font-size: 32rpx;
 									color: #fff;
 									display: inline-block;
-									padding: 0.31rem 0.81rem;
+									padding: 0 36rpx;
 									border-radius: 1rem;
 								}
 

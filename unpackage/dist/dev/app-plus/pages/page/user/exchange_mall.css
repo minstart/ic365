@@ -37,6 +37,11 @@
   flex: 4;
   border-width: 0;
   color: #333;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.375rem;
+  padding-bottom: 0.1rem;
+  background: url("../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
   background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
@@ -99,6 +104,7 @@
   min-height: 14rem;
   background: url("../../../static/image/5_2_banner_back.png") no-repeat top/100%;
   position: relative;
+  margin-top: 1.125rem;
 }
 .achievement-statistics-wrap .achievement-statistics .achievement-title[data-v-77a7c594] {
   color: #fff;
@@ -204,7 +210,8 @@
   width: 5.5rem;
   height: 6.75rem;
   margin-right: 0.75rem;
-  background: #ccc;
+  border-radius: 0.625rem;
+  overflow: hidden;
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info[data-v-77a7c594] {
   flex: 1;
@@ -217,7 +224,7 @@
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .info-subtitle[data-v-77a7c594] {
   color: #999;
   font-size: 0.875rem;
-  margin: 0.125rem 0 1.125rem 0;
+  margin: 0.125rem 0 0.9375rem 0;
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type[data-v-77a7c594] {
   overflow: hidden;
@@ -231,6 +238,7 @@
   color: #ff926b;
   font-size: 0.8125rem;
   border-radius: 0.5rem;
+  margin-top: 0.125rem;
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .label .reward-reward-icon[data-v-77a7c594] {
   width: 0.75rem;
@@ -245,15 +253,15 @@
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .exchange-btn[data-v-77a7c594] {
   float: right;
   border-radius: 1rem;
-  border: 0.1rem solid #79D183;
+  border: 0.0625rem solid #79D183;
   width: 4.25rem;
-  line-height: 1.625rem;
+  line-height: 2rem;
   text-align: center;
   background-color: #79D183;
   font-size: 1rem;
   color: #fff;
   display: inline-block;
-  padding: 0.31rem 0.81rem;
+  padding: 0 1.125rem;
   border-radius: 1rem;
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .already-redeemed[data-v-77a7c594] {

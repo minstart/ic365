@@ -113,6 +113,17 @@
 								} else {
 									// TODO: 授权成功处理，可以进行关闭授权页、服务端验证等
 									// this.consoleLog('授权成功：：', data)
+									const deviceInfo = uni.getDeviceInfo()
+									const appInfo = uni.getSystemInfoSync()
+									// console.log("设备信息：：：",deviceInfo)
+									// console.log("安装包版本：：：",appInfo)
+									
+									let recordActivity = {
+										deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
+										osVersion: deviceInfo.system,
+										appVersion: appInfo.appVersion,
+										uniqueId: deviceInfo.deviceId
+									}
 									const _this = this;
 									this.commonRequest({
 											url: '/api/auth/oneClickLogin',
@@ -125,13 +136,21 @@
 										.then(res => {
 											console.log('/api/sms/forLogin：验证码登录成功:', JSON.stringify(res))
 											ydLogin.closeAuthController()
-											if (res.code === 0) {
 												uni.showToast({
 													title: res.message || '一键登陆成功',
 													icon: 'success',
 													duration: 2000,
 													success: function() {
 														_this.setLogin(res.data)
+														try{
+															// 记录用户设备信息
+															_this.commonRequest({
+																url: "/api/student/recordActivity",
+																method: "POST",
+																notLoading:true,
+																data: recordActivity
+															})
+														}catch(e){}
 														setTimeout(() => {
 															uni.reLaunch({
 																url: "/pages/page/index/index"
@@ -139,12 +158,7 @@
 														}, 2000)
 													}
 												})
-											} else {
-												uni.showToast({
-													title: res.message || "一键登陆失败",
-													icon: 'none'
-												})
-											}
+											
 										}).catch(error => {
 											uni.showToast({
 												title: error || "一键登陆失败",

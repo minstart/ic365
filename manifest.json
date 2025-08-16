@@ -12,7 +12,7 @@
         "compilerVersion" : 3,
         "nvueLaunchMode" : "fast",
         "splashscreen" : {
-            "alwaysShowBeforeRender" : true,
+            "alwaysShowBeforeRender" : false,
             "waiting" : true,
             "autoclose" : true,
             "delay" : 0

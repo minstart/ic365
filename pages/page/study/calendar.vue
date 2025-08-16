@@ -60,20 +60,25 @@
 			this.$nextTick(() => {
 				this.showCalendar = true
 			})
-			// TODO 模拟请求异步同步数据
-			setTimeout(() => {
+			this.verifLogin().then(data => {
 				this.info.date = this.changeDate(new Date(), -30).fullDate
 				this.info.startDate = this.changeDate(new Date(), -60).fullDate
 				this.info.endDate = this.changeDate(new Date(), 30).fullDate
-				this.info.selected = [{
-						date: this.changeDate("2025-8-1").fullDate
-					},
-					{
-						date: this.changeDate("2025-8-4").fullDate
-					}
-				]
-				console.log(this.info)
-			}, 2000)
+				// 获取已答题的日期
+				this.commonRequest({
+					url: "/api/question/answeredDates"
+				}).then(res => {
+					// this.consoleLog("推荐学习::", JSON.stringify(res))
+					try {
+						this.info.selected = res.data || [];
+					} catch (e) {}
+
+				}).catch(error => {
+					this.consoleLog("获取已答题的日期：：", error)
+				})
+			}).catch(error => {
+				this.consoleLog("没有登录：：", error)
+			})
 			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
 		},
 		onShow() {
@@ -88,7 +93,6 @@
 			}).then(data => {
 				this.disabledDays = this.getDatesInCurrentMonth()
 			})
-
 		},
 		onHide() {
 
@@ -146,7 +150,7 @@
 			},
 			doingExercises() {
 				this.jumpPage({
-					url:"/pages/page/study/answer_questions?date="+this.checkedDate+"&isEveryDay=true"
+					url: "/pages/page/study/answer_questions?date=" + this.checkedDate + "&isEveryDay=true"
 				})
 			}
 		}
@@ -318,8 +322,8 @@
 
 	.checked-icon {
 		position: absolute;
-		width:  22rpx !important;
-		height:  22rpx !important;
+		width: 22rpx !important;
+		height: 22rpx !important;
 		top: calc(-22rpx /3) !important;
 		right: calc(-22rpx /3) !important;
 		background: url("/static/icons/calendar_checked.png") no-repeat center /100% 100%;

@@ -234,7 +234,6 @@
 						try {
 							store.commit("Update_UserInfo", res.data)
 							this.userInfo = res.data;
-							console.log(this.userInfo)
 						} catch (e) {}
 						// 全新用户，需要选年级
 
@@ -272,7 +271,10 @@
 
 				// 获取兑换商品列表
 				this.commonRequest({
-					url: "/api/exchange/products"
+					url: "/api/exchange/products",
+					data:{
+						size:3
+					}
 				}).then(res => {
 					console.log("获取兑换商品列表:", res.data)
 					this.exchangeList = res.data;

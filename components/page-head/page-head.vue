@@ -104,6 +104,7 @@
 		.common-page-head-module {
 			flex: 1;
 			position: relative;
+
 			* {
 				position: absolute;
 				left: 0;
@@ -120,6 +121,12 @@
 			flex: 4;
 			border-width: 0;
 			color: #333;
+			display: inline-block;
+			font-weight: 700;
+			font-size: 44rpx;
+			// line-height: ;
+			padding-bottom: 0.1rem;
+			background: url("/static/image/title_back.png") no-repeat bottom center / 5.5rem;
 		}
 
 		.page-head-back-icon {

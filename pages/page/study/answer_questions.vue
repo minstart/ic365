@@ -2,7 +2,7 @@
 	<view class="page-loading" v-if="pageMask"></view>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
+		<page-head :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
 		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
 			<view class="content-wrap">
 				<view class="category-wrap">
@@ -98,8 +98,8 @@
 				time: 0, //答题计时器
 				current: "", //选中的答案下标
 				answer: {
-					optionName: "",
-					option: ""
+					optionName: "", //ABCDEF选项
+					option: "" //答案内容
 				}, //选中的答案
 				categoryTree: { //左侧类目树状图
 					subject: "数学", //学科
@@ -255,10 +255,37 @@
 					icon: "none"
 				});
 				this.answered = true;
-				uni.showToast({
-					title: "提交的答案：" + this.answer.optionName + this.answer.option + "，用时：" + this.time + "秒",
-					icon: "none"
+				let postData = {
+					questionId: this.topic.questionId,
+					answer: this.answer.optionName,
+					useTime: this.time
+					// missionId: "",
+					// teamId: "",
+					// wrong_record_id: ""
+				}
+				this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId)
+
+				console.log("postData",postData)
+				// 回答问题
+				this.commonRequest({
+					url: "/api/question/submit",
+					method: "POST",
+					data: postData
+				}).then(res => {
+					try {
+						uni.showToast({
+							title: (this.answer.optionName == this.topic.answer ? "恭喜你，答对啦(●'◡'●)" : "很遗憾，你答错了~~>_<~~") + "，用时：" + this.time + "秒",
+							icon: "none",
+							duration: "4000"
+						})
+					} catch (e) {
+						console.log(e)
+					}
+				}).catch(error => {
+					this.consoleLog("回答问题接口报错：：", error)
 				})
+
+
 			},
 
 			playVideo() {
@@ -294,7 +321,7 @@
 					icon: "none"
 				})
 			},
-			textAnalysis(){
+			textAnalysis() {
 				uni.showToast({
 					title: "文本或者图片解析",
 					icon: "none"
@@ -324,7 +351,7 @@
 			// 左侧树状菜单 ------ Start
 			.category-wrap {
 				max-width: 9.625rem;
-				width: 200rpx;
+				width: 300rpx;
 				max-height: calc(100vh - 2.75rem);
 				overflow: auto;
 				padding-right: 0.2rem;
@@ -342,6 +369,7 @@
 					}
 				}
 			}
+
 			// 左侧树状菜单 ------ End
 			.topic-wrap {
 				flex: 1;
@@ -352,10 +380,12 @@
 					background: #FFEDBB;
 					height: 2.75rem;
 				}
+
 				// 中间答题 ------ Start
 				.topic-content-wrap {
 					display: flex;
 					height: calc(100vh - 2.75rem - 1rem);
+
 					.topic {
 						height: 100%;
 						width: 600rpx;
@@ -364,6 +394,7 @@
 						padding: 0.5rem 1.25rem;
 						border-right: 0.18rem solid #FFF5F3;
 						overflow-y: auto;
+
 						.topic-text {
 							font-size: 1.25rem;
 						}
@@ -456,12 +487,13 @@
 					}
 
 				}
+
 				// 中间答题 ------ End
 				// 右侧解析 ------ Start
 				.analysis-wrap {
-					width: 9.5rem;
-					height: calc(100% - 1.25rem);
-					padding: 1.25rem 0 0 0.625rem;
+					width: 10.5rem;
+					height: calc(100% - 40rpx);
+					padding: 40rpx 0 0 14rpx;
 					position: relative;
 
 					.analysis-title {

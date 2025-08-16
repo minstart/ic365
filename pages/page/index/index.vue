@@ -65,9 +65,9 @@
 					<view class="progress-wrap" v-if="item.startTime==0">
 						<progress :percent="item.processTotal" activeColor="#77D182" backgroundColor="#ffffff" stroke-width="8" />
 					</view>
-					<view class="time-limited-wrap" v-else="calculateDaysUntilDeadline(item.endTime)>0">
+					<view class="time-limited-wrap" v-else="calculateDaysUntilDeadline(changeTime(item.endTime))>0">
 						<view class="time-limited">
-							限时活动 剩余{{calculateDaysUntilDeadline(item.endTime)}}天
+							限时活动 剩余{{calculateDaysUntilDeadline(changeTime(item.endTime))}}天
 						</view>
 					</view>
 				</li>
@@ -380,17 +380,7 @@
 						break;
 				}
 			},
-			calculateDaysUntilDeadline(endTime) {
-				// console.log(endTime)
-				// 获取当前时间的时间戳
-				const now = new Date().getTime();
-				// 计算两个时间戳的差值（毫秒）
-				const diff = endTime + "000" - now;
-				// 将差值转换为天数（需要除以一天的毫秒数86400000）
-				const daysUntilDeadline = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-				return daysUntilDeadline;
-			}
+			
 		}
 	};
 </script>
