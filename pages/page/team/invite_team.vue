@@ -1,7 +1,7 @@
 <template>
 	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
+		<page-head :isBack='true' :background="'#FFEEE6'"></page-head>
 		<view class="banner-back"></view>
 		<div class="banner-wrap">
 			<view class="btn-wrap">
@@ -11,7 +11,7 @@
 				<view class="invite-team-icon"></view>
 				<h3 class="info-title">邀请好友加入队伍</h3>
 				<view class="info-subtitle">邀请好友一起学习，共同进步,还能获得额外奖励！</view>
-				<image class="qr-code" src=""></image>
+				<image class="qr-code" :src="qrCode"></image>
 				<view class="info-tips">扫描二维码加入我的队伍</view>
 				<div class="invitation-code-wrap">
 					<view class="invitation-code-tips">或使用邀请码</view>
@@ -72,7 +72,7 @@
 
 		data() {
 			return {
-				pageHeadTitle: "",
+				qrCode:"",
 				invitationRewards: [{
 						name: "成功邀请1位好友",
 						cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
@@ -103,7 +103,14 @@
 			}
 		},
 		onLoad() {
-
+			this.verifLogin().then(data => {
+				this.commonRequest({
+					url: "/api/user/qrCode",
+					notLoading:true
+				}).then(res => {
+					this.qrCode = res.data;
+				})
+			})
 		},
 		onReady() {
 
@@ -111,6 +118,8 @@
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
+			}).then(res=>{
+				
 			})
 		},
 		onHide() {

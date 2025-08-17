@@ -71,12 +71,38 @@
 			</view>
 		</view>
 	</view>
-	<uni-popup ref="popup" type="center" :mask-click="true" border-radius="10px 10px 0 0" :animation="false">
-		<view class="popup-video-wrap">
-			<view class="close-icon" @click="closePopupVideo"></view>
+	<!-- 视频弹窗 -->
+	<l-popup v-show="showVideo" :close="closePopupVideo">
+		<template v-slot>
 			<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" show-fullscreen-btn="false"></video>
-		</view>
-	</uni-popup>
+		</template>
+	</l-popup>
+	<!-- 文字 + 图片析题弹窗 -->
+	<l-popup v-show="showAnalysis" :close="closePopupVideo">
+		<template v-slot>
+			<view class="popup-analysis-wrap">
+				<view class="popup-analysis-text" v-if="topic.analysis">
+					{{topic.analysis}}
+				</view>
+				<view class="popup-analysis-img-wrap" v-for="item in topic.analysisImages">
+					<image class="popup-analysis-img" :src="item" mode=""></image>
+				</view>
+			</view>
+		</template>
+	</l-popup>
+	<!-- AI析题弹窗 -->
+	<l-popup v-show="showAIAnalysis" :close="closePopupVideo">
+		<template v-slot>
+			<view class="popup-analysis-wrap">
+				<view class="popup-analysis-text" v-if="topic.analysis">
+					{{topic.analysis}}
+				</view>
+				<view class="popup-analysis-img-wrap" v-for="item in topic.analysisImages">
+					<image class="popup-analysis-img" :src="item" mode=""></image>
+				</view>
+			</view>
+		</template>
+	</l-popup>
 </template>
 
 <script>
@@ -114,7 +140,16 @@
 				},
 				showVideo: false, //是否展示是视频弹窗（uni-popup 有毒）
 				topic: {},
-				context: {}
+				context: {},
+				showAnalysis: false, //是否展示文本或图片解析弹窗
+				showAIAnalysis: false, //是否展示AI解析弹窗
+				videoEl: "",
+
+				// answered: true,
+				// answer: {
+				// 	optionName: "A", //ABCDEF选项
+				// 	option: "随便填的答案" //答案内容
+				// }
 			}
 		},
 		onLoad(option) {
@@ -161,6 +196,15 @@
 							this.categoryTree.semester = res.data.semester == "fall" ? "上册" : (res.data.semester == "spring" ? "下册" : "");
 							this.categoryTree.category[0].categoryName = res.data.categoryName;
 							this.topic = res.data;
+
+							if (this.topic.content.indexOf("http") != -1) {
+								// 1. 正则表达式提取图片URL
+								const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif)/gi;
+								const contentImages = this.topic.content.match(imageUrlPattern) || [];
+								// 2. 删除图片URL后的文本
+								this.topic.content = this.topic.content.replace(imageUrlPattern, '').trim();
+								this.topic.contentImages = [...this.topic.contentImages, contentImages]
+							}
 
 							let time = setInterval(() => {
 								if (this.answered) {
@@ -265,7 +309,7 @@
 				}
 				this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId)
 
-				console.log("postData",postData)
+				console.log("postData", postData)
 				// 回答问题
 				this.commonRequest({
 					url: "/api/question/submit",
@@ -284,52 +328,81 @@
 				}).catch(error => {
 					this.consoleLog("回答问题接口报错：：", error)
 				})
-
-
 			},
 
 			playVideo() {
-				// #ifdef H5
-				this.$refs.popup.open('center')
-				// #endif
-				this.commonRequest({
-					url: "/api/video/getById",
-					method: 'post',
-					data: {
-						id: this.topic.videoId
-					}
-				}).then(res => {
-					// console.log("获取视频解析地址::", res.data)
-					try {
-						this.analysis.video = res.data
-						this.$refs.popup.open('center')
-						// this.showVideo = true;
-						let _this = this;
-						// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---Start
-						// setTimeout(()=>{
-						// 	 _this.context.play()
-						// },1000)
-						// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---End
-					} catch (e) {}
-				}).catch(error => {
-					this.consoleLog("获取视频解析地址报错", error)
-				})
+				if (!this.analysis.video) {
+					this.commonRequest({
+						url: "/api/video/getById",
+						method: 'post',
+						data: {
+							id: this.topic.videoId
+						}
+					}).then(res => {
+						console.log("获取视频解析地址::", res.data)
+						try {
+							this.analysis.video = res.data
+							this.showVideo = true;
+							// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---Start
+							// let _this = this;
+							// setTimeout(()=>{
+							// 	 _this.context.play()
+							// },1000)
+							// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---End
+
+							this.videoEl = uni.createVideoContext('video1'); //创建视频实例指向video
+							this.videoEl.seek(0);
+							this.videoEl.play();
+						} catch (e) {}
+					}).catch(error => {
+						this.consoleLog("获取视频解析地址报错", error)
+					})
+				} else {
+					this.videoEl.seek(0);
+					this.videoEl.play();
+				}
+
 			},
 			AIAnalysis() {
-				uni.showToast({
-					title: "AI解析",
-					icon: "none"
-				})
+				this.showAIAnalysis = true;
 			},
 			textAnalysis() {
-				uni.showToast({
-					title: "文本或者图片解析",
-					icon: "none"
-				})
+				this.showAnalysis = true;
 			},
 			closePopupVideo() {
-				this.$refs.popup.close()
-				// this.showVideo = false;
+				if (this.videoEl && this.showVideo) {
+					this.videoEl.pause()
+				}
+				this.showVideo = false;
+				this.showAnalysis = false;
+				this.showAIAnalysis = false;
+			},
+			// 切换题目之后，需要调用，重置数据
+			resetProblem() {
+				this.answered = false; //是否已经回答了问题
+				this.time = 0; //答题计时器
+				this.current = ""; //选中的答案下标
+				this.answer = {
+					optionName: "", //ABCDEF选项
+					option: "" //答案内容
+				} //选中的答案
+				this.categoryTree = { //左侧类目树状图
+					subject: "数学", //学科
+					grade: "",
+					semester: "", //接口会返回 fall 上册, spring 下册
+					category: [{}]
+				}
+				this.analysis = { //分析相关
+					text: {},
+					images: {},
+					video: ""
+				}
+				this.showVideo = false //是否展示是视频弹窗（uni-popup 有毒）
+				this.topic = {}
+				this.context = {}
+				this.showAnalysis = false //是否展示文本或图片解析弹窗
+				this.showAIAnalysis = false //是否展示AI解析弹窗
+				this.videoEl = ""
 			}
 		}
 	}
@@ -594,38 +667,37 @@
 	}
 
 	// 解析弹窗样式 ------ Start
-	.popup-video-wrap {
-		width: 80vw;
-		height: 80vh;
-		// background: #fff;
-		position: relative;
-		z-index: 100;
+	.video-view {
+		width: 100% !important;
+		height: 80vh !important;
+		z-index: 2;
+	}
 
-		.close-icon {
-			width: 1.6rem;
-			position: absolute;
-			height: 1.6rem;
-			right: -0.8rem;
-			top: -0.8rem;
-			z-index: 4;
-			background: url("/static/icons/error.png") no-repeat center/100% 100%;
+	// 解析弹窗样式 ------ End
+
+	// 文本或者弹窗解析 ------Start
+	.popup-analysis-wrap {
+		padding: 20rpx 20rpx 0 20rpx;
+		width: calc(100% - 40rpx);
+		height: calc(100% - 40rpx);
+		overflow-x: hidden;
+		overflow-y: auto;
+
+		.popup-analysis-text {
+			font-size: 40rpx;
+			line-height: 1.5;
+			margin-bottom: 20rpx;
 		}
 
-		.video-view {
-			width: 80% !important;
-			height: 80% !important;
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			margin: auto;
-			z-index: 2;
+		.popup-analysis-img-wrap {
+			.popup-analysis-img {
+				width: 100%;
+				margin-bottom: 20rpx;
+			}
 		}
 	}
 
-
-	// 解析弹窗样式 ------ End
+	// 文本或者弹窗解析 ------End
 	:global(.topic-image > div) {
 		display: none;
 	}

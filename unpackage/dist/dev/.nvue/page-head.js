@@ -1,5 +1,5 @@
 import { f as formatAppLog } from "./uni-app.es.js";
-import { resolveComponent, openBlock, createElementBlock, Fragment, createElementVNode, normalizeStyle, createCommentVNode, createVNode, withCtx, toDisplayString } from "vue";
+import { openBlock, createElementBlock, Fragment, createElementVNode, normalizeStyle, createCommentVNode, toDisplayString } from "vue";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper.js";
 const _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
 const _sfc_main = {
@@ -55,7 +55,6 @@ const _sfc_main = {
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_viww = resolveComponent("viww");
   return openBlock(), createElementBlock(
     Fragment,
     null,
@@ -79,17 +78,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               style: normalizeStyle({ background: $props.background, paddingTop: $data.taskbarHeight })
             },
             [
-              createVNode(_component_viww, { class: "common-page-head-back" }, {
-                default: withCtx(() => [
-                  $props.isBack ? (openBlock(), createElementBlock("view", {
-                    key: 0,
-                    class: "page-head-back-icon",
-                    onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
-                  })) : createCommentVNode("v-if", true)
-                ]),
-                _: 1
-                /* STABLE */
-              }),
+              createElementVNode("view", { class: "common-page-head-back" }, [
+                $props.isBack ? (openBlock(), createElementBlock("view", {
+                  key: 0,
+                  class: "page-head-back-icon",
+                  onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
+                })) : createCommentVNode("v-if", true)
+              ]),
               createElementVNode(
                 "view",
                 {

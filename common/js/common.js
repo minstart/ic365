@@ -33,7 +33,7 @@ async function fetchData(data) {
 		data.url && data.url.indexOf("http") == -1 && (data.url = store.state.configData.staticUrl + data.url)
 		return request({
 			url: data.url,
-			method: data.method || 'get',
+			method: data.method || 'post',
 			data: data.data
 		}).finally(() => {
 			!data.notLoading && uni.hideLoading()

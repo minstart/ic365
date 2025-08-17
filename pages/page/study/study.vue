@@ -129,7 +129,7 @@
 				} else {
 					// 获取用户信息
 					this.commonRequest({
-						url: "/api/student/info"
+						url: "/api/student/update"
 					}).then(res => {
 						this.consoleLog("获取用户信息::", JSON.stringify(res))
 						if (res.code == 0) {

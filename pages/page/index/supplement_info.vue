@@ -108,7 +108,7 @@
 			})
 			
 			this.commonRequest({
-				url: "/api/student/info"
+				url: "/api/student/update"
 			}).then(res => {
 				this.consoleLog("获取用户信息::", JSON.stringify(res))
 				if (res.code == 0) {
@@ -145,7 +145,7 @@
 				this.$refs[ref].validate().then(res => {
 					// 校验通过
 					this.commonRequest({
-							url: "/api/student/info",
+							url: "/api/student/update",
 							method: "POST",
 							data: this.baseFormData
 						})

@@ -94,27 +94,45 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.uni-popup[data-v-4dd3c44b] {
+.l-popup-window[data-v-b138c4d7] {
   position: fixed;
-  z-index: 99;
-}
-.uni-popup.top[data-v-4dd3c44b], .uni-popup.left[data-v-4dd3c44b], .uni-popup.right[data-v-4dd3c44b] {
   top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  background: #fff;
+  z-index: 1000;
 }
-.uni-popup .uni-popup__wrapper[data-v-4dd3c44b] {
-  display: block;
+.l-popup-window .l-popup-wrap[data-v-b138c4d7] {
   position: relative;
-  /* iphonex 等安全区设置，底部安全区适配 */
+  width: 100%;
+  height: 100%;
 }
-.uni-popup .uni-popup__wrapper.left[data-v-4dd3c44b], .uni-popup .uni-popup__wrapper.right[data-v-4dd3c44b] {
-  padding-top: 0;
-  flex: 1;
+.l-popup-window .l-popup-wrap .l-popup-close-icon[data-v-b138c4d7] {
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 1.875rem;
+  background-color: #dedede;
+  position: absolute;
+  right: -1.875rem;
+  top: -1.875rem;
+  z-index: 1000000;
+  border: 0.1875rem solid #fff;
+  overflow: hidden;
 }
-.fixforpc-z-index[data-v-4dd3c44b] {
-  z-index: 999;
+.l-popup-window .l-popup-wrap .l-popup-close-icon[data-v-b138c4d7]::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  display: block;
+  background: url("../../../static/icons/close.png") no-repeat center/100% 100%;
 }
-.fixforpc-top[data-v-4dd3c44b] {
-  top: 0;
+.l-popup-window .l-popup-wrap .l-popup-content[data-v-b138c4d7] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
 }
 /**
  * 这里是uni-app内置的常用样式变量
@@ -348,31 +366,26 @@
   height: 6rem;
   background: url("../../../static/image/analysis_image.png") no-repeat bottom/100%;
 }
-.popup-video-wrap[data-v-772e1c56] {
-  width: 80vw;
-  height: 80vh;
-  position: relative;
-  z-index: 100;
-}
-.popup-video-wrap .close-icon[data-v-772e1c56] {
-  width: 1.6rem;
-  position: absolute;
-  height: 1.6rem;
-  right: -0.8rem;
-  top: -0.8rem;
-  z-index: 4;
-  background: url("../../../static/icons/error.png") no-repeat center/100% 100%;
-}
-.popup-video-wrap .video-view[data-v-772e1c56] {
-  width: 80% !important;
-  height: 80% !important;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+.video-view[data-v-772e1c56] {
+  width: 100% !important;
+  height: 80vh !important;
   z-index: 2;
+}
+.popup-analysis-wrap[data-v-772e1c56] {
+  padding: 0.625rem 0.625rem 0 0.625rem;
+  width: calc(100% - 1.25rem);
+  height: calc(100% - 1.25rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.popup-analysis-wrap .popup-analysis-text[data-v-772e1c56] {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 0.625rem;
+}
+.popup-analysis-wrap .popup-analysis-img-wrap .popup-analysis-img[data-v-772e1c56] {
+  width: 100%;
+  margin-bottom: 0.625rem;
 }
 .topic-image > div {
   display: none;

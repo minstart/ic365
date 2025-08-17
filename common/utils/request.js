@@ -78,7 +78,7 @@ service.interceptors.request.use(
 				}
 			}
 			
-			// console.log("请求参数：newConfig:::", JSON.stringify(newConfig))
+			console.log("请求参数：newConfig:::", JSON.stringify(newConfig))
 			return newConfig
 		},
 		error => Promise.reject(error)
@@ -147,7 +147,7 @@ service.interceptors.response.use(
 		}
 	},
 	error => {
-		console.log("报错接口返回：",error)
+		// console.log("报错接口返回：",error)
 		uni.showToast({
 			title: error.message,
 			icon: "none"

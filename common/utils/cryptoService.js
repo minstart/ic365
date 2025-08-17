@@ -18,6 +18,7 @@ async function getPublicKey() {
 				resolve(res);
 			},
 			fail: err => {
+				// console.log("/api/crypto/publicKey接口fail返回：", JSON.stringify(res))
 				reject(err);
 			},
 			complete: (res) => {
@@ -30,8 +31,8 @@ async function getExchange(data) {
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: staticUrl + '/api/crypto/exchange',
-			method: 'POST',
-			data:data,
+			data: data,
+			method:'POST',
 			success: res => {
 				resolve(res);
 			},
@@ -60,6 +61,8 @@ export async function exchangeKeys() {
 		encryptedAesKey: encryptedKey
 	})
 	
+	console.log(keyRes)
+
 	// uni.request({
 	// 	url: staticUrl + '/api/crypto/exchange',
 	// 	method: 'post',
@@ -78,7 +81,7 @@ export async function exchangeKeys() {
 		aesKey: aesKey,
 		expireTime: Date.now() + keyRes.data.expire_time * 1000
 	}
-	
+
 	// const pubRes = await request({
 	// 	url: staticUrl + '/api/crypto/publicKey',
 	// 	method: 'get'
@@ -99,8 +102,7 @@ export async function exchangeKeys() {
 
 export async function refreshKeys() {
 	// console.log("refreshKeys2222222222222::",JSON.stringify(refreshPromise))
-	if (store.state.crypto && JSON.stringify(store.state.crypto) != "{}" && JSON.stringify(
-			refreshPromise) == "{}") {
+	if (store.state.crypto && JSON.stringify(store.state.crypto) != "{}" && JSON.stringify(refreshPromise) == "{}") {
 		newCrypto = store.state.crypto
 		return newCrypto;
 	}

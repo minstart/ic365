@@ -8,9 +8,9 @@
 	<view class="common-page-head-view" :style="{paddingTop:taskbarHeight}">
 		<view class="reserve-seat" v-if='!isHide'></view>
 		<view v-if='!isHide' class="common-page-head" :style="{background:background,paddingTop:taskbarHeight}">
-			<viww class="common-page-head-back">
+			<view class="common-page-head-back">
 				<view class="page-head-back-icon" v-if='isBack' @click="clickBack(backData)"></view>
-			</viww>
+			</view>
 			<view class="common-page-head-title" :style="!title&&'height:0;'">{{title}}</view>
 			<view class="common-page-head-module" :style="!isModule&&'height:0;'">
 				<image v-if='isModule' :src="moduleIcon" mode="" @click="clickModule"></image>

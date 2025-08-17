@@ -180,7 +180,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   };
   function _sfc_render2(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_viww = (0, import_vue3.resolveComponent)("viww");
     return (0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)(
       import_vue3.Fragment,
       null,
@@ -204,17 +203,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 style: (0, import_vue3.normalizeStyle)({ background: $props.background, paddingTop: $data.taskbarHeight })
               },
               [
-                (0, import_vue3.createVNode)(_component_viww, { class: "common-page-head-back" }, {
-                  default: (0, import_vue3.withCtx)(() => [
-                    $props.isBack ? ((0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)("view", {
-                      key: 0,
-                      class: "page-head-back-icon",
-                      onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
-                    })) : (0, import_vue3.createCommentVNode)("v-if", true)
-                  ]),
-                  _: 1
-                  /* STABLE */
-                }),
+                (0, import_vue3.createElementVNode)("view", { class: "common-page-head-back" }, [
+                  $props.isBack ? ((0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)("view", {
+                    key: 0,
+                    class: "page-head-back-icon",
+                    onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
+                  })) : (0, import_vue3.createCommentVNode)("v-if", true)
+                ]),
                 (0, import_vue3.createElementVNode)(
                   "view",
                   {

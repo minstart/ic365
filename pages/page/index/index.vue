@@ -236,12 +236,12 @@
 		onLoad() {
 
 		},
-		
+
 		onReady() {
 			this.verifLogin().then(data => {
 				// 获取用户信息
 				this.commonRequest({
-					url: "/api/student/info"
+					url: "/api/student/update"
 				}).then(res => {
 					// this.consoleLog("获取用户信息::", JSON.stringify(res))
 					if (res.code == 0) {
@@ -250,7 +250,7 @@
 							this.userInfo = res.data;
 						} catch (e) {}
 						// 全新用户，需要选年级
-				
+
 						if (res.data.grade == 0) {
 							uni.redirectTo({
 								url: '/pages/page/index/supplement_info?pageFrom=' +
@@ -266,26 +266,26 @@
 				}).catch(error => {
 					this.consoleLog("获取用户信息报错：：", error)
 				})
-				
+
 				// 获取任务列表
 				this.commonRequest({
 					url: "/api/mission/getAll"
 				}).then(res => {
-					// this.consoleLog("首页任务列表::", JSON.stringify(res))
+					this.consoleLog("首页任务列表::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							this.plan = res.data;
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.message || "获取用户信息失败!",
+							title: res.message || "首页任务列表失败!",
 							icon: "none"
 						});
 					}
 				}).catch(error => {
 					this.consoleLog("获取任务列表报错：：", error)
 				})
-				
+
 				// 获取我的成就
 				this.commonRequest({
 					url: "/api/achievement/mine"
@@ -302,9 +302,9 @@
 						});
 					}
 				}).catch(error => {
-					this.consoleLog("获取最新成就失败：：", error)
+					console.log("获取最新成就失败：：", error)
 				})
-				
+
 				// 获取推荐学习
 				this.commonRequest({
 					url: "/api/recommend/videos"
@@ -380,7 +380,7 @@
 						break;
 				}
 			},
-			
+
 		}
 	};
 </script>

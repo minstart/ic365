@@ -27,7 +27,7 @@
 			<!-- 搜索相关 -->
 			<view class="search-wrap">
 				<view class="search-btn-wrap">
-					<input class="search-input" type="text" v-model="search" placeholder="搜索成就名称" />
+					<input class="search-input" type="text" v-model="keyword" placeholder="搜索成就名称" />
 					<view class="search-btn" @click="getProducts({reset:true})">搜索</view>
 				</view>
 				<view class="tab-wrap search-content-wrap">
@@ -123,7 +123,7 @@
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {
-				// 兑换资源类型(Tab)
+				// 成就统计
 				this.commonRequest({
 					url: "/api/achievement/stats"
 				}).then(res => {
