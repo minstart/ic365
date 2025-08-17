@@ -134,7 +134,7 @@
 											},
 										})
 										.then(res => {
-											console.log('/api/sms/forLogin：验证码登录成功:', JSON.stringify(res))
+											console.log('/api/sms/forLogin：一键登陆成功:', JSON.stringify(res))
 											ydLogin.closeAuthController()
 												uni.showToast({
 													title: res.message || '一键登陆成功',

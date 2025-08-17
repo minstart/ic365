@@ -31925,7 +31925,7 @@ ${o3}
                     telecom_token: data2.accessToken
                   }
                 }).then((res2) => {
-                  formatAppLog("log", "at pages/page/login/login.vue:137", "/api/sms/forLogin：验证码登录成功:", JSON.stringify(res2));
+                  formatAppLog("log", "at pages/page/login/login.vue:137", "/api/sms/forLogin：一键登陆成功:", JSON.stringify(res2));
                   ydLogin.closeAuthController();
                   uni.showToast({
                     title: res2.message || "一键登陆成功",
