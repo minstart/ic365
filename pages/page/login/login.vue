@@ -171,7 +171,12 @@
 								}
 							})
 						} else {
-							this.consoleLog('预取号失败了:', data)
+							// this.consoleLog('预取号失败了:', data)
+							uni.showToast({
+								title: data.msg + "，请重新点击或者切换手机验证码方式登录！" || "一键登陆失败调用预约号失败，请重新点击或者切换手机验证码方式登录！",
+								icon: 'none',
+								duration:5000
+							})
 						}
 
 					});
@@ -190,7 +195,7 @@
 		@import "/static/css/standard.scss";
 		.page-wrap {
 			width: 100%;
-			height: 100%;
+			height: calc(100vh - 60rpx);
 			background: url("/static/image/0_login_back.png") no-repeat top / 100%;
 		}
 		.page-title {

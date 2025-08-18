@@ -62,7 +62,7 @@ const pages = [
     }
   },
   {
-    path: "pages/page/study/wrong_question",
+    path: "pages/page/study/wrongQuestion",
     style: {
       navigationBarTitleText: "错题本",
       navigationStyle: "custom"
@@ -80,7 +80,7 @@ const pages = [
     }
   },
   {
-    path: "pages/page/study/answer_questions",
+    path: "pages/page/study/answerQuestions",
     style: {
       navigationBarTitleText: "答题",
       navigationStyle: "custom",
@@ -133,7 +133,7 @@ const pages = [
     }
   },
   {
-    path: "pages/page/user/exchange_mall",
+    path: "pages/page/user/exchangeMall",
     style: {
       navigationBarTitleText: "兑换商城",
       navigationStyle: "custom"

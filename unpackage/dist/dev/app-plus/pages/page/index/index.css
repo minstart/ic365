@@ -465,17 +465,20 @@ body {
 }
 .achievement-wrap .recently-achievement[data-v-5040744a] {
   position: absolute;
-  top: 1.6rem;
+  top: 1.25rem;
   width: 90%;
   left: 0;
   right: 0;
   margin: 0 auto;
 }
 .achievement-wrap .recently-achievement .achievement-head-pic[data-v-5040744a] {
-  width: 5.25rem;
-  height: 5.25rem;
+  width: 5.125rem;
+  height: 5.125rem;
   display: inline-block;
   margin-right: 1rem;
+  border-radius: 100%;
+  border: 0.125rem solid #7FD488;
+  overflow: hidden;
 }
 .achievement-wrap .recently-achievement .achievement-info[data-v-5040744a] {
   display: inline-block;
@@ -518,9 +521,27 @@ body {
   text-align: center;
   flex: 1;
 }
+.achievement-wrap .more-achievement .achievement-list .achievement-list-pic-wrap[data-v-5040744a] {
+  width: 5.625rem;
+  height: 5.625rem;
+  margin: 0 auto;
+}
 .achievement-wrap .more-achievement .achievement-list .achievement-list-pic[data-v-5040744a] {
-  width: 4.625rem;
-  height: 4.625rem;
+  width: 4.25rem;
+  height: 4.25rem;
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  overflow: hidden;
+  /* 隐藏超出部分 */
+}
+.achievement-wrap .more-achievement .achievement-list:nth-child(1) .achievement-list-pic-wrap[data-v-5040744a] {
+  background: url("../../../static/image/1_achievement_back1.png") no-repeat center / 100% 100%;
+}
+.achievement-wrap .more-achievement .achievement-list:nth-child(2) .achievement-list-pic-wrap[data-v-5040744a] {
+  background: url("../../../static/image/1_achievement_back2.png") no-repeat center / 100% 100%;
+}
+.achievement-wrap .more-achievement .achievement-list:nth-child(3) .achievement-list-pic-wrap[data-v-5040744a] {
+  background: url("../../../static/image/1_achievement_back3.png") no-repeat center / 100% 100%;
 }
 .achievement-wrap .more-achievement .achievement-list .achievement-list-back[data-v-5040744a] {
   width: 3.56rem;

@@ -132,7 +132,7 @@
 				<view class="item-title-wrap">
 					<h3 class="item-title">兑换商城</h3>
 					<view class="item-more">
-						<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/exchange_mall'})">查看更多</view>
+						<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/exchangeMall'})">查看更多</view>
 					</view>
 				</view>
 				<!-- 暂无数据 -->
@@ -200,9 +200,9 @@
 							},
 							{
 								coverUrl: "/static/icons/exchange_mall.png",
-								title: "兑换商城",
+								title: "可兑商品",
 								introduce: "",
-								jumpUrl: "/pages/page/user/exchange_mall"
+								jumpUrl: "/pages/page/user/exchangeMall"
 							}
 						]
 					},

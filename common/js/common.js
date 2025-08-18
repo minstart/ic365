@@ -189,7 +189,7 @@ export default {
 		// url 跳转页面地址
 		// type uni 跳转页面函数("navigateTo","redirectTo","reLaunch") - 默认navigateTo
 		jumpPage(data) {
-			console.log("jumpPage:::::", data)
+			// console.log("jumpPage:::::", data)
 			if (!data) return this.consoleLog("jumpPage()没有传参")
 			if (!data.url) return this.consoleLog("url没有传参"),uni.showToast({
 				title:"没有填写跳转地址",

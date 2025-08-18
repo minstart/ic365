@@ -1,12 +1,10 @@
+<!-- 成就中心 -->
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#ECEFFF'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
-				<!-- <view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
-					<h3 class="item-title">成就中心</h3>
-				</view> -->
 				<view class="achievement-statistics">
 					<view class="achievement-progress-wrap">
 						<view class="progress-icon" :style="'left:50'+'%'"></view>
@@ -44,20 +42,24 @@
 								<h3 class="item-title">{{item.name}}</h3>
 							</view>
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
-							<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
-								<image class="list-icon" :src="item2.coverImage" mode=""></image>
-								<view class="list-info">
-									<h3 class="info-title">{{item2.name}}</h3>
-									<view class="info-subtitle">{{item2.subtitle}}</view>
-									<view class="achievement-type">
-										<h3 class="type" :typeId="item2.labelType">
-											<image class="icon"></image>
-											<view class="text">{{item2.label}}</view>
-										</h3>
-										<view class="time">{{item2.time}}</view>
+							<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll">
+								<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
+									<image class="list-icon" :src="item2.coverImage" mode=""></image>
+									<view class="list-info">
+										<h3 class="info-title">{{item2.name}}</h3>
+										<view class="info-subtitle">{{item2.subtitle}}</view>
+										<view class="achievement-type">
+											<h3 class="type" :typeId="item2.labelType">
+												<image class="icon"></image>
+												<view class="text">{{item2.label}}</view>
+											</h3>
+											<view class="time">{{item2.time}}</view>
+										</view>
 									</view>
 								</view>
-							</view>
+							</scroll-view>
+
+							
 						</view>
 					</view>
 				</view>
@@ -173,6 +175,7 @@
 						this.productsList["products" + item.id].list = [];
 					})
 				}
+				console.log(this.selectProductsId)
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
 					// 获取兑换商品列表
 					this.commonRequest({

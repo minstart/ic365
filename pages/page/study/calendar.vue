@@ -2,7 +2,7 @@
 	<view class="page-loading" v-if="pageMask"></view>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
+		<page-head :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
 		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
 			<view class="calendar-back"></view>
 			<view class="calendar-wrap" v-if="showCalendar">
@@ -95,7 +95,7 @@
 			})
 		},
 		onHide() {
-
+			
 		},
 		onUnload() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -150,7 +150,7 @@
 			},
 			doingExercises() {
 				this.jumpPage({
-					url: "/pages/page/study/answer_questions?date=" + this.checkedDate + "&isEveryDay=true"
+					url: "/pages/page/study/answerQuestions?date=" + this.checkedDate + "&pageType=everyDay"
 				})
 			}
 		}

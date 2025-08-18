@@ -42,7 +42,7 @@
 				<view class="item-more" style="color: #999999;">{{plan.finished}}/{{plan.total}} 完成</view>
 			</view>
 			<!-- 暂无数据 -->
-			<view class="no-list-tip" v-if="plan.list.length==0">暂无数据</view>
+			<view class="no-list-tip" v-if="plan.list && plan.list.length==0">暂无数据</view>
 			<ul class="plan-list-wrap">
 				<li class="plan-list" v-for="(item,i) in plan.list" :key="item.missionId" :type="item.missionTypeId" :colorScheme="item.colorScheme" @click="jumpPage({url:''})">
 					<!-- <image class="plan-background" :src="planBackground(item.missionTypeId)"></image> -->
@@ -116,7 +116,9 @@
 				</view>
 				<ul class="more-achievement">
 					<li class="achievement-list" v-if="achievement&&achievement.list&&achievement.list.length>0" v-for="(item,i) in otherAchievement" :key="item.achievementId">
-						<image class="achievement-list-pic" :src="item.imgPath || defaultAchievementIcon" @error="defaultAchievementMoreIconUrl(i)"></image>
+						<div class="achievement-list-pic-wrap flex-center">
+							<image class="achievement-list-pic" :src="item.imgPath || defaultAchievementIcon" @error="defaultAchievementMoreIconUrl(i)"></image>
+						</div>
 						<view class="achievement-list-back"></view>
 						<view class="achievement-list-name">{{item.name}}</view>
 						<view class="achievement-list-time">{{changeDate(item.obtainTimeUnix*1000).fullDate}}</view>
@@ -241,7 +243,7 @@
 			this.verifLogin().then(data => {
 				// 获取用户信息
 				this.commonRequest({
-					url: "/api/student/update"
+					url: "/api/student/info"
 				}).then(res => {
 					// this.consoleLog("获取用户信息::", JSON.stringify(res))
 					if (res.code == 0) {
@@ -290,17 +292,11 @@
 				this.commonRequest({
 					url: "/api/achievement/mine"
 				}).then(res => {
-					this.consoleLog("最新成就::", JSON.stringify(res))
-					if (res.code == 0) {
-						try {
-							this.achievement = res.data;
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.message || "获取最新成就失败!",
-							icon: "none"
-						});
-					}
+					console.log("最新成就::", res)
+					try {
+						this.achievement = res.data;
+					} catch (e) {}
+
 				}).catch(error => {
 					console.log("获取最新成就失败：：", error)
 				})
@@ -774,17 +770,20 @@
 		// 最新成就
 		.recently-achievement {
 			position: absolute;
-			top: 1.6rem;
+			top: 40rpx;
 			width: 90%;
 			left: 0;
 			right: 0;
 			margin: 0 auto;
 
 			.achievement-head-pic {
-				width: 5.25rem;
-				height: 5.25rem;
+				width: 164rpx;
+				height: 164rpx;
 				display: inline-block;
 				margin-right: 1rem;
+				border-radius: 100%;
+				border: 4rpx solid #7FD488;
+				overflow: hidden;
 			}
 
 			.achievement-info {
@@ -836,10 +835,36 @@
 				text-align: center;
 				flex: 1;
 
-				.achievement-list-pic {
-					width: 4.625rem;
-					height: 4.625rem;
+				.achievement-list-pic-wrap {
+					width: 180rpx;
+					height: 180rpx;
+					margin: 0 auto;
+				}
 
+				.achievement-list-pic {
+					width: 136rpx;
+					height: 136rpx;
+					clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+					overflow: hidden;
+					/* 隐藏超出部分 */
+				}
+
+				&:nth-child(1) {
+					.achievement-list-pic-wrap {
+						background: url("/static/image/1_achievement_back1.png") no-repeat center / 100% 100%;
+					}
+				}
+
+				&:nth-child(2) {
+					.achievement-list-pic-wrap {
+						background: url("/static/image/1_achievement_back2.png") no-repeat center / 100% 100%;
+					}
+				}
+
+				&:nth-child(3) {
+					.achievement-list-pic-wrap {
+						background: url("/static/image/1_achievement_back3.png") no-repeat center / 100% 100%;
+					}
 				}
 
 				.achievement-list-back {

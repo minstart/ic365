@@ -26,7 +26,7 @@
 			clickModule: {
 				type: Function,
 				default: () => {
-					console.log("默认右侧功能区函数")
+					// console.log("默认右侧功能区函数")
 				}
 			},
 			isHide: {

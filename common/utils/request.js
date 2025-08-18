@@ -39,6 +39,7 @@ service.interceptors.request.use(
 			if (store.state.userInfo.token) {
 				newConfig.headers['Authorization'] = 'Bearer ' + store.state.userInfo.token
 			}
+			newConfig.headers['content-type'] = 'application/json';
 
 			if (store.state.encrypt_enabled) {
 				// console.log("crypto:::::",crypto)

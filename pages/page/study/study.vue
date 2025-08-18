@@ -1,8 +1,8 @@
 <template>
-	<!-- <view class="page-loading" v-if="pageMask"></view> -->
+	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
 		<view class="banner-wrap">
-			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+			<page-head :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
 				<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
 				<view class="user-info">
@@ -54,11 +54,11 @@
 			</view>
 			<view class="learning-method-wrap">
 				<view class="learning-method">
-					<view class="method-img method_left" @click="jumpPage({url:''})"></view>
+					<view class="method-img method_left" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video'})"></view>
 				</view>
 				<view class="learning-method">
 					<view class="method-img method_right" @click="jumpPage({url:''})"></view>
-					<view class="method-img method_right" @click="jumpPage({url:'/pages/page/study/wrong_question'})"></view>
+					<view class="method-img method_right" @click="jumpPage({url:'/pages/page/study/wrongQuestion'})"></view>
 				</view>
 			</view>
 			<view class="item-title-wrap">
@@ -98,7 +98,6 @@
 		components: {},
 		data() {
 			return {
-				pageHeadTitle: "",
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
 				userInfo: {
 					nickname: "",
@@ -129,7 +128,7 @@
 				} else {
 					// 获取用户信息
 					this.commonRequest({
-						url: "/api/student/update"
+						url: "/api/student/info"
 					}).then(res => {
 						this.consoleLog("获取用户信息::", JSON.stringify(res))
 						if (res.code == 0) {
@@ -150,8 +149,7 @@
 
 				// 获取用户周报数据
 				this.commonRequest({
-					url: "/api/report/weekly",
-					method: "get"
+					url: "/api/report/weekly"
 				}).then(res => {
 					this.consoleLog("获取用户周报数据::", JSON.stringify(res))
 					if (res.code == 0) {
@@ -168,8 +166,7 @@
 
 				// 知识点学习
 				this.commonRequest({
-					url: "/api/recommend/categories",
-					method: "get"
+					url: "/api/recommend/categories"
 				}).then(res => {
 					this.consoleLog("知识点学习::", JSON.stringify(res))
 					res.data && (this.knowledgePoints = res.data);
