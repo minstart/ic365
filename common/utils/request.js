@@ -100,8 +100,7 @@ service.interceptors.response.use(
 	response => {
 		// console.log("接口返回::", JSON.stringify(response))
 		const res = response.data
-		if (store.state.encrypt_enabled && response.config.url.includes('/crypto') === false && response.data
-			?.data) {
+		if (store.state.encrypt_enabled && response.config.url.includes('/crypto') === false && response.data?.data) {
 			// AES KEY EXPIRED.
 			if (res.code === 407) {
 				return handleSessionExpired(response.config)

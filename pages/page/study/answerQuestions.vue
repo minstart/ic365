@@ -11,24 +11,27 @@
 						<span> · </span>
 						<span class="grade">{{categoryTree.grade}}年级{{categoryTree.semester}}</span>
 					</view>
-					<view class="tree-wrap" v-for="(item,i) in categoryTree.category">
-						<h3 class="tree-title">{{item.categoryName}}</h3>
-						<view class="tree-list" v-for="(item2,i2) in item.children">
-							<view class="tree-list-title">{{item2.categoryName}}</view>
-							<div class="tree-list" v-for="(item3,i3) in item2.children">
-								<view class="tree-list-title">{{item3.categoryName}}</view>
-							</div>
+					<view class="tree-wrap">
+						<view class="tree-list" :class='selectCategoryId == item.categoryId?"tree-selected":""' v-for="(item,i) in categoryTree.category" @click.stop="choiceCategory(item)">
+							<view class="tree-list-title">{{item.name}}</view>
+							<!-- <view class="tree-list" v-for="(item2,i2) in item.children">
+								<view class="tree-list-title">{{item2.categoryName}}</view>
+								<div class="tree-list" v-for="(item3,i3) in item2.children">
+									<view class="tree-list-title">{{item3.categoryName}}</view>
+								</div>
+							</view> -->
 						</view>
 					</view>
 				</view>
 				<view class="topic-wrap">
 					<view class="topic-function-wrap">
-						<view class="search-btn-wrap">
+						<view class="search-btn-wrap" v-if="pageType!='everyDay'">
 							<input class="search-input" type="text" v-model="keyword" placeholder="你想学什么" />
 							<view class="search-btn" @click=""></view>
 						</view>
 					</view>
-					<view class="topic-content-wrap">
+					<!-- 答题右下方内容 -->
+					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'">
 						<view class="topic">
 							<h3 class="topic-text">{{topic.content}}</h3>
 							<view class="topic-image-wrap">
@@ -72,6 +75,8 @@
 							</view>
 						</view>
 					</view>
+					<!-- 视频列表 -->
+					<view class="list-content-wrap"></view>
 				</view>
 			</view>
 		</view>
@@ -86,8 +91,7 @@
 	<l-popup v-show="showAnalysis" :close="closePopupVideo">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
-				<view class="popup-analysis-text" v-if="topic.analysis" v-html="topic.analysis">
-				</view>
+				<view class="popup-analysis-text" v-if="topic.analysis" v-html="topic.analysis"></view>
 			</view>
 		</template>
 	</l-popup>
@@ -95,8 +99,12 @@
 	<l-popup v-show="showAIAnalysis" :close="closePopupVideo">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
-				<view class="popup-analysis-text" v-if="topic.AIanalysis">
-					这是AI析提
+				<view class="conten-window">
+					<view class="popup-analysis-text" v-if="topic.AIanalysis" v-html="topic.AIanalysis.text">
+					</view>
+					<div class="next-btn-wrap" v-show="AIanalysisNextBtn">
+						<view class="next-btn" @click="getAIAnalysis">下一步</view>
+					</div>
 				</view>
 			</view>
 		</template>
@@ -117,9 +125,9 @@
 		data() {
 			return {
 				taskbarHeight2: "", //计算任务栏高度，避开左侧摄像头位置
-				pageType: "", //everyDay 每日一题；topic 题目；video 视频
+				pageType: "", //everyDay 每日一题；question 题目；video 视频
 				answered: false, //是否已经回答了问题
-				keyword:"", //搜索内容
+				keyword: "", //搜索内容
 				time: 0, //答题计时器
 				current: "", //选中的答案下标
 				answer: {
@@ -143,13 +151,14 @@
 				showAnalysis: false, //是否展示文本或图片解析弹窗
 				showAIAnalysis: false, //是否展示AI解析弹窗
 				videoEl: "",
-				categoryId:""
-
-				// answered: true,
-				// answer: {
-				// 	optionName: "A", //ABCDEF选项
-				// 	option: "随便填的答案" //答案内容
-				// }
+				categoryId: "",
+				AIanalysisNextBtn: true, //是否显示AI解析下一步按钮
+				selectCategoryId: "", //选中的类目id
+				
+				videoList:{ //视频列表
+					page:1,
+					list:[]
+				}
 			}
 		},
 		onLoad(option) {
@@ -169,6 +178,7 @@
 				"categoryName": "1-5的认识和加减法",
 				"semester": "fall",
 				"grade": 1,
+				AIanalysis: "",
 				options: [
 					"3",
 					"4",
@@ -180,10 +190,10 @@
 				],
 			};
 			// #endif
-			console.log(option)
 			this.verifLogin().then(data => {
 				option.pageType && (this.pageType = option.pageType);
-				if (option.pageType == "everyDay") {
+				const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi; //图片校验
+				if (this.pageType == "everyDay") {
 					// 每日一题 ------ Start
 					let requestData = {
 						url: "/api/question/today"
@@ -197,9 +207,7 @@
 							// this.categoryTree.semester = res.data.semester == "fall" ? "上册" : (res.data.semester == "spring" ? "下册" : "");
 							this.categoryTree.category[0].categoryName = res.data.categoryName;
 							this.topic = res.data;
-							console.log(this.topic.content.indexOf("http"))
 							// 题目问题数据处理
-							const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi;
 
 							if (this.topic.content.indexOf("http") != -1) {
 								// 1. 正则表达式提取图片URL
@@ -221,6 +229,10 @@
 										this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
 									})
 								} catch (e) {}
+							}!this.topic.AIanalysis && (this.topic.AIanalysis = {})
+							this.topic.AIanalysis = {
+								text: "",
+								step: 0
 							}
 							let time = setInterval(() => {
 								if (this.answered) {
@@ -236,20 +248,23 @@
 					})
 					// 每日一题 ------ End
 				} else {
-					console.log(this.changeGrade(store.state.userInfo.info.grade))
-					try{
-						this.categoryTree.grade = this.changeGrade(store.state.userInfo.info.grade); 
-					}catch(e){
+					try {
+						this.categoryTree.grade = this.changeGrade(store.state.userInfo.info.grade);
+					} catch (e) {
 						console.log(e)
 					}
-					if (option.pageType == "video") {
+
+					this.getQuestion().then(res => {
+
+					})
+					if (this.pageType == "video") {
 						// 教材同步（视频）------ Start
-						
+
 						// 教材同步（视频）------ End
 					}
 				}
 			})
-			
+
 
 		},
 		onReady() {
@@ -294,10 +309,6 @@
 			}
 		},
 		methods: {
-			checkClassSet(item, i) {
-				console.log(item, i)
-				return 1;
-			},
 			changeOptions(arr) {
 				let _arr = [];
 				let optionName = ["A", "B", "C", "D", "E", "F"]
@@ -323,9 +334,8 @@
 					this.answer = item;
 				}
 			},
-			// 查询类目
-			
-			
+
+
 			// 提交答案
 			submit() {
 				if (!this.answer.optionName) return uni.showToast({
@@ -343,7 +353,6 @@
 				}
 				this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId)
 
-				console.log("postData", postData)
 				// 回答问题
 				this.commonRequest({
 					url: "/api/question/submit",
@@ -363,7 +372,7 @@
 					this.consoleLog("回答问题接口报错：：", error)
 				})
 			},
-			
+
 			// 每日一题 - 打开视频解析
 			playVideo() {
 				if (!this.analysis.video || this.pageType == "video") {
@@ -397,37 +406,111 @@
 				}
 
 			},
-			// 打开AI解析
-			AIAnalysis() {
-				this.showAIAnalysis = true;
-				this.commonRequest({
-					url: "/api/ai/getAnalysis",
-					data: {
-						question_id: this.topic.questionId
-					}
-				}).then(res => {
+			
 
-				}).catch(error => {
-					this.consoleLog("AI析题报错", error)
-				})
-				topic.AIanalysis
-			},
-			// 打开文本 + 图片解析；
-			textAnalysis() {
-				this.showAnalysis = true;
-			},
-			// 关闭视频弹窗
-			closePopupVideo() {
-				if (this.videoEl && this.showVideo) {
-					this.videoEl.pause()
+			// 获取AI解析
+			getAIAnalysis() {
+				if (this.topic.AIanalysis.step != 0) {
+					this.AIanalysisNextBtn = false
 				}
-				this.showVideo = false;
-				this.showAnalysis = false;
-				this.showAIAnalysis = false;
+				if (this.topic.AIanalysis.step == 0 || ((this.topic.AIanalysis.step + 1) <= this.topic.AIanalysis.stepCount)) {
+					this.commonRequest({
+						url: "/api/ai/getAnalysisByStep",
+						data: {
+							questionId: this.topic.questionId,
+							step: this.topic.AIanalysis.step + 1
+						}
+					}).then(res => {
+						console.log("/api/ai/getAnalysisByStep：：", res.data)
+						this.topic.AIanalysis.step = res.data.currentStep;
+						this.topic.AIanalysis.stepCount = res.data.stepCount;
+						res.data.currentStep < res.data.stepCount && (this.AIanalysisNextBtn = true)
+						this.topic.AIanalysis.text = this.topic.AIanalysis.text + (this.topic.AIanalysis.step != 1 ? "</br></br>" : "") + res.data.content;
+
+						// 解析数据处理
+						if (this.topic.AIanalysis.text.indexOf("http") != -1) {
+							const analysisImages = this.topic.AIanalysis.text.match(imageUrlPattern) || [];
+							try {
+								analysisImages.forEach(item => {
+									this.topic.AIanalysis.text = this.topic.AIanalysis.text.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
+								})
+							} catch (e) {}
+						}
+					}).catch(error => {
+						console.log("AI析题报错", error)
+					})
+				}
 			},
-			// 切换题目之后，需要调用，重置数据 type: "all" 所有；topic:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
+
+			// 视频、题目类型获取左侧类目目录
+			getQuestion() {
+				return new Promise((resolve, reject) => {
+					this.commonRequest({
+						url: "/api/category/getCategoryWithQuestionCountByGrade",
+						data: {
+							keyword: this.keyword,
+							fromType: this.pageType
+						}
+					}).then(res => {
+						console.log("视频、题目类型获取左侧类目目录:", res.data)
+						this.resetProblem("all")
+						this.categoryTree.category = res.data;
+						this.selectCategoryId = res.data.categories[0].categoryId;
+						choiceCategory()
+						resolve(res)
+					}).catch(error => {
+						console.log("视频、题目类型获取左侧类目目录报错", error)
+						reject(error)
+					})
+				})
+			},
+
+			// 点击类目之后,获取右侧内容
+			choiceCategory(item) {
+				if (this.selectCategoryId != item.categoryId) {
+					this.resetProblem(this.pageType)
+					if (this.pageType == "question") {
+						// 获取题目
+						this.commonRequest({
+							url: "/api/question/byCategory",
+							data: {
+								keyword: this.keyword,
+								// page:,
+								size: "1",
+								categoryId: item.categoryId
+							}
+						}).then(res => {
+							console.log("获取题目:", res.data)
+						}).catch(error => {
+							console.log("获取题目报错", error)
+							reject(error)
+						})
+					} else if (this.pageType == "video") {
+						// 获取视频列表
+						this.commonRequest({
+							url: "/api/video/byCategory",
+							data: {
+								keyword: this.keyword,
+								page:videoList.page,
+								size: "30",
+								categoryId: item.categoryId
+							}
+						}).then(res => {
+							console.log("获取视频列表:", res.data)
+						}).catch(error => {
+							console.log("获取视频列表报错", error)
+							reject(error)
+						})
+					} else {
+						return console.log("每日一题的不能点")
+					}
+				}
+				// resetProblem("question")
+			},
+
+			// 切换题目之后，需要调用，重置数据 type: "all" 所有；question:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
 			resetProblem(type) {
-				if(type == "all" || type == "topic"){
+				if (type == "all" || type == "question") {
 					this.answered = false; //是否已经回答了问题
 					this.time = 0; //答题计时器
 					this.current = ""; //选中的答案下标
@@ -447,7 +530,7 @@
 					this.context = {}
 					this.videoEl = ""
 				}
-				if(type == "all" || type == "category"){
+				if (type == "all" || type == "category") {
 					this.categoryTree = { //左侧类目树状图
 						subject: "数学", //学科
 						grade: "",
@@ -456,11 +539,35 @@
 					}
 					this.categoryId = "" //选中类目id
 				}
-				
-				
-				
-				
-			}
+			
+				if(type == "all" || type == "video"){
+					this.videoList = {
+						page:1,
+						list:[]
+					}
+				}
+			},
+			
+
+			// 打开文本 + 图片解析；
+			textAnalysis() {
+				this.showAnalysis = true;
+			},
+			// 关闭视频弹窗
+			closePopupVideo() {
+				if (this.videoEl && this.showVideo) {
+					this.videoEl.pause()
+				}
+				this.showVideo = false;
+				this.showAnalysis = false;
+				this.showAIAnalysis = false;
+			},
+
+			// 打开AI解析
+			AIAnalysis() {
+				this.showAIAnalysis = true;
+				this.getAIAnalysis();
+			},
 			
 		}
 	}
@@ -509,11 +616,13 @@
 				background: #fff;
 				position: relative;
 				z-index: 100;
+
 				.topic-function-wrap {
 					background: #FFEDBB;
 					height: 2.75rem;
 					position: relative;
-					.search-btn-wrap{
+
+					.search-btn-wrap {
 						background-color: #fff;
 						border-radius: 60rpx;
 						height: 48rpx;
@@ -523,13 +632,15 @@
 						left: 40rpx;
 						margin: auto;
 						overflow: hidden;
-						.search-input{
-							padding:0 6rpx 0 30rpx;
+
+						.search-input {
+							padding: 0 6rpx 0 30rpx;
 							height: 100%;
 							display: inline-block;
 							font-size: 28rpx;
 						}
-						.search-btn{
+
+						.search-btn {
 							width: 80rpx;
 							height: 48rpx;
 							display: inline-block;
@@ -744,8 +855,10 @@
 						}
 					}
 				}
+
 				// 右侧解析 ------ End
 			}
+
 			// 右侧内容 ------ End
 		}
 	}
@@ -759,13 +872,19 @@
 
 	// 解析弹窗样式 ------ End
 
-	// 文本或者弹窗解析 ------Start
+	// 文本、图片’AI弹窗解析 ------Start
 	.popup-analysis-wrap {
 		padding: 20rpx 20rpx 0 20rpx;
 		width: calc(100% - 40rpx);
 		height: calc(100% - 40rpx);
 		overflow-x: hidden;
 		overflow-y: auto;
+		position: relative;
+
+		.conten-window {
+			height: 100% !important;
+			overflow: hidden auto;
+		}
 
 		.popup-analysis-text {
 			font-size: 40rpx;
@@ -783,6 +902,23 @@
 			width: 100%;
 			margin-bottom: 20rpx;
 		}
+
+		.next-btn-wrap {
+			width: 100%;
+			text-align: center;
+
+			.next-btn {
+				width: 180rpx;
+				font-weight: 500;
+				margin: 10rpx auto;
+				color: #000;
+				font-size: 32rpx;
+				line-height: 60rpx;
+				border-radius: 20rpx;
+				background: linear-gradient(to right, #FDB150, #FFDB9B);
+			}
+		}
+
 	}
 
 	// 文本或者弹窗解析 ------End

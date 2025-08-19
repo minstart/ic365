@@ -1233,12 +1233,12 @@ if (uni.restoreGlobal) {
   utils$4.inherits(CanceledError, AxiosError$2, {
     __CANCEL__: true
   });
-  function settle$2(resolve, reject, response) {
+  function settle$2(resolve, reject2, response) {
     const validateStatus = response.config.validateStatus;
     if (!response.status || !validateStatus || validateStatus(response.status)) {
       resolve(response);
     } else {
-      reject(new AxiosError$2(
+      reject2(new AxiosError$2(
         "Request failed with status code " + response.status,
         [AxiosError$2.ERR_BAD_REQUEST, AxiosError$2.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
         response.config,
@@ -1511,7 +1511,7 @@ if (uni.restoreGlobal) {
   };
   const isXHRAdapterSupported = typeof XMLHttpRequest !== "undefined";
   const xhrAdapter = isXHRAdapterSupported && function(config) {
-    return new Promise(function dispatchXhrRequest(resolve, reject) {
+    return new Promise(function dispatchXhrRequest(resolve, reject2) {
       const _config = resolveConfig(config);
       let requestData = _config.data;
       const requestHeaders = AxiosHeaders$1.from(_config.headers).normalize();
@@ -1548,7 +1548,7 @@ if (uni.restoreGlobal) {
           resolve(value);
           done();
         }, function _reject(err) {
-          reject(err);
+          reject2(err);
           done();
         }, response);
         request = null;
@@ -1570,11 +1570,11 @@ if (uni.restoreGlobal) {
         if (!request) {
           return;
         }
-        reject(new AxiosError$2("Request aborted", AxiosError$2.ECONNABORTED, config, request));
+        reject2(new AxiosError$2("Request aborted", AxiosError$2.ECONNABORTED, config, request));
         request = null;
       };
       request.onerror = function handleError() {
-        reject(new AxiosError$2("Network Error", AxiosError$2.ERR_NETWORK, config, request));
+        reject2(new AxiosError$2("Network Error", AxiosError$2.ERR_NETWORK, config, request));
         request = null;
       };
       request.ontimeout = function handleTimeout() {
@@ -1583,7 +1583,7 @@ if (uni.restoreGlobal) {
         if (_config.timeoutErrorMessage) {
           timeoutErrorMessage = _config.timeoutErrorMessage;
         }
-        reject(new AxiosError$2(
+        reject2(new AxiosError$2(
           timeoutErrorMessage,
           transitional.clarifyTimeoutError ? AxiosError$2.ETIMEDOUT : AxiosError$2.ECONNABORTED,
           config,
@@ -1617,7 +1617,7 @@ if (uni.restoreGlobal) {
           if (!request) {
             return;
           }
-          reject(!cancel || cancel.type ? new CanceledError(null, config, request) : cancel);
+          reject2(!cancel || cancel.type ? new CanceledError(null, config, request) : cancel);
           request.abort();
           request = null;
         };
@@ -1628,7 +1628,7 @@ if (uni.restoreGlobal) {
       }
       const protocol = parseProtocol(_config.url);
       if (protocol && platform$4.protocols.indexOf(protocol) === -1) {
-        reject(new AxiosError$2("Unsupported protocol " + protocol + ":", AxiosError$2.ERR_BAD_REQUEST, config));
+        reject2(new AxiosError$2("Unsupported protocol " + protocol + ":", AxiosError$2.ERR_BAD_REQUEST, config));
         return;
       }
       request.send(requestData || null);
@@ -1882,8 +1882,8 @@ if (uni.restoreGlobal) {
       responseType = responseType || "text";
       let responseData = await resolvers[utils$4.findKey(resolvers, responseType) || "text"](response, config);
       !isStreamResponse && unsubscribe && unsubscribe();
-      return await new Promise((resolve, reject) => {
-        settle$2(resolve, reject, {
+      return await new Promise((resolve, reject2) => {
+        settle$2(resolve, reject2, {
           data: responseData,
           headers: AxiosHeaders$1.from(response.headers),
           status: response.status,
@@ -2262,7 +2262,7 @@ if (uni.restoreGlobal) {
           token.subscribe(resolve);
           _resolve = resolve;
         }).then(onfulfilled);
-        promise.cancel = function reject() {
+        promise.cancel = function reject2() {
           token.unsubscribe(_resolve);
         };
         return promise;
@@ -3681,7 +3681,7 @@ if (uni.restoreGlobal) {
     var result = entry.length > 1 ? Promise.all(entry.map(function(handler) {
       return handler(payload);
     })) : entry[0](payload);
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject2) {
       result.then(function(res2) {
         try {
           this$1$1._actionSubscribers.filter(function(sub) {
@@ -3709,7 +3709,7 @@ if (uni.restoreGlobal) {
             console.error(e2);
           }
         }
-        reject(error);
+        reject2(error);
       });
     });
   };
@@ -4203,7 +4203,7 @@ if (uni.restoreGlobal) {
         commit,
         state
       }) {
-        return await new Promise((resolve, reject) => {
+        return await new Promise((resolve, reject2) => {
           if (state.openid) {
             resolve(state.openid);
           }
@@ -4212,7 +4212,7 @@ if (uni.restoreGlobal) {
       getPhoneNumber: function({
         commit
       }, univerifyInfo) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
           uni.request({
             url: "https://97fca9f2-41f6-449f-a35e-3f135d4c3875.bspapp.com/http/univerify-login",
             method: "POST",
@@ -4222,11 +4222,11 @@ if (uni.restoreGlobal) {
               if (data.success) {
                 resolve(data.phoneNumber);
               } else {
-                reject(res2);
+                reject2(res2);
               }
             },
             fail: (err) => {
-              reject(res);
+              reject2(res);
             }
           });
         });
@@ -13541,12 +13541,12 @@ if (uni.restoreGlobal) {
   };
   var AxiosError_1 = AxiosError$1;
   var AxiosError = AxiosError_1;
-  var settle$1 = function settle2(resolve, reject, response) {
+  var settle$1 = function settle2(resolve, reject2, response) {
     var validateStatus = response.config.validateStatus;
     if (!response.status || !validateStatus || validateStatus(response.status)) {
       resolve(response);
     } else {
-      reject(new AxiosError(
+      reject2(new AxiosError(
         "Request failed with status code " + response.status,
         [AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
         response.config,
@@ -13617,7 +13617,7 @@ if (uni.restoreGlobal) {
   var buildURL = buildURL$1;
   var buildFullPath = buildFullPath$1;
   const isUploadFile$1 = isUploadFile$2;
-  var format$1 = function format2(config, resolve, reject) {
+  var format$1 = function format2(config, resolve, reject2) {
     const fullPath = buildFullPath(config.baseURL, config.url);
     const requestHeaders = config.headers;
     const uniConfig = {
@@ -13656,15 +13656,15 @@ if (uni.restoreGlobal) {
         config
         // request: request
       };
-      settle(resolve, reject, result);
+      settle(resolve, reject2, result);
     };
     return uniConfig;
   };
   const isUploadFile = isUploadFile$2;
   const format = format$1;
   function uniappAdapter(config = {}) {
-    return new Promise(function dispatchUniApp(resolve, reject) {
-      const uniConfig = format(config, resolve, reject);
+    return new Promise(function dispatchUniApp(resolve, reject2) {
+      const uniConfig = format(config, resolve, reject2);
       let requestTask = null;
       if (config.cancelToken) {
         config.cancelToken.promise.then(function onCanceled(cancel) {
@@ -13672,7 +13672,7 @@ if (uni.restoreGlobal) {
             return;
           }
           requestTask.abort();
-          reject(cancel);
+          reject2(cancel);
           requestTask = null;
         });
       }
@@ -13812,7 +13812,7 @@ if (uni.restoreGlobal) {
       const newCrypto2 = await refreshKeys();
       originalRequest.headers["X-Session-Key"] = newCrypto2.sessionKey;
       if (originalRequest.data) {
-        formatAppLog("log", "at common/utils/request.js:171", "333333333333", originalRequest.data, newCrypto2.aesKey);
+        formatAppLog("log", "at common/utils/request.js:170", "333333333333", originalRequest.data, newCrypto2.aesKey);
         originalRequest.data = {
           data: aesEncrypt(originalRequest.data, newCrypto2.aesKey)
         };
@@ -13825,7 +13825,7 @@ if (uni.restoreGlobal) {
   const staticUrl = store.state.configData.staticUrl;
   let refreshPromise = null;
   async function getPublicKey() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       uni.request({
         url: staticUrl + "/api/crypto/publicKey",
         method: "get",
@@ -13833,7 +13833,7 @@ if (uni.restoreGlobal) {
           resolve(res2);
         },
         fail: (err) => {
-          reject(err);
+          reject2(err);
         },
         complete: (res2) => {
         }
@@ -13841,7 +13841,7 @@ if (uni.restoreGlobal) {
     });
   }
   async function getExchange(data) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       uni.request({
         url: staticUrl + "/api/crypto/exchange",
         data,
@@ -13850,7 +13850,7 @@ if (uni.restoreGlobal) {
           resolve(res2);
         },
         fail: (err) => {
-          reject(err);
+          reject2(err);
         },
         complete: (res2) => {
         }
@@ -13865,7 +13865,6 @@ if (uni.restoreGlobal) {
       keyId: pubRes.data.data.key_id,
       encryptedAesKey: encryptedKey
     });
-    formatAppLog("log", "at common/utils/cryptoService.js:64", keyRes);
     const cryptoData = {
       sessionKey: keyRes.data.data.session_key,
       aesKey,
@@ -13965,7 +13964,7 @@ if (uni.restoreGlobal) {
       },
       getLogin() {
         let _this = this;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
           uni.getStorage({
             key: store.state.userInfo.cookieName,
             success: function(res2) {
@@ -13973,7 +13972,7 @@ if (uni.restoreGlobal) {
               store.state.userInfo.token = res2.data.token;
             },
             fail: function(err) {
-              reject(err);
+              reject2(err);
               _this.removeLogin();
             }
           });
@@ -14152,7 +14151,7 @@ if (uni.restoreGlobal) {
         this.pageMask = true;
         if (!data)
           return;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
           try {
             data.uniHide && this.uniHide(data.uniHide);
           } catch (e2) {
@@ -14211,7 +14210,7 @@ if (uni.restoreGlobal) {
       // success : function 确认已经登录的调用
       verifLogin(_data) {
         let _this = this;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
           const route = getCurrentPages();
           const pathUrl = route[route.length - 1].route;
           _this.getLogin().then((data) => {
@@ -14220,7 +14219,7 @@ if (uni.restoreGlobal) {
             data.pathUrl = pathUrl;
             resolve(data);
           }).catch((err) => {
-            reject(err);
+            reject2(err);
             if (pathUrl.indexOf("/login") == -1) {
               formatAppLog("log", "at common/js/common.js:401", "没有登录,跳转到登录页面");
               uni.redirectTo({
@@ -23521,9 +23520,9 @@ ${o3}
         }
         let promise;
         if (!callback && typeof callback !== "function" && Promise) {
-          promise = new Promise((resolve, reject) => {
+          promise = new Promise((resolve, reject2) => {
             callback = function(valid, invalidFields2) {
-              !valid ? resolve(invalidFields2) : reject(valid);
+              !valid ? resolve(invalidFields2) : reject2(valid);
             };
           });
         }
@@ -23940,6 +23939,7 @@ ${o3}
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
+          formatAppLog("log", "at pages/page/study/study.vue:181", "推荐学习::", res2.data);
           if (res2.code == 0) {
             try {
               res2.data && (this.classroom = res2.data);
@@ -26762,7 +26762,7 @@ ${o3}
         taskbarHeight2: "",
         //计算任务栏高度，避开左侧摄像头位置
         pageType: "",
-        //everyDay 每日一题；topic 题目；video 视频
+        //everyDay 每日一题；question 题目；video 视频
         answered: false,
         //是否已经回答了问题
         keyword: "",
@@ -26802,41 +26802,43 @@ ${o3}
         showAIAnalysis: false,
         //是否展示AI解析弹窗
         videoEl: "",
-        categoryId: ""
-        // answered: true,
-        // answer: {
-        // 	optionName: "A", //ABCDEF选项
-        // 	option: "随便填的答案" //答案内容
-        // }
+        categoryId: "",
+        AIanalysisNextBtn: true,
+        //是否显示AI解析下一步按钮
+        selectCategoryId: "",
+        //选中的类目id
+        videoList: {
+          //视频列表
+          page: 1,
+          list: []
+        }
       };
     },
     onLoad(option) {
-      formatAppLog("log", "at pages/page/study/answerQuestions.vue:183", option);
       this.verifLogin().then((data) => {
         option.pageType && (this.pageType = option.pageType);
-        if (option.pageType == "everyDay") {
+        const imageUrlPattern2 = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi;
+        if (this.pageType == "everyDay") {
           let requestData = {
             url: "/api/question/today"
           };
           this.changeDate(option.date).fullDate != this.changeDate(/* @__PURE__ */ new Date()).fullDate && (requestData.date = option.date);
           this.commonRequest(requestData).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:194", "获取今日题目::", res2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:204", "获取今日题目::", res2);
             try {
               this.categoryTree.grade = this.changeGrade(res2.data.grade);
               this.categoryTree.category[0].categoryName = res2.data.categoryName;
               this.topic = res2.data;
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:200", this.topic.content.indexOf("http"));
-              const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi;
               if (this.topic.content.indexOf("http") != -1) {
-                const contentImages = this.topic.content.match(imageUrlPattern) || [];
+                const contentImages = this.topic.content.match(imageUrlPattern2) || [];
                 try {
-                  this.topic.content = this.topic.content.replace(imageUrlPattern, "").trim();
+                  this.topic.content = this.topic.content.replace(imageUrlPattern2, "").trim();
                 } catch (e2) {
                 }
                 this.topic.contentImages = [...this.topic.contentImages, contentImages];
               }
               if (this.topic.analysis.indexOf("http") != -1) {
-                const analysisImages = this.topic.analysis.match(imageUrlPattern) || [];
+                const analysisImages = this.topic.analysis.match(imageUrlPattern2) || [];
                 this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages];
                 try {
                   this.topic.analysisImages.forEach((item) => {
@@ -26845,6 +26847,11 @@ ${o3}
                 } catch (e2) {
                 }
               }
+              !this.topic.AIanalysis && (this.topic.AIanalysis = {});
+              this.topic.AIanalysis = {
+                text: "",
+                step: 0
+              };
               let time = setInterval(() => {
                 if (this.answered) {
                   clearInterval(time);
@@ -26852,19 +26859,20 @@ ${o3}
                 this.time = this.time + 1;
               }, 1e3);
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:232", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:244", e2);
             }
           }).catch((error) => {
             this.consoleLog("获取今日题目报错：：", error);
           });
         } else {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:239", this.changeGrade(store.state.userInfo.info.grade));
           try {
             this.categoryTree.grade = this.changeGrade(store.state.userInfo.info.grade);
           } catch (e2) {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:243", e2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:254", e2);
           }
-          if (option.pageType == "video")
+          this.getQuestion().then((res2) => {
+          });
+          if (this.pageType == "video")
             ;
         }
       });
@@ -26905,10 +26913,6 @@ ${o3}
       }
     },
     methods: {
-      checkClassSet(item, i2) {
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:298", item, i2);
-        return 1;
-      },
       changeOptions(arr) {
         let _arr = [];
         let optionName = ["A", "B", "C", "D", "E", "F"];
@@ -26934,7 +26938,6 @@ ${o3}
           this.answer = item;
         }
       },
-      // 查询类目
       // 提交答案
       submit() {
         if (!this.answer.optionName)
@@ -26952,7 +26955,6 @@ ${o3}
           // wrong_record_id: ""
         };
         this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId);
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:346", "postData", postData);
         this.commonRequest({
           url: "/api/question/submit",
           method: "POST",
@@ -26965,7 +26967,7 @@ ${o3}
               duration: "4000"
             });
           } catch (e2) {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:360", e2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:369", e2);
           }
         }).catch((error) => {
           this.consoleLog("回答问题接口报错：：", error);
@@ -26980,7 +26982,7 @@ ${o3}
               id: this.topic.videoId
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:376", "获取视频解析地址::", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:385", "获取视频解析地址::", res2.data);
             try {
               this.analysis.video = res2.data;
               this.showVideo = true;
@@ -26997,36 +26999,102 @@ ${o3}
           this.videoEl.play();
         }
       },
-      // 打开AI解析
-      AIAnalysis() {
-        this.showAIAnalysis = true;
-        this.commonRequest({
-          url: "/api/ai/getAnalysis",
-          data: {
-            question_id: this.topic.questionId
-          }
-        }).then((res2) => {
-        }).catch((error) => {
-          this.consoleLog("AI析题报错", error);
-        });
-        topic.AIanalysis;
-      },
-      // 打开文本 + 图片解析；
-      textAnalysis() {
-        this.showAnalysis = true;
-      },
-      // 关闭视频弹窗
-      closePopupVideo() {
-        if (this.videoEl && this.showVideo) {
-          this.videoEl.pause();
+      // 获取AI解析
+      getAIAnalysis() {
+        if (this.topic.AIanalysis.step != 0) {
+          this.AIanalysisNextBtn = false;
         }
-        this.showVideo = false;
-        this.showAnalysis = false;
-        this.showAIAnalysis = false;
+        if (this.topic.AIanalysis.step == 0 || this.topic.AIanalysis.step + 1 <= this.topic.AIanalysis.stepCount) {
+          this.commonRequest({
+            url: "/api/ai/getAnalysisByStep",
+            data: {
+              questionId: this.topic.questionId,
+              step: this.topic.AIanalysis.step + 1
+            }
+          }).then((res2) => {
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:424", "/api/ai/getAnalysisByStep：：", res2.data);
+            this.topic.AIanalysis.step = res2.data.currentStep;
+            this.topic.AIanalysis.stepCount = res2.data.stepCount;
+            res2.data.currentStep < res2.data.stepCount && (this.AIanalysisNextBtn = true);
+            this.topic.AIanalysis.text = this.topic.AIanalysis.text + (this.topic.AIanalysis.step != 1 ? "</br></br>" : "") + res2.data.content;
+            if (this.topic.AIanalysis.text.indexOf("http") != -1) {
+              const analysisImages = this.topic.AIanalysis.text.match(imageUrlPattern) || [];
+              try {
+                analysisImages.forEach((item) => {
+                  this.topic.AIanalysis.text = this.topic.AIanalysis.text.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
+                });
+              } catch (e2) {
+              }
+            }
+          }).catch((error) => {
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:440", "AI析题报错", error);
+          });
+        }
       },
-      // 切换题目之后，需要调用，重置数据 type: "all" 所有；topic:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
+      // 视频、题目类型获取左侧类目目录
+      getQuestion() {
+        return new Promise((resolve, reject2) => {
+          this.commonRequest({
+            url: "/api/category/getCategoryWithQuestionCountByGrade",
+            data: {
+              keyword: this.keyword,
+              fromType: this.pageType
+            }
+          }).then((res2) => {
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:455", "视频、题目类型获取左侧类目目录:", res2.data);
+            this.resetProblem("all");
+            this.categoryTree.category = res2.data;
+            this.selectCategoryId = res2.data.categories[0].categoryId;
+            choiceCategory();
+            resolve(res2);
+          }).catch((error) => {
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:462", "视频、题目类型获取左侧类目目录报错", error);
+            reject2(error);
+          });
+        });
+      },
+      // 点击类目之后,获取右侧内容
+      choiceCategory(item) {
+        if (this.selectCategoryId != item.categoryId) {
+          this.resetProblem(this.pageType);
+          if (this.pageType == "question") {
+            this.commonRequest({
+              url: "/api/question/byCategory",
+              data: {
+                keyword: this.keyword,
+                // page:,
+                size: "1",
+                categoryId: item.categoryId
+              }
+            }).then((res2) => {
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:483", "获取题目:", res2.data);
+            }).catch((error) => {
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:485", "获取题目报错", error);
+              reject(error);
+            });
+          } else if (this.pageType == "video") {
+            this.commonRequest({
+              url: "/api/video/byCategory",
+              data: {
+                keyword: this.keyword,
+                page: videoList.page,
+                size: "30",
+                categoryId: item.categoryId
+              }
+            }).then((res2) => {
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:499", "获取视频列表:", res2.data);
+            }).catch((error) => {
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:501", "获取视频列表报错", error);
+              reject(error);
+            });
+          } else {
+            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:505", "每日一题的不能点");
+          }
+        }
+      },
+      // 切换题目之后，需要调用，重置数据 type: "all" 所有；question:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
       resetProblem(type) {
-        if (type == "all" || type == "topic") {
+        if (type == "all" || type == "question") {
           this.answered = false;
           this.time = 0;
           this.current = "";
@@ -27061,6 +27129,30 @@ ${o3}
           };
           this.categoryId = "";
         }
+        if (type == "all" || type == "video") {
+          this.videoList = {
+            page: 1,
+            list: []
+          };
+        }
+      },
+      // 打开文本 + 图片解析；
+      textAnalysis() {
+        this.showAnalysis = true;
+      },
+      // 关闭视频弹窗
+      closePopupVideo() {
+        if (this.videoEl && this.showVideo) {
+          this.videoEl.pause();
+        }
+        this.showVideo = false;
+        this.showAnalysis = false;
+        this.showAIAnalysis = false;
+      },
+      // 打开AI解析
+      AIAnalysis() {
+        this.showAIAnalysis = true;
+        this.getAIAnalysis();
       }
     }
   };
@@ -27114,61 +27206,36 @@ ${o3}
                       /* TEXT */
                     )
                   ]),
-                  (vue.openBlock(true), vue.createElementBlock(
-                    vue.Fragment,
-                    null,
-                    vue.renderList($data.categoryTree.category, (item, i2) => {
-                      return vue.openBlock(), vue.createElementBlock("view", { class: "tree-wrap" }, [
-                        vue.createElementVNode(
-                          "h3",
-                          { class: "tree-title" },
-                          vue.toDisplayString(item.categoryName),
-                          1
-                          /* TEXT */
-                        ),
-                        (vue.openBlock(true), vue.createElementBlock(
-                          vue.Fragment,
-                          null,
-                          vue.renderList(item.children, (item2, i22) => {
-                            return vue.openBlock(), vue.createElementBlock("view", { class: "tree-list" }, [
-                              vue.createElementVNode(
-                                "view",
-                                { class: "tree-list-title" },
-                                vue.toDisplayString(item2.categoryName),
-                                1
-                                /* TEXT */
-                              ),
-                              (vue.openBlock(true), vue.createElementBlock(
-                                vue.Fragment,
-                                null,
-                                vue.renderList(item2.children, (item3, i3) => {
-                                  return vue.openBlock(), vue.createElementBlock("div", { class: "tree-list" }, [
-                                    vue.createElementVNode(
-                                      "view",
-                                      { class: "tree-list-title" },
-                                      vue.toDisplayString(item3.categoryName),
-                                      1
-                                      /* TEXT */
-                                    )
-                                  ]);
-                                }),
-                                256
-                                /* UNKEYED_FRAGMENT */
-                              ))
-                            ]);
-                          }),
-                          256
-                          /* UNKEYED_FRAGMENT */
-                        ))
-                      ]);
-                    }),
-                    256
-                    /* UNKEYED_FRAGMENT */
-                  ))
+                  vue.createElementVNode("view", { class: "tree-wrap" }, [
+                    (vue.openBlock(true), vue.createElementBlock(
+                      vue.Fragment,
+                      null,
+                      vue.renderList($data.categoryTree.category, (item, i2) => {
+                        return vue.openBlock(), vue.createElementBlock("view", {
+                          class: vue.normalizeClass(["tree-list", $data.selectCategoryId == item.categoryId ? "tree-selected" : ""]),
+                          onClick: vue.withModifiers(($event) => $options.choiceCategory(item), ["stop"])
+                        }, [
+                          vue.createElementVNode(
+                            "view",
+                            { class: "tree-list-title" },
+                            vue.toDisplayString(item.name),
+                            1
+                            /* TEXT */
+                          ),
+                          vue.createCommentVNode(' <view class="tree-list" v-for="(item2,i2) in item.children">\r\n								<view class="tree-list-title">{{item2.categoryName}}</view>\r\n								<div class="tree-list" v-for="(item3,i3) in item2.children">\r\n									<view class="tree-list-title">{{item3.categoryName}}</view>\r\n								</div>\r\n							</view> ')
+                        ], 10, ["onClick"]);
+                      }),
+                      256
+                      /* UNKEYED_FRAGMENT */
+                    ))
+                  ])
                 ]),
                 vue.createElementVNode("view", { class: "topic-wrap" }, [
                   vue.createElementVNode("view", { class: "topic-function-wrap" }, [
-                    vue.createElementVNode("view", { class: "search-btn-wrap" }, [
+                    $data.pageType != "everyDay" ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      class: "search-btn-wrap"
+                    }, [
                       vue.withDirectives(vue.createElementVNode(
                         "input",
                         {
@@ -27188,9 +27255,13 @@ ${o3}
                         onClick: _cache[2] || (_cache[2] = () => {
                         })
                       })
-                    ])
+                    ])) : vue.createCommentVNode("v-if", true)
                   ]),
-                  vue.createElementVNode("view", { class: "topic-content-wrap" }, [
+                  vue.createCommentVNode(" 答题右下方内容 "),
+                  $data.pageType == "everyDay" || $data.pageType == "question" ? (vue.openBlock(), vue.createElementBlock("view", {
+                    key: 0,
+                    class: "topic-content-wrap"
+                  }, [
                     vue.createElementVNode("view", { class: "topic" }, [
                       vue.createElementVNode(
                         "h3",
@@ -27290,7 +27361,9 @@ ${o3}
                         ])
                       ])) : vue.createCommentVNode("v-if", true)
                     ])
-                  ])
+                  ])) : vue.createCommentVNode("v-if", true),
+                  vue.createCommentVNode(" 视频列表 "),
+                  vue.createElementVNode("view", { class: "list-content-wrap" })
                 ])
               ])
             ],
@@ -27335,10 +27408,27 @@ ${o3}
         vue.withDirectives(vue.createVNode(_component_l_popup, { close: $options.closePopupVideo }, {
           default: vue.withCtx(() => [
             vue.createElementVNode("view", { class: "popup-analysis-wrap" }, [
-              $data.topic.AIanalysis ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 0,
-                class: "popup-analysis-text"
-              }, " 这是AI析提 ")) : vue.createCommentVNode("v-if", true)
+              vue.createElementVNode("view", { class: "conten-window" }, [
+                $data.topic.AIanalysis ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 0,
+                  class: "popup-analysis-text",
+                  innerHTML: $data.topic.AIanalysis.text
+                }, null, 8, ["innerHTML"])) : vue.createCommentVNode("v-if", true),
+                vue.withDirectives(vue.createElementVNode(
+                  "div",
+                  { class: "next-btn-wrap" },
+                  [
+                    vue.createElementVNode("view", {
+                      class: "next-btn",
+                      onClick: _cache[7] || (_cache[7] = (...args) => $options.getAIAnalysis && $options.getAIAnalysis(...args))
+                    }, "下一步")
+                  ],
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vShow, $data.AIanalysisNextBtn]
+                ])
+              ])
             ])
           ]),
           _: 1
@@ -35261,7 +35351,7 @@ ${o3}
     return result;
   }
   function requestIOS(permissionID) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       switch (permissionID) {
         case "push":
           resolve(push());
@@ -35294,7 +35384,7 @@ ${o3}
     });
   }
   function requestAndroid(permissionID) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       plus.android.requestPermissions(
         [permissionID],
         function(resultObj) {
@@ -36187,14 +36277,14 @@ ${o3}
        * 发送请求到后台
        */
       request(sendDate, imgs) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
           let fromData = {
             url: "https://service.dcloud.net.cn/feedback",
             success: (res2) => {
               resolve(res2);
             },
             fail: (res2) => {
-              reject(res2);
+              reject2(res2);
             },
             complete() {
               uni.hideLoading();
@@ -36509,7 +36599,7 @@ ${o3}
     },
     methods: {
       loginMpWeixin() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
         });
       },
       async weixinPay() {
@@ -36593,9 +36683,9 @@ ${o3}
         });
       },
       getOrderInfo(provider) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
           if (!this.price) {
-            reject(new Error("请输入金额"));
+            reject2(new Error("请输入金额"));
           }
           formatAppLog("warn", "at pages/API/request-payment/request-payment.vue:200", "此处使用uni-pay处理支付，详情参考: https://uniapp.dcloud.io/uniCloud/unipay");
           uni.request({
@@ -36612,11 +36702,11 @@ ${o3}
               if (res2.data.code === 0) {
                 resolve(res2.data.orderInfo);
               } else {
-                reject(new Error("获取支付信息失败" + res2.data.msg));
+                reject2(new Error("获取支付信息失败" + res2.data.msg));
               }
             },
             fail(err) {
-              reject(new Error("请求支付接口失败" + err));
+              reject2(new Error("请求支付接口失败" + err));
             }
           });
         });
@@ -40283,7 +40373,7 @@ ${o3}
       let ref = this.$.$refs["ani"].ref;
       if (!ref)
         return;
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject2) => {
         nvueAnimation.transition(ref, {
           styles,
           ...config
@@ -41082,7 +41172,7 @@ ${o3}
         });
       },
       getSetting: function() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject2) => {
           uni.getSetting({
             success: (res2) => {
               if (res2.authSetting["scope.userLocation"] === void 0) {
@@ -52960,13 +53050,13 @@ ${o3}
       initSize() {
         if (this.scrollable) {
           let query = [];
-          let textQuery = new Promise((resolve, reject) => {
+          let textQuery = new Promise((resolve, reject2) => {
             uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
               this.textWidth = ret[0].width;
               resolve();
             });
           });
-          let boxQuery = new Promise((resolve, reject) => {
+          let boxQuery = new Promise((resolve, reject2) => {
             uni.createSelectorQuery().in(this).select(`#${this.elIdBox}`).boundingClientRect().exec((ret) => {
               this.boxWidth = ret[0].width;
               resolve();
@@ -60140,7 +60230,7 @@ ${o3}
       sourceType: sourceType2,
       extension
     } = opts;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       uni.chooseImage({
         count: count2,
         sizeType: sizeType2,
@@ -60150,7 +60240,7 @@ ${o3}
           resolve(normalizeChooseAndUploadFileRes(res2, "image"));
         },
         fail(res2) {
-          reject({
+          reject2({
             errMsg: res2.errMsg.replace("chooseImage:fail", ERR_MSG_FAIL)
           });
         }
@@ -60166,7 +60256,7 @@ ${o3}
       sourceType: sourceType2,
       extension
     } = opts;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       uni.chooseVideo({
         camera: camera2,
         compressed,
@@ -60198,7 +60288,7 @@ ${o3}
           }, "video"));
         },
         fail(res2) {
-          reject({
+          reject2({
             errMsg: res2.errMsg.replace("chooseVideo:fail", ERR_MSG_FAIL)
           });
         }
@@ -60210,13 +60300,13 @@ ${o3}
       count: count2,
       extension
     } = opts;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       let chooseFile = uni.chooseFile;
       if (typeof wx !== "undefined" && typeof wx.chooseMessageFile === "function") {
         chooseFile = wx.chooseMessageFile;
       }
       if (typeof chooseFile !== "function") {
-        return reject({
+        return reject2({
           errMsg: ERR_MSG_FAIL + " 请指定 type 类型，该平台仅支持选择 image 或 video。"
         });
       }
@@ -60228,7 +60318,7 @@ ${o3}
           resolve(normalizeChooseAndUploadFileRes(res2));
         },
         fail(res2) {
-          reject({
+          reject2({
             errMsg: res2.errMsg.replace("chooseFile:fail", ERR_MSG_FAIL)
           });
         }
@@ -60372,14 +60462,14 @@ ${o3}
     };
   };
   const get_file_info = (filepath) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       uni.getImageInfo({
         src: filepath,
         success(res2) {
           resolve(res2);
         },
         fail(err) {
-          reject(err);
+          reject2(err);
         }
       });
     });
@@ -64203,7 +64293,7 @@ ${o3}
       fileInput.accept = ".json";
     }
     function openFile() {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject2) => {
         fileInput.onchange = async () => {
           const files = fileInput.files;
           if (!files)
@@ -64214,7 +64304,7 @@ ${o3}
           return resolve({ text: await file.text(), file });
         };
         fileInput.oncancel = () => resolve(null);
-        fileInput.onerror = reject;
+        fileInput.onerror = reject2;
         fileInput.click();
       });
     }
@@ -65769,7 +65859,7 @@ This will fail in production if not fixed.`);
   __definePage("pages/template/vuex-vue/vuex-vue", PagesTemplateVuexVueVuexVue);
   __definePage("pages/template/crypto-api/crypto-api", PagesTemplateCryptoApiCryptoApi);
   function callCheckVersion() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
         const data = {
           action: "checkVersion",
@@ -65785,7 +65875,7 @@ This will fail in production if not fixed.`);
             resolve(e2);
           },
           fail: (error) => {
-            reject(error);
+            reject2(error);
           }
         });
       });
@@ -65793,7 +65883,7 @@ This will fail in production if not fixed.`);
   }
   const PACKAGE_INFO_KEY = "__package_info__";
   function checkUpdate() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject2) => {
       callCheckVersion().then(async (e2) => {
         if (!e2.result)
           return;
@@ -65842,12 +65932,12 @@ This will fail in production if not fixed.`);
           return;
         } else if (code < 0) {
           formatAppLog("error", "at uni_modules/uni-upgrade-center-app/utils/check-update.js:71", message);
-          return reject(e2);
+          return reject2(e2);
         }
         return resolve(e2);
       }).catch((err) => {
         formatAppLog("error", "at uni_modules/uni-upgrade-center-app/utils/check-update.js:77", err.message);
-        reject(err);
+        reject2(err);
       });
     });
   }

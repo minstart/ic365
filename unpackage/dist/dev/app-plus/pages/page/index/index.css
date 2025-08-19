@@ -291,13 +291,14 @@ body {
   position: absolute;
   left: -0.2rem;
   top: 1rem;
+  z-index: 2;
 }
 .plan-wrap .plan-list-wrap .plan-list .plan-list-icon[data-v-5040744a] {
-  width: 4.43rem;
-  height: 4.43rem;
+  width: 4.4375rem;
+  height: 4.4375rem;
   position: absolute;
   top: 1rem;
-  left: 2rem;
+  left: 1.5625rem;
 }
 .plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap[data-v-5040744a] {
   position: absolute;
@@ -434,19 +435,6 @@ body {
 }
 .plan-recommend-list-wrap .plan-recommend-list[data-v-5040744a]:last-child {
   margin-right: 0;
-}
-.all-achievement[data-v-5040744a] {
-  float: right;
-  color: #999999;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.all-achievement .more-icon[data-v-5040744a] {
-  width: 0.5rem;
-  height: 0.8rem;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0.25rem 0.2rem;
 }
 .achievement-wrap[data-v-5040744a] {
   position: relative;

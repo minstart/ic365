@@ -529,14 +529,15 @@
 					position: absolute;
 					left: -0.2rem;
 					top: 1rem;
+					z-index: 2;
 				}
 
 				.plan-list-icon {
-					width: 4.43rem;
-					height: 4.43rem;
+					width: 142rpx;
+					height: 142rpx;
 					position: absolute;
 					top: 1rem;
-					left: 2rem;
+					left: 50rpx;
 				}
 
 				// 列表标题名称 + 奖励
@@ -734,21 +735,6 @@
 	}
 
 	// 最新成就  -------------Start
-	.all-achievement {
-		float: right;
-		color: #999999;
-		font-size: 0.875rem;
-		line-height: 1.25rem;
-
-		.more-icon {
-			width: 0.5rem;
-			height: 0.8rem;
-			display: inline-block;
-			vertical-align: top;
-			margin: 0.25rem 0.2rem;
-		}
-	}
-
 	.achievement-wrap {
 		position: relative;
 

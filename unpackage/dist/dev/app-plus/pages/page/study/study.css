@@ -217,6 +217,7 @@
 }
 .plan-list-wrap .plan-list[data-v-ff8615f1] {
   flex: 1;
+  max-width: 6.6875rem;
   height: 100%;
   position: relative;
   text-align: center;
@@ -224,7 +225,7 @@
 .plan-list-wrap .plan-list .list-back[data-v-ff8615f1] {
   position: absolute;
   width: 100%;
-  height: 9.06rem;
+  height: 9.0625rem;
   z-index: 0;
   top: 0;
   left: 0;

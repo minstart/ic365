@@ -178,7 +178,7 @@
 				this.commonRequest({
 					url: "/api/recommend/videos"
 				}).then(res => {
-					// this.consoleLog("推荐学习::", JSON.stringify(res))
+					console.log("推荐学习::", res.data)
 					if (res.code == 0) {
 						try {
 							res.data && (this.classroom = res.data);
@@ -378,6 +378,7 @@
 
 		.plan-list {
 			flex: 1;
+			max-width: 214rpx;
 			height: 100%;
 			position: relative;
 			text-align: center;
@@ -385,7 +386,7 @@
 			.list-back {
 				position: absolute;
 				width: 100%;
-				height: 9.06rem;
+				height: 290rpx;
 				z-index: 0;
 				top: 0;
 				left: 0;

@@ -18,7 +18,6 @@ async function getPublicKey() {
 				resolve(res);
 			},
 			fail: err => {
-				// console.log("/api/crypto/publicKey接口fail返回：", JSON.stringify(res))
 				reject(err);
 			},
 			complete: (res) => {
@@ -61,8 +60,6 @@ export async function exchangeKeys() {
 		encryptedAesKey: encryptedKey
 	})
 	
-	console.log(keyRes)
-
 	// uni.request({
 	// 	url: staticUrl + '/api/crypto/exchange',
 	// 	method: 'post',
