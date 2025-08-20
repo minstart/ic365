@@ -108,7 +108,12 @@
       "plugins": {
         "speech": {},
         "oauth": {},
-        "share": {},
+        "share": {
+          "weixin": {
+            "appid": "com.edusafety.cal",
+            "UniversalLinks": ""
+          }
+        },
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"

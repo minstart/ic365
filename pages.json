@@ -1,15 +1,9 @@
 {
 	"leftWindow": {
-		"path": "windows/left-window.vue",
-		"style": {
-			"width": "0px"
-		}
+		
 	},
 	"topWindow": {
-		"path": "windows/top-window.vue",
-		"style": {
-			"height": "60px"
-		}
+		
 	},
 	"pages": [
 		// 项目页面 ---------------------------------Start

@@ -222,19 +222,28 @@
   position: relative;
   text-align: center;
 }
-.plan-list-wrap .plan-list .list-back[data-v-ff8615f1] {
+.plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(1) {
+  background: url("../../../static/image/2_knowledge_points1.png") no-repeat center/100% 100%;
+}
+.plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(2) {
+  background: url("../../../static/image/2_knowledge_points2.png") no-repeat center/100% 100%;
+}
+.plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(3) {
+  background: url("../../../static/image/2_knowledge_points3.png") no-repeat center/100% 100%;
+}
+.plan-list-wrap .plan-list .list-icon[data-v-ff8615f1] {
   position: absolute;
-  width: 100%;
-  height: 9.0625rem;
-  z-index: 0;
+  width: 2.875rem;
+  height: 2.875rem;
   top: 0;
   left: 0;
-  background: #ccc;
+  right: 0;
+  margin: 0 auto;
   border-radius: 0.5rem;
 }
 .plan-list-wrap .plan-list .list-title[data-v-ff8615f1] {
   position: absolute;
-  top: 3.85rem;
+  bottom: 1.6875rem;
   color: #fff;
   width: 100%;
   font-size: 1.25rem;

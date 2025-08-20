@@ -61,14 +61,14 @@
 									</span>
 								</view>
 								<!-- 视频解析 -->
-								<view class="other-analysis-wrap" v-if="topic.videoId">
+								<view class="other-analysis-wrap" v-if="topic.videoId && pageType == 'everyDay'">
 									<view class="analysis-title">
 										<span class="title-icon"></span>
 										<view class="title">视频解析</view>
 									</view>
 									<view class="play-video-btn" @click="playVideo()"></view>
 								</view>
-								<view class="lingbao-wrap">
+								<view class="lingbao-wrap" v-if="pageType == 'everyDay'">
 									<view class="lingbao-icon" @click="AIAnalysis"></view>
 									<view class="lingbao-image"></view>
 								</view>
@@ -95,13 +95,13 @@
 		</view>
 	</view>
 	<!-- 视频弹窗 -->
-	<l-popup v-show="showVideo" :close="closePopupVideo">
+	<l-popup v-show="showVideo" :close="closePopup">
 		<template v-slot>
 			<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" show-fullscreen-btn="false"></video>
 		</template>
 	</l-popup>
 	<!-- 文字 + 图片析题弹窗 -->
-	<l-popup v-show="showAnalysis" :close="closePopupVideo">
+	<l-popup v-show="showAnalysis" :close="closePopup">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
 				<view class="popup-analysis-text" v-if="topic.analysis" v-html="topic.analysis"></view>
@@ -109,7 +109,7 @@
 		</template>
 	</l-popup>
 	<!-- AI析题弹窗 -->
-	<l-popup v-show="showAIAnalysis" :close="closePopupVideo">
+	<l-popup v-show="showAIAnalysis" :close="closePopup">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
 				<view class="conten-window">
@@ -127,6 +127,7 @@
 <script>
 	import store from '/store/index.js';
 	import commonJs from '/common/js/common.js';
+import { error } from 'console';
 	const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi; //图片校验
 	export default {
 		mixins: [commonJs],
@@ -180,36 +181,9 @@
 			}
 		},
 		onLoad(option) {
-			// #ifdef H5
-			this.categoryTree.grade = this.changeGrade('1');
-			// this.categoryTree.semester = "上册";
-			this.categoryTree.category[0].categoryName = "1-5的认识和加减法";
-			this.topic = {
-				questionId: "bb53a6f9b454348ca860aaf4c32b62cb",
-				"title": "苹果对应的数字是多少？",
-				"content": "苹果对应的数字是多少？",
-				"answer": "C",
-				"analysis": "图片一中苹果的数量为5个，故选C。",
-				"videoId": 6800,
-				"tags": "",
-				"categoryId": 7,
-				"categoryName": "1-5的认识和加减法",
-				"semester": "fall",
-				"grade": 1,
-				AIanalysis: "",
-				options: [
-					"3",
-					"4",
-					"5",
-					"6"
-				],
-				"contentImages": [
-					"http://ic365.com/media/picture/20250719/01578a43e5814d148ace9b8c3b0a0765.png"
-				],
-			};
-			// #endif
 			this.verifLogin().then(data => {
 				option.pageType && (this.pageType = option.pageType);
+				option.keyword && (this.keyword = option.keyword);
 				if (this.pageType == "everyDay") {
 					// 每日一题 ------ Start
 					let requestData = {
@@ -222,8 +196,14 @@
 						try {
 							this.categoryTree.grade = this.changeGrade(res.data.grade);
 							// this.categoryTree.semester = res.data.semester == "fall" ? "上册" : (res.data.semester == "spring" ? "下册" : "");
-							this.categoryTree.category[0].categoryName = res.data.categoryName;
-
+							this.categoryTree.category[0] = {
+								categoryId: res.data.categoryId,
+								name: res.data.categoryName
+							};
+							this.selectCategory = {
+								categoryId: res.data.categoryId,
+								name: res.data.categoryName
+							}
 							this.topic = res.data;
 							this.topicFilter()
 						} catch (e) {
@@ -414,13 +394,6 @@
 						try {
 							this.analysis.video = res.data
 							this.showVideo = true;
-							// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---Start
-							// let _this = this;
-							// setTimeout(()=>{
-							// 	 _this.context.play()
-							// },1000)
-							// 安卓多次重复播放发现视频宽高出现概率性缩小的情况 ---End
-
 							this.videoEl = uni.createVideoContext('video1'); //创建视频实例指向video
 							this.videoEl.seek(0);
 							this.videoEl.play();
@@ -429,6 +402,7 @@
 						console.log("获取视频解析地址报错", error)
 					})
 				} else {
+					this.showVideo = true;
 					this.videoEl.seek(0);
 					this.videoEl.play();
 				}
@@ -481,12 +455,19 @@
 						console.log("视频、题目类型获取左侧类目目录:", res.data)
 						this.resetProblem("all")
 						this.categoryTree.category = res.data.categories;
-						this.choiceCategory(res.data.categories[0])
-						this.selectCategory = {
-							categoryId: res.data.categories[0].categoryId,
-							name: res.data.categories[0].name
-						}
-
+						this.selectCategory = res.data.categories[0]
+						if (this.keyword) {
+							try {
+								res.data.categories.forEach(item => {
+									console.log(item)
+									if (item.name == this.keyword || item.categoryId == this.keyword) {
+										this.selectCategory = item;
+										throw new Error("已经匹配了，终止循环")
+									}
+								})
+							} catch (e) {}
+						}else{}
+						this.choiceCategory(this.selectCategory)
 						resolve(res)
 					}).catch(error => {
 						console.log("视频、题目类型获取左侧类目目录报错", error)
@@ -498,7 +479,7 @@
 			// 点击类目之后,获取右侧内容
 			choiceCategory(item) {
 				if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video") {
-					if(this.selectCategory.categoryId != item.categoryId){
+					if (this.selectCategory.categoryId != item.categoryId && item) {
 						this.selectCategory = {
 							categoryId: item.categoryId,
 							name: item.name
@@ -554,7 +535,7 @@
 			},
 
 			GetNextVideoList() {
-				if(this.isLoading) return false;
+				if (this.isLoading) return false;
 				this.isLoading = true;
 				this.choiceCategory(this.selectCategory)
 				console.log("触发滚动到底部加载视频新数据")
@@ -608,7 +589,7 @@
 				this.showAnalysis = true;
 			},
 			// 关闭视频弹窗
-			closePopupVideo() {
+			closePopup() {
 				if (this.videoEl && this.showVideo) {
 					this.videoEl.pause()
 				}

@@ -65,9 +65,9 @@
 				<h3 class="item-title">知识点学习</h3>
 			</view>
 			<view class="no-list-tip" v-if="knowledgePoints.length==0">暂无数据</view>
-			<ul class="plan-list-wrap">
-				<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:''})">
-					<image class="list-back" :src='item.coverUrl'></image>
+			<ul class="plan-list-wrap" v-if="knowledgePoints.length>0">
+				<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.name})">
+					<image class="list-icon" :src='item.coverUrl'></image>
 					<h3 class="list-title">{{item.name}}</h3>
 					<view class="list-subtitle">{{item.subtitle}}</view>
 				</li>
@@ -76,8 +76,8 @@
 				<h3 class="item-title">推荐课堂</h3>
 			</view>
 			<view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
-			<ul class="classroom-list-wrap">
-				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:''})" v-for="item in classroom">
+			<ul class="classroom-list-wrap" v-if="classroom.length>0">
+				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.categoryName})" v-for="item in classroom">
 					<image class="list-back" :src='item.coverUrl'></image>
 					<!-- <h3 class="list-title">{{item.name}}</h3> -->
 				</li>
@@ -130,20 +130,13 @@
 					this.commonRequest({
 						url: "/api/student/info"
 					}).then(res => {
-						this.consoleLog("获取用户信息::", JSON.stringify(res))
-						if (res.code == 0) {
-							try {
-								store.commit("Update_UserInfo", res.data)
-								this.userInfo = res.data;
-							} catch (e) {}
-						} else {
-							uni.showToast({
-								title: res.message || "获取用户信息失败!",
-								icon: "none"
-							});
-						}
+						console.log("获取用户信息::", res)
+						try {
+							store.commit("Update_UserInfo", res.data)
+							this.userInfo = res.data;
+						} catch (e) {}
 					}).catch(error => {
-						this.consoleLog("获取用户信息报错：：", error)
+						console.log("获取用户信息报错：：", error)
 					})
 				}
 
@@ -151,27 +144,24 @@
 				this.commonRequest({
 					url: "/api/report/weekly"
 				}).then(res => {
-					this.consoleLog("获取用户周报数据::", JSON.stringify(res))
-					if (res.code == 0) {
+					console.log("获取用户周报数据::", JSON.stringify(res))
+					try {
 						res.data && (this.learningGoal = res.data);
-					} else {
-						uni.showToast({
-							title: res.message || "获取用户周报数据失败!",
-							icon: "none"
-						});
-					}
+					} catch (e) {}
 				}).catch(error => {
-					this.consoleLog("获取用户周报数据报错：：", error)
+					console.log("获取用户周报数据报错：：", error)
 				})
 
 				// 知识点学习
 				this.commonRequest({
 					url: "/api/recommend/categories"
 				}).then(res => {
-					this.consoleLog("知识点学习::", JSON.stringify(res))
-					res.data && (this.knowledgePoints = res.data);
+					console.log("知识点学习::", res)
+					try {
+						res.data && (this.knowledgePoints = res.data);
+					} catch (e) {}
 				}).catch(error => {
-					this.consoleLog("知识点学习报错：：", error)
+					console.log("知识点学习报错：：", error)
 				})
 
 				// 推荐课堂 - 目前使用推荐学习的接口
@@ -383,20 +373,33 @@
 			position: relative;
 			text-align: center;
 
-			.list-back {
+			&:nth-child(1) {
+				background: url("/static/image/2_knowledge_points1.png") no-repeat center / 100% 100%;
+			}
+
+			&:nth-child(2) {
+				background: url("/static/image/2_knowledge_points2.png") no-repeat center / 100% 100%;
+			}
+
+			&:nth-child(3) {
+				background: url("/static/image/2_knowledge_points3.png") no-repeat center / 100% 100%;
+			}
+
+			.list-icon {
 				position: absolute;
-				width: 100%;
-				height: 290rpx;
-				z-index: 0;
+				width: 92rpx;
+				height: 92rpx;
 				top: 0;
 				left: 0;
-				background: #ccc;
+				right: 0;
+				margin: 0 auto;
+				// background: #ccc;
 				border-radius: 0.5rem;
 			}
 
 			.list-title {
 				position: absolute;
-				top: 3.85rem;
+				bottom: 54rpx;
 				color: #fff;
 				width: 100%;
 				font-size: 1.25rem;

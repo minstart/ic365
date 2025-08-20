@@ -68,13 +68,13 @@
 				this.commonRequest({
 					url: "/api/question/answeredDates"
 				}).then(res => {
-					// this.consoleLog("推荐学习::", JSON.stringify(res))
+					console.log("获取已答题的日期::", res)
 					try {
 						this.info.selected = res.data || [];
 					} catch (e) {}
 
 				}).catch(error => {
-					this.consoleLog("获取已答题的日期：：", error)
+					this.consoleLog("获取已答题的日期失败：：", error)
 				})
 			}).catch(error => {
 				this.consoleLog("没有登录：：", error)

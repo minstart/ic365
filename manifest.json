@@ -68,7 +68,12 @@
             "sdkConfigs" : {
                 "speech" : {},
                 "oauth" : {},
-                "share" : {}
+                "share" : {
+                    "weixin" : {
+                        "appid" : "com.edusafety.cal",
+                        "UniversalLinks" : ""
+                    }
+                }
             },
             "orientation" : [ "portrait-primary" ],
             "splashscreen" : {

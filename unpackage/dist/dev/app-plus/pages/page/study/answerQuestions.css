@@ -94,6 +94,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.l-popup-background[data-v-b138c4d7] {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+}
 .l-popup-window[data-v-b138c4d7] {
   position: fixed;
   top: 0;
