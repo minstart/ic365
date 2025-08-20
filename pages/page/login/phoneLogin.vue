@@ -14,9 +14,8 @@
 				<uni-forms-item class="uni-forms-item checkbox-item" required name="agreement" label-width="0">
 					<view class="agreement-text">已阅读并同意<uni-link class="link-a" href="https://www.baidu.com/"
 							text="《智算365》"></uni-link>、<uni-link class="link-a" href="https://www.baidu.com/"
-							text="《用户服务协议》"></uni-link>、<uni-link class="link-a" href="https://www.baidu.com/"
-							text="《隐私政策》"></uni-link>和<uni-link class="link-a" href="https://www.baidu.com/"
-							text="《中国移动认证服务协议》"></uni-link>。</view>
+							text="《用户服务协议》"></uni-link>和<uni-link class="link-a" href="https://www.baidu.com/"
+							text="《隐私政策》"></uni-link>。</view>
 					<uni-data-checkbox multiple v-model="baseFormData.agreement" :localdata="agreements" />
 				</uni-forms-item>
 				<button class="submit-btn" type="primary" @click="submit('baseForm')">立即登录</button>
@@ -217,6 +216,7 @@
 
 
 	<style lang="scss" scoped>
+		@import "/STATIC/css/standard.scss";
 		uni-page-body {
 			background: url("/static/image/0_login_back.png") no-repeat top / 100%;
 		}
@@ -224,7 +224,7 @@
 		.page-title {
 			padding: 3.25rem 2rem 4.375rem 2rem;
 			font-size: 1.25rem;
-			color: #F5A623;
+			color: $ThemeColor;
 		}
 
 		.get-verification-code {

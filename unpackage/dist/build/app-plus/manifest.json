@@ -106,9 +106,7 @@
         "dSYMs": false
       },
       "plugins": {
-        "speech": {
-          "ifly": {}
-        },
+        "speech": {},
         "oauth": {},
         "share": {},
         "audio": {
@@ -130,7 +128,7 @@
           "platforms": "Android,iOS",
           "url": "https://ext.dcloud.net.cn/plugin?id=2274",
           "android_package_name": "",
-          "ios_bundle_id": "",
+          "ios_bundle_id": "com.edusafety.cal",
           "isCloud": true,
           "bought": 1,
           "pid": "2274",

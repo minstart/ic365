@@ -13772,7 +13772,7 @@ if (uni.restoreGlobal) {
       }
       if (res2.code !== 0) {
         uni.showToast({
-          title: res2.message || "服务器返回异常",
+          title: res2.message || res2.msg || "服务器返回异常",
           icon: "none",
           duration: 5e3
         });
@@ -13791,14 +13791,15 @@ if (uni.restoreGlobal) {
             });
           });
         }
-        return Promise.reject(new Error(res2.message || "Error"));
+        return Promise.reject(new Error(res2.message || res2.msg || "Error"));
       } else {
         return res2;
       }
     },
     (error) => {
+      formatAppLog("log", "at common/utils/request.js:151", "报错接口返回：", error);
       uni.showToast({
-        title: error.message,
+        title: error.message || error.msg,
         icon: "none"
       });
       if (error.response && error.response.data.code === 407) {
@@ -13812,7 +13813,7 @@ if (uni.restoreGlobal) {
       const newCrypto2 = await refreshKeys();
       originalRequest.headers["X-Session-Key"] = newCrypto2.sessionKey;
       if (originalRequest.data) {
-        formatAppLog("log", "at common/utils/request.js:170", "333333333333", originalRequest.data, newCrypto2.aesKey);
+        formatAppLog("log", "at common/utils/request.js:171", "333333333333", originalRequest.data, newCrypto2.aesKey);
         originalRequest.data = {
           data: aesEncrypt(originalRequest.data, newCrypto2.aesKey)
         };
@@ -13946,7 +13947,6 @@ if (uni.restoreGlobal) {
         data && (conText = conText + JSON.stringify(data));
         data2 && (conText = conText + JSON.stringify(data2));
         data3 && (conText = conText + JSON.stringify(data3));
-        formatAppLog("log", "at common/js/common.js:84", conText);
         return conText;
       },
       // 设置登录token状态及数据
@@ -24110,7 +24110,7 @@ ${o3}
               vue.createElementVNode("view", { class: "learning-method" }, [
                 vue.createElementVNode("view", {
                   class: "method-img method_right",
-                  onClick: _cache[2] || (_cache[2] = ($event) => _ctx.jumpPage({ url: "" }))
+                  onClick: _cache[2] || (_cache[2] = ($event) => _ctx.jumpPage({ url: "/pages/page/study/answerQuestions?pageType=question" }))
                 }),
                 vue.createElementVNode("view", {
                   class: "method-img method_right",
@@ -26753,6 +26753,7 @@ ${o3}
     );
   }
   const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3d, [["render", _sfc_render$3c], ["__scopeId", "data-v-b138c4d7"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/l-popup/l-popup.vue"]]);
+  const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi;
   const _sfc_main$3c = {
     mixins: [commonJs],
     props: {},
@@ -26796,6 +26797,7 @@ ${o3}
         showVideo: false,
         //是否展示是视频弹窗（uni-popup 有毒）
         topic: {},
+        //题目内容
         context: {},
         showAnalysis: false,
         //是否展示文本或图片解析弹窗
@@ -26805,11 +26807,18 @@ ${o3}
         categoryId: "",
         AIanalysisNextBtn: true,
         //是否显示AI解析下一步按钮
-        selectCategoryId: "",
-        //选中的类目id
+        selectCategory: {
+          //选中的类目
+          categoryId: "",
+          //选中的类目id
+          name: ""
+          //选中的类目名称
+        },
         videoList: {
           //视频列表
-          page: 1,
+          page: 0,
+          noData: false,
+          //判断是不是已经没有更多视频了
           list: []
         }
       };
@@ -26817,60 +26826,31 @@ ${o3}
     onLoad(option) {
       this.verifLogin().then((data) => {
         option.pageType && (this.pageType = option.pageType);
-        const imageUrlPattern2 = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi;
         if (this.pageType == "everyDay") {
           let requestData = {
             url: "/api/question/today"
           };
           this.changeDate(option.date).fullDate != this.changeDate(/* @__PURE__ */ new Date()).fullDate && (requestData.date = option.date);
           this.commonRequest(requestData).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:204", "获取今日题目::", res2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:221", "获取今日题目::", res2);
             try {
               this.categoryTree.grade = this.changeGrade(res2.data.grade);
               this.categoryTree.category[0].categoryName = res2.data.categoryName;
               this.topic = res2.data;
-              if (this.topic.content.indexOf("http") != -1) {
-                const contentImages = this.topic.content.match(imageUrlPattern2) || [];
-                try {
-                  this.topic.content = this.topic.content.replace(imageUrlPattern2, "").trim();
-                } catch (e2) {
-                }
-                this.topic.contentImages = [...this.topic.contentImages, contentImages];
-              }
-              if (this.topic.analysis.indexOf("http") != -1) {
-                const analysisImages = this.topic.analysis.match(imageUrlPattern2) || [];
-                this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages];
-                try {
-                  this.topic.analysisImages.forEach((item) => {
-                    this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
-                  });
-                } catch (e2) {
-                }
-              }
-              !this.topic.AIanalysis && (this.topic.AIanalysis = {});
-              this.topic.AIanalysis = {
-                text: "",
-                step: 0
-              };
-              let time = setInterval(() => {
-                if (this.answered) {
-                  clearInterval(time);
-                }
-                this.time = this.time + 1;
-              }, 1e3);
+              this.topicFilter();
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:244", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:230", e2);
             }
           }).catch((error) => {
             this.consoleLog("获取今日题目报错：：", error);
           });
         } else {
-          try {
-            this.categoryTree.grade = this.changeGrade(store.state.userInfo.info.grade);
-          } catch (e2) {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:254", e2);
-          }
           this.getQuestion().then((res2) => {
+            try {
+              this.categoryTree.grade = this.changeGrade(store.state.userInfo.info.grade);
+            } catch (e2) {
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:241", e2);
+            }
           });
           if (this.pageType == "video")
             ;
@@ -26913,6 +26893,7 @@ ${o3}
       }
     },
     methods: {
+      // 选项新增ABCD
       changeOptions(arr) {
         let _arr = [];
         let optionName = ["A", "B", "C", "D", "E", "F"];
@@ -26928,15 +26909,50 @@ ${o3}
           return arr;
         }
       },
+      // 年级转换成大写
       changeGrade(id2) {
         let arr = ["一", "二", "三", "四", "五", "六"];
         return arr[Number(id2) - 1];
       },
+      // 答题选中选项
       clickOption(item, i2) {
         if (this.current !== i2 && !this.answered) {
           this.current = i2;
           this.answer = item;
         }
+      },
+      // 题目赋值后，对数据结构进行过滤
+      topicFilter() {
+        if (this.topic.content.indexOf("http") != -1) {
+          const contentImages = this.topic.content.match(imageUrlPattern) || [];
+          try {
+            this.topic.content = this.topic.content.replace(imageUrlPattern, "").trim();
+          } catch (e2) {
+          }
+          this.topic.contentImages = [...this.topic.contentImages, contentImages];
+        }
+        if (this.topic.analysis.indexOf("http") != -1) {
+          const analysisImages = this.topic.analysis.match(imageUrlPattern) || [];
+          this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages];
+          try {
+            this.topic.analysisImages.forEach((item) => {
+              this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
+            });
+          } catch (e2) {
+          }
+        }
+        !this.topic.AIanalysis && (this.topic.AIanalysis = {});
+        this.topic.AIanalysis = {
+          text: "",
+          step: 0
+        };
+        let _this = this;
+        let time = setInterval(() => {
+          if (_this.answered) {
+            clearInterval(time);
+          }
+          _this.time = _this.time + 1;
+        }, 1e3);
       },
       // 提交答案
       submit() {
@@ -26967,22 +26983,28 @@ ${o3}
               duration: "4000"
             });
           } catch (e2) {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:369", e2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:389", e2);
           }
         }).catch((error) => {
           this.consoleLog("回答问题接口报错：：", error);
         });
       },
-      // 每日一题 - 打开视频解析
-      playVideo() {
+      // 教材同步 - 需要校验会员
+      verifyPlayVideo(item) {
+        if (item) {
+          this.playVideo(item.videoId);
+        }
+      },
+      // 每日一题、视频列表 - 打开视频解析
+      playVideo(videoId) {
         if (!this.analysis.video || this.pageType == "video") {
           this.commonRequest({
             url: "/api/video/getById",
             data: {
-              id: this.topic.videoId
+              id: videoId || this.topic.videoId
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:385", "获取视频解析地址::", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:413", "获取视频解析地址::", res2.data);
             try {
               this.analysis.video = res2.data;
               this.showVideo = true;
@@ -26992,7 +27014,7 @@ ${o3}
             } catch (e2) {
             }
           }).catch((error) => {
-            this.consoleLog("获取视频解析地址报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:429", "获取视频解析地址报错", error);
           });
         } else {
           this.videoEl.seek(0);
@@ -27012,10 +27034,10 @@ ${o3}
               step: this.topic.AIanalysis.step + 1
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:424", "/api/ai/getAnalysisByStep：：", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:450", "/api/ai/getAnalysisByStep：：", res2.data);
             this.topic.AIanalysis.step = res2.data.currentStep;
             this.topic.AIanalysis.stepCount = res2.data.stepCount;
-            res2.data.currentStep < res2.data.stepCount && (this.AIanalysisNextBtn = true);
+            res2.data.currentStep < res2.data.stepCount ? this.AIanalysisNextBtn = true : this.AIanalysisNextBtn = false;
             this.topic.AIanalysis.text = this.topic.AIanalysis.text + (this.topic.AIanalysis.step != 1 ? "</br></br>" : "") + res2.data.content;
             if (this.topic.AIanalysis.text.indexOf("http") != -1) {
               const analysisImages = this.topic.AIanalysis.text.match(imageUrlPattern) || [];
@@ -27027,7 +27049,7 @@ ${o3}
               }
             }
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:440", "AI析题报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:466", "AI析题报错", error);
           });
         }
       },
@@ -27041,22 +27063,31 @@ ${o3}
               fromType: this.pageType
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:455", "视频、题目类型获取左侧类目目录:", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:481", "视频、题目类型获取左侧类目目录:", res2.data);
             this.resetProblem("all");
-            this.categoryTree.category = res2.data;
-            this.selectCategoryId = res2.data.categories[0].categoryId;
-            choiceCategory();
+            this.categoryTree.category = res2.data.categories;
+            this.choiceCategory(res2.data.categories[0]);
+            this.selectCategory = {
+              categoryId: res2.data.categories[0].categoryId,
+              name: res2.data.categories[0].name
+            };
             resolve(res2);
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:462", "视频、题目类型获取左侧类目目录报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:492", "视频、题目类型获取左侧类目目录报错", error);
             reject2(error);
           });
         });
       },
       // 点击类目之后,获取右侧内容
       choiceCategory(item) {
-        if (this.selectCategoryId != item.categoryId) {
-          this.resetProblem(this.pageType);
+        if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video") {
+          if (this.selectCategory.categoryId != item.categoryId) {
+            this.selectCategory = {
+              categoryId: item.categoryId,
+              name: item.name
+            };
+            this.resetProblem(this.pageType);
+          }
           if (this.pageType == "question") {
             this.commonRequest({
               url: "/api/question/byCategory",
@@ -27067,30 +27098,46 @@ ${o3}
                 categoryId: item.categoryId
               }
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:483", "获取题目:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:520", "获取题目:", res2.data);
+              this.topic = res2.data[0];
+              this.topicFilter();
             }).catch((error) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:485", "获取题目报错", error);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:524", "获取题目报错", error);
               reject(error);
             });
           } else if (this.pageType == "video") {
+            if (this.videoList.noData)
+              return false;
             this.commonRequest({
               url: "/api/video/byCategory",
               data: {
                 keyword: this.keyword,
-                page: videoList.page,
-                size: "30",
+                page: this.videoList.page + 1,
+                size: "24",
                 categoryId: item.categoryId
               }
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:499", "获取视频列表:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:539", "获取视频列表:", res2.data);
+              if (res2.data.length == 0) {
+                this.videoList.noData = true;
+              }
+              this.isLoading = false;
+              this.videoList.page = this.videoList.page + 1;
+              this.videoList.list = [...this.videoList.list, ...res2.data];
             }).catch((error) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:501", "获取视频列表报错", error);
-              reject(error);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:547", "获取视频列表报错", error);
             });
           } else {
-            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:505", "每日一题的不能点");
+            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:550", "每日一题的不能点");
           }
         }
+      },
+      GetNextVideoList() {
+        if (this.isLoading)
+          return false;
+        this.isLoading = true;
+        this.choiceCategory(this.selectCategory);
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:560", "触发滚动到底部加载视频新数据");
       },
       // 切换题目之后，需要调用，重置数据 type: "all" 所有；question:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
       resetProblem(type) {
@@ -27126,12 +27173,14 @@ ${o3}
             semester: "",
             //接口会返回 fall 上册, spring 下册
             category: [{}]
-          };
-          this.categoryId = "";
+          }, this.categoryId = "";
         }
         if (type == "all" || type == "video") {
           this.videoList = {
-            page: 1,
+            //视频列表
+            page: 0,
+            noData: false,
+            //判断是不是已经没有更多视频了
             list: []
           };
         }
@@ -27212,7 +27261,7 @@ ${o3}
                       null,
                       vue.renderList($data.categoryTree.category, (item, i2) => {
                         return vue.openBlock(), vue.createElementBlock("view", {
-                          class: vue.normalizeClass(["tree-list", $data.selectCategoryId == item.categoryId ? "tree-selected" : ""]),
+                          class: vue.normalizeClass(["tree-list", $data.selectCategory.categoryId == item.categoryId ? "tree-selected" : ""]),
                           onClick: vue.withModifiers(($event) => $options.choiceCategory(item), ["stop"])
                         }, [
                           vue.createElementVNode(
@@ -27349,7 +27398,7 @@ ${o3}
                           ]),
                           vue.createElementVNode("view", {
                             class: "play-video-btn",
-                            onClick: _cache[5] || (_cache[5] = (...args) => $options.playVideo && $options.playVideo(...args))
+                            onClick: _cache[5] || (_cache[5] = ($event) => $options.playVideo())
                           })
                         ])) : vue.createCommentVNode("v-if", true),
                         vue.createElementVNode("view", { class: "lingbao-wrap" }, [
@@ -27363,7 +27412,57 @@ ${o3}
                     ])
                   ])) : vue.createCommentVNode("v-if", true),
                   vue.createCommentVNode(" 视频列表 "),
-                  vue.createElementVNode("view", { class: "list-content-wrap" })
+                  vue.createElementVNode("view", { class: "video-list-wrap" }, [
+                    vue.createElementVNode(
+                      "scroll-view",
+                      {
+                        class: "video-list-window",
+                        "scroll-y": "true",
+                        onScrolltolower: _cache[7] || (_cache[7] = (...args) => $options.GetNextVideoList && $options.GetNextVideoList(...args))
+                      },
+                      [
+                        vue.createElementVNode("view", { class: "name-wrap" }, [
+                          vue.createElementVNode("view", { class: "name" }, [
+                            vue.createTextVNode(
+                              vue.toDisplayString($data.selectCategory.name) + " ",
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode("span", { class: "border" })
+                          ])
+                        ]),
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList($data.videoList.list, (item) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              class: "video-list",
+                              key: item.videoId,
+                              onClick: ($event) => $options.verifyPlayVideo(item)
+                            }, [
+                              vue.createElementVNode("div", { class: "video-img-wrap flex-center" }, [
+                                vue.createElementVNode("view", { class: "label" }, "会员"),
+                                vue.createElementVNode("image", {
+                                  "lazy-load": "",
+                                  class: "video-img",
+                                  src: item.coverUrl
+                                }, null, 8, ["src"])
+                              ])
+                            ], 8, ["onClick"]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        )),
+                        $data.videoList.noData ? (vue.openBlock(), vue.createElementBlock("view", {
+                          key: 0,
+                          style: { "float": "left", "width": "100%" },
+                          class: "no-list-tip"
+                        }, " - 没有更多视频了 -")) : vue.createCommentVNode("v-if", true)
+                      ],
+                      32
+                      /* NEED_HYDRATION */
+                    )
+                  ])
                 ])
               ])
             ],
@@ -27420,7 +27519,7 @@ ${o3}
                   [
                     vue.createElementVNode("view", {
                       class: "next-btn",
-                      onClick: _cache[7] || (_cache[7] = (...args) => $options.getAIAnalysis && $options.getAIAnalysis(...args))
+                      onClick: _cache[8] || (_cache[8] = (...args) => $options.getAIAnalysis && $options.getAIAnalysis(...args))
                     }, "下一步")
                   ],
                   512
@@ -32315,7 +32414,7 @@ ${o3}
               });
             }
           }).catch((error) => {
-            formatAppLog("error", "at pages/page/login/phoneLogin.vue:142", "验证码发送失败:", error);
+            formatAppLog("error", "at pages/page/login/phoneLogin.vue:141", "验证码发送失败:", error);
           });
         }).catch((err) => {
           uni.showToast({
@@ -32371,9 +32470,9 @@ ${o3}
                 icon: "none"
               });
             }
-            formatAppLog("error", "at pages/page/login/phoneLogin.vue:202", "/api/sms/forLogin：验证码登录成功:", res3);
+            formatAppLog("error", "at pages/page/login/phoneLogin.vue:201", "/api/sms/forLogin：验证码登录成功:", res3);
           }).catch((error) => {
-            formatAppLog("error", "at pages/page/login/phoneLogin.vue:204", "验证码登录失败:", error);
+            formatAppLog("error", "at pages/page/login/phoneLogin.vue:203", "验证码登录失败:", error);
           });
         }).catch((err) => {
           uni.showToast({
@@ -32470,17 +32569,11 @@ ${o3}
                       href: "https://www.baidu.com/",
                       text: "《用户服务协议》"
                     }),
-                    vue.createTextVNode("、"),
-                    vue.createVNode(_component_uni_link, {
-                      class: "link-a",
-                      href: "https://www.baidu.com/",
-                      text: "《隐私政策》"
-                    }),
                     vue.createTextVNode("和"),
                     vue.createVNode(_component_uni_link, {
                       class: "link-a",
                       href: "https://www.baidu.com/",
-                      text: "《中国移动认证服务协议》"
+                      text: "《隐私政策》"
                     }),
                     vue.createTextVNode("。")
                   ]),

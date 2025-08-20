@@ -57,7 +57,7 @@
 					<view class="method-img method_left" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video'})"></view>
 				</view>
 				<view class="learning-method">
-					<view class="method-img method_right" @click="jumpPage({url:''})"></view>
+					<view class="method-img method_right" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=question'})"></view>
 					<view class="method-img method_right" @click="jumpPage({url:'/pages/page/study/wrongQuestion'})"></view>
 				</view>
 			</view>

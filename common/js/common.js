@@ -81,7 +81,7 @@ export default {
 			data && (conText = conText + JSON.stringify(data));
 			data2 && (conText = conText + JSON.stringify(data2));
 			data3 && (conText = conText + JSON.stringify(data3));
-			console.log(conText)
+			// console.log(conText)
 			return conText;
 		},
 		// 设置登录token状态及数据

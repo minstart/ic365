@@ -201,7 +201,7 @@
 		.page-title {
 			padding: 3.25rem 2rem 4.375rem 2rem;
 			font-size: 1.25rem;
-			color: #F5A623;
+			color: $ThemeColor;
 		}
 		.directLogin {
 			margin: 2rem auto 1rem auto;

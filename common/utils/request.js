@@ -45,24 +45,24 @@ service.interceptors.request.use(
 				// console.log("crypto:::::",crypto)
 				if (shouldRefreshKeys(crypto)) {
 					// try {
-						let newCrypto = refreshKeys()
-						
-						if (store.state.crypto && JSON.stringify(store.state.crypto) != "{}" && JSON.stringify(newCrypto) == "{}") {
-							newCrypto = store.state.crypto
-						}
-						newCrypto = JSON.parse(JSON.stringify(newCrypto))
-						if (newCrypto || JSON.stringify(newCrypto) != "{}") {
-							try{
-								newCrypto.sessionKey && (newConfig.headers['X-Session-Key'] = newCrypto.sessionKey)
-							}catch(e){}
-							if (newConfig.data) {
-								newConfig.data = {
-									data: aesEncrypt(newConfig.data, newCrypto.aesKey)
-								}
+					let newCrypto = refreshKeys()
+
+					if (store.state.crypto && JSON.stringify(store.state.crypto) != "{}" && JSON.stringify(newCrypto) == "{}") {
+						newCrypto = store.state.crypto
+					}
+					newCrypto = JSON.parse(JSON.stringify(newCrypto))
+					if (newCrypto || JSON.stringify(newCrypto) != "{}") {
+						try {
+							newCrypto.sessionKey && (newConfig.headers['X-Session-Key'] = newCrypto.sessionKey)
+						} catch (e) {}
+						if (newConfig.data) {
+							newConfig.data = {
+								data: aesEncrypt(newConfig.data, newCrypto.aesKey)
 							}
-							// console.log("请求参数2：newConfig:::", newConfig)
-							return newConfig
 						}
+						// console.log("请求参数2：newConfig:::", newConfig)
+						return newConfig
+					}
 					// } catch (e) {
 					// 	console.error('密钥刷新失败，使用旧密钥', JSON.stringify(e))
 					// }
@@ -71,14 +71,14 @@ service.interceptors.request.use(
 				if (crypto.sessionKey && crypto.aesKey) {
 					newConfig.headers['X-Session-Key'] = crypto.sessionKey
 					if (newConfig.data) {
-						console.log("2222222222222",newConfig.data, crypto.aesKey)
+						console.log("2222222222222", newConfig.data, crypto.aesKey)
 						newConfig.data = {
 							data: aesEncrypt(newConfig.data, crypto.aesKey)
 						}
 					}
 				}
 			}
-			
+
 			console.log("请求参数：newConfig:::", JSON.stringify(newConfig))
 			return newConfig
 		},
@@ -122,7 +122,7 @@ service.interceptors.response.use(
 		// if the custom code is not 20000, it is judged as an error.
 		if (res.code !== 0) {
 			uni.showToast({
-				title: res.message || '服务器返回异常',
+				title: res.message || res.msg || '服务器返回异常',
 				icon: 'none',
 				duration: 5000
 			});
@@ -141,15 +141,16 @@ service.interceptors.response.use(
 					})
 				})
 			}
-			return Promise.reject(new Error(res.message || 'Error'))
+			
+			return Promise.reject(new Error(res.message || res.msg || 'Error'))
 		} else {
 			return res
 		}
 	},
 	error => {
-		// console.log("报错接口返回：",error)
+		console.log("报错接口返回：", error)
 		uni.showToast({
-			title: error.message,
+			title: error.message || error.msg,
 			icon: "none"
 		});
 
@@ -167,7 +168,7 @@ async function handleSessionExpired(originalRequest) {
 		const newCrypto = await refreshKeys()
 		originalRequest.headers['X-Session-Key'] = newCrypto.sessionKey
 		if (originalRequest.data) {
-			console.log("333333333333",originalRequest.data, newCrypto.aesKey)
+			console.log("333333333333", originalRequest.data, newCrypto.aesKey)
 			originalRequest.data = {
 				data: aesEncrypt(originalRequest.data, newCrypto.aesKey)
 			}
