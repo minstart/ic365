@@ -12,8 +12,9 @@
 				</h3>
 				<view class="">
 					<!-- 插入模式 -->
-					<uni-calendar class="uni-calendar--hook" :disabledDay="disabledDays" :selected="info.selected" :showMonth="false" @change="change">
+					<uni-calendar class="uni-calendar--hook" :disabledDay="disabledDays" :selected="info.selected" :errorDay="errorDays" :showMonth="false" @change="change">
 						<template v-slot:date-content="date">
+							{{date}}
 							<view :class="{'selected': date.isSelected}">
 								{{ date.text1 }}
 							</view>
@@ -22,6 +23,22 @@
 				</view>
 			</view>
 			<view class="btn-wrap">
+				<!-- 功能说明 -->
+				<view class="instructions-wrap">
+					<h3 class="title">功能说明</h3>
+					<view class="instructions">
+						<view class="instructions-icon"></view>
+						已掌握
+					</view>
+					<view class="instructions">
+						<view class="instructions-icon"></view>
+						未解锁
+					</view>
+					<view class="instructions">
+						<view class="instructions-icon"></view>
+						未掌握
+					</view>
+				</view>
 				<button class="next-btn" type="button" @click="doingExercises">进入做题</button>
 			</view>
 		</view>
@@ -50,6 +67,7 @@
 					selected: []
 				},
 				disabledDays: [],
+				errorDays: [],
 				checkedDate: ""
 			}
 		},
@@ -70,9 +88,18 @@
 				}).then(res => {
 					console.log("获取已答题的日期::", res)
 					try {
-						this.info.selected = res.data || [];
+						res.data.forEach(item=>{
+							for (let i in item) {
+								try {
+									if (item[i] == true) {
+										this.info.selected.push(i)
+									} else {
+										this.errorDays.push(i)
+									}
+								} catch (e) {}
+							}
+						})
 					} catch (e) {}
-
 				}).catch(error => {
 					this.consoleLog("获取已答题的日期失败：：", error)
 				})
@@ -95,7 +122,7 @@
 			})
 		},
 		onHide() {
-			
+
 		},
 		onUnload() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -145,7 +172,6 @@
 				return dateArray; // 返回包含所有日期的数组
 			},
 			change(e) {
-				console.log('change 返回:', e)
 				this.checkedDate = e.fulldate;
 			},
 			doingExercises() {
@@ -213,7 +239,44 @@
 		position: relative;
 		width: 244rpx;
 		margin: 0 32rpx;
-
+		.instructions-wrap{
+			width: 232rpx;
+			padding: 20rpx 30rpx;
+			background: rgba(255, 255, 255, 0.6);
+			border-radius: 10rpx;
+			.title{
+				text-align: center;
+				font-size: 24rpx;
+				margin-bottom: 30rpx;
+			}
+			.instructions{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 20rpx;
+				margin-bottom: 30rpx;
+				.instructions-icon{
+					
+				}
+				&:nth-child(2){
+					.instructions-icon{
+						background: url("/static/icons/calendar_selected.png") no-repeat center /100% 100%;
+					}
+				}
+				&:nth-child(2){
+					.instructions-icon{
+						background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
+					}
+				}
+				&:nth-child(3){
+					margin-bottom: 0;
+					.instructions-icon{
+						background: url("/static/icons/error2.png") no-repeat center /100% 100%;
+					}
+				}
+				
+			}
+		}
 		.next-btn {
 			width: 244rpx;
 			height: 80rpx;
@@ -327,19 +390,32 @@
 		top: calc(-22rpx /3) !important;
 		right: calc(-22rpx /3) !important;
 		background: url("/static/icons/calendar_checked.png") no-repeat center /100% 100%;
+		z-index: 2;
 	}
-
+	.new-error-icon {
+		position: absolute;
+		width: 22rpx !important;
+		height: 22rpx !important;
+		top: calc(-22rpx /3) !important;
+		right: calc(-22rpx /3) !important;
+		background: url("/static/icons/error2.png") no-repeat center /100% 100%;
+	}
+	
 	.calendar-selected {
 		background: #fff !important;
 		opacity: 1;
 	}
 
-	:global(.uni-calendar-item__weeks-box-circle) {
+	.selected-icon {
+		position: absolute;
 		width: 28rpx !important;
 		height: 28rpx !important;
 		top: calc(-28rpx / 3) !important;
 		right: calc(-28rpx / 3) !important;
 		background: url("/static/icons/calendar_selected.png") no-repeat top / 100% 100%;
+	}
+
+	:global(.uni-calendar-item__weeks-box-circle) {
 		background-color: transparent !important;
 	}
 </style>

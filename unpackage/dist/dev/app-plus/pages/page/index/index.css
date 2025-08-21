@@ -194,6 +194,25 @@ body {
   background: #fff;
   overflow: hidden;
   margin-right: 0.5rem;
+  border-radius: 3rem;
+  border: 0.125rem solid #fff;
+  position: relative;
+}
+.banner-wrap .user-info-wrap .head-pic[data-v-5040744a]::after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  width: 1.4375rem;
+  height: 1.4375rem;
+  z-index: 2;
+  background: url("../../../static/icons/vip.png") no-repeat center / 100% 100%;
+}
+.banner-wrap .user-info-wrap .head-pic[vipLevel="0"][data-v-5040744a]::after {
+  display: none;
+}
+.banner-wrap .user-info-wrap .head-pic[vipLevel="2"][data-v-5040744a]::after {
+  background: url("../../../static/icons/svip.png") no-repeat center / 100% 100%;
 }
 .banner-wrap .user-info-wrap .user-info .name[data-v-5040744a] {
   margin: 0.25rem 0;

@@ -400,6 +400,36 @@
   width: 7.625rem;
   margin: 0 1rem;
 }
+.btn-wrap .instructions-wrap[data-v-3f5d8074] {
+  width: 7.25rem;
+  padding: 0.625rem 0.9375rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 0.3125rem;
+}
+.btn-wrap .instructions-wrap .title[data-v-3f5d8074] {
+  text-align: center;
+  font-size: 0.75rem;
+  margin-bottom: 0.9375rem;
+}
+.btn-wrap .instructions-wrap .instructions[data-v-3f5d8074] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  margin-bottom: 0.9375rem;
+}
+.btn-wrap .instructions-wrap .instructions:nth-child(2) .instructions-icon[data-v-3f5d8074] {
+  background: url("../../../static/icons/calendar_selected.png") no-repeat center/100% 100%;
+}
+.btn-wrap .instructions-wrap .instructions:nth-child(2) .instructions-icon[data-v-3f5d8074] {
+  background: url("../../../static/icons/calendar_disable.png") no-repeat center/100% 100%;
+}
+.btn-wrap .instructions-wrap .instructions[data-v-3f5d8074]:nth-child(3) {
+  margin-bottom: 0;
+}
+.btn-wrap .instructions-wrap .instructions:nth-child(3) .instructions-icon[data-v-3f5d8074] {
+  background: url("../../../static/icons/error2.png") no-repeat center/100% 100%;
+}
 .btn-wrap .next-btn[data-v-3f5d8074] {
   width: 7.625rem;
   height: 2.5rem;
@@ -489,16 +519,28 @@
 		top: calc(-0.6875rem /3) !important;
 		right: calc(-0.6875rem /3) !important;
 		background: url("../../../static/icons/calendar_checked.png") no-repeat center /100% 100%;
+		z-index: 2;
+}
+.new-error-icon {
+		position: absolute;
+		width: 0.6875rem !important;
+		height: 0.6875rem !important;
+		top: calc(-0.6875rem /3) !important;
+		right: calc(-0.6875rem /3) !important;
+		background: url("../../../static/icons/error2.png") no-repeat center /100% 100%;
 }
 .calendar-selected {
 		background: #fff !important;
 		opacity: 1;
 }
-.uni-calendar-item__weeks-box-circle {
+.selected-icon {
+		position: absolute;
 		width: 0.875rem !important;
 		height: 0.875rem !important;
 		top: calc(-0.875rem / 3) !important;
 		right: calc(-0.875rem / 3) !important;
 		background: url("../../../static/icons/calendar_selected.png") no-repeat top / 100% 100%;
+}
+.uni-calendar-item__weeks-box-circle {
 		background-color: transparent !important;
 }

@@ -113,6 +113,7 @@
 		<template v-slot>
 			<view class="popup-analysis-wrap">
 				<view class="conten-window">
+					<h3>题目：{{topic.content}}</h3>
 					<view class="popup-analysis-text" v-if="topic.AIanalysis" v-html="topic.AIanalysis.text">
 					</view>
 					<div class="next-btn-wrap" v-show="AIanalysisNextBtn">

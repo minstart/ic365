@@ -98,7 +98,7 @@ service.interceptors.response.use(
 	 * You can also judge the status by HTTP Status Code
 	 */
 	response => {
-		// console.log("接口返回::", JSON.stringify(response))
+		console.log("接口返回::", JSON.stringify(response))
 		const res = response.data
 		if (store.state.encrypt_enabled && response.config.url.includes('/crypto') === false && response.data?.data) {
 			// AES KEY EXPIRED.

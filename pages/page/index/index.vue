@@ -4,9 +4,7 @@
 		<view class="banner-wrap">
 			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
-				<!-- <view class="head-pic"></view> -->
-				<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt="">
-				</image>
+				<image class="head-pic" :vipLevel='userInfo.vipLevel' :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
 				<view class="user-info">
 					<h3 class="name">{{userInfo.nickname}}同学</h3>
 					<ul class="cumulative-list">
@@ -404,6 +402,29 @@
 				overflow: hidden;
 				// flex: 1;
 				margin-right: 16rpx;
+				border-radius: 96rpx;
+				border:4rpx solid #fff;
+				position: relative;
+				&::after{
+					position: absolute;
+					content: "";
+					right: 0;
+					bottom: 0;
+					width: 46rpx;
+					height: 46rpx;
+					z-index: 2;
+					background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
+				}
+				&[vipLevel="0"]{
+					&::after{
+						display: none;
+					}
+				}
+				&[vipLevel="2"]{
+					&::after{
+						background: url("/static/icons/svip.png") no-repeat center / 100% 100%;
+					}
+				}
 			}
 
 			.user-info {

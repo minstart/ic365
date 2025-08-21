@@ -103,12 +103,24 @@
           "baidumap",
           "iosamap"
         ],
-        "dSYMs": false
+        "dSYMs": false,
+        "capabilities": {
+          "entitlements": {
+            "com.apple.developer.associated-domains": [
+              "applinks:static-mp-dce2f7cb-6625-4a09-8138-e8de2fb38a3d.next.bspapp.com"
+            ]
+          }
+        }
       },
       "plugins": {
         "speech": {},
         "oauth": {},
-        "share": {},
+        "share": {
+          "weixin": {
+            "appid": "com.edusafety.cal",
+            "UniversalLinks": "https://static-mp-dce2f7cb-6625-4a09-8138-e8de2fb38a3d.next.bspapp.com/uni-universallinks/__UNI__F94F8DE/"
+          }
+        },
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"

@@ -63,7 +63,14 @@
             "ios" : {
                 "UIBackgroundModes" : [ "audio" ],
                 "urlschemewhitelist" : [ "baidumap", "iosamap" ],
-                "dSYMs" : false
+                "dSYMs" : false,
+                "capabilities" : {
+                    "entitlements" : {
+                        "com.apple.developer.associated-domains" : [
+                            "applinks:static-mp-dce2f7cb-6625-4a09-8138-e8de2fb38a3d.next.bspapp.com"
+                        ]
+                    }
+                }
             },
             "sdkConfigs" : {
                 "speech" : {},
@@ -71,7 +78,7 @@
                 "share" : {
                     "weixin" : {
                         "appid" : "com.edusafety.cal",
-                        "UniversalLinks" : ""
+                        "UniversalLinks" : "https://static-mp-dce2f7cb-6625-4a09-8138-e8de2fb38a3d.next.bspapp.com/uni-universallinks/__UNI__F94F8DE/"
                     }
                 }
             },
@@ -234,5 +241,6 @@
         "uniStatistics" : {
             "enable" : false
         }
-    }
+    },
+    "_spaceID" : "mp-dce2f7cb-6625-4a09-8138-e8de2fb38a3d"
 }

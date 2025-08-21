@@ -42,7 +42,7 @@
 								<h3 class="item-title">{{item.name}}</h3>
 							</view>
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
-							<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll">
+							<scroll-view scroll-y="true" class="scroll-Y" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll">
 								<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
 									<image class="list-icon" :src="item2.coverImage" mode=""></image>
 									<view class="list-info">
@@ -58,8 +58,6 @@
 									</view>
 								</view>
 							</scroll-view>
-
-							
 						</view>
 					</view>
 				</view>
@@ -175,14 +173,13 @@
 						this.productsList["products" + item.id].list = [];
 					})
 				}
-				console.log(this.selectProductsId)
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
 					// 获取兑换商品列表
 					this.commonRequest({
 						url: "/api/achievement/list",
 						data: {
-							keyword: this.keyword,
-							type: this.selectProductsId,
+							search: this.keyword,
+							groupType: this.selectProductsId,
 							size: "10"
 						}
 					}).then(res => {

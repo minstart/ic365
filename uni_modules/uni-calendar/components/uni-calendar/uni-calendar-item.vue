@@ -6,15 +6,18 @@
 		'uni-calendar-item--before-checked':weeks.beforeMultiple,
 		'uni-calendar-item--multiple': weeks.multiple,
 		'uni-calendar-item--after-checked':weeks.afterMultiple,
-		'calendar-selected':selected&&weeks.extraInfo,
+		'calendar-selected':selected.indexOf(weeks.fullDate)!=-1 || errorDay.indexOf(weeks.fullDate)!=-1,
 		'uni-calendar-item--disable':new Date() < new Date(weeks.fullDate),
 		'new-disable':disabledDay.indexOf(weeks.fullDate)!=-1,
+		'new-error': errorDay.indexOf(weeks.fullDate)!=-1
 		}"
 	 @click="choiceDate(weeks)">
 		<view class="uni-calendar-item__weeks-box-item">
 			<text v-if="selected&&weeks.extraInfo" class="uni-calendar-item__weeks-box-circle"></text>
-			<text v-if="disabledDay.indexOf(weeks.fullDate)!=-1" class="new-disable-icon"></text>
 			<text v-if="calendar.fullDate === weeks.fullDate" class="checked-icon"></text>
+			<text v-if="disabledDay.indexOf(weeks.fullDate)!=-1" class="new-disable-icon"></text>
+			<text v-if="selected.indexOf(weeks.fullDate)!=-1" class="selected-icon"></text>
+			<text v-if="errorDay.indexOf(weeks.fullDate)!=-1" class="new-error-icon"></text>
 			<text class="uni-calendar-item__weeks-box-text" :class="{
 				'uni-calendar-item--isDay-text': weeks.isDay,
 				'uni-calendar-item--isDay':calendar.fullDate === weeks.fullDate && weeks.isDay,
@@ -86,6 +89,12 @@
 				default: false
 			},
 			disabledDay: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
+			errorDay: {
 				type: Array,
 				default () {
 					return []

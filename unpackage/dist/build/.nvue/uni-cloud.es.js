@@ -1,16 +1,6 @@
 import "vue";
-const leftWindow = {
-  path: "windows/left-window.vue",
-  style: {
-    width: "0px"
-  }
-};
-const topWindow = {
-  path: "windows/top-window.vue",
-  style: {
-    height: "60px"
-  }
-};
+const leftWindow = {};
+const topWindow = {};
 const pages = [
   {
     path: "pages/page/guide/judge",

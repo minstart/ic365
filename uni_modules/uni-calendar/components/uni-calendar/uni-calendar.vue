@@ -55,7 +55,7 @@
 				<view class="uni-calendar__weeks" v-for="(item,weekIndex) in weeks" :key="weekIndex">
 					<view class="uni-calendar__weeks-item" v-for="(weeks,weeksIndex) in item" :key="weeksIndex">
 						<calendar-item class="uni-calendar-item--hook" :weeks="weeks" :calendar="calendar"
-							:selected="selected" :disabledDay="disabledDay" :lunar="lunar" @change="choiceDate"></calendar-item>
+							:selected="selected" :disabledDay="disabledDay" :errorDay="errorDay" :lunar="lunar" @change="choiceDate"></calendar-item>
 					</view>
 				</view>
 			</view>
@@ -112,6 +112,12 @@
 				}
 			},
 			disabledDay: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
+			errorDay: {
 				type: Array,
 				default () {
 					return []
@@ -217,7 +223,8 @@
 				startDate: this.startDate,
 				endDate: this.endDate,
 				range: this.range,
-				disabledDay : this.disabledDay
+				disabledDay : this.disabledDay,
+				errorDay : this.errorDay
 			})
 			this.init(this.date)
 		},

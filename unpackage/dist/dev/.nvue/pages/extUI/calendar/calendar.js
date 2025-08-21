@@ -1239,6 +1239,12 @@ const _sfc_main$2 = {
       default() {
         return [];
       }
+    },
+    errorDay: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
   computed: {
@@ -1263,9 +1269,10 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         "uni-calendar-item--before-checked": $props.weeks.beforeMultiple,
         "uni-calendar-item--multiple": $props.weeks.multiple,
         "uni-calendar-item--after-checked": $props.weeks.afterMultiple,
-        "calendar-selected": $props.selected && $props.weeks.extraInfo,
+        "calendar-selected": $props.selected.indexOf($props.weeks.fullDate) != -1 || $props.errorDay.indexOf($props.weeks.fullDate) != -1,
         "uni-calendar-item--disable": /* @__PURE__ */ new Date() < new Date($props.weeks.fullDate),
-        "new-disable": $props.disabledDay.indexOf($props.weeks.fullDate) != -1
+        "new-disable": $props.disabledDay.indexOf($props.weeks.fullDate) != -1,
+        "new-error": $props.errorDay.indexOf($props.weeks.fullDate) != -1
       }]),
       onClick: _cache[0] || (_cache[0] = ($event) => $options.choiceDate($props.weeks)),
       renderWhole: true
@@ -1276,13 +1283,21 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
           key: 0,
           class: "uni-calendar-item__weeks-box-circle"
         })) : createCommentVNode("v-if", true),
-        $props.disabledDay.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+        $props.calendar.fullDate === $props.weeks.fullDate ? (openBlock(), createElementBlock("u-text", {
           key: 1,
+          class: "checked-icon"
+        })) : createCommentVNode("v-if", true),
+        $props.disabledDay.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+          key: 2,
           class: "new-disable-icon"
         })) : createCommentVNode("v-if", true),
-        $props.calendar.fullDate === $props.weeks.fullDate ? (openBlock(), createElementBlock("u-text", {
-          key: 2,
-          class: "checked-icon"
+        $props.selected.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+          key: 3,
+          class: "selected-icon"
+        })) : createCommentVNode("v-if", true),
+        $props.errorDay.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+          key: 4,
+          class: "new-error-icon"
         })) : createCommentVNode("v-if", true),
         createElementVNode(
           "u-text",
@@ -1304,7 +1319,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         !$props.lunar && !$props.weeks.extraInfo && $props.weeks.isDay ? (openBlock(), createElementBlock(
           "u-text",
           {
-            key: 3,
+            key: 5,
             class: normalizeClass(["uni-calendar-item__weeks-lunar-text", {
               "uni-calendar-item--isDay-text": $props.weeks.isDay,
               "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
@@ -1321,7 +1336,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         $props.lunar && !$props.weeks.extraInfo ? (openBlock(), createElementBlock(
           "u-text",
           {
-            key: 4,
+            key: 6,
             class: normalizeClass(["uni-calendar-item__weeks-lunar-text", {
               "uni-calendar-item--isDay-text": $props.weeks.isDay,
               "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
@@ -1339,7 +1354,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         $props.weeks.extraInfo && $props.weeks.extraInfo.info ? (openBlock(), createElementBlock(
           "u-text",
           {
-            key: 5,
+            key: 7,
             class: normalizeClass(["uni-calendar-item__weeks-lunar-text", {
               "uni-calendar-item--extra": $props.weeks.extraInfo.info,
               "uni-calendar-item--isDay-text": $props.weeks.isDay,
@@ -1361,7 +1376,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     /* CLASS */
   );
 }
-const CalendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item.vue"]]);
+const CalendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item.vue"]]);
 const _style_0$1 = { "uni-calendar": { "": { "flexDirection": "column" } }, "uni-calendar__mask": { "": { "position": "fixed", "bottom": 0, "top": 0, "left": 0, "right": 0, "backgroundColor": "rgba(0,0,0,0.4)", "transitionProperty": "opacity", "transitionDuration": 300, "opacity": 0 } }, "uni-calendar--mask-show": { "": { "opacity": 1 } }, "uni-calendar--fixed": { "": { "position": "fixed", "bottom": 0, "left": 0, "right": 0, "transitionProperty": "transform", "transitionDuration": 300, "transform": "translateY(460px)" } }, "uni-calendar--ani-show": { "": { "transform": "translateY(0)" } }, "uni-calendar__content": { "": { "backgroundColor": "#ffffff" } }, "uni-calendar__header": { "": { "position": "relative", "flexDirection": "row", "justifyContent": "center", "alignItems": "center", "height": 50, "borderBottomColor": "#EDEDED", "borderBottomStyle": "solid", "borderBottomWidth": 1 } }, "uni-calendar--fixed-top": { "": { "flexDirection": "row", "justifyContent": "space-between", "borderTopColor": "#EDEDED", "borderTopStyle": "solid", "borderTopWidth": 1 } }, "uni-calendar--fixed-width": { "": { "width": 50 } }, "uni-calendar__backtoday": { "": { "position": "absolute", "right": 0, "top": "25rpx", "paddingTop": 0, "paddingRight": 5, "paddingBottom": 0, "paddingLeft": 10, "height": 25, "lineHeight": 25, "fontSize": 12, "borderTopLeftRadius": 25, "borderBottomLeftRadius": 25, "color": "#333333", "backgroundColor": "#f1f1f1" } }, "uni-calendar__header-text": { "": { "textAlign": "center", "width": 100, "fontSize": 14, "color": "#333333" } }, "uni-calendar__header-btn-box": { "": { "flexDirection": "row", "alignItems": "center", "justifyContent": "center", "width": 50, "height": 50 } }, "uni-calendar__header-btn": { "": { "width": 10, "height": 10, "borderLeftColor": "#808080", "borderLeftStyle": "solid", "borderLeftWidth": 2, "borderTopColor": "#555555", "borderTopStyle": "solid", "borderTopWidth": 2 } }, "uni-calendar--left": { "": { "transform": "rotate(-45deg)" } }, "uni-calendar--right": { "": { "transform": "rotate(135deg)" } }, "uni-calendar__weeks": { "": { "position": "relative", "flexDirection": "row" } }, "uni-calendar__weeks-item": { "": { "flex": 1 } }, "uni-calendar__weeks-day": { "": { "flex": 1, "flexDirection": "column", "justifyContent": "center", "alignItems": "center", "height": 45, "borderBottomColor": "#F5F5F5", "borderBottomStyle": "solid", "borderBottomWidth": 1 } }, "uni-calendar__weeks-day-text": { "": { "fontSize": 14 } }, "uni-calendar__box": { "": { "position": "relative" } }, "uni-calendar__box-bg": { "": { "justifyContent": "center", "alignItems": "center", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0 } }, "uni-calendar__box-bg-text": { "": { "fontSize": 200, "fontWeight": "bold", "color": "#999999", "opacity": 0.1, "textAlign": "center" } }, "@TRANSITION": { "uni-calendar__mask": { "property": "opacity", "duration": 300 }, "uni-calendar--fixed": { "property": "transform", "duration": 300 } } };
 const {
   t
@@ -1383,6 +1398,12 @@ const _sfc_main$1 = {
       }
     },
     disabledDay: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    errorDay: {
       type: Array,
       default() {
         return [];
@@ -1486,7 +1507,8 @@ const _sfc_main$1 = {
       startDate: this.startDate,
       endDate: this.endDate,
       range: this.range,
-      disabledDay: this.disabledDay
+      disabledDay: this.disabledDay,
+      errorDay: this.errorDay
     });
     this.init(this.date);
   },
@@ -1841,9 +1863,10 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
                         calendar: $data.calendar,
                         selected: $props.selected,
                         disabledDay: $props.disabledDay,
+                        errorDay: $props.errorDay,
                         lunar: $props.lunar,
                         onChange: $options.choiceDate
-                      }, null, 8, ["weeks", "calendar", "selected", "disabledDay", "lunar", "onChange"])
+                      }, null, 8, ["weeks", "calendar", "selected", "disabledDay", "errorDay", "lunar", "onChange"])
                     ]);
                   }),
                   128
@@ -1861,7 +1884,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     )) : createCommentVNode("v-if", true)
   ]);
 }
-const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar.vue"]]);
+const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar.vue"]]);
 const _style_0 = { "example-body": { "": { "flexDirection": "row" } }, "calendar-button": { "": { "flex": 1, "fontWeight": "bold", "fontSize": "32rpx" } } };
 function getDate(date, AddDayCount = 0) {
   if (!date) {
@@ -2022,7 +2045,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])) : createCommentVNode("v-if", true)
   ]);
 }
-const calendar = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/calendar/calendar.nvue"]]);
+const calendar = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/calendar/calendar.nvue"]]);
 export {
   calendar as default
 };

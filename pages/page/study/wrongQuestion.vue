@@ -1,12 +1,10 @@
 <template>
+	<!-- 错题本 -->
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
-			<!-- 	<view class="item-title-wrap" style="margin: 0.625rem 0 0.5rem 0;">
-					<h3 class="item-title">错题本</h3>
-				</view> -->
 				<view class="achievement-statistics">
 					<h3 class="achievement-title">错题统计</h3>
 					<h3 class="statistics">共28道错题</h3>
@@ -90,13 +88,13 @@
 
 		data() {
 			return {
-				wrongRecordsCount:{},
-				pageHeadTitle:"错题本",
+				wrongRecordsCount: {},
+				pageHeadTitle: "错题本",
 				keyword: "",
 				current: 0,
 				selectProductsId: "",
-				productsTab: [],//tab选项
-				productsList: {},//tab列表
+				productsTab: [], //tab选项
+				productsList: {}, //tab列表
 			}
 		},
 		onLoad() {
@@ -108,20 +106,20 @@
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
-			}).then(res=>{
+			}).then(res => {
 				this.verifLogin().then(data => {
 					// 错题统计
 					this.commonRequest({
 						url: "/api/wrong-records/stats"
 					}).then(res => {
-						this.consoleLog("错题统计::", JSON.stringify(res))
-							try {
-								this.wrongRecordsCount = res.data;
-							} catch (e) {}
+						console.log("错题统计::", JSON.stringify(res))
+						try {
+							this.wrongRecordsCount = res.data;
+						} catch (e) {}
 					}).catch(error => {
-						this.consoleLog("错题统计报错：：", error)
+						console.log("错题统计报错：：", error)
 					})
-					
+
 					this.commonRequest({
 						url: "/api/wrong-records/getCategories"
 					}).then(res => {
@@ -135,8 +133,8 @@
 									page: 1
 								})
 								this.productsList["products" + i] = {
-									requested:false,
-									list:[]
+									requested: false,
+									list: []
 								}
 							} catch (e) {}
 						}
@@ -145,7 +143,7 @@
 						this.consoleLog("获取错题类目分组(Tab)报错：：", error)
 					})
 				})
-				
+
 			})
 		},
 		onHide() {
@@ -164,28 +162,28 @@
 			},
 		},
 		methods: {
-			clickTab(item,i) {
+			clickTab(item, i) {
 				if (this.current !== i) {
 					this.selectProductsId = item.id;
 					this.current = i;
 					this.getProducts()
 				}
 			},
-			similarExercises(data){
+			similarExercises(data) {
 				// 同类练习
 				uni.showToast({
 					title: "同类练习" + data.recordId,
 					icon: "none"
 				})
 			},
-			reAnswer(data){
+			reAnswer(data) {
 				// 重新作答
 				uni.showToast({
 					title: "重新作答" + data.recordId,
 					icon: "none"
 				})
 			},
-			print(data){
+			print(data) {
 				// 打印
 				uni.showToast({
 					title: "打印" + data.recordId,
@@ -195,17 +193,17 @@
 			// 获取商品
 			getProducts(data) {
 				if (!this.selectProductsId) return;
-				if(data && data.reset){
-					this.productsTab.forEach(item=>{
+				if (data && data.reset) {
+					this.productsTab.forEach(item => {
 						this.productsList["products" + item.id].requested = false;
 						this.productsList["products" + item.id].list = [];
 					})
 				}
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					console.log(this.keyword,this.selectProductsId)
+					console.log(this.keyword, this.selectProductsId)
 					// 错题列表
 					this.commonRequest({
-						url: "/api/exchange/products",
+						url: "/api/wrong-records/getAll",
 						data: {
 							keyword: this.keyword,
 							type: this.selectProductsId,
@@ -214,13 +212,13 @@
 					}).then(res => {
 						console.log("错题列表:", res.data)
 						this.productsList["products" + this.selectProductsId].requested = true;
-						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
+						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list,...res.data];
 					}).catch(error => {
 						this.consoleLog("错题列表报错：：", error)
 					})
 				}
 			}
-			
+
 		}
 	}
 </script>
@@ -239,6 +237,7 @@
 			background: url("/static/image/2_2_banner_back.png") no-repeat top /100%;
 			position: relative;
 			margin-top: 36rpx;
+
 			.achievement-title {
 				color: #fff;
 				font-size: 1.25rem;
@@ -365,7 +364,8 @@
 						font-size: 0.75rem;
 						min-width: calc(3.75rem - 0.56rem * 2);
 						text-align: center;
-						&:last-child{
+
+						&:last-child {
 							margin-right: 0;
 						}
 					}
@@ -383,71 +383,85 @@
 						background-color: #fff;
 						border-radius: 1rem;
 						margin-bottom: 0.75rem;
-						.topic-title-wrap{
+
+						.topic-title-wrap {
 							overflow: hidden;
-							.topic-title{
+
+							.topic-title {
 								float: left;
 								font-size: 0.75rem;
 								color: #222;
 							}
-							.topic-time{
+
+							.topic-time {
 								float: right;
 								font-size: 0.625rem;
 								color: #676767;
 							}
 						}
-						.topic-wrap{
-							.topic{
+
+						.topic-wrap {
+							.topic {
 								padding: 0.75rem 0;
 								color: #222;
 								font-size: 0.81rem;
 							}
-							.topic-answer-wrap{
-								.topic-answer{
+
+							.topic-answer-wrap {
+								.topic-answer {
 									border-radius: 1rem;
 									padding: 0.625rem;
 									font-size: 0.81rem;
 									line-height: 1.125rem;
-									&:nth-child(1){
+
+									&:nth-child(1) {
 										background: #FFF5F6;
 										color: #7D000F;
 										margin-bottom: 0.625rem;
 									}
-									&:nth-child(2){
+
+									&:nth-child(2) {
 										background: #F3FFF3;
 										color: #1C760D;
 									}
-									.topic-answer-title{
+
+									.topic-answer-title {
 										font-size: 0.81rem;
 										margin-bottom: 0.2rem;
 									}
 								}
 							}
-							.list-btn-wrap{
+
+							.list-btn-wrap {
 								display: flex;
 								margin-top: 0.625rem;
-								.list-btn{
+
+								.list-btn {
 									flex: 1;
 									text-align: center;
 									padding: 0.43rem;
 									margin-right: 1.3rem;
-									&:nth-child(1){
+
+									&:nth-child(1) {
 										border: 0.1rem solid #ACE48C;
 										background: #F1FFEE;
 										border-radius: 1rem;
 									}
-									&:nth-child(2){
+
+									&:nth-child(2) {
 										border: 0.1rem solid #6093FF;
 										background: #6093FF;
 										border-radius: 1rem;
 										color: #fff;
 									}
-									&:nth-child(3){
+
+									&:nth-child(3) {
 										border: 0.1rem solid #ACACAC;
 										background: #F2F2F2;
 										border-radius: 1rem;
 									}
-									&:last-child{
+
+									&:last-child {
 										margin-right: 0;
 									}
 								}
