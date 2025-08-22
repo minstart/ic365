@@ -9,10 +9,10 @@
 					<view class="subject-grade-wrap">
 						<span class="subject">{{categoryTree.subject}}</span>
 						<span> · </span>
-						<span class="grade">{{categoryTree.grade}}年级{{categoryTree.semester}}</span>
+						<span class="grade">{{categoryTree.grade}}年级{{categoryTree.semester}}{{treeID}}</span>
 					</view>
-					<view class="tree-wrap">
-						<view class="tree-list" :class='selectCategory.categoryId == item.categoryId?"tree-selected":""' v-for="(item,i) in categoryTree.category" @click.stop="choiceCategory(item)">
+					<scroll-view class="tree-wrap" scroll-y="true" :scroll-into-view="treeID" :scroll-with-animation="true">
+						<view :id="'tree-list-'+item.categoryId" class="tree-list" :class='selectCategory.categoryId == item.categoryId?"tree-selected":""' v-for="(item,i) in categoryTree.category" @click.stop="choiceCategory(item)">
 							<view class="tree-list-title">{{item.name}}</view>
 							<!-- <view class="tree-list" v-for="(item2,i2) in item.children">
 								<view class="tree-list-title">{{item2.categoryName}}</view>
@@ -21,13 +21,13 @@
 								</div>
 							</view> -->
 						</view>
-					</view>
+					</scroll-view>
 				</view>
 				<view class="topic-wrap">
 					<view class="topic-function-wrap">
 						<view class="search-btn-wrap" v-if="pageType!='everyDay'">
 							<input class="search-input" type="text" v-model="keyword" placeholder="你想学什么" />
-							<view class="search-btn" @click=""></view>
+							<view class="search-btn" @click="getQuestion"></view>
 						</view>
 					</view>
 					<!-- 答题右下方内容 -->
@@ -68,8 +68,9 @@
 									</view>
 									<view class="play-video-btn" @click="playVideo()"></view>
 								</view>
+								<!-- AI析题 -->
 								<view class="lingbao-wrap" v-if="pageType == 'everyDay'">
-									<view class="lingbao-icon" @click="AIAnalysis"></view>
+									<view class="lingbao-icon" @click="AIAnalysis()"></view>
 									<view class="lingbao-image"></view>
 								</view>
 							</view>
@@ -104,7 +105,8 @@
 	<l-popup v-show="showAnalysis" :close="closePopup">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
-				<view class="popup-analysis-text" v-if="topic.analysis" v-html="topic.analysis"></view>
+				<h3 style="margin-bottom: 16rpx;">题目：{{topic.content}}</h3>
+				<view class="popup-analysis-text" v-if="topic.analysis" v-html="'解析：'+topic.analysis"></view>
 			</view>
 		</template>
 	</l-popup>
@@ -113,8 +115,8 @@
 		<template v-slot>
 			<view class="popup-analysis-wrap">
 				<view class="conten-window">
-					<h3>题目：{{topic.content}}</h3>
-					<view class="popup-analysis-text" v-if="topic.AIanalysis" v-html="topic.AIanalysis.text">
+					<h3 style="margin-bottom: 16rpx;">题目：{{topic.content}}</h3>
+					<view class="popup-analysis-text" v-if="topic.AIanalysis" v-html="'AI解析：'+topic.AIanalysis.text">
 					</view>
 					<div class="next-btn-wrap" v-show="AIanalysisNextBtn">
 						<view class="next-btn" @click="getAIAnalysis">下一步</view>
@@ -128,7 +130,6 @@
 <script>
 	import store from '/store/index.js';
 	import commonJs from '/common/js/common.js';
-import { error } from 'console';
 	const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi; //图片校验
 	export default {
 		mixins: [commonJs],
@@ -140,6 +141,7 @@ import { error } from 'console';
 		data() {
 			return {
 				taskbarHeight2: "", //计算任务栏高度，避开左侧摄像头位置
+				treeID: "", //树状图左侧菜单滚动位置
 				pageType: "", //everyDay 每日一题；question 题目；video 视频
 				answered: false, //是否已经回答了问题
 				keyword: "", //搜索内容
@@ -311,7 +313,6 @@ import { error } from 'console';
 						this.topic.content = this.topic.content.replace(imageUrlPattern, '').trim();
 					} catch (e) {}
 					this.topic.contentImages = [...this.topic.contentImages, contentImages]
-
 				}
 
 				// 解析数据处理
@@ -415,6 +416,7 @@ import { error } from 'console';
 					this.AIanalysisNextBtn = false
 				}
 				if (this.topic.AIanalysis.step == 0 || ((this.topic.AIanalysis.step + 1) <= this.topic.AIanalysis.stepCount)) {
+					// console.log("questionId:",this.topic.questionId,",step:",this.topic.AIanalysis.step + 1)
 					this.commonRequest({
 						url: "/api/ai/getAnalysisByStep",
 						data: {
@@ -460,14 +462,17 @@ import { error } from 'console';
 						if (this.keyword) {
 							try {
 								res.data.categories.forEach(item => {
-									console.log(item)
 									if (item.name == this.keyword || item.categoryId == this.keyword) {
 										this.selectCategory = item;
+										let _this = this;
+										setTimeout(() => {
+											_this.treeID = "tree-list-" + item.categoryId;
+										}, 1000)
 										throw new Error("已经匹配了，终止循环")
 									}
 								})
 							} catch (e) {}
-						}else{}
+						} else {}
 						this.choiceCategory(this.selectCategory)
 						resolve(res)
 					}).catch(error => {
@@ -602,7 +607,9 @@ import { error } from 'console';
 			// 打开AI解析
 			AIAnalysis() {
 				this.showAIAnalysis = true;
-				this.getAIAnalysis();
+				if (this.topic.AIanalysis.step == 0) {
+					this.getAIAnalysis();
+				}
 			},
 
 		}
@@ -640,6 +647,8 @@ import { error } from 'console';
 				}
 
 				.tree-wrap {
+					height: calc(100% - 128rpx);
+
 					.tree-list {
 						.tree-list-title {
 							line-height: 52rpx;

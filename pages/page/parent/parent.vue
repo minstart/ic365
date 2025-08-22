@@ -96,7 +96,7 @@
 					<view class="item-info">
 						<h3 class="info-title">{{item.name||""}}</h3>
 						<view class="info-text">正确率：{{item.accuracy}}% | {{suggestionTetx(item.accuracy)}}</view>
-						<button class="info-btn" @click="jumpPage({url:''})">{{item.btnTitle}}专项学习</button>
+						<button class="info-btn" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.name})">{{item.btnTitle}}专项学习</button>
 					</view>
 				</li>
 			</ul>
@@ -224,7 +224,14 @@
 				},
 
 				// 建议提升和其他
-				suggestionImproveOther: {},
+				suggestionImproveOther: {
+					currencies:{
+						_newlyAdded:{
+							text:""
+						}
+					}
+					
+				},
 				// 家长页面统计
 				parent: {},
 

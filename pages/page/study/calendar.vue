@@ -240,7 +240,7 @@
 		width: 244rpx;
 		margin: 0 32rpx;
 		.instructions-wrap{
-			width: 232rpx;
+			width: 192rpx;
 			padding: 20rpx 30rpx;
 			background: rgba(255, 255, 255, 0.6);
 			border-radius: 10rpx;
@@ -252,25 +252,33 @@
 			.instructions{
 				display: flex;
 				align-items: center;
-				justify-content: center;
+				// justify-content: center;
 				font-size: 20rpx;
 				margin-bottom: 30rpx;
 				.instructions-icon{
-					
 				}
 				&:nth-child(2){
 					.instructions-icon{
+						width: 26rpx;
+						height: 26rpx;
+						margin-right: 20rpx;
 						background: url("/static/icons/calendar_selected.png") no-repeat center /100% 100%;
 					}
 				}
-				&:nth-child(2){
+				&:nth-child(3){
 					.instructions-icon{
+						margin:0 20rpx 0 3rpx;
+						width: 20rpx;
+						height: 26rpx;
 						background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
 					}
 				}
-				&:nth-child(3){
+				&:nth-child(4){
 					margin-bottom: 0;
 					.instructions-icon{
+						width: 24rpx;
+						height: 24rpx;
+						margin: 1rpx 20rpx 1rpx 1rpx;
 						background: url("/static/icons/error2.png") no-repeat center /100% 100%;
 					}
 				}

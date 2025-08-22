@@ -23,7 +23,7 @@ const service = axios.create({
 	// withCredentials: true, // send cookies when cross-domain requests
 	// adapter:createUniAppAxiosAdapter(),
 	adapter: axiosAdapterUniapp,
-	timeout: 5000 // request timeout
+	timeout: 30000 // request timeout
 })
 
 // request interceptor
@@ -98,7 +98,7 @@ service.interceptors.response.use(
 	 * You can also judge the status by HTTP Status Code
 	 */
 	response => {
-		console.log("接口返回::", JSON.stringify(response))
+		// console.log("接口返回::", JSON.stringify(response))
 		const res = response.data
 		if (store.state.encrypt_enabled && response.config.url.includes('/crypto') === false && response.data?.data) {
 			// AES KEY EXPIRED.

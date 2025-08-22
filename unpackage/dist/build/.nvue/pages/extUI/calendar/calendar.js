@@ -1239,6 +1239,12 @@ const _sfc_main$2 = {
       default() {
         return [];
       }
+    },
+    errorDay: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
   computed: {
@@ -1261,9 +1267,10 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
       "uni-calendar-item--before-checked": $props.weeks.beforeMultiple,
       "uni-calendar-item--multiple": $props.weeks.multiple,
       "uni-calendar-item--after-checked": $props.weeks.afterMultiple,
-      "calendar-selected": $props.selected && $props.weeks.extraInfo,
+      "calendar-selected": $props.selected.indexOf($props.weeks.fullDate) != -1 || $props.errorDay.indexOf($props.weeks.fullDate) != -1,
       "uni-calendar-item--disable": /* @__PURE__ */ new Date() < new Date($props.weeks.fullDate),
-      "new-disable": $props.disabledDay.indexOf($props.weeks.fullDate) != -1
+      "new-disable": $props.disabledDay.indexOf($props.weeks.fullDate) != -1,
+      "new-error": $props.errorDay.indexOf($props.weeks.fullDate) != -1
     }]),
     onClick: _cache[0] || (_cache[0] = ($event) => $options.choiceDate($props.weeks)),
     renderWhole: true
@@ -1273,13 +1280,21 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         key: 0,
         class: "uni-calendar-item__weeks-box-circle"
       })) : createCommentVNode("", true),
-      $props.disabledDay.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+      $props.calendar.fullDate === $props.weeks.fullDate ? (openBlock(), createElementBlock("u-text", {
         key: 1,
+        class: "checked-icon"
+      })) : createCommentVNode("", true),
+      $props.disabledDay.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+        key: 2,
         class: "new-disable-icon"
       })) : createCommentVNode("", true),
-      $props.calendar.fullDate === $props.weeks.fullDate ? (openBlock(), createElementBlock("u-text", {
-        key: 2,
-        class: "checked-icon"
+      $props.selected.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+        key: 3,
+        class: "selected-icon"
+      })) : createCommentVNode("", true),
+      $props.errorDay.indexOf($props.weeks.fullDate) != -1 ? (openBlock(), createElementBlock("u-text", {
+        key: 4,
+        class: "new-error-icon"
       })) : createCommentVNode("", true),
       createElementVNode("u-text", {
         class: normalizeClass(["uni-calendar-item__weeks-box-text", {
@@ -1293,7 +1308,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         }])
       }, toDisplayString($props.weeks.date), 3),
       !$props.lunar && !$props.weeks.extraInfo && $props.weeks.isDay ? (openBlock(), createElementBlock("u-text", {
-        key: 3,
+        key: 5,
         class: normalizeClass(["uni-calendar-item__weeks-lunar-text", {
           "uni-calendar-item--isDay-text": $props.weeks.isDay,
           "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
@@ -1304,7 +1319,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         }])
       }, toDisplayString($options.todayText), 3)) : createCommentVNode("", true),
       $props.lunar && !$props.weeks.extraInfo ? (openBlock(), createElementBlock("u-text", {
-        key: 4,
+        key: 6,
         class: normalizeClass(["uni-calendar-item__weeks-lunar-text", {
           "uni-calendar-item--isDay-text": $props.weeks.isDay,
           "uni-calendar-item--isDay": $props.calendar.fullDate === $props.weeks.fullDate && $props.weeks.isDay,
@@ -1316,7 +1331,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         }])
       }, toDisplayString($props.weeks.isDay ? $options.todayText : $props.weeks.lunar.IDayCn === "初一" ? $props.weeks.lunar.IMonthCn : $props.weeks.lunar.IDayCn), 3)) : createCommentVNode("", true),
       $props.weeks.extraInfo && $props.weeks.extraInfo.info ? (openBlock(), createElementBlock("u-text", {
-        key: 5,
+        key: 7,
         class: normalizeClass(["uni-calendar-item__weeks-lunar-text", {
           "uni-calendar-item--extra": $props.weeks.extraInfo.info,
           "uni-calendar-item--isDay-text": $props.weeks.isDay,
@@ -1353,6 +1368,12 @@ const _sfc_main$1 = {
       }
     },
     disabledDay: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    errorDay: {
       type: Array,
       default() {
         return [];
@@ -1456,7 +1477,8 @@ const _sfc_main$1 = {
       startDate: this.startDate,
       endDate: this.endDate,
       range: this.range,
-      disabledDay: this.disabledDay
+      disabledDay: this.disabledDay,
+      errorDay: this.errorDay
     });
     this.init(this.date);
   },
@@ -1723,9 +1745,10 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
                   calendar: $data.calendar,
                   selected: $props.selected,
                   disabledDay: $props.disabledDay,
+                  errorDay: $props.errorDay,
                   lunar: $props.lunar,
                   onChange: $options.choiceDate
-                }, null, 8, ["weeks", "calendar", "selected", "disabledDay", "lunar", "onChange"])
+                }, null, 8, ["weeks", "calendar", "selected", "disabledDay", "errorDay", "lunar", "onChange"])
               ]);
             }), 128))
           ]);

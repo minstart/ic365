@@ -193,6 +193,9 @@
   margin-top: 1.25rem;
   margin-bottom: 1.625rem;
 }
+.page-wrap .content-wrap .category-wrap .tree-wrap[data-v-9e40ef6f] {
+  height: calc(100% - 4rem);
+}
 .page-wrap .content-wrap .category-wrap .tree-wrap .tree-list[data-v-9e40ef6f] {
   margin-bottom: 0.3125rem;
 }

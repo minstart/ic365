@@ -77,7 +77,7 @@
 			</view>
 			<view class="no-list-tip" v-if="videos.length==0">暂无数据</view>
 			<ul class="plan-recommend-list-wrap">
-				<li class="plan-recommend-list" :key="item.videoId" v-for="item in videos" @click="jumpPage({url:''})">
+				<li class="plan-recommend-list" :key="item.videoId" v-for="item in videos" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.categoryName})">
 					<image class="list-icon" :src="item.coverUrl"></image>
 				</li>
 			</ul>

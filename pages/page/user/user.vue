@@ -1,7 +1,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+		<page-head :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="banner-wrap">
 			<view class="btn-wrap">
 				<view class="user-set-btn" @click="jumpPage({url:''})"></view>
@@ -54,7 +54,7 @@
 				<view class="tab-list" :current='current' v-if="current === 0">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的练习 -->
-					<view class="practice-list" v-for="item in practiceList[current].list">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpUrl({url:''})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
@@ -65,7 +65,7 @@
 				<view class="tab-list" :current='current' v-if="current === 1">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的错题 -->
-					<view class="practice-list" v-for="item in practiceList[current].list">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.title})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
@@ -86,7 +86,7 @@
 				<view class="tab-list" :current='current' v-if="current === 3">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的任务 -->
-					<view class="practice-list" v-for="item in practiceList[current].list">
+					<view class="practice-list" v-for="item in practiceList[current].list"  @click="jumpUrl({url:''})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
