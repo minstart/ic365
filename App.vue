@@ -40,17 +40,18 @@
 
 			//     }
 			// });
+			this.verifLogin().then(data => {
+				// 记录用户设备信息
+				this.commonRequest({
+					url: "/api/student/recordActivity",
+					notLoading: true,
+					data: recordActivity
+				}).then(res => {
+					// this.consoleLog("加载app时传输用户设备信息：",res)
 
-			// 记录用户设备信息
-			this.commonRequest({
-				url: "/api/student/recordActivity",
-				notLoading:true,
-				data: recordActivity
-			}).then(res => {
-				// this.consoleLog("加载app时传输用户设备信息：",res)
-
-			}).catch(error => {
-				// this.consoleLog("记录用户设备信息报错：：", error)
+				}).catch(error => {
+					// this.consoleLog("记录用户设备信息报错：：", error)
+				})
 			})
 
 			// this.removeLogin()//清除登录状态

@@ -61,7 +61,7 @@
 		},
 		mounted() {
 			this.systemTaskbar ? (this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx") : (this.taskbarHeight = "0rem")
-			// console.log("taskbarHeight",this.taskbarHeight)
+			console.log("taskbarHeight",this.taskbarHeight)
 		},
 		methods: {
 			clickBack() {

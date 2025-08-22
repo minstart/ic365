@@ -227,7 +227,7 @@
 			this.verifLogin().then(data => {
 				// 获取用户信息
 				this.commonRequest({
-					url: "/api/student/update"
+					url: "/api/student/info"
 				}).then(res => {
 					this.consoleLog("获取用户信息::", JSON.stringify(res))
 					if (res.code == 0) {

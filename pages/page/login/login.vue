@@ -93,7 +93,7 @@
 					ydLogin.getPhoneNumberCompletion((data) => {
 						uni.hideLoading()
 						if (data.success) {
-							// this.consoleLog('预取号成功', data)
+							console.log('预取号成功', data)
 							const config = {}
 							ydLogin.setCustomView(config, (data) => {
 								const platform = uni.getSystemInfoSync().platform
@@ -171,7 +171,7 @@
 								}
 							})
 						} else {
-							// this.consoleLog('预取号失败了:', data)
+							console.log('预取号失败了:', data)
 							uni.showToast({
 								title: data.msg + "，请重新点击或者切换手机验证码方式登录！" || "一键登陆失败调用预约号失败，请重新点击或者切换手机验证码方式登录！",
 								icon: 'none',
