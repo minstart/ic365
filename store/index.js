@@ -45,9 +45,37 @@ const store = new Vuex.Store({
 					formRules: { //uni-forms校验必填
 						phone: /^1[3456789]\d{9}$/
 					},
-					baseFontSize:16,
-					isLoading:true,//页面是否加载loading样式
-					taskbarHeight:"0rpx",//任务栏高度，从首页获取
+					baseFontSize: 16,
+					isLoading: true, //页面是否加载loading样式
+					taskbarHeight: "0rpx", //任务栏高度，从首页获取
+					showRewardPopUp: true, //任务奖励、成就奖励弹窗是否显示
+					rewardPopUpList: [{
+						"noticeId": 1,
+						"name": "每日必修",
+						"summary": "测试副标题",
+						"createTime": "2025-08-22T04:12:38",
+						"createTimeUnix": 1755807158,
+						"type": 1,
+						"rewardList": [{
+								"name": "10智慧星",
+								"currencyType": 1,
+								"quantity": 10,
+								"icon": "http://ic365.com"
+							},
+							{
+								"name": "5启明石",
+								"currencyType": 3,
+								"quantity": 5,
+								"icon": "http://ic365.com"
+							},
+							{
+								"name": "8知识尘",
+								"currencyType": 2,
+								"quantity": 8,
+								"icon": "http://ic365.com"
+							}
+						]
+					}], //任务奖励、成就奖励弹窗列表
 
 					hasLogin: false,
 					isUniverifyLogin: false,

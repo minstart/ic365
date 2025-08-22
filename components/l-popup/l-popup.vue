@@ -2,7 +2,7 @@
 	<view class="l-popup-background">
 		<view class="l-popup-window" :style="{'width':width,'height':height,'background':background}">
 			<view class="l-popup-wrap">
-				<view class="l-popup-close-icon" @click="close"></view>
+				<view class="l-popup-close-icon" @click.stop="close"></view>
 				<view class="l-popup-content">
 					<slot></slot>
 				</view>
@@ -83,7 +83,6 @@
 				z-index: 1000000;
 				border: 6rpx solid #fff;
 				overflow: hidden;
-
 				&::after {
 					width: 100%;
 					height: 100%;

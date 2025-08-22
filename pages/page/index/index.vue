@@ -2,7 +2,7 @@
 	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
 		<view class="banner-wrap">
-			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'" :showRewardPopUp="$store.state.showRewardPopUp" :rewardPopUpList="$store.state.rewardPopUpList"></page-head>
 			<view class="user-info-wrap">
 				<image class="head-pic" :vipLevel='userInfo.vipLevel' :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
 				<view class="user-info">

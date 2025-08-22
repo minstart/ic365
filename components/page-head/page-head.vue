@@ -17,7 +17,16 @@
 			</view>
 		</view>
 	</view>
-	<!-- <view class="page-loading" v-if="$store.state.isLoading"></view> -->
+	<view v-if="showRewardPopUp" class="reward-pop-up-wrap" v-for="item in rewardPopUpList">
+		<view class="pop-up-type" :data-type="item.type">
+			<view class="reward-pop-up-back">
+
+			</view>
+			<div class="reward-pop-up-content">
+
+			</div>
+		</view>
+	</view>
 </template>
 <script>
 	export default {
@@ -52,6 +61,15 @@
 			},
 			systemTaskbar: {
 				default: true
+			},
+
+			// 奖励弹窗
+			showRewardPopUp: {
+				default: false
+			},
+			// 奖励列表
+			rewardPopUpList: {
+				default: []
 			}
 		},
 		data() {
@@ -77,11 +95,12 @@
 	}
 </script>
 <style lang="less">
-	.common-page-head-view{
+	.common-page-head-view {
 		position: relative;
 		top: 0;
 		// background: green;
 	}
+
 	.page-head {
 		z-index: 999;
 	}
@@ -99,6 +118,7 @@
 		width: 100%;
 		background: #fff;
 		z-index: 99;
+
 		.common-page-head-back {
 			height: 88rpx;
 		}
@@ -150,40 +170,7 @@
 		height: 100vh;
 		overflow: hidden;
 		background: #fff;
-		z-index: 99999999999999999999999999999;
-	}
-
-	.page-loading::before {
-		// content: "";
-		// width: 16px;
-		// height: 16px;
-		// border-radius: 100%;
-		// color: rgba(255, 206, 9, .4);
-		// box-shadow: 0 -40px rgba(255, 206, 9, .9),
-		// 	/* top */
-		// 	40px 0px,
-		// 	/* right */
-		// 	0 40px,
-		// 	/* bottom */
-		// 	-40px 0 rgba(255, 206, 9, .7),
-		// 	/* left */
-
-		// 	-28px -28px rgba(255, 206, 9, .8),
-		// 	/* left-top */
-		// 	28px -28px rgba(255, 206, 9, 1),
-		// 	/* right-top */
-		// 	28px 28px,
-		// 	/* right-bottom */
-		// 	-28px 28px;
-		// /* left-bottom */
-		// animation: spin 1s steps(8) infinite;
-		// /* center */
-		// position: absolute;
-		// top: 0;
-		// right: 0;
-		// bottom: 0;
-		// left: 0;
-		// margin: auto;
+		z-index: 10000;
 	}
 
 	@keyframes spin {
@@ -193,6 +180,23 @@
 
 		100% {
 			transform: rotate(360deg);
+		}
+	}
+
+	//奖励列表弹窗 
+	.reward-pop-up-wrap {
+		position: fixed;
+		overflow: hidden;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 1600rpx;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 100000;
+		.pop-up-type{
+			width: 80%;
+			height: 80%;
+			background: #fff;
 		}
 	}
 </style>

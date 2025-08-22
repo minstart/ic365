@@ -385,7 +385,6 @@
 			},
 			// 教材同步 - 需要校验会员
 			verifyPlayVideo(item) {
-				console.log("item:::", item)
 				if (item) {
 					try {
 						this.playVideo(item.videoId)
@@ -396,7 +395,7 @@
 			// 每日一题、视频列表 - 打开视频解析
 			playVideo(videoId) {
 				if (!this.analysis.video || this.pageType == "video") {
-					console.log("播放视频id：", videoId || this.topic.videoId)
+					// console.log("播放视频id：", videoId || this.topic.videoId)
 					this.commonRequest({
 						url: "/api/video/getById",
 						data: {
@@ -612,16 +611,16 @@
 			},
 			// 关闭视频弹窗
 			closePopup() {
-				// if (this.videoEl && this.showVideo) {
-				// 	this.videoEl.pause()
-				// }
-				// this.showVideo = false;
-				// this.showAnalysis = false;
-				// this.showAIAnalysis = false;
-				// if (this.pageType == "video") {
-				// 	this.analysis.video = ""
-				// 	this.videoEl = ""
-				// }
+				if (this.videoEl && this.showVideo) {
+					this.videoEl.pause()
+				}
+				this.showVideo = false;
+				this.showAnalysis = false;
+				this.showAIAnalysis = false;
+				if (this.pageType == "video") {
+					this.analysis.video = ""
+					this.videoEl = ""
+				}
 			},
 
 			// 打开AI解析

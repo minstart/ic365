@@ -4071,6 +4071,37 @@ if (uni.restoreGlobal) {
       //页面是否加载loading样式
       taskbarHeight: "0rpx",
       //任务栏高度，从首页获取
+      showRewardPopUp: true,
+      //任务奖励、成就奖励弹窗是否显示
+      rewardPopUpList: [{
+        "noticeId": 1,
+        "name": "每日必修",
+        "summary": "测试副标题",
+        "createTime": "2025-08-22T04:12:38",
+        "createTimeUnix": 1755807158,
+        "type": 1,
+        "rewardList": [
+          {
+            "name": "10智慧星",
+            "currencyType": 1,
+            "quantity": 10,
+            "icon": "http://ic365.com"
+          },
+          {
+            "name": "5启明石",
+            "currencyType": 3,
+            "quantity": 5,
+            "icon": "http://ic365.com"
+          },
+          {
+            "name": "8知识尘",
+            "currencyType": 2,
+            "quantity": 8,
+            "icon": "http://ic365.com"
+          }
+        ]
+      }],
+      //任务奖励、成就奖励弹窗列表
       hasLogin: false,
       isUniverifyLogin: false,
       loginProvider: "",
@@ -4113,7 +4144,7 @@ if (uni.restoreGlobal) {
         state.userInfo.token = "";
       },
       SET_LOGIN: (state, data) => {
-        formatAppLog("log", "at store/index.js:95", "data.token::", data.token);
+        formatAppLog("log", "at store/index.js:123", "data.token::", data.token);
         state.userInfo.token = data.token;
         state.userInfo.info = data;
       },
@@ -14639,6 +14670,14 @@ if (uni.restoreGlobal) {
       },
       systemTaskbar: {
         default: true
+      },
+      // 奖励弹窗
+      showRewardPopUp: {
+        default: false
+      },
+      // 奖励列表
+      rewardPopUpList: {
+        default: []
       }
     },
     data() {
@@ -14725,10 +14764,26 @@ if (uni.restoreGlobal) {
           4
           /* STYLE */
         ),
-        vue.createCommentVNode(' <view class="page-loading" v-if="$store.state.isLoading"></view> ')
+        $props.showRewardPopUp ? (vue.openBlock(true), vue.createElementBlock(
+          vue.Fragment,
+          { key: 0 },
+          vue.renderList($props.rewardPopUpList, (item) => {
+            return vue.openBlock(), vue.createElementBlock("view", { class: "reward-pop-up-wrap" }, [
+              vue.createElementVNode("view", {
+                class: "pop-up-type",
+                "data-type": item.type
+              }, [
+                vue.createElementVNode("view", { class: "reward-pop-up-back" }),
+                vue.createElementVNode("div", { class: "reward-pop-up-content" })
+              ], 8, ["data-type"])
+            ]);
+          }),
+          256
+          /* UNKEYED_FRAGMENT */
+        )) : vue.createCommentVNode("v-if", true)
       ],
-      2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+      64
+      /* STABLE_FRAGMENT */
     );
   }
   const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3t, [["render", _sfc_render$3s], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/71018/Desktop/ic365/components/page-head/page-head.vue"]]);
@@ -14992,8 +15047,10 @@ if (uni.restoreGlobal) {
               isHide: true,
               isBack: false,
               isModule: false,
-              background: "transparent"
-            }, null, 8, ["title"]),
+              background: "transparent",
+              showRewardPopUp: _ctx.$store.state.showRewardPopUp,
+              rewardPopUpList: _ctx.$store.state.rewardPopUpList
+            }, null, 8, ["title", "showRewardPopUp", "rewardPopUpList"]),
             vue.createElementVNode("view", { class: "user-info-wrap" }, [
               vue.createElementVNode("image", {
                 class: "head-pic",
@@ -26806,7 +26863,7 @@ ${o3}
           vue.createElementVNode("view", { class: "l-popup-wrap" }, [
             vue.createElementVNode("view", {
               class: "l-popup-close-icon",
-              onClick: _cache[0] || (_cache[0] = (...args) => $props.close && $props.close(...args))
+              onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => $props.close && $props.close(...args), ["stop"]))
             }),
             vue.createElementVNode("view", { class: "l-popup-content" }, [
               vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
@@ -27071,7 +27128,6 @@ ${o3}
       },
       // 教材同步 - 需要校验会员
       verifyPlayVideo(item) {
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:388", "item:::", item);
         if (item) {
           try {
             this.playVideo(item.videoId);
@@ -27082,14 +27138,13 @@ ${o3}
       // 每日一题、视频列表 - 打开视频解析
       playVideo(videoId) {
         if (!this.analysis.video || this.pageType == "video") {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:399", "播放视频id：", videoId || this.topic.videoId);
           this.commonRequest({
             url: "/api/video/getById",
             data: {
               id: videoId || this.topic.videoId
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:406", "获取视频解析地址::", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:405", "获取视频解析地址::", res2.data);
             try {
               this.analysis.video = res2.data;
               this.showVideo = true;
@@ -27099,7 +27154,7 @@ ${o3}
             } catch (e2) {
             }
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:415", "获取视频解析地址报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:414", "获取视频解析地址报错", error);
           });
         } else {
           this.showVideo = true;
@@ -27120,7 +27175,7 @@ ${o3}
               step: this.topic.AIanalysis.step + 1
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:438", "/api/ai/getAnalysisByStep：：", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:437", "/api/ai/getAnalysisByStep：：", res2.data);
             this.topic.AIanalysis.step = res2.data.currentStep;
             this.topic.AIanalysis.stepCount = res2.data.stepCount;
             res2.data.currentStep < res2.data.stepCount ? this.AIanalysisNextBtn = true : this.AIanalysisNextBtn = false;
@@ -27135,7 +27190,7 @@ ${o3}
               }
             }
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:454", "AI析题报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:453", "AI析题报错", error);
           });
         }
       },
@@ -27149,7 +27204,7 @@ ${o3}
               fromType: this.pageType
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:469", "视频、题目类型获取左侧类目目录:", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:468", "视频、题目类型获取左侧类目目录:", res2.data);
             this.resetProblem("all");
             this.categoryTree.category = res2.data.categories;
             this.selectCategory = res2.data.categories[0];
@@ -27171,14 +27226,14 @@ ${o3}
             this.choiceCategory(this.selectCategory, true);
             resolve(res2);
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:490", "视频、题目类型获取左侧类目目录报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:489", "视频、题目类型获取左侧类目目录报错", error);
             reject2(error);
           });
         });
       },
       // 点击类目之后,获取右侧内容
       choiceCategory(item, isInitialization) {
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:498", this.selectCategory.categoryId, item.categoryId);
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:497", this.selectCategory.categoryId, item.categoryId);
         if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || typeof isInitialization != "undefined") {
           if (this.selectCategory.categoryId != item.categoryId && item) {
             this.selectCategory = {
@@ -27187,7 +27242,7 @@ ${o3}
             };
             this.resetProblem(this.pageType);
           }
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:507", "this.pageType:", this.pageType);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:506", "this.pageType:", this.pageType);
           if (this.pageType == "question") {
             this.commonRequest({
               url: "/api/question/byCategory",
@@ -27198,11 +27253,11 @@ ${o3}
                 categoryId: item.categoryId
               }
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:520", "获取题目:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:519", "获取题目:", res2.data);
               this.topic = res2.data[0];
               this.topicFilter();
             }).catch((error) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:524", "获取题目报错", error);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:523", "获取题目报错", error);
               reject(error);
             });
           } else if (this.pageType == "video") {
@@ -27217,7 +27272,7 @@ ${o3}
                 categoryId: item.categoryId
               }
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:539", "获取视频列表:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:538", "获取视频列表:", res2.data);
               if (res2.data.length == 0) {
                 this.videoList.noData = true;
               }
@@ -27225,10 +27280,10 @@ ${o3}
               this.videoList.page = this.videoList.page + 1;
               this.videoList.list = [...this.videoList.list, ...res2.data];
             }).catch((error) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:547", "获取视频列表报错", error);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:546", "获取视频列表报错", error);
             });
           } else {
-            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:550", "每日一题的不能点");
+            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:549", "每日一题的不能点");
           }
         }
       },
@@ -27237,7 +27292,7 @@ ${o3}
           return false;
         this.isLoading = true;
         this.choiceCategory(this.selectCategory);
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:560", "触发滚动到底部加载视频新数据");
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:559", "触发滚动到底部加载视频新数据");
       },
       // 切换题目之后，需要调用，重置数据 type: "all" 所有；question:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
       resetProblem(type) {
@@ -27297,6 +27352,16 @@ ${o3}
       },
       // 关闭视频弹窗
       closePopup() {
+        if (this.videoEl && this.showVideo) {
+          this.videoEl.pause();
+        }
+        this.showVideo = false;
+        this.showAnalysis = false;
+        this.showAIAnalysis = false;
+        if (this.pageType == "video") {
+          this.analysis.video = "";
+          this.videoEl = "";
+        }
       },
       // 打开AI解析
       AIAnalysis() {
@@ -30853,6 +30918,10 @@ ${o3}
         //选项卡显示下标
         practiceList: [
           {
+            title: "我的任务",
+            list: []
+          },
+          {
             title: "我的练习",
             list: [
               {
@@ -30888,10 +30957,6 @@ ${o3}
                 jumpUrl: "/pages/page/user/exchangeMall"
               }
             ]
-          },
-          {
-            title: "我的任务",
-            list: []
           }
         ],
         skinCurrent: 0,
@@ -30949,7 +31014,7 @@ ${o3}
             size: 3
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:279", "获取兑换商品列表:", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:280", "获取兑换商品列表:", res2.data);
           this.exchangeList = res2.data;
         }).catch((error) => {
           this.consoleLog("获取兑换商品列表报错：：", error);
@@ -30957,7 +31022,7 @@ ${o3}
         this.commonRequest({
           url: "/api/question/getRecentlyAndCollection"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:289", "获取最近题目和收藏题目数量", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:290", "获取最近题目和收藏题目数量", res2.data);
           res2.data.recently > 0 ? this.practiceList[0].list[0].unRead = res2.data.recently + "条新记录" : this.practiceList[0].list[0].unRead = "";
           this.practiceList[0].list[1].introduce = "已收藏" + (res2.data.collection || 0) + "个练习";
         }).catch((error) => {
@@ -30980,7 +31045,7 @@ ${o3}
         this.commonRequest({
           url: "/api/exchange/stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:318", "获取我的兑换统计：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:319", "获取我的兑换统计：", res2.data);
           this.practiceList[2].list[0].introduce = "已兑换" + (res2.data.exchangeTotal || 0) + "件物品";
           this.practiceList[2].list[1].introduce = (res2.data.availableExchangeCount || 0) + "件商品可兑换";
         }).catch((error) => {
@@ -30989,7 +31054,7 @@ ${o3}
         this.commonRequest({
           url: "/api/mission/mine-stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:331", "我的任务：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:332", "我的任务：", res2.data);
           res2.data.forEach((item) => {
             this.practiceList[3].list.push({
               coverUrl: item.cover,
@@ -31200,7 +31265,7 @@ ${o3}
                   vue.renderList($data.practiceList[$data.current].list, (item) => {
                     return vue.openBlock(), vue.createElementBlock("view", {
                       class: "practice-list",
-                      onClick: _cache[3] || (_cache[3] = ($event) => _ctx.jumpUrl({ url: "" }))
+                      onClick: _cache[3] || (_cache[3] = ($event) => _ctx.jumpPage({ url: "" }))
                     }, [
                       vue.createElementVNode("image", {
                         class: "list-icon",
@@ -31331,7 +31396,7 @@ ${o3}
                   vue.renderList($data.practiceList[$data.current].list, (item) => {
                     return vue.openBlock(), vue.createElementBlock("view", {
                       class: "practice-list",
-                      onClick: _cache[4] || (_cache[4] = ($event) => _ctx.jumpUrl({ url: "" }))
+                      onClick: _cache[4] || (_cache[4] = ($event) => _ctx.jumpPage({ url: "" }))
                     }, [
                       vue.createElementVNode("image", {
                         class: "list-icon",

@@ -54,7 +54,7 @@
 				<view class="tab-list" :current='current' v-if="current === 0">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的练习 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpUrl({url:''})">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:''})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
@@ -86,7 +86,7 @@
 				<view class="tab-list" :current='current' v-if="current === 3">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的任务 -->
-					<view class="practice-list" v-for="item in practiceList[current].list"  @click="jumpUrl({url:''})">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:''})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
@@ -171,6 +171,10 @@
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
 				current: 0, //选项卡显示下标
 				practiceList: [{
+						title: "我的任务",
+						list: []
+					},
+					{
 						title: "我的练习",
 						list: [{
 								coverUrl: "/static/icons/recently_practiced.png",
@@ -205,11 +209,8 @@
 								jumpUrl: "/pages/page/user/exchangeMall"
 							}
 						]
-					},
-					{
-						title: "我的任务",
-						list: []
 					}
+
 				],
 
 				skinCurrent: 0,
@@ -272,8 +273,8 @@
 				// 获取兑换商品列表
 				this.commonRequest({
 					url: "/api/exchange/products",
-					data:{
-						size:3
+					data: {
+						size: 3
 					}
 				}).then(res => {
 					console.log("获取兑换商品列表:", res.data)
