@@ -18,41 +18,6 @@
 		mixins: [commonJs],
 		onLaunch: function() {
 			store.commit("SET_ENCRYPTENABLED", true) //开启数据加密模式
-			const deviceInfo = uni.getDeviceInfo()
-			const appInfo = uni.getSystemInfoSync()
-			// console.log("设备信息：：：",deviceInfo)
-			// console.log("安装包版本：：：",appInfo)
-
-			let recordActivity = {
-				deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
-				osVersion: deviceInfo.system,
-				appVersion: appInfo.appVersion,
-				uniqueId: deviceInfo.deviceId
-			}
-
-			// uni.request({
-			//     url: store.state.configData.staticUrl  + "/api/student/recordActivity", //仅为示例，并非真实接口地址。
-			//     data: recordActivity,
-			//     // header: {
-			//     //     'custom-header': 'hello' //自定义请求头信息
-			//     // },
-			//     success: (res) => {
-
-			//     }
-			// });
-			this.verifLogin().then(data => {
-				// 记录用户设备信息
-				this.commonRequest({
-					url: "/api/student/recordActivity",
-					notLoading: true,
-					data: recordActivity
-				}).then(res => {
-					// this.consoleLog("加载app时传输用户设备信息：",res)
-
-				}).catch(error => {
-					// this.consoleLog("记录用户设备信息报错：：", error)
-				})
-			})
 
 			// this.removeLogin()//清除登录状态
 			// store.commit('RESET_CRYPTO') //清除crypto加密储存数据

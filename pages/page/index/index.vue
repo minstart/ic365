@@ -239,6 +239,29 @@
 
 		onReady() {
 			this.verifLogin().then(data => {
+				store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
+				const deviceInfo = uni.getDeviceInfo()
+				const appInfo = uni.getSystemInfoSync()
+				// console.log("设备信息：：：",deviceInfo)
+				// console.log("安装包版本：：：",appInfo)
+				let recordActivity = {
+					deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
+					osVersion: deviceInfo.system,
+					appVersion: appInfo.appVersion,
+					uniqueId: deviceInfo.deviceId
+				}
+				// 记录用户设备信息
+				this.commonRequest({
+					url: "/api/student/recordActivity",
+					notLoading: true,
+					data: recordActivity
+				}).then(res => {
+					// this.consoleLog("加载app时传输用户设备信息：",res)
+			
+				}).catch(error => {
+					// this.consoleLog("记录用户设备信息报错：：", error)
+				})
+				
 				// 获取用户信息
 				this.commonRequest({
 					url: "/api/student/info"
@@ -385,8 +408,7 @@
 
 <style lang="less" scoped>
 	.banner-wrap {
-		padding: 40rpx 24rpx 0 24rpx;
-		padding-top: 48rpx;
+		padding: 20rpx 24rpx 0 24rpx;
 		// display: flex;
 		background: url("/static/image/1_header_banner.png") no-repeat top / 100%;
 
@@ -504,7 +526,7 @@
 		}
 
 		.activity-wrap {
-			margin-top: 4.4rem;
+			margin-top: 126rpx;
 			display: flex;
 
 			.activity {

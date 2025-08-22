@@ -1,3 +1,7 @@
+.common-page-head-view[data-v-e80b2f0b] {
+  position: relative;
+  top: 0;
+}
 .page-head[data-v-e80b2f0b] {
   z-index: 999;
 }
@@ -96,8 +100,7 @@
 /* 文章场景相关 */
 .banner-wrap[data-v-ff8615f1] {
   border-radius: 0.6rem;
-  padding: 1.25rem 0.75rem 0 0.75rem;
-  padding-top: 1.5rem;
+  padding: 0.625rem 0.75rem 0 0.75rem;
 }
 .banner-wrap .user-info-wrap[data-v-ff8615f1] {
   display: flex;

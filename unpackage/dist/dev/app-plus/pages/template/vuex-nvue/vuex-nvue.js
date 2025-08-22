@@ -104,24 +104,8 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
-  var import_vue = __toESM(require_vue());
-  function requireNativePlugin(name) {
-    return weex.requireModule(name);
-  }
-  function formatAppLog(type, filename, ...args) {
-    if (uni.__log__) {
-      uni.__log__(type, filename, ...args);
-    } else {
-      console[type].apply(console, [...args, filename]);
-    }
-  }
-  function resolveEasycom(component, easycom) {
-    return typeof component === "string" ? easycom : component;
-  }
-
   // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
-  var import_vue2 = __toESM(require_vue());
+  var import_vue = __toESM(require_vue());
 
   // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
@@ -133,7 +117,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
   };
 
   // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
-  var _style_0 = { "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
+  var _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e29 } }, "@FONT-FACE": [{}] };
   var _sfc_main = {
     name: "page-head",
     props: {
@@ -174,7 +158,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     },
     mounted() {
       this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx" : this.taskbarHeight = "0rem";
-      formatAppLog("log", "at components/page-head/page-head.vue:64", "taskbarHeight", this.taskbarHeight);
     },
     methods: {
       clickBack() {
@@ -187,47 +170,47 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
-      import_vue2.Fragment,
+    return (0, import_vue.openBlock)(), (0, import_vue.createElementBlock)(
+      import_vue.Fragment,
       null,
       [
-        (0, import_vue2.createElementVNode)(
+        (0, import_vue.createElementVNode)(
           "view",
           {
             class: "common-page-head-view",
-            style: (0, import_vue2.normalizeStyle)({ paddingTop: $data.taskbarHeight })
+            style: (0, import_vue.normalizeStyle)({ paddingTop: $data.taskbarHeight })
           },
           [
-            !$props.isHide ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("view", {
+            !$props.isHide ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("view", {
               key: 0,
               class: "reserve-seat"
-            })) : (0, import_vue2.createCommentVNode)("v-if", true),
-            !$props.isHide ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
+            })) : (0, import_vue.createCommentVNode)("v-if", true),
+            !$props.isHide ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)(
               "view",
               {
                 key: 1,
                 class: "common-page-head",
-                style: (0, import_vue2.normalizeStyle)({ background: $props.background, paddingTop: $data.taskbarHeight })
+                style: (0, import_vue.normalizeStyle)({ background: $props.background, paddingTop: $data.taskbarHeight })
               },
               [
-                (0, import_vue2.createElementVNode)("view", { class: "common-page-head-back" }, [
-                  $props.isBack ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("view", {
+                (0, import_vue.createElementVNode)("view", { class: "common-page-head-back" }, [
+                  $props.isBack ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("view", {
                     key: 0,
                     class: "page-head-back-icon",
                     onClick: _cache[0] || (_cache[0] = ($event) => $options.clickBack(_ctx.backData))
-                  })) : (0, import_vue2.createCommentVNode)("v-if", true)
+                  })) : (0, import_vue.createCommentVNode)("v-if", true)
                 ]),
-                (0, import_vue2.createElementVNode)(
+                (0, import_vue.createElementVNode)(
                   "view",
                   {
                     class: "common-page-head-title",
-                    style: (0, import_vue2.normalizeStyle)(!$props.title && "height:0;")
+                    style: (0, import_vue.normalizeStyle)(!$props.title && "height:0;")
                   },
                   [
-                    (0, import_vue2.createElementVNode)(
+                    (0, import_vue.createElementVNode)(
                       "u-text",
                       null,
-                      (0, import_vue2.toDisplayString)($props.title),
+                      (0, import_vue.toDisplayString)($props.title),
                       1
                       /* TEXT */
                     )
@@ -235,19 +218,19 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                   4
                   /* STYLE */
                 ),
-                (0, import_vue2.createElementVNode)(
+                (0, import_vue.createElementVNode)(
                   "view",
                   {
                     class: "common-page-head-module",
-                    style: (0, import_vue2.normalizeStyle)(!$props.isModule && "height:0;")
+                    style: (0, import_vue.normalizeStyle)(!$props.isModule && "height:0;")
                   },
                   [
-                    $props.isModule ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("u-image", {
+                    $props.isModule ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("u-image", {
                       key: 0,
                       src: $props.moduleIcon,
                       mode: "",
                       onClick: _cache[1] || (_cache[1] = (...args) => $props.clickModule && $props.clickModule(...args))
-                    }, null, 8, ["src"])) : (0, import_vue2.createCommentVNode)("v-if", true)
+                    }, null, 8, ["src"])) : (0, import_vue.createCommentVNode)("v-if", true)
                   ],
                   4
                   /* STYLE */
@@ -255,12 +238,12 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
               ],
               4
               /* STYLE */
-            )) : (0, import_vue2.createCommentVNode)("v-if", true)
+            )) : (0, import_vue.createCommentVNode)("v-if", true)
           ],
           4
           /* STYLE */
         ),
-        (0, import_vue2.createCommentVNode)(' <view class="page-loading" v-if="$store.state.isLoading"></view> ')
+        (0, import_vue.createCommentVNode)(' <view class="page-loading" v-if="$store.state.isLoading"></view> ')
       ],
       2112
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
@@ -270,6 +253,24 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
 
   // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/vuex-nvue/vuex-nvue.js
   var import_vue3 = __toESM(require_vue());
+
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  var import_vue2 = __toESM(require_vue());
+  function requireNativePlugin(name) {
+    return weex.requireModule(name);
+  }
+  function formatAppLog(type, filename, ...args) {
+    if (uni.__log__) {
+      uni.__log__(type, filename, ...args);
+    } else {
+      console[type].apply(console, [...args, filename]);
+    }
+  }
+  function resolveEasycom(component, easycom) {
+    return typeof component === "string" ? easycom : component;
+  }
+
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/vuex-nvue/vuex-nvue.js
   var import_vuex = __toESM(require_vuex());
   var lookup = [
     0,
@@ -565,6 +566,8 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       baseFontSize: 16,
       isLoading: true,
       //页面是否加载loading样式
+      taskbarHeight: "0rpx",
+      //任务栏高度，从首页获取
       hasLogin: false,
       isUniverifyLogin: false,
       loginProvider: "",

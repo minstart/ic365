@@ -61,7 +61,6 @@
 		},
 		mounted() {
 			this.systemTaskbar ? (this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx") : (this.taskbarHeight = "0rem")
-			console.log("taskbarHeight",this.taskbarHeight)
 		},
 		methods: {
 			clickBack() {
@@ -78,6 +77,11 @@
 	}
 </script>
 <style lang="less">
+	.common-page-head-view{
+		position: relative;
+		top: 0;
+		// background: green;
+	}
 	.page-head {
 		z-index: 999;
 	}
@@ -95,7 +99,6 @@
 		width: 100%;
 		background: #fff;
 		z-index: 99;
-
 		.common-page-head-back {
 			height: 88rpx;
 		}

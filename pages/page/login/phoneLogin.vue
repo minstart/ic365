@@ -9,7 +9,7 @@
 						@click="forLogin('baseForm')">{{forLoginName}}</button>
 				</uni-forms-item>
 				<uni-forms-item class="uni-forms-item" required name="code" label-width="0">
-					<uni-easyinput v-model="baseFormData.code" placeholder="请输入验证码" />
+					<uni-easyinput v-model="baseFormData.code" placeholder="请输入验证码" maxlength="4" />
 				</uni-forms-item>
 				<uni-forms-item class="uni-forms-item checkbox-item" required name="agreement" label-width="0">
 					<view class="agreement-text">已阅读并同意<uni-link class="link-a" href="https://www.baidu.com/"
@@ -151,17 +151,7 @@
 				// 提交数据
 				submit(ref) {
 					let _this = this;
-					const deviceInfo = uni.getDeviceInfo()
-					const appInfo = uni.getSystemInfoSync()
-					// console.log("设备信息：：：",deviceInfo)
-					// console.log("安装包版本：：：",appInfo)
 					
-					let recordActivity = {
-						deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
-						osVersion: deviceInfo.system,
-						appVersion: appInfo.appVersion,
-						uniqueId: deviceInfo.deviceId
-					}
 					this.$refs[ref].validate().then(res => {
 						this.commonRequest({
 								url: "/api/auth/loginWithPhone",
@@ -170,26 +160,17 @@
 							})
 							.then(res => {
 								if (res.code == 0) {
+									_this.setLogin(res.data)
 									uni.showToast({
 										title: res.message || "验证码登陆成功!",
 										icon: "success",
-										duration: 2000,
+										duration: 3000,
 										success: function() {
-											_this.setLogin(res.data)
-											try{
-												// 记录用户设备信息
-												_this.commonRequest({
-													url: "/api/student/recordActivity",
-													method: "POST",
-													notLoading:true,
-													data: recordActivity
-												})
-											}catch(e){}
 											setTimeout(() => {
 												uni.reLaunch({
 													url: "/pages/page/index/index"
 												});
-											}, 2000)
+											}, 3000)
 										}
 									});
 								} else {
@@ -198,7 +179,7 @@
 										icon: "none"
 									});
 								}
-								console.error('/api/sms/forLogin：验证码登录成功:', res)
+								console.log('/api/sms/forLogin：验证码登录成功:', res)
 							}).catch(error => {
 								console.error('验证码登录失败:', error)
 							})
@@ -239,6 +220,9 @@
 			z-index: 2;
 			border-bottom: 1px solid #dcdfe6;
 			border-radius: 0;
+			font-size: 32rpx;
+			width: 8rem;
+			text-align: center;
 			&::after {
 				border-width: 0;
 			}
@@ -254,7 +238,9 @@
 	</style>
 	<style lang="scss">
 		@import "/static/css/standard.scss";
-
+		input{
+			font-size:32rpx !important;
+		}
 		.uni-forms-item {
 			position: relative;
 			margin: 0 1rem;
@@ -277,7 +263,7 @@
 
 		.phone-input-wrap {
 			.uni-easyinput__content {
-				width: calc(100% - 5rem)
+				width: calc(100% - 8rem)
 			}
 		}
 

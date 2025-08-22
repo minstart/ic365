@@ -46,7 +46,11 @@
 									{{item.optionName}}.{{item.option}}
 								</view>
 							</view>
-							<button class="topic-submit" @click="submit" v-if="!answered">提交</button>
+							<view class="btn-wrap">
+								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'">下一题</button>
+								<button class="topic-submit" @click="submitTopic" v-if="!answered">提交</button>
+							</view>
+							
 						</view>
 						<view class="analysis-wrap">
 							<view class="analysis" v-if="answered">
@@ -234,7 +238,8 @@
 		},
 		onReady() {
 			this.context = uni.createVideoContext("video1", this);
-			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
+			this.taskbarHeight2 = store.state.taskbarHeight
+			console.log(this.taskbarHeight2)
 		},
 		onShow() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -339,7 +344,7 @@
 			},
 
 			// 提交答案
-			submit() {
+			submitTopic() {
 				if (!this.answer.optionName) return uni.showToast({
 					title: "请选择答案",
 					icon: "none"
@@ -374,7 +379,11 @@
 					this.consoleLog("回答问题接口报错：：", error)
 				})
 			},
-
+			
+			// 下一题
+			nextTopic(){
+				this.choiceCategory(this.selectCategory,true)
+			},
 			// 教材同步 - 需要校验会员
 			verifyPlayVideo(item) {
 				if (item) {
@@ -473,7 +482,7 @@
 								})
 							} catch (e) {}
 						} else {}
-						this.choiceCategory(this.selectCategory)
+						this.choiceCategory(this.selectCategory,true)
 						resolve(res)
 					}).catch(error => {
 						console.log("视频、题目类型获取左侧类目目录报错", error)
@@ -483,8 +492,9 @@
 			},
 
 			// 点击类目之后,获取右侧内容
-			choiceCategory(item) {
-				if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video") {
+			choiceCategory(item,isInitialization) {
+				console.log(this.selectCategory.categoryId , item.categoryId)
+				if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || typeof isInitialization != "undefined") {
 					if (this.selectCategory.categoryId != item.categoryId && item) {
 						this.selectCategory = {
 							categoryId: item.categoryId,
@@ -492,6 +502,7 @@
 						}
 						this.resetProblem(this.pageType)
 					}
+					console.log("this.pageType:",this.pageType)
 					// console.log("categoryId：：",item.categoryId)
 					if (this.pageType == "question") {
 						// 获取题目
@@ -805,15 +816,29 @@
 								}
 							}
 						}
-
+						
 						.topic-submit {
-							width: 5.625rem;
-							height: 2.25rem;
-							line-height: 2.25rem;
+							width: 180rpx;
+							height: 72rpx;
+							line-height: 72rpx;
 							font-weight: 500;
-							font-size: 1rem;
+							font-size: 32rpx;
 							background: linear-gradient(to right, #FDB150, #FFDB9B);
+							border: 2rpx solid linear-gradient(to right, #FDB150, #FFDB9B);
 							float: right;
+							border-radius: 36rpx;
+							margin-right: 40rpx;
+						}
+						.topic-next{
+							width: 180rpx;
+							height: 72rpx;
+							line-height: 72rpx;
+							font-weight: 500;
+							font-size: 32rpx;
+							background: #fff !important;
+							float: right;
+							border-radius: 36rpx;
+							border: 2rpx solid #FF7426;
 						}
 					}
 

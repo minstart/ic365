@@ -1,3 +1,7 @@
+.common-page-head-view[data-v-e80b2f0b] {
+  position: relative;
+  top: 0;
+}
 .page-head[data-v-e80b2f0b] {
   z-index: 999;
 }
@@ -366,7 +370,7 @@
 .calendar-back[data-v-3f5d8074] {
   width: 12.875rem;
   height: 100%;
-  background: url("../../../static/image/1_2_calendar_back.png") no-repeat bottom/100%;
+  background: url("../../../static/image/1_2_calendar_back.png") no-repeat center/100%;
 }
 .calendar-wrap[data-v-3f5d8074] {
   flex: 1;
@@ -405,6 +409,8 @@
   padding: 0.625rem 0.9375rem;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 0.3125rem;
+  position: absolute;
+  top: 1.875rem;
 }
 .btn-wrap .instructions-wrap .title[data-v-3f5d8074] {
   text-align: center;

@@ -1,3 +1,7 @@
+.common-page-head-view[data-v-e80b2f0b] {
+  position: relative;
+  top: 0;
+}
 .page-head[data-v-e80b2f0b] {
   z-index: 999;
 }
@@ -333,7 +337,21 @@
   font-weight: 500;
   font-size: 1rem;
   background: linear-gradient(to right, #FDB150, #FFDB9B);
+  border: 0.0625rem solid linear-gradient(to right, #FDB150, #FFDB9B);
   float: right;
+  border-radius: 1.125rem;
+  margin-right: 1.25rem;
+}
+.page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-next[data-v-9e40ef6f] {
+  width: 5.625rem;
+  height: 2.25rem;
+  line-height: 2.25rem;
+  font-weight: 500;
+  font-size: 1rem;
+  background: #fff !important;
+  float: right;
+  border-radius: 1.125rem;
+  border: 0.0625rem solid #FF7426;
 }
 .page-wrap .content-wrap .topic-wrap .video-list-wrap[data-v-9e40ef6f] {
   height: calc(100vh - 2.75rem - 1rem);

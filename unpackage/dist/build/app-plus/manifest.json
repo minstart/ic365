@@ -7,7 +7,7 @@
   "id": "__UNI__F94F8DE",
   "name": "ic365",
   "version": {
-    "name": "1.0.1",
+    "name": "1.0.2",
     "code": "100"
   },
   "description": "应用描述",
@@ -115,12 +115,7 @@
       "plugins": {
         "speech": {},
         "oauth": {},
-        "share": {
-          "weixin": {
-            "appid": "com.edusafety.cal",
-            "UniversalLinks": "https://static-mp-dce2f7cb-6625-4a09-8138-e8de2fb38a3d.next.bspapp.com/uni-universallinks/__UNI__F94F8DE/"
-          }
-        },
+        "share": {},
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"

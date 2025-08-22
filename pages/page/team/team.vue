@@ -337,8 +337,7 @@
 <style lang="scss" scoped>
 	.banner-wrap {
 		border-radius: 0.6rem;
-		padding: 1.25rem 0.75rem 0 0.75rem;
-		padding-top: 1.5rem;
+		padding: 20rpx 24rpx 0 24rpx;
 
 		.user-info-wrap {
 			display: flex;

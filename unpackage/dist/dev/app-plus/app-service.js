@@ -4069,6 +4069,8 @@ if (uni.restoreGlobal) {
       baseFontSize: 16,
       isLoading: true,
       //页面是否加载loading样式
+      taskbarHeight: "0rpx",
+      //任务栏高度，从首页获取
       hasLogin: false,
       isUniverifyLogin: false,
       loginProvider: "",
@@ -14646,7 +14648,6 @@ if (uni.restoreGlobal) {
     },
     mounted() {
       this.systemTaskbar ? this.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx" : this.taskbarHeight = "0rem";
-      formatAppLog("log", "at components/page-head/page-head.vue:64", "taskbarHeight", this.taskbarHeight);
     },
     methods: {
       clickBack() {
@@ -14840,6 +14841,22 @@ if (uni.restoreGlobal) {
     },
     onReady() {
       this.verifLogin().then((data) => {
+        store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
+        const deviceInfo = uni.getDeviceInfo();
+        const appInfo = uni.getSystemInfoSync();
+        let recordActivity = {
+          deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
+          osVersion: deviceInfo.system,
+          appVersion: appInfo.appVersion,
+          uniqueId: deviceInfo.deviceId
+        };
+        this.commonRequest({
+          url: "/api/student/recordActivity",
+          notLoading: true,
+          data: recordActivity
+        }).then((res2) => {
+        }).catch((error) => {
+        });
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
@@ -14884,13 +14901,13 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/achievement/mine"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:293", "最新成就::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:316", "最新成就::", res2);
           try {
             this.achievement = res2.data;
           } catch (e2) {
           }
         }).catch((error) => {
-          formatAppLog("log", "at pages/page/index/index.vue:299", "获取最新成就失败：：", error);
+          formatAppLog("log", "at pages/page/index/index.vue:322", "获取最新成就失败：：", error);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
@@ -26883,7 +26900,7 @@ ${o3}
           };
           this.changeDate(option.date).fullDate != this.changeDate(/* @__PURE__ */ new Date()).fullDate && (requestData.date = option.date);
           this.commonRequest(requestData).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:198", "获取今日题目::", res2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:202", "获取今日题目::", res2);
             try {
               this.categoryTree.grade = this.changeGrade(res2.data.grade);
               this.categoryTree.category[0] = {
@@ -26897,7 +26914,7 @@ ${o3}
               this.topic = res2.data;
               this.topicFilter();
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:213", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:217", e2);
             }
           }).catch((error) => {
             this.consoleLog("获取今日题目报错：：", error);
@@ -26907,7 +26924,7 @@ ${o3}
             try {
               this.categoryTree.grade = this.changeGrade(store.state.userInfo.info.grade);
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:224", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:228", e2);
             }
           });
           if (this.pageType == "video")
@@ -26917,7 +26934,8 @@ ${o3}
     },
     onReady() {
       this.context = uni.createVideoContext("video1", this);
-      this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
+      this.taskbarHeight2 = store.state.taskbarHeight;
+      formatAppLog("log", "at pages/page/study/answerQuestions.vue:242", this.taskbarHeight2);
     },
     onShow() {
       try {
@@ -27013,7 +27031,7 @@ ${o3}
         }, 1e3);
       },
       // 提交答案
-      submit() {
+      submitTopic() {
         if (!this.answer.optionName)
           return uni.showToast({
             title: "请选择答案",
@@ -27041,11 +27059,15 @@ ${o3}
               duration: "4000"
             });
           } catch (e2) {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:371", e2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:376", e2);
           }
         }).catch((error) => {
           this.consoleLog("回答问题接口报错：：", error);
         });
+      },
+      // 下一题
+      nextTopic() {
+        this.choiceCategory(this.selectCategory, true);
       },
       // 教材同步 - 需要校验会员
       verifyPlayVideo(item) {
@@ -27062,7 +27084,7 @@ ${o3}
               id: videoId || this.topic.videoId
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:395", "获取视频解析地址::", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:404", "获取视频解析地址::", res2.data);
             try {
               this.analysis.video = res2.data;
               this.showVideo = true;
@@ -27072,7 +27094,7 @@ ${o3}
             } catch (e2) {
             }
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:404", "获取视频解析地址报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:413", "获取视频解析地址报错", error);
           });
         } else {
           this.showVideo = true;
@@ -27093,7 +27115,7 @@ ${o3}
               step: this.topic.AIanalysis.step + 1
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:427", "/api/ai/getAnalysisByStep：：", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:436", "/api/ai/getAnalysisByStep：：", res2.data);
             this.topic.AIanalysis.step = res2.data.currentStep;
             this.topic.AIanalysis.stepCount = res2.data.stepCount;
             res2.data.currentStep < res2.data.stepCount ? this.AIanalysisNextBtn = true : this.AIanalysisNextBtn = false;
@@ -27108,7 +27130,7 @@ ${o3}
               }
             }
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:443", "AI析题报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:452", "AI析题报错", error);
           });
         }
       },
@@ -27122,7 +27144,7 @@ ${o3}
               fromType: this.pageType
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:458", "视频、题目类型获取左侧类目目录:", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:467", "视频、题目类型获取左侧类目目录:", res2.data);
             this.resetProblem("all");
             this.categoryTree.category = res2.data.categories;
             this.selectCategory = res2.data.categories[0];
@@ -27141,17 +27163,18 @@ ${o3}
               } catch (e2) {
               }
             }
-            this.choiceCategory(this.selectCategory);
+            this.choiceCategory(this.selectCategory, true);
             resolve(res2);
           }).catch((error) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:479", "视频、题目类型获取左侧类目目录报错", error);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:488", "视频、题目类型获取左侧类目目录报错", error);
             reject2(error);
           });
         });
       },
       // 点击类目之后,获取右侧内容
-      choiceCategory(item) {
-        if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video") {
+      choiceCategory(item, isInitialization) {
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:496", this.selectCategory.categoryId, item.categoryId);
+        if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || typeof isInitialization != "undefined") {
           if (this.selectCategory.categoryId != item.categoryId && item) {
             this.selectCategory = {
               categoryId: item.categoryId,
@@ -27159,6 +27182,7 @@ ${o3}
             };
             this.resetProblem(this.pageType);
           }
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:505", "this.pageType:", this.pageType);
           if (this.pageType == "question") {
             this.commonRequest({
               url: "/api/question/byCategory",
@@ -27169,11 +27193,11 @@ ${o3}
                 categoryId: item.categoryId
               }
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:507", "获取题目:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:518", "获取题目:", res2.data);
               this.topic = res2.data[0];
               this.topicFilter();
             }).catch((error) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:511", "获取题目报错", error);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:522", "获取题目报错", error);
               reject(error);
             });
           } else if (this.pageType == "video") {
@@ -27188,7 +27212,7 @@ ${o3}
                 categoryId: item.categoryId
               }
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:526", "获取视频列表:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:537", "获取视频列表:", res2.data);
               if (res2.data.length == 0) {
                 this.videoList.noData = true;
               }
@@ -27196,10 +27220,10 @@ ${o3}
               this.videoList.page = this.videoList.page + 1;
               this.videoList.list = [...this.videoList.list, ...res2.data];
             }).catch((error) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:534", "获取视频列表报错", error);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:545", "获取视频列表报错", error);
             });
           } else {
-            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:537", "每日一题的不能点");
+            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:548", "每日一题的不能点");
           }
         }
       },
@@ -27208,7 +27232,7 @@ ${o3}
           return false;
         this.isLoading = true;
         this.choiceCategory(this.selectCategory);
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:547", "触发滚动到底部加载视频新数据");
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:558", "触发滚动到底部加载视频新数据");
       },
       // 切换题目之后，需要调用，重置数据 type: "all" 所有；question:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
       resetProblem(type) {
@@ -27430,11 +27454,18 @@ ${o3}
                           /* UNKEYED_FRAGMENT */
                         ))
                       ]),
-                      !$data.answered ? (vue.openBlock(), vue.createElementBlock("button", {
-                        key: 0,
-                        class: "topic-submit",
-                        onClick: _cache[3] || (_cache[3] = (...args) => $options.submit && $options.submit(...args))
-                      }, "提交")) : vue.createCommentVNode("v-if", true)
+                      vue.createElementVNode("view", { class: "btn-wrap" }, [
+                        $data.pageType == "question" ? (vue.openBlock(), vue.createElementBlock("button", {
+                          key: 0,
+                          class: "topic-next",
+                          onClick: _cache[3] || (_cache[3] = (...args) => $options.nextTopic && $options.nextTopic(...args))
+                        }, "下一题")) : vue.createCommentVNode("v-if", true),
+                        !$data.answered ? (vue.openBlock(), vue.createElementBlock("button", {
+                          key: 1,
+                          class: "topic-submit",
+                          onClick: _cache[4] || (_cache[4] = (...args) => $options.submitTopic && $options.submitTopic(...args))
+                        }, "提交")) : vue.createCommentVNode("v-if", true)
+                      ])
                     ]),
                     vue.createElementVNode("view", { class: "analysis-wrap" }, [
                       $data.answered ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -27454,7 +27485,7 @@ ${o3}
                         ),
                         vue.createElementVNode("view", {
                           class: "analysis-text",
-                          onClick: _cache[4] || (_cache[4] = (...args) => $options.textAnalysis && $options.textAnalysis(...args))
+                          onClick: _cache[5] || (_cache[5] = (...args) => $options.textAnalysis && $options.textAnalysis(...args))
                         }, [
                           vue.createElementVNode("view", { class: "analysis-icon" }),
                           vue.createElementVNode(
@@ -27476,7 +27507,7 @@ ${o3}
                           ]),
                           vue.createElementVNode("view", {
                             class: "play-video-btn",
-                            onClick: _cache[5] || (_cache[5] = ($event) => $options.playVideo())
+                            onClick: _cache[6] || (_cache[6] = ($event) => $options.playVideo())
                           })
                         ])) : vue.createCommentVNode("v-if", true),
                         vue.createCommentVNode(" AI析题 "),
@@ -27486,7 +27517,7 @@ ${o3}
                         }, [
                           vue.createElementVNode("view", {
                             class: "lingbao-icon",
-                            onClick: _cache[6] || (_cache[6] = ($event) => $options.AIAnalysis())
+                            onClick: _cache[7] || (_cache[7] = ($event) => $options.AIAnalysis())
                           }),
                           vue.createElementVNode("view", { class: "lingbao-image" })
                         ])) : vue.createCommentVNode("v-if", true)
@@ -27500,7 +27531,7 @@ ${o3}
                       {
                         class: "video-list-window",
                         "scroll-y": "true",
-                        onScrolltolower: _cache[7] || (_cache[7] = (...args) => $options.GetNextVideoList && $options.GetNextVideoList(...args))
+                        onScrolltolower: _cache[8] || (_cache[8] = (...args) => $options.GetNextVideoList && $options.GetNextVideoList(...args))
                       },
                       [
                         vue.createElementVNode("view", { class: "name-wrap" }, [
@@ -27615,7 +27646,7 @@ ${o3}
                   [
                     vue.createElementVNode("view", {
                       class: "next-btn",
-                      onClick: _cache[8] || (_cache[8] = (...args) => $options.getAIAnalysis && $options.getAIAnalysis(...args))
+                      onClick: _cache[9] || (_cache[9] = (...args) => $options.getAIAnalysis && $options.getAIAnalysis(...args))
                     }, "下一步")
                   ],
                   512
@@ -32226,22 +32257,20 @@ ${o3}
             formatAppLog("log", "at pages/page/login/login.vue:96", "预取号成功", data);
             const config = {};
             ydLogin.setCustomView(config, (data2) => {
-              uni.getSystemInfoSync().platform;
+              const platform2 = uni.getSystemInfoSync().platform;
+              if (platform2 === "ios") {
+                this.consoleLog("ios自定义页面回调", data2);
+              } else if (platform2 === "android") {
+                this.consoleLog("android自定义页面回调", data2);
+              }
             });
             ydLogin.cucmctAuthorizeLoginCompletion((data2) => {
-              if (!data2.success && !data2.cancel)
-                ;
-              else if (data2.cancel)
-                ;
-              else {
-                const deviceInfo = uni.getDeviceInfo();
-                const appInfo = uni.getSystemInfoSync();
-                let recordActivity = {
-                  deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
-                  osVersion: deviceInfo.system,
-                  appVersion: appInfo.appVersion,
-                  uniqueId: deviceInfo.deviceId
-                };
+              if (!data2.success && !data2.cancel) {
+                this.consoleLog("授权失败", data2);
+              } else if (data2.cancel) {
+                this.consoleLog("用户取消", data2);
+              } else {
+                this.consoleLog("授权成功：：", data2);
                 const _this = this;
                 this.commonRequest({
                   url: "/api/auth/oneClickLogin",
@@ -32251,28 +32280,19 @@ ${o3}
                     telecom_token: data2.accessToken
                   }
                 }).then((res2) => {
-                  formatAppLog("log", "at pages/page/login/login.vue:137", "/api/sms/forLogin：一键登陆成功:", JSON.stringify(res2));
+                  _this.setLogin(res2.data);
+                  formatAppLog("log", "at pages/page/login/login.vue:128", "/api/sms/forLogin：一键登陆成功:", JSON.stringify(res2));
                   ydLogin.closeAuthController();
                   uni.showToast({
                     title: res2.message || "一键登陆成功",
                     icon: "success",
-                    duration: 2e3,
+                    duration: 3e3,
                     success: function() {
-                      _this.setLogin(res2.data);
-                      try {
-                        _this.commonRequest({
-                          url: "/api/student/recordActivity",
-                          method: "POST",
-                          notLoading: true,
-                          data: recordActivity
-                        });
-                      } catch (e2) {
-                      }
                       setTimeout(() => {
                         uni.reLaunch({
                           url: "/pages/page/index/index"
                         });
-                      }, 2e3);
+                      }, 3e3);
                     }
                   });
                 }).catch((error) => {
@@ -32285,7 +32305,7 @@ ${o3}
               }
             });
           } else {
-            formatAppLog("log", "at pages/page/login/login.vue:174", "预取号失败了:", data);
+            formatAppLog("log", "at pages/page/login/login.vue:155", "预取号失败了:", data);
             uni.showToast({
               title: data.msg + "，请重新点击或者切换手机验证码方式登录！" || "一键登陆失败调用预约号失败，请重新点击或者切换手机验证码方式登录！",
               icon: "none",
@@ -32537,14 +32557,6 @@ ${o3}
       // 提交数据
       submit(ref) {
         let _this = this;
-        const deviceInfo = uni.getDeviceInfo();
-        const appInfo = uni.getSystemInfoSync();
-        let recordActivity = {
-          deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
-          osVersion: deviceInfo.system,
-          appVersion: appInfo.appVersion,
-          uniqueId: deviceInfo.deviceId
-        };
         this.$refs[ref].validate().then((res2) => {
           this.commonRequest({
             url: "/api/auth/loginWithPhone",
@@ -32552,26 +32564,17 @@ ${o3}
             data: this.baseFormData
           }).then((res3) => {
             if (res3.code == 0) {
+              _this.setLogin(res3.data);
               uni.showToast({
                 title: res3.message || "验证码登陆成功!",
                 icon: "success",
-                duration: 2e3,
+                duration: 3e3,
                 success: function() {
-                  _this.setLogin(res3.data);
-                  try {
-                    _this.commonRequest({
-                      url: "/api/student/recordActivity",
-                      method: "POST",
-                      notLoading: true,
-                      data: recordActivity
-                    });
-                  } catch (e2) {
-                  }
                   setTimeout(() => {
                     uni.reLaunch({
                       url: "/pages/page/index/index"
                     });
-                  }, 2e3);
+                  }, 3e3);
                 }
               });
             } else {
@@ -32580,9 +32583,9 @@ ${o3}
                 icon: "none"
               });
             }
-            formatAppLog("error", "at pages/page/login/phoneLogin.vue:201", "/api/sms/forLogin：验证码登录成功:", res3);
+            formatAppLog("log", "at pages/page/login/phoneLogin.vue:182", "/api/sms/forLogin：验证码登录成功:", res3);
           }).catch((error) => {
-            formatAppLog("error", "at pages/page/login/phoneLogin.vue:203", "验证码登录失败:", error);
+            formatAppLog("error", "at pages/page/login/phoneLogin.vue:184", "验证码登录失败:", error);
           });
         }).catch((err) => {
           uni.showToast({
@@ -32653,7 +32656,8 @@ ${o3}
                   vue.createVNode(_component_uni_easyinput, {
                     modelValue: $data.baseFormData.code,
                     "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.baseFormData.code = $event),
-                    placeholder: "请输入验证码"
+                    placeholder: "请输入验证码",
+                    maxlength: "4"
                   }, null, 8, ["modelValue"])
                 ]),
                 _: 1
@@ -66148,23 +66152,6 @@ This will fail in production if not fixed.`);
     mixins: [commonJs],
     onLaunch: function() {
       store.commit("SET_ENCRYPTENABLED", true);
-      const deviceInfo = uni.getDeviceInfo();
-      const appInfo = uni.getSystemInfoSync();
-      let recordActivity = {
-        deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
-        osVersion: deviceInfo.system,
-        appVersion: appInfo.appVersion,
-        uniqueId: deviceInfo.deviceId
-      };
-      this.verifLogin().then((data) => {
-        this.commonRequest({
-          url: "/api/student/recordActivity",
-          notLoading: true,
-          data: recordActivity
-        }).then((res2) => {
-        }).catch((error) => {
-        });
-      });
       if (plus.runtime.appid !== "HBuilder") {
         checkUpdate();
       }

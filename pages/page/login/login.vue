@@ -98,32 +98,22 @@
 							ydLogin.setCustomView(config, (data) => {
 								const platform = uni.getSystemInfoSync().platform
 								if (platform === 'ios') {
-									// this.consoleLog("ios自定义页面回调", data)
+									this.consoleLog("ios自定义页面回调", data)
 								} else if (platform === 'android') {
-									// this.consoleLog("android自定义页面回调", data)
+									this.consoleLog("android自定义页面回调", data)
 								}
 							})
 
 							ydLogin.cucmctAuthorizeLoginCompletion((data) => {
 								if (!data.success && !data.cancel) {
-									// this.consoleLog('授权失败', data)
+									this.consoleLog('授权失败', data)
 								} else if (data.cancel) {
-									// this.consoleLog('用户取消', data)
+									this.consoleLog('用户取消', data)
 
 								} else {
 									// TODO: 授权成功处理，可以进行关闭授权页、服务端验证等
-									// this.consoleLog('授权成功：：', data)
-									const deviceInfo = uni.getDeviceInfo()
-									const appInfo = uni.getSystemInfoSync()
-									// console.log("设备信息：：：",deviceInfo)
-									// console.log("安装包版本：：：",appInfo)
+									this.consoleLog('授权成功：：', data)
 									
-									let recordActivity = {
-										deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
-										osVersion: deviceInfo.system,
-										appVersion: appInfo.appVersion,
-										uniqueId: deviceInfo.deviceId
-									}
 									const _this = this;
 									this.commonRequest({
 											url: '/api/auth/oneClickLogin',
@@ -134,28 +124,19 @@
 											},
 										})
 										.then(res => {
+											_this.setLogin(res.data)
 											console.log('/api/sms/forLogin：一键登陆成功:', JSON.stringify(res))
 											ydLogin.closeAuthController()
 												uni.showToast({
 													title: res.message || '一键登陆成功',
 													icon: 'success',
-													duration: 2000,
+													duration: 3000,
 													success: function() {
-														_this.setLogin(res.data)
-														try{
-															// 记录用户设备信息
-															_this.commonRequest({
-																url: "/api/student/recordActivity",
-																method: "POST",
-																notLoading:true,
-																data: recordActivity
-															})
-														}catch(e){}
 														setTimeout(() => {
 															uni.reLaunch({
 																url: "/pages/page/index/index"
 															});
-														}, 2000)
+														}, 3000)
 													}
 												})
 											

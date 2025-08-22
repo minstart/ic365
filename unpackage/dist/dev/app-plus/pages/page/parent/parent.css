@@ -1,3 +1,7 @@
+.common-page-head-view[data-v-e80b2f0b] {
+  position: relative;
+  top: 0;
+}
 .page-head[data-v-e80b2f0b] {
   z-index: 999;
 }
@@ -564,8 +568,7 @@ to {
 
 .banner-wrap[data-v-1185e19c] {
   border-radius: 0.6rem;
-  padding: 1.25rem 0.75rem 0 0.75rem;
-  padding-top: 1.5rem;
+  padding: 0.625rem 0.75rem 0 0.75rem;
   margin-bottom: 2rem;
 }
 .banner-wrap .user-info-wrap[data-v-1185e19c] {

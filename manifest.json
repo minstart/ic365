@@ -2,7 +2,7 @@
     "name" : "ic365",
     "appid" : "__UNI__F94F8DE",
     "description" : "应用描述",
-    "versionName" : "1.0.1",
+    "versionName" : "1.0.2",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -75,12 +75,7 @@
             "sdkConfigs" : {
                 "speech" : {},
                 "oauth" : {},
-                "share" : {
-                    "weixin" : {
-                        "appid" : "com.edusafety.cal",
-                        "UniversalLinks" : "https://static-mp-dce2f7cb-6625-4a09-8138-e8de2fb38a3d.next.bspapp.com/uni-universallinks/__UNI__F94F8DE/"
-                    }
-                }
+                "share" : {}
             },
             "orientation" : [ "portrait-primary" ],
             "splashscreen" : {

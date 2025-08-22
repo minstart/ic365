@@ -1,3 +1,7 @@
+.common-page-head-view[data-v-e80b2f0b] {
+  position: relative;
+  top: 0;
+}
 .page-head[data-v-e80b2f0b] {
   z-index: 999;
 }
@@ -179,8 +183,7 @@ body {
 }
 
 .banner-wrap[data-v-5040744a] {
-  padding: 1.25rem 0.75rem 0 0.75rem;
-  padding-top: 1.5rem;
+  padding: 0.625rem 0.75rem 0 0.75rem;
   background: url("../../../static/image/1_header_banner.png") no-repeat top / 100%;
 }
 .banner-wrap .user-info-wrap[data-v-5040744a] {
@@ -274,7 +277,7 @@ body {
   font-size: 0.8rem;
 }
 .banner-wrap .activity-wrap[data-v-5040744a] {
-  margin-top: 4.4rem;
+  margin-top: 3.9375rem;
   display: flex;
 }
 .banner-wrap .activity-wrap .activity[data-v-5040744a] {

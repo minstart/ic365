@@ -196,7 +196,7 @@
 	.calendar-back {
 		width: 412rpx;
 		height: 100%;
-		background: url("/static/image/1_2_calendar_back.png") no-repeat bottom / 100%;
+		background: url("/static/image/1_2_calendar_back.png") no-repeat center / 100%;
 	}
 
 	.calendar-wrap {
@@ -244,6 +244,8 @@
 			padding: 20rpx 30rpx;
 			background: rgba(255, 255, 255, 0.6);
 			border-radius: 10rpx;
+			position: absolute;
+			top: 60rpx;
 			.title{
 				text-align: center;
 				font-size: 24rpx;
