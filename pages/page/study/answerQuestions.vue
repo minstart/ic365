@@ -50,7 +50,7 @@
 								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'">下一题</button>
 								<button class="topic-submit" @click="submitTopic" v-if="!answered">提交</button>
 							</view>
-							
+
 						</view>
 						<view class="analysis-wrap">
 							<view class="analysis" v-if="answered">
@@ -86,7 +86,7 @@
 							<view class="name-wrap">
 								<view class="name">{{selectCategory.name}} <span class="border"></span></view>
 							</view>
-							<view class="video-list" :key="item.videoId" v-for="item in videoList.list" @click="verifyPlayVideo(item)">
+							<view class="video-list" v-for="item in videoList.list" @click.stop="verifyPlayVideo(item)">
 								<div class="video-img-wrap flex-center">
 									<view class="label">会员</view>
 									<image lazy-load class="video-img" :src="item.coverUrl"></image>
@@ -100,7 +100,7 @@
 		</view>
 	</view>
 	<!-- 视频弹窗 -->
-	<l-popup v-show="showVideo" :close="closePopup">
+	<l-popup v-show="showVideo" :close="closePopup" :width="'calc(80vh / 9 * 16)'">
 		<template v-slot>
 			<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" show-fullscreen-btn="false"></video>
 		</template>
@@ -173,7 +173,6 @@
 				showAnalysis: false, //是否展示文本或图片解析弹窗
 				showAIAnalysis: false, //是否展示AI解析弹窗
 				videoEl: "",
-				categoryId: "",
 				AIanalysisNextBtn: true, //是否显示AI解析下一步按钮
 				selectCategory: { //选中的类目
 					categoryId: "", //选中的类目id
@@ -379,22 +378,25 @@
 					this.consoleLog("回答问题接口报错：：", error)
 				})
 			},
-			
+
 			// 下一题
-			nextTopic(){
-				this.choiceCategory(this.selectCategory,true)
+			nextTopic() {
+				this.choiceCategory(this.selectCategory, true)
 			},
 			// 教材同步 - 需要校验会员
 			verifyPlayVideo(item) {
+				console.log("item:::", item)
 				if (item) {
-					this.playVideo(item.videoId)
+					try {
+						this.playVideo(item.videoId)
+					} catch (e) {}
 				}
 			},
 
 			// 每日一题、视频列表 - 打开视频解析
 			playVideo(videoId) {
 				if (!this.analysis.video || this.pageType == "video") {
-					// console.log("播放视频id：", videoId || this.topic.videoId)
+					console.log("播放视频id：", videoId || this.topic.videoId)
 					this.commonRequest({
 						url: "/api/video/getById",
 						data: {
@@ -482,7 +484,7 @@
 								})
 							} catch (e) {}
 						} else {}
-						this.choiceCategory(this.selectCategory,true)
+						this.choiceCategory(this.selectCategory, true)
 						resolve(res)
 					}).catch(error => {
 						console.log("视频、题目类型获取左侧类目目录报错", error)
@@ -492,8 +494,8 @@
 			},
 
 			// 点击类目之后,获取右侧内容
-			choiceCategory(item,isInitialization) {
-				console.log(this.selectCategory.categoryId , item.categoryId)
+			choiceCategory(item, isInitialization) {
+				console.log(this.selectCategory.categoryId, item.categoryId)
 				if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || typeof isInitialization != "undefined") {
 					if (this.selectCategory.categoryId != item.categoryId && item) {
 						this.selectCategory = {
@@ -502,7 +504,7 @@
 						}
 						this.resetProblem(this.pageType)
 					}
-					console.log("this.pageType:",this.pageType)
+					console.log("this.pageType:", this.pageType)
 					// console.log("categoryId：：",item.categoryId)
 					if (this.pageType == "question") {
 						// 获取题目
@@ -588,7 +590,10 @@
 							semester: "", //接口会返回 fall 上册, spring 下册
 							category: [{}]
 						},
-						this.categoryId = "" //选中类目id
+						this.selectCategory = { //选中的类目
+							categoryId: "", //选中的类目id
+							name: "", //选中的类目名称
+						}
 				}
 
 				if (type == "all" || type == "video") {
@@ -607,12 +612,16 @@
 			},
 			// 关闭视频弹窗
 			closePopup() {
-				if (this.videoEl && this.showVideo) {
-					this.videoEl.pause()
-				}
-				this.showVideo = false;
-				this.showAnalysis = false;
-				this.showAIAnalysis = false;
+				// if (this.videoEl && this.showVideo) {
+				// 	this.videoEl.pause()
+				// }
+				// this.showVideo = false;
+				// this.showAnalysis = false;
+				// this.showAIAnalysis = false;
+				// if (this.pageType == "video") {
+				// 	this.analysis.video = ""
+				// 	this.videoEl = ""
+				// }
 			},
 
 			// 打开AI解析
@@ -816,7 +825,7 @@
 								}
 							}
 						}
-						
+
 						.topic-submit {
 							width: 180rpx;
 							height: 72rpx;
@@ -829,7 +838,8 @@
 							border-radius: 36rpx;
 							margin-right: 40rpx;
 						}
-						.topic-next{
+
+						.topic-next {
 							width: 180rpx;
 							height: 72rpx;
 							line-height: 72rpx;

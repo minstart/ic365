@@ -326,7 +326,7 @@
 				this.commonRequest({
 					url: "/api/recommend/videos"
 				}).then(res => {
-					// this.consoleLog("推荐学习::", JSON.stringify(res))
+					console.log("推荐学习::", res.data)
 					if (res.code == 0) {
 						try {
 							this.videos = res.data;
@@ -338,7 +338,7 @@
 						});
 					}
 				}).catch(error => {
-					this.consoleLog("获取推荐学习失败：：", error)
+					console.log("获取推荐学习失败：：", error)
 				})
 			}).catch(error => {
 				this.consoleLog("没有登录：：", error)

@@ -298,6 +298,8 @@ const store = createStore({
     baseFontSize: 16,
     isLoading: true,
     //页面是否加载loading样式
+    taskbarHeight: "0rpx",
+    //任务栏高度，从首页获取
     hasLogin: false,
     isUniverifyLogin: false,
     loginProvider: "",

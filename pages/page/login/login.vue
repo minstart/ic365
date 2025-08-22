@@ -27,7 +27,7 @@
 				ydLogin.shouldQuickLogin((data) => {
 					// console.log(data)
 					if (!data.success) {
-						this.getLogin().then(data => {}).catch(err => {
+						// this.getLogin().then(data => {}).catch(err => {
 							uni.showModal({
 								content: '不具备一键登录网络环境（请保持手机卡移动数据联网，断开WiFi联网），或者是否需要跳转到手机验证码登录？',
 								showCancel: true,
@@ -42,7 +42,7 @@
 									}
 								}
 							});
-						})
+						// })
 						
 						// this.consoleLog("不具备一键登录网络环境 - 跳转到账号密码登录", data)
 					} else {
@@ -95,16 +95,21 @@
 						if (data.success) {
 							console.log('预取号成功', data)
 							const config = {}
-							ydLogin.setCustomView(config, (data) => {
-								const platform = uni.getSystemInfoSync().platform
-								if (platform === 'ios') {
-									this.consoleLog("ios自定义页面回调", data)
-								} else if (platform === 'android') {
-									this.consoleLog("android自定义页面回调", data)
-								}
-							})
+							try{
+								ydLogin.setCustomView(config, (data) => {
+									console.log("data::",data)
+									const platform = uni.getSystemInfoSync().platform
+									console.log("platform:",platform)
+									if (platform === 'ios') {
+										console.log("ios自定义页面回调", data)
+									} else if (platform === 'android') {
+										console.log("android自定义页面回调", data)
+									}
+								})
+							}catch(e){}
 
-							ydLogin.cucmctAuthorizeLoginCompletion((data) => {
+							ydLogin.cucmctAuthorizeLoginCompletion(data => {
+								console.log("data::",data)
 								if (!data.success && !data.cancel) {
 									this.consoleLog('授权失败', data)
 								} else if (data.cancel) {

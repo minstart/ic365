@@ -183,6 +183,7 @@
 							size: "10"
 						}
 					}).then(res => {
+						// console.log("search:",this.keyword,",groupType:",this.selectProductsId)
 						console.log("获取兑换商品列表:", res.data)
 						this.productsList["products" + this.selectProductsId].requested = true;
 						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
