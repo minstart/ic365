@@ -4,7 +4,10 @@
 		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="user-info-wrap">
 			<!-- <view class="head-pic"></view> -->
-			<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+			<view class="head-pic-wrap">
+				<view class="vip-icon" :vipLevel='userInfo.vipLevel'></view>
+				<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+			</view>
 			<view class="user-info">
 				<h3 class="name">{{userInfo.nickname}}同学</h3>
 				<ul class="cumulative-list">
@@ -24,6 +27,9 @@
 			</view>
 			<view class="btn-setUp" @click="jumpPage({url:''})"></view>
 		</view>
+	</view>
+
+	<view class="plan-recommend-wrap uni-padding-wrap">
 		<view class="study-report-wrap">
 			<!-- 设置跳转到详情页面 -->
 			<view class="report-details" @click="jumpPage({url:'/pages/page/parent/parent_detail'})"></view>
@@ -55,9 +61,6 @@
 				<qiun-data-charts type="column" :opts="barChartOpts" :chartData="dailyReport" />
 			</view>
 		</view>
-	</view>
-
-	<view class="plan-recommend-wrap uni-padding-wrap">
 		<view class="ability-analysis-wrap">
 			<view class="item-title-wrap">
 				<h3 class="item-title">能力分析</h3>
@@ -225,12 +228,12 @@
 
 				// 建议提升和其他
 				suggestionImproveOther: {
-					currencies:{
-						_newlyAdded:{
-							text:""
+					currencies: {
+						_newlyAdded: {
+							text: ""
 						}
 					}
-					
+
 				},
 				// 家长页面统计
 				parent: {},
@@ -362,25 +365,33 @@
 	.banner-wrap {
 		border-radius: 0.6rem;
 		padding: 20rpx 24rpx 0 24rpx;
-		margin-bottom: 2rem;
 
 		.user-info-wrap {
 			display: flex;
 			margin-bottom: 1.6rem;
 			position: relative;
 
+			.head-pic-wrap {
+				.vip-icon {
+					right: 12rpx;
+				}
+			}
+
 			.head-pic {
-				width: 3rem;
-				height: 3rem;
+				width: 96rpx;
+				height: 96rpx;
 				border-radius: 50%;
 				background: #fff;
 				overflow: hidden;
-				margin-right: 0.5rem;
+				margin-right: 16rpx;
+				border-radius: 96rpx;
+				border: 4rpx solid #fff;
+				position: relative;
 			}
 
 			.user-info {
 				.name {
-					margin: 0.2rem 0;
+					margin: 8rpx 0;
 				}
 
 				.cumulative-list {
@@ -501,12 +512,12 @@
 
 			&:nth-child(2) {
 				padding-top: 6.9375rem;
-				margin: 2rem;
+				margin: 0 2rem 2rem 2rem;
 			}
 
 			&:nth-child(3) {
 				padding-top: 2.5rem;
-				margin: 2rem;
+				margin: 0 2rem 2rem 2rem;
 			}
 		}
 

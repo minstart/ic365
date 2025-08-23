@@ -8,8 +8,10 @@
 			</view>
 			<view class="user-info-wrap">
 				<view class="uni-padding-wrap">
-					<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt="">
-					</image>
+					<view class="head-pic-wrap">
+						<view class="vip-icon" :vipLevel='userInfo.vipLevel'></view>
+						<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+					</view>
 					<view class="user-info">
 						<h3 class="name">{{userInfo.nickname||""}}同学</h3>
 						<view class="school">{{userInfo.school||""}} {{userInfo.className||""}}</view>
@@ -288,8 +290,8 @@
 					url: "/api/question/getRecentlyAndCollection"
 				}).then(res => {
 					console.log("获取最近题目和收藏题目数量", res.data)
-					res.data.recently > 0 ? (this.practiceList[0].list[0].unRead = res.data.recently + "条新记录") : (this.practiceList[0].list[0].unRead = "");
-					this.practiceList[0].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习"
+					res.data.recently > 0 ? (this.practiceList[1].list[0].unRead = res.data.recently + "条新记录") : (this.practiceList[1].list[0].unRead = "");
+					this.practiceList[1].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习"
 				}).catch(error => {
 					this.consoleLog("获取最近题目和收藏题目数量报错：：", error)
 				})
@@ -298,9 +300,9 @@
 				this.commonRequest({
 					url: "/api/wrong-records/category-stats"
 				}).then(res => {
-					// console.log("我的错题：", res.data)
+					console.log("我的错题：", res.data)
 					res.data.forEach(item => {
-						this.practiceList[1].list.push({
+						this.practiceList[2].list.push({
 							coverUrl: item.coverUrl,
 							title: item.categoryName,
 							introduce: item.total + "道错题待复习",
@@ -317,8 +319,8 @@
 					url: "/api/exchange/stat"
 				}).then(res => {
 					console.log("获取我的兑换统计：", res.data)
-					this.practiceList[2].list[0].introduce = "已兑换" + (res.data.exchangeTotal || 0) + "件物品"
-					this.practiceList[2].list[1].introduce = (res.data.availableExchangeCount || 0) + "件商品可兑换"
+					this.practiceList[3].list[0].introduce = "已兑换" + (res.data.exchangeTotal || 0) + "件物品"
+					this.practiceList[3].list[1].introduce = (res.data.availableExchangeCount || 0) + "件商品可兑换"
 					// res.data.recently
 					// collection
 				}).catch(error => {
@@ -331,9 +333,10 @@
 				}).then(res => {
 					console.log("我的任务：", res.data)
 					res.data.forEach(item => {
-						this.practiceList[3].list.push({
+						this.practiceList[0].list.push({
 							coverUrl: item.cover,
 							title: item.name,
+							id:item.missionTypeId,
 							introduce: "已完成" + item.completedCount + "/" + item.totalCount + "个任务",
 							totalCount: item.totalCount,
 							completedCount: item.completedCount,
@@ -439,21 +442,28 @@
 				padding: 1.25rem 0.9375rem;
 			}
 
+			.head-pic-wrap {
+				.vip-icon {
+					right: 12rpx;
+				}
+			}
 			.head-pic {
-				width: 3rem;
-				height: 3rem;
+				width: 96rpx;
+				height: 96rpx;
 				border-radius: 50%;
 				background: #fff;
 				overflow: hidden;
-				// flex: 1;
-				margin-right: 0.5rem;
+				margin-right: 16rpx;
+				border-radius: 96rpx;
+				border: 4rpx solid #fff;
+				position: relative;
 			}
 
 			.user-info {
 				flex: 1;
 
 				.name {
-					margin: 0.2rem 0;
+					margin: 8rpx 0;
 				}
 
 				.school {

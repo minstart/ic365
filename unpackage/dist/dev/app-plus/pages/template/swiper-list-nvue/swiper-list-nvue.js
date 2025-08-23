@@ -63,7 +63,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue = __toESM(require_vue());
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
@@ -73,10 +73,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   }
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-list-nvue/swiper-list-nvue.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-list-nvue/swiper-list-nvue.js
   var import_vue2 = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -85,7 +85,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-list-nvue/swiper-list-nvue.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/swiper-list-nvue/swiper-list-nvue.js
   var _style_0$1 = { "uni-swiper-page": { "": { "flex": 1, "position": "absolute", "left": 0, "top": 0, "right": 0, "bottom": 0 } }, "list": { "": { "flex": 1, "backgroundColor": "#ebebeb" } }, "list-item": { "": { "marginLeft": 12, "marginRight": 12, "marginTop": 12, "paddingTop": 20, "paddingRight": 20, "paddingBottom": 20, "paddingLeft": 20, "backgroundColor": "#ffffff", "borderRadius": 5 } }, "loading": { "": { "height": 20 } } };
   var _sfc_main$1 = {
     props: {
@@ -177,7 +177,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       )
     ]);
   }
-  var swiperPage = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/swiper-list-nvue/swiper-page.nvue"]]);
+  var swiperPage = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/swiper-list-nvue/swiper-page.nvue"]]);
   var _style_0 = { "page": { "": { "flex": 1 } }, "header": { "": { "height": 160, "flexDirection": "row", "alignItems": "center", "justifyContent": "center", "backgroundColor": "#f4f4f4" } }, "header-title": { "": { "fontSize": 30, "fontWeight": "bold", "color": "#444444" } }, "flexible-view": { "": { "backgroundColor": "#f823ff" } }, "page-head": { "": { "height": 200, "flexDirection": "column", "alignItems": "center", "justifyContent": "center", "backgroundColor": "#FF0000" } }, "tabs": { "": { "flexDirection": "column", "overflow": "hidden", "backgroundColor": "#ffffff" } }, "tab-bar": { "": { "width": "750rpx", "height": "84rpx", "flexDirection": "row" } }, "scroll-view-indicator": { "": { "position": "relative", "height": 2, "backgroundColor": "rgba(0,0,0,0)" } }, "scroll-view-underline": { "": { "position": "absolute", "top": 0, "bottom": 0, "width": 0, "backgroundColor": "#007AFF" } }, "scroll-view-animation": { "": { "transitionDuration": 200, "transitionProperty": "left" } }, "tab-bar-line": { "": { "height": "1rpx", "backgroundColor": "#cccccc" } }, "tab-view": { "": { "flex": 1 } }, "uni-tab-item": { "": { "flexWrap": "nowrap", "paddingLeft": 25, "paddingRight": 25 } }, "uni-tab-item-title": { "": { "color": "#555555", "fontSize": "30rpx", "height": "80rpx", "lineHeight": "80rpx", "flexWrap": "nowrap" } }, "uni-tab-item-title-active": { "": { "color": "#007AFF" } }, "swiper-item": { "": { "flex": 1, "flexDirection": "column" } }, "swiper-page": { "": { "flex": 1, "flexDirection": "row", "position": "absolute", "left": 0, "top": 0, "right": 0, "bottom": 0 } }, "refresh-view": { "": { "width": "750rpx", "height": 80, "flexDirection": "row", "alignItems": "center", "justifyContent": "center" } }, "@TRANSITION": { "scroll-view-animation": { "duration": 200, "property": "left" } } };
   var dom = weex.requireModule("dom");
   var MAX_CACHE_DATA = 100;
@@ -513,7 +513,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ], 8, ["id"]);
   }
-  var swiperListNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/swiper-list-nvue/swiper-list-nvue.nvue"]]);
+  var swiperListNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/swiper-list-nvue/swiper-list-nvue.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

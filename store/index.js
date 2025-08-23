@@ -49,7 +49,9 @@ const store = new Vuex.Store({
 					isLoading: true, //页面是否加载loading样式
 					taskbarHeight: "0rpx", //任务栏高度，从首页获取
 					showRewardPopUp: true, //任务奖励、成就奖励弹窗是否显示
-					rewardPopUpList: [{
+					rewardPopUpList: [
+						
+						{
 						"noticeId": 1,
 						"name": "每日必修",
 						"summary": "测试副标题",
@@ -75,7 +77,15 @@ const store = new Vuex.Store({
 								"icon": "http://ic365.com"
 							}
 						]
-					}], //任务奖励、成就奖励弹窗列表
+					},
+					{
+						type:2,
+						coverUrl:"",
+						name:"萌新小精灵",
+						summary: "欢迎你，数学森林的小精灵！快用你的魔法小脑瓜，和数字宝宝一起开启一场奇妙探险吧",
+						
+					},
+					], //任务奖励、成就奖励弹窗列表
 
 					hasLogin: false,
 					isUniverifyLogin: false,

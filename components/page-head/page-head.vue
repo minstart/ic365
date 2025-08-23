@@ -184,19 +184,19 @@
 	}
 
 	//奖励列表弹窗 
-	.reward-pop-up-wrap {
-		position: fixed;
-		overflow: hidden;
-		left: 0;
-		top: 0;
-		width: 100vw;
-		height: 1600rpx;
-		background: rgba(0, 0, 0, 0.5);
-		z-index: 100000;
-		.pop-up-type{
-			width: 80%;
-			height: 80%;
-			background: #fff;
-		}
-	}
+	// .reward-pop-up-wrap {
+	// 	position: fixed;
+	// 	overflow: hidden;
+	// 	left: 0;
+	// 	top: 0;
+	// 	width: 100vw;
+	// 	height: 1600rpx;
+	// 	background: rgba(0, 0, 0, 0.5);
+	// 	z-index: 100000;
+	// 	.pop-up-type{
+	// 		width: 80%;
+	// 		height: 80%;
+	// 		background: #fff;
+	// 	}
+	// }
 </style>

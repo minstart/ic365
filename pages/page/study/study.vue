@@ -1,23 +1,26 @@
 <template>
-	<view class="page-loading" v-if="pageMask"></view>
+	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<view class="banner-wrap">
 			<page-head :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
-				<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+				<view class="head-pic-wrap">
+					<view class="vip-icon" :vipLevel='userInfo.vipLevel'></view>
+					<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+				</view>
 				<view class="user-info">
 					<h3 class="name">{{userInfo.nickname}}同学</h3>
 					<ul class="cumulative-list">
 						<li class="list">
-							<view class="icon" iconType="star"></view>
+							<view class="icon" type="star"></view>
 							<h4 class="number">{{userInfo.currencies.star||0}}</h4>
 						</li>
 						<li class="list">
-							<view class="icon" iconType="stone"></view>
+							<view class="icon" type="stone"></view>
 							<h4 class="number">{{userInfo.currencies.stone||0}}</h4>
 						</li>
 						<li class="list">
-							<view class="icon" iconType="dust"></view>
+							<view class="icon" type="dust"></view>
 							<h4 class="number">{{userInfo.currencies.dust||0}}</h4>
 						</li>
 					</ul>
@@ -189,6 +192,8 @@
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
+			}).then(res => {
+				this.$refs.rewardPopUp.open('center')
 			})
 		},
 		onHide() {
@@ -219,18 +224,27 @@
 			display: flex;
 			margin-bottom: 1.6rem;
 
+			.head-pic-wrap {
+				.vip-icon {
+					right: 12rpx;
+				}
+			}
+
 			.head-pic {
-				width: 3rem;
-				height: 3rem;
+				width: 96rpx;
+				height: 96rpx;
 				border-radius: 50%;
 				background: #fff;
 				overflow: hidden;
-				margin-right: 0.5rem;
+				margin-right: 16rpx;
+				border-radius: 96rpx;
+				border: 4rpx solid #fff;
+				position: relative;
 			}
 
 			.user-info {
 				.name {
-					margin: 0.2rem 0;
+					margin: 8rpx 0;
 				}
 
 				.cumulative-list {
@@ -246,21 +260,21 @@
 							display: inline-block;
 							margin-right: 0.56rem;
 
-							&[iconType="star"] {
+							&[type="star"] {
 								background-image: url("/static/icons/star.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
-							&[iconType="stone"] {
+							&[type="stone"] {
 								background-image: url("/static/icons/stone.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
-							&[iconType="dust"] {
+							&[type="dust"] {
 								background-image: url("/static/icons/dust.png");
 								background-repeat: no-repeat;
 								background-position: center;

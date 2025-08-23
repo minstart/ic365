@@ -27,22 +27,24 @@
 				ydLogin.shouldQuickLogin((data) => {
 					// console.log(data)
 					if (!data.success) {
-						// this.getLogin().then(data => {}).catch(err => {
-							uni.showModal({
-								content: '不具备一键登录网络环境（请保持手机卡移动数据联网，断开WiFi联网），或者是否需要跳转到手机验证码登录？',
-								showCancel: true,
-								success: (res) => {
-									if (res.confirm) {
-										// 确认
-										uni.reLaunch({
-											url: '/pages/page/login/phoneLogin'
-										});
-									} else if (res.cancel) {
-										// 取消
+						try{
+							this.getLogin().then(data => {}).catch(err => {
+								uni.showModal({
+									content: '不具备一键登录网络环境（请保持手机卡移动数据联网，断开WiFi联网），或者是否需要跳转到手机验证码登录？',
+									showCancel: true,
+									success: (res) => {
+										if (res.confirm) {
+											// 确认
+											uni.reLaunch({
+												url: '/pages/page/login/phoneLogin'
+											});
+										} else if (res.cancel) {
+											// 取消
+										}
 									}
-								}
-							});
-						// })
+								});
+							})
+						}catch(e){}
 						
 						// this.consoleLog("不具备一键登录网络环境 - 跳转到账号密码登录", data)
 					} else {

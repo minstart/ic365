@@ -106,7 +106,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     ])) : createCommentVNode("v-if", true)
   ]);
 }
-const indexedListItem = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list-item.vue"]]);
+const indexedListItem = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list-item.vue"]]);
 const _style_0 = { "uni-indexed-list": { "": { "position": "absolute", "left": 0, "top": 0, "right": 0, "bottom": 0, "flexDirection": "row" } }, "uni-indexed-list__scroll": { "": { "flex": 1 } }, "uni-indexed-list__menu": { "": { "width": 24, "flexDirection": "column" } }, "uni-indexed-list__menu-item": { "": { "flex": 1, "alignItems": "center", "justifyContent": "center" } }, "uni-indexed-list__menu-text": { "": { "fontSize": 12, "textAlign": "center", "color": "#aaaaaa" } }, "uni-indexed-list__menu-text--active": { "": { "borderRadius": 16, "width": 16, "height": 16, "lineHeight": 16, "backgroundColor": "#007aff", "color": "#ffffff" } }, "uni-indexed-list__alert-wrapper": { "": { "position": "absolute", "left": 0, "top": 0, "right": 0, "bottom": 0, "flexDirection": "row", "alignItems": "center", "justifyContent": "center" } }, "uni-indexed-list__alert": { "": { "width": 80, "height": 80, "borderRadius": 80, "textAlign": "center", "lineHeight": 80, "fontSize": 35, "color": "#ffffff", "backgroundColor": "rgba(0,0,0,0.5)" } } };
 const dom = weex.requireModule("dom");
 function throttle(func, delay) {
@@ -381,7 +381,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     /* NEED_PATCH */
   );
 }
-const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list.vue"]]);
+const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list.vue"]]);
 const airport = {
   "list": [{
     "letter": "A",
@@ -673,7 +673,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }, null, 8, ["options", "onClick"])
   ]);
 }
-const indexedList = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/indexed-list/indexed-list.nvue"]]);
+const indexedList = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/indexed-list/indexed-list.nvue"]]);
 export {
   indexedList as default
 };

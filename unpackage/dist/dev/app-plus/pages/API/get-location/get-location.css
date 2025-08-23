@@ -72,21 +72,6 @@
     transform: rotate(360deg);
 }
 }
-.reward-pop-up-wrap[data-v-e80b2f0b] {
-  position: fixed;
-  overflow: hidden;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 50rem;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100000;
-}
-.reward-pop-up-wrap .pop-up-type[data-v-e80b2f0b] {
-  width: 80%;
-  height: 80%;
-  background: #fff;
-}
 
 /**
  * 这里是uni-app内置的常用样式变量
@@ -115,7 +100,7 @@
 /* 文章场景相关 */
 .uni-popup[data-v-4dd3c44b] {
   position: fixed;
-  z-index: 99;
+  z-index: 100;
 }
 .uni-popup.top[data-v-4dd3c44b], .uni-popup.left[data-v-4dd3c44b], .uni-popup.right[data-v-4dd3c44b] {
   top: 0;

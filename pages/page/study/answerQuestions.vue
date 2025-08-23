@@ -86,7 +86,7 @@
 							<view class="name-wrap">
 								<view class="name">{{selectCategory.name}} <span class="border"></span></view>
 							</view>
-							<view class="video-list" v-for="item in videoList.list" @click.stop="verifyPlayVideo(item)">
+							<view class="video-list" v-for="item in videoList.list" @tap.stop="verifyPlayVideo(item)">
 								<div class="video-img-wrap flex-center">
 									<view class="label">会员</view>
 									<image lazy-load class="video-img" :src="item.coverUrl"></image>
@@ -99,14 +99,24 @@
 			</view>
 		</view>
 	</view>
+
 	<!-- 视频弹窗 -->
-	<l-popup v-show="showVideo" :close="closePopup" :width="'calc(80vh / 9 * 16)'">
+	<!-- 	<uni-popup ref="showVideo" :mask-click="true" type="center">
+		<view class="common-popup-wrap">
+			<view class="common-popup-close" @click.stop="closePopup"></view>
+			<div class="common-popup-content">
+				<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" show-fullscreen-btn="false"></video>
+			</div>
+		</view>
+	</uni-popup> -->
+	<!-- 视频弹窗 -->
+	<l-popup :pageShow="showVideo" :close="closePopup" :width="'calc(80vh / 9 * 16)'">
 		<template v-slot>
 			<video id="video1" class="video-view" :src="analysis.video" autoplay="true" duration="" show-fullscreen-btn="false"></video>
 		</template>
 	</l-popup>
 	<!-- 文字 + 图片析题弹窗 -->
-	<l-popup v-show="showAnalysis" :close="closePopup">
+	<l-popup :pageShow="showAnalysis" :close="closePopup">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
 				<h3 style="margin-bottom: 16rpx;">题目：{{topic.content}}</h3>
@@ -115,7 +125,7 @@
 		</template>
 	</l-popup>
 	<!-- AI析题弹窗 -->
-	<l-popup v-show="showAIAnalysis" :close="closePopup">
+	<l-popup :pageShow="showAIAnalysis" :close="closePopup">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
 				<view class="conten-window">
@@ -386,6 +396,7 @@
 			// 教材同步 - 需要校验会员
 			verifyPlayVideo(item) {
 				if (item) {
+					console.log("item", item)
 					try {
 						this.playVideo(item.videoId)
 					} catch (e) {}
@@ -395,7 +406,7 @@
 			// 每日一题、视频列表 - 打开视频解析
 			playVideo(videoId) {
 				if (!this.analysis.video || this.pageType == "video") {
-					// console.log("播放视频id：", videoId || this.topic.videoId)
+					console.log("播放视频id：", videoId || this.topic.videoId)
 					this.commonRequest({
 						url: "/api/video/getById",
 						data: {
@@ -404,11 +415,12 @@
 					}).then(res => {
 						console.log("获取视频解析地址::", res.data)
 						try {
-							this.analysis.video = res.data
 							this.showVideo = true;
+							this.analysis.video = res.data
 							this.videoEl = uni.createVideoContext('video1'); //创建视频实例指向video
 							this.videoEl.seek(0);
 							this.videoEl.play();
+
 						} catch (e) {}
 					}).catch(error => {
 						console.log("获取视频解析地址报错", error)
@@ -556,9 +568,8 @@
 				if (this.isLoading) return false;
 				this.isLoading = true;
 				this.choiceCategory(this.selectCategory)
-				console.log("触发滚动到底部加载视频新数据")
+				// console.log("触发滚动到底部加载视频新数据")
 			},
-
 			// 切换题目之后，需要调用，重置数据 type: "all" 所有；question:题目相关 （题目、答案和解析）；video:视频列表；category 左侧类目
 			resetProblem(type) {
 				if (type == "all" || type == "question") {
@@ -604,7 +615,6 @@
 				}
 			},
 
-
 			// 打开文本 + 图片解析；
 			textAnalysis() {
 				this.showAnalysis = true;
@@ -621,6 +631,9 @@
 					this.analysis.video = ""
 					this.videoEl = ""
 				}
+				try{
+					this.$refs.showVideo.close()
+				}catch(e){}
 			},
 
 			// 打开AI解析

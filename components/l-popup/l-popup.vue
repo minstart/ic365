@@ -1,5 +1,5 @@
 <template name="l-popup">
-	<view class="l-popup-background">
+	<view class="l-popup-background" v-if="pageShow">
 		<view class="l-popup-window" :style="{'width':width,'height':height,'background':background}">
 			<view class="l-popup-wrap">
 				<view class="l-popup-close-icon" @click.stop="close"></view>
@@ -22,6 +22,9 @@
 			},
 			background: {
 				default: "#fff"
+			},
+			pageShow: {
+				default: false
 			},
 			close: {
 				type: Function,

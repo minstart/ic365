@@ -72,21 +72,6 @@
     transform: rotate(360deg);
 }
 }
-.reward-pop-up-wrap[data-v-e80b2f0b] {
-  position: fixed;
-  overflow: hidden;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 50rem;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100000;
-}
-.reward-pop-up-wrap .pop-up-type[data-v-e80b2f0b] {
-  width: 80%;
-  height: 80%;
-  background: #fff;
-}
 
 
 uni-movable-view {

@@ -1,10 +1,13 @@
 <template>
-	<view class="page-loading" v-if="pageMask"></view>
+	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<view class="banner-wrap">
-			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'" :showRewardPopUp="$store.state.showRewardPopUp" :rewardPopUpList="$store.state.rewardPopUpList"></page-head>
+			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
-				<image class="head-pic" :vipLevel='userInfo.vipLevel' :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+				<view class="head-pic-wrap">
+					<view class="vip-icon" :vipLevel='userInfo.vipLevel'></view>
+					<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
+				</view>
 				<view class="user-info">
 					<h3 class="name">{{userInfo.nickname}}同学</h3>
 					<ul class="cumulative-list">
@@ -125,6 +128,9 @@
 			</view>
 		</view>
 	</view>
+	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
+		<reward-pop-up></reward-pop-up>
+	</uni-popup>
 </template>
 <script>
 	import store from '/store/index.js';
@@ -182,7 +188,9 @@
 				// 	"categoryName": "两位数加一位数"
 				// }],
 				// 学习模块
-				plan: {},
+				plan: {
+					list: []
+				},
 				// 最新成就
 				achievement: {},
 				// achievement: {
@@ -257,11 +265,11 @@
 					data: recordActivity
 				}).then(res => {
 					// this.consoleLog("加载app时传输用户设备信息：",res)
-			
+
 				}).catch(error => {
 					// this.consoleLog("记录用户设备信息报错：：", error)
 				})
-				
+
 				// 获取用户信息
 				this.commonRequest({
 					url: "/api/student/info"
@@ -347,6 +355,8 @@
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
+			}).then(res => {
+				this.$refs.rewardPopUp.open('center')
 			})
 		},
 		onHide() {
@@ -410,11 +420,20 @@
 	.banner-wrap {
 		padding: 20rpx 24rpx 0 24rpx;
 		// display: flex;
+		min-height: 760rpx;
 		background: url("/static/image/1_header_banner.png") no-repeat top / 100%;
+		position: relative;
 
 		.user-info-wrap {
 			display: flex;
-			margin-bottom: 96rpx;
+			// position: absolute;
+			// bottom: 560rpx;
+
+			.head-pic-wrap {
+				.vip-icon {
+					right: 12rpx;
+				}
+			}
 
 			.head-pic {
 				width: 96rpx;
@@ -422,31 +441,10 @@
 				border-radius: 50%;
 				background: #fff;
 				overflow: hidden;
-				// flex: 1;
 				margin-right: 16rpx;
 				border-radius: 96rpx;
-				border:4rpx solid #fff;
+				border: 4rpx solid #fff;
 				position: relative;
-				&::after{
-					position: absolute;
-					content: "";
-					right: 0;
-					bottom: 0;
-					width: 46rpx;
-					height: 46rpx;
-					z-index: 2;
-					background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
-				}
-				&[vipLevel="0"]{
-					&::after{
-						display: none;
-					}
-				}
-				&[vipLevel="2"]{
-					&::after{
-						background: url("/static/icons/svip.png") no-repeat center / 100% 100%;
-					}
-				}
 			}
 
 			.user-info {
@@ -504,6 +502,8 @@
 			color: #00362B;
 			margin-left: 1rem;
 			font-size: 1.1rem;
+			position: absolute;
+			bottom: 300rpx;
 
 			* {
 				text-shadow: 0px 2px 3px #fff;
@@ -528,6 +528,9 @@
 		.activity-wrap {
 			margin-top: 126rpx;
 			display: flex;
+			position: absolute;
+			bottom: 0;
+			width: calc(100% - 48rpx);
 
 			.activity {
 				flex: 1;

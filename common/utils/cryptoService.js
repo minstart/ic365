@@ -18,6 +18,7 @@ async function getPublicKey() {
 				resolve(res);
 			},
 			fail: err => {
+				console.log("/api/crypto/publicKey接口返回：", err)
 				reject(err);
 			},
 			complete: (res) => {
@@ -36,10 +37,11 @@ async function getExchange(data) {
 				resolve(res);
 			},
 			fail: err => {
+				console.log("/api/crypto/exchange接口返回：", err)
 				reject(err);
 			},
 			complete: (res) => {
-				// console.log("/api/crypto/exchange接口返回：", JSON.stringify(res))
+				// console.log("/api/crypto/exchange接口返回：", res)
 			}
 		})
 	})

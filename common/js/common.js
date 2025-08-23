@@ -468,6 +468,13 @@ export default {
 			const daysUntilDeadline = Math.floor(diff / (1000 * 60 * 60 * 24));
 		
 			return daysUntilDeadline;
+		},
+		// 关闭全局奖励弹窗
+		closeRewardPopUp(){
+			try{
+				this.$refs.rewardPopUp.close()
+			}catch(e){}
 		}
+		
 	}
 }
