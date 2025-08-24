@@ -45,7 +45,7 @@
 			<!-- 暂无数据 -->
 			<view class="no-list-tip" v-if="plan.list && plan.list.length==0">暂无数据</view>
 			<ul class="plan-list-wrap">
-				<li class="plan-list" v-for="(item,i) in plan.list" :key="item.missionId" :type="item.missionTypeId" :colorScheme="item.colorScheme" @click="jumpPage({url:''})">
+				<li class="plan-list" v-for="(item,i) in plan.list" :key="item.missionId" :type="item.missionTypeId" :colorScheme="item.colorScheme" @click="openTaskDetails(item)">
 					<!-- <image class="plan-background" :src="planBackground(item.missionTypeId)"></image> -->
 					<view class="plan-background"></view>
 					<view class="plan-list-type-back">
@@ -80,7 +80,7 @@
 			</view>
 			<view class="no-list-tip" v-if="videos.length==0">暂无数据</view>
 			<ul class="plan-recommend-list-wrap">
-				<li class="plan-recommend-list" :key="item.videoId" v-for="item in videos" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.categoryName})">
+				<li class="plan-recommend-list" :key="item.videoId" v-for="item in videos" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&keyword='+item.videoId})">
 					<image class="list-icon" :src="item.coverUrl"></image>
 				</li>
 			</ul>
@@ -129,7 +129,10 @@
 		</view>
 	</view>
 	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
-		<reward-pop-up></reward-pop-up>
+		<reward-pop-up :close="closeRewardPopUp"></reward-pop-up>
+	</uni-popup>
+	<uni-popup ref="taskPopUp" :mask-click="false" type="bottom">
+		<task-details :details='taskDetails' :close="closeTaskPopUp"></task-details>
 	</uni-popup>
 </template>
 <script>
@@ -161,76 +164,21 @@
 				defaultAchievementIcon: "/static/image/head_pic.png", // 默认成就图标
 				// 活动列表
 				activityList: [],
-				// activityList: [{
-				// 		activityBack: "/static/shuijiao.jpg",
-				// 		title: "每日挑战",
-				// 		tip: "完成挑战赢取奖励"
-				// 	},
-				// 	{
-				// 		activityBack: "/static/shuijiao.jpg",
-				// 		title: "组队学习",
-				// 		tip: "与好友一起进步"
-				// 	}
-				// ],
 				// 推荐学习
 				videos: [],
-				// videos: [{
-				// 	"videoId": 37815146,
-				// 	"coverUrl": "https://ic365.ajulye.com/media/xue_ke_cover/video_47474516.jpg",
-				// 	"categoryName": "找规律"
-				// }, {
-				// 	"videoId": 37815106,
-				// 	"coverUrl": "https://ic365.ajulye.com/media/xue_ke_cover/video_47474515.jpg",
-				// 	"categoryName": "两位数减一位数"
-				// }, {
-				// 	"videoId": 37815017,
-				// 	"coverUrl": "https://ic365.ajulye.com/media/xue_ke_cover/video_47474514.jpg",
-				// 	"categoryName": "两位数加一位数"
-				// }],
 				// 学习模块
 				plan: {
 					list: []
 				},
 				// 最新成就
 				achievement: {},
-				// achievement: {
-				// 	"total": 12,
-				// 	"obtained": 3,
-				// 	"list": [{
-				// 			"achievementId": 1,
-				// 			"name": "持之以恒",
-				// 			"subtitle": "连续登录7天",
-				// 			"imgPath": "achievement_1.png",
-				// 			"rare": 1,
-				// 			"obtainTime": "2025-07-20T21:58:49",
-				// 			"obtainTimeUnix": 1753019929
-				// 		},
-				// 		{
-				// 			"achievementId": 4,
-				// 			"name": "错题终结者",
-				// 			"subtitle": "订正100道错题",
-				// 			"imgPath": "achievement_4.png",
-				// 			"rare": 0,
-				// 			"obtainTime": "2025-07-20T21:58:49",
-				// 			"obtainTimeUnix": 1753019929
-				// 		},
-				// 		{
-				// 			"achievementId": 12,
-				// 			"name": "数字小精灵",
-				// 			"subtitle": "完成100道10以内加减法",
-				// 			"imgPath": "achievement_12.png",
-				// 			"rare": 0,
-				// 			"obtainTime": "2025-07-20T21:58:49",
-				// 			"obtainTimeUnix": 1753019929
-				// 		}
-				// 	]
-				// },
-				// userInfo: {
-				// 	nickname: "",
-				// 	currencies: {
 
-				// 	}
-				// },
+				userInfo: {
+					nickname: "",
+					currencies: {
+
+					}
+				},
 				pageData: {
 					banner: {
 						bannerBack: "#3c25b9",
@@ -238,7 +186,8 @@
 						content: "数学是真理的永恒表现形式",
 						contentFrom: "- 卡尔·弗里德里希·高斯"
 					}
-				}
+				},
+				taskDetails:{} //选中的任务详情
 			};
 		},
 		onLoad() {
@@ -264,17 +213,17 @@
 					notLoading: true,
 					data: recordActivity
 				}).then(res => {
-					// this.consoleLog("加载app时传输用户设备信息：",res)
+					// console.log("加载app时传输用户设备信息：",res)
 
 				}).catch(error => {
-					// this.consoleLog("记录用户设备信息报错：：", error)
+					// console.log("记录用户设备信息报错：：", error)
 				})
 
 				// 获取用户信息
 				this.commonRequest({
 					url: "/api/student/info"
 				}).then(res => {
-					// this.consoleLog("获取用户信息::", JSON.stringify(res))
+					// console.log("获取用户信息::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							store.commit("Update_UserInfo", res.data)
@@ -295,26 +244,23 @@
 						});
 					}
 				}).catch(error => {
-					this.consoleLog("获取用户信息报错：：", error)
+					console.log("获取用户信息报错：：", error)
 				})
 
 				// 获取任务列表
 				this.commonRequest({
-					url: "/api/mission/getAll"
-				}).then(res => {
-					this.consoleLog("首页任务列表::", JSON.stringify(res))
-					if (res.code == 0) {
-						try {
-							this.plan = res.data;
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.message || "首页任务列表失败!",
-							icon: "none"
-						});
+					url: "/api/mission/getAll",
+					data: {
+						size: 3
 					}
+				}).then(res => {
+					console.log("首页任务列表::", res)
+					try {
+						this.plan = res.data;
+					} catch (e) {}
+
 				}).catch(error => {
-					this.consoleLog("获取任务列表报错：：", error)
+					console.log("获取任务列表报错：：", error)
 				})
 
 				// 获取我的成就
@@ -348,15 +294,31 @@
 				}).catch(error => {
 					console.log("获取推荐学习失败：：", error)
 				})
+
+				// 通知消息（成就奖励、任务奖励）
+				this.commonRequest({
+					url: "/api/notice/getAll"
+				}).then(res => {
+					console.log("通知消息::", res.data)
+					try {
+						if (res.data.length > 0) {
+							this.$store.state.rewardPopUpList = res.data;
+							this.$refs.rewardPopUp.open('center')
+						}
+					} catch (e) {}
+				}).catch(error => {
+					console.log("通知消息失败：：", error)
+				})
+
+
 			}).catch(error => {
-				this.consoleLog("没有登录：：", error)
+				console.log("没有登录：：", error)
 			})
 		},
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {
-				this.$refs.rewardPopUp.open('center')
 			})
 		},
 		onHide() {
@@ -407,7 +369,20 @@
 						break;
 				}
 			},
-
+			//关闭弹窗 
+			closeRewardPopUp(){
+				this.$refs.rewardPopUp.close()
+			},
+			closeTaskPopUp(name) {
+				this.$refs.taskPopUp.close()
+			},
+			// 打开任务详情
+			openTaskDetails(item){
+				console.log(item)
+				this.taskDetails = item;
+				this.$refs.taskPopUp.open("bottom")
+			}
+			
 		}
 	};
 </script>

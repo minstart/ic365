@@ -30,16 +30,12 @@
 					<input class="search-input" type="text" v-model="keyword" placeholder="搜索知识点或题目" />
 					<view class="search-btn" @click="getProducts({reset:true})">搜索</view>
 				</view>
-				<view class="tab-wrap search-content-wrap">
-					<view class="tab-overflow-bar">
-						<view class="tab-overflow-bar">
-							<ul class="tab-wrap search-tab-wrap">
-								<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in productsTab" :current='i' @click="clickTab(item,i)">
-									{{item.name}}
-								</li>
-							</ul>
+				<view class="search-content-wrap">
+					<scroll-view class="tab-wrap search-tab-wrap" scroll-x="true" :scroll-into-view="tabID" :scroll-with-animation="true">
+						<view :id="'tab-list-'+item.id" class="tab search-tab" :class="selectProductsId==item.id?'selected':''" v-for="(item,i) in productsTab" :current='i' @click="clickTab(item,i)">
+							{{item.name}}
 						</view>
-					</view>
+					</scroll-view>
 					<view class="tab-content-wrap">
 						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
@@ -63,7 +59,7 @@
 									<view class="list-btn-wrap">
 										<view class="list-btn" @click="similarExercises(item2)">同类练习</view>
 										<view class="list-btn" @click="reAnswer(item2)">从新作答</view>
-										<view class="list-btn" @click="print(item2)">打印</view>
+										<!-- <view class="list-btn" @click="print(item2)">打印</view> -->
 									</view>
 								</view>
 							</view>
@@ -95,10 +91,11 @@
 				selectProductsId: "",
 				productsTab: [], //tab选项
 				productsList: {}, //tab列表
+				tabID: "", //选中的tabId
 			}
 		},
-		onLoad() {
-
+		onLoad(option) {
+			option.categoryId && (this.selectProductsId = option.categoryId)
 		},
 		onReady() {
 
@@ -130,7 +127,8 @@
 								this.productsTab.push({
 									id: i,
 									name: res.data[i],
-									page: 1
+									page: 1,
+									noData:false
 								})
 								this.productsList["products" + i] = {
 									requested: false,
@@ -138,6 +136,10 @@
 								}
 							} catch (e) {}
 						}
+						let _that = this;
+						setTimeout(() => {
+							_that.tabID = "tab-list-" + _that.selectProductsId;
+						}, 1000)
 						this.getProducts()
 					}).catch(error => {
 						this.consoleLog("获取错题类目分组(Tab)报错：：", error)
@@ -166,22 +168,29 @@
 				if (this.current !== i) {
 					this.selectProductsId = item.id;
 					this.current = i;
+					this.tabID = "tab-list-" + i;
 					this.getProducts()
 				}
 			},
 			similarExercises(data) {
-				// 同类练习
-				uni.showToast({
-					title: "同类练习" + data.recordId,
-					icon: "none"
+				this.jumpPage({
+					url:"/pages/page/study/answerQuestions?pageType=question&categoryId"+data.categoryId
 				})
+				// // 同类练习
+				// uni.showToast({
+				// 	title: "同类练习" + data.recordId,
+				// 	icon: "none"
+				// })
 			},
 			reAnswer(data) {
-				// 重新作答
-				uni.showToast({
-					title: "重新作答" + data.recordId,
-					icon: "none"
+				this.jumpPage({
+					url:"/pages/page/study/answerQuestions?pageType=question&categoryId"+data.categoryId+"&keyword="+data.questionId
 				})
+				// 重新作答
+				// uni.showToast({
+				// 	title: "重新作答" + data.recordId,
+				// 	icon: "none"
+				// })
 			},
 			print(data) {
 				// 打印
@@ -200,7 +209,7 @@
 					})
 				}
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					console.log(this.keyword, this.selectProductsId)
+					// console.log(this.keyword, this.selectProductsId)
 					// 错题列表
 					this.commonRequest({
 						url: "/api/wrong-records/getAll",
@@ -212,7 +221,7 @@
 					}).then(res => {
 						console.log("错题列表:", res.data)
 						this.productsList["products" + this.selectProductsId].requested = true;
-						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list,...res.data];
+						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list, ...res.data];
 					}).catch(error => {
 						this.consoleLog("错题列表报错：：", error)
 					})
@@ -353,26 +362,26 @@
 
 		.search-content-wrap {
 			margin: 1.25rem 0;
-
-			.tab-overflow-bar {
-				.search-tab-wrap {
-					.tab {
-						padding: 0.56rem 0.56rem;
-						margin-right: 0.625rem;
-						border-radius: 1rem;
-						background-color: #fff;
-						font-size: 0.75rem;
-						min-width: calc(3.75rem - 0.56rem * 2);
-						text-align: center;
-
-						&:last-child {
-							margin-right: 0;
-						}
+			.search-tab-wrap {
+				white-space: nowrap;
+				width: 100%;
+				height: 80rpx;
+				.tab {
+					padding: 0.56rem 0.56rem;
+					margin-right: 0.625rem;
+					border-radius: 1rem;
+					background-color: #fff;
+					font-size: 0.75rem;
+					min-width: calc(3.75rem - 0.56rem * 2);
+					text-align: center;
+					display: inline-block;
+					&:last-child {
+						margin-right: 0;
 					}
+				}
 
-					.selected {
-						background: #FFE084;
-					}
+				.selected {
+					background: #FFE084;
 				}
 			}
 

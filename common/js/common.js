@@ -46,7 +46,7 @@ async function fetchData(data) {
 export default {
 	data() {
 		return {
-			pageMask:true, //页面遮罩，配合组件page-head使用
+			pageMask: true, //页面遮罩，配合组件page-head使用
 			isLoading: true,
 			userInfo: {
 				nickname: "",
@@ -71,7 +71,7 @@ export default {
 		// console.log("this.$store.state::",this.$store.state)
 		// console.log(this.$store.mutation.login())
 	},
-	onHide(){
+	onHide() {
 		this.pageMask = true;
 	},
 	methods: {
@@ -191,9 +191,9 @@ export default {
 		jumpPage(data) {
 			// console.log("jumpPage:::::", data)
 			if (!data) return this.consoleLog("jumpPage()没有传参")
-			if (!data.url) return this.consoleLog("url没有传参"),uni.showToast({
-				title:"没有填写跳转地址",
-				icon:"none"
+			if (!data.url) return this.consoleLog("url没有传参"), uni.showToast({
+				title: "没有填写跳转地址",
+				icon: "none"
 			})
 			if (data.type) {
 				switch (data.type) {
@@ -325,16 +325,16 @@ export default {
 						_this.setRootFontSize(data)
 					} else {
 						// setTimeout(() => {
-							// #ifdef APP-PLUS
-							plus.screen.lockOrientation('portrait-primary');
-							// #endif  
+						// #ifdef APP-PLUS
+						plus.screen.lockOrientation('portrait-primary');
+						// #endif  
 						// }, 0)
 						_this.setRootFontSize(data)
 					}
 					setTimeout(() => {
-						try{
+						try {
 							this.pageMask = false;
-						}catch(e){}
+						} catch (e) {}
 						uni.hideLoading();
 					}, 1000)
 				} catch (e) {
@@ -413,7 +413,7 @@ export default {
 				});
 			})
 		},
-	
+
 		/**
 		 * 获取任意时间(转换时间)
 		 */
@@ -421,15 +421,15 @@ export default {
 			if (!date) {
 				date = new Date()
 			}
-			if(typeof date == "number"){
-				
+			if (typeof date == "number") {
+
 			} else if (typeof date !== 'object') {
 				date = date.replace(/-/g, '/')
 			}
 			const dd = new Date(date)
-		
+
 			dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
-		
+
 			const y = dd.getFullYear()
 			const m = dd.getMonth() + 1 < 10 ? '0' + (dd.getMonth() + 1) : dd.getMonth() + 1 // 获取当前月份的日期，不足10补0
 			const d = dd.getDate() < 10 ? '0' + dd.getDate() : dd.getDate() // 获取当前几号，不足10补0
@@ -443,21 +443,21 @@ export default {
 		},
 		// 转换服务端返回的时间转换成YYYY-MM-DD
 		// type不传 返回格式：YYYY-MM-DD，type:1 => YYYY-MM-DD  type:2 直接删除T返回
-		changeTime(time,type){
-			if(typeof type != "undefined" && type == 2) return time.replace("T", "");
-			if(time.indexOf("T")!=1||time.indexOf(":")!=1){
+		changeTime(time, type) {
+			if (typeof type != "undefined" && type == 2) return time.replace("T", "");
+			if (time.indexOf("T") != 1 || time.indexOf(":") != 1) {
 				let date = new Date(time);
 				let year = date.getFullYear();
 				let month = date.getMonth() + 1; // 月份是从0开始的，所以要加1
 				let day = date.getDate();
 				return `${year}-${month}-${day}`;
-			}else{
+			} else {
 				return time;
 			}
 		},
 		// 计算倒计时（剩余时间）
 		calculateDaysUntilDeadline(endTime) {
-			if(endTime.indexOf("-")!=-1){
+			if (endTime.indexOf("-") != -1) {
 				endTime = new Date(endTime).getTime()
 			}
 			// 获取当前时间的时间戳
@@ -466,15 +466,8 @@ export default {
 			const diff = endTime - now;
 			// 将差值转换为天数（需要除以一天的毫秒数86400000）
 			const daysUntilDeadline = Math.floor(diff / (1000 * 60 * 60 * 24));
-		
+
 			return daysUntilDeadline;
-		},
-		// 关闭全局奖励弹窗
-		closeRewardPopUp(){
-			try{
-				this.$refs.rewardPopUp.close()
-			}catch(e){}
 		}
-		
 	}
 }

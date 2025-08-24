@@ -188,7 +188,7 @@
 					categoryId: "", //选中的类目id
 					name: "", //选中的类目名称
 				},
-
+				recommendCategoryId:"",//推荐视频带过来的CategoryId
 				videoList: { //视频列表
 					page: 0,
 					noData: false, //判断是不是已经没有更多视频了
@@ -200,6 +200,7 @@
 			this.verifLogin().then(data => {
 				option.pageType && (this.pageType = option.pageType);
 				option.keyword && (this.keyword = option.keyword);
+				option.categoryId && (this.recommendCategoryId = option.categoryId)
 				if (this.pageType == "everyDay") {
 					// 每日一题 ------ Start
 					let requestData = {
@@ -248,7 +249,7 @@
 		onReady() {
 			this.context = uni.createVideoContext("video1", this);
 			this.taskbarHeight2 = store.state.taskbarHeight
-			console.log(this.taskbarHeight2)
+			// console.log(this.taskbarHeight2)
 		},
 		onShow() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -484,7 +485,7 @@
 						if (this.keyword) {
 							try {
 								res.data.categories.forEach(item => {
-									if (item.name == this.keyword || item.categoryId == this.keyword) {
+									if (item.name == this.keyword || item.categoryId == this.keyword || item.categoryId == this.recommendCategoryId) {
 										this.selectCategory = item;
 										let _this = this;
 										setTimeout(() => {

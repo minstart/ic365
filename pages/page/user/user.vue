@@ -67,7 +67,8 @@
 				<view class="tab-list" :current='current' v-if="current === 1">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的错题 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.title})">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
+						{{item.jumpUrl}}
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
@@ -306,9 +307,11 @@
 							coverUrl: item.coverUrl,
 							title: item.categoryName,
 							introduce: item.total + "道错题待复习",
-							unRead: item.highFrequencyErrTotal + "道高频错题"
+							unRead: item.highFrequencyErrTotal + "道高频错题",
+							jumpUrl:"/pages/page/study/wrongQuestion?categoryId="+item.categoryId
 						})
 					})
+					console.log(this.practiceList[2].list)
 				}).catch(error => {
 					this.consoleLog("我的错题报错：：", error)
 				})

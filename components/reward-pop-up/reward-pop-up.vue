@@ -36,11 +36,14 @@
 <script>
 	import commonJs from '/common/js/common.js';
 	export default {
+		mixins: [commonJs],
 		props: {
-			width: {
-				default: ""
+			close: {
+				type: Function,
+				default: () => {
+					// console.log("默认右侧功能区函数")
+				}
 			},
-
 		},
 		data() {
 			return {
@@ -49,7 +52,17 @@
 		},
 		mounted() {},
 		methods: {
-
+			// 关闭全局奖励弹窗
+			closeRewardPopUp(item) {
+				try {
+					try {
+						this.$store.state.rewardPopUpList = this.$store.state.rewardPopUpList.filter(item2 => item2.noticeId !== item.noticeId)
+					} catch (e) {}
+					if (this.$store.state.rewardPopUpList.length == 0) {
+						this.close()
+					}
+				} catch (e) {}
+			}
 		}
 	}
 </script>
@@ -67,19 +80,15 @@
 		height: 100vh;
 		background: rgba(0, 0, 0, 0.5);
 		z-index: 2;
-
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		.reward-wrap {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			margin: auto;
-
+			position: relative;
 			.reward-back-wrap {
 				position: absolute;
 				width: 100%;
-				top: -160rpx;
+				top: 0;
 				min-height: 300rpx;
 
 				@keyframes back1Keyframes {
@@ -273,7 +282,7 @@
 				position: relative;
 				width: 100%;
 				height: 100%;
-
+				
 				.reward-content {
 					position: absolute;
 				}
@@ -320,7 +329,7 @@
 		&[rewardType="2"] {
 			.reward-wrap {
 				width: 656rpx;
-				height: max-content;
+				// height: fit-content;
 				border-radius: 60rpx;
 
 				.reward-content-wrap {
@@ -329,7 +338,7 @@
 					width: calc(656rpx - 72rpx * 2);
 					background: #fff;
 					border-radius: 60rpx;
-
+					margin-top: 200rpx;
 					.reward-icon {
 						position: absolute;
 						top: -300rpx;
@@ -338,6 +347,7 @@
 						margin: auto;
 						width: 568rpx;
 						height: 498rpx;
+						border-radius: 30rpx;
 					}
 
 					.reward-content-title {

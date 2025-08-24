@@ -302,34 +302,7 @@ const store = createStore({
     //任务栏高度，从首页获取
     showRewardPopUp: true,
     //任务奖励、成就奖励弹窗是否显示
-    rewardPopUpList: [{
-      "noticeId": 1,
-      "name": "每日必修",
-      "summary": "测试副标题",
-      "createTime": "2025-08-22T04:12:38",
-      "createTimeUnix": 1755807158,
-      "type": 1,
-      "rewardList": [
-        {
-          "name": "10智慧星",
-          "currencyType": 1,
-          "quantity": 10,
-          "icon": "http://ic365.com"
-        },
-        {
-          "name": "5启明石",
-          "currencyType": 3,
-          "quantity": 5,
-          "icon": "http://ic365.com"
-        },
-        {
-          "name": "8知识尘",
-          "currencyType": 2,
-          "quantity": 8,
-          "icon": "http://ic365.com"
-        }
-      ]
-    }],
+    rewardPopUpList: [],
     //任务奖励、成就奖励弹窗列表
     hasLogin: false,
     isUniverifyLogin: false,
@@ -373,7 +346,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:123", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:97", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },
@@ -611,7 +584,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
+const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
 export {
   vuexNvue as default
 };

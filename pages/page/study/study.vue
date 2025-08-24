@@ -69,7 +69,7 @@
 			</view>
 			<view class="no-list-tip" v-if="knowledgePoints.length==0">暂无数据</view>
 			<ul class="plan-list-wrap" v-if="knowledgePoints.length>0">
-				<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.name})">
+				<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.categoryId})">
 					<image class="list-icon" :src='item.coverUrl'></image>
 					<h3 class="list-title">{{item.name}}</h3>
 					<view class="list-subtitle">{{item.subtitle}}</view>
@@ -80,9 +80,8 @@
 			</view>
 			<view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
 			<ul class="classroom-list-wrap" v-if="classroom.length>0">
-				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.categoryName})" v-for="item in classroom">
+				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&keyword='+item.videoId})" v-for="item in classroom">
 					<image class="list-back" :src='item.coverUrl'></image>
-					<!-- <h3 class="list-title">{{item.name}}</h3> -->
 				</li>
 			</ul>
 		</view>
@@ -193,7 +192,7 @@
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {
-				this.$refs.rewardPopUp.open('center')
+
 			})
 		},
 		onHide() {

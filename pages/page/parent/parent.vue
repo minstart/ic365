@@ -99,7 +99,7 @@
 					<view class="item-info">
 						<h3 class="info-title">{{item.name||""}}</h3>
 						<view class="info-text">正确率：{{item.accuracy}}% | {{suggestionTetx(item.accuracy)}}</view>
-						<button class="info-btn" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.name})">{{item.btnTitle}}专项学习</button>
+						<button class="info-btn" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.parentCategoryId})">{{item.btnTitle}}专项学习</button>
 					</view>
 				</li>
 			</ul>
@@ -349,7 +349,7 @@
 		},
 		methods: {
 			suggestionTetx(num) {
-				if (num > 0 && num <= 50) {
+				if (num >= 0 && num <= 50) {
 					return "建议练习"
 				} else if (num > 50 && num <= 80) {
 					return "概念巩固"
