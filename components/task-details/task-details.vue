@@ -7,7 +7,7 @@
 			<view class="content-text">{{details.subTitle}}</view>
 		</div>
 		<view class="task-reward-wrap">
-			<h3 class="content-title">任务说明：</h3>
+			<h3 class="content-title">任务奖励：</h3>
 			<view class="reward-list-wrap">
 				<view class="reward-list">
 					<view class="reward" v-if="details.rewardName">

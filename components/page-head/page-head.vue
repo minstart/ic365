@@ -11,7 +11,7 @@
 			<view class="common-page-head-back">
 				<view class="page-head-back-icon" v-if='isBack' @click="clickBack(backData)"></view>
 			</view>
-			<view class="common-page-head-title" :style="!title&&'height:0;'">{{title}}</view>
+			<view class="common-page-head-title" :class="standardTitle?'standard-title':''" :style="!title&&'height:0;'">{{title}}</view>
 			<view class="common-page-head-module" :style="!isModule&&'height:0;'">
 				<image v-if='isModule' :src="moduleIcon" mode="" @click="clickModule"></image>
 			</view>
@@ -70,6 +70,9 @@
 			// 奖励列表
 			rewardPopUpList: {
 				default: []
+			},
+			standardTitle:{
+				default: false
 			}
 		},
 		data() {
@@ -127,7 +130,7 @@
 		.common-page-head-module {
 			flex: 1;
 			position: relative;
-
+			min-height: 2rpx;
 			* {
 				position: absolute;
 				left: 0;
@@ -150,6 +153,12 @@
 			// line-height: ;
 			padding-bottom: 0.1rem;
 			background: url("/static/image/title_back.png") no-repeat bottom center / 5.5rem;
+		}
+		.standard-title{
+			font-size: 36rpx;
+			color: #000;
+			font-weight: normal;
+			background: transparent;
 		}
 
 		.page-head-back-icon {

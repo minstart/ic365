@@ -153,7 +153,7 @@
 			},
 			otherAchievement() {
 				this.achievement.list.map(img => img.imgPath || this.defaultAchievementIcon);
-				return this.achievement.list.slice(1, 3)
+				return this.achievement.list.slice(0, 3)
 			},
 		},
 		data() {
@@ -171,7 +171,25 @@
 					list: []
 				},
 				// 最新成就
-				achievement: {},
+				achievement: {
+					"list": [
+					    {
+					        "achievementId": 1,
+					        "name": "持之以恒",
+					        "subtitle": "连续登录7天",
+					        "imgPath": "https://ic365.ajulye.com/material/achievement/perseverance.png",
+					        "type": 0,
+					        "obtainTime": "2025-08-25T09:55:38",
+					        "obtainTimeUnix": 1756086938,
+					        "typeName": "铜质",
+					        "groupType": null,
+					        "groupTypeName": "挑战成就",
+					        "obtained": null,
+					        "totalProgress": 0,
+					        "currentProgress": 0
+					    }
+					]
+				},
 
 				userInfo: {
 					nickname: "",
@@ -373,12 +391,11 @@
 			closeRewardPopUp(){
 				this.$refs.rewardPopUp.close()
 			},
-			closeTaskPopUp(name) {
+			closeTaskPopUp() {
 				this.$refs.taskPopUp.close()
 			},
 			// 打开任务详情
 			openTaskDetails(item){
-				console.log(item)
 				this.taskDetails = item;
 				this.$refs.taskPopUp.open("bottom")
 			}
@@ -840,7 +857,7 @@
 
 			.achievement-list {
 				text-align: center;
-				flex: 1;
+				width: 33.33%;
 
 				.achievement-list-pic-wrap {
 					width: 180rpx;
@@ -888,6 +905,7 @@
 					font-size: 1.06rem;
 					font-weight: 500;
 					line-height: 1.5rem;
+					padding: 0 10rpx;
 				}
 
 				.achievement-list-time {

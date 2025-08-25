@@ -29,6 +29,12 @@
 							<input class="search-input" type="text" v-model="keyword" placeholder="你想学什么" />
 							<view class="search-btn" @click="getQuestion"></view>
 						</view>
+						<view class="collect-btn-wrap" v-if="pageType=='question'">
+							<view class="collect-btn" :isCollect="topic.isCollect"  @click.stop="collectTopic()">
+								<view class="collect-icon"></view>
+								{{topic.isCollect?'已收藏':'收藏'}}
+							</view>
+						</view>
 					</view>
 					<!-- 答题右下方内容 -->
 					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'">
@@ -188,7 +194,7 @@
 					categoryId: "", //选中的类目id
 					name: "", //选中的类目名称
 				},
-				recommendCategoryId:"",//推荐视频带过来的CategoryId
+				recommendCategoryId: "", //推荐视频带过来的CategoryId
 				videoList: { //视频列表
 					page: 0,
 					noData: false, //判断是不是已经没有更多视频了
@@ -504,7 +510,27 @@
 					})
 				})
 			},
-
+			
+			// 收藏题目
+			collectTopic(){
+				console.log(this.topic.questionId)
+				this.commonRequest({
+					url: "/api/question/collection",
+					data: {
+						questionId: this.topic.questionId,
+					}
+				}).then(res => {
+					console.log("收藏题目",res.data)
+					this.topic.isCollect = !this.topic.isCollect;
+					uni.showToast({
+						title: this.topic.isCollect?"收藏成功":"取消收藏成功",
+						icon: "none"
+					});
+				}).catch(error => {
+					console.log("收藏题目报错", error)
+				})
+			},
+			
 			// 点击类目之后,获取右侧内容
 			choiceCategory(item, isInitialization) {
 				console.log(this.selectCategory.categoryId, item.categoryId)
@@ -632,9 +658,9 @@
 					this.analysis.video = ""
 					this.videoEl = ""
 				}
-				try{
+				try {
 					this.$refs.showVideo.close()
-				}catch(e){}
+				} catch (e) {}
 			},
 
 			// 打开AI解析
@@ -741,6 +767,43 @@
 							height: 48rpx;
 							display: inline-block;
 							background: url("/static/icons/search.png") no-repeat center / 36rpx 36rpx;
+						}
+					}
+
+					.collect-btn-wrap {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						right:200rpx;
+						margin: auto;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						z-index: 2;
+						.collect-btn {
+							border-radius: 30rpx;
+							line-height: 54rpx;
+							padding: 0 20rpx;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							font-size: 28rpx;
+							background-color: #fff;
+							&[isCollect="true"] {
+								.collect-icon{
+									background: url("/static/icons/collect.png") no-repeat center / 100% 100%;
+								}
+							}
+							&[isCollect="false"] {
+								.collect-icon{
+									background: url("/static/icons/un_collect.png") no-repeat center / 100% 100%;
+								}
+							}
+							.collect-icon{
+								width: 34rpx;
+								height: 30rpx;
+								margin-right: 8rpx;
+							}
 						}
 					}
 				}

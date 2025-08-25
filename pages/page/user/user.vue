@@ -55,41 +55,8 @@
 			<view class="tab-list-content">
 				<view class="tab-list" :current='current' v-if="current === 0">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
-					<!-- 我的练习 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:''})">
-						<image class="list-icon" :src="item.coverUrl" mode=""></image>
-						<view class="list-info">
-							<h3 class="title">{{item.title}}</h3>
-							<view class="introduce">{{item.introduce}}</view>
-						</view>
-					</view>
-				</view>
-				<view class="tab-list" :current='current' v-if="current === 1">
-					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
-					<!-- 我的错题 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
-						{{item.jumpUrl}}
-						<image class="list-icon" :src="item.coverUrl" mode=""></image>
-						<view class="list-info">
-							<h3 class="title">{{item.title}}</h3>
-							<view class="introduce">{{item.introduce}}</view>
-						</view>
-					</view>
-				</view>
-				<view class="tab-list" :current='current' v-if="current === 2">
-					<!-- 我的兑换 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
-						<image class="list-icon" :src="item.coverUrl" mode=""></image>
-						<view class="list-info">
-							<h3 class="title">{{item.title}}</h3>
-							<view class="introduce">{{item.introduce}}</view>
-						</view>
-					</view>
-				</view>
-				<view class="tab-list" :current='current' v-if="current === 3">
-					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的任务 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:''})">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
@@ -102,6 +69,40 @@
 						</view>
 					</view>
 				</view>
+				<view class="tab-list" :current='current' v-if="current === 1">
+					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
+					<!-- 我的练习 -->
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:''})">
+						<image class="list-icon" :src="item.coverUrl" mode=""></image>
+						<view class="list-info">
+							<h3 class="title">{{item.title}}</h3>
+							<view class="introduce">{{item.introduce}}</view>
+						</view>
+					</view>
+				</view>
+				<view class="tab-list" :current='current' v-if="current === 2">
+					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
+					<!-- 我的错题 -->
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
+						{{item.jumpUrl}}
+						<image class="list-icon" :src="item.coverUrl" mode=""></image>
+						<view class="list-info">
+							<h3 class="title">{{item.title}}</h3>
+							<view class="introduce">{{item.introduce}}</view>
+						</view>
+					</view>
+				</view>
+				<view class="tab-list" :current='current' v-if="current === 3">
+					<!-- 我的兑换 -->
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
+						<image class="list-icon" :src="item.coverUrl" mode=""></image>
+						<view class="list-info">
+							<h3 class="title">{{item.title}}</h3>
+							<view class="introduce">{{item.introduce}}</view>
+						</view>
+					</view>
+				</view>
+				
 			</view>
 			<!-- 我的tab相关 ------End -->
 			<!-- 皮肤tab ------Start -->
@@ -233,7 +234,7 @@
 				this.commonRequest({
 					url: "/api/student/info"
 				}).then(res => {
-					this.consoleLog("获取用户信息::", JSON.stringify(res))
+					console.log("获取用户信息::", JSON.stringify(res))
 					if (res.code == 0) {
 						try {
 							store.commit("Update_UserInfo", res.data)
@@ -253,7 +254,7 @@
 						});
 					}
 				}).catch(error => {
-					this.consoleLog("获取用户信息报错：：", error)
+					console.log("获取用户信息报错：：", error)
 				})
 
 				// 获取我资源(战衣/皮肤/名人堂...)
@@ -270,7 +271,7 @@
 					}
 
 				}).catch(error => {
-					this.consoleLog("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
+					console.log("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
 				})
 
 				// 获取兑换商品列表
@@ -283,7 +284,7 @@
 					console.log("获取兑换商品列表:", res.data)
 					this.exchangeList = res.data;
 				}).catch(error => {
-					this.consoleLog("获取兑换商品列表报错：：", error)
+					console.log("获取兑换商品列表报错：：", error)
 				})
 
 				// 获取最近题目和收藏题目数量
@@ -294,7 +295,7 @@
 					res.data.recently > 0 ? (this.practiceList[1].list[0].unRead = res.data.recently + "条新记录") : (this.practiceList[1].list[0].unRead = "");
 					this.practiceList[1].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习"
 				}).catch(error => {
-					this.consoleLog("获取最近题目和收藏题目数量报错：：", error)
+					console.log("获取最近题目和收藏题目数量报错：：", error)
 				})
 
 				// 我的错题
@@ -308,12 +309,12 @@
 							title: item.categoryName,
 							introduce: item.total + "道错题待复习",
 							unRead: item.highFrequencyErrTotal + "道高频错题",
-							jumpUrl:"/pages/page/study/wrongQuestion?categoryId="+item.categoryId
+							jumpUrl: "/pages/page/study/wrongQuestion?categoryId=" + item.categoryId
 						})
 					})
 					console.log(this.practiceList[2].list)
 				}).catch(error => {
-					this.consoleLog("我的错题报错：：", error)
+					console.log("我的错题报错：：", error)
 				})
 
 
@@ -327,7 +328,7 @@
 					// res.data.recently
 					// collection
 				}).catch(error => {
-					this.consoleLog("获取我的兑换统计报错：：", error)
+					console.log("获取我的兑换统计报错：：", error)
 				})
 
 				// 我的任务
@@ -339,14 +340,15 @@
 						this.practiceList[0].list.push({
 							coverUrl: item.cover,
 							title: item.name,
-							id:item.missionTypeId,
+							id: item.missionTypeId,
 							introduce: "已完成" + item.completedCount + "/" + item.totalCount + "个任务",
 							totalCount: item.totalCount,
 							completedCount: item.completedCount,
+							jumpUrl: "/pages/page/user/taskList?missionTypeId=" + item.missionTypeId + "&typeName=" + item.name
 						})
 					})
 				}).catch(error => {
-					this.consoleLog("我的任务报错：：", error)
+					console.log("我的任务报错：：", error)
 				})
 			})
 		},
@@ -450,6 +452,7 @@
 					right: 12rpx;
 				}
 			}
+
 			.head-pic {
 				width: 96rpx;
 				height: 96rpx;

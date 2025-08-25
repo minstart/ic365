@@ -1,6 +1,6 @@
-import { openBlock, createElementBlock, Fragment, createElementVNode, normalizeStyle, createCommentVNode, toDisplayString, renderList } from "vue";
+import { openBlock, createElementBlock, Fragment, createElementVNode, normalizeStyle, createCommentVNode, normalizeClass, toDisplayString, renderList } from "vue";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper.js";
-const _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "@FONT-FACE": [{}] };
+const _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "@FONT-FACE": [{}] };
 const _sfc_main = {
   name: "page-head",
   props: {
@@ -40,6 +40,9 @@ const _sfc_main = {
     // 奖励列表
     rewardPopUpList: {
       default: []
+    },
+    standardTitle: {
+      default: false
     }
   },
   data() {
@@ -94,7 +97,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               createElementVNode(
                 "view",
                 {
-                  class: "common-page-head-title",
+                  class: normalizeClass(["common-page-head-title", $props.standardTitle ? "standard-title" : ""]),
                   style: normalizeStyle(!$props.title && "height:0;")
                 },
                 [
@@ -106,8 +109,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                     /* TEXT */
                   )
                 ],
-                4
-                /* STYLE */
+                6
+                /* CLASS, STYLE */
               ),
               createElementVNode(
                 "view",
@@ -156,7 +159,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE_FRAGMENT */
   );
 }
-const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/components/page-head/page-head.vue"]]);
+const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
 export {
   __easycom_0 as _
 };

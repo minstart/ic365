@@ -130,6 +130,20 @@ const pages = [
     }
   },
   {
+    path: "pages/page/user/taskList",
+    style: {
+      navigationBarTitleText: "任务列表",
+      navigationStyle: "custom"
+    }
+  },
+  {
+    path: "/pages/page/user/systemSettings",
+    style: {
+      navigationBarTitleText: "系统设置",
+      navigationStyle: "custom"
+    }
+  },
+  {
     path: "pages/page/login/login",
     style: {
       navigationBarTitleText: "登录",
