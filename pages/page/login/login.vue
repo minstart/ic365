@@ -1,7 +1,7 @@
 	<meta content="always" name="referrer" />
 	<template>
 		<view class="page-wrap">
-			<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
+			<page-head :title='pageHeadTitle' :isBack='false' :background="'transparent'"></page-head>
 			<view class="uni-padding-wrap">
 				<h3 class="page-title">本机号码一键登录</h3>
 				<button class="directLogin" @click='verifyNumber()'>本机号码登录</button>
@@ -183,7 +183,7 @@
 		@import "/static/css/standard.scss";
 		.page-wrap {
 			width: 100%;
-			height: calc(100vh - 60rpx);
+			height: 100vh;
 			background: url("/static/image/0_login_back.png") no-repeat top / 100%;
 		}
 		.page-title {

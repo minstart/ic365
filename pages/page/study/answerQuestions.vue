@@ -53,7 +53,7 @@
 								</view>
 							</view>
 							<view class="btn-wrap">
-								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'">下一题</button>
+								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'&&answered">下一题</button>
 								<button class="topic-submit" @click="submitTopic" v-if="!answered">提交</button>
 							</view>
 
@@ -398,6 +398,7 @@
 
 			// 下一题
 			nextTopic() {
+				this.resetProblem("question")
 				this.choiceCategory(this.selectCategory, true)
 			},
 			// 教材同步 - 需要校验会员

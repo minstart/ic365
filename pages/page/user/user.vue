@@ -4,7 +4,7 @@
 		<page-head :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="banner-wrap">
 			<view class="btn-wrap">
-				<view class="user-set-btn" @click="jumpPage({url:''})"></view>
+				<view class="user-set-btn" @click="jumpPage({url:'/pages/page/user/systemSettings'})"></view>
 			</view>
 			<view class="user-info-wrap">
 				<view class="uni-padding-wrap">
@@ -84,7 +84,6 @@
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的错题 -->
 					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
-						{{item.jumpUrl}}
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>

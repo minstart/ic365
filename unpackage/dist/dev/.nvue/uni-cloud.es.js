@@ -137,7 +137,7 @@ const pages = [
     }
   },
   {
-    path: "/pages/page/user/systemSettings",
+    path: "pages/page/user/systemSettings",
     style: {
       navigationBarTitleText: "系统设置",
       navigationStyle: "custom"

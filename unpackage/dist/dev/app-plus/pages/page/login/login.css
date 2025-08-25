@@ -107,7 +107,7 @@
 /* 文章场景相关 */
 .page-wrap {
   width: 100%;
-  height: calc(100vh - 1.875rem);
+  height: 100vh;
   background: url("../../../static/image/0_login_back.png") no-repeat top/100%;
 }
 .page-title {

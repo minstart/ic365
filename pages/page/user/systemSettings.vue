@@ -4,12 +4,12 @@
 		<page-head :title='pageHeadTitle' :isBack='true' :standardTitle='true' :background="'#fff'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="list-wrap">
-				<view class="list">
+				<view class="list" @tap="parentBinding">
 					<view class="list-title">绑定家长</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
 				</view>
-				<view class="list">
+				<view class="list" @tap="parentUnbind">
 					<view class="list-title">解绑功能</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
@@ -18,19 +18,19 @@
 			<view class="list-wrap">
 				<view class="list">
 					<view class="list-title">版本号</view>
-					<view class="list-text">1.0.1</view>
+					<view class="list-text">{{appVersion}}</view>
 				</view>
-				<view class="list">
+				<view class="list" @tap="privacyPolicy">
 					<view class="list-title">隐私协议</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
 				</view>
-				<view class="list">
+				<view class="list" @tap="collectionList">
 					<view class="list-title">个人信息收集清单</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
 				</view>
-				<view class="list">
+				<view class="list" @tap="thirdParty">
 					<view class="list-title">第三方SDK清单</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
@@ -55,10 +55,12 @@
 		data() {
 			return {
 				pageHeadTitle: "设置",
+				appVersion:""
 			}
 		},
 		onLoad() {
-
+			const appInfo = uni.getSystemInfoSync()
+			this.appVersion = appInfo.appVersion;
 		},
 		onReady() {
 
@@ -84,12 +86,44 @@
 
 		},
 		methods: {
+			parentBinding(){
+				// 绑定家长
+				uni.showToast({
+					title:"绑定家长"
+				})
+			},
+			parentUnbind(){
+				// 解除绑定
+				uni.showToast({
+					title:"解除绑定"
+				})
+			},
+			privacyPolicy(){
+				// 隐私协议
+				uni.showToast({
+					title:"隐私协议"
+				})
+			},
+			collectionList(){
+				// 个人信息收集清单
+				uni.showToast({
+					title:"个人信息收集清单"
+				})
+			},
+			thirdParty(){
+				//第三方协议SDK
+				uni.showToast({
+					title:"第三方协议SDK"
+				})
+			},
 			logOut(){
+				// 退出登录
 				this.removeLogin()//清除登录状态
 				store.commit('RESET_CRYPTO') //清除crypto加密储存数据
 				
 				this.jumpPage({
-					url:"/"
+					url:"/pages/page/login/login",
+					type:"reLaunch"
 				})
 			}
 		}

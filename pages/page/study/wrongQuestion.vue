@@ -168,7 +168,6 @@
 				if (this.current !== i) {
 					this.selectProductsId = item.id;
 					this.current = i;
-					this.tabID = "tab-list-" + i;
 					this.getProducts()
 				}
 			},
@@ -209,7 +208,7 @@
 					})
 				}
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					// console.log(this.keyword, this.selectProductsId)
+					console.log(this.keyword, this.selectProductsId)
 					// 错题列表
 					this.commonRequest({
 						url: "/api/wrong-records/getAll",
@@ -219,7 +218,7 @@
 							size: "10"
 						}
 					}).then(res => {
-						console.log("错题列表:", res.data)
+						console.log("错题列表:", res)
 						this.productsList["products" + this.selectProductsId].requested = true;
 						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list, ...res.data];
 					}).catch(error => {
