@@ -334,6 +334,7 @@
   border-radius: 0.5rem;
   border: 0.08rem solid #C2C2C2;
   margin: 0 0.75rem 0.75rem 0;
+  overflow: hidden;
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-options-wrap .topic-options[data-v-9e40ef6f]:nth-child(2n) {
   margin-right: 0;
@@ -596,4 +597,10 @@
   width: 100%;
   height: auto;
   position: relative;
+}
+
+.options-img {
+		display: inline-block;
+		vertical-align: text-top;
+		width: calc(100% - 0.9375rem) !important;
 }

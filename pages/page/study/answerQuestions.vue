@@ -48,8 +48,7 @@
 									'selected' : !answered && i===current,
 									'check-correct' : answered && i===current && item.optionName === topic.answer,
 									'check-error': answered && i===current && item.optionName !== topic.answer,
-								}" :current='i' @click="clickOption(item,i)" v-for="(item,i) in changeOptions(topic.options)">
-									{{item.optionName}}.{{item.option}}
+								}" :current='i' @click="clickOption(item,i)" v-for="(item,i) in changeOptions(topic.options)" v-html="item.optionName +'.'+ item.option">
 								</view>
 							</view>
 							<view class="btn-wrap">
@@ -64,7 +63,7 @@
 									<span class="title-icon"></span>
 									<view class="title">我的答案</view>
 								</view>
-								<view class="answer-text">{{answer.optionName}}.{{answer.option}}</view>
+								<view class="answer-text" v-html="answer.optionName + '.' + answer.option"></view>
 								<view class="analysis-text" @click="textAnalysis">
 									<view class="analysis-icon"></view>
 									<span>{{answer.optionName == topic.answer ? '答对了!看看解析来巩固一下!' : '答错了! 看看解析也许会有用!'}}
@@ -202,7 +201,7 @@
 				},
 				videoId: "", //精准查询某个视频
 				questionId: "", //精准查询某个题目
-				option:{}
+				option: {}
 			}
 		},
 		onLoad(option) {
@@ -333,40 +332,42 @@
 			// 题目赋值后，对数据结构进行过滤
 			topicFilter() {
 				// 题目问题数据处理
-				if (this.topic.content.indexOf("http") != -1) {
-					// 1. 正则表达式提取图片URL
-					const contentImages = this.topic.content.match(imageUrlPattern) || [];
-					// 2. 删除图片URL后的文本
-					try {
-						this.topic.content = this.topic.content.replace(imageUrlPattern, '').trim();
-					} catch (e) {}
-					this.topic.contentImages = [...this.topic.contentImages, contentImages]
-				}
+				try {
+					if (this.topic.content.indexOf("http") != -1) {
+						// 1. 正则表达式提取图片URL
+						const contentImages = this.topic.content.match(imageUrlPattern) || [];
+						// 2. 删除图片URL后的文本
+						try {
+							this.topic.content = this.topic.content.replace(imageUrlPattern, '').trim();
+						} catch (e) {}
+						this.topic.contentImages = [...this.topic.contentImages, contentImages]
+					}
+				} catch (e) {}
 
 				// 解析数据处理
-				if (this.topic.analysis.indexOf("http") != -1) {
-					const analysisImages = this.topic.analysis.match(imageUrlPattern) || [];
-					this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages]
-					try {
-						this.topic.analysisImages.forEach(item => {
-							this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
-						})
-					} catch (e) {}
-				}
-				!this.topic.AIanalysis && (this.topic.AIanalysis = {})
-				
+				try {
+					if (this.topic.analysis.indexOf("http") != -1) {
+						const analysisImages = this.topic.analysis.match(imageUrlPattern) || [];
+						this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages]
+						try {
+							this.topic.analysisImages.forEach(item => {
+								this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
+							})
+						} catch (e) {}
+					}!this.topic.AIanalysis && (this.topic.AIanalysis = {})
+				} catch (e) {}
 				// 题目答案处理
-				console.log("题目：",this.topic)
-				// if (this.topic.analysis.indexOf("http") != -1) {
-				// 	const analysisImages = this.topic.analysis.match(imageUrlPattern) || [];
-				// 	this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages]
-				// 	try {
-				// 		this.topic.analysisImages.forEach(item => {
-				// 			this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
-				// 		})
-				// 	} catch (e) {}
-				// }
-				
+				console.log("题目：", this.topic)
+				this.topic.options.forEach((item, i) => {
+					if (item.indexOf("http") != -1) {
+						const analysisImages = item.match(imageUrlPattern) || [];
+						try {
+							this.topic.options[i] = item.replace(analysisImages[0], '<image class="options-img" src="' + analysisImages[0] + '" mode=""></image>').trim();
+						} catch (e) {}
+					}
+				})
+				console.log(this.topic.options)
+
 				this.topic.AIanalysis = {
 					text: "",
 					step: 0
@@ -575,7 +576,7 @@
 							url: "/api/question/byCategory",
 							data: {
 								keyword: this.keyword,
-								questionId: this.questionId,
+								questionId: this.questionId || "",
 								size: "1",
 								categoryId: item.categoryId
 							}
@@ -590,16 +591,18 @@
 						})
 					} else if (this.pageType == "video") {
 						if (this.videoList.noData) return false;
+						let byCategoryData = {
+							keyword: this.keyword,
+							page: this.videoList.page + 1,
+							size: 24,
+							categoryId: item.categoryId
+						}
+						this.videoId && (byCategoryData.videoId = this.videoId)
+						console.log("byCategoryData::", byCategoryData)
 						// 获取视频列表
 						this.commonRequest({
 							url: "/api/video/byCategory",
-							data: {
-								keyword: this.keyword,
-								page: this.videoList.page + 1,
-								size: "24",
-								categoryId: item.categoryId,
-								videoId: this.videoId || 0
-							}
+							data: byCategoryData
 						}).then(res => {
 							console.log("获取视频列表:", res.data)
 							if (res.data.length == 0) {
@@ -891,11 +894,13 @@
 								border-radius: 0.5rem;
 								border: 0.08rem solid #C2C2C2;
 								margin: 0 0.75rem 0.75rem 0;
+								overflow: hidden;
 
 								&:nth-child(2n) {
 									margin-right: 0;
 								}
 							}
+
 
 							.selected {
 								border-color: #428BFE;
@@ -1219,5 +1224,12 @@
 		width: 100%;
 		height: auto;
 		position: relative;
+	}
+</style>
+<style>
+	.options-img {
+		display: inline-block;
+		vertical-align: text-top;
+		width: calc(100% - 30rpx) !important;
 	}
 </style>

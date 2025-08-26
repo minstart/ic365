@@ -7,7 +7,7 @@
 			<view class="achievement-statistics-wrap ">
 				<view class="achievement-statistics">
 					<h3 class="achievement-title">错题统计</h3>
-					<h3 class="statistics">共28道错题</h3>
+					<h3 class="statistics">共{{wrongRecordsCount.total}}道错题</h3>
 					<view class="property">
 						<view class="property-item">
 							<h3 class="item-info-num">{{wrongRecordsCount.highFrequencyErrCount||0}}</h3>
