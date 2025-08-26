@@ -30,7 +30,7 @@
 							<view class="search-btn" @click="getQuestion"></view>
 						</view>
 						<view class="collect-btn-wrap" v-if="pageType=='question'">
-							<view class="collect-btn" :isCollect="topic.isCollect"  @click.stop="collectTopic()">
+							<view class="collect-btn" :isCollect="topic.isCollect" @click.stop="collectTopic()">
 								<view class="collect-icon"></view>
 								{{topic.isCollect?'已收藏':'收藏'}}
 							</view>
@@ -199,14 +199,21 @@
 					page: 0,
 					noData: false, //判断是不是已经没有更多视频了
 					list: []
-				}
+				},
+				videoId: "", //精准查询某个视频
+				questionId: "", //精准查询某个题目
+				option:{}
 			}
 		},
 		onLoad(option) {
+			// console.log("option:",option)
 			this.verifLogin().then(data => {
+				option && (this.option = option)
 				option.pageType && (this.pageType = option.pageType);
-				option.keyword && (this.keyword = option.keyword);
+				// option.keyword && (this.keyword = option.keyword);
 				option.categoryId && (this.recommendCategoryId = option.categoryId)
+				option.videoId && (this.videoId = option.videoId)
+				option.questionId && (this.questionId = option.questionId)
 				if (this.pageType == "everyDay") {
 					// 每日一题 ------ Start
 					let requestData = {
@@ -345,7 +352,21 @@
 							this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
 						})
 					} catch (e) {}
-				}!this.topic.AIanalysis && (this.topic.AIanalysis = {})
+				}
+				!this.topic.AIanalysis && (this.topic.AIanalysis = {})
+				
+				// 题目答案处理
+				console.log("题目：",this.topic)
+				// if (this.topic.analysis.indexOf("http") != -1) {
+				// 	const analysisImages = this.topic.analysis.match(imageUrlPattern) || [];
+				// 	this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages]
+				// 	try {
+				// 		this.topic.analysisImages.forEach(item => {
+				// 			this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
+				// 		})
+				// 	} catch (e) {}
+				// }
+				
 				this.topic.AIanalysis = {
 					text: "",
 					step: 0
@@ -489,7 +510,8 @@
 						this.resetProblem("all")
 						this.categoryTree.category = res.data.categories;
 						this.selectCategory = res.data.categories[0]
-						if (this.keyword) {
+						// j精准查找类目视频或题目
+						if (this.questionId || this.videoId || this.recommendCategoryId) {
 							try {
 								res.data.categories.forEach(item => {
 									if (item.name == this.keyword || item.categoryId == this.keyword || item.categoryId == this.recommendCategoryId) {
@@ -511,30 +533,32 @@
 					})
 				})
 			},
-			
+
 			// 收藏题目
-			collectTopic(){
-				console.log(this.topic.questionId)
+			collectTopic() {
+				let postData = {
+					questionId: this.topic.questionId
+				}
+				this.topic.isCollect && (postData.drop = 1);
+				console.log(postData)
 				this.commonRequest({
 					url: "/api/question/collection",
-					data: {
-						questionId: this.topic.questionId,
-					}
+					data: postData
 				}).then(res => {
-					console.log("收藏题目",res.data)
+					console.log("收藏题目", res.data)
 					this.topic.isCollect = !this.topic.isCollect;
 					uni.showToast({
-						title: this.topic.isCollect?"收藏成功":"取消收藏成功",
+						title: this.topic.isCollect ? "收藏成功" : "取消收藏成功",
 						icon: "none"
 					});
 				}).catch(error => {
 					console.log("收藏题目报错", error)
 				})
 			},
-			
-			// 点击类目之后,获取右侧内容
+
+			// 点击类目之后,获取右侧内容（切换类目）
 			choiceCategory(item, isInitialization) {
-				console.log(this.selectCategory.categoryId, item.categoryId)
+				// console.log(this.selectCategory.categoryId, item.categoryId)
 				if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || typeof isInitialization != "undefined") {
 					if (this.selectCategory.categoryId != item.categoryId && item) {
 						this.selectCategory = {
@@ -543,7 +567,7 @@
 						}
 						this.resetProblem(this.pageType)
 					}
-					console.log("this.pageType:", this.pageType)
+					// console.log("this.pageType:", this.pageType)
 					// console.log("categoryId：：",item.categoryId)
 					if (this.pageType == "question") {
 						// 获取题目
@@ -551,7 +575,7 @@
 							url: "/api/question/byCategory",
 							data: {
 								keyword: this.keyword,
-								// page:,
+								questionId: this.questionId,
 								size: "1",
 								categoryId: item.categoryId
 							}
@@ -559,6 +583,7 @@
 							console.log("获取题目:", res.data)
 							this.topic = res.data[0];
 							this.topicFilter()
+							this.questionId = ""; //精准查询某个题目
 						}).catch(error => {
 							console.log("获取题目报错", error)
 							reject(error)
@@ -572,7 +597,8 @@
 								keyword: this.keyword,
 								page: this.videoList.page + 1,
 								size: "24",
-								categoryId: item.categoryId
+								categoryId: item.categoryId,
+								videoId: this.videoId || 0
 							}
 						}).then(res => {
 							console.log("获取视频列表:", res.data)
@@ -582,6 +608,7 @@
 							this.isLoading = false;
 							this.videoList.page = this.videoList.page + 1;
 							this.videoList.list = [...this.videoList.list, ...res.data]
+							this.videoId = ""; //精准查询某个题目
 						}).catch(error => {
 							console.log("获取视频列表报错", error)
 						})
@@ -618,7 +645,7 @@
 					this.showVideo = false //是否展示是视频弹窗
 					this.topic = {}
 					this.context = {}
-					this.videoEl = ""
+					this.videoEl = "";
 				}
 
 				if (type == "all" || type == "category") {
@@ -775,12 +802,13 @@
 						position: absolute;
 						top: 0;
 						bottom: 0;
-						right:200rpx;
+						right: 200rpx;
 						margin: auto;
 						display: flex;
 						align-items: center;
 						justify-content: center;
 						z-index: 2;
+
 						.collect-btn {
 							border-radius: 30rpx;
 							line-height: 54rpx;
@@ -790,17 +818,20 @@
 							justify-content: center;
 							font-size: 28rpx;
 							background-color: #fff;
+
 							&[isCollect="true"] {
-								.collect-icon{
+								.collect-icon {
 									background: url("/static/icons/collect.png") no-repeat center / 100% 100%;
 								}
 							}
+
 							&[isCollect="false"] {
-								.collect-icon{
+								.collect-icon {
 									background: url("/static/icons/un_collect.png") no-repeat center / 100% 100%;
 								}
 							}
-							.collect-icon{
+
+							.collect-icon {
 								width: 34rpx;
 								height: 30rpx;
 								margin-right: 8rpx;

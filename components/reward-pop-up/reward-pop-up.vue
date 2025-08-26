@@ -56,7 +56,21 @@
 			closeRewardPopUp(item) {
 				try {
 					try {
-						this.$store.state.rewardPopUpList = this.$store.state.rewardPopUpList.filter(item2 => item2.noticeId !== item.noticeId)
+						// 记录用户设备信息
+						this.commonRequest({
+							url: "/api/notice/read",
+							notLoading: true,
+							data: {
+								noticeId: item.noticeId
+							}
+						}).then(res => {
+							this.$store.state.rewardPopUpList = this.$store.state.rewardPopUpList.filter(item2 => item2.noticeId !== item.noticeId)
+							if (this.$store.state.rewardPopUpList.length == 0) {
+								this.close()
+							}
+						}).catch(error => {
+							// console.log("记录用户设备信息报错：：", error)
+						})
 					} catch (e) {}
 					if (this.$store.state.rewardPopUpList.length == 0) {
 						this.close()
@@ -83,8 +97,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
 		.reward-wrap {
 			position: relative;
+
 			.reward-back-wrap {
 				position: absolute;
 				width: 100%;
@@ -153,6 +169,7 @@
 						transform: translateX(-100rpx) translateY(-200rpx) rotate(180deg);
 						opacity: 0.8;
 					}
+
 					100% {
 						transform: translateX(-110px) translateY(-350rpx) rotate(360deg);
 						opacity: 0;
@@ -282,7 +299,7 @@
 				position: relative;
 				width: 100%;
 				height: 100%;
-				
+
 				.reward-content {
 					position: absolute;
 				}
@@ -339,6 +356,7 @@
 					background: #fff;
 					border-radius: 60rpx;
 					margin-top: 200rpx;
+
 					.reward-icon {
 						position: absolute;
 						top: -300rpx;

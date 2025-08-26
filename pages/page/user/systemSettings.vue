@@ -20,17 +20,22 @@
 					<view class="list-title">版本号</view>
 					<view class="list-text">{{appVersion}}</view>
 				</view>
-				<view class="list" @tap="privacyPolicy">
+				<view class="list" @tap="jumpPage({url:'/pages/page/user/webView?webViewType=4'})">
+					<view class="list-title">儿童隐私协议</view>
+					<view class="list-text"></view>
+					<view class="list-icon"></view>
+				</view>
+				<view class="list" @tap="jumpPage({url:'/pages/page/user/webView?webViewType=3'})">
 					<view class="list-title">隐私协议</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
 				</view>
-				<view class="list" @tap="collectionList">
-					<view class="list-title">个人信息收集清单</view>
+				<view class="list" @tap="jumpPage({url:'/pages/page/user/webView?webViewType=2'})">
+					<view class="list-title">用户协议</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
 				</view>
-				<view class="list" @tap="thirdParty">
+				<view class="list" @tap="jumpPage({url:'/pages/page/user/webView?webViewType=1'})">
 					<view class="list-title">第三方SDK清单</view>
 					<view class="list-text"></view>
 					<view class="list-icon"></view>

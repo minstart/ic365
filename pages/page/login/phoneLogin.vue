@@ -5,17 +5,17 @@
 			<uni-forms ref="baseForm" :rules="rules" :model="baseFormData" labelWidth="80px">
 				<uni-forms-item class="uni-forms-item phone-input-wrap" required name="phone" label-width="0">
 					<uni-easyinput type="tel" v-model="baseFormData.phone" maxlength="11" placeholder="请输入手机号码" />
-					<button class="get-verification-code" type="primary" :disabled="isForLogin" size="mini"
-						@click="forLogin('baseForm')">{{forLoginName}}</button>
+					<button class="get-verification-code" type="primary" :disabled="isForLogin" size="mini" @click="forLogin('baseForm')">{{forLoginName}}</button>
 				</uni-forms-item>
 				<uni-forms-item class="uni-forms-item" required name="code" label-width="0">
 					<uni-easyinput v-model="baseFormData.code" placeholder="请输入验证码" maxlength="4" />
 				</uni-forms-item>
 				<uni-forms-item class="uni-forms-item checkbox-item" required name="agreement" label-width="0">
-					<view class="agreement-text">已阅读并同意<uni-link class="link-a" href="https://www.baidu.com/"
-							text="《智算365》"></uni-link>、<uni-link class="link-a" href="https://www.baidu.com/"
-							text="《用户服务协议》"></uni-link>和<uni-link class="link-a" href="https://www.baidu.com/"
-							text="《隐私政策》"></uni-link>。</view>
+					<view class="agreement-text">已阅读并同意
+						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=4'})">《儿童隐私政策》</span>、
+						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=2'})">《用户服务协议》</span>和
+						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=3'})">《隐私政策》</span>。
+					</view>
 					<uni-data-checkbox multiple v-model="baseFormData.agreement" :localdata="agreements" />
 				</uni-forms-item>
 				<button class="submit-btn" type="primary" @click="submit('baseForm')">立即登录</button>
@@ -98,8 +98,8 @@
 			methods: {
 				changeLogin() {
 					this.jumpPage({
-						url:"/pages/page/login/login",
-						type:"reLaunch"
+						url: "/pages/page/login/login",
+						type: "reLaunch"
 					})
 				},
 				forLogin: function(ref) {
@@ -151,7 +151,7 @@
 				// 提交数据
 				submit(ref) {
 					let _this = this;
-					
+
 					this.$refs[ref].validate().then(res => {
 						this.commonRequest({
 								url: "/api/auth/loginWithPhone",
@@ -198,6 +198,7 @@
 
 	<style lang="scss" scoped>
 		@import "/STATIC/css/standard.scss";
+
 		uni-page-body {
 			background: url("/static/image/0_login_back.png") no-repeat top / 100%;
 		}
@@ -223,6 +224,7 @@
 			font-size: 32rpx;
 			width: 8rem;
 			text-align: center;
+
 			&::after {
 				border-width: 0;
 			}
@@ -238,9 +240,11 @@
 	</style>
 	<style lang="scss">
 		@import "/static/css/standard.scss";
-		input{
-			font-size:32rpx !important;
+
+		input {
+			font-size: 32rpx !important;
 		}
+
 		.uni-forms-item {
 			position: relative;
 			margin: 0 1rem;
@@ -284,16 +288,17 @@
 				z-index: 2;
 				line-height: 1.5;
 				padding-bottom: 1rem;
+
 				.link-a {
-					span{
-						color: #0034FF !important;
-						font-size: 0.75rem
-					}
+					color: #0034FF !important;
+					font-size: 0.75rem;
 					text-decoration: none;
+					display: inline-block;
 				}
 			}
 		}
-		.uni-link{
+
+		.uni-link {
 			color: #0034FF !important;
 		}
 

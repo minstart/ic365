@@ -101,10 +101,16 @@
 						</view>
 					</view>
 				</view>
-				
+
 			</view>
 			<!-- 我的tab相关 ------End -->
 			<!-- 皮肤tab ------Start -->
+			<view class="item-title-wrap">
+				<h3 class="item-title">兑换商城</h3>
+				<view class="item-more">
+					<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/exchangeMall'})">查看更多</view>
+				</view>
+			</view>
 			<view class="skin-tab-wrap">
 				<view class="skin-tab-list-wrap">
 					<h3 class="skin-tab-list flex-center" :class="selectedClass2(i)" :current='i' @click="clickTab2(i)" v-for="(item,i) in skinList" v-html="item.resourceTypeName">
@@ -115,14 +121,12 @@
 						<view class="skin-list" v-for="item in skinList[skinCurrent].resourceDetails">
 							<image class="list-icon" :src="item.icon" mode=""></image>
 							<view class="list-info ">
-								<view class="flex-center">
-									<view>
-										<h3 class="title">{{item.name}}</h3>
-										<view class="introduce">{{item.subtitle}}</view>
-										<view class="isObtain back-green" v-if="item.possessed==2">使用中</view>
-										<view class="isObtain back-green" v-if="item.possessed==1">已获取</view>
-										<view class="isObtain" v-if="item.possessed==0">未获得</view>
-									</view>
+								<view>
+									<h3 class="title">{{item.name}}</h3>
+									<view class="introduce">{{item.subtitle}}</view>
+									<view class="isObtain back-green" v-if="item.possessed==2">使用中</view>
+									<view class="isObtain back-green" v-if="item.possessed==1">已获取</view>
+									<view class="isObtain" v-if="item.possessed==0">未获得</view>
 								</view>
 							</view>
 						</view>
@@ -130,34 +134,6 @@
 				</view>
 			</view>
 			<!-- 皮肤tab ------End -->
-			<!-- 兑换商城 ------Start -->
-			<view class="exchange-wrap">
-				<view class="item-title-wrap">
-					<h3 class="item-title">兑换商城</h3>
-					<view class="item-more">
-						<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/exchangeMall'})">查看更多</view>
-					</view>
-				</view>
-				<!-- 暂无数据 -->
-				<view class="no-list-tip" v-if="exchangeList.length==0">暂无数据</view>
-				<ul class="exchange-list-wrap">
-					<li class="exchange-list" v-for="(item,i) in exchangeList" :type="item.missionTypeId" :colorscheme="item.colorScheme">
-						<image class="list-icon" :src="item.icon"></image>
-						<view class="list-info">
-							<h3 class="info-title">{{item.productName}}</h3>
-							<view class="info-describe">{{item.subtitle}}</view>
-							<view class="rewardBtn-wrap">
-								<view class="list-reward" v-if="item.payCurrencyTypeName">
-									<image class="reward-reward-icon" :src="rewardIcon(item.payCurrencyType)"></image>
-									<span>{{item.quantity}}{{item.payCurrencyTypeName}}</span>
-								</view>
-								<view class="exchange-btn" :class="item.obtained&&'already-redeemed'" @click="() => exchange(item)">{{!item.obtained?'立即兑换':'已拥有'}}</view>
-							</view>
-						</view>
-					</li>
-				</ul>
-			</view>
-			<!-- 兑换商城 ------End -->
 		</view>
 	</view>
 
@@ -217,7 +193,7 @@
 				],
 
 				skinCurrent: 0,
-				skinList: [],
+				skinList:[],
 				exchangeList: []
 			}
 		},
@@ -234,24 +210,18 @@
 					url: "/api/student/info"
 				}).then(res => {
 					console.log("获取用户信息::", JSON.stringify(res))
-					if (res.code == 0) {
-						try {
-							store.commit("Update_UserInfo", res.data)
-							this.userInfo = res.data;
-						} catch (e) {}
-						// 全新用户，需要选年级
+					try {
+						store.commit("Update_UserInfo", res.data)
+						this.userInfo = res.data;
+					} catch (e) {}
+					// 全新用户，需要选年级
 
-						if (res.data.grade == 0) {
-							uni.redirectTo({
-								url: '/pages/page/index/supplement_info?pageFrom=' + pathUrl
-							});
-						}
-					} else {
-						uni.showToast({
-							title: res.message || "获取用户信息失败!",
-							icon: "none"
+					if (res.data.grade == 0) {
+						uni.redirectTo({
+							url: '/pages/page/index/supplement_info?pageFrom=' + pathUrl
 						});
 					}
+
 				}).catch(error => {
 					console.log("获取用户信息报错：：", error)
 				})
@@ -260,15 +230,8 @@
 				this.commonRequest({
 					url: "/api/student/getResourcesGroups"
 				}).then(res => {
-					if (res.code == 0) {
-						this.skinList = res.data.currencies;
-					} else {
-						uni.showToast({
-							title: res.message || "获取我资源(战衣/皮肤/名人堂...)失败!",
-							icon: "none"
-						});
-					}
-
+					console.log("获取我资源(战衣/皮肤/名人堂...)", res.data)
+					this.skinList = res.data.currencies;
 				}).catch(error => {
 					console.log("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
 				})
@@ -400,10 +363,33 @@
 			},
 			exchange(item) {
 				if (item.obtained) return false;
-				item.obtained = true
-				uni.showToast({
-					title: "点击了兑换商城的id" + item.productionId,
-					icon: "none"
+				// 兑换商品
+				this.commonRequest({
+					url: "/api/exchange/redeem",
+					data: {
+						productionId: item.productionId
+					}
+				}).then(res => {
+					// console.log("兑换商品：", res.data)
+					uni.showToast({
+						title: res.data,
+						icon: "none"
+					})
+					item.obtained = true
+					this.commonRequest({
+						url: "/api/student/info"
+					}).then(res => {
+						console.log("获取用户信息::", res)
+						try {
+							store.commit("Update_UserInfo", res.data)
+							this.userInfo = res.data;
+						} catch (e) {}
+					
+					}).catch(error => {
+						console.log("获取用户信息报错：：", error)
+					})
+				}).catch(error => {
+					console.log("兑换商品报错：：", error)
 				})
 			}
 		}
@@ -689,12 +675,14 @@
 						position: relative;
 						flex: 1;
 
-						.flex-center {
-							height: 100%;
-							justify-content: left;
+						.title {
+							margin-top: 48rpx;
 						}
 
-						.introduce {}
+						.introduce {
+							margin-top: 8rpx;
+							padding-bottom: 20rpx;
+						}
 
 						.isObtain {
 							position: absolute;

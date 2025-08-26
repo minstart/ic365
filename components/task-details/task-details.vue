@@ -12,7 +12,7 @@
 				<view class="reward-list">
 					<view class="reward" v-if="details.rewardName">
 						<view class="reward-icon-back" :currencyType="details.currencyTypeId">
-							<image class="reward-icon" :src="rewardIcon(details.currencyTypeId)"></image>
+							<image class="reward-icon" :src="rewardIcon(details.currencyTypeId).moderate"></image>
 						</view>
 						<view class="reward-text">{{details.rewardName.replace(/\d/g,'')}}</view>
 						<view class="reward-num">{{details.rewardName.match(/\d+/g)[0]}}颗</view>
@@ -133,8 +133,8 @@
 							height: 140rpx;
 							background-color: #ECFAFF;
 							.reward-icon{
-								width: 100rpx;
-								height: 100rpx;
+								width: 100%;
+								height: 100%;
 							}
 						}
 						.reward-text{

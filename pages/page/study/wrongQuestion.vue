@@ -58,7 +58,7 @@
 									</view>
 									<view class="list-btn-wrap">
 										<view class="list-btn" @click="similarExercises(item2)">同类练习</view>
-										<view class="list-btn" @click="reAnswer(item2)">从新作答</view>
+										<view class="list-btn" @click="reAnswer(item2)">重新作答</view>
 										<!-- <view class="list-btn" @click="print(item2)">打印</view> -->
 									</view>
 								</view>
@@ -183,7 +183,7 @@
 			},
 			reAnswer(data) {
 				this.jumpPage({
-					url:"/pages/page/study/answerQuestions?pageType=question&categoryId"+data.categoryId+"&keyword="+data.questionId
+					url:"/pages/page/study/answerQuestions?pageType=question&categoryId"+data.categoryId+"&questionId="+data.questionId
 				})
 				// 重新作答
 				// uni.showToast({
@@ -204,6 +204,7 @@
 				if (data && data.reset) {
 					this.productsTab.forEach(item => {
 						this.productsList["products" + item.id].requested = false;
+						this.productsList["products" + item.id].page = 1;
 						this.productsList["products" + item.id].list = [];
 					})
 				}
@@ -214,12 +215,14 @@
 						url: "/api/wrong-records/getAll",
 						data: {
 							keyword: this.keyword,
-							type: this.selectProductsId,
-							size: "10"
+							categoryld: this.selectProductsId,
+							size: 10,
+							page:this.productsList["products" + this.selectProductsId].page
 						}
 					}).then(res => {
 						console.log("错题列表:", res)
 						this.productsList["products" + this.selectProductsId].requested = true;
+						this.productsList["products" + this.selectProductsId].page = this.productsList["products" + this.selectProductsId].page + 1;
 						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list, ...res.data];
 					}).catch(error => {
 						this.consoleLog("错题列表报错：：", error)

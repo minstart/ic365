@@ -870,14 +870,6 @@
 .is-first-border[data-v-462874dd] {
   border: none;
 }
-
-.uni-link[data-v-5db80ddb] {
-		cursor: pointer;
-}
-.uni-link--withline[data-v-5db80ddb] {
-		text-decoration: underline;
-}
-
 /**
  * 这里是uni-app内置的常用样式变量
  *
@@ -1487,11 +1479,10 @@ uni-input {
   padding-bottom: 1rem;
 }
 .checkbox-item .agreement-text .link-a {
-  text-decoration: none;
-}
-.checkbox-item .agreement-text .link-a span {
   color: #0034FF !important;
   font-size: 0.75rem;
+  text-decoration: none;
+  display: inline-block;
 }
 .uni-link {
   color: #0034FF !important;

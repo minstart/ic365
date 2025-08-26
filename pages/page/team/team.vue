@@ -57,7 +57,7 @@
 								<view class="info-describe">{{item.subtitle}}</view>
 								<view class="info-reward-wrap">
 									<view class="reward" v-for="item2 in item.rewards">
-										<image class="reward-icon" :src="rewardIcon(item2.currencyTypeId)"></image>
+										<image class="reward-icon" :src="rewardIcon(item2.currencyTypeId).min"></image>
 										<span>{{item2.name}}</span>
 									</view>
 								</view>

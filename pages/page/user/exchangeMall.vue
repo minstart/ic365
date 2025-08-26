@@ -52,7 +52,7 @@
 									<view class="info-subtitle">{{item2.subtitle}}</view>
 									<view class="achievement-type">
 										<view class="label" v-if="item2.payCurrencyTypeName">
-											<image class="reward-reward-icon" :src="rewardIcon(item2.payCurrencyType)"></image>
+											<image class="reward-reward-icon" :src="rewardIcon(item2.payCurrencyType).min"></image>
 											<span>{{item2.quantity}}{{item2.payCurrencyTypeName}}</span>
 										</view>
 										<view class="exchange-btn" :class="item2.obtained&&'already-redeemed'" @click="() => exchange(item2)">{{!item2.obtained?'立即兑换':'已拥有'}}</view>

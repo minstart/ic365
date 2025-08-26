@@ -144,6 +144,13 @@ const pages = [
     }
   },
   {
+    path: "pages/page/user/webView",
+    style: {
+      navigationBarTitleText: "协议页面",
+      navigationStyle: "custom"
+    }
+  },
+  {
     path: "pages/page/login/login",
     style: {
       navigationBarTitleText: "登录",

@@ -355,22 +355,34 @@ export default {
 			switch (id) {
 				case 1:
 					// 智慧星
-					return "/static/icons/star.png";
+					return {
+						min: "/static/icons/star.png",
+						moderate:"/static/icons/star2.png"
+					};
 					break;
 				case 2:
 					// 知识尘
-					return "/static/icons/dust.png";
+					return {
+						min: "/static/icons/dust.png",
+						moderate:"/static/icons/dust2.png"
+					};
 					break;
 				case 3:
 					// 启明石
-					return "/static/icons/stone.png";
+					return {
+						min: "/static/icons/stone.png",
+						moderate:"/static/icons/stone2.png"
+					};
 					break;
 				case 4:
 					// 丰硕穗
 					break;
 				case 5:
 					// 圣诞欢乐颂
-					return "/static/icons/christmas.png";
+					return {
+						min: "/static/icons/christmas.png",
+						moderate:""
+					};
 					break;
 				case 6:
 					// 课程

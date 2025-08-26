@@ -337,9 +337,12 @@ uni-page-body[data-v-351444bc] {
   position: relative;
   flex: 1;
 }
-.tab-wrap .skin-tab-wrap .skin-tab-content .skin-list .list-info .flex-center[data-v-351444bc] {
-  height: 100%;
-  justify-content: left;
+.tab-wrap .skin-tab-wrap .skin-tab-content .skin-list .list-info .title[data-v-351444bc] {
+  margin-top: 1.5rem;
+}
+.tab-wrap .skin-tab-wrap .skin-tab-content .skin-list .list-info .introduce[data-v-351444bc] {
+  margin-top: 0.25rem;
+  padding-bottom: 0.625rem;
 }
 .tab-wrap .skin-tab-wrap .skin-tab-content .skin-list .list-info .isObtain[data-v-351444bc] {
   position: absolute;

@@ -56,7 +56,7 @@
 					<view class="plan-list-name-wrap">
 						<view class="plan-list-name">{{item.name}}</view>
 						<view class="plan-reward" v-if="item.rewardName">
-							<image class="plan-reward-icon" :src="rewardIcon(item.currencyTypeId)"></image>
+							<image class="plan-reward-icon" :src="rewardIcon(item.currencyTypeId).min"></image>
 							<span>{{item.rewardName}}</span>
 						</view>
 					</view>
@@ -80,7 +80,7 @@
 			</view>
 			<view class="no-list-tip" v-if="videos.length==0">暂无数据</view>
 			<ul class="plan-recommend-list-wrap">
-				<li class="plan-recommend-list" :key="item.videoId" v-for="item in videos" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&keyword='+item.videoId})">
+				<li class="plan-recommend-list" :key="item.videoId" v-for="item in videos" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})">
 					<image class="list-icon" :src="item.coverUrl"></image>
 				</li>
 			</ul>
@@ -853,12 +853,12 @@
 			width: 100%;
 			position: absolute;
 			top: 13rem;
-			display: flex;
+			// display: flex;
 
 			.achievement-list {
 				text-align: center;
 				width: 33.33%;
-
+				float: right;
 				.achievement-list-pic-wrap {
 					width: 180rpx;
 					height: 180rpx;
