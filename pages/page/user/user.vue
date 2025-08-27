@@ -179,7 +179,8 @@
 						list: [{
 								coverUrl: "/static/icons/exchange_records.png",
 								title: "兑换物品",
-								introduce: ""
+								introduce: "",
+								jumpUrl: "/pages/page/user/exchangeMall?tabId=2"
 							},
 							{
 								coverUrl: "/static/icons/exchange_mall.png",
@@ -202,6 +203,9 @@
 
 		},
 		onReady() {
+			
+		},
+		onShow() {
 			const route = getCurrentPages(); //获取当前页面地址
 			const pathUrl = route[route.length - 1].route;
 			this.verifLogin().then(data => {
@@ -215,17 +219,17 @@
 						this.userInfo = res.data;
 					} catch (e) {}
 					// 全新用户，需要选年级
-
+			
 					if (res.data.grade == 0) {
 						uni.redirectTo({
 							url: '/pages/page/index/supplement_info?pageFrom=' + pathUrl
 						});
 					}
-
+			
 				}).catch(error => {
 					console.log("获取用户信息报错：：", error)
 				})
-
+			
 				// 获取我资源(战衣/皮肤/名人堂...)
 				this.commonRequest({
 					url: "/api/student/getResourcesGroups"
@@ -235,7 +239,7 @@
 				}).catch(error => {
 					console.log("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
 				})
-
+			
 				// 获取兑换商品列表
 				this.commonRequest({
 					url: "/api/exchange/products",
@@ -248,7 +252,7 @@
 				}).catch(error => {
 					console.log("获取兑换商品列表报错：：", error)
 				})
-
+			
 				// 获取最近题目和收藏题目数量
 				this.commonRequest({
 					url: "/api/question/getRecentlyAndCollection"
@@ -259,12 +263,13 @@
 				}).catch(error => {
 					console.log("获取最近题目和收藏题目数量报错：：", error)
 				})
-
+			
 				// 我的错题
 				this.commonRequest({
 					url: "/api/wrong-records/category-stats"
 				}).then(res => {
 					console.log("我的错题：", res.data)
+					this.practiceList[2].list = [];
 					res.data.forEach(item => {
 						this.practiceList[2].list.push({
 							coverUrl: item.coverUrl,
@@ -278,8 +283,7 @@
 				}).catch(error => {
 					console.log("我的错题报错：：", error)
 				})
-
-
+			
 				// 获取我的兑换统计
 				this.commonRequest({
 					url: "/api/exchange/stat"
@@ -292,12 +296,13 @@
 				}).catch(error => {
 					console.log("获取我的兑换统计报错：：", error)
 				})
-
+			
 				// 我的任务
 				this.commonRequest({
 					url: "/api/mission/mine-stat"
 				}).then(res => {
 					console.log("我的任务：", res.data)
+					this.practiceList[0].list = [];
 					res.data.forEach(item => {
 						this.practiceList[0].list.push({
 							coverUrl: item.cover,
@@ -313,8 +318,7 @@
 					console.log("我的任务报错：：", error)
 				})
 			})
-		},
-		onShow() {
+			
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(data => {

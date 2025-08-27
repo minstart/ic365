@@ -32,7 +32,7 @@
 	<view class="plan-recommend-wrap uni-padding-wrap">
 		<view class="study-report-wrap">
 			<!-- 设置跳转到详情页面 -->
-			<view class="report-details" @click="jumpPage({url:'/pages/page/parent/parent_detail'})"></view>
+			<view class="report-details"></view>
 			<view class="report-info-wrap">
 				<view class="report-info">
 					<h4 class="info-text">{{overallReport.studyMinutes}}小时</h4>
@@ -65,7 +65,7 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">能力分析</h3>
 				<view class="item-more">
-					<view class="text icon-more" @click="jumpPage({url:''})">详情</view>
+					<!-- <view class="text icon-more" @click="jumpPage({url:''})">详情</view> -->
 				</view>
 			</view>
 			<view class="charts-box-wrap">
@@ -99,7 +99,7 @@
 					<view class="item-info">
 						<h3 class="info-title">{{item.name||""}}</h3>
 						<view class="info-text">正确率：{{item.accuracy}}% | {{suggestionTetx(item.accuracy)}}</view>
-						<button class="info-btn" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&keyword='+item.parentCategoryId})">{{item.btnTitle}}专项学习</button>
+						<button class="info-btn" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.parentCategoryId})">{{item.btnTitle}}专项学习</button>
 					</view>
 				</li>
 			</ul>
@@ -246,6 +246,9 @@
 
 		},
 		onReady() {
+			
+		},
+		onShow() {
 			this.verifLogin().then(data => {
 				// 获取家长版报告数据(统计图)
 				this.commonRequest({
@@ -266,7 +269,7 @@
 										score: res.data.radarChart.series[1].data[i]
 									})
 								})
-
+			
 								const sortedArray = [...newRadarChart].sort((x, y) => x.score - y.score);
 								this.radarChartAnalysis = {
 									min: sortedArray[0],
@@ -286,7 +289,7 @@
 				}).catch(error => {
 					this.consoleLog("获取家长版报告数据(统计图)失败：：", error)
 				})
-
+			
 				// 获取提升建议和其他
 				this.commonRequest({
 					url: "/api/report/getAdviceAndCurrenciesAndPublish"
@@ -295,7 +298,7 @@
 						console.log("获取提升建议和其他：", res)
 						try {
 							let _currencies = {};
-
+			
 							//处理后端返回的数据拼凑成前端简易展示数据 ------------Start
 							res.data.currencies.current.forEach(item => {
 								item.type == 1 && (_currencies.star = item.quantity)
@@ -328,12 +331,10 @@
 				}).catch(error => {
 					this.consoleLog("获取提升建议和其他失败：：", error)
 				})
-
+			
 			}).catch(error => {
 				this.consoleLog("没有登录：：", error)
 			})
-		},
-		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
 			})
@@ -459,11 +460,13 @@
 		position: relative;
 
 		.report-details {
-			width: 5.1875rem;
-			height: 1.375rem;
+			width: 166rpx;
+			height: 32rpx;
 			position: absolute;
 			top: 0.625rem;
 			right: 0.875rem;
+			background: url('/static/image/4_banner_details.png') no-repeat center / 100% 100%;
+			display: none;
 		}
 
 		.report-info-wrap {

@@ -155,6 +155,9 @@
 
 		},
 		onReady() {
+			
+		},
+		onShow() {
 			const route = getCurrentPages(); //获取当前页面地址
 			const pathUrl = route[route.length - 1].route;
 			this.getLogin().then(data => {
@@ -162,7 +165,7 @@
 				// this.consoleLog(store.state.userInfo)
 				// 已经登陆了
 				this.consoleLog("已经登陆了")
-
+			
 				// 获取我的队伍和任务相关信息
 				this.commonRequest({
 					url: "/api/team-mission/details"
@@ -178,7 +181,7 @@
 							this.members = res.data.members || [];
 							// 队伍日志
 							this.activities = res.data.activities || [];
-
+			
 							// 没有数据时模拟数据
 							// this.currentMission = {
 							// 	"missionId": 12,
@@ -258,7 +261,7 @@
 				}).catch(error => {
 					this.consoleLog("获取我的队伍和任务相关信息报错：：", error)
 				})
-
+			
 				// 获取组队任务
 				this.commonRequest({
 					url: "/api/team-mission/list"
@@ -266,7 +269,7 @@
 					this.consoleLog("获取组队任务::", JSON.stringify(res))
 					if (res.code == 0) {
 						this.teamTask = res.data;
-
+			
 						// 没返回数据时的测试数据
 						// this.teamTask = [{
 						// 	"missionId": 12,
@@ -311,9 +314,7 @@
 					// #endif
 				}
 			});
-
-		},
-		onShow() {
+			
 			this.pageOnShowSet({
 				uniHide: "all"
 			})

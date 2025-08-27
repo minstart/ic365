@@ -5,31 +5,26 @@
 		<page-head :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
 		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
 			<view class="content-wrap">
+				<!-- 左侧类目 -->
 				<view class="category-wrap">
 					<view class="subject-grade-wrap">
 						<span class="subject">{{categoryTree.subject}}</span>
 						<span> · </span>
 						<span class="grade">{{categoryTree.grade}}年级{{categoryTree.semester}}{{treeID}}</span>
 					</view>
-					<scroll-view class="tree-wrap" scroll-y="true" :scroll-into-view="treeID" :scroll-with-animation="true">
+					<scroll-view class="tree-wrap" v-if="!option.missionId" scroll-y="true" :scroll-into-view="treeID" :scroll-with-animation="true">
 						<view :id="'tree-list-'+item.categoryId" class="tree-list" :class='selectCategory.categoryId == item.categoryId?"tree-selected":""' v-for="(item,i) in categoryTree.category" @click.stop="choiceCategory(item)">
 							<view class="tree-list-title">{{item.name}}</view>
-							<!-- <view class="tree-list" v-for="(item2,i2) in item.children">
-								<view class="tree-list-title">{{item2.categoryName}}</view>
-								<div class="tree-list" v-for="(item3,i3) in item2.children">
-									<view class="tree-list-title">{{item3.categoryName}}</view>
-								</div>
-							</view> -->
 						</view>
 					</scroll-view>
 				</view>
 				<view class="topic-wrap">
 					<view class="topic-function-wrap">
-						<view class="search-btn-wrap" v-if="pageType!='everyDay'">
+						<view class="search-btn-wrap" v-if="pageType!='everyDay' && !option.missionId">
 							<input class="search-input" type="text" v-model="keyword" placeholder="你想学什么" />
 							<view class="search-btn" @click="getQuestion"></view>
 						</view>
-						<view class="collect-btn-wrap" v-if="pageType=='question'">
+						<view class="collect-btn-wrap" v-if="pageType=='question' && topic.questionId">
 							<view class="collect-btn" :isCollect="topic.isCollect" @click.stop="collectTopic()">
 								<view class="collect-icon"></view>
 								{{topic.isCollect?'已收藏':'收藏'}}
@@ -53,7 +48,7 @@
 							</view>
 							<view class="btn-wrap">
 								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'&&answered">下一题</button>
-								<button class="topic-submit" @click="submitTopic" v-if="!answered">提交</button>
+								<button class="topic-submit" @click="submitTopic" v-if="!answered && topic.questionId">提交</button>
 							</view>
 
 						</view>
@@ -193,7 +188,7 @@
 					categoryId: "", //选中的类目id
 					name: "", //选中的类目名称
 				},
-				recommendCategoryId: "", //推荐视频带过来的CategoryId
+				categoryId: "", //推荐视频带过来的CategoryId
 				videoList: { //视频列表
 					page: 0,
 					noData: false, //判断是不是已经没有更多视频了
@@ -210,7 +205,7 @@
 				option && (this.option = option)
 				option.pageType && (this.pageType = option.pageType);
 				// option.keyword && (this.keyword = option.keyword);
-				option.categoryId && (this.recommendCategoryId = option.categoryId)
+				option.categoryId && (this.categoryId = option.categoryId)
 				option.videoId && (this.videoId = option.videoId)
 				option.questionId && (this.questionId = option.questionId)
 				if (this.pageType == "everyDay") {
@@ -357,7 +352,6 @@
 					}!this.topic.AIanalysis && (this.topic.AIanalysis = {})
 				} catch (e) {}
 				// 题目答案处理
-				console.log("题目：", this.topic)
 				this.topic.options.forEach((item, i) => {
 					if (item.indexOf("http") != -1) {
 						const analysisImages = item.match(imageUrlPattern) || [];
@@ -366,7 +360,6 @@
 						} catch (e) {}
 					}
 				})
-				console.log(this.topic.options)
 
 				this.topic.AIanalysis = {
 					text: "",
@@ -392,12 +385,12 @@
 					questionId: this.topic.questionId,
 					answer: this.answer.optionName,
 					useTime: this.time
-					// missionId: "",
 					// teamId: "",
 					// wrong_record_id: ""
 				}
-				this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId)
-
+				this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId);
+				this.option.missionId && (postData.missionId = this.option.missionId);
+				console.log("回答问题传参：",postData)
 				// 回答问题
 				this.commonRequest({
 					url: "/api/question/submit",
@@ -436,14 +429,18 @@
 			// 每日一题、视频列表 - 打开视频解析
 			playVideo(videoId) {
 				if (!this.analysis.video || this.pageType == "video") {
-					console.log("播放视频id：", videoId || this.topic.videoId)
+					let getByIdData = {
+						id: videoId || this.topic.videoId
+					}
+					if (this.option && this.option.missionId && this.pageType == "video") {
+						getByIdData.missionId = this.option.missionId;
+					}
+					// console.log("获取视频地址传参",getByIdData)
 					this.commonRequest({
 						url: "/api/video/getById",
-						data: {
-							id: videoId || this.topic.videoId
-						}
+						data: getByIdData
 					}).then(res => {
-						console.log("获取视频解析地址::", res.data)
+						console.log("获取视频地址::", res.data)
 						try {
 							this.showVideo = true;
 							this.analysis.video = res.data
@@ -453,7 +450,7 @@
 
 						} catch (e) {}
 					}).catch(error => {
-						console.log("获取视频解析地址报错", error)
+						console.log("获取视频地址报错", error)
 					})
 				} else {
 					this.showVideo = true;
@@ -512,10 +509,10 @@
 						this.categoryTree.category = res.data.categories;
 						this.selectCategory = res.data.categories[0]
 						// j精准查找类目视频或题目
-						if (this.questionId || this.videoId || this.recommendCategoryId) {
+						if (this.questionId || this.videoId || this.categoryId) {
 							try {
 								res.data.categories.forEach(item => {
-									if (item.name == this.keyword || item.categoryId == this.keyword || item.categoryId == this.recommendCategoryId) {
+									if (item.name == this.keyword || item.categoryId == this.keyword || item.categoryId == this.categoryId) {
 										this.selectCategory = item;
 										let _this = this;
 										setTimeout(() => {
@@ -571,15 +568,25 @@
 					// console.log("this.pageType:", this.pageType)
 					// console.log("categoryId：：",item.categoryId)
 					if (this.pageType == "question") {
+						let byCategoryData = {
+							keyword: this.keyword,
+							size: "1",
+							categoryId: item.categoryId
+						}
+						this.questionId && (byCategoryData.questionId = this.questionId)
+
+						let byCategoryUrl = "/api/question/byCategory"
+						if (this.option && this.option.missionId) {
+							byCategoryUrl = '/api/question/getQuestionByMission'
+							byCategoryData = {
+								missionId: this.option.missionId
+							};
+						}
+						console.log("获取题目传参：", byCategoryData)
 						// 获取题目
 						this.commonRequest({
-							url: "/api/question/byCategory",
-							data: {
-								keyword: this.keyword,
-								questionId: this.questionId || "",
-								size: "1",
-								categoryId: item.categoryId
-							}
+							url: byCategoryUrl,
+							data: byCategoryData
 						}).then(res => {
 							console.log("获取题目:", res.data)
 							this.topic = res.data[0];
@@ -598,10 +605,18 @@
 							categoryId: item.categoryId
 						}
 						this.videoId && (byCategoryData.videoId = this.videoId)
-						console.log("byCategoryData::", byCategoryData)
+
+						let byCategoryUrl = "/api/video/byCategory"
+						if (this.option && this.option.missionId) {
+							byCategoryUrl = '/api/video/getVideoByMission'
+							byCategoryData.missionId = this.option.missionId;
+							delete byCategoryData.keyword;
+							delete byCategoryData.categoryId;
+						}
+						console.log("获取视频列表传参::", byCategoryData)
 						// 获取视频列表
 						this.commonRequest({
-							url: "/api/video/byCategory",
+							url: byCategoryUrl,
 							data: byCategoryData
 						}).then(res => {
 							console.log("获取视频列表:", res.data)
@@ -894,7 +909,6 @@
 								border-radius: 0.5rem;
 								border: 0.08rem solid #C2C2C2;
 								margin: 0 0.75rem 0.75rem 0;
-								overflow: hidden;
 
 								&:nth-child(2n) {
 									margin-right: 0;

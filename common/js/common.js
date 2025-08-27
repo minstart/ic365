@@ -39,6 +39,7 @@ async function fetchData(data) {
 			!data.notLoading && uni.hideLoading()
 		})
 	} catch (error) {
+		store.commit('RESET_CRYPTO') //清除crypto加密储存数据
 		console.error('校验加密数据失败:', error);
 	}
 }
@@ -480,6 +481,24 @@ export default {
 			const daysUntilDeadline = Math.floor(diff / (1000 * 60 * 60 * 24));
 
 			return daysUntilDeadline;
-		}
+		},
+		// 图片路径转换为图片
+		// content : 需要转换的内容
+		// imgClass : 转换后图片的class名称 默认change-img
+		imgUrlChangeImg(data){
+			const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi; //图片校验
+			if(!data || !data.content) return false;
+			if (data.content.indexOf("http") != -1) {
+				// 1. 正则表达式提取图片URL
+				const contentImages = data.content.match(imageUrlPattern) || [];
+				// 2. 删除图片URL后的文本
+				try {
+					contentImages.forEach(item => {
+						data.content = data.content.replace(item,'<image class="'+(data.imgClass || "change-img")+'" src="' + item + '" mode=""></image>').trim();
+					})
+					return data.content;
+				} catch (e) {}
+			}
+		},
 	}
 }

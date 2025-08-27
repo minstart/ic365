@@ -122,6 +122,9 @@
 
 		},
 		onReady() {
+			
+		},
+		onShow() {
 			this.verifLogin().then(data => {
 				// 如果已经有登陆信息，那就不重新获取
 				if (store.state.userInfo.token && store.state.userInfo.info && store.state.userInfo.info
@@ -141,7 +144,7 @@
 						console.log("获取用户信息报错：：", error)
 					})
 				}
-
+			
 				// 获取用户周报数据
 				this.commonRequest({
 					url: "/api/report/weekly"
@@ -153,7 +156,7 @@
 				}).catch(error => {
 					console.log("获取用户周报数据报错：：", error)
 				})
-
+			
 				// 知识点学习
 				this.commonRequest({
 					url: "/api/recommend/categories"
@@ -165,7 +168,7 @@
 				}).catch(error => {
 					console.log("知识点学习报错：：", error)
 				})
-
+			
 				// 推荐课堂 - 目前使用推荐学习的接口
 				this.commonRequest({
 					url: "/api/recommend/videos"
@@ -187,8 +190,6 @@
 			}).catch(error => {
 				this.consoleLog("没有登录：：", error)
 			})
-		},
-		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {

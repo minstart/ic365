@@ -15,10 +15,10 @@
 						<view class="content-time"></view>
 					</view>
 					<view class="task-right">
-						<view class="task-list-btn" v-if="!item.finishedTime" @tap.stop="jumpPage({url:''})">做任务</view>
+						<view class="task-list-btn" v-if="!item.finishedTime" @tap.stop="completeTask(item)">做任务</view>
 						<view class="task-list-complete-icon" v-if="item.finishedTime"></view>
 					</view>
-					
+
 				</view>
 			</scroll-view>
 		</div>
@@ -45,56 +45,8 @@
 				selectMissionId: "", //选中的任务id
 				taskDetails: "", //任务详情
 				missionTypeId: "", //任务类型id
-				typeName:"",//任务类型名称
-				taskList: [{
-						"missionId": 7,
-						"missionTypeId": 2,
-						"name": "完成5道题目",
-						"subTitle": "完成5道题目",
-						"typeName": "周常",
-						"startTime": 0,
-						"endTime": 0,
-						"rewardName": "15知识尘",
-						"currencyTypeId": 2,
-						"status": null,
-						"processTotal": null,
-						"finishedTime": null,
-						"cover": "https://ic365.ajulye.comnull",
-						"colorScheme": 1
-					},
-					{
-						"missionId": 8,
-						"missionTypeId": 1,
-						"name": "每日1题",
-						"subTitle": "每日1题",
-						"typeName": "日常",
-						"startTime": 0,
-						"endTime": 0,
-						"rewardName": "10智慧星",
-						"currencyTypeId": 2,
-						"status": null,
-						"processTotal": null,
-						"finishedTime": "123456",
-						"cover": "https://ic365.ajulye.com/material/mission/9999FF.png",
-						"colorScheme": 1
-					},
-					{
-						"missionId": 10,
-						"missionTypeId": 8,
-						"name": "图形拼图",
-						"subTitle": "知识点学习",
-						"typeName": "特定",
-						"startTime": 0,
-						"endTime": 0,
-						"rewardName": "",
-						"currencyTypeId": 0,
-						"status": null,
-						"processTotal": null,
-						"finishedTime": null,
-						"cover": "https://ic365.ajulye.com/material/mission/AEE3A5.png",
-						"colorScheme": 4
-					}
-				]
+				typeName: "", //任务类型名称
+				taskList: []
 			}
 		},
 		onLoad(option) {
@@ -145,8 +97,28 @@
 		methods: {
 			// 打开任务详情
 			openTaskDetails(item) {
+				// 已经做完了，查看任务详情
 				this.taskDetails = item;
 				this.$refs.taskPopUp.open("bottom")
+			},
+			completeTask(item) {
+				// 没有做完，跳转到任务界面
+				if (item.matchSubTypeId == 1) {
+					// 任务做题
+					this.jumpPage({
+						url: '/pages/page/study/answerQuestions?pageType=question&missionId=' + item.missionId
+					})
+				} else if (item.matchSubTypeId == 2) {
+					// 任务看视频
+					this.jumpPage({
+						url: '/pages/page/study/answerQuestions?pageType=video&categoryId=' + item.categoryId + '&missionId=' + item.missionId
+					})
+				} else {
+					uni.showToast({
+						title:"匹配任务类型失败，无法跳转",
+						icon:"none"
+					})
+				}
 			},
 			closeTaskPopUp() {
 				this.$refs.taskPopUp.close()
@@ -159,6 +131,7 @@
 	.page-wrap {
 		background-color: #F6F6F6;
 		min-height: 100vh;
+
 		.task-back {
 			margin-top: 16rpx;
 			height: 160rpx;
@@ -191,6 +164,7 @@
 			padding: 36rpx 30rpx;
 			margin-bottom: 20rpx;
 			position: relative;
+
 			// justify-content: center;
 			.task-list-icon {
 				width: 72rpx;
@@ -200,10 +174,12 @@
 
 			.task-list-content {
 				flex: 1;
+
 				.content-title {
 					font-size: 26rpx;
 					color: #222;
-					&::after{
+
+					&::after {
 						content: "";
 						display: inline-block;
 						margin-left: 6rpx;
@@ -218,10 +194,12 @@
 					font-size: 20rpx;
 				}
 			}
-			.task-right{
+
+			.task-right {
 				min-width: 140rpx;
 				min-height: 10rpx;
 			}
+
 			.task-list-btn {
 				font-style: 24rpx;
 				color: #fff;

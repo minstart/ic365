@@ -32,7 +32,7 @@
 		</view>
 	</view>
 	
-	
+	<!-- 弹窗需要调用@touchmove.stop.prevent="moveHandle" -->
 </template>
 
 <script>

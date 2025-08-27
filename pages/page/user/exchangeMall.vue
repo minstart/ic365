@@ -91,11 +91,16 @@
 				current: 0,
 				selectProductsId: "",
 				productsTab: [],
-				productsList: {}
+				productsList: {},
+				option: {}
 			}
 		},
-		onLoad() {
-
+		onLoad(option) {
+			option && (this.option = option);
+			if (option.tabId) {
+				this.selectProductsId = option.tabId;
+				this.current = 1
+			}
 		},
 		onReady() {
 			this.verifLogin().then(data => {
@@ -153,17 +158,17 @@
 				}
 			},
 			exchange(data) {
-				if (data.obtained) return console.log("已拥有：", data.id);
+				if (data.obtained) return console.log("已拥有：", data.productionId);
 				// 兑换商品
 				this.commonRequest({
 					url: "/api/exchange/redeem",
 					data: {
-						productionId: data.id,
+						productionId: data.productionId,
 					}
 				}).then(res => {
 					// 点击兑换商品
 					uni.showToast({
-						title: "兑换成功",
+						title: res.msg || "兑换成功",
 						icon: "success"
 					})
 					data.obtained = true;
@@ -182,11 +187,11 @@
 					})
 				}
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					console.log(this.keyword,this.selectProductsId)
+					console.log(this.keyword, this.selectProductsId)
 					// 获取兑换商品列表
 					this.commonRequest({
 						url: "/api/exchange/products",
-						method:"POST",
+						method: "POST",
 						data: {
 							keyword: this.keyword,
 							type: this.selectProductsId,
@@ -211,6 +216,7 @@
 
 	.page-wrap {
 		background: linear-gradient(#FFF0DC 0%, #F4F4F4 40%, #F4F4F4 100%);
+		min-height: 100vh;
 	}
 
 	.item-title-wrap {

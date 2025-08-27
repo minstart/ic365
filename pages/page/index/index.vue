@@ -171,25 +171,7 @@
 					list: []
 				},
 				// 最新成就
-				achievement: {
-					"list": [
-					    {
-					        "achievementId": 1,
-					        "name": "持之以恒",
-					        "subtitle": "连续登录7天",
-					        "imgPath": "https://ic365.ajulye.com/material/achievement/perseverance.png",
-					        "type": 0,
-					        "obtainTime": "2025-08-25T09:55:38",
-					        "obtainTimeUnix": 1756086938,
-					        "typeName": "铜质",
-					        "groupType": null,
-					        "groupTypeName": "挑战成就",
-					        "obtained": null,
-					        "totalProgress": 0,
-					        "currentProgress": 0
-					    }
-					]
-				},
+				achievement: {},
 
 				userInfo: {
 					nickname: "",
@@ -205,7 +187,7 @@
 						contentFrom: "- 卡尔·弗里德里希·高斯"
 					}
 				},
-				taskDetails:{} //选中的任务详情
+				taskDetails: {} //选中的任务详情
 			};
 		},
 		onLoad() {
@@ -213,30 +195,43 @@
 		},
 
 		onReady() {
+			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
+			const deviceInfo = uni.getDeviceInfo()
+			const appInfo = uni.getSystemInfoSync()
+			// console.log("设备信息：：：",deviceInfo)
+			// console.log("安装包版本：：：",appInfo)
+			let recordActivity = {
+				deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
+				osVersion: deviceInfo.system,
+				appVersion: appInfo.appVersion,
+				uniqueId: deviceInfo.deviceId
+			}
+			// 记录用户设备信息
+			this.commonRequest({
+				url: "/api/student/recordActivity",
+				notLoading: true,
+				data: recordActivity
+			}).then(res => {
+				// console.log("加载app时传输用户设备信息：",res)
+
+			}).catch(error => {
+				// console.log("记录用户设备信息报错：：", error)
+			})
+
+			// 获取推荐学习
+			this.commonRequest({
+				url: "/api/recommend/videos"
+			}).then(res => {
+				console.log("推荐学习::", res.data)
+				try {
+					this.videos = res.data;
+				} catch (e) {}
+			}).catch(error => {
+				console.log("获取推荐学习失败：：", error)
+			})
+		},
+		onShow() {
 			this.verifLogin().then(data => {
-				store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
-				const deviceInfo = uni.getDeviceInfo()
-				const appInfo = uni.getSystemInfoSync()
-				// console.log("设备信息：：：",deviceInfo)
-				// console.log("安装包版本：：：",appInfo)
-				let recordActivity = {
-					deviceModel: deviceInfo.deviceBrand + deviceInfo.deviceModel,
-					osVersion: deviceInfo.system,
-					appVersion: appInfo.appVersion,
-					uniqueId: deviceInfo.deviceId
-				}
-				// 记录用户设备信息
-				this.commonRequest({
-					url: "/api/student/recordActivity",
-					notLoading: true,
-					data: recordActivity
-				}).then(res => {
-					// console.log("加载app时传输用户设备信息：",res)
-
-				}).catch(error => {
-					// console.log("记录用户设备信息报错：：", error)
-				})
-
 				// 获取用户信息
 				this.commonRequest({
 					url: "/api/student/info"
@@ -251,8 +246,7 @@
 
 						if (res.data.grade == 0) {
 							uni.redirectTo({
-								url: '/pages/page/index/supplement_info?pageFrom=' +
-									data.pathUrl
+								url: '/pages/page/index/supplement_info?pageFrom=' + data.pathUrl
 							});
 						}
 					} else {
@@ -294,25 +288,6 @@
 					console.log("获取最新成就失败：：", error)
 				})
 
-				// 获取推荐学习
-				this.commonRequest({
-					url: "/api/recommend/videos"
-				}).then(res => {
-					console.log("推荐学习::", res.data)
-					if (res.code == 0) {
-						try {
-							this.videos = res.data;
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.message || "获取推荐学习失败!",
-							icon: "none"
-						});
-					}
-				}).catch(error => {
-					console.log("获取推荐学习失败：：", error)
-				})
-
 				// 通知消息（成就奖励、任务奖励）
 				this.commonRequest({
 					url: "/api/notice/getAll"
@@ -327,17 +302,13 @@
 				}).catch(error => {
 					console.log("通知消息失败：：", error)
 				})
-
-
 			}).catch(error => {
 				console.log("没有登录：：", error)
 			})
-		},
-		onShow() {
+
 			this.pageOnShowSet({
 				uniHide: "all"
-			}).then(res => {
-			})
+			}).then(res => {})
 		},
 		onHide() {
 
@@ -388,18 +359,37 @@
 				}
 			},
 			//关闭弹窗 
-			closeRewardPopUp(){
+			closeRewardPopUp() {
 				this.$refs.rewardPopUp.close()
 			},
 			closeTaskPopUp() {
 				this.$refs.taskPopUp.close()
 			},
 			// 打开任务详情
-			openTaskDetails(item){
-				this.taskDetails = item;
-				this.$refs.taskPopUp.open("bottom")
+			openTaskDetails(item) {
+				if (item.processTotal && item.processTotal == 100) {
+					// 已经做完了，查看任务详情
+					this.taskDetails = item;
+					this.$refs.taskPopUp.open("bottom")
+				} else {
+					// 没有做完，跳转到任务界面
+					if (item.matchSubTypeId == 1) {
+						// 任务做题
+						this.jumpPage({
+							url: '/pages/page/study/answerQuestions?pageType=question&missionId=' + item.missionId
+						})
+					} else if (item.matchSubTypeId == 2) {
+						// 任务看视频
+						this.jumpPage({
+							url: '/pages/page/study/answerQuestions?pageType=video&categoryId=' + item.categoryId + '&missionId=' + item.missionId
+						})
+					} else {
+						this.taskDetails = item;
+						this.$refs.taskPopUp.open("bottom")
+					}
+				}
 			}
-			
+
 		}
 	};
 </script>
@@ -859,6 +849,7 @@
 				text-align: center;
 				width: 33.33%;
 				float: right;
+
 				.achievement-list-pic-wrap {
 					width: 180rpx;
 					height: 180rpx;

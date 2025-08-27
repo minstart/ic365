@@ -49,11 +49,11 @@
 									<view class="topic-answer-wrap">
 										<view class="topic-answer">
 											<view class="topic-answer-title">你的答案</view>
-											<view class="answer">{{item2.userAnswer}}</view>
+											<view class="answer" v-html="imgUrlChangeImg({content:item2.userAnswer})"></view>
 										</view>
 										<view class="topic-answer">
 											<view class="topic-answer-title">正确答案</view>
-											<view class="answer">{{item2.correctAnswer}}</view>
+											<view class="answer" v-html="imgUrlChangeImg({content:item2.correctAnswer})"></view>
 										</view>
 									</view>
 									<view class="list-btn-wrap">
@@ -482,5 +482,10 @@
 				}
 			}
 		}
+	}
+</style>
+<style>
+	.answer .change-img{
+		max-height: 300rpx;
 	}
 </style>
