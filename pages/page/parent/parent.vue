@@ -89,7 +89,7 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">提升建议</h3>
 				<view class="item-more">
-					<view class="text icon-more" @click="jumpPage({url:''})">全部</view>
+					<!-- <view class="text icon-more" @click="jumpPage({url:''})">全部</view> -->
 				</view>
 			</view>
 			<view class="no-list-tip" v-if="suggestionImproveOther.categories && suggestionImproveOther.categories.length==0">暂无数据</view>
@@ -131,7 +131,7 @@
 					<span>本周获取</span>
 					<span>{{suggestionImproveOther.currencies._newlyAdded.text}}</span>
 				</view>
-				<view class="statistics" v-if="suggestionImproveOther.currencies.exchanges&&suggestionImproveOther.currencies.exchanges.name">
+				<view class="statistics" @tap.stop="jumpPage({url:'/pages/page/user/exchangeMall'})" v-if="suggestionImproveOther.currencies.exchanges&&suggestionImproveOther.currencies.exchanges.name">
 					<span>可兑换{{suggestionImproveOther.currencies.exchanges.name}}</span>
 					<span>{{suggestionImproveOther.currencies.exchanges.quantity}}个</span>
 				</view>
@@ -141,7 +141,7 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">系统资讯</h3>
 				<view class="item-more">
-					<view class="text icon-more" @click="jumpPage({url:''})">更多</view>
+					<!-- <view class="text icon-more"  @click="jumpPage({url:''})">更多</view> -->
 				</view>
 			</view>
 			<ul class="information-list-wrap">
@@ -150,6 +150,7 @@
 					<view class="list-info">
 						<h3 class="title">{{item.title}}</h3>
 						<view class="subtitle">{{item.subtitle}}</view>
+						<view class="more-text"  @click="jumpPage({url:''})">{{item.buttonText}}</view>
 					</view>
 				</li>
 			</ul>
@@ -239,7 +240,25 @@
 				parent: {},
 
 				// 系统资讯
-				information: []
+				information: [],
+				information: [
+				    {
+				        "publishId": 1,
+				        "title": "测试咨询",
+				        "subtitle": "副标题",
+				        "icon": "http://ic365.com/a.jpg",
+				        "buttonText": "登录消息详情按钮",
+				        "createTime": "2025-08-08T18:12:04"
+				    },
+				    {
+				        "publishId": 2,
+				        "title": "砍一刀9999",
+				        "subtitle": "渣渣辉领衔主演",
+				        "icon": "http://ic365.com/a.jpg",
+				        "buttonText": "砍一刀消息详情按钮",
+				        "createTime": "2025-08-08T18:12:04"
+				    }
+				]
 			}
 		},
 		onLoad() {
@@ -592,7 +611,7 @@
 
 		.statistics {
 			overflow: hidden;
-			padding: 0 0.2rem 0 0.65rem;
+			padding: 0 32rpx;
 			line-height: 3.375rem;
 
 			span {
@@ -739,31 +758,89 @@
 				background: #F9F9F9;
 				border-bottom: 0.16rem solid #F6F6F6;
 				display: flex;
-				padding: 1.375rem 1.125rem;
-
+				padding: 18rpx 20rpx;
+				min-height: 158rpx;
+				margin-bottom: 20rpx;
 				.list-icon {
-					width: 2.25em;
-					height: 2.25em;
+					width: 108rpx;
+					height: 108rpx;
 					display: inline-block;
-					margin-right: 0.625rem;
-					background: #ccc;
+					margin-right: 20rpx;
+					// background: #ccc;
 					border-radius: 0.2rem;
+					padding: 4rpx;
+					border-radius: 108rpx;
 				}
-
 				.list-info {
 					flex: 1;
 					display: inline-block;
-					background: url("/static/icons/next.png") no-repeat right / 0.5rem 0.85rem;
+					// background: url("/static/icons/next.png") no-repeat right / 0.5rem 0.85rem;
 
 					.title {
-						font-size: 1.125rem;
+						font-size: 30rpx;
 						line-height: 1;
-						margin-bottom: 0.2rem;
+						margin-bottom: 8rpx;
+						color: #333;
+						
 					}
 
 					.subtitle {
 						color: #999;
-						font-size: 0.875rem;
+						font-size: 22rpx;
+						position: relative;
+						padding-left: 24rpx;
+						margin-bottom: 28rpx;
+						&::after{
+							content:"";
+							width: 12rpx;
+							height: 12rpx;
+							left: 0;
+							top: 0;
+							bottom: 0;
+							margin: auto;
+							position: absolute;
+						}
+					}
+				}
+				.more-text{
+					line-height: 34rpx;
+					border-radius: 20rpx;
+					padding: 0 18rpx;
+					color: #4d4d4d;
+					width: 196rpx;
+					font-size: 18rpx;
+					border:2rpx solid #D8D8D8;
+					padding-right: 20rpx;
+					&::after{
+						float: right;
+						content: "→";
+						font-weight: 700;
+					}
+				}
+				&:nth-child(1){
+					background: url("/static/image/4_information_back1.png") no-repeat right / 196rpx 100%;
+					.list-icon{
+						border:2rpx solid #F94559;
+					}
+					.list-info{
+						.subtitle{
+							&::after{
+								background-color: #F94559;
+							}
+						}
+					}
+				}
+				&:nth-child(2){
+					background: url("/static/image/4_information_back2.png") no-repeat right / 196rpx 100%;
+					.list-icon{
+						border:2rpx solid #FFBA31;
+					}
+					.list-info{
+						.subtitle{
+							&::after{
+								background-color: #FFBA31;
+							}
+						}
 					}
 				}
 			}

@@ -551,7 +551,9 @@
 						}
 					}
 				}
-
+				.flex-center{
+					flex: 1;
+				}
 				.list-icon {
 					width: 6.625rem;
 					height: 6.9375rem;

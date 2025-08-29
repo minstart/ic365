@@ -21,6 +21,8 @@ import Cookies from 'js-cookie';
 import request from '/common/utils/request'
 import store from '/store/index.js'
 
+const imageUrlPattern = /https:\/\/[^\s]+\.(png|jpg|jpeg|gif|svg)/gi;//图片校验
+
 // 校验加密数据
 async function fetchData(data) {
 	try {
@@ -358,21 +360,21 @@ export default {
 					// 智慧星
 					return {
 						min: "/static/icons/star.png",
-						moderate:"/static/icons/star2.png"
+							moderate: "/static/icons/star2.png"
 					};
 					break;
 				case 2:
 					// 知识尘
 					return {
 						min: "/static/icons/dust.png",
-						moderate:"/static/icons/dust2.png"
+							moderate: "/static/icons/dust2.png"
 					};
 					break;
 				case 3:
 					// 启明石
 					return {
 						min: "/static/icons/stone.png",
-						moderate:"/static/icons/stone2.png"
+							moderate: "/static/icons/stone2.png"
 					};
 					break;
 				case 4:
@@ -382,7 +384,7 @@ export default {
 					// 圣诞欢乐颂
 					return {
 						min: "/static/icons/christmas.png",
-						moderate:""
+							moderate: ""
 					};
 					break;
 				case 6:
@@ -485,19 +487,22 @@ export default {
 		// 图片路径转换为图片
 		// content : 需要转换的内容
 		// imgClass : 转换后图片的class名称 默认change-img
-		imgUrlChangeImg(data){
-			const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi; //图片校验
-			if(!data || !data.content) return false;
+		imgUrlChangeImg(data) {
+			if (!data || !data.content) return false;
 			if (data.content.indexOf("http") != -1) {
 				// 1. 正则表达式提取图片URL
 				const contentImages = data.content.match(imageUrlPattern) || [];
 				// 2. 删除图片URL后的文本
 				try {
 					contentImages.forEach(item => {
-						data.content = data.content.replace(item,'<image class="'+(data.imgClass || "change-img")+'" src="' + item + '" mode=""></image>').trim();
+						data.content = data.content.replace(item, '<image class="' + (data.imgClass || "change-img") + '" src="' + item + '" mode=""></image>').trim();
 					})
 					return data.content;
-				} catch (e) {}
+				} catch (e) {
+					return data.content;
+				}
+			}else{
+				return data.content;
 			}
 		},
 	}

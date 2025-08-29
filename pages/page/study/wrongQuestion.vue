@@ -41,7 +41,7 @@
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
 							<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
 								<view class="topic-title-wrap">
-									<h3 class="topic-title">{{item2.title}}</h3>
+									<h3 class="topic-title" v-html="'题目：'+item2.content"></h3>
 									<view class="topic-time">{{changeTime(item2.createTime,2)}}</view>
 								</view>
 								<view class="topic-wrap">
@@ -98,53 +98,53 @@
 			option.categoryId && (this.selectProductsId = option.categoryId)
 		},
 		onReady() {
+			this.verifLogin().then(data => {
+				// 错题统计
+				this.commonRequest({
+					url: "/api/wrong-records/stats"
+				}).then(res => {
+					console.log("错题统计::", JSON.stringify(res))
+					try {
+						this.wrongRecordsCount = res.data;
+					} catch (e) {}
+				}).catch(error => {
+					console.log("错题统计报错：：", error)
+				})
 
+				this.commonRequest({
+					url: "/api/wrong-records/getCategories"
+				}).then(res => {
+					console.log("获取错题类目分组(Tab)::", res)
+					for (let i in res.data) {
+						try {
+							!this.selectProductsId && (this.selectProductsId = i);
+							this.productsTab = []
+							this.productsTab.push({
+								id: i,
+								name: res.data[i],
+								page: 1,
+								noData: false
+							})
+							this.productsList["products" + i] = {
+								requested: false,
+								list: []
+							}
+						} catch (e) {}
+					}
+					let _that = this;
+					setTimeout(() => {
+						_that.tabID = "tab-list-" + _that.selectProductsId;
+					}, 1000)
+					this.getProducts()
+				}).catch(error => {
+					this.consoleLog("获取错题类目分组(Tab)报错：：", error)
+				})
+			})
 		},
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {
-				this.verifLogin().then(data => {
-					// 错题统计
-					this.commonRequest({
-						url: "/api/wrong-records/stats"
-					}).then(res => {
-						console.log("错题统计::", JSON.stringify(res))
-						try {
-							this.wrongRecordsCount = res.data;
-						} catch (e) {}
-					}).catch(error => {
-						console.log("错题统计报错：：", error)
-					})
-
-					this.commonRequest({
-						url: "/api/wrong-records/getCategories"
-					}).then(res => {
-						console.log("获取错题类目分组(Tab)::", res)
-						for (let i in res.data) {
-							try {
-								!this.selectProductsId && (this.selectProductsId = i);
-								this.productsTab.push({
-									id: i,
-									name: res.data[i],
-									page: 1,
-									noData:false
-								})
-								this.productsList["products" + i] = {
-									requested: false,
-									list: []
-								}
-							} catch (e) {}
-						}
-						let _that = this;
-						setTimeout(() => {
-							_that.tabID = "tab-list-" + _that.selectProductsId;
-						}, 1000)
-						this.getProducts()
-					}).catch(error => {
-						this.consoleLog("获取错题类目分组(Tab)报错：：", error)
-					})
-				})
 
 			})
 		},
@@ -173,7 +173,7 @@
 			},
 			similarExercises(data) {
 				this.jumpPage({
-					url:"/pages/page/study/answerQuestions?pageType=question&categoryId"+data.categoryId
+					url: "/pages/page/study/answerQuestions?pageType=question&categoryId" + data.categoryId
 				})
 				// // 同类练习
 				// uni.showToast({
@@ -183,7 +183,7 @@
 			},
 			reAnswer(data) {
 				this.jumpPage({
-					url:"/pages/page/study/answerQuestions?pageType=question&categoryId"+data.categoryId+"&questionId="+data.questionId
+					url: "/pages/page/study/answerQuestions?pageType=question&categoryId" + data.categoryId + "&questionId=" + data.questionId
 				})
 				// 重新作答
 				// uni.showToast({
@@ -217,10 +217,16 @@
 							keyword: this.keyword,
 							categoryld: this.selectProductsId,
 							size: 10,
-							page:this.productsList["products" + this.selectProductsId].page
+							page: this.productsList["products" + this.selectProductsId].page
 						}
 					}).then(res => {
 						console.log("错题列表:", res)
+						res.data.forEach((item, i) => {
+							res.data[i].content = this.imgUrlChangeImg({
+								content: item.content
+							})
+						})
+						console.log(res.data)
 						this.productsList["products" + this.selectProductsId].requested = true;
 						this.productsList["products" + this.selectProductsId].page = this.productsList["products" + this.selectProductsId].page + 1;
 						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list, ...res.data];
@@ -364,10 +370,12 @@
 
 		.search-content-wrap {
 			margin: 1.25rem 0;
+
 			.search-tab-wrap {
 				white-space: nowrap;
 				width: 100%;
 				height: 80rpx;
+
 				.tab {
 					padding: 0.56rem 0.56rem;
 					margin-right: 0.625rem;
@@ -377,6 +385,7 @@
 					min-width: calc(3.75rem - 0.56rem * 2);
 					text-align: center;
 					display: inline-block;
+
 					&:last-child {
 						margin-right: 0;
 					}
@@ -485,7 +494,15 @@
 	}
 </style>
 <style>
-	.answer .change-img{
+	.answer .change-img {
+		max-height: 200rpx;
+	}
+
+	.change-img {
+		display: inline-block;
+		vertical-align: text-top;
+		min-height: 100rpx;
+		max-width: 100%;
 		max-height: 300rpx;
 	}
 </style>

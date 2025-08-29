@@ -138,6 +138,18 @@
 <script>
 	import store from '/store/index.js';
 	import commonJs from '/common/js/common.js';
+	function getTimeOfDay() {
+	    const now = new Date();
+	    const hours = now.getHours();
+	 
+	    if (hours < 12) {
+	        return '早上';
+	    } else if (hours < 18) {
+	        return '下午';
+	    } else {
+	        return '晚上';
+	    }
+	}
 	export default {
 		mixins: [commonJs],
 		components: {
@@ -182,7 +194,7 @@
 				pageData: {
 					banner: {
 						bannerBack: "#3c25b9",
-						title: "下午好，小明，数学小超人！",
+						title: " ",
 						content: "数学是真理的永恒表现形式",
 						contentFrom: "- 卡尔·弗里德里希·高斯"
 					}
@@ -217,18 +229,6 @@
 			}).catch(error => {
 				// console.log("记录用户设备信息报错：：", error)
 			})
-
-			// 获取推荐学习
-			this.commonRequest({
-				url: "/api/recommend/videos"
-			}).then(res => {
-				console.log("推荐学习::", res.data)
-				try {
-					this.videos = res.data;
-				} catch (e) {}
-			}).catch(error => {
-				console.log("获取推荐学习失败：：", error)
-			})
 		},
 		onShow() {
 			this.verifLogin().then(data => {
@@ -237,26 +237,33 @@
 					url: "/api/student/info"
 				}).then(res => {
 					// console.log("获取用户信息::", JSON.stringify(res))
-					if (res.code == 0) {
-						try {
-							store.commit("Update_UserInfo", res.data)
-							this.userInfo = res.data;
-						} catch (e) {}
-						// 全新用户，需要选年级
+					try {
+						store.commit("Update_UserInfo", res.data)
+						this.userInfo = res.data;
+						
+						this.pageData.banner.title = getTimeOfDay() + "好，" + this.userInfo.nickname + "同学" + (this.userInfo.showAchievementName?'，'+this.userInfo.showAchievementName:"")+'。'
+					} catch (e) {}
+					// 全新用户，需要选年级
 
-						if (res.data.grade == 0) {
-							uni.redirectTo({
-								url: '/pages/page/index/supplement_info?pageFrom=' + data.pathUrl
-							});
-						}
-					} else {
-						uni.showToast({
-							title: res.message || "获取用户信息失败!",
-							icon: "none"
+					if (res.data.grade == 0) {
+						uni.redirectTo({
+							url: '/pages/page/index/supplement_info?pageFrom=' + data.pathUrl
 						});
 					}
 				}).catch(error => {
 					console.log("获取用户信息报错：：", error)
+				})
+
+				// 获取推荐学习
+				this.commonRequest({
+					url: "/api/recommend/videos"
+				}).then(res => {
+					console.log("推荐学习::", res.data)
+					try {
+						this.videos = res.data;
+					} catch (e) {}
+				}).catch(error => {
+					console.log("获取推荐学习失败：：", error)
 				})
 
 				// 获取任务列表

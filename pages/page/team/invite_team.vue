@@ -3,6 +3,7 @@
 	<view class="page-wrap">
 		<page-head :isBack='true' :background="'#FFEEE6'"></page-head>
 		<view class="banner-back"></view>
+		<view class="banner-back2"></view>
 		<div class="banner-wrap">
 			<view class="btn-wrap">
 				<view class="set-btn"></view>
@@ -11,51 +12,17 @@
 				<view class="invite-team-icon"></view>
 				<h3 class="info-title">邀请好友加入队伍</h3>
 				<view class="info-subtitle">邀请好友一起学习，共同进步,还能获得额外奖励！</view>
-				<image class="qr-code" :src="qrCode"></image>
-				<view class="info-tips">扫描二维码加入我的队伍</view>
+				<image src=""></image>
 				<div class="invitation-code-wrap">
-					<view class="invitation-code-tips">或使用邀请码</view>
-					<h3 class="my-code">MATH-2023-015</h3>
+					<h3 class="my-code">邀请码：{{invitationCode}}</h3>
 				</div>
-				<button class="share-btn btn-yellow" @click="shareBtn">分享邀请链接</button>
-				<button class="copy-btn btn-white" @click="copyBtn">复制邀请码</button>
+				<div class="btn-wrap">
+					<button class="share-btn btn-yellow" @click="shareBtn">生成邀请码</button>
+					<button class="copy-btn btn-white" @click="copyBtn">复制邀请码</button>
+				</div>
 			</view>
 		</div>
-		<view class="uni-padding-wrap">
-			<view class="item-title-wrap">
-				<h3 class="item-title">邀请奖励</h3>
-			</view>
-			<view class="list-wrap rewar-list-wrap">
-				<view class="list" v-for="item in invitationRewards">
-					<image class="list-icon" :src="item.cover"></image>
-					<view class="list-info">
-						<h3 class="list-info-title">{{item.name}}</h3>
-						<view class="list-info-subtitle">奖励：{{item.rewardName}}</view>
-					</view>
-				</view>
-			</view>
-			<view class="item-title-wrap">
-				<h3 class="item-title">已邀请好友</h3>
-				<view class="item-more">
-					<view class="text">2/3</view>
-				</view>
-			</view>
-			<view class="list-wrap invited-list-wrap">
-				<view class="list" v-for="item in invited">
-					<image class="list-icon" :src="item.cover"></image>
-					<view class="list-info">
-						<h3 class="list-info-title">{{item.name}}同学</h3>
-						<view class="list-info-subtitle">{{item.time}} 加入</view>
-					</view>
-					<view class="flex-center">
-						<view class="list-more">
-							<view class="delete-btn" @click="deleteUser(item)">删除</view>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-
+		
 	</view>
 </template>
 
@@ -72,34 +39,7 @@
 
 		data() {
 			return {
-				qrCode:"",
-				invitationRewards: [{
-						name: "成功邀请1位好友",
-						cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
-						rewardName: "50智慧星"
-					},
-					{
-						name: "成功邀请3位好友",
-						cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
-						rewardName: "200智慧星+限定称号"
-					},
-					{
-						name: "成功邀请5位好友",
-						cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
-						rewardName: "500智慧星+10启明石"
-					}
-				],
-				invited: [{
-					userId: "1",
-					cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
-					name: "小红",
-					time: "2023.11.15"
-				}, {
-					userId: "2",
-					cover: "https://ic365.ajulye.com/material/mission/002@2x.png",
-					name: "小黑",
-					time: "2023.12.15"
-				}, ]
+				invitationCode:"MATH-2023-015"
 			}
 		},
 		onLoad() {
@@ -176,8 +116,10 @@
 </script>
 
 <style lang="scss" scoped>
+	@import '/static/css/standard.scss';
 	.page-wrap {
-		background-color: #F4F4F4;
+		background-color: $background;
+		min-height: calc(100vh - 60rpx);
 	}
 
 	.banner-back {
@@ -255,94 +197,30 @@
 			}
 
 			.invitation-code-wrap {
-				background: #F9F9F9;
 				border-radius: 1rem;
 				padding: 0.625rem;
 				margin-bottom: 1.25rem;
-
-				.invitation-code-tips {
-					margin-bottom: 0.3125rem;
-					font-size: 0.8125rem;
-					color: #999;
-				}
-
 				.my-code {
 					font-size: 1.125rem;
 					color: #222;
 					line-height: 1.625rem;
 				}
 			}
-
-			.share-btn {
-				margin: 0 0.5rem 1.25rem 0.5rem;
-			}
-
-			.copy-btn {
-				margin: 0 0.5rem;
-			}
-		}
-	}
-
-
-	.list-wrap {
-		.list {
-			display: flex;
-			padding: 1.25rem 0;
-
-			.list-icon {
-				width: 3.375rem;
-				height: 3.375rem;
-				margin-right: 0.8rem;
-			}
-
-			.list-info {
-				flex: 1;
-
-				.list-info-title {
-					font-size: 1.125rem;
-					line-height: 1.5625rem;
-					color: #222;
-					margin-bottom: 0.3125rem;
+			
+			.btn-wrap{
+				display: flex;
+				.share-btn {
+					flex: 1;
+					margin: 0 27rpx 60rpx 40rpx;
 				}
-
-				.list-info-subtitle {
-					font-size: 0.875rem;
-					color: #999;
+				
+				.copy-btn {
+					flex: 1;
+					margin: 0 40rpx 60rpx 27rpx;
 				}
 			}
-		}
-	}
-
-	.rewar-list-wrap {
-		background: #fff;
-		padding: 0 0.75rem;
-		border-radius: 1rem;
-
-		.list {
-			border-bottom: 0.1rem solid #D7D7D7;
-
-			&:last-child {
-				border-width: 0;
-			}
-		}
-	}
-
-	.invited-list-wrap {
-		.list{
-			background: #fff;
-			padding: 1rem 0.75rem;
-			border-radius: 1rem;
-			margin-bottom: 0.75rem;
-		}
-		.delete-btn{
-			width: 4.125rem;
-			border: 0.1rem solid #FF3A3A;
-			border-radius: 1rem;
-			color: #ff3a3a;
-			font-weight: 700;
-			font-size: 1rem;
-			line-height: 1.875rem;
-			text-align: center;
+			
+			
 		}
 	}
 </style>

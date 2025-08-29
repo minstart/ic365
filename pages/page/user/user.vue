@@ -39,10 +39,10 @@
 						<view class="item-info-title">知识尘</view>
 					</view>
 				</view>
-				<view class="user-id">
+				<!-- <view class="user-id">
 					<view class="userId-title">守护者ID</view>
 					<h3 class="userId">{{userInfo.userId}}</h3>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="uni-padding-wrap uni-common-mt tab-wrap">

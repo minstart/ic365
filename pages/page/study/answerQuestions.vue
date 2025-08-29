@@ -34,7 +34,7 @@
 					<!-- 答题右下方内容 -->
 					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'">
 						<view class="topic">
-							<h3 class="topic-text">{{topic.content}}</h3>
+							<h3 class="topic-text" v-html="topic.content"></h3>
 							<view class="topic-image-wrap">
 								<image class="topic-image" :src="item" v-for="item in topic.contentImages"></image>
 							</view>
@@ -61,8 +61,7 @@
 								<view class="answer-text" v-html="answer.optionName + '.' + answer.option"></view>
 								<view class="analysis-text" @click="textAnalysis">
 									<view class="analysis-icon"></view>
-									<span>{{answer.optionName == topic.answer ? '答对了!看看解析来巩固一下!' : '答错了! 看看解析也许会有用!'}}
-									</span>
+									<span>{{topic.analysis?(answer.optionName == topic.answer ? '答对了!点这里看看解析来巩固一下!' : '答错了! 点这里看看解析也许会有用!'):(answer.optionName == topic.answer ?"答对啦！":"答错了!")}}</span>
 								</view>
 								<!-- 视频解析 -->
 								<view class="other-analysis-wrap" v-if="topic.videoId && pageType == 'everyDay'">
@@ -119,7 +118,7 @@
 	<l-popup :pageShow="showAnalysis" :close="closePopup">
 		<template v-slot>
 			<view class="popup-analysis-wrap">
-				<h3 style="margin-bottom: 16rpx;">题目：{{topic.content}}</h3>
+				<h3 style="margin-bottom: 16rpx;" v-html="'题目：'+topic.content"></h3>
 				<view class="popup-analysis-text" v-if="topic.analysis" v-html="'解析：'+topic.analysis"></view>
 			</view>
 		</template>
@@ -144,7 +143,6 @@
 <script>
 	import store from '/store/index.js';
 	import commonJs from '/common/js/common.js';
-	const imageUrlPattern = /https?:\/\/[^\s]+?\.(?:png|jpg|jpeg|gif|svg)/gi; //图片校验
 	export default {
 		mixins: [commonJs],
 		props: {
@@ -329,13 +327,9 @@
 				// 题目问题数据处理
 				try {
 					if (this.topic.content.indexOf("http") != -1) {
-						// 1. 正则表达式提取图片URL
-						const contentImages = this.topic.content.match(imageUrlPattern) || [];
-						// 2. 删除图片URL后的文本
-						try {
-							this.topic.content = this.topic.content.replace(imageUrlPattern, '').trim();
-						} catch (e) {}
-						this.topic.contentImages = [...this.topic.contentImages, contentImages]
+						this.topic.content = this.imgUrlChangeImg({
+							content: this.topic.content
+						})
 					}
 				} catch (e) {}
 
@@ -353,12 +347,16 @@
 				} catch (e) {}
 				// 题目答案处理
 				this.topic.options.forEach((item, i) => {
-					if (item.indexOf("http") != -1) {
-						const analysisImages = item.match(imageUrlPattern) || [];
-						try {
-							this.topic.options[i] = item.replace(analysisImages[0], '<image class="options-img" src="' + analysisImages[0] + '" mode=""></image>').trim();
-						} catch (e) {}
-					}
+					this.topic.options[i] = this.imgUrlChangeImg({
+						content: item,
+						imgClass: 'options-img'
+					})
+					// if (item.indexOf("http") != -1) {
+					// 	const analysisImages = item.match(imageUrlPattern) || [];
+					// 	try {
+					// 		this.topic.options[i] = item.replace(analysisImages[0], '<image class="options-img" src="' + analysisImages[0] + '" mode=""></image>').trim();
+					// 	} catch (e) {}
+					// }
 				})
 
 				this.topic.AIanalysis = {
@@ -390,7 +388,7 @@
 				}
 				this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId);
 				this.option.missionId && (postData.missionId = this.option.missionId);
-				console.log("回答问题传参：",postData)
+				console.log("回答问题传参：", postData)
 				// 回答问题
 				this.commonRequest({
 					url: "/api/question/submit",
@@ -1244,6 +1242,12 @@
 	.options-img {
 		display: inline-block;
 		vertical-align: text-top;
-		width: calc(100% - 30rpx) !important;
+		max-width: calc(100% - 30rpx) !important;
+		max-height: 200rpx;
+	}
+
+	.change-img {
+		max-width: 300rpx;
+		max-height: 300rpx;
 	}
 </style>
