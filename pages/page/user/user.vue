@@ -27,15 +27,15 @@
 				</view>
 				<view class="property">
 					<view class="property-item">
-						<h3 class="item-info-num">{{userInfo.currencies.star||0}}</h3>
+						<h3 class="item-info-num">{{userInfo.currencies.star}}</h3>
 						<view class="item-info-title">智慧星</view>
 					</view>
 					<view class="property-item">
-						<h3 class="item-info-num">{{userInfo.currencies.stone||0}}</h3>
+						<h3 class="item-info-num">{{userInfo.currencies.stone}}</h3>
 						<view class="item-info-title">启明石</view>
 					</view>
 					<view class="property-item">
-						<h3 class="item-info-num">{{userInfo.currencies.dust||0}}</h3>
+						<h3 class="item-info-num">{{userInfo.currencies.dust}}</h3>
 						<view class="item-info-title">知识尘</view>
 					</view>
 				</view>
@@ -671,8 +671,10 @@
 					padding-right: 0.5rem;
 
 					.list-icon {
-						width: 6.5rem;
-						height: 6.5rem;
+						width: 180rpx;
+						height: 180rpx;
+						padding: 14rpx;
+						margin-right: 10rpx;
 					}
 
 					.list-info {

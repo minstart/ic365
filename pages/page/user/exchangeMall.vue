@@ -80,12 +80,6 @@
 
 		data() {
 			return {
-				userInfo: {
-					nickname: "",
-					currencies: {
-
-					}
-				},
 				pageHeadTitle: "兑换商城",
 				keyword: "",
 				current: 0,
@@ -172,6 +166,18 @@
 						icon: "success"
 					})
 					data.obtained = true;
+					this.commonRequest({
+						url: "/api/student/info"
+					}).then(res => {
+						console.log("获取用户信息::", res)
+						try {
+							store.commit("Update_UserInfo", res.data)
+							this.userInfo = res.data;
+						} catch (e) {}
+					
+					}).catch(error => {
+						console.log("获取用户信息报错：：", error)
+					})
 				}).catch(error => {
 					this.consoleLog("兑换商品报错：：", error)
 				})

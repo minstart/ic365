@@ -44,16 +44,18 @@
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
 							<scroll-view scroll-y="true" class="scroll-Y" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll">
 								<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
-									<image class="list-icon" :src="item2.coverImage" mode=""></image>
+									<div class="list-icon-wrap flex-center">
+										<image lazy-load class="list-icon" :src="item2.imgPath" mode=""></image>
+									</div>
 									<view class="list-info">
 										<h3 class="info-title">{{item2.name}}</h3>
 										<view class="info-subtitle">{{item2.subtitle}}</view>
 										<view class="achievement-type">
-											<h3 class="type" :typeId="item2.labelType">
+											<h3 class="type" :typeId="item2.type">
 												<image class="icon"></image>
-												<view class="text">{{item2.label}}</view>
+												<view class="text">{{item2.typeName}}成就</view>
 											</h3>
-											<view class="time">{{item2.time}}</view>
+											<view class="time">{{changeDate(item2.obtainTimeUnix*1000).fullDate}}</view>
 										</view>
 									</view>
 								</view>
@@ -90,9 +92,6 @@
 			}
 		},
 		onLoad() {
-
-		},
-		onReady() {
 			this.verifLogin().then(data => {
 				// 兑换资源类型(Tab)
 				this.commonRequest({
@@ -119,15 +118,20 @@
 				})
 			})
 		},
+		onReady() {},
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {
+				console.log("this.selectProductsId:",this.selectProductsId)
+				if(this.selectProductsId){
+					this.getProducts()
+				}
 				// 成就统计
 				this.commonRequest({
 					url: "/api/achievement/stats"
 				}).then(res => {
-					console.log(res.data)
+					console.log("成就统计:",res.data)
 					this.progress = res.data
 					this.progress.list = [];
 					this.progress.list.push(res.data.groupTypeCounts["铜质"] || 0)
@@ -180,7 +184,7 @@
 						data: {
 							search: this.keyword,
 							groupType: this.selectProductsId,
-							size: "10"
+							size: "20"
 						}
 					}).then(res => {
 						// console.log("search:",this.keyword,",groupType:",this.selectProductsId)
@@ -335,17 +339,20 @@
 						background-color: #fff;
 						border-radius: 1rem;
 						margin-bottom: 0.75rem;
-
+						.list-icon-wrap{
+							height: 100%;
+							float: left;
+							margin: auto 0;
+						}
 						.list-icon {
 							width: 5.5rem;
-							height: 6.75rem;
+							height: 5.5rem;
 							margin-right: 0.75rem;
-							background: #ccc;
+							border-radius: 16rpx;
 						}
 
 						.list-info {
 							flex: 1;
-
 							.info-title {
 								margin-top: 0.5rem;
 								line-height: 1.56rem;
@@ -360,7 +367,6 @@
 
 							.achievement-type {
 								overflow: hidden;
-
 								.type {
 									display: inline-block;
 									margin-right: 1.25rem;
@@ -381,7 +387,7 @@
 										line-height: 1.25rem;
 									}
 
-									&[typeid="1"] {
+									&[typeid="0"] {
 										background-color: #FFE7DA;
 
 										.icon {
@@ -389,7 +395,7 @@
 										}
 									}
 
-									&[typeid="2"] {
+									&[typeid="1"] {
 										background-color: #E9E9E9;
 
 										.icon {
@@ -397,7 +403,7 @@
 										}
 									}
 
-									&[typeid="3"] {
+									&[typeid="2"] {
 										background-color: #FFF5E5;
 
 										.icon {
@@ -405,7 +411,7 @@
 										}
 									}
 
-									&[typeid="4"] {
+									&[typeid="3"] {
 										background-color: #FFF7E2;
 
 										.icon {
@@ -413,7 +419,7 @@
 										}
 									}
 
-									&[typeid="5"] {
+									&[typeid="4"] {
 										background-color: #EFFFE5;
 
 										.icon {

@@ -109,7 +109,7 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">学习资产</h3>
 				<view class="item-more">
-					<view class="text icon-more" @click="jumpPage({url:''})">兑换记录</view>
+					<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/redemptionHistory'})">兑换记录</view>
 				</view>
 			</view>
 			<view class="property">
@@ -302,14 +302,15 @@
 							//处理后端返回的数据拼凑成前端简易展示数据 ------------Start
 							res.data.currencies.current.forEach(item => {
 								item.type == 1 && (_currencies.star = item.quantity)
-								item.type == 2 && (_currencies.stone = item.quantity)
-								item.type == 3 && (_currencies.dust = item.quantity)
+								item.type == 3 && (_currencies.stone = item.quantity)
+								item.type == 2 && (_currencies.dust = item.quantity)
 							})
 							store.state.userInfo.info.currencies = _currencies;
 							this.userInfo = {
 								...this.userInfo,
 								...store.state.userInfo.info
 							}
+							console.log(this.userInfo)
 							res.data.currencies._current = _currencies;
 							let addCurrencies = [];
 							res.data.currencies.newlyAdded.forEach(item => {

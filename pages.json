@@ -139,6 +139,20 @@
 			}
 		},
 		{
+			"path": "pages/page/user/redemptionHistory",
+			"style": {
+				"navigationBarTitleText": "兑换记录",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/page/user/exchangeLogDetails",
+			"style": {
+				"navigationBarTitleText": "兑换日志",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/page/user/taskList",
 			"style": {
 				"navigationBarTitleText": "任务列表",
