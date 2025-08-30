@@ -2,7 +2,7 @@
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<view class="banner-wrap">
-			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+			<page-head :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
 				<view class="head-pic-wrap">
 					<view class="vip-icon" :vipLevel='userInfo.vipLevel'></view>
@@ -89,13 +89,24 @@
 				</view>
 				<ul class="team-list-wrap">
 					<li class="team-list" v-for="item in members">
+						<view class="delete-btn" @tap.stop="deleteTeammate(item)"></view>
 						<image class="list-avatar" :src="item.avatar"></image>
 						<h3 class="list-nickname">{{item.nickname}}同学</h3>
-						<view class="list-time green">{{item.lastActive}}</view>
+						<view class="list-time green">{{item.lastActive?"队长":"队员"}}</view>
 					</li>
-					<li class="team-list invite" @click="jumpPage({url:'/pages/page/team/invite_team'})">
+					<li class="team-list" type='invite' v-if="members.length<=3" @click="jumpPage({url:'/pages/page/team/invite_team'})">
 						<view class="list-avatar"></view>
 						<h3 class="list-nickname">邀请好友</h3>
+						<view class="list-time"></view>
+					</li>
+					<li class="team-list" type="join" v-if="members.length==0" @tap.stop='joinTeam'>
+						<view class="list-avatar"></view>
+						<h3 class="list-nickname">加入队伍</h3>
+						<view class="list-time"></view>
+					</li>
+					<li class="team-list" type="exit" v-if="members.length>0" @tap.stop="exitTeam(item)">
+						<view class="list-avatar"></view>
+						<h3 class="list-nickname">退出队伍</h3>
 						<view class="list-time"></view>
 					</li>
 				</ul>
@@ -121,6 +132,13 @@
 			</view>
 		</view>
 	</view>
+	<uni-popup ref="joinTeam" :mask-click="false" type="bottom">
+		<div class="joinTeam-wrap">
+			<image class="close-popup" src="/static/icons/delete.png" @click="joinPopupClose"></image>
+			<input type="text" class="joinTeam-input uni-input" placeholder="长按粘贴好友发送的邀请码，点确定加入队伍吧" v-model="invitationCode">
+			<button class="join-btn" @tap.stop='confirmJoin'>确认</button>
+		</div>
+	</uni-popup>
 </template>
 
 <script>
@@ -136,7 +154,7 @@
 
 		data() {
 			return {
-				pageHeadTitle: "标题",
+				invitationCode: "", //加入队伍输入的邀请码
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
 				// 当前挑战
 				currentMission: {},
@@ -155,166 +173,22 @@
 
 		},
 		onReady() {
-			
+
 		},
 		onShow() {
 			const route = getCurrentPages(); //获取当前页面地址
 			const pathUrl = route[route.length - 1].route;
-			this.getLogin().then(data => {
-				// this.consoleLog(store.state.userInfo.token)
-				// this.consoleLog(store.state.userInfo)
+			this.verifLogin().then(data => {
+				// console.log(store.state.userInfo.token)
+				// console.log(store.state.userInfo)
 				// 已经登陆了
-				this.consoleLog("已经登陆了")
-			
-				// 获取我的队伍和任务相关信息
-				this.commonRequest({
-					url: "/api/team-mission/details"
-				}).then(res => {
-					this.consoleLog("获取我的队伍和任务相关信息::", JSON.stringify(res))
-					if (res.code == 0) {
-						try {
-							// 当前任务
-							this.currentMission = res.data.currentMission || {};
-							// 组队情况统计
-							this.stats = res.data.stats;
-							// 团队成员
-							this.members = res.data.members || [];
-							// 队伍日志
-							this.activities = res.data.activities || [];
-			
-							// 没有数据时模拟数据
-							// this.currentMission = {
-							// 	"missionId": 12,
-							// 	"name": "团队算术任务",
-							// 	"subtitle": "完成100道算术题目",
-							// 	"processTotal": 0,
-							// 	"remainingTime": "7天0小时",
-							// 	"rewardNames": "100智慧星,50知识尘",
-							// 	"coverImage": "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png"
-							// }
-							// this.stats = {
-							// 	"completedCount": 0,
-							// 	"completionRate": 0
-							// }
-							// this.members = [{
-							// 		avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
-							// 		nickname: "晓东",
-							// 		lastActive: "30分钟"
-							// 	},
-							// 	{
-							// 		avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
-							// 		nickname: "凛冬",
-							// 		lastActive: "30分钟"
-							// 	}
-							// ]
-							// this.activities = [{
-							// 		"nickname": "Nature",
-							// 		"eventName": "加入队伍",
-							// 		"eventType": 3,
-							// 		"time": "2025-08-05T09:11:49",
-							// 		"rewardName": "100智慧星"
-							// 	},
-							// 	{
-							// 		"nickname": "团队",
-							// 		"eventName": "周学习目标",
-							// 		"eventType": 2,
-							// 		"time": "2025-08-05T08:11:49",
-							// 		"rewardName": "100智慧星"
-							// 	},
-							// 	{
-							// 		"nickname": "IC3795",
-							// 		"eventName": "完成计算题",
-							// 		"eventType": 1,
-							// 		"time": "2025-08-05T07:11:49",
-							// 		"rewardName": "10星尘"
-							// 	}
-							// ]
-							try {
-								this.activities.forEach(item => {
-									if (item.eventType == 1) {
-										// 完成任务
-										item.action = "完成了";
-										item.subtitle = item.time || "" + " · " + item.rewardName || "";
-									} else if (item.eventType == 2) {
-										// 团队消息
-										item.nickname = "";
-										item.action = "团队达成了";
-										item.subtitle = item.time || "";
-									} else if (item.eventType == 3) {
-										// 成员加入
-										item.action = "加入了队伍";
-										item.eventName = "";
-										item.subtitle = item.time || "" + " · " + item.rewardName || "";
-									}
-									// console.log(item.subtitle)
-								})
-							} catch (e) {
-								console.log(e)
-							}
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.message || "获取我的队伍和任务相关信息失败!",
-							icon: "none"
-						});
-					}
-				}).catch(error => {
-					this.consoleLog("获取我的队伍和任务相关信息报错：：", error)
-				})
-			
-				// 获取组队任务
-				this.commonRequest({
-					url: "/api/team-mission/list"
-				}).then(res => {
-					this.consoleLog("获取组队任务::", JSON.stringify(res))
-					if (res.code == 0) {
-						this.teamTask = res.data;
-			
-						// 没返回数据时的测试数据
-						// this.teamTask = [{
-						// 	"missionId": 12,
-						// 	"name": "团队算术任务",
-						// 	"subtitle": "完成100道算术题目",
-						// 	"coverImage": "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
-						// 	"rewards": [{
-						// 			"name": "100智慧星",
-						// 			"currencyTypeId": 1,
-						// 			"quantity": 100
-						// 		},
-						// 		{
-						// 			"name": "50知识尘",
-						// 			"currencyTypeId": 2,
-						// 			"quantity": 50
-						// 		}
-						// 	]
-						// }]
-					} else {
-						uni.showToast({
-							title: res.message || "获取组队任务失败!",
-							icon: "none"
-						});
-					}
-				}).catch(error => {
-					this.consoleLog("获取组队任务报错：：", error)
-				})
+				console.log("已经登陆了")
+
+				this.getTeamInfo()
 			}).catch(err => {
-				// 没有登陆
-				if (pathUrl.indexOf("/login") == -1) {
-					// 没有登录
-					// console.log("没有登录,跳转到登录页面")
-					// #ifdef APP-PLUS
-					uni.redirectTo({
-						url: '/pages/page/login/login?pageFrom=' + pathUrl
-					});
-					// #endif
-					// #ifdef H5
-					// uni.redirectTo({
-					// 	url: '/pages/page/login/phoneLogin?pageFrom=' + pathUrl
-					// });
-					// #endif
-				}
+				console.log("没有登录：：", error)
 			});
-			
+
 			this.pageOnShowSet({
 				uniHide: "all"
 			})
@@ -332,7 +206,162 @@
 
 		},
 		methods: {
+			// 所有获取队伍相关信息接口合集
+			getTeamInfo() {
+				// 获取我的队伍和任务相关信息
+				this.commonRequest({
+					url: "/api/team-mission/details"
+				}).then(res => {
+					console.log("获取我的队伍和任务相关信息::", res)
+					try {
+						// 当前任务
+						this.currentMission = res.data.currentMission || {};
+						// 组队情况统计
+						this.stats = res.data.stats;
+						// 团队成员
+						this.members = res.data.members || [];
+						// 队伍日志
+						this.activities = res.data.activities || [];
 
+						// 没有数据时模拟数据
+						// this.currentMission = {
+						// 	"missionId": 12,
+						// 	"name": "团队算术任务",
+						// 	"subtitle": "完成100道算术题目",
+						// 	"processTotal": 0,
+						// 	"remainingTime": "7天0小时",
+						// 	"rewardNames": "100智慧星,50知识尘",
+						// 	"coverImage": "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png"
+						// }
+						// this.stats = {
+						// 	"completedCount": 0,
+						// 	"completionRate": 0
+						// }
+						// this.members = [{
+						// 		avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						// 		nickname: "晓东",
+						// 		lastActive: "30分钟"
+						// 	},
+						// 	{
+						// 		avatar: "https://ic365.ajulye.com/material/mission/001@2x.png",
+						// 		nickname: "凛冬",
+						// 		lastActive: "30分钟"
+						// 	}
+						// ]
+						// this.activities = [{
+						// 		"nickname": "Nature",
+						// 		"eventName": "加入队伍",
+						// 		"eventType": 3,
+						// 		"time": "2025-08-05T09:11:49",
+						// 		"rewardName": "100智慧星"
+						// 	},
+						// 	{
+						// 		"nickname": "团队",
+						// 		"eventName": "周学习目标",
+						// 		"eventType": 2,
+						// 		"time": "2025-08-05T08:11:49",
+						// 		"rewardName": "100智慧星"
+						// 	},
+						// 	{
+						// 		"nickname": "IC3795",
+						// 		"eventName": "完成计算题",
+						// 		"eventType": 1,
+						// 		"time": "2025-08-05T07:11:49",
+						// 		"rewardName": "10星尘"
+						// 	}
+						// ]
+						try {
+							this.activities.forEach(item => {
+								if (item.eventType == 1) {
+									// 完成任务
+									item.action = "完成了";
+									item.subtitle = item.time || "" + " · " + item.rewardName || "";
+								} else if (item.eventType == 2) {
+									// 团队消息
+									item.nickname = "";
+									item.action = "团队达成了";
+									item.subtitle = item.time || "";
+								} else if (item.eventType == 3) {
+									// 成员加入
+									item.action = "加入了队伍";
+									item.eventName = "";
+									item.subtitle = item.time || "" + " · " + item.rewardName || "";
+								}
+								// console.log(item.subtitle)
+							})
+						} catch (e) {
+							console.log(e)
+						}
+					} catch (e) {}
+
+				}).catch(error => {
+					console.log("获取我的队伍和任务相关信息报错：：", error)
+				})
+
+				// 获取组队任务
+				this.commonRequest({
+					url: "/api/team-mission/list"
+				}).then(res => {
+					console.log("获取组队任务::", res)
+					this.teamTask = res.data;
+
+					// 没返回数据时的测试数据
+					// this.teamTask = [{
+					// 	"missionId": 12,
+					// 	"name": "团队算术任务",
+					// 	"subtitle": "完成100道算术题目",
+					// 	"coverImage": "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
+					// 	"rewards": [{
+					// 			"name": "100智慧星",
+					// 			"currencyTypeId": 1,
+					// 			"quantity": 100
+					// 		},
+					// 		{
+					// 			"name": "50知识尘",
+					// 			"currencyTypeId": 2,
+					// 			"quantity": 50
+					// 		}
+					// 	]
+					// }]
+
+				}).catch(error => {
+					console.log("获取组队任务报错：：", error)
+				})
+			},
+			joinTeam() {
+				this.$refs.joinTeam.open("center")
+			},
+			joinPopupClose() {
+				this.$refs.joinTeam.close()
+			},
+			deleteTeammate(item) {
+				console.log("删除队友", item)
+			},
+			exitTeam(item) {
+				console.log("退出队伍", item)
+			},
+			confirmJoin() {
+				if (!this.invitationCode) {
+					uni.showToast({
+						title: "请输入邀请码",
+						icon: "none"
+					})
+					return false;
+				}
+				this.commonRequest({
+					url: "/api/team-mission/list",
+					data: {
+						code: this.invitationCode
+					}
+				}).then(res => {
+					this.getTeamInfo()
+					uni.showToast({
+						title: "加入队伍成功",
+						icon: "none"
+					})
+					this.$refs.joinTeam.close()
+				})
+			}
 		}
 	}
 </script>
@@ -551,9 +580,11 @@
 						}
 					}
 				}
-				.flex-center{
+
+				.flex-center {
 					flex: 1;
 				}
+
 				.list-icon {
 					width: 6.625rem;
 					height: 6.9375rem;
@@ -640,6 +671,16 @@
 				border-radius: 0.5rem;
 				margin: 1.7rem 0 1.875rem 0;
 				padding-bottom: 1rem;
+				position: relative;
+
+				.delete-btn {
+					position: absolute;
+					right: -24rpx;
+					top: -24rpx;
+					width: 48rpx;
+					height: 48rpx;
+					background: url("/static/icons/delete.png") no-repeat center / 100% 100%;
+				}
 
 				.list-avatar {
 					width: 3.375rem;
@@ -668,11 +709,23 @@
 				&:not(:nth-child(3n)) {
 					margin-right: 0.5rem;
 				}
-			}
 
-			.invite {
-				.list-avatar {
-					background: url("/static/icons/invite.png") no-repeat top /100% 100%;
+				&[type="invite"] {
+					.list-avatar {
+						background: url("/static/icons/team_invite.png") no-repeat top /100% 100%;
+					}
+				}
+
+				&[type="join"] {
+					.list-avatar {
+						background: url("/static/icons/team_join.png") no-repeat top /100% 100%;
+					}
+				}
+
+				&[type="exit"] {
+					.list-avatar {
+						background: url("/static/icons/team_exit.png") no-repeat top /100% 100%;
+					}
 				}
 			}
 		}
@@ -734,4 +787,28 @@
 	}
 
 	// 队伍动态 ------End
+	// 加入队伍弹窗
+	.joinTeam-wrap {
+		background: #fff;
+		border-radius: 30rpx;
+		width: calc(750rpx - 140rpx);
+		padding: 20rpx;
+		position: relative;
+
+		.close-popup {
+			position: absolute;
+			right: -24rpx;
+			top: -24rpx;
+			width: 48rpx;
+			height: 48rpx;
+			background-color: #fff;
+			border-radius: 48rpx;
+		}
+
+		.joinTeam-input {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			margin-bottom: 10px;
+		}
+	}
 </style>

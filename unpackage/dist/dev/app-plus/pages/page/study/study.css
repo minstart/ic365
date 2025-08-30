@@ -1,0 +1,333 @@
+.common-page-head-view[data-v-e80b2f0b] {
+  position: relative;
+  top: 0;
+}
+.page-head[data-v-e80b2f0b] {
+  z-index: 999;
+}
+.reserve-seat[data-v-e80b2f0b] {
+  height: 2.75rem;
+}
+.common-page-head[data-v-e80b2f0b] {
+  display: flex;
+  /* 定义弹性容器 */
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 99;
+}
+.common-page-head .common-page-head-back[data-v-e80b2f0b] {
+  height: 2.75rem;
+}
+.common-page-head .common-page-head-back[data-v-e80b2f0b],
+.common-page-head .common-page-head-module[data-v-e80b2f0b] {
+  flex: 1;
+  position: relative;
+  min-height: 0.0625rem;
+}
+.common-page-head .common-page-head-back *[data-v-e80b2f0b],
+.common-page-head .common-page-head-module *[data-v-e80b2f0b] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 2rem;
+  height: 2rem;
+}
+.common-page-head .common-page-head-title[data-v-e80b2f0b] {
+  flex: 4;
+  border-width: 0;
+  color: #333;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.375rem;
+  padding-bottom: 0.1rem;
+  background: url("../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
+}
+.common-page-head .standard-title[data-v-e80b2f0b] {
+  font-size: 1.125rem;
+  color: #000;
+  font-weight: normal;
+  background: transparent;
+}
+.common-page-head .page-head-back-icon[data-v-e80b2f0b] {
+  background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
+}
+.common-page-head .page-head-module-icon[data-v-e80b2f0b] {
+  width: 2.125rem;
+  height: 2.125rem;
+}
+.page-loading[data-v-e80b2f0b] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  z-index: 10000;
+}
+@keyframes spin-e80b2f0b {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}
+
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.banner-wrap[data-v-ff8615f1] {
+  border-radius: 0.6rem;
+  padding: 0.625rem 0.75rem 0 0.75rem;
+}
+.banner-wrap .user-info-wrap[data-v-ff8615f1] {
+  display: flex;
+  margin-bottom: 1.6rem;
+}
+.banner-wrap .user-info-wrap .head-pic-wrap .vip-icon[data-v-ff8615f1] {
+  right: 0.375rem;
+}
+.banner-wrap .user-info-wrap .head-pic[data-v-ff8615f1] {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+  margin-right: 0.5rem;
+  border-radius: 3rem;
+  border: 0.125rem solid #fff;
+  position: relative;
+}
+.banner-wrap .user-info-wrap .user-info .name[data-v-ff8615f1] {
+  margin: 0.25rem 0;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list[data-v-ff8615f1] {
+  overflow: hidden;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list[data-v-ff8615f1] {
+  float: left;
+  margin-right: 0.8rem;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[data-v-ff8615f1] {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  margin-right: 0.56rem;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type=star][data-v-ff8615f1] {
+  background-image: url("../../../static/icons/star.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type=stone][data-v-ff8615f1] {
+  background-image: url("../../../static/icons/stone.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type=dust][data-v-ff8615f1] {
+  background-image: url("../../../static/icons/dust.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .number[data-v-ff8615f1] {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: #EB7D1E;
+}
+.learning-goal-wrap[data-v-ff8615f1] {
+  min-height: 14.18rem;
+  background: url("../../../static/image/2_header_banner.png") no-repeat top/100%;
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+.learning-goal-wrap .learning-goal-title[data-v-ff8615f1] {
+  font-size: 1.25rem;
+  color: #fff;
+  padding: 1.65rem 0.875rem;
+}
+.learning-goal-wrap .learning-goal-list-wrap[data-v-ff8615f1] {
+  display: flex;
+  position: absolute;
+  bottom: 1.6rem;
+  width: 100%;
+}
+.learning-goal-wrap .learning-goal-list-wrap .learning-goal-list[data-v-ff8615f1] {
+  flex: 1;
+  text-align: center;
+}
+.learning-goal-wrap .learning-goal-list-wrap .learning-goal-list .list-content .list-num[data-v-ff8615f1] {
+  font-size: 1.5rem;
+  margin-right: 0.2rem;
+}
+.learning-goal-wrap .learning-goal-list-wrap .learning-goal-list .list-content .list-unit[data-v-ff8615f1] {
+  font-size: 1.125rem;
+}
+.learning-goal-wrap .learning-goal-list-wrap .learning-goal-list .list-title[data-v-ff8615f1] {
+  color: #999999;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.learning-method-wrap[data-v-ff8615f1] {
+  display: flex;
+}
+.learning-method-wrap .learning-method[data-v-ff8615f1] {
+  flex: 1;
+  height: 13.4rem;
+}
+.learning-method-wrap .learning-method .method_left[data-v-ff8615f1] {
+  width: 100%;
+}
+.learning-method-wrap .learning-method .method_left[data-v-ff8615f1] {
+  height: 100%;
+  background: url("../../../static/image/2_method_1.png") no-repeat top/100% 100%;
+}
+.learning-method-wrap .learning-method .method_right[data-v-ff8615f1] {
+  width: 100%;
+  height: 6.375rem;
+}
+.learning-method-wrap .learning-method .method_right[data-v-ff8615f1]:nth-child(1) {
+  margin-bottom: 0.6875rem;
+  background: url("../../../static/image/2_method_2.png") no-repeat top/100% 100%;
+}
+.learning-method-wrap .learning-method .method_right[data-v-ff8615f1]:nth-child(2) {
+  background: url("../../../static/image/2_method_3.png") no-repeat top/100% 100%;
+}
+.learning-method-wrap .learning-method[data-v-ff8615f1]:nth-child(1) {
+  margin-right: 0.68rem;
+}
+.plan-list-wrap[data-v-ff8615f1] {
+  display: flex;
+  height: 9.06rem;
+}
+.plan-list-wrap .plan-list[data-v-ff8615f1] {
+  flex: 1;
+  max-width: 6.6875rem;
+  height: 100%;
+  position: relative;
+  text-align: center;
+}
+.plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(1) {
+  background: url("../../../static/image/2_knowledge_points1.png") no-repeat center/100% 100%;
+}
+.plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(2) {
+  background: url("../../../static/image/2_knowledge_points2.png") no-repeat center/100% 100%;
+}
+.plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(3) {
+  background: url("../../../static/image/2_knowledge_points3.png") no-repeat center/100% 100%;
+}
+.plan-list-wrap .plan-list .list-icon[data-v-ff8615f1] {
+  position: absolute;
+  width: 2.875rem;
+  height: 2.875rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+.plan-list-wrap .plan-list .list-title[data-v-ff8615f1] {
+  position: absolute;
+  bottom: 1.6875rem;
+  color: #fff;
+  width: 100%;
+  font-size: 1.25rem;
+}
+.plan-list-wrap .plan-list .list-subtitle[data-v-ff8615f1] {
+  position: absolute;
+  width: 100%;
+  top: 5.6rem;
+  color: #fff;
+  font-size: 0.75rem;
+}
+.plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(1), .plan-list-wrap .plan-list[data-v-ff8615f1]:nth-child(2) {
+  margin-right: 0.6875rem;
+}
+.classroom-list-wrap[data-v-ff8615f1] {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+.classroom-list-wrap .classroom-list[data-v-ff8615f1] {
+  width: calc(50% - 0.34375rem);
+  height: 10.375rem;
+  margin: 0 0.6875rem 0.6875rem 0;
+  background: #ccc;
+  border-radius: 1rem;
+  position: relative;
+}
+.classroom-list-wrap .classroom-list[data-v-ff8615f1]:nth-child(2n) {
+  margin-right: 0;
+}
+.classroom-list-wrap .classroom-list .list-back[data-v-ff8615f1] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0;
+  left: 0;
+}
+.classroom-list-wrap .classroom-list .list-title[data-v-ff8615f1] {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 64%;
+  margin: auto;
+  text-align: center;
+  font-size: 1.125rem;
+}
+.classroom-list-wrap .classroom-list[colorTheme="1"][data-v-ff8615f1] {
+  background: #EBFDEA;
+}
+.classroom-list-wrap .classroom-list[colorTheme="1"] .list-title[data-v-ff8615f1] {
+  color: #51750E;
+}
+.classroom-list-wrap .classroom-list[colorTheme="2"][data-v-ff8615f1] {
+  background: #FFEFF3;
+}
+.classroom-list-wrap .classroom-list[colorTheme="2"] .list-title[data-v-ff8615f1] {
+  color: #F9626D;
+}
+.classroom-list-wrap .classroom-list[colorTheme="3"][data-v-ff8615f1] {
+  background: #FFF2EA;
+}
+.classroom-list-wrap .classroom-list[colorTheme="3"] .list-title[data-v-ff8615f1] {
+  color: #EF761F;
+}
+.classroom-list-wrap .classroom-list[colorTheme="4"][data-v-ff8615f1] {
+  background: #E8F9FF;
+}
+.classroom-list-wrap .classroom-list[colorTheme="4"] .list-title[data-v-ff8615f1] {
+  color: #0588AE;
+}

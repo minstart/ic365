@@ -1,0 +1,1 @@
+import{p as s,q as e,A as r,o as t,j as o}from"./index-DQotwNSd.js";import{_ as a}from"./_plugin-vue_export-helper.BCo6x5W8.js";const n=a({},[["render",function(a,n){const u=r;return t(),s(u,null,{default:e((()=>[o(" study ")])),_:1})}]]);export{n as default};

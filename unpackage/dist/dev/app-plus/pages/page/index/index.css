@@ -1,0 +1,1032 @@
+.common-page-head-view[data-v-e80b2f0b] {
+  position: relative;
+  top: 0;
+}
+.page-head[data-v-e80b2f0b] {
+  z-index: 999;
+}
+.reserve-seat[data-v-e80b2f0b] {
+  height: 2.75rem;
+}
+.common-page-head[data-v-e80b2f0b] {
+  display: flex;
+  /* 定义弹性容器 */
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 99;
+}
+.common-page-head .common-page-head-back[data-v-e80b2f0b] {
+  height: 2.75rem;
+}
+.common-page-head .common-page-head-back[data-v-e80b2f0b],
+.common-page-head .common-page-head-module[data-v-e80b2f0b] {
+  flex: 1;
+  position: relative;
+  min-height: 0.0625rem;
+}
+.common-page-head .common-page-head-back *[data-v-e80b2f0b],
+.common-page-head .common-page-head-module *[data-v-e80b2f0b] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 2rem;
+  height: 2rem;
+}
+.common-page-head .common-page-head-title[data-v-e80b2f0b] {
+  flex: 4;
+  border-width: 0;
+  color: #333;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.375rem;
+  padding-bottom: 0.1rem;
+  background: url("../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
+}
+.common-page-head .standard-title[data-v-e80b2f0b] {
+  font-size: 1.125rem;
+  color: #000;
+  font-weight: normal;
+  background: transparent;
+}
+.common-page-head .page-head-back-icon[data-v-e80b2f0b] {
+  background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
+}
+.common-page-head .page-head-module-icon[data-v-e80b2f0b] {
+  width: 2.125rem;
+  height: 2.125rem;
+}
+.page-loading[data-v-e80b2f0b] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  z-index: 10000;
+}
+@keyframes spin-e80b2f0b {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}
+
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.reward-pop-up-list-wrap[data-v-759cae5c] {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.reward-pop-up-list[data-v-759cae5c] {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reward-pop-up-list .reward-wrap[data-v-759cae5c] {
+  position: relative;
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap[data-v-759cae5c] {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  min-height: 9.375rem;
+}
+@keyframes back1Keyframes-759cae5c {
+0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+}
+50% {
+    transform: translateX(3.125rem) translateY(-6.25rem) rotate(180deg);
+    opacity: 0.5;
+}
+100% {
+    transform: translateX(200px) translateY(-9.375rem) rotate(360deg);
+    opacity: 0;
+}
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap .back1[data-v-759cae5c] {
+  width: 1.25rem;
+  height: 1rem;
+  position: absolute;
+  right: 0.625rem;
+  bottom: 0;
+  animation: back1Keyframes-759cae5c 3s linear infinite;
+}
+@keyframes back2Keyframes-759cae5c {
+0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+}
+50% {
+    transform: translateX(-3.125rem) translateY(-6.25rem) rotate(180deg);
+    opacity: 0.8;
+}
+100% {
+    transform: translateX(-160px) translateY(-12.5rem) rotate(260deg);
+    opacity: 0;
+}
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap .back2[data-v-759cae5c] {
+  width: 1.25rem;
+  height: 1.5rem;
+  position: absolute;
+  left: 0.625rem;
+  bottom: 0;
+  animation: back2Keyframes-759cae5c 4s linear infinite;
+}
+@keyframes back3Keyframes-759cae5c {
+0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+}
+50% {
+    transform: translateX(-3.125rem) translateY(-6.25rem) rotate(180deg);
+    opacity: 0.8;
+}
+100% {
+    transform: translateX(-110px) translateY(-10.9375rem) rotate(360deg);
+    opacity: 0;
+}
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap .back3[data-v-759cae5c] {
+  width: 1.25rem;
+  height: 1.25rem;
+  position: absolute;
+  left: 55%;
+  bottom: 0.625rem;
+  animation: back3Keyframes-759cae5c 2s linear infinite;
+}
+@keyframes back4Keyframes-759cae5c {
+0% {
+    opacity: 0;
+    visibility: hidden;
+}
+50% {
+    opacity: 1;
+    visibility: visible;
+}
+100% {
+    opacity: 0;
+    visibility: hidden;
+}
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap .back4[data-v-759cae5c] {
+  width: 100%;
+  position: absolute;
+  bottom: 1.875rem;
+  animation: back4Keyframes-759cae5c 3s linear infinite;
+}
+@keyframes back5Keyframes-759cae5c {
+0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+}
+50% {
+    transform: translateX(-0.3125rem) translateY(-5.625rem) rotate(180deg);
+    opacity: 0.8;
+}
+100% {
+    transform: translateX(-30px) translateY(-11.25rem) rotate(260deg);
+    opacity: 0;
+}
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap .back5[data-v-759cae5c] {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  border-radius: 0.9375rem;
+  background: linear-gradient(#3023AE, #C86DD7);
+  position: absolute;
+  bottom: 0.3125rem;
+  left: 20%;
+  animation: back5Keyframes-759cae5c 1.5s linear infinite;
+}
+@keyframes back6Keyframes-759cae5c {
+0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+}
+50% {
+    transform: translateX(-3.125rem) translateY(-6.25rem) rotate(180deg);
+    opacity: 0.8;
+}
+100% {
+    transform: translateX(-130px) translateY(-12.5rem) rotate(260deg);
+    opacity: 0;
+}
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap .back6[data-v-759cae5c] {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  border-radius: 0.9375rem;
+  background: linear-gradient(#F5515F, #9F041B);
+  position: absolute;
+  left: 40%;
+  bottom: 1.25rem;
+  animation: back6Keyframes-759cae5c 2s linear infinite;
+}
+@keyframes back7Keyframes-759cae5c {
+0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+}
+50% {
+    transform: translateX(3.4375rem) translateY(-6.25rem) rotate(180deg);
+    opacity: 0.8;
+}
+100% {
+    transform: translateX(140px) translateY(-12.5rem) rotate(360deg);
+    opacity: 0;
+}
+}
+.reward-pop-up-list .reward-wrap .reward-back-wrap .back7[data-v-759cae5c] {
+  width: 0.8125rem;
+  height: 0.8125rem;
+  border-radius: 0.9375rem;
+  background: linear-gradient(#FAD961, #F76B1C);
+  position: absolute;
+  right: 2.8125rem;
+  bottom: 1.875rem;
+  animation: back7Keyframes-759cae5c 1.5s linear infinite;
+}
+.reward-pop-up-list .reward-wrap .reward-content-wrap[data-v-759cae5c] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.reward-pop-up-list .reward-wrap .reward-content-wrap .reward-content[data-v-759cae5c] {
+  position: absolute;
+}
+.reward-pop-up-list[rewardType="1"] .reward-wrap[data-v-759cae5c] {
+  width: 20.5rem;
+  height: 26.1875rem;
+  background: url("../../../static/image/reward_content_back.png") no-repeat center/100% 100%;
+}
+.reward-pop-up-list[rewardType="1"] .reward-wrap .reward-content-wrap .reward-content[data-v-759cae5c] {
+  position: absolute;
+  right: 2.1875rem;
+  bottom: 6.25rem;
+  width: 10.625rem;
+  height: 7.1875rem;
+  display: grid;
+  align-items: center;
+}
+.reward-pop-up-list[rewardType="1"] .reward-wrap .reward-content-wrap .reward-content .reward-list[data-v-759cae5c] {
+  width: 100%;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: #000;
+}
+.reward-pop-up-list[rewardType="1"] .reward-wrap .reward-content-wrap .reward-close-btn[data-v-759cae5c] {
+  position: absolute;
+  right: 1.375rem;
+  bottom: 0.5rem;
+  width: 16.9375rem;
+  height: 3.625rem;
+}
+.reward-pop-up-list[rewardType="2"] .reward-wrap[data-v-759cae5c] {
+  width: 20.5rem;
+  border-radius: 1.875rem;
+}
+.reward-pop-up-list[rewardType="2"] .reward-wrap .reward-content-wrap[data-v-759cae5c] {
+  position: relative;
+  padding: 6.9375rem 2.25rem 1.875rem 2.25rem;
+  width: 16rem;
+  background: #fff;
+  border-radius: 1.875rem;
+  margin-top: 6.25rem;
+}
+.reward-pop-up-list[rewardType="2"] .reward-wrap .reward-content-wrap .reward-icon[data-v-759cae5c] {
+  position: absolute;
+  top: -9.375rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 17.75rem;
+  height: 15.5625rem;
+  border-radius: 0.9375rem;
+}
+.reward-pop-up-list[rewardType="2"] .reward-wrap .reward-content-wrap .reward-content-title[data-v-759cae5c] {
+  width: 100%;
+  font-size: 1.875rem;
+  text-align: center;
+  margin-bottom: 0.625rem;
+}
+.reward-pop-up-list[rewardType="2"] .reward-wrap .reward-content-wrap .reward-content-subtitle[data-v-759cae5c] {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.reward-pop-up-list[rewardType="2"] .reward-wrap .reward-content-wrap .reward-btn-wrap[data-v-759cae5c] {
+  width: 100%;
+  text-align: center;
+}
+.reward-pop-up-list[rewardType="2"] .reward-wrap .reward-content-wrap .reward-btn-wrap .reward-close-btn[data-v-759cae5c] {
+  width: 8.125rem;
+  height: 2.75rem;
+  padding: 0;
+  margin-top: 1.875rem;
+  font-size: 1.4375rem;
+  color: #fff;
+  line-height: 2.75rem;
+  border-radius: 1.875rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.uni-popup[data-v-4dd3c44b] {
+  position: fixed;
+  z-index: 100;
+}
+.uni-popup.top[data-v-4dd3c44b], .uni-popup.left[data-v-4dd3c44b], .uni-popup.right[data-v-4dd3c44b] {
+  top: 0;
+}
+.uni-popup .uni-popup__wrapper[data-v-4dd3c44b] {
+  display: block;
+  position: relative;
+  /* iphonex 等安全区设置，底部安全区适配 */
+}
+.uni-popup .uni-popup__wrapper.left[data-v-4dd3c44b], .uni-popup .uni-popup__wrapper.right[data-v-4dd3c44b] {
+  padding-top: 0;
+  flex: 1;
+}
+.fixforpc-z-index[data-v-4dd3c44b] {
+  z-index: 999;
+}
+.fixforpc-top[data-v-4dd3c44b] {
+  top: 0;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.task-pop-up-wrap[data-v-6a6cf342] {
+  border-radius: 0.9375rem 0.9375rem 0 0;
+  background: #fff;
+  min-height: 18.75rem;
+  position: relative;
+  padding: 0 1.25rem;
+}
+.task-pop-up-wrap .task-type[data-v-6a6cf342] {
+  position: absolute;
+  top: -0.9375rem;
+  background: #F5A623;
+  font-size: 1rem;
+  left: 1.25rem;
+  padding: 0.4375rem 0.625rem 0.4375rem 1.875rem;
+  border-radius: 1.25rem;
+  color: #fff;
+  line-height: 1;
+}
+.task-pop-up-wrap .task-type[data-v-6a6cf342]::after {
+  content: "";
+  position: absolute;
+  left: 0.625rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 1rem;
+  height: 0.6875rem;
+  background: url("../../../static/icons/task_type.png") no-repeat center/100% 100%;
+}
+.task-pop-up-wrap .task-content-wrap[data-v-6a6cf342] {
+  padding-top: 2.5rem;
+}
+.task-pop-up-wrap .task-content-wrap .content-title[data-v-6a6cf342] {
+  font-size: 0.9375rem;
+}
+.task-pop-up-wrap .task-content-wrap .content-text[data-v-6a6cf342] {
+  background-color: #F8F8F8;
+  font-size: 0.75rem;
+  text-indent: 1.5rem;
+  padding: 0.8125rem 0.5rem;
+  margin-top: 0.3125rem;
+  color: #222;
+}
+.task-pop-up-wrap .task-reward-wrap[data-v-6a6cf342] {
+  padding-top: 2.5rem;
+  padding-bottom: 6.875rem;
+}
+.task-pop-up-wrap .task-reward-wrap .content-title[data-v-6a6cf342] {
+  font-size: 0.9375rem;
+}
+.task-pop-up-wrap .task-reward-wrap .reward-list-wrap[data-v-6a6cf342] {
+  background-color: #F8F8F8;
+  margin-top: 0.3125rem;
+}
+.task-pop-up-wrap .task-reward-wrap .reward-list-wrap .reward-list[data-v-6a6cf342] {
+  padding: 0.625rem;
+}
+.task-pop-up-wrap .task-reward-wrap .reward-list-wrap .reward-list .reward[data-v-6a6cf342] {
+  display: flex;
+  line-height: 4.375rem;
+}
+.task-pop-up-wrap .task-reward-wrap .reward-list-wrap .reward-list .reward .reward-icon-back[data-v-6a6cf342] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.8125rem;
+  width: 3.125rem;
+  height: 4.375rem;
+  background-color: #ECFAFF;
+}
+.task-pop-up-wrap .task-reward-wrap .reward-list-wrap .reward-list .reward .reward-icon-back .reward-icon[data-v-6a6cf342] {
+  width: 100%;
+  height: 100%;
+}
+.task-pop-up-wrap .task-reward-wrap .reward-list-wrap .reward-list .reward .reward-text[data-v-6a6cf342] {
+  flex: 4;
+}
+.task-pop-up-wrap .task-reward-wrap .reward-list-wrap .reward-list .reward .reward-num[data-v-6a6cf342] {
+  flex: 1;
+}
+.task-pop-up-wrap .close-btn-wrap[data-v-6a6cf342] {
+  position: absolute;
+  height: 5.5rem;
+  width: 100%;
+  margin-left: -1.25rem;
+  text-align: center;
+  bottom: 0;
+  box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.08);
+}
+.task-pop-up-wrap .close-btn-wrap .close-btn[data-v-6a6cf342] {
+  width: 80%;
+  font-weight: 700;
+  line-height: 2.5rem;
+  font-size: 1rem;
+  color: #fff;
+}
+
+body {
+    min-height: 100%;
+    height: auto;
+}
+
+/* 解决头条小程序字体图标不显示问题，因为头条运行时自动插入了span标签，且有全局字体 */
+.uni-icon {
+    font-family: uniicons;
+    font-weight: normal;
+}
+.uni-container {
+    padding: 15px;
+    background-color: #f8f8f8;
+}
+.uni-header-logo {
+
+
+
+    padding: 15px 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.3125rem;
+}
+.uni-header-image {
+    width: 80px;
+    height: 80px;
+}
+.uni-hello-text {
+    margin-bottom: 20px;
+}
+.hello-text {
+    color: #7A7E83;
+    font-size: 14px;
+    line-height: 20px;
+}
+.hello-link {
+    color: #7A7E83;
+    font-size: 14px;
+    line-height: 20px;
+}
+.uni-panel {
+    margin-bottom: 12px;
+}
+.uni-panel-h {
+
+
+
+    background-color: #ffffff;
+    flex-direction: row !important;
+	/* justify-content: space-between !important; */
+    align-items: center !important;
+    padding: 12px;
+}
+/*
+.uni-panel-h:active {
+    background-color: #f8f8f8;
+}
+ */
+.uni-panel-h-on {
+    background-color: #f0f0f0;
+}
+.uni-panel-text {
+    flex: 1;
+    color: #000000;
+    font-size: 14px;
+    font-weight: normal;
+}
+.uni-panel-icon {
+    margin-left: 15px;
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+    transform: rotate(0deg);
+    transition-duration: 0s;
+    transition-property: transform;
+}
+.uni-panel-icon-on {
+    transform: rotate(180deg);
+}
+.uni-navigate-item {
+
+
+
+    flex-direction: row;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-top-style: solid;
+    border-top-color: #f0f0f0;
+    border-top-width: 1px;
+    padding: 12px;
+}
+.uni-navigate-item:active {
+    background-color: #f8f8f8;
+}
+.uni-navigate-text {
+    flex: 1;
+    color: #000000;
+    font-size: 14px;
+    font-weight: normal;
+}
+.uni-navigate-icon {
+    margin-left: 15px;
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.banner-wrap[data-v-5040744a] {
+  padding: 0.625rem 0.75rem 0 0.75rem;
+  min-height: 23.75rem;
+  background: url("../../../static/image/1_header_banner.png") no-repeat top / 100%;
+  position: relative;
+}
+.banner-wrap .user-info-wrap[data-v-5040744a] {
+  display: flex;
+}
+.banner-wrap .user-info-wrap .head-pic-wrap .vip-icon[data-v-5040744a] {
+  right: 0.375rem;
+}
+.banner-wrap .user-info-wrap .head-pic[data-v-5040744a] {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+  margin-right: 0.5rem;
+  border-radius: 3rem;
+  border: 0.125rem solid #fff;
+  position: relative;
+}
+.banner-wrap .user-info-wrap .user-info .name[data-v-5040744a] {
+  margin: 0.25rem 0;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list[data-v-5040744a] {
+  overflow: hidden;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list[data-v-5040744a] {
+  float: left;
+  margin-right: 0.8rem;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[data-v-5040744a] {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  margin-right: 0.56rem;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type="star"][data-v-5040744a] {
+  background-image: url("../../../static/icons/star.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type="stone"][data-v-5040744a] {
+  background-image: url("../../../static/icons/stone.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .icon[type="dust"][data-v-5040744a] {
+  background-image: url("../../../static/icons/dust.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.banner-wrap .user-info-wrap .user-info .cumulative-list .list .number[data-v-5040744a] {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: #EB7D1E;
+}
+.banner-wrap .banner-text-wrap[data-v-5040744a] {
+  color: #00362B;
+  margin-left: 1rem;
+  font-size: 1.1rem;
+  position: absolute;
+  bottom: 9.375rem;
+}
+.banner-wrap .banner-text-wrap *[data-v-5040744a] {
+  text-shadow: 0px 2px 3px #fff;
+}
+.banner-wrap .banner-text-wrap .banner-text-title[data-v-5040744a] {
+  margin-bottom: 0.6rem;
+  font-size: 1.06rem;
+}
+.banner-wrap .banner-text-wrap .banner-text-content[data-v-5040744a] {
+  margin-bottom: 0.2rem;
+  font-size: 0.93rem;
+  display: block;
+}
+.banner-wrap .banner-text-wrap .banner-text-contentFrom[data-v-5040744a] {
+  font-size: 0.8rem;
+}
+.banner-wrap .activity-wrap[data-v-5040744a] {
+  margin-top: 3.9375rem;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 1.5rem);
+}
+.banner-wrap .activity-wrap .activity[data-v-5040744a] {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.6rem;
+  height: 7.375rem;
+}
+.plan-wrap[data-v-5040744a] {
+  margin-bottom: 1rem;
+}
+.plan-wrap .no-plan-list[data-v-5040744a] {
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
+.plan-wrap .plan-list-wrap .plan-list[data-v-5040744a] {
+  margin: 0.75rem 0;
+  position: relative;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-background[data-v-5040744a] {
+  width: 100%;
+  height: 6.5rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-type-back[data-v-5040744a] {
+  width: 1.9rem;
+  height: 1.7rem;
+  line-height: 1.5rem;
+  font-size: 0.75rem;
+  color: #fff;
+  padding-left: 0.3rem;
+  position: absolute;
+  left: -0.2rem;
+  top: 1rem;
+  z-index: 2;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-icon[data-v-5040744a] {
+  width: 4.4375rem;
+  height: 4.4375rem;
+  position: absolute;
+  top: 1rem;
+  left: 1.5625rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap[data-v-5040744a] {
+  position: absolute;
+  top: 1rem;
+  right: 0.75rem;
+  width: 13.375rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  display: inline-block;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward[data-v-5040744a] {
+  display: inline-block;
+  padding: 0.375rem 0.5rem;
+  background-color: #fff;
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 500;
+  margin-left: 0.4rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward .plan-reward-icon[data-v-5040744a] {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  margin-right: 0.2rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 0.75rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .plan-list-require[data-v-5040744a] {
+  position: absolute;
+  top: 2.8rem;
+  right: 0.75rem;
+  width: 13.375rem;
+  font-size: 0.75rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .progress-wrap[data-v-5040744a] {
+  position: absolute;
+  bottom: 1.4rem;
+  right: 0.75rem;
+  width: 13.375rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .time-limited-wrap[data-v-5040744a] {
+  position: absolute;
+  bottom: 1.1rem;
+  right: 0.75rem;
+  width: 13.375rem;
+  overflow: hidden;
+}
+.plan-wrap .plan-list-wrap .plan-list .time-limited-wrap .time-limited[data-v-5040744a] {
+  padding: 0 0.3rem 0 1rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #fff;
+  line-height: 1.3rem;
+  display: inline-block;
+  background: url("../../../static/image/1_time_limited.png") no-repeat left / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"][data-v-5040744a] {
+  background: #FFF2EA;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label1.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #712A02;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #CA8417;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="1"] .plan-list-require[data-v-5040744a] {
+  color: #CA590B;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"][data-v-5040744a] {
+  background: #FFEFF3;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label2.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #FC4148;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #FE6268;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="2"] .plan-list-require[data-v-5040744a] {
+  color: #E95C61;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"][data-v-5040744a] {
+  background: #EBFDEA;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label3.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #004264;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #00A8DC;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="3"] .plan-list-require[data-v-5040744a] {
+  color: #008BD0;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"][data-v-5040744a] {
+  background: #EBFDEA;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-type-back[data-v-5040744a] {
+  background: url("../../../static/image/1_plan_label4.png") no-repeat center / 100% 100%;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+  color: #51750E;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+  color: #0A9E19;
+}
+.plan-wrap .plan-list-wrap .plan-list[colorscheme="4"] .plan-list-require[data-v-5040744a] {
+  color: #0A9E19;
+}
+.plan-recommend-list-wrap[data-v-5040744a] {
+  display: flex;
+}
+.plan-recommend-list-wrap .plan-recommend-list[data-v-5040744a] {
+  flex: 1;
+  margin-right: 0.68rem;
+}
+.plan-recommend-list-wrap .plan-recommend-list .list-icon[data-v-5040744a] {
+  width: 100%;
+  height: 7.5rem;
+}
+.plan-recommend-list-wrap .plan-recommend-list[data-v-5040744a]:last-child {
+  margin-right: 0;
+}
+.achievement-wrap[data-v-5040744a] {
+  position: relative;
+}
+.achievement-wrap .achievement-back[data-v-5040744a] {
+  width: 100%;
+  height: 23.625rem;
+}
+.achievement-wrap .achievement-statistics[data-v-5040744a] {
+  font-size: 1rem;
+  color: #FFFFFF;
+  position: absolute;
+  top: 0.4rem;
+  left: 81%;
+  font-weight: 500;
+}
+.achievement-wrap .recently-achievement[data-v-5040744a] {
+  position: absolute;
+  top: 1.25rem;
+  width: 90%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.achievement-wrap .recently-achievement .achievement-head-pic[data-v-5040744a] {
+  width: 5.125rem;
+  height: 5.125rem;
+  display: inline-block;
+  margin-right: 1rem;
+  border-radius: 100%;
+  border: 0.125rem solid #7FD488;
+  overflow: hidden;
+}
+.achievement-wrap .recently-achievement .achievement-info[data-v-5040744a] {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 13rem;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-name[data-v-5040744a] {
+  font-size: 1.25rem;
+  color: #0E562F;
+  font-weight: 700;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-from[data-v-5040744a] {
+  font-size: 0.9rem;
+  color: #09916A;
+  margin: 0.2rem 0 0.5rem 0;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-time[data-v-5040744a] {
+  color: #065E4F;
+  font-size: 0.81rem;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-time .achievement-rare[data-v-5040744a] {
+  color: #EB7D1E;
+  background: #FFFBDB;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.2rem;
+}
+.achievement-wrap .recently-achievement .achievement-info .achievement-time .achievement-rare .achievement-rare-icon[data-v-5040744a] {
+  width: 0.75rem;
+  height: 0.75rem;
+  padding-right: 0.1rem;
+}
+.achievement-wrap .more-achievement[data-v-5040744a] {
+  width: 100%;
+  position: absolute;
+  top: 13rem;
+}
+.achievement-wrap .more-achievement .achievement-list[data-v-5040744a] {
+  text-align: center;
+  width: 33.33%;
+  float: right;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-pic-wrap[data-v-5040744a] {
+  width: 5.625rem;
+  height: 5.625rem;
+  margin: 0 auto;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-pic[data-v-5040744a] {
+  width: 4.25rem;
+  height: 4.25rem;
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  overflow: hidden;
+  /* 隐藏超出部分 */
+}
+.achievement-wrap .more-achievement .achievement-list:nth-child(1) .achievement-list-pic-wrap[data-v-5040744a] {
+  background: url("../../../static/image/1_achievement_back1.png") no-repeat center / 100% 100%;
+}
+.achievement-wrap .more-achievement .achievement-list:nth-child(2) .achievement-list-pic-wrap[data-v-5040744a] {
+  background: url("../../../static/image/1_achievement_back2.png") no-repeat center / 100% 100%;
+}
+.achievement-wrap .more-achievement .achievement-list:nth-child(3) .achievement-list-pic-wrap[data-v-5040744a] {
+  background: url("../../../static/image/1_achievement_back3.png") no-repeat center / 100% 100%;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-back[data-v-5040744a] {
+  width: 3.56rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #79D183;
+  opacity: 0.45;
+  margin: 0.2rem auto;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-name[data-v-5040744a] {
+  color: #0E562F;
+  font-size: 1.06rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  padding: 0 0.3125rem;
+}
+.achievement-wrap .more-achievement .achievement-list .achievement-list-time[data-v-5040744a] {
+  color: #09916A;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+}

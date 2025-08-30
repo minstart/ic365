@@ -11,8 +11,8 @@
 			<view class="common-page-head-back">
 				<view class="page-head-back-icon" v-if='isBack' @click="clickBack(backData)"></view>
 			</view>
-			<view class="common-page-head-title" :class="standardTitle?'standard-title':''" :style="!title&&'height:0;'">{{title}}</view>
-			<view class="common-page-head-module" :style="!isModule&&'height:0;'">
+			<view class="common-page-head-title" :class="standardTitle?'standard-title':''" :style="!title&&'height:0;opacity: 0;'">{{title}}</view>
+			<view class="common-page-head-module" :style="!isModule&&'height:0;opacity: 0;'">
 				<image v-if='isModule' :src="moduleIcon" mode="" @click="clickModule"></image>
 			</view>
 		</view>

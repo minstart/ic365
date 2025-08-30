@@ -241,24 +241,6 @@
 
 				// 系统资讯
 				information: [],
-				information: [
-				    {
-				        "publishId": 1,
-				        "title": "测试咨询",
-				        "subtitle": "副标题",
-				        "icon": "http://ic365.com/a.jpg",
-				        "buttonText": "登录消息详情按钮",
-				        "createTime": "2025-08-08T18:12:04"
-				    },
-				    {
-				        "publishId": 2,
-				        "title": "砍一刀9999",
-				        "subtitle": "渣渣辉领衔主演",
-				        "icon": "http://ic365.com/a.jpg",
-				        "buttonText": "砍一刀消息详情按钮",
-				        "createTime": "2025-08-08T18:12:04"
-				    }
-				]
 			}
 		},
 		onLoad() {
@@ -813,8 +795,12 @@
 					padding-right: 20rpx;
 					&::after{
 						float: right;
-						content: "→";
+						content: "";
+						width: 14rpx;
+						height: 10rpx;
+						margin: 12rpx 0;
 						font-weight: 700;
+						background: url("/static/icons/next2.png") no-repeat right / 100% 100%;
 					}
 				}
 				&:nth-child(1){
