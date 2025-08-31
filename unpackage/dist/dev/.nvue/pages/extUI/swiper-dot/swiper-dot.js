@@ -238,7 +238,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     )) : createCommentVNode("v-if", true)
   ]);
 }
-const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-swiper-dot/components/uni-swiper-dot/uni-swiper-dot.vue"]]);
+const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-swiper-dot/components/uni-swiper-dot/uni-swiper-dot.vue"]]);
 const _style_0 = { "swiper-box": { "": { "height": 200 } }, "swiper-item": { "": { "flexDirection": "column", "justifyContent": "center", "alignItems": "center", "height": 200, "color": "#ffffff" } }, "swiper-item0": { "": { "backgroundColor": "#cee1fd" } }, "swiper-item1": { "": { "backgroundColor": "#b2cef7" } }, "swiper-item2": { "": { "backgroundColor": "#cee1fd" } }, "uni-bg-red": { "": { "backgroundColor": "#ff5a5f" } }, "uni-bg-green": { "": { "backgroundColor": "#09bb07" } }, "uni-bg-blue": { "": { "backgroundColor": "#007aff" } }, "example-body": { "": { "flexDirection": "row", "paddingTop": "20rpx", "paddingRight": "20rpx", "paddingBottom": "20rpx", "paddingLeft": "20rpx" } }, "example-body-item": { "": { "flexDirection": "row", "justifyContent": "center", "alignItems": "center", "marginTop": "15rpx", "marginRight": "15rpx", "marginBottom": "15rpx", "marginLeft": "15rpx", "paddingTop": "15rpx", "paddingRight": "15rpx", "paddingBottom": "15rpx", "paddingLeft": "15rpx", "height": "60rpx", "flex": 1, "borderColor": "#e5e5e5", "borderStyle": "solid", "borderWidth": 1, "borderRadius": 5 } }, "example-body-item-text": { "": { "fontSize": "28rpx", "color": "#333333" } }, "example-body-dots": { "": { "width": "16rpx", "height": "16rpx", "borderRadius": 50, "backgroundColor": "#333333", "marginLeft": "10rpx" } }, "active": { "": { "borderStyle": "solid", "borderColor": "#007aff", "borderWidth": 1 } }, "@FONT-FACE": [{ "uni-swiper-dot-box": { "": { "width": 400, "marginTop": 8 } }, "image": { "": { "width": 100 } } }] };
 const _sfc_main = {
   components: {},
@@ -544,7 +544,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const swiperDot = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/swiper-dot/swiper-dot.nvue"]]);
+const swiperDot = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/swiper-dot/swiper-dot.nvue"]]);
 export {
   swiperDot as default
 };

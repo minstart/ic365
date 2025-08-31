@@ -61,7 +61,7 @@
 								<view class="answer-text" v-html="answer.optionName + '.' + answer.option"></view>
 								<view class="analysis-text" @click="textAnalysis">
 									<view class="analysis-icon"></view>
-									<span>{{topic.analysis?(answer.optionName == topic.answer ? '答对了!点这里看看解析来巩固一下!' : '答错了! 点这里看看解析也许会有用!'):(answer.optionName == topic.answer ?"答对啦！":"答错了!")}}</span>
+									<span>{{topic.analysis?(answer.optionName == topic.answer ? '答对了!点这里看看解析来巩固一下!' : '答错了! 点这里看看解析也许会有用!'):(answer.optionName == topic.answer ?"答对了！":"答错了!")}}</span>
 								</view>
 								<!-- 视频解析 -->
 								<view class="other-analysis-wrap" v-if="topic.videoId && pageType == 'everyDay'">
@@ -335,15 +335,11 @@
 
 				// 解析数据处理
 				try {
-					if (this.topic.analysis.indexOf("http") != -1) {
-						const analysisImages = this.topic.analysis.match(imageUrlPattern) || [];
-						this.topic.analysisImages = [...this.topic.analysisImages, ...analysisImages]
-						try {
-							this.topic.analysisImages.forEach(item => {
-								this.topic.analysis = this.topic.analysis.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
-							})
-						} catch (e) {}
-					}!this.topic.AIanalysis && (this.topic.AIanalysis = {})
+					this.topic.analysis = this.imgUrlChangeImg({
+						content: this.topic.analysis,
+						imgClass: 'popup-analysis-img'
+					})
+					!this.topic.AIanalysis && (this.topic.AIanalysis = {})
 				} catch (e) {}
 				// 题目答案处理
 				this.topic.options.forEach((item, i) => {
@@ -351,12 +347,6 @@
 						content: item,
 						imgClass: 'options-img'
 					})
-					// if (item.indexOf("http") != -1) {
-					// 	const analysisImages = item.match(imageUrlPattern) || [];
-					// 	try {
-					// 		this.topic.options[i] = item.replace(analysisImages[0], '<image class="options-img" src="' + analysisImages[0] + '" mode=""></image>').trim();
-					// 	} catch (e) {}
-					// }
 				})
 
 				this.topic.AIanalysis = {
@@ -478,14 +468,10 @@
 						this.topic.AIanalysis.text = this.topic.AIanalysis.text + (this.topic.AIanalysis.step != 1 ? "</br></br>" : "") + res.data.content;
 
 						// 解析数据处理
-						if (this.topic.AIanalysis.text.indexOf("http") != -1) {
-							const analysisImages = this.topic.AIanalysis.text.match(imageUrlPattern) || [];
-							try {
-								analysisImages.forEach(item => {
-									this.topic.AIanalysis.text = this.topic.AIanalysis.text.replace(item, '<image class="popup-analysis-img" src="' + item + '" mode=""></image>').trim();
-								})
-							} catch (e) {}
-						}
+						this.topic.AIanalysis.text = this.imgUrlChangeImg({
+							content: this.topic.AIanalysis.text,
+							imgClass: 'popup-analysis-img'
+						})
 					}).catch(error => {
 						console.log("AI析题报错", error)
 					})
@@ -688,6 +674,7 @@
 
 			// 打开文本 + 图片解析；
 			textAnalysis() {
+				if(!this.topic.analysis) return false;
 				this.showAnalysis = true;
 			},
 			// 关闭视频弹窗

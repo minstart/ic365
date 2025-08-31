@@ -46,7 +46,7 @@
 								<image class="list-icon" :src="item2.icon" mode=""></image>
 								<view class="list-info">
 									<h3 class="info-title">{{item2.productName}}</h3>
-									<view class="item-more" v-if="item2.endTime">
+									<view class="item-more" v-if="item2.endTime && calculateDaysUntilDeadline(changeTime(item2.endTime))">
 										<view class="text" style="color:#F23E3E;font-weight: 700;">剩余{{calculateDaysUntilDeadline(changeTime(item2.endTime))}}天</view>
 									</view>
 									<view class="info-subtitle">{{item2.subtitle}}</view>
@@ -162,7 +162,7 @@
 				}).then(res => {
 					// 点击兑换商品
 					uni.showToast({
-						title: res.msg || "兑换成功",
+						title:"兑换成功",
 						icon: "success"
 					})
 					data.obtained = true;

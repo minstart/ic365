@@ -37,7 +37,7 @@
 					</view>
 				</view>
 				<view class="invitation-code-wrap">
-					<h3 class="my-code">邀请码：{{invitationCode}}</h3>
+					<h3 class="my-code">邀请码：<span>{{invitationCode}}</span></h3>
 				</view>
 				<view class="btn-wrap">
 					<button class="share-btn btn-yellow" @click="getInvitationCode">生成邀请码</button>
@@ -62,7 +62,7 @@
 
 		data() {
 			return {
-				invitationCode: " "
+				invitationCode: ""
 			}
 		},
 		onLoad() {
@@ -110,7 +110,7 @@
 			copyBtn() {
 				if(!this.invitationCode){
 					uni.showToast({
-						title: '请先点击生成邀请码按钮，生成邀请码',
+						title: '请先点击生成邀请码按钮，再复制邀请码',
 						icon: 'none',
 						duration: 4000
 					});
@@ -321,6 +321,11 @@
 					font-size: 1.125rem;
 					color: #222;
 					line-height: 1.625rem;
+					span{
+						display: inline-block;
+						min-width: 200rpx;
+						min-height: 2rpx;
+					}
 				}
 			}
 

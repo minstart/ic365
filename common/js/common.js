@@ -21,7 +21,7 @@ import Cookies from 'js-cookie';
 import request from '/common/utils/request'
 import store from '/store/index.js'
 
-const imageUrlPattern = /https:\/\/[^\s]+\.(png|jpg|jpeg|gif|svg)/gi;//图片校验
+const imageUrlPattern = /https:\/\/[^\s]+\.(png|jpg|jpeg|gif|svg)/gi; //图片校验
 
 // 校验加密数据
 async function fetchData(data) {
@@ -494,16 +494,43 @@ export default {
 				const contentImages = data.content.match(imageUrlPattern) || [];
 				// 2. 删除图片URL后的文本
 				try {
-					contentImages.forEach(item => {
-						data.content = data.content.replace(item, '<image class="' + (data.imgClass || "change-img") + '" src="' + item + '" mode=""></image>').trim();
+					contentImages.forEach((item,i) => {
+						data.content = data.content.replace(item, 'imgDom'+i).trim();
+					})
+					contentImages.forEach((item,i) => {
+						data.content = data.content.replace('imgDom'+i, '<image class="' + (data.imgClass || "change-img") + '" src="' + item + '" mode=""></image>').trim();
 					})
 					return data.content;
 				} catch (e) {
 					return data.content;
 				}
-			}else{
+			} else {
 				return data.content;
 			}
 		},
+		// 处理任务跳转数据
+		openTask(item) {
+			// 返回true,页面处理 false 当前逻辑处理
+			if (item.processTotal && item.processTotal == 100) {
+				return true;
+			}
+			// 没有做完，跳转到任务界面
+			if (item.matchSubTypeId == 1) {
+				// 任务做题
+				this.jumpPage({
+					url: '/pages/page/study/answerQuestions?pageType=question&missionId=' + item.missionId
+				})
+				return false;
+			} else if (item.matchSubTypeId == 2) {
+				// 任务看视频
+				this.jumpPage({
+					url: '/pages/page/study/answerQuestions?pageType=video&categoryId=' + (item.categoryId || '') + '&missionId=' + item.missionId
+				})
+				return false;
+			} else {
+				return true;
+			}
+		}
+
 	}
 }

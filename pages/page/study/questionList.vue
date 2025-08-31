@@ -2,24 +2,24 @@
 	<!-- 错题本 -->
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
+		<page-head :title='pageInfo.pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
 		<view class="uni-padding-wrap">
-			<view class="achievement-statistics-wrap ">
-				<view class="achievement-statistics">
-					<h3 class="achievement-title">错题统计</h3>
-					<h3 class="statistics">共{{wrongRecordsCount.total}}道错题</h3>
+			<view class="achievement-statistics-wrap">
+				<view class="achievement-statistics" :type="pageType">
+					<h3 class="achievement-title">{{pageInfo.statisticsTtile.title}}统计</h3>
+					<h3 class="statistics">共{{wrongRecordsCount.total}}道{{pageInfo.statisticsTtile.title}}</h3>
 					<view class="property">
 						<view class="property-item">
 							<h3 class="item-info-num">{{wrongRecordsCount.highFrequencyErrCount||0}}</h3>
-							<view class="item-info-title">高频错题</view>
+							<view class="item-info-title">{{pageInfo.statisticsTtile.statisticsListTitle[0]}}</view>
 						</view>
 						<view class="property-item">
 							<h3 class="item-info-num">{{wrongRecordsCount.weeklyNewCount}}</h3>
-							<view class="item-info-title">本周新增</view>
+							<view class="item-info-title">{{pageInfo.statisticsTtile.statisticsListTitle[1]}}</view>
 						</view>
 						<view class="property-item">
 							<h3 class="item-info-num">{{wrongRecordsCount.masteredCount}}</h3>
-							<view class="item-info-title">已掌握</view>
+							<view class="item-info-title">{{pageInfo.statisticsTtile.statisticsListTitle[2]}}</view>
 						</view>
 					</view>
 				</view>
@@ -84,61 +84,97 @@
 
 		data() {
 			return {
+				pageInfo:{
+					pageHeadTitle: "错题本",
+					statisticsTtile:{
+						title:"错题",
+						statisticsListTitle:["高频错题","本周新增","已掌握"]
+					}
+				},
 				wrongRecordsCount: {},
-				pageHeadTitle: "错题本",
 				keyword: "",
 				current: 0,
 				selectProductsId: "",
 				productsTab: [], //tab选项
 				productsList: {}, //tab列表
 				tabID: "", //选中的tabId
+				pageType: "error", //error（错题本）  recently（最近练习） collect（收藏练习）
 			}
 		},
 		onLoad(option) {
 			option.categoryId && (this.selectProductsId = option.categoryId)
+			option.pageType && (this.pageType = option.pageType)
 		},
 		onReady() {
 			this.verifLogin().then(data => {
-				// 错题统计
-				this.commonRequest({
-					url: "/api/wrong-records/stats"
-				}).then(res => {
-					console.log("错题统计::", JSON.stringify(res))
-					try {
-						this.wrongRecordsCount = res.data;
-					} catch (e) {}
-				}).catch(error => {
-					console.log("错题统计报错：：", error)
-				})
-
-				this.commonRequest({
-					url: "/api/wrong-records/getCategories"
-				}).then(res => {
-					console.log("获取错题类目分组(Tab)::", res)
-					for (let i in res.data) {
-						try {
-							!this.selectProductsId && (this.selectProductsId = i);
-							this.productsTab = []
-							this.productsTab.push({
-								id: i,
-								name: res.data[i],
-								page: 1,
-								noData: false
-							})
-							this.productsList["products" + i] = {
-								requested: false,
-								list: []
-							}
-						} catch (e) {}
+				if (this.pageType == "error") {
+					this.pageInfo = {
+						pageHeadTitle: "错题本",
+						statisticsTtile:{
+							title:"错题",
+							statisticsListTitle:["高频错题","本周新增","已掌握"]
+						}
 					}
-					let _that = this;
-					setTimeout(() => {
-						_that.tabID = "tab-list-" + _that.selectProductsId;
-					}, 1000)
-					this.getProducts()
-				}).catch(error => {
-					this.consoleLog("获取错题类目分组(Tab)报错：：", error)
-				})
+					// 错题统计
+					this.commonRequest({
+						url: "/api/wrong-records/stats"
+					}).then(res => {
+						console.log("错题统计::", JSON.stringify(res))
+						try {
+							this.wrongRecordsCount = res.data;
+						} catch (e) {}
+					}).catch(error => {
+						console.log("错题统计报错：：", error)
+					})
+
+					this.commonRequest({
+						url: "/api/wrong-records/getCategories"
+					}).then(res => {
+						console.log("获取错题类目分组(Tab)::", res)
+						this.productsTab = []
+						for (let i in res.data) {
+							try {
+								this.selectProductsId == "" && (this.selectProductsId = i);
+								this.productsTab.push({
+									id: i,
+									name: res.data[i],
+									page: 1,
+									noData: false
+								})
+								this.productsList["products" + i] = {
+									requested: false,
+									list: []
+								}
+							} catch (e) {
+								console.log(e)
+							}
+						}
+						let _that = this;
+						setTimeout(() => {
+							_that.tabID = "tab-list-" + _that.selectProductsId;
+						}, 1000)
+						this.getProducts()
+					}).catch(error => {
+						console.log("获取错题类目分组(Tab)报错：：", error)
+					})
+
+				} else if (this.pageType == "recently") {
+					this.pageInfo = {
+						pageHeadTitle: "最近练习",
+						statisticsTtile:{
+							title:"题目",
+							statisticsListTitle:["XXXXX","XXXXX","XXXXX"]
+						}
+					}
+				} else if (this.pageType == "collect") {
+					this.pageInfo = {
+						pageHeadTitle: "收藏题目",
+						statisticsTtile:{
+							title:"题目",
+							statisticsListTitle:["XXXXX","XXXXX","XXXXX"]
+						}
+					}
+				}
 			})
 		},
 		onShow() {
@@ -198,7 +234,7 @@
 					icon: "none"
 				})
 			},
-			// 获取商品
+			// 获取列表
 			getProducts(data) {
 				if (!this.selectProductsId) return;
 				if (data && data.reset) {
@@ -209,13 +245,13 @@
 					})
 				}
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					console.log(this.keyword, this.selectProductsId)
+					console.log("keyword：",this.keyword, "categoryId：",this.selectProductsId)
 					// 错题列表
 					this.commonRequest({
 						url: "/api/wrong-records/getAll",
 						data: {
 							keyword: this.keyword,
-							categoryld: this.selectProductsId,
+							categoryId: this.selectProductsId,
 							size: 10,
 							page: this.productsList["products" + this.selectProductsId].page
 						}
@@ -231,7 +267,7 @@
 						this.productsList["products" + this.selectProductsId].page = this.productsList["products" + this.selectProductsId].page + 1;
 						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list, ...res.data];
 					}).catch(error => {
-						this.consoleLog("错题列表报错：：", error)
+						console.log("错题列表报错：：", error)
 					})
 				}
 			}

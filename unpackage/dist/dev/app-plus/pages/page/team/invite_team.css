@@ -253,6 +253,11 @@
   color: #222;
   line-height: 1.625rem;
 }
+.banner-wrap .user-info-wrap .invitation-code-wrap .my-code span[data-v-bc1c30b9] {
+  display: inline-block;
+  min-width: 6.25rem;
+  min-height: 0.0625rem;
+}
 .banner-wrap .user-info-wrap .btn-wrap[data-v-bc1c30b9] {
   display: flex;
 }

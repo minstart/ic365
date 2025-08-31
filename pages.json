@@ -61,9 +61,9 @@
 			}
 		},
 		{
-			"path": "pages/page/study/wrongQuestion",
+			"path": "pages/page/study/questionList",
 			"style": {
-				"navigationBarTitleText": "错题本",
+				"navigationBarTitleText": "题目列表", //错题本、最近练习、收藏题目
 				"navigationStyle": "custom"
 			}
 		},

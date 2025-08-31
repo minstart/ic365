@@ -52,9 +52,9 @@ const pages = [
     }
   },
   {
-    path: "pages/page/study/wrongQuestion",
+    path: "pages/page/study/questionList",
     style: {
-      navigationBarTitleText: "错题本",
+      navigationBarTitleText: "题目列表",
       navigationStyle: "custom"
     }
   },

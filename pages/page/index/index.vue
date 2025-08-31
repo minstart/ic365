@@ -138,17 +138,18 @@
 <script>
 	import store from '/store/index.js';
 	import commonJs from '/common/js/common.js';
+
 	function getTimeOfDay() {
-	    const now = new Date();
-	    const hours = now.getHours();
-	 
-	    if (hours < 12) {
-	        return '早上';
-	    } else if (hours < 18) {
-	        return '下午';
-	    } else {
-	        return '晚上';
-	    }
+		const now = new Date();
+		const hours = now.getHours();
+
+		if (hours < 12) {
+			return '早上';
+		} else if (hours < 18) {
+			return '下午';
+		} else {
+			return '晚上';
+		}
 	}
 	export default {
 		mixins: [commonJs],
@@ -240,8 +241,8 @@
 					try {
 						store.commit("Update_UserInfo", res.data)
 						this.userInfo = res.data;
-						
-						this.pageData.banner.title = getTimeOfDay() + "好，" + this.userInfo.nickname + "同学" + (this.userInfo.showAchievementName?'，'+this.userInfo.showAchievementName:"")+'。'
+
+						this.pageData.banner.title = getTimeOfDay() + "好，" + this.userInfo.nickname + "同学" + (this.userInfo.showAchievementName ? '，' + this.userInfo.showAchievementName : "") + '。'
 					} catch (e) {}
 					// 全新用户，需要选年级
 
@@ -374,29 +375,13 @@
 			},
 			// 打开任务详情
 			openTaskDetails(item) {
-				if (item.processTotal && item.processTotal == 100) {
-					// 已经做完了，查看任务详情
+				let isOther = this.openTask(item);
+				if(isOther){
+					// 已经做完了或其他情况，查看任务详情
 					this.taskDetails = item;
 					this.$refs.taskPopUp.open("bottom")
-				} else {
-					// 没有做完，跳转到任务界面
-					if (item.matchSubTypeId == 1) {
-						// 任务做题
-						this.jumpPage({
-							url: '/pages/page/study/answerQuestions?pageType=question&missionId=' + item.missionId
-						})
-					} else if (item.matchSubTypeId == 2) {
-						// 任务看视频
-						this.jumpPage({
-							url: '/pages/page/study/answerQuestions?pageType=video&categoryId=' + item.categoryId + '&missionId=' + item.missionId
-						})
-					} else {
-						this.taskDetails = item;
-						this.$refs.taskPopUp.open("bottom")
-					}
 				}
 			}
-
 		}
 	};
 </script>

@@ -72,11 +72,12 @@
 				<view class="tab-list" :current='current' v-if="current === 1">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的练习 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:''})">
+					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">{{item.introduce}}</view>
+							<div class="unRead">{{item.unRead||""}}</div>
 						</view>
 					</view>
 				</view>
@@ -88,6 +89,7 @@
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">{{item.introduce}}</view>
+							<div class="unRead">{{item.unRead||""}}</div>
 						</view>
 					</view>
 				</view>
@@ -98,6 +100,7 @@
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">{{item.introduce}}</view>
+							<div class="unRead">{{item.unRead||""}}</div>
 						</view>
 					</view>
 				</view>
@@ -172,7 +175,12 @@
 					},
 					{
 						title: "我的错题",
-						list: []
+						list: [{
+							coverUrl: "/static/icons/mistake.png",
+							title: "错题本",
+							introduce: "查看历史错题记录",
+							jumpUrl: "/pages/page/study/questionList?pageType=error"
+						}]
 					},
 					{
 						title: "我的兑换",
@@ -194,7 +202,7 @@
 				],
 
 				skinCurrent: 0,
-				skinList:[],
+				skinList: [],
 				exchangeList: []
 			}
 		},
@@ -203,7 +211,7 @@
 
 		},
 		onReady() {
-			
+
 		},
 		onShow() {
 			const route = getCurrentPages(); //获取当前页面地址
@@ -213,23 +221,23 @@
 				this.commonRequest({
 					url: "/api/student/info"
 				}).then(res => {
-					console.log("获取用户信息::", JSON.stringify(res))
+					console.log("获取用户信息::", res)
 					try {
 						store.commit("Update_UserInfo", res.data)
 						this.userInfo = res.data;
 					} catch (e) {}
 					// 全新用户，需要选年级
-			
+
 					if (res.data.grade == 0) {
 						uni.redirectTo({
 							url: '/pages/page/index/supplement_info?pageFrom=' + pathUrl
 						});
 					}
-			
+
 				}).catch(error => {
 					console.log("获取用户信息报错：：", error)
 				})
-			
+
 				// 获取我资源(战衣/皮肤/名人堂...)
 				this.commonRequest({
 					url: "/api/student/getResourcesGroups"
@@ -239,7 +247,7 @@
 				}).catch(error => {
 					console.log("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
 				})
-			
+
 				// 获取兑换商品列表
 				this.commonRequest({
 					url: "/api/exchange/products",
@@ -252,38 +260,52 @@
 				}).catch(error => {
 					console.log("获取兑换商品列表报错：：", error)
 				})
-			
+
 				// 获取最近题目和收藏题目数量
 				this.commonRequest({
 					url: "/api/question/getRecentlyAndCollection"
 				}).then(res => {
 					console.log("获取最近题目和收藏题目数量", res.data)
 					res.data.recently > 0 ? (this.practiceList[1].list[0].unRead = res.data.recently + "条新记录") : (this.practiceList[1].list[0].unRead = "");
-					this.practiceList[1].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习"
+					this.practiceList[1].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习";
+					this.practiceList[1].list[0].jumpUrl = "/pages/page/study/questionList?pageType=recently";
+					this.practiceList[1].list[1].jumpUrl = "/pages/page/study/questionList?pageType=collect";
 				}).catch(error => {
 					console.log("获取最近题目和收藏题目数量报错：：", error)
 				})
-			
-				// 我的错题
+
+				// 错题统计
 				this.commonRequest({
-					url: "/api/wrong-records/category-stats"
+					url: "/api/wrong-records/stats"
 				}).then(res => {
-					console.log("我的错题：", res.data)
-					this.practiceList[2].list = [];
-					res.data.forEach(item => {
-						this.practiceList[2].list.push({
-							coverUrl: item.coverUrl,
-							title: item.categoryName,
-							introduce: item.total + "道错题待复习",
-							unRead: item.highFrequencyErrTotal + "道高频错题",
-							jumpUrl: "/pages/page/study/wrongQuestion?categoryId=" + item.categoryId
-						})
-					})
-					console.log(this.practiceList[2].list)
+					console.log("错题统计::", JSON.stringify(res))
+					try {
+						res.data.highFrequencyErrCount && (this.practiceList[2].list[0].unRead = res.data.highFrequencyErrCount + "道高频错题")
+					} catch (e) {}
 				}).catch(error => {
-					console.log("我的错题报错：：", error)
+					console.log("错题统计报错：：", error)
 				})
-			
+
+				// 我的错题
+				// this.commonRequest({
+				// 	url: "/api/wrong-records/category-stats"
+				// }).then(res => {
+				// 	console.log("我的错题：", res.data)
+				// 	this.practiceList[2].list = [];
+				// 	res.data.forEach(item => {
+				// 		this.practiceList[2].list.push({
+				// 			coverUrl: item.coverUrl,
+				// 			title: item.categoryName,
+				// 			introduce: item.total + "道错题待复习",
+				// 			unRead: item.highFrequencyErrTotal + "道高频错题",
+				// 			jumpUrl: "/pages/page/study/questionList?pageType=error&categoryId=" + item.categoryId
+				// 		})
+				// 	})
+				// 	console.log(this.practiceList[2].list)
+				// }).catch(error => {
+				// 	console.log("我的错题报错：：", error)
+				// })
+
 				// 获取我的兑换统计
 				this.commonRequest({
 					url: "/api/exchange/stat"
@@ -296,7 +318,7 @@
 				}).catch(error => {
 					console.log("获取我的兑换统计报错：：", error)
 				})
-			
+
 				// 我的任务
 				this.commonRequest({
 					url: "/api/mission/mine-stat"
@@ -318,7 +340,7 @@
 					console.log("我的任务报错：：", error)
 				})
 			})
-			
+
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(data => {
@@ -388,7 +410,7 @@
 							store.commit("Update_UserInfo", res.data)
 							this.userInfo = res.data;
 						} catch (e) {}
-					
+
 					}).catch(error => {
 						console.log("获取用户信息报错：：", error)
 					})
@@ -563,7 +585,15 @@
 				background: url("/static/icons/selected.png") no-repeat bottom / 1.3125rem 0.375rem;
 			}
 		}
-
+		.tab-list-content{
+			.tab-list{
+				&[current="1"] {
+					.unRead {
+						color: #5893F3 !important;
+					}
+				}
+			}
+		}
 		.practice-list {
 			background: #F9F9F9;
 			border-bottom: 0.16rem solid #F6F6F6;
@@ -607,7 +637,7 @@
 
 				.unRead {
 					position: absolute;
-					color: #5893f3;
+					color: #E74C3D;
 					font-size: 0.93rem;
 					top: 0;
 					bottom: 0;

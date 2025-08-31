@@ -146,6 +146,7 @@
 			</view>
 			<ul class="information-list-wrap">
 				<li class="information-list" v-for="item in information" @click="jumpPage({url:''})">
+					<view class="information-list-back"></view>
 					<image class="list-icon" :src="item.icon" mode=""></image>
 					<view class="list-info">
 						<h3 class="title">{{item.title}}</h3>
@@ -735,14 +736,19 @@
 
 	// 系统资讯 ------Start
 	.information-wrap {
+		padding-bottom: 60rpx;
 		.information-list-wrap {
+			background: #F9F9F9;
+			border-radius: 20rpx;
+			padding:40rpx 20rpx 20rpx 20rpx;
 			.information-list {
-				background: #F9F9F9;
+				background: #fff;
 				border-bottom: 0.16rem solid #F6F6F6;
 				display: flex;
 				padding: 18rpx 20rpx;
 				min-height: 158rpx;
 				margin-bottom: 20rpx;
+				position: relative;
 				.list-icon {
 					width: 108rpx;
 					height: 108rpx;
@@ -803,8 +809,17 @@
 						background: url("/static/icons/next2.png") no-repeat right / 100% 100%;
 					}
 				}
+				.information-list-back{
+					position: absolute;
+					right: 0;
+					top: 0;
+					height: 100%;
+					width: 196rpx;
+				}
 				&:nth-child(1){
-					background: url("/static/image/4_information_back1.png") no-repeat right / 196rpx 100%;
+					.information-list-back{
+						background: url("/static/image/4_information_back1.png") no-repeat right / 196rpx 100%;
+					}
 					.list-icon{
 						border:2rpx solid #F94559;
 					}
@@ -817,7 +832,9 @@
 					}
 				}
 				&:nth-child(2){
-					background: url("/static/image/4_information_back2.png") no-repeat right / 196rpx 100%;
+					.information-list-back{
+						background: url("/static/image/4_information_back2.png") no-repeat right / 196rpx 100%;
+					}
 					.list-icon{
 						border:2rpx solid #FFBA31;
 					}

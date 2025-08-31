@@ -87,13 +87,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         createElementVNode("view", {
           class: normalizeClass(["common-page-head-title", $props.standardTitle ? "standard-title" : ""]),
-          style: normalizeStyle(!$props.title && "height:0;")
+          style: normalizeStyle(!$props.title && "height:0;opacity: 0;")
         }, [
           createElementVNode("u-text", null, toDisplayString($props.title), 1)
         ], 6),
         createElementVNode("view", {
           class: "common-page-head-module",
-          style: normalizeStyle(!$props.isModule && "height:0;")
+          style: normalizeStyle(!$props.isModule && "height:0;opacity: 0;")
         }, [
           $props.isModule ? (openBlock(), createElementBlock("u-image", {
             key: 0,

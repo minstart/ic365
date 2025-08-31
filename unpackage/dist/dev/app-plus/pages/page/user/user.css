@@ -236,6 +236,9 @@ uni-page-body[data-v-351444bc] {
   padding-top: 0;
   background: url("../../../static/icons/selected.png") no-repeat bottom/1.3125rem 0.375rem;
 }
+.tab-wrap .tab-list-content .tab-list[current="1"] .unRead[data-v-351444bc] {
+  color: #5893F3 !important;
+}
 .tab-wrap .practice-list[data-v-351444bc] {
   background: #F9F9F9;
   border-bottom: 0.16rem solid #F6F6F6;
@@ -275,7 +278,7 @@ uni-page-body[data-v-351444bc] {
 }
 .tab-wrap .practice-list .list-info .unRead[data-v-351444bc] {
   position: absolute;
-  color: #5893f3;
+  color: #E74C3D;
   font-size: 0.93rem;
   top: 0;
   bottom: 0;

@@ -846,13 +846,22 @@ to {
   font-size: 0.875rem;
   color: #999999;
 }
-.information-wrap .information-list-wrap .information-list[data-v-1185e19c] {
+.information-wrap[data-v-1185e19c] {
+  padding-bottom: 1.875rem;
+}
+.information-wrap .information-list-wrap[data-v-1185e19c] {
   background: #F9F9F9;
+  border-radius: 0.625rem;
+  padding: 1.25rem 0.625rem 0.625rem 0.625rem;
+}
+.information-wrap .information-list-wrap .information-list[data-v-1185e19c] {
+  background: #fff;
   border-bottom: 0.16rem solid #F6F6F6;
   display: flex;
   padding: 0.5625rem 0.625rem;
   min-height: 4.9375rem;
   margin-bottom: 0.625rem;
+  position: relative;
 }
 .information-wrap .information-list-wrap .information-list .list-icon[data-v-1185e19c] {
   width: 3.375rem;
@@ -909,7 +918,14 @@ to {
   font-weight: 700;
   background: url("../../../static/icons/next2.png") no-repeat right / 100% 100%;
 }
-.information-wrap .information-list-wrap .information-list[data-v-1185e19c]:nth-child(1) {
+.information-wrap .information-list-wrap .information-list .information-list-back[data-v-1185e19c] {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 6.125rem;
+}
+.information-wrap .information-list-wrap .information-list:nth-child(1) .information-list-back[data-v-1185e19c] {
   background: url("../../../static/image/4_information_back1.png") no-repeat right / 6.125rem 100%;
 }
 .information-wrap .information-list-wrap .information-list:nth-child(1) .list-icon[data-v-1185e19c] {
@@ -918,7 +934,7 @@ to {
 .information-wrap .information-list-wrap .information-list:nth-child(1) .list-info .subtitle[data-v-1185e19c]::after {
   background-color: #F94559;
 }
-.information-wrap .information-list-wrap .information-list[data-v-1185e19c]:nth-child(2) {
+.information-wrap .information-list-wrap .information-list:nth-child(2) .information-list-back[data-v-1185e19c] {
   background: url("../../../static/image/4_information_back2.png") no-repeat right / 6.125rem 100%;
 }
 .information-wrap .information-list-wrap .information-list:nth-child(2) .list-icon[data-v-1185e19c] {

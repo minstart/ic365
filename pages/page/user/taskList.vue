@@ -1,5 +1,5 @@
 <template>
-	<view class="page-loading" v-if="pageMask"></view>
+	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
 		<div class="uni-padding-wrap">
