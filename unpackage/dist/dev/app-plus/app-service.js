@@ -14821,7 +14821,7 @@ if (uni.restoreGlobal) {
     );
   }
   const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3A, [["render", _sfc_render$3z], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/71018/Desktop/ic365/components/page-head/page-head.vue"]]);
-  const _imports_0$7 = "/static/image/reward_back1.png";
+  const _imports_0$6 = "/static/image/reward_back1.png";
   const _imports_1$2 = "/static/image/reward_back2.png";
   const _imports_2$3 = "/static/image/reward_back3.png";
   const _imports_3$1 = "/static/image/reward_back4.png";
@@ -14881,7 +14881,7 @@ if (uni.restoreGlobal) {
               vue.createElementVNode("view", { class: "reward-back-wrap" }, [
                 vue.createElementVNode("image", {
                   class: "back1",
-                  src: _imports_0$7,
+                  src: _imports_0$6,
                   mode: ""
                 }),
                 vue.createElementVNode("image", {
@@ -15867,7 +15867,7 @@ if (uni.restoreGlobal) {
     ]);
   }
   const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3w, [["render", _sfc_render$3v], ["__scopeId", "data-v-6a6cf342"], ["__file", "C:/Users/71018/Desktop/ic365/components/task-details/task-details.vue"]]);
-  const _imports_0$6 = "/static/image/1_challenge.png";
+  const _imports_0$5 = "/static/image/1_challenge.png";
   const _imports_1$1 = "/static/image/1_study.png";
   const _imports_2$2 = "/static/image/1_achievement_back.png";
   const _imports_3 = "/static/icons/achievement.png";
@@ -16191,7 +16191,7 @@ if (uni.restoreGlobal) {
               vue.createElementVNode("image", {
                 class: "activity",
                 onClick: _cache[1] || (_cache[1] = ($event) => _ctx.jumpPage({ url: "/pages/page/study/calendar" })),
-                src: _imports_0$6
+                src: _imports_0$5
               }),
               vue.createElementVNode("image", {
                 class: "activity",
@@ -29020,7 +29020,6 @@ ${o3}
     );
   }
   const PagesPageStudyAnswerQuestions = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-9e40ef6f"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/study/answerQuestions.vue"]]);
-  const _imports_0$5 = "/static/icons/delete.png";
   const _sfc_main$3e = {
     mixins: [commonJs],
     props: {},
@@ -29056,7 +29055,7 @@ ${o3}
       this.verifLogin().then((data) => {
         this.getTeamInfo();
       }).catch((err) => {
-        formatAppLog("log", "at pages/page/team/team.vue:192", "没有登录：：", error);
+        formatAppLog("log", "at pages/page/team/team.vue:195", "没有登录：：", error);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -29075,23 +29074,23 @@ ${o3}
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:218", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/team/team.vue:221", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:224", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/team/team.vue:227", "获取用户信息报错：：", error2);
         });
         this.getTeamDetails();
         this.commonRequest({
           url: "/api/team-mission/list"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:233", "获取组队任务::", res2);
+          formatAppLog("log", "at pages/page/team/team.vue:236", "获取组队任务::", res2);
           this.teamTask = res2.data;
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:256", "获取组队任务报错：：", error2);
+          formatAppLog("log", "at pages/page/team/team.vue:259", "获取组队任务报错：：", error2);
         });
       },
       joinTeam() {
@@ -29101,14 +29100,14 @@ ${o3}
         this.$refs.joinTeam.close();
       },
       deleteTeammate(item) {
-        formatAppLog("log", "at pages/page/team/team.vue:266", "删除队友", item);
+        formatAppLog("log", "at pages/page/team/team.vue:269", "删除队友", item);
         this.commonRequest({
           url: "/api/team/kickMember",
           data: {
             userId: item.userId
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:273", "移除队员：", res2.data);
+          formatAppLog("log", "at pages/page/team/team.vue:276", "移除队员：", res2.data);
           this.getTeamDetails();
           uni.showToast({
             title: "移除队员成功",
@@ -29117,11 +29116,11 @@ ${o3}
         });
       },
       exitTeam(item) {
-        formatAppLog("log", "at pages/page/team/team.vue:284", "离开队伍", item);
+        formatAppLog("log", "at pages/page/team/team.vue:287", "离开队伍", item);
         this.commonRequest({
           url: "/api/team/leaveTeam"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:288", "离开队伍：", res2.data);
+          formatAppLog("log", "at pages/page/team/team.vue:291", "离开队伍：", res2.data);
           this.getTeamInfo();
           uni.showToast({
             title: "离开队伍成功",
@@ -29131,7 +29130,7 @@ ${o3}
       },
       // 任务详情处理
       openTaskDetails(item) {
-        formatAppLog("log", "at pages/page/team/team.vue:298", item);
+        formatAppLog("log", "at pages/page/team/team.vue:301", item);
         if (!this.isCaptain) {
           uni.showToast({
             title: "只有队长才能开启任务" + (this.currentMission && this.currentMission.name ? ",且当前挑战任务未完成" : ""),
@@ -29184,7 +29183,7 @@ ${o3}
             code: this.invitationCode
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:364", "加入队伍：", res2.data);
+          formatAppLog("log", "at pages/page/team/team.vue:367", "加入队伍：", res2.data);
           this.getTeamInfo();
           uni.showToast({
             title: "加入队伍成功",
@@ -29198,7 +29197,7 @@ ${o3}
           this.commonRequest({
             url: "/api/team-mission/details"
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/team/team.vue:379", "获取我的队伍和任务相关信息::", res2);
+            formatAppLog("log", "at pages/page/team/team.vue:382", "获取我的队伍和任务相关信息::", res2);
             try {
               this.currentMission = res2.data.currentMission || {};
               this.stats = res2.data.stats;
@@ -29226,13 +29225,13 @@ ${o3}
                   }
                 });
               } catch (e2) {
-                formatAppLog("log", "at pages/page/team/team.vue:418", e2);
+                formatAppLog("log", "at pages/page/team/team.vue:421", e2);
               }
             } catch (e2) {
             }
             resolve(res2);
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/team/team.vue:423", "获取我的队伍和任务相关信息报错：：", error2);
+            formatAppLog("log", "at pages/page/team/team.vue:426", "获取我的队伍和任务相关信息报错：：", error2);
           });
         });
       }
@@ -29623,18 +29622,13 @@ ${o3}
           {
             default: vue.withCtx(() => [
               vue.createElementVNode("div", { class: "joinTeam-wrap" }, [
-                vue.createElementVNode("image", {
-                  class: "close-popup",
-                  src: _imports_0$5,
-                  onClick: _cache[5] || (_cache[5] = (...args) => $options.joinPopupClose && $options.joinPopupClose(...args))
-                }),
                 vue.withDirectives(vue.createElementVNode(
                   "input",
                   {
                     type: "text",
                     class: "joinTeam-input uni-input",
-                    placeholder: "长按粘贴好友发送的邀请码，点确定加入队伍吧",
-                    "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $data.invitationCode = $event)
+                    placeholder: "请输入邀请码",
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $data.invitationCode = $event)
                   },
                   null,
                   512
@@ -29642,10 +29636,17 @@ ${o3}
                 ), [
                   [vue.vModelText, $data.invitationCode]
                 ]),
-                vue.createElementVNode("button", {
-                  class: "join-btn",
-                  onClick: _cache[7] || (_cache[7] = vue.withModifiers((...args) => $options.confirmJoin && $options.confirmJoin(...args), ["stop"]))
-                }, "确认")
+                vue.createElementVNode("view", { class: "tips" }, "输入或者粘贴好友发送的邀请码，点确定加入队伍。"),
+                vue.createElementVNode("view", { class: "btn-wrap" }, [
+                  vue.createElementVNode("button", {
+                    class: "join-btn btn-white",
+                    onClick: _cache[6] || (_cache[6] = vue.withModifiers((...args) => $options.joinPopupClose && $options.joinPopupClose(...args), ["stop"]))
+                  }, "关闭"),
+                  vue.createElementVNode("button", {
+                    class: "join-btn",
+                    onClick: _cache[7] || (_cache[7] = vue.withModifiers((...args) => $options.confirmJoin && $options.confirmJoin(...args), ["stop"]))
+                  }, "确认")
+                ])
               ])
             ]),
             _: 1

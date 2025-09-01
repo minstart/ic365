@@ -595,23 +595,54 @@
   margin-top: 0.2rem;
 }
 .joinTeam-wrap[data-v-d282c156] {
-  background: #fff;
+  background: url("../../../static/image/join_team.png") no-repeat center/100% 100%;
   border-radius: 0.9375rem;
-  width: 19.0625rem;
+  width: 20.5625rem;
+  height: 13.9375rem;
   padding: 0.625rem;
   position: relative;
 }
-.joinTeam-wrap .close-popup[data-v-d282c156] {
-  position: absolute;
-  right: -0.75rem;
-  top: -0.75rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: #fff;
-  border-radius: 1.5rem;
-}
 .joinTeam-wrap .joinTeam-input[data-v-d282c156] {
-  border: 1px solid #ccc;
+  width: 12.5625rem;
+  border-width: 0;
   border-radius: 4px;
   margin-bottom: 10px;
+  line-height: 2.5625rem;
+  font-size: 0.75rem;
+  background: #FDF0DE;
+  position: absolute;
+  top: 4.8125rem;
+  right: 2.25rem;
+}
+.joinTeam-wrap .tips[data-v-d282c156] {
+  position: absolute;
+  color: #000;
+  font-size: 0.625rem;
+  width: 16rem;
+  right: 1.5rem;
+  bottom: 5.0625rem;
+  text-align: center;
+}
+.joinTeam-wrap .btn-wrap[data-v-d282c156] {
+  position: absolute;
+  width: 14.75rem;
+  right: 2.5rem;
+  bottom: 0.625rem;
+  display: flex;
+}
+.joinTeam-wrap .btn-wrap .join-btn[data-v-d282c156] {
+  flex: 1;
+  border-radius: 0.9375rem;
+  border-width: 0;
+  width: 6.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.joinTeam-wrap .btn-wrap .join-btn[data-v-d282c156]:nth-child(1) {
+  margin-right: 0.5rem;
+  color: #484848 !important;
+}
+.joinTeam-wrap .btn-wrap .join-btn[data-v-d282c156]:nth-child(2) {
+  margin-left: 0.5rem;
+  color: #fff !important;
 }

@@ -134,9 +134,12 @@
 	</view>
 	<uni-popup ref="joinTeam" :mask-click="false" type="bottom">
 		<div class="joinTeam-wrap">
-			<image class="close-popup" src="/static/icons/delete.png" @click="joinPopupClose"></image>
-			<input type="text" class="joinTeam-input uni-input" placeholder="长按粘贴好友发送的邀请码，点确定加入队伍吧" v-model="invitationCode">
-			<button class="join-btn" @tap.stop='confirmJoin'>确认</button>
+			<input type="text" class="joinTeam-input uni-input" placeholder="请输入邀请码" v-model="invitationCode">
+			<view class="tips">输入或者粘贴好友发送的邀请码，点确定加入队伍。</view>
+			<view class="btn-wrap">
+				<button class="join-btn btn-white" @tap.stop="joinPopupClose">关闭</button>
+				<button class="join-btn" @tap.stop='confirmJoin'>确认</button>
+			</view>
 		</div>
 	</uni-popup>
 	<uni-popup ref="taskPopUp" :mask-click="false" type="bottom">
@@ -852,26 +855,56 @@
 	// 队伍动态 ------End
 	// 加入队伍弹窗
 	.joinTeam-wrap {
-		background: #fff;
+		background: url("/static/image/join_team.png") no-repeat center / 100% 100%;
 		border-radius: 30rpx;
-		width: calc(750rpx - 140rpx);
+		width: 658rpx;
+		height: 446rpx;
 		padding: 20rpx;
 		position: relative;
 
-		.close-popup {
-			position: absolute;
-			right: -24rpx;
-			top: -24rpx;
-			width: 48rpx;
-			height: 48rpx;
-			background-color: #fff;
-			border-radius: 48rpx;
-		}
-
 		.joinTeam-input {
-			border: 1px solid #ccc;
+			width: 402rpx;
+			border-width: 0;
 			border-radius: 4px;
 			margin-bottom: 10px;
+			line-height: 82rpx;
+			font-size: 24rpx;
+			background: #FDF0DE;
+			position: absolute;
+			top: 154rpx;
+			right: 72rpx;
+		}
+		.tips{
+			position: absolute;
+			color: #000;
+			font-size: 20rpx;
+			width: 512rpx;
+			right: 48rpx;
+			bottom: 162rpx;
+			text-align: center;
+		}
+		.btn-wrap{
+			position: absolute;
+			width: 472rpx;
+			right: 80rpx;
+			bottom: 20rpx;
+			display: flex;
+			.join-btn{
+				flex: 1;
+				border-radius: 30rpx;
+				border-width: 0;
+				width: 200rpx;
+				font-size: 32rpx;
+				font-weight: 500;
+				&:nth-child(1){
+					margin-right: 16rpx;
+					color: #484848 !important;
+				}
+				&:nth-child(2){
+					margin-left: 16rpx;
+					color: #fff !important;
+				}
+			}
 		}
 	}
 </style>
