@@ -99,7 +99,7 @@
 						<h3 class="list-nickname">邀请好友</h3>
 						<view class="list-time"></view>
 					</li>
-					<li class="team-list" type="join" v-if="members.length!=0" @tap.stop='joinTeam'>
+					<li class="team-list" type="join" v-if="members.length==0" @tap.stop='joinTeam'>
 						<view class="list-avatar"></view>
 						<h3 class="list-nickname">加入队伍</h3>
 						<view class="list-time"></view>
@@ -132,7 +132,7 @@
 			</view>
 		</view>
 	</view>
-	<uni-popup ref="joinTeam" :mask-click="false" type="bottom">
+	<uni-popup ref="joinTeam" :mask-click="false" type="bottom" >
 		<div class="joinTeam-wrap">
 			<input type="text" class="joinTeam-input uni-input" placeholder="请输入邀请码" v-model="invitationCode">
 			<view class="tips">输入或者粘贴好友发送的邀请码，点确定加入队伍。</view>
@@ -325,6 +325,7 @@
 											missionId: item.missionId
 										}
 									}).then(res => {
+										console.log("开启任务:",res.data)
 										// 更新当前挑战任务
 										_this.getTeamDetails()
 										uni.showToast({

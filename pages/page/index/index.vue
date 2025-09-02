@@ -230,8 +230,6 @@
 			}).catch(error => {
 				// console.log("记录用户设备信息报错：：", error)
 			})
-			
-			this.jumpPage({url:'/pages/page/user/redemptionHistory'})
 		},
 		onShow() {
 			this.verifLogin().then(data => {

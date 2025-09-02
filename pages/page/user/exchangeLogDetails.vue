@@ -9,9 +9,13 @@
 				<h3 class="info-text">{{exchangeData.productName}}</h3>
 			</view>
 			<view class="currency-list-wrap">
-				<view class="currency-list" :type="exchangeData.payCurrencyType">
+				<view class="currency-list">
 					<image class="currency-icon" :src="rewardIcon(exchangeData.payCurrencyType).icon4"></image>
-					<view class="currency-name">{{exchangeData.payCurrencyTypeName}} X{{exchangeData.quantity}}</view>
+					<view class="currency-name">{{exchangeData.payCurrencyTypeName}} ×{{exchangeData.quantity}}</view>
+				</view>
+				<view class="currency-time-wrap">
+					<view class="time-title">兑换时间：</view>
+					<view class="time-text">{{changeTime(exchangeData.redeemTime,2)}}</view>
 				</view>
 			</view>
 		</view>
@@ -90,6 +94,7 @@
 				margin-bottom: 16rpx;
 				padding: 20rpx;
 				background-color: #f1f4fb;
+				border-radius: 20rpx;
 			}
 		}
 
@@ -97,10 +102,10 @@
 			padding: 40rpx;
 			background-color: #fff;
 			margin: 60rpx 40rpx;
-
+			
 			.currency-list {
 				display: flex;
-
+				font-weight: 500;
 				.currency-icon {
 					width: 136rpx;
 					height: 136rpx;
@@ -113,6 +118,18 @@
 					line-height: 136rpx;
 					font-weight: 500;
 				}
+			}
+			
+			.currency-time-wrap{
+				display: flex;
+				color: #616161;
+				font-size: 24rpx;
+				margin-top: 60rpx;
+				.time-text{
+					flex: 1;
+					text-align: right;
+				}
+				
 			}
 		}
 	}

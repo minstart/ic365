@@ -119,6 +119,7 @@
   margin-bottom: 0.5rem;
   padding: 0.625rem;
   background-color: #f1f4fb;
+  border-radius: 0.625rem;
 }
 .details-wrap .currency-list-wrap[data-v-7e25877f] {
   padding: 1.25rem;
@@ -127,6 +128,7 @@
 }
 .details-wrap .currency-list-wrap .currency-list[data-v-7e25877f] {
   display: flex;
+  font-weight: 500;
 }
 .details-wrap .currency-list-wrap .currency-list .currency-icon[data-v-7e25877f] {
   width: 4.25rem;
@@ -138,4 +140,14 @@
   font-size: 0.9375rem;
   line-height: 4.25rem;
   font-weight: 500;
+}
+.details-wrap .currency-list-wrap .currency-time-wrap[data-v-7e25877f] {
+  display: flex;
+  color: #616161;
+  font-size: 0.75rem;
+  margin-top: 1.875rem;
+}
+.details-wrap .currency-list-wrap .currency-time-wrap .time-text[data-v-7e25877f] {
+  flex: 1;
+  text-align: right;
 }

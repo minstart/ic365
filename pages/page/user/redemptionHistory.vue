@@ -47,63 +47,7 @@
 				commodity: {
 					page: 0,
 					noData: false,
-					commodityList: {
-						"2025-09": {
-							"title": "2025年09月",
-							"data": [{
-									"productName": "处女座男战士",
-									"subtitle": "细心的小处女座，追求完美每一步。",
-									"quantity": 80,
-									"icon": "https://ic365.ajulye.com/material/constellation/virgo_m.png",
-									"startTime": "2025-08-23T00:00:00",
-									"endTime": "2025-09-22T00:00:00",
-									"payCurrencyType": 3,
-									"productCurrencyType": 12,
-									"productionId": 6,
-									"vipLevel": 0,
-									"payCurrencyTypeName": "启明石",
-									"obtained": true,
-									"currencyBalance": 976,
-									"redeemUnixTime": 1756794923,
-									"redeemTime": "2025-09-02T14:35:23"
-								},
-								{
-									"productName": "聪明侦探",
-									"subtitle": "聪明的小侦探，是数学谜题破解家！",
-									"quantity": 300,
-									"icon": "https://ic365.ajulye.com/material/occupation/detective.png",
-									"startTime": null,
-									"endTime": null,
-									"payCurrencyType": 2,
-									"productCurrencyType": 5,
-									"productionId": 1,
-									"vipLevel": 0,
-									"payCurrencyTypeName": "知识尘",
-									"obtained": true,
-									"currencyBalance": 810,
-									"redeemUnixTime": 1756794781,
-									"redeemTime": "2025-09-02T14:33:01"
-								},
-								{
-									"productName": "数算小熊",
-									"subtitle": "数字森林小向导",
-									"quantity": 300,
-									"icon": "https://ic365.ajulye.com/material/elf/bear.png",
-									"startTime": null,
-									"endTime": null,
-									"payCurrencyType": 1,
-									"productCurrencyType": 31,
-									"productionId": 9,
-									"vipLevel": 0,
-									"payCurrencyTypeName": "智慧星",
-									"obtained": true,
-									"currencyBalance": 950,
-									"redeemUnixTime": 1756794704,
-									"redeemTime": "2025-09-02T14:31:44"
-								}
-							]
-						}
-					}
+					commodityList: {}
 				},
 			}
 		},
@@ -163,7 +107,6 @@
 						return false;
 					}
 					res.data.forEach(item => {
-						console.log(item)
 						let year = this.changeDate(this.changeTime(item.redeemTime)).year;
 						let month = this.changeDate(this.changeTime(item.redeemTime)).month
 						if (typeof this.commodity.commodityList[year + '-' + month] == "undefined") {
@@ -175,10 +118,6 @@
 
 						this.commodity.commodityList[year + '-' + month].data.push(item)
 					})
-
-					console.log(this.commodity.commodityList)
-
-					//  this.commodity.commodityList = [...this.commodity.commodityList, ...res.data]
 				}).catch(error => {
 					this.consoleLog("已兑换商品列表报错：：", error)
 				})
