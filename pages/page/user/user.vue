@@ -211,7 +211,7 @@
 
 		},
 		onReady() {
-
+			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
 		},
 		onShow() {
 			const route = getCurrentPages(); //获取当前页面地址

@@ -99,7 +99,7 @@
 						<h3 class="list-nickname">邀请好友</h3>
 						<view class="list-time"></view>
 					</li>
-					<li class="team-list" type="join" v-if="members.length==0" @tap.stop='joinTeam'>
+					<li class="team-list" type="join" v-if="members.length!=0" @tap.stop='joinTeam'>
 						<view class="list-avatar"></view>
 						<h3 class="list-nickname">加入队伍</h3>
 						<view class="list-time"></view>
@@ -181,7 +181,7 @@
 
 		},
 		onReady() {
-
+			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
 		},
 		onShow() {
 			const route = getCurrentPages(); //获取当前页面地址
@@ -863,15 +863,15 @@
 		position: relative;
 
 		.joinTeam-input {
-			width: 402rpx;
+			width: 382rpx;
 			border-width: 0;
-			border-radius: 4px;
+			border-radius: 20px;
 			margin-bottom: 10px;
 			line-height: 82rpx;
 			font-size: 24rpx;
 			background: #FDF0DE;
 			position: absolute;
-			top: 154rpx;
+			top: 174rpx;
 			right: 72rpx;
 		}
 		.tips{

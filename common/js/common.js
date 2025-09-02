@@ -43,6 +43,20 @@ async function fetchData(data) {
 	} catch (error) {
 		store.commit('RESET_CRYPTO') //清除crypto加密储存数据
 		console.error('校验加密数据失败:', error);
+		const crypto = Cookies.get('crypto') ? JSON.parse(Cookies.get('crypto')) : ""
+		if (store.state.encrypt_enabled) {
+			if (shouldRefreshKeys(crypto)) {
+				await refreshKeys()
+			}
+		}
+		data.url && data.url.indexOf("http") == -1 && (data.url = store.state.configData.staticUrl + data.url)
+		return request({
+			url: data.url,
+			method: data.method || 'post',
+			data: data.data
+		}).finally(() => {
+			!data.notLoading && uni.hideLoading()
+		})
 	}
 }
 
@@ -355,41 +369,39 @@ export default {
 
 		// 奖励图标统一返回
 		rewardIcon(id) {
-			switch (id) {
-				case 1:
-					// 智慧星
-					return {
-						min: "/static/icons/star.png",
-							moderate: "/static/icons/star2.png"
-					};
-					break;
-				case 2:
-					// 知识尘
-					return {
-						min: "/static/icons/dust.png",
-							moderate: "/static/icons/dust2.png"
-					};
-					break;
-				case 3:
-					// 启明石
-					return {
-						min: "/static/icons/stone.png",
-							moderate: "/static/icons/stone2.png"
-					};
-					break;
-				case 4:
-					// 丰硕穗
-					break;
-				case 5:
-					// 圣诞欢乐颂
-					return {
-						min: "/static/icons/christmas.png",
-							moderate: ""
-					};
-					break;
-				case 6:
-					// 课程
-					break;
+			if (id == 1) {
+				// 智慧星
+				return {
+					min: "/static/icons/star.png",
+					moderate: "/static/icons/star2.png",
+					icon3:"/static/icons/star3.png",
+					icon4:"/static/icons/star4.png",
+					
+				};
+			} else if (id == 2) {
+				// 知识尘
+				return {
+					min: "/static/icons/dust.png",
+					moderate: "/static/icons/dust2.png",
+					icon3: "/static/icons/dust3.png",
+					icon4: "/static/icons/dust4.png",
+					
+				};
+			} else if (id == 3) {
+				// 启明石
+				return {
+					min: "/static/icons/stone.png",
+					moderate: "/static/icons/stone2.png",
+					icon3: "/static/icons/stone3.png",
+					icon4: "/static/icons/stone4.png",
+				};
+			} else if (id == 4) {
+				// 丰硕穗
+			} else if (id == 5) {
+				return {
+					min: "/static/icons/christmas.png",
+					moderate: ""
+				};
 			}
 		},
 
@@ -462,10 +474,10 @@ export default {
 			if (typeof type != "undefined" && type == 2) return time.replace("T", "");
 			if (time.indexOf("T") != 1 || time.indexOf(":") != 1) {
 				let date = new Date(time);
-				let year = date.getFullYear();
-				let month = date.getMonth() + 1; // 月份是从0开始的，所以要加1
-				let day = date.getDate();
-				return `${year}-${month}-${day}`;
+				const y = date.getFullYear()
+				const m = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1 // 获取当前月份的日期，不足10补0
+				const d = date.getDate() < 10 ? '0' + date.getDate() : date.getDate() // 获取当前几号，不足10补0
+				return `${y}-${m}-${d}`;
 			} else {
 				return time;
 			}
@@ -494,11 +506,11 @@ export default {
 				const contentImages = data.content.match(imageUrlPattern) || [];
 				// 2. 删除图片URL后的文本
 				try {
-					contentImages.forEach((item,i) => {
-						data.content = data.content.replace(item, 'imgDom'+i).trim();
+					contentImages.forEach((item, i) => {
+						data.content = data.content.replace(item, 'imgDom' + i).trim();
 					})
-					contentImages.forEach((item,i) => {
-						data.content = data.content.replace('imgDom'+i, '<image class="' + (data.imgClass || "change-img") + '" src="' + item + '" mode=""></image>').trim();
+					contentImages.forEach((item, i) => {
+						data.content = data.content.replace('imgDom' + i, '<image class="' + (data.imgClass || "change-img") + '" src="' + item + '" mode=""></image>').trim();
 					})
 					return data.content;
 				} catch (e) {
@@ -530,7 +542,12 @@ export default {
 			} else {
 				return true;
 			}
+		},
+		// 对象转换成url参数
+		objectToQueryString(obj) {
+			return Object.keys(obj).map(key => {
+				return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
+			}).join('&');
 		}
-
 	}
 }

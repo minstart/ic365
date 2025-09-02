@@ -120,7 +120,7 @@
 					data: this.invitationCode,
 					success: function() {
 						uni.showToast({
-							title: '已复制邀请码，长按后粘贴发送给好友邀请他/她一起来学习吧！',
+							title: '已复制邀请码，发送给好友邀请他/她一起来学习吧！',
 							icon: 'none',
 							duration: 5000
 						});

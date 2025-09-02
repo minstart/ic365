@@ -148,7 +148,7 @@
 		{
 			"path": "pages/page/user/exchangeLogDetails",
 			"style": {
-				"navigationBarTitleText": "兑换日志",
+				"navigationBarTitleText": "兑换详情",
 				"navigationStyle": "custom"
 			}
 		},
@@ -1565,7 +1565,8 @@
 		"app-plus": {
 			"animationType": "none", // 设置为"none"以关闭动画
 			"animationDuration": 0 // 动画持续时间设置为0
-		}
+		},
+		"bounce":"none"
 	},
 	"tabBar": {
 		"color": "#999999",

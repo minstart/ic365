@@ -321,6 +321,7 @@
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-options-wrap[data-v-9e40ef6f] {
   margin-top: 0.5rem;
+  padding-bottom: 2.5rem;
 }
 .page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-options-wrap .topic-options[data-v-9e40ef6f] {
   position: relative;
@@ -369,7 +370,12 @@
   height: 1.25rem;
   background: url("../../../static/icons/error.png") no-repeat center/100% 100%;
 }
-.page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-submit[data-v-9e40ef6f] {
+.page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .btn-wrap[data-v-9e40ef6f] {
+  position: fixed;
+  bottom: 0.625rem;
+  right: 12.5rem;
+}
+.page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .btn-wrap .topic-submit[data-v-9e40ef6f] {
   width: 5.625rem;
   height: 2.25rem;
   line-height: 2.25rem;
@@ -381,7 +387,7 @@
   border-radius: 1.125rem;
   margin-right: 1.25rem;
 }
-.page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .topic-next[data-v-9e40ef6f] {
+.page-wrap .content-wrap .topic-wrap .topic-content-wrap .topic .btn-wrap .topic-next[data-v-9e40ef6f] {
   width: 5.625rem;
   height: 2.25rem;
   line-height: 2.25rem;

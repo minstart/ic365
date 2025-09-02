@@ -139,7 +139,7 @@ const pages = [
   {
     path: "pages/page/user/exchangeLogDetails",
     style: {
-      navigationBarTitleText: "兑换日志",
+      navigationBarTitleText: "兑换详情",
       navigationStyle: "custom"
     }
   },
@@ -1464,7 +1464,8 @@ const globalStyle = {
   "app-plus": {
     animationType: "none",
     animationDuration: 0
-  }
+  },
+  bounce: "none"
 };
 const tabBar = {
   color: "#999999",

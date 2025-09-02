@@ -603,15 +603,15 @@
   position: relative;
 }
 .joinTeam-wrap .joinTeam-input[data-v-d282c156] {
-  width: 12.5625rem;
+  width: 11.9375rem;
   border-width: 0;
-  border-radius: 4px;
+  border-radius: 20px;
   margin-bottom: 10px;
   line-height: 2.5625rem;
   font-size: 0.75rem;
   background: #FDF0DE;
   position: absolute;
-  top: 4.8125rem;
+  top: 5.4375rem;
   right: 2.25rem;
 }
 .joinTeam-wrap .tips[data-v-d282c156] {

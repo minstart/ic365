@@ -161,10 +161,6 @@
 					}
 				}).then(res => {
 					// 点击兑换商品
-					uni.showToast({
-						title:"兑换成功",
-						icon: "success"
-					})
 					data.obtained = true;
 					this.commonRequest({
 						url: "/api/student/info"
@@ -174,7 +170,10 @@
 							store.commit("Update_UserInfo", res.data)
 							this.userInfo = res.data;
 						} catch (e) {}
-					
+						uni.showToast({
+							title: "兑换成功",
+							icon: "success"
+						})
 					}).catch(error => {
 						console.log("获取用户信息报错：：", error)
 					})

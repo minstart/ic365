@@ -262,7 +262,6 @@
 								content: item.content
 							})
 						})
-						console.log(res.data)
 						this.productsList["products" + this.selectProductsId].requested = true;
 						this.productsList["products" + this.selectProductsId].page = this.productsList["products" + this.selectProductsId].page + 1;
 						this.productsList["products" + this.selectProductsId].list = [...this.productsList["products" + this.selectProductsId].list, ...res.data];

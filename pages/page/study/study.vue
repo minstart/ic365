@@ -122,7 +122,7 @@
 
 		},
 		onReady() {
-			
+			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
 		},
 		onShow() {
 			this.verifLogin().then(data => {

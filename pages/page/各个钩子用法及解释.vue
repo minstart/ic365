@@ -15,12 +15,15 @@
 	
 	<!-- 暂无数据 -->
 	<view class="no-list-tip" v-if="plan.list.length==0">暂无数据</view>
+	<!-- 没有更多数据 -->
+	<view style="float: left;width: 100%;" class="no-list-tip" v-if="commodity.noData"> - 没有更多了 -</view>
 	
 	<!-- 滚动 -->
 	<!-- @scrolltolower（到底加载函数） scroll-into-view（滚动到指定位置）  scroll-with-animation（滚动动画开启）-->
 	<scroll-view class="tree-wrap" scroll-y="true" :scroll-into-view="treeID" :scroll-with-animation="true" @scrolltolower="GetNextVideoList">
 		<view :id="'tree-list-'+item.categoryId" class="tree-list" :class='selectCategory.categoryId == item.categoryId?"tree-selected":""' v-for="(item,i) in categoryTree.category" @click.stop="choiceCategory(item)">
 			<view class="tree-list-title">{{item.name}}</view>
+			<!-- lazy-load 图片懒加载 -->
 		</view>
 	</scroll-view>
 	<!-- 公共页面项标题 -->

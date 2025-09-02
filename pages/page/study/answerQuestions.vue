@@ -34,6 +34,7 @@
 					<!-- 答题右下方内容 -->
 					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'">
 						<view class="topic">
+							题目id:{{topic.questionId}}
 							<h3 class="topic-text" v-html="topic.content"></h3>
 							<view class="topic-image-wrap">
 								<image class="topic-image" :src="item" v-for="item in topic.contentImages"></image>
@@ -50,7 +51,6 @@
 								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'&&answered">下一题</button>
 								<button class="topic-submit" @click="submitTopic" v-if="!answered && topic.questionId">提交</button>
 							</view>
-
 						</view>
 						<view class="analysis-wrap">
 							<view class="analysis" v-if="answered">
@@ -847,7 +847,6 @@
 				.topic-content-wrap {
 					display: flex;
 					height: calc(100vh - 2.75rem - 1rem);
-
 					.topic {
 						height: 100%;
 						width: 600rpx;
@@ -881,7 +880,7 @@
 
 						.topic-options-wrap {
 							margin-top: 0.5rem;
-
+							padding-bottom: 80rpx;
 							.topic-options {
 								position: relative;
 								display: inline-block;
@@ -937,31 +936,36 @@
 								}
 							}
 						}
-
-						.topic-submit {
-							width: 180rpx;
-							height: 72rpx;
-							line-height: 72rpx;
-							font-weight: 500;
-							font-size: 32rpx;
-							background: linear-gradient(to right, #FDB150, #FFDB9B);
-							border: 2rpx solid linear-gradient(to right, #FDB150, #FFDB9B);
-							float: right;
-							border-radius: 36rpx;
-							margin-right: 40rpx;
+						.btn-wrap{
+							position: fixed;
+							bottom: 20rpx;
+							right: 400rpx;
+							.topic-submit {
+								width: 180rpx;
+								height: 72rpx;
+								line-height: 72rpx;
+								font-weight: 500;
+								font-size: 32rpx;
+								background: linear-gradient(to right, #FDB150, #FFDB9B);
+								border: 2rpx solid linear-gradient(to right, #FDB150, #FFDB9B);
+								float: right;
+								border-radius: 36rpx;
+								margin-right: 40rpx;
+							}
+							
+							.topic-next {
+								width: 180rpx;
+								height: 72rpx;
+								line-height: 72rpx;
+								font-weight: 500;
+								font-size: 32rpx;
+								background: #fff !important;
+								float: right;
+								border-radius: 36rpx;
+								border: 2rpx solid #FF7426;
+							}
 						}
-
-						.topic-next {
-							width: 180rpx;
-							height: 72rpx;
-							line-height: 72rpx;
-							font-weight: 500;
-							font-size: 32rpx;
-							background: #fff !important;
-							float: right;
-							border-radius: 36rpx;
-							border: 2rpx solid #FF7426;
-						}
+						
 					}
 
 				}
