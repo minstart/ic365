@@ -61,7 +61,7 @@
 				</view>
 				<view class="learning-method">
 					<view class="method-img method_right" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=question'})"></view>
-					<view class="method-img method_right" @click="jumpPage({url:'/pages/page/study/questionList?pageType=error'})"></view>
+					<view class="method-img method_right" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=errorList'})"></view>
 				</view>
 			</view>
 			<view class="item-title-wrap">

@@ -162,13 +162,15 @@
 								coverUrl: "/static/icons/recently_practiced.png",
 								title: "最近练习",
 								introduce: "查看最近的练习记录",
-								unRead: ""
+								unRead: "",
+								jumpUrl:"/pages/page/study/answerQuestions?pageType=recentlyList"
 							},
 							{
 								coverUrl: "/static/icons/collecting_exercises.png",
 								title: "收藏练习",
 								introduce: "",
-								unRead: ""
+								unRead: "",
+								jumpUrl:"/pages/page/study/answerQuestions?pageType=collectList"
 							}
 
 						]
@@ -268,8 +270,6 @@
 					console.log("获取最近题目和收藏题目数量", res.data)
 					res.data.recently > 0 ? (this.practiceList[1].list[0].unRead = res.data.recently + "条新记录") : (this.practiceList[1].list[0].unRead = "");
 					this.practiceList[1].list[1].introduce = "已收藏" + (res.data.collection || 0) + "个练习";
-					this.practiceList[1].list[0].jumpUrl = "/pages/page/study/questionList?pageType=recently";
-					this.practiceList[1].list[1].jumpUrl = "/pages/page/study/questionList?pageType=collect";
 				}).catch(error => {
 					console.log("获取最近题目和收藏题目数量报错：：", error)
 				})

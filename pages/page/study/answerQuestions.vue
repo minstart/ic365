@@ -8,9 +8,7 @@
 				<!-- 左侧类目 -->
 				<view class="category-wrap">
 					<view class="subject-grade-wrap">
-						<span class="subject">{{categoryTree.subject}}</span>
-						<span> · </span>
-						<span class="grade">{{categoryTree.grade}}年级{{categoryTree.semester}}{{treeID}}</span>
+						<span class="grade">{{categoryTree.grade}}</span>
 					</view>
 					<scroll-view class="tree-wrap" v-if="!option.missionId" scroll-y="true" :scroll-into-view="treeID" :scroll-with-animation="true">
 						<view :id="'tree-list-'+item.categoryId" class="tree-list" :class='selectCategory.categoryId == item.categoryId?"tree-selected":""' v-for="(item,i) in categoryTree.category" @click.stop="choiceCategory(item)">
@@ -79,9 +77,20 @@
 							</view>
 						</view>
 					</view>
+					<!-- 错题本列表 、 收藏列表 、 最近练习列表 -->
+					<view class="topic-list-wrap" v-if="pageType=='errorList' || pageType=='recentlyList' || pageType=='collectList'">
+						<scroll-view class="topic-list-window" scroll-y="true" @scrolltolower="GetNextList">
+							<view class="topic-list" v-for="item in topicList" v-html="item.content" @tap.stop="getTopicDetails(item)"></view>
+							<view style="float: left;width: 100%;" class="no-list-tip" v-if="videoList.noData"> - 没有更多题目了 -</view>
+						</scroll-view>
+					</view>
+					<!-- 详情 -->
+					<view class="topic-details-wrap" v-if="pageType=='errorDetails' || pageType=='recentlyDetails' || pageType=='collectDetails'">
+						<h3 class="topic-text" v-html="topicDetails.content"></h3>
+					</view>
 					<!-- 视频列表 -->
 					<view class="video-list-wrap">
-						<scroll-view class="video-list-window" scroll-y="true" @scrolltolower="GetNextVideoList">
+						<scroll-view class="video-list-window" scroll-y="true" @scrolltolower="GetNextList">
 							<view class="name-wrap">
 								<view class="name">{{selectCategory.name}} <span class="border"></span></view>
 							</view>
@@ -154,7 +163,7 @@
 			return {
 				taskbarHeight2: "", //计算任务栏高度，避开左侧摄像头位置
 				treeID: "", //树状图左侧菜单滚动位置
-				pageType: "", //everyDay 每日一题；question 题目；video 视频
+				pageType: "", //everyDay 每日一题; question 题目;video 视频;errorList 错题本;errorDetails错题详情;recentlyList 最近练习列表;recentlyDetails最近习题详情; collectList 收藏列表;collectDetails 收藏习题详情
 				answered: false, //是否已经回答了问题
 				keyword: "", //搜索内容
 				time: 0, //答题计时器
@@ -194,7 +203,11 @@
 				},
 				videoId: "", //精准查询某个视频
 				questionId: "", //精准查询某个题目
-				option: {}
+				option: {},
+				topicList: [], //错题本列表、最近答题列表、收藏列表
+				parentPageType:"",//上一级页面类型（错题本详情、收藏练习详情、最近练习详情）
+				topicDetails:{}, //点击题目的详情 （错题本详情、收藏练习详情、最近练习详情）
+				
 			}
 		},
 		onLoad(option) {
@@ -216,7 +229,7 @@
 					this.commonRequest(requestData).then(res => {
 						console.log("获取今日题目::", res)
 						try {
-							this.categoryTree.grade = this.changeGrade(res.data.grade);
+							this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(res.data.grade) + "年级";
 							// this.categoryTree.semester = res.data.semester == "fall" ? "上册" : (res.data.semester == "spring" ? "下册" : "");
 							this.categoryTree.category[0] = {
 								categoryId: res.data.categoryId,
@@ -238,7 +251,13 @@
 				} else {
 					this.getQuestion().then(res => {
 						try {
-							this.categoryTree.grade = this.changeGrade(store.state.userInfo.info.grade);
+							if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
+								this.categoryTree.grade = "错题本";
+								this.pageType == "recentlyList" && (this.categoryTree.grade = "最近练习")
+								this.pageType == "collectList" && (this.categoryTree.grade = "收藏练习")
+							} else {
+								this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(store.state.userInfo.info.grade) + "年级";
+							}
 						} catch (e) {
 							console.log(e)
 						}
@@ -338,7 +357,7 @@
 					this.topic.analysis = this.imgUrlChangeImg({
 						content: this.topic.analysis,
 						imgClass: 'popup-analysis-img'
-					})
+					});
 					!this.topic.AIanalysis && (this.topic.AIanalysis = {})
 				} catch (e) {}
 				// 题目答案处理
@@ -540,8 +559,8 @@
 
 			// 点击类目之后,获取右侧内容（切换类目）
 			choiceCategory(item, isInitialization) {
-				// console.log(this.selectCategory.categoryId, item.categoryId)
-				if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || typeof isInitialization != "undefined") {
+				console.log(this.selectCategory.categoryId, item.categoryId)
+				if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList" || typeof isInitialization != "undefined") {
 					if (this.selectCategory.categoryId != item.categoryId && item) {
 						this.selectCategory = {
 							categoryId: item.categoryId,
@@ -549,7 +568,7 @@
 						}
 						this.resetProblem(this.pageType)
 					}
-					// console.log("this.pageType:", this.pageType)
+					console.log("this.pageType:", this.pageType)
 					// console.log("categoryId：：",item.categoryId)
 					if (this.pageType == "question") {
 						let byCategoryData = {
@@ -588,6 +607,7 @@
 							size: 24,
 							categoryId: item.categoryId
 						}
+						console.log(byCategoryData)
 						this.videoId && (byCategoryData.videoId = this.videoId)
 
 						let byCategoryUrl = "/api/video/byCategory"
@@ -614,6 +634,49 @@
 						}).catch(error => {
 							console.log("获取视频列表报错", error)
 						})
+					} else if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
+						if (this.videoList.noData) return false;
+						let byCategoryUrl = "/api/wrong-records/getAll";
+						let byCategoryData = {
+							keyword: this.keyword,
+							page: this.videoList.page + 1,
+							size: 10,
+							categoryId: item.categoryId
+						}
+						if (this.pageType == "recentlyList") {
+							byCategoryUrl = "/api/question/collectionList"
+						} else if (this.pageType == "collectList") {
+							byCategoryUrl = "/api/question/getRecentlyAnswer"
+						}
+
+						this.commonRequest({
+							url: byCategoryUrl,
+							data: byCategoryData
+						}).then(res => {
+							console.log("题目列表:", res.data)
+							if (res.data.length == 0) {
+								this.videoList.noData = true;
+							}
+							this.videoList.page = this.videoList.page + 1;
+							this.isLoading = false;
+							res.data.forEach((item, i) => {
+								res.data[i].content = this.imgUrlChangeImg({
+									content: item.content
+								})
+								if (this.pageType == "errorList") {
+									res.data[i].userAnswer = this.imgUrlChangeImg({
+										content: item.userAnswer
+									})
+									res.data[i].correctAnswer = this.imgUrlChangeImg({
+										content: item.correctAnswer
+									})
+								}
+							})
+							this.topicList = [...this.topicList, ...res.data]
+							console.log("this.topicList 题目列表：", this.topicList)
+						}).catch(error => {
+							console.log("题目列表报错", error)
+						})
 					} else {
 						return console.log("每日一题的不能点")
 					}
@@ -621,7 +684,7 @@
 				// resetProblem("question")
 			},
 
-			GetNextVideoList() {
+			GetNextList() {
 				if (this.isLoading) return false;
 				this.isLoading = true;
 				this.choiceCategory(this.selectCategory)
@@ -670,11 +733,20 @@
 						list: []
 					}
 				}
+
+				if (type == "all" || type == "video" || type == "errorList" || type == "recentlyList" || type == "collectList") {
+					this.videoList = { //视频列表
+						page: 0,
+						noData: false, //判断是不是已经没有更多视频了
+						list: []
+					}
+				}
+
 			},
 
 			// 打开文本 + 图片解析；
 			textAnalysis() {
-				if(!this.topic.analysis) return false;
+				if (!this.topic.analysis) return false;
 				this.showAnalysis = true;
 			},
 			// 关闭视频弹窗
@@ -701,7 +773,18 @@
 					this.getAIAnalysis();
 				}
 			},
-
+			// 错题本 、 最近练习、收藏练习列表打开详情
+			getTopicDetails(item){
+				this.parentPageType = this.pageType;
+				if(this.pageType == "errorList"){
+					this.pageType = "errorDetails"
+				} else if(this.pageType == "recentlyList"){
+					this.pageType = "recentlyDetails"
+				} else if(this.pageType == "collectList"){
+					this.pageType = "collectDetails"
+				}
+				this.topicDetails = item;
+			}
 		}
 	}
 </script>
@@ -847,6 +930,7 @@
 				.topic-content-wrap {
 					display: flex;
 					height: calc(100vh - 2.75rem - 1rem);
+
 					.topic {
 						height: 100%;
 						width: 600rpx;
@@ -881,6 +965,7 @@
 						.topic-options-wrap {
 							margin-top: 0.5rem;
 							padding-bottom: 80rpx;
+
 							.topic-options {
 								position: relative;
 								display: inline-block;
@@ -936,10 +1021,12 @@
 								}
 							}
 						}
-						.btn-wrap{
+
+						.btn-wrap {
 							position: fixed;
 							bottom: 20rpx;
 							right: 400rpx;
+
 							.topic-submit {
 								width: 180rpx;
 								height: 72rpx;
@@ -952,7 +1039,7 @@
 								border-radius: 36rpx;
 								margin-right: 40rpx;
 							}
-							
+
 							.topic-next {
 								width: 180rpx;
 								height: 72rpx;
@@ -965,12 +1052,46 @@
 								border: 2rpx solid #FF7426;
 							}
 						}
-						
+
 					}
 
 				}
 
 				// 中间答题 ------ End
+				// 错题本、最近练习题、收藏习题 列表
+				.topic-list-wrap {
+					height: calc(100vh - 2.75rem - 1rem);
+					padding: 20rpx;
+					background-color: #fff;
+
+					.topic-list-window {
+						height: 100%;
+					}
+
+					.topic-list {
+						padding: 10rpx 40rpx 10rpx 20rpx;
+						margin-bottom: 40rpx;
+						border-radius: 10rpx;
+						width: calc(100% - 64rpx);
+						background: #fffdf9;
+						position: relative;
+						font-size: 20rpx !important;
+						border: 2rpx solid #ccc;
+
+						&::after {
+							content: " ";
+							position: absolute;
+							right: 20rpx;
+							top: 0;
+							bottom: 0;
+							margin: auto;
+							width: 16rpx;
+							height: 28rpx;
+							background: url("/static/icons/next.png") no-repeat right / 100% 100%;
+						}
+					}
+				}
+
 				// 视频列表 ------ Start
 				.video-list-wrap {
 					height: calc(100vh - 2.75rem - 1rem);
