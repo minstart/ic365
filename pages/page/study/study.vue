@@ -149,7 +149,7 @@
 				this.commonRequest({
 					url: "/api/report/weekly"
 				}).then(res => {
-					console.log("获取用户周报数据::", JSON.stringify(res))
+					console.log("获取用户周报数据::", res)
 					try {
 						res.data && (this.learningGoal = res.data);
 					} catch (e) {}

@@ -56,6 +56,12 @@ service.interceptors.request.use(
 							newCrypto.sessionKey && (newConfig.headers['X-Session-Key'] = newCrypto.sessionKey)
 						} catch (e) {}
 						if (newConfig.data) {
+							if(JSON.stringify(newConfig.data).indexOf("data")==-1){
+								newConfig.oldData = newConfig.data;
+							}else if(typeof newConfig.oldData != "undefined"){
+								newConfig.oldData = newConfig.oldData;
+							}
+							console.log("newConfig.data::",newConfig.data)
 							newConfig.data = {
 								data: aesEncrypt(newConfig.data, newCrypto.aesKey)
 							}
@@ -102,7 +108,7 @@ service.interceptors.response.use(
 		const res = response.data
 		if (store.state.encrypt_enabled && response.config.url.includes('/crypto') === false && response.data?.data) {
 			// AES KEY EXPIRED.
-			if (res.code === 407) {
+			if (res.code === 407 || res.code === 412) {
 				return handleSessionExpired(response.config)
 			}
 
@@ -121,12 +127,6 @@ service.interceptors.response.use(
 
 		// if the custom code is not 20000, it is judged as an error.
 		if (res.code !== 0) {
-			uni.showToast({
-				title: res.message || res.msg || '服务器返回异常',
-				icon: 'none',
-				duration: 5000
-			});
-
 			// 50008: Illegal token 50012: Other clients logged in 50014: Token expired
 			if (res.code === 401 || res.code === 401 || res.code === 401) {
 				// to re-login
@@ -141,7 +141,11 @@ service.interceptors.response.use(
 					})
 				})
 			}
-			
+			uni.showToast({
+				title: res.message || res.msg || '服务器返回异常',
+				icon: 'none',
+				duration: 5000
+			});
 			return Promise.reject(new Error(res.message || res.msg || 'Error'))
 		} else {
 			return res
@@ -149,33 +153,38 @@ service.interceptors.response.use(
 	},
 	error => {
 		console.log("报错接口返回：", error)
+
+		if (error.response && (error.response.data.code === 407 || error.response.data.status === 412)) {
+			return handleSessionExpired(error.config)
+		}
 		uni.showToast({
 			title: error.message || error.msg,
 			icon: "none"
 		});
-
-		if (error.response && error.response.data.code === 407) {
-			return handleSessionExpired(error.config)
-		}
-
 		return Promise.reject(error)
 	}
 )
 
 
 async function handleSessionExpired(originalRequest) {
+	// console.log("处理会话过期:::::")
+	if(store.state.crypto && store.state.crypto.sessionKey){
+		store.commit('RESET_CRYPTO') //清除crypto加密储存数据
+	}
 	try {
 		const newCrypto = await refreshKeys()
 		originalRequest.headers['X-Session-Key'] = newCrypto.sessionKey
-		if (originalRequest.data) {
-			console.log("333333333333", originalRequest.data, newCrypto.aesKey)
+		if (originalRequest.oldData) {
+			console.log("333333333333", originalRequest.oldData, newCrypto.aesKey)
+			let arr = Object.assign({},originalRequest.oldData)
 			originalRequest.data = {
-				data: aesEncrypt(originalRequest.data, newCrypto.aesKey)
+				data: aesEncrypt(originalRequest.oldData, newCrypto.aesKey)
 			}
+			originalRequest.oldData = arr;
 		}
 		return service(originalRequest)
 	} catch (e) {
-		// console.log('处理会话过期失败', JSON.stringify(e))
+		// console.log('处理会话过期失败', e)
 		return Promise.reject(e)
 	}
 }

@@ -81,8 +81,8 @@
 	@import "/static/css/standard.scss";
 
 	.details-wrap {
-		height: calc(100vh - 88rpx);
-		background: linear-gradient(#FFF4CF 0%, #FFF4CF 50%, $background 100%);
+		height: calc(100vh - 210rpx);
+		background: linear-gradient(#FFF4CF 0%, $background 100%);
 
 		.details-info {
 			text-align: center;

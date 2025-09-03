@@ -41,22 +41,9 @@ async function fetchData(data) {
 			!data.notLoading && uni.hideLoading()
 		})
 	} catch (error) {
-		store.commit('RESET_CRYPTO') //清除crypto加密储存数据
+		// store.commit('RESET_CRYPTO') //清除crypto加密储存数据
 		console.error('校验加密数据失败:', error);
-		const crypto = Cookies.get('crypto') ? JSON.parse(Cookies.get('crypto')) : ""
-		if (store.state.encrypt_enabled) {
-			if (shouldRefreshKeys(crypto)) {
-				await refreshKeys()
-			}
-		}
-		data.url && data.url.indexOf("http") == -1 && (data.url = store.state.configData.staticUrl + data.url)
-		return request({
-			url: data.url,
-			method: data.method || 'post',
-			data: data.data
-		}).finally(() => {
-			!data.notLoading && uni.hideLoading()
-		})
+		
 	}
 }
 

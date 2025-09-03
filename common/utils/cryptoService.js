@@ -8,7 +8,6 @@ import store from '/store/index.js'
 const staticUrl = store.state.configData.staticUrl
 
 // console.log("11111:",staticUrl)
-let refreshPromise = null
 async function getPublicKey() {
 	return new Promise((resolve, reject) => {
 		uni.request({
@@ -22,7 +21,7 @@ async function getPublicKey() {
 				reject(err);
 			},
 			complete: (res) => {
-				// console.log("/api/crypto/publicKey接口返回：", JSON.stringify(res))
+				// console.log("/api/crypto/publicKey接口返回：", res)
 			}
 		})
 	})
@@ -86,7 +85,7 @@ export async function exchangeKeys() {
 	// 	method: 'get'
 	// })
 	store.commit('SET_CRYPTO', cryptoData)
-	// aesKey && (refreshPromise = cryptoData);
+	// aesKey && (store.state.refreshPromise = cryptoData);
 	return cryptoData
 	// } catch (error) {
 	// 	console.log('密钥交换失败', JSON.stringify(error))
@@ -100,31 +99,41 @@ export async function exchangeKeys() {
 
 
 export async function refreshKeys() {
-	// console.log("refreshKeys2222222222222::",JSON.stringify(refreshPromise))
-	if (store.state.crypto && JSON.stringify(store.state.crypto) != "{}" && JSON.stringify(refreshPromise) == "{}") {
-		newCrypto = store.state.crypto
-		return newCrypto;
+	// console.log("refreshKeys2222222222222::",JSON.stringify(store.state.refreshPromise))
+	if (store.state.crypto && store.state.crypto.sessionKey) {
+		// console.log("store.state.crypto::",store.state.crypto)
+		return store.state.crypto;
 	}
 
-	if (refreshPromise) {
-		// console.log("refreshPromisekkkkk:::::::::::",JSON.stringify(refreshPromise))
-		return refreshPromise;
+	if (store.state.refreshPromise) {
+		// console.log("store.state.refreshPromisekkkkk:::::::::::",store.state.refreshPromise)
+		return store.state.refreshPromise;
 	}
 
-	refreshPromise = (async () => {
+	store.state.refreshPromise = (async () => {
+		// try {
+		// 	return await exchangeKeys()
+		// } finally {
+		// 	console.log("store.state.refreshPromise报错！！！！！！！")
+		// 	// store.state.refreshPromise = null
+		// 	// if (store.state.crypto && store.state.crypto.aesKey) {
+		// 	// 	store.state.refreshPromise = store.state.crypto
+		// 	// 	return store.state.crypto;
+		// 	// }
+		// }
 		try {
 			return await exchangeKeys()
-		} finally {
-			// console.log("refreshPromise报错！！！！！！！")
-			// refreshPromise = null
-			if (store.state.crypto && store.state.crypto.aesKey) {
-				refreshPromise = store.state.crypto
-				return store.state.crypto;
-			}
+		} catch(e) {
+			console.log("store.state.refreshPromise报错！！！！！！！",e)
+			// store.state.refreshPromise = null
+			// if (store.state.crypto && store.state.crypto.aesKey) {
+			// 	store.state.refreshPromise = store.state.crypto
+			// 	return store.state.crypto;
+			// }
 		}
 	})()
-	// console.log("refreshKeys::",JSON.stringify(refreshPromise))
-	return refreshPromise
+	// console.log("refreshKeys::",JSON.stringify(store.state.refreshPromise))
+	return store.state.refreshPromise
 }
 
 

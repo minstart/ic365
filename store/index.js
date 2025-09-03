@@ -41,6 +41,7 @@ const store = new Vuex.Store({
 						info: {} //登录用户信息数据存储
 					},
 					crypto: crypto,
+					refreshPromise:null,
 					encrypt_enabled: process.env.VUE_APP_ENCRYPT_ENABLED === 'true',
 					formRules: { //uni-forms校验必填
 						phone: /^1[3456789]\d{9}$/
@@ -74,11 +75,8 @@ const store = new Vuex.Store({
 					// 复位crypto
 					RESET_CRYPTO: (state) => {
 						Cookies.remove('crypto')
-						state.crypto = {
-							sessionKey: '',
-							aesKey: '',
-							expireTime: 0
-						}
+						state.crypto = {}
+						state.refreshPromise = null;
 					},
 					// 设置crypto
 					SET_CRYPTO: (state, crypto) => {

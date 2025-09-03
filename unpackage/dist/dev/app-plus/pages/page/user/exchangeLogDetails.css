@@ -106,8 +106,8 @@
 /* 透明度 */
 /* 文章场景相关 */
 .details-wrap[data-v-7e25877f] {
-  height: calc(100vh - 2.75rem);
-  background: linear-gradient(#FFF4CF 0%, #FFF4CF 50%, #F8F8F8 100%);
+  height: calc(100vh - 6.5625rem);
+  background: linear-gradient(#FFF4CF 0%, #F8F8F8 100%);
 }
 .details-wrap .details-info[data-v-7e25877f] {
   text-align: center;

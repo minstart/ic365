@@ -89,7 +89,7 @@
 				</view>
 				<ul class="team-list-wrap">
 					<li class="team-list" v-for="item in members">
-						<view class="delete-btn" @tap.stop="deleteTeammate(item)" v-if="isCaptain && item.userId != userInfo.userId"></view>
+						<view class="delete-btn" @tap.stop="deleteTeammate(item)" v-if="!item.isCaptain && isCaptain && item.userId != userInfo.userId"></view>
 						<image class="list-avatar" :src="item.avatar"></image>
 						<h3 class="list-nickname">{{item.nickname}}同学</h3>
 						<view class="list-time green">{{item.isCaptain?"队长":"队员"}}</view>
@@ -266,22 +266,33 @@
 				this.$refs.joinTeam.close()
 			},
 			deleteTeammate(item) {
-				console.log("删除队友", item)
-				this.commonRequest({
-					url: "/api/team/kickMember",
-					data: {
-						userId: item.userId
+				let _this = this;
+				uni.showModal({
+					title: '队伍管理',
+					content: '是否确认把'+item.nickname + "同学移出队伍？",
+					success: function(res) {
+						if (res.confirm) {
+							_this.commonRequest({
+								url: "/api/team/kickMember",
+								data: {
+									userId: item.userId
+								}
+							}).then(res => {
+								console.log("移出队员：", res.data)
+								// 获取我的队伍和任务相关信息
+								_this.getTeamDetails()
+							
+								uni.showToast({
+									title: "移出队员成功",
+									icon: "none"
+								})
+							})
+						} else if (res.cancel) {
+							// 取消
+						}
 					}
-				}).then(res => {
-					console.log("移除队员：", res.data)
-					// 获取我的队伍和任务相关信息
-					this.getTeamDetails()
-
-					uni.showToast({
-						title: "移除队员成功",
-						icon: "none"
-					})
-				})
+				});
+				
 			},
 			exitTeam(item) {
 				console.log("离开队伍", item)

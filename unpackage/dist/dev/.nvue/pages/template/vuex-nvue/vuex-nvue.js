@@ -290,6 +290,7 @@ const store = createStore({
       //登录用户信息数据存储
     },
     crypto,
+    refreshPromise: null,
     encrypt_enabled: process.env.VUE_APP_ENCRYPT_ENABLED === "true",
     formRules: {
       //uni-forms校验必填
@@ -327,11 +328,8 @@ const store = createStore({
     // 复位crypto
     RESET_CRYPTO: (state) => {
       api.remove("crypto");
-      state.crypto = {
-        sessionKey: "",
-        aesKey: "",
-        expireTime: 0
-      };
+      state.crypto = {};
+      state.refreshPromise = null;
     },
     // 设置crypto
     SET_CRYPTO: (state, crypto2) => {
@@ -346,7 +344,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:97", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:95", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },
@@ -584,7 +582,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
+const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
 export {
   vuexNvue as default
 };
