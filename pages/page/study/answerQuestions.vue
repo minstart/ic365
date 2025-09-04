@@ -81,7 +81,7 @@
 					<!-- 错题本列表 、 收藏列表 、 最近练习列表 -->
 					<view class="topic-list-wrap" v-show="pageType=='recentlyList' || pageType=='errorList' ||  pageType=='collectList'">
 						<scroll-view class="topic-list-window" scroll-y="true" @scrolltolower="GetNextList">
-							<view style="font-size: 30rpx;">测试</view>
+							<!-- <view style="font-size: 30rpx;">测试</view> -->
 							<view class="topic-list" v-for="item in topicList" v-html="item.content" @tap.stop="getTopicDetails(item)"></view>
 							<view style="float: left;width: 100%;" class="no-list-tip" v-if="videoList.noData"> - 没有更多题目了 -</view>
 						</scroll-view>
@@ -618,6 +618,12 @@
 							data: byCategoryData
 						}).then(res => {
 							console.log("获取题目:", res.data)
+							if(res.data.length==0){
+								uni.showToast({
+									title:"获取不到题目"
+								})
+								return false;
+							}
 							this.topic = res.data[0];
 							this.topicFilter()
 							this.questionId = ""; //精准查询某个题目

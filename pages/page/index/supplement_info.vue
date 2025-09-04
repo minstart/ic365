@@ -36,9 +36,7 @@
 		data() {
 			return {
 				pageHeadTitle: '补充用户信息',
-				baseFormData: {
-					grade: ""
-				},
+				baseFormData: {},
 				gradeRange: [{
 						value: 1,
 						text: '一年级'
@@ -64,7 +62,6 @@
 						text: '六年级'
 					},
 				],
-
 				genders: [{
 						value: 0,
 						text: '男'
@@ -75,16 +72,16 @@
 					}
 				],
 				rules: {
-					grade: {
-						rules: [{
-							required: true,
-							errorMessage: '请选择年级',
-						}]
-					},
 					gender: {
 						rules: [{
 							required: true,
 							errorMessage: '请选择性别'
+						}],
+					},
+					grade: {
+						rules: [{
+							required: true,
+							errorMessage: '请选择年级',
 						}]
 					},
 					nickname: {
@@ -106,23 +103,16 @@
 			this.pageOnShowSet({
 				uniHide: "all"
 			})
-			
+
 			this.commonRequest({
 				url: "/api/student/info"
 			}).then(res => {
 				this.consoleLog("获取用户信息::", JSON.stringify(res))
-				if (res.code == 0) {
-					try {
-						store.commit("Update_UserInfo", res.data)
-						this.baseFormData = res.data;
-					} catch (e) {}
-
-				} else {
-					uni.showToast({
-						title: res.message || "获取用户信息失败!",
-						icon: "none"
-					});
-				}
+				try {
+					store.commit("Update_UserInfo", res.data)
+					this.baseFormData = res.data;
+					!this.baseFormData.grade && (this.baseFormData.grade = "");
+				} catch (e) {}
 			}).catch(error => {
 				this.consoleLog("获取用户信息报错：：", error)
 			})
@@ -150,28 +140,19 @@
 							data: this.baseFormData
 						})
 						.then(res => {
-							if (res.code == 0) {
-								_this.$store.commit("Update_UserInfo", _this.baseFormData)
-								uni.showToast({
-									title: res.message || "更新成功",
-									icon: "success",
-									duration: 2000,
-									success: function() {
-										setTimeout(() => {
-											uni.showToast({title:"执行到这里了2"})
-											_this.jumpPage({
-												url:"/pages/page/index/index",
-												type:"reLaunch"
-											})
-										}, 2000)
-									}
-								});
-							} else {
-								uni.showToast({
-									title: res.message || "更新用户信息失败!",
-									icon: "none"
-								});
-							}
+							_this.$store.commit("Update_UserInfo", _this.baseFormData)
+							uni.showToast({
+								title: res.message || "更新成功",
+								icon: "success",
+								duration: 2000
+							});
+							setTimeout(() => {
+								_this.jumpPage({
+									url: "/pages/page/index/index",
+									type: "reLaunch"
+								})
+							}, 2000)
+
 						}).catch(error => {
 							uni.showToast({
 								title: '更新用户信息失败:' + error,
@@ -191,10 +172,11 @@
 	}
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 	.page-wrap {
 		background: url("/static/image/0_login_back.png") no-repeat top / 100%;
 	}
+
 	.uni-form-item {
 		.title {
 			flex: 1;
@@ -217,9 +199,8 @@
 		padding: 0 15px;
 		/* text-align: right; */
 	}
-	
-	.submit-btn{
+
+	.submit-btn {
 		width: 90%;
 	}
 </style>
-

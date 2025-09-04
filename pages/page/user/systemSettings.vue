@@ -3,7 +3,7 @@
 	<view class="page-wrap">
 		<page-head :title='pageHeadTitle' :isBack='true' :standardTitle='true' :background="'#fff'"></page-head>
 		<view class="uni-padding-wrap">
-			<view class="list-wrap">
+			<!-- <view class="list-wrap">
 				<view class="list" @tap="parentBinding">
 					<view class="list-title">绑定家长</view>
 					<view class="list-text"></view>
@@ -14,7 +14,7 @@
 					<view class="list-text"></view>
 					<view class="list-icon"></view>
 				</view>
-			</view>
+			</view> -->
 			<view class="list-wrap">
 				<view class="list">
 					<view class="list-title">版本号</view>

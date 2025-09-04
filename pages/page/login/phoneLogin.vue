@@ -13,16 +13,15 @@
 				<uni-forms-item class="uni-forms-item checkbox-item" required name="agreement" label-width="0">
 					<view class="agreement-text">已阅读并同意
 						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=4'})">《儿童隐私政策》</span>、
-						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=2'})">《用户服务协议》</span>和
+						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=2'})">《用户服务协议》</span>、
+						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=1'})">《第三方SDK清单》</span>和
 						<span class="link-a" @click="jumpPage({url:'/pages/page/user/webView?webViewType=3'})">《隐私政策》</span>。
 					</view>
 					<uni-data-checkbox multiple v-model="baseFormData.agreement" :localdata="agreements" />
 				</uni-forms-item>
 				<button class="submit-btn" type="primary" @click="submit('baseForm')">立即登录</button>
 				<view class="change-login" @click="changeLogin">手机号码一键登录</view>
-
 			</uni-forms>
-
 		</view>
 	</template>
 
@@ -164,15 +163,13 @@
 									uni.showToast({
 										title: res.message || "验证码登陆成功!",
 										icon: "success",
-										duration: 3000,
-										success: function() {
-											setTimeout(() => {
-												uni.reLaunch({
-													url: "/pages/page/index/index"
-												});
-											}, 3000)
-										}
+										duration: 2000
 									});
+									setTimeout(() => {
+										uni.reLaunch({
+											url: "/pages/page/index/index"
+										});
+									}, 2000)
 								} else {
 									uni.showToast({
 										title: res.message || "验证码登录失败!",
@@ -197,7 +194,7 @@
 
 
 	<style lang="scss" scoped>
-		@import "/STATIC/css/standard.scss";
+		@import "/static/css/standard.scss";
 
 		uni-page-body {
 			background: url("/static/image/0_login_back.png") no-repeat top / 100%;

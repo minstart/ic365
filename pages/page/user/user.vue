@@ -181,7 +181,7 @@
 							coverUrl: "/static/icons/mistake.png",
 							title: "错题本",
 							introduce: "查看历史错题记录",
-							jumpUrl: "/pages/page/study/questionList?pageType=error"
+							jumpUrl: "/pages/page/study/answerQuestions?pageType=errorList"
 						}]
 					},
 					{

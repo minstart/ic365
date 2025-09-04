@@ -41,7 +41,7 @@
 					break;
 				case "4":
 					this.pageHeadTitle = "儿童隐私协议"
-					this.viewUrl = ""
+					this.viewUrl = "/hybrid/html/privacyChildren.html"
 					break;
 			}
 

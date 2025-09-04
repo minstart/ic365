@@ -31,7 +31,9 @@
 		<view class="uni-padding-wrap">
 			<!-- 当前挑战 -->
 			<view class="challenge-wrap">
-				<h3 class="progress">团队进度： <span v-if="currentMission.processTotal">currentMission.processTotal</span><span v-else>— —</span></h3>
+				<h3 class="progress">团队进度： 
+				<span v-if="currentMission.processTotal">currentMission.processTotal</span>
+				<span v-else>— —</span></h3>
 				<view class="progress-info">
 					<image class="info-icon" :src="currentMission.coverImage"></image>
 					<view class="info-wrap">
@@ -46,8 +48,8 @@
 						<span v-else>— —</span>
 					</h2>
 					<h2 class="progress-reward">
-					{{currentMission.rewardNames}}
-					<span>— —</span>
+						<span v-if="currentMission.rewardNames">{{currentMission.rewardNames}}</span>
+						<span v-else>— —</span>
 					</h2>
 				</view>
 			</view>

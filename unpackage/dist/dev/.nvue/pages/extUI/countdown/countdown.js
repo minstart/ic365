@@ -333,7 +333,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     )) : createCommentVNode("v-if", true)
   ]);
 }
-const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
+const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-countdown/components/uni-countdown/uni-countdown.vue"]]);
 const _sfc_main = {
   components: {},
   data() {
@@ -541,7 +541,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const countdown = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/countdown/countdown.nvue"]]);
+const countdown = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/countdown/countdown.nvue"]]);
 export {
   countdown as default
 };
