@@ -230,6 +230,7 @@
 			}).catch(error => {
 				// console.log("记录用户设备信息报错：：", error)
 			})
+			
 		},
 		onShow() {
 			this.verifLogin().then(data => {
@@ -310,10 +311,12 @@
 				}).catch(error => {
 					console.log("通知消息失败：：", error)
 				})
+				
 			}).catch(error => {
 				console.log("没有登录：：", error)
 			})
-
+			
+			// this.jumpPage({url:"/pages/page/study/answerQuestions?pageType=errorList"})
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {})

@@ -57,16 +57,20 @@ service.interceptors.request.use(
 						} catch (e) {}
 						if (newConfig.data) {
 							if(JSON.stringify(newConfig.data).indexOf("data")==-1){
+								// 没有加密，原始状态
 								newConfig.oldData = newConfig.data;
-							}else if(typeof newConfig.oldData != "undefined"){
+								newConfig.data = {
+									data: aesEncrypt(newConfig.data, newCrypto.aesKey)
+								}
+							}else {
+								// 已经加密了
+							}
+							if(typeof newConfig.oldData != "undefined"){
 								newConfig.oldData = newConfig.oldData;
 							}
 							console.log("newConfig.data::",newConfig.data)
-							newConfig.data = {
-								data: aesEncrypt(newConfig.data, newCrypto.aesKey)
-							}
 						}
-						// console.log("请求参数2：newConfig:::", newConfig)
+						console.log("请求参数2：newConfig:::", newConfig)
 						return newConfig
 					}
 					// } catch (e) {

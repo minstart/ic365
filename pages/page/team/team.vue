@@ -31,7 +31,7 @@
 		<view class="uni-padding-wrap">
 			<!-- 当前挑战 -->
 			<view class="challenge-wrap">
-				<h3 class="progress">团队进度： {{currentMission.processTotal}}</h3>
+				<h3 class="progress">团队进度： <span v-if="currentMission.processTotal">currentMission.processTotal</span><span v-else>— —</span></h3>
 				<view class="progress-info">
 					<image class="info-icon" :src="currentMission.coverImage"></image>
 					<view class="info-wrap">
@@ -39,9 +39,16 @@
 						<view class="info-describe">{{currentMission.subtitle}}</view>
 					</view>
 				</view>
+				<view class="no-challenge"></view>
 				<view class="progress-reward-wrap flex-center">
-					<h2 class="progress-time">{{currentMission.remainingTime}}</h2>
-					<h2 class="progress-reward">{{currentMission.rewardNames}}</h2>
+					<h2 class="progress-time">
+						<span v-if="currentMission.remainingTime">{{currentMission.remainingTime}}</span>
+						<span v-else>— —</span>
+					</h2>
+					<h2 class="progress-reward">
+					{{currentMission.rewardNames}}
+					<span>— —</span>
+					</h2>
 				</view>
 			</view>
 			<view class="team-task-wrap">
@@ -565,7 +572,16 @@
 				}
 			}
 		}
-
+		.no-challenge{
+			position: absolute;
+			top: 120rpx;
+			left: 0;
+			right: 0;
+			margin: auto;
+			width: 332rpx;
+			height: 188rpx;
+			background: url('/static/image/3_no_challenge.png') no-repeat center / 100% 100%;
+		}
 		.progress-reward-wrap {
 			position: absolute;
 			left: 1.5rem;

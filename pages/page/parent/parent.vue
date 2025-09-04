@@ -25,7 +25,7 @@
 					</li>
 				</ul>
 			</view>
-			<view class="btn-setUp" @click="jumpPage({url:''})"></view>
+			<!-- <view class="btn-setUp" @click="jumpPage({url:''})"></view> -->
 		</view>
 	</view>
 

@@ -48,6 +48,7 @@
 							<view class="btn-wrap">
 								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'&&answered">下一题</button>
 								<button class="topic-submit" @click="submitTopic" v-if="!answered && topic.questionId">提交</button>
+								<view v-if="parentPageType" class="back-list-btn" @click="backList()">返回列表</view>
 							</view>
 						</view>
 						<view class="analysis-wrap">
@@ -78,18 +79,40 @@
 						</view>
 					</view>
 					<!-- 错题本列表 、 收藏列表 、 最近练习列表 -->
-					<view class="topic-list-wrap" v-if="pageType=='errorList' || pageType=='recentlyList' || pageType=='collectList'">
+					<view class="topic-list-wrap" v-show="pageType=='recentlyList' || pageType=='errorList' ||  pageType=='collectList'">
 						<scroll-view class="topic-list-window" scroll-y="true" @scrolltolower="GetNextList">
+							<view style="font-size: 30rpx;">测试</view>
 							<view class="topic-list" v-for="item in topicList" v-html="item.content" @tap.stop="getTopicDetails(item)"></view>
 							<view style="float: left;width: 100%;" class="no-list-tip" v-if="videoList.noData"> - 没有更多题目了 -</view>
 						</scroll-view>
 					</view>
 					<!-- 详情 -->
 					<view class="topic-details-wrap" v-if="pageType=='errorDetails' || pageType=='recentlyDetails' || pageType=='collectDetails'">
-						<h3 class="topic-text" v-html="topicDetails.content"></h3>
+						<scroll-view class="topic-details-window" scroll-y="true" @scrolltolower="GetNextList">
+							<h3 class="topic-text" v-html="topicDetails.content"></h3>
+							<view class="details-error-wrap" v-if="pageType=='errorDetails'">
+								<view class="details-error-answer">
+									<view class="topic-answer-title">你的答案</view>
+									<view class="answer" v-html="topicDetails.userAnswer"></view>
+								</view>
+								<view class="details-error-answer">
+									<view class="topic-answer-title">正确答案</view>
+									<view class="answer" v-html="topicDetails.correctAnswer"></view>
+								</view>
+							</view>
+							<view class="topic-options-wrap" v-if="pageType=='recentlyDetails' || pageType=='collectDetails'">
+								<view class="topic-options" v-for="(item,i) in changeOptions(topicDetails.options)" v-html="item.optionName +'.'+ item.option"></view>
+							</view>
+							<view class="list-btn-wrap">
+								<view class="list-btn" @click="backList()">返回列表</view>
+								<view class="list-btn" @click="similarExercises(topicDetails)">同类练习</view>
+								<view class="list-btn" @click="reAnswer(topicDetails)">{{pageType=='errorDetails'?'重新作答':'回答题目'}}</view>
+								<!-- <view class="list-btn" @click="print(item2)">打印</view> -->
+							</view>
+						</scroll-view>
 					</view>
 					<!-- 视频列表 -->
-					<view class="video-list-wrap">
+					<view class="video-list-wrap" v-if="pageType == 'video'">
 						<scroll-view class="video-list-window" scroll-y="true" @scrolltolower="GetNextList">
 							<view class="name-wrap">
 								<view class="name">{{selectCategory.name}} <span class="border"></span></view>
@@ -568,6 +591,9 @@
 						}
 						this.resetProblem(this.pageType)
 					}
+					if(this.parentPageType){
+						this.resetProblem(this.pageType)
+					}
 					console.log("this.pageType:", this.pageType)
 					// console.log("categoryId：：",item.categoryId)
 					if (this.pageType == "question") {
@@ -648,21 +674,33 @@
 						} else if (this.pageType == "collectList") {
 							byCategoryUrl = "/api/question/getRecentlyAnswer"
 						}
-
+						console.log("获取题目列表传参::", byCategoryData)
 						this.commonRequest({
 							url: byCategoryUrl,
 							data: byCategoryData
 						}).then(res => {
-							console.log("题目列表:", res.data)
 							if (res.data.length == 0) {
 								this.videoList.noData = true;
 							}
+							console.log("错题本、最近练习题、收藏练习原始返回数据：",res.data)
 							this.videoList.page = this.videoList.page + 1;
 							this.isLoading = false;
 							res.data.forEach((item, i) => {
+								if(res.data[i].contentImages && res.data[i].contentImages.length>0){
+									res.data[i].content = res.data[i].content + " " + res.data[i].contentImages.join(" ")
+								}
 								res.data[i].content = this.imgUrlChangeImg({
 									content: item.content
 								})
+								if(res.data[i].options && res.data[i].options.length>0){
+									res.data[i].options.forEach((item2, a) => {
+										res.data[i].options[a] = this.imgUrlChangeImg({
+											content: item2,
+											imgClass: 'options-img'
+										})
+									})
+								}
+								
 								if (this.pageType == "errorList") {
 									res.data[i].userAnswer = this.imgUrlChangeImg({
 										content: item.userAnswer
@@ -673,12 +711,12 @@
 								}
 							})
 							this.topicList = [...this.topicList, ...res.data]
-							console.log("this.topicList 题目列表：", this.topicList)
+							console.log("错题本、最近练习题、收藏练习处理后的返回数据：",this.topicList)
 						}).catch(error => {
 							console.log("题目列表报错", error)
 						})
 					} else {
-						return console.log("每日一题的不能点")
+						return console.log("其他类型的不能点")
 					}
 				}
 				// resetProblem("question")
@@ -734,12 +772,15 @@
 					}
 				}
 
-				if (type == "all" || type == "video" || type == "errorList" || type == "recentlyList" || type == "collectList") {
+				if (type == "all" || type == "errorList" || type == "recentlyList" || type == "collectList") {
 					this.videoList = { //视频列表
 						page: 0,
 						noData: false, //判断是不是已经没有更多视频了
 						list: []
 					}
+					this.videoList.page = 0;
+					this.topicList = [];
+					this.parentPageType = "";
 				}
 
 			},
@@ -784,6 +825,21 @@
 					this.pageType = "collectDetails"
 				}
 				this.topicDetails = item;
+			},
+			backList(){
+				this.pageType = this.parentPageType;
+				this.choiceCategory({
+					categoryId:this.selectCategory.categoryId
+				},true)
+			},
+			similarExercises(item){
+				this.pageType = "question"
+				this.choiceCategory(item,true)
+			},
+			reAnswer(item){
+				this.questionId = item.questionId
+				this.pageType = "question"
+				this.choiceCategory(item,true)
 			}
 		}
 	}
@@ -1051,6 +1107,20 @@
 								border-radius: 36rpx;
 								border: 2rpx solid #FF7426;
 							}
+							.back-list-btn {
+								width: 180rpx;
+								height: 72rpx;
+								line-height: 72rpx;
+								font-weight: 500;
+								font-size: 32rpx;
+								background: #fff !important;
+								float: right;
+								border-radius: 36rpx;
+								
+								text-align: center;
+								margin-right: 1.3rem;
+								border: 2rpx solid #ccc;
+							}
 						}
 
 					}
@@ -1058,14 +1128,18 @@
 				}
 
 				// 中间答题 ------ End
-				// 错题本、最近练习题、收藏习题 列表
+				// 错题本、最近练习题、收藏习题 列表 ------ Start
 				.topic-list-wrap {
-					height: calc(100vh - 2.75rem - 1rem);
-					padding: 20rpx;
+					height: calc(100vh - 2.75rem - 40rpx);
+					padding: 20rpx 40rpx;
 					background-color: #fff;
 
 					.topic-list-window {
 						height: 100%;
+						transform: scale(1) !important;
+						*{
+							transform: scale(1) !important;
+						}
 					}
 
 					.topic-list {
@@ -1075,9 +1149,8 @@
 						width: calc(100% - 64rpx);
 						background: #fffdf9;
 						position: relative;
-						font-size: 20rpx !important;
+						font-size: 16px !important;
 						border: 2rpx solid #ccc;
-
 						&::after {
 							content: " ";
 							position: absolute;
@@ -1091,7 +1164,111 @@
 						}
 					}
 				}
-
+				// 错题本、最近练习题、收藏习题 列表 ------ End
+				// 错题本、最近练习题、收藏习题 详情 ------ Start
+				.topic-details-wrap{
+					height: calc(100vh - 2.75rem - 40rpx);
+					padding: 20rpx 40rpx;
+					.topic-details-window{
+						height: 100%;
+						.topic-text{
+							padding-bottom: 24rpx;
+						}
+					}
+					// 错题本详情
+					.details-error-wrap{
+						display: flex;
+						.details-error-answer{
+							flex: 1;
+							padding: 40rpx 40rpx 90rpx 40rpx;
+							&:nth-child(1) {
+								background: #FFF5F6;
+								color: #7D000F;
+								margin-bottom: 0.625rem;
+								margin-right: 10rpx;
+							}
+							
+							&:nth-child(2) {
+								background: #F3FFF3;
+								color: #1C760D;
+								margin-left: 10rpx;
+							}
+							
+							.topic-answer-title {
+								font-size: 26rpx;
+								margin-bottom: 0.2rem;
+							}
+						}
+					}
+					// 收藏练习 、 最近练习详情
+					.topic-options-wrap {
+						margin-top: 0.5rem;
+						padding-bottom: 80rpx;
+					
+						.topic-options {
+							position: relative;
+							display: inline-block;
+							vertical-align: top;
+							width: calc(50% - 0.625rem * 2 - 0.75rem);
+							font-size: 0.9375rem;
+							line-height: 2rem;
+							color: #000;
+							padding: 0 0.625rem;
+							border-radius: 0.5rem;
+							border: 0.08rem solid #C2C2C2;
+							margin: 0 0.75rem 0.75rem 0;
+					
+							&:nth-child(2n) {
+								margin-right: 0;
+							}
+						}
+					}
+					
+					.list-btn-wrap{
+						position: fixed;
+						left: 200rpx;
+						right: 0;
+						bottom: 30rpx;
+						margin:auto;
+						width: 600rpx;
+						display: flex;
+						.list-btn {
+							flex: 1;
+							text-align: center;
+							padding: 0.43rem;
+							margin-right: 1.3rem;
+							
+							&:nth-child(1){
+								border: 0.1rem solid #ccc;
+								background: #fff;
+								border-radius: 1rem;
+							}
+							&:nth-child(2) {
+								border: 0.1rem solid #ACE48C;
+								background: #F1FFEE;
+								border-radius: 1rem;
+							}
+						
+							&:nth-child(3) {
+								border: 0.1rem solid #6093FF;
+								background: #6093FF;
+								border-radius: 1rem;
+								color: #fff;
+							}
+						
+							&:nth-child(4) {
+								border: 0.1rem solid #ACACAC;
+								background: #F2F2F2;
+								border-radius: 1rem;
+							}
+						
+							&:last-child {
+								margin-right: 0;
+							}
+						}
+					}
+				}
+				// 错题本、最近练习题、收藏习题 详情 ------ End
 				// 视频列表 ------ Start
 				.video-list-wrap {
 					height: calc(100vh - 2.75rem - 1rem);
@@ -1349,6 +1526,9 @@
 		height: auto;
 		position: relative;
 	}
+	:global(.topic-list-window > *) {
+		font-size: 30rpx !important;
+	}
 </style>
 <style>
 	.options-img {
@@ -1362,4 +1542,12 @@
 		max-width: 300rpx;
 		max-height: 300rpx;
 	}
+	.topic-details-wrap .change-img {
+		display: inline-block;
+		vertical-align: text-top;
+		min-height: 40rpx;
+		max-width: 100%;
+		max-height: 200rpx;
+	}
+	
 </style>
