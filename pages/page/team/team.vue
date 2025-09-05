@@ -105,7 +105,7 @@
 						<view class="list-time green">{{item.isCaptain?"队长":"队员"}}</view>
 					</li>
 					<li class="team-list" v-for="item in placeholderMembers">
-						<image class="list-avatar"></image>
+						<image class="list-avatar back-white"></image>
 						<h3 class="list-nickname">待邀请</h3>
 						<view class="list-time green"></view>
 					</li>
@@ -187,7 +187,7 @@
 				teamTask: [],
 				// 我的队伍
 				members: [],
-				placeholderMembers:[],
+				placeholderMembers: [],
 				activities: [],
 				taskDetails: {}, //任务详情
 				isCaptain: false // 队伍里我是不是队长
@@ -371,8 +371,8 @@
 						});
 					} else {
 						uni.showToast({
-							title:"已开启挑战任务，请先完成当前组队挑战任务",
-							icon:"none",
+							title: "已开启挑战任务，请先完成当前组队挑战任务",
+							icon: "none",
 							duration: 5000
 						})
 					}
@@ -431,7 +431,8 @@
 									this.isCaptain = true;
 								}
 							})
-							for(let i =0;i<3-this.members.length;i++){
+							this.placeholderMembers = [];
+							for (let i = 0; i <= 2 - this.members.length; i++) {
 								this.placeholderMembers.push({})
 							}
 
@@ -818,6 +819,9 @@
 					margin-top: -1.7rem;
 					display: inline-block;
 				}
+				.back-white{
+					background: #fff;
+				}
 
 				.list-nickname {
 					font-size: 1rem;
@@ -882,7 +886,6 @@
 
 				.list-info-wrap {
 					flex: 1;
-
 					.list-info {
 						line-height: 1.56rem;
 						color: #222;

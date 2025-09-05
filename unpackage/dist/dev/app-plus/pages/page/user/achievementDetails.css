@@ -252,6 +252,7 @@
   float: left;
   width: 1.25rem;
   height: 1.25rem;
+  margin-right: 0.25rem;
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .type .text[data-v-70c707a8] {
   display: inline-block;

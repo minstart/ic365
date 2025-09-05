@@ -63,10 +63,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/video-mask.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/video-mask.js
   var import_vue = __toESM(require_vue());
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -75,7 +75,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/video-mask.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/subnvue/subnvue/video-mask.js
   var _style_0 = { "wrapper": { "": { "position": "relative", "flex": 1, "backgroundColor": "rgba(0,0,0,0)" } }, "list": { "": { "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "rgba(0,0,0,0.7)" } }, "cell": { "": { "paddingTop": "10rpx", "paddingRight": 0, "paddingBottom": "10rpx", "paddingLeft": 0, "flexDirection": "row", "flexWrap": "nowrap" } }, "name": { "": { "flex": 0, "fontSize": "20rpx", "marginRight": "20rpx", "color": "#FF5A5F" } }, "content": { "": { "flex": 1, "fontSize": "20rpx", "color": "#F4F5F6" } } };
   var _sfc_main = {
     data() {
@@ -193,7 +193,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var videoMask = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/subnvue/subnvue/video-mask.nvue"]]);
+  var videoMask = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/subnvue/subnvue/video-mask.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

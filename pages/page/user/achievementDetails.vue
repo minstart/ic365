@@ -377,8 +377,9 @@
 
 									.icon {
 										float: left;
-										width: 1.25rem;
-										height: 1.25rem;
+										width: 40rpx;
+										height: 40rpx;
+										margin-right: 8rpx;
 									}
 
 									.text {

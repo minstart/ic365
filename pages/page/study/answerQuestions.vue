@@ -436,23 +436,26 @@
 						uni.showToast({
 							title: (this.answer.optionName == this.topic.answer ? "恭喜你，答对啦(●'◡'●)" : "很遗憾，你答错了~~>_<~~") + "，用时：" + this.time + "秒",
 							icon: "none",
-							duration: "4000"
+							duration: "3000"
 						})
+						let _this = this;
+						setTimeout(()=>{
+							// 通知消息（成就奖励、任务奖励）
+							_this.commonRequest({
+								url: "/api/notice/getAll"
+							}).then(res => {
+								console.log("通知消息::", res.data)
+								try {
+									if (res.data.length > 0) {
+										_this.$store.state.rewardPopUpList = res.data;
+										_this.$refs.rewardPopUp.open('center')
+									}
+								} catch (e) {}
+							}).catch(error => {
+								console.log("通知消息失败：：", error)
+							})
+						},3000)
 						
-						// 通知消息（成就奖励、任务奖励）
-						this.commonRequest({
-							url: "/api/notice/getAll"
-						}).then(res => {
-							console.log("通知消息::", res.data)
-							try {
-								if (res.data.length > 0) {
-									this.$store.state.rewardPopUpList = res.data;
-									this.$refs.rewardPopUp.open('center')
-								}
-							} catch (e) {}
-						}).catch(error => {
-							console.log("通知消息失败：：", error)
-						})
 					} catch (e) {
 						console.log(e)
 					}
@@ -700,11 +703,11 @@
 							categoryId: item.categoryId
 						}
 						if (this.pageType == "recentlyList") {
-							byCategoryUrl = "/api/question/collectionList"
+							byCategoryUrl = "/api/question/getRecentlyAnswer" 
 						} else if (this.pageType == "collectList") {
-							byCategoryUrl = "/api/question/getRecentlyAnswer"
+							byCategoryUrl = "/api/question/collectionList"
 						}
-						console.log("获取题目列表传参::", byCategoryData)
+						console.log("获取题目列表传参::",byCategoryUrl ,byCategoryData)
 						this.commonRequest({
 							url: byCategoryUrl,
 							data: byCategoryData
