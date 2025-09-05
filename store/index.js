@@ -51,6 +51,7 @@ const store = new Vuex.Store({
 					taskbarHeight: "0rpx", //任务栏高度，从首页获取
 					showRewardPopUp: true, //任务奖励、成就奖励弹窗是否显示
 					rewardPopUpList: [], //任务奖励、成就奖励弹窗列表
+					openDebug:true, //是否开启调试模式
 
 					hasLogin: false,
 					isUniverifyLogin: false,

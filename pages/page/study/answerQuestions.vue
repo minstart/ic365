@@ -32,7 +32,7 @@
 					<!-- 答题右下方内容 -->
 					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'">
 						<view class="topic">
-							题目id:{{topic.questionId}}
+							<span v-if="$store.state.openDebug">题目id:{{topic.questionId}}</span>
 							<h3 class="topic-text" v-html="topic.content"></h3>
 							<view class="topic-image-wrap">
 								<image class="topic-image" :src="item" v-for="item in topic.contentImages"></image>
@@ -46,7 +46,7 @@
 								</view>
 							</view>
 							<view class="btn-wrap">
-								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'&&answered">下一题</button>
+								<button class="topic-next" @click="nextTopic" v-if="pageType=='question'&&answered&&!isAnswerOnly">下一题</button>
 								<button class="topic-submit" @click="submitTopic" v-if="!answered && topic.questionId">提交</button>
 								<view v-if="parentPageType" class="back-list-btn" @click="backList()">返回列表</view>
 							</view>
@@ -170,6 +170,9 @@
 			</view>
 		</template>
 	</l-popup>
+	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
+		<reward-pop-up :close="closeRewardPopUp" :size="0.9"></reward-pop-up>
+	</uni-popup>
 </template>
 
 <script>
@@ -230,7 +233,7 @@
 				topicList: [], //错题本列表、最近答题列表、收藏列表
 				parentPageType:"",//上一级页面类型（错题本详情、收藏练习详情、最近练习详情）
 				topicDetails:{}, //点击题目的详情 （错题本详情、收藏练习详情、最近练习详情）
-				
+				isAnswerOnly:false,//是否只答题，不显示下一题
 			}
 		},
 		onLoad(option) {
@@ -307,7 +310,9 @@
 			this.pageOnShowSet({
 				uniHide: "all",
 				orientation: "landscape"
-			}).then(data => {})
+			}).then(data => {
+				
+			})
 		},
 		onHide() {
 
@@ -433,6 +438,21 @@
 							icon: "none",
 							duration: "4000"
 						})
+						
+						// 通知消息（成就奖励、任务奖励）
+						this.commonRequest({
+							url: "/api/notice/getAll"
+						}).then(res => {
+							console.log("通知消息::", res.data)
+							try {
+								if (res.data.length > 0) {
+									this.$store.state.rewardPopUpList = res.data;
+									this.$refs.rewardPopUp.open('center')
+								}
+							} catch (e) {}
+						}).catch(error => {
+							console.log("通知消息失败：：", error)
+						})
 					} catch (e) {
 						console.log(e)
 					}
@@ -440,7 +460,10 @@
 					this.consoleLog("回答问题接口报错：：", error)
 				})
 			},
-
+			//关闭奖励通知弹窗
+			closeRewardPopUp() {
+				this.$refs.rewardPopUp.close()
+			},
 			// 下一题
 			nextTopic() {
 				this.resetProblem("question")
@@ -620,7 +643,8 @@
 							console.log("获取题目:", res.data)
 							if(res.data.length==0){
 								uni.showToast({
-									title:"获取不到题目"
+									title:"获取题目失败",
+									icon:"none"
 								})
 								return false;
 							}
@@ -833,16 +857,20 @@
 				this.topicDetails = item;
 			},
 			backList(){
+				this.isAnswerOnly = false;
 				this.pageType = this.parentPageType;
 				this.choiceCategory({
 					categoryId:this.selectCategory.categoryId
 				},true)
 			},
+			// 同类练习（错题本、收藏练习、最近练习）
 			similarExercises(item){
-				this.pageType = "question"
+				this.isAnswerOnly = false;
+				this.pageType = "question";
 				this.choiceCategory(item,true)
 			},
 			reAnswer(item){
+				this.isAnswerOnly = true;
 				this.questionId = item.questionId
 				this.pageType = "question"
 				this.choiceCategory(item,true)

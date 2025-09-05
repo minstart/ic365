@@ -31,17 +31,18 @@
 		<view class="uni-padding-wrap">
 			<!-- 当前挑战 -->
 			<view class="challenge-wrap">
-				<h3 class="progress">团队进度： 
-				<span v-if="currentMission.processTotal">currentMission.processTotal</span>
-				<span v-else>— —</span></h3>
-				<view class="progress-info">
+				<h3 class="progress">团队进度：
+					<span v-if="currentMission.missionId">{{currentMission.processTotal}} / {{currentMission.conditionCount}}</span>
+					<span v-else>— —</span>
+				</h3>
+				<view class="progress-info" @tap.stop="openTask(currentMission)">
 					<image class="info-icon" :src="currentMission.coverImage"></image>
 					<view class="info-wrap">
 						<h3 class="info-title">{{currentMission.name}}</h3>
 						<view class="info-describe">{{currentMission.subtitle}}</view>
 					</view>
 				</view>
-				<view class="no-challenge"></view>
+				<view class="no-challenge" v-if="!currentMission.missionId"></view>
 				<view class="progress-reward-wrap flex-center">
 					<h2 class="progress-time">
 						<span v-if="currentMission.remainingTime">{{currentMission.remainingTime}}</span>
@@ -103,6 +104,11 @@
 						<h3 class="list-nickname">{{item.nickname}}同学</h3>
 						<view class="list-time green">{{item.isCaptain?"队长":"队员"}}</view>
 					</li>
+					<li class="team-list" v-for="item in placeholderMembers">
+						<image class="list-avatar"></image>
+						<h3 class="list-nickname">待邀请</h3>
+						<view class="list-time green"></view>
+					</li>
 					<li class="team-list" type='invite' v-if="members.length<=3" @click="jumpPage({url:'/pages/page/team/invite_team'})">
 						<view class="list-avatar"></view>
 						<h3 class="list-nickname">邀请好友</h3>
@@ -141,7 +147,7 @@
 			</view>
 		</view>
 	</view>
-	<uni-popup ref="joinTeam" :mask-click="false" type="bottom" >
+	<uni-popup ref="joinTeam" :mask-click="false" type="bottom">
 		<div class="joinTeam-wrap">
 			<input type="text" class="joinTeam-input uni-input" placeholder="请输入邀请码" v-model="invitationCode">
 			<view class="tips">输入或者粘贴好友发送的邀请码，点确定加入队伍。</view>
@@ -181,6 +187,7 @@
 				teamTask: [],
 				// 我的队伍
 				members: [],
+				placeholderMembers:[],
 				activities: [],
 				taskDetails: {}, //任务详情
 				isCaptain: false // 队伍里我是不是队长
@@ -278,7 +285,7 @@
 				let _this = this;
 				uni.showModal({
 					title: '队伍管理',
-					content: '是否确认把'+item.nickname + "同学移出队伍？",
+					content: '是否确认把' + item.nickname + "同学移出队伍？",
 					success: function(res) {
 						if (res.confirm) {
 							_this.commonRequest({
@@ -290,7 +297,7 @@
 								console.log("移出队员：", res.data)
 								// 获取我的队伍和任务相关信息
 								_this.getTeamDetails()
-							
+
 								uni.showToast({
 									title: "移出队员成功",
 									icon: "none"
@@ -301,7 +308,7 @@
 						}
 					}
 				});
-				
+
 			},
 			exitTeam(item) {
 				console.log("离开队伍", item)
@@ -319,6 +326,10 @@
 			// 任务详情处理
 			openTaskDetails(item) {
 				console.log(item)
+				// if (this.currentMission && item.missionId == this.currentMission.missionId) {
+				// 	let isOther = this.openTask(item);
+				// 	return false;
+				// }
 				if (!this.isCaptain) {
 					uni.showToast({
 						title: "只有队长才能开启任务" + ((this.currentMission && this.currentMission.name) ? ",且当前挑战任务未完成" : ""),
@@ -345,7 +356,7 @@
 											missionId: item.missionId
 										}
 									}).then(res => {
-										console.log("开启任务:",res.data)
+										console.log("开启任务:", res.data)
 										// 更新当前挑战任务
 										_this.getTeamDetails()
 										uni.showToast({
@@ -358,6 +369,12 @@
 								}
 							}
 						});
+					} else {
+						uni.showToast({
+							title:"已开启挑战任务，请先完成当前组队挑战任务",
+							icon:"none",
+							duration: 5000
+						})
 					}
 				})
 
@@ -414,6 +431,9 @@
 									this.isCaptain = true;
 								}
 							})
+							for(let i =0;i<3-this.members.length;i++){
+								this.placeholderMembers.push({})
+							}
 
 							// 队伍日志
 							this.activities = res.data.activities || [];
@@ -573,8 +593,21 @@
 					line-height: 1.25rem;
 				}
 			}
+
+			&::after {
+				content: " ";
+				position: absolute;
+				right: 20rpx;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				width: 16rpx;
+				height: 28rpx;
+				background: url("/static/icons/next.png") no-repeat right / 100% 100%;
+			}
 		}
-		.no-challenge{
+
+		.no-challenge {
 			position: absolute;
 			top: 120rpx;
 			left: 0;
@@ -584,10 +617,11 @@
 			height: 188rpx;
 			background: url('/static/image/3_no_challenge.png') no-repeat center / 100% 100%;
 		}
+
 		.progress-reward-wrap {
 			position: absolute;
 			left: 1.5rem;
-			top: 12rem;
+			top: 400rpx;
 			width: calc(100% - 3rem);
 			display: flex;
 			text-align: center;
@@ -904,7 +938,8 @@
 			top: 174rpx;
 			right: 72rpx;
 		}
-		.tips{
+
+		.tips {
 			position: absolute;
 			color: #000;
 			font-size: 20rpx;
@@ -913,24 +948,28 @@
 			bottom: 162rpx;
 			text-align: center;
 		}
-		.btn-wrap{
+
+		.btn-wrap {
 			position: absolute;
 			width: 472rpx;
 			right: 80rpx;
 			bottom: 20rpx;
 			display: flex;
-			.join-btn{
+
+			.join-btn {
 				flex: 1;
 				border-radius: 30rpx;
 				border-width: 0;
 				width: 200rpx;
 				font-size: 32rpx;
 				font-weight: 500;
-				&:nth-child(1){
+
+				&:nth-child(1) {
 					margin-right: 16rpx;
 					color: #484848 !important;
 				}
-				&:nth-child(2){
+
+				&:nth-child(2) {
 					margin-left: 16rpx;
 					color: #fff !important;
 				}

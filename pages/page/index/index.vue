@@ -306,6 +306,8 @@
 						if (res.data.length > 0) {
 							this.$store.state.rewardPopUpList = res.data;
 							this.$refs.rewardPopUp.open('center')
+						}else{
+							this.closeRewardPopUp()
 						}
 					} catch (e) {}
 				}).catch(error => {

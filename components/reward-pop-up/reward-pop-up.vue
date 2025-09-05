@@ -1,7 +1,7 @@
 <template name="reward-pop-up">
 	<view class="reward-pop-up-list-wrap">
 		<view class="reward-pop-up-list" v-for="item in $store.state.rewardPopUpList" :rewardType="item.type">
-			<view class="reward-wrap">
+			<view class="reward-wrap" :style="'transform: scale('+size+');'">
 				<view class="reward-back-wrap">
 					<image class="back1" src="/static/image/reward_back1.png" mode=""></image>
 					<image class="back2" src="/static/image/reward_back2.png" mode=""></image>
@@ -44,6 +44,9 @@
 					// console.log("默认右侧功能区函数")
 				}
 			},
+			size:{
+				default:1
+			}
 		},
 		data() {
 			return {

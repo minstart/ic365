@@ -401,7 +401,7 @@ export default {
 				const pathUrl = route[route.length - 1].route;
 				_this.getLogin().then(data => {
 					// 已经登陆了
-					console.log("已经登陆了 - 来自common")
+					// console.log("已经登陆了 - 来自common")
 					data.route = route;
 					data.pathUrl = pathUrl;
 					resolve(data);
@@ -527,6 +527,10 @@ export default {
 				})
 				return false;
 			} else {
+				uni.showToast({
+					title:"匹配不到任务类型",
+					icon:"none"
+				})
 				return true;
 			}
 		},

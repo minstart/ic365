@@ -166,7 +166,7 @@
   font-size: 1rem;
 }
 .search-wrap[data-v-c19752be] {
-  margin: 1.25rem 0;
+  margin-top: 1.25rem;
 }
 .search-wrap .search-btn-wrap[data-v-c19752be] {
   position: relative;
@@ -191,7 +191,7 @@
   border-radius: 1rem;
 }
 .search-wrap .search-content-wrap[data-v-c19752be] {
-  margin: 1.25rem 0;
+  margin-top: 1.25rem;
 }
 .search-wrap .search-content-wrap .tab-overflow-bar .search-tab-wrap .tab[data-v-c19752be] {
   padding: 0.56rem 0.56rem;
@@ -207,6 +207,9 @@
 }
 .search-wrap .search-content-wrap .tab-overflow-bar .search-tab-wrap .selected[data-v-c19752be] {
   background: #FFE084;
+}
+.search-wrap .search-content-wrap .tab-content-wrap[data-v-c19752be] {
+  max-height: calc(100vh - 18.75rem);
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list[data-v-c19752be] {
   display: flex;
@@ -279,7 +282,10 @@
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .already-redeemed[data-v-c19752be] {
   background: #EEFFF0;
   color: #79D183;
-  font-size: 1rem;
-  border-radius: 1rem;
-  border: 0.1rem solid #79D183;
+  border-color: #79D183;
+}
+.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .achievement-type .not-enough[data-v-c19752be] {
+  background-color: #f3f3f3;
+  color: #686868;
+  border-color: #6d6d6d;
 }

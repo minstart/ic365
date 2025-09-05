@@ -36,7 +36,7 @@
 							</li>
 						</ul>
 					</view>
-					<view class="tab-content-wrap">
+					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts">
 						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
@@ -55,12 +55,15 @@
 											<image class="reward-reward-icon" :src="rewardIcon(item2.payCurrencyType).min"></image>
 											<span>{{item2.quantity}}{{item2.payCurrencyTypeName}}</span>
 										</view>
-										<view class="exchange-btn" :class="item2.obtained&&'already-redeemed'" @click="() => exchange(item2)">{{!item2.obtained?'立即兑换':'已拥有'}}</view>
+										<view class="exchange-btn already-redeemed" v-if="item2.obtained">已拥有</view>
+										<view class="exchange-btn not-enough" v-else-if="!item2.isExchange">货币不足</view>
+										<view class="exchange-btn" v-else @click="() => exchange(item2)">立即兑换</view>
 									</view>
 								</view>
 							</view>
+							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && productsList['products' + item.id].noData">- 没有更多了 -</view>
 						</view>
-					</view>
+					</scroll-view>
 				</view>
 			</view>
 		</view>
@@ -151,6 +154,7 @@
 					this.getProducts()
 				}
 			},
+			// 点击兑换商品
 			exchange(data) {
 				if (data.obtained) return console.log("已拥有：", data.productionId);
 				// 兑换商品
@@ -174,6 +178,9 @@
 							title: "兑换成功",
 							icon: "success"
 						})
+						setTimeout(()=>{
+							this.getProducts({reset:true})
+						},1500)
 					}).catch(error => {
 						console.log("获取用户信息报错：：", error)
 					})
@@ -182,36 +189,71 @@
 				})
 
 			},
-			// 获取商品
+			// 获取兑换商品列表
 			getProducts(data) {
 				if (!this.selectProductsId) return;
 				if (data && data.reset) {
 					this.productsTab.forEach(item => {
-						this.productsList["products" + item.id].requested = false;
-						this.productsList["products" + item.id].list = [];
+						this.productsList["products" + item.id] = {
+							requested: false,
+							page: 0,
+							noData:false,
+							list: []
+						}
 					})
+					console.log("this.productsList::",this.productsList)
 				}
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					console.log(this.keyword, this.selectProductsId)
-					// 获取兑换商品列表
-					this.commonRequest({
-						url: "/api/exchange/products",
-						method: "POST",
-						data: {
-							keyword: this.keyword,
-							type: this.selectProductsId,
-							size: "10"
-						}
-					}).then(res => {
-						console.log("获取兑换商品列表:", res.data)
-						this.productsList["products" + this.selectProductsId].requested = true;
-						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
-					}).catch(error => {
-						this.consoleLog("获取兑换商品列表报错：：", error)
-					})
+					this.getProducts()
 				}
+			},
+			// 获取兑换商品列表
+			getProducts(){
+				if(this.productsList["products" + this.selectProductsId].noData) return false;
+				console.log(this.selectProductsId,this.productsList)
+				let postData = {
+					keyword: this.keyword,
+					page: this.productsList["products" + this.selectProductsId].page + 1,
+					type: this.selectProductsId,
+					size: "10"
+				}
+				// console.log("获取兑换商品列表请求参数",postData)
+				
+				this.commonRequest({
+					url: "/api/exchange/products",
+					method: "POST",
+					data: postData
+				}).then(res => {
+					// console.log("获取兑换商品列表:", res.data)
+					if (res.data.length==0) {
+						this.productsList["products" + this.selectProductsId].noData = true;
+						return false;
+					}
+					try{
+						res.data.forEach((item,i)=>{
+							const myCurrency = 0;
+							if(item.payCurrencyType==1){
+								this.userInfo.currencies.star && (myCurrency = this.userInfo.currencies.star)
+							} else if(item.payCurrencyType==2){
+								this.userInfo.currencies.dust && (myCurrency = this.userInfo.currencies.dust)
+							} else if(item.payCurrencyType==3){
+								this.userInfo.currencies.stone && (myCurrency = this.userInfo.currencies.stone)
+							}
+							res.data[i].isExchange = (myCurrency>=item.quantity)
+						})
+					}catch(e){
+						console.log(e)
+					}
+					
+					this.productsList["products" + this.selectProductsId].requested = true;
+					this.productsList["products" + this.selectProductsId].page = (this.productsList["products" + this.selectProductsId].page?this.productsList["products" + this.selectProductsId].page:0) + 1;
+					this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
+				}).catch(error => {
+					this.consoleLog("获取兑换商品列表报错：：", error)
+				})
 			}
-
+			
+			
 		}
 	}
 </script>
@@ -299,7 +341,7 @@
 
 	// 搜索功能及搜索列表
 	.search-wrap {
-		margin: 1.25rem 0;
+		margin-top: 40rpx;
 
 		.search-btn-wrap {
 			position: relative;
@@ -327,7 +369,7 @@
 		}
 
 		.search-content-wrap {
-			margin: 1.25rem 0;
+			margin-top: 40rpx;
 
 			.tab-overflow-bar {
 				.search-tab-wrap {
@@ -352,6 +394,7 @@
 			}
 
 			.tab-content-wrap {
+				max-height: calc(100vh - 600rpx);
 				.table-list-wrap {
 					.tab-list {
 						display: flex;
@@ -433,9 +476,12 @@
 								.already-redeemed {
 									background: #EEFFF0;
 									color: #79D183;
-									font-size: 1rem;
-									border-radius: 1rem;
-									border: 0.1rem solid #79D183;
+									border-color: #79D183;
+								}
+								.not-enough{
+									background-color: #f3f3f3;
+									color: #686868;
+									border-color: #6d6d6d;
 								}
 							}
 						}

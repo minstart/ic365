@@ -305,6 +305,8 @@ const store = createStore({
     //任务奖励、成就奖励弹窗是否显示
     rewardPopUpList: [],
     //任务奖励、成就奖励弹窗列表
+    openDebug: true,
+    //是否开启调试模式
     hasLogin: false,
     isUniverifyLogin: false,
     loginProvider: "",
@@ -344,7 +346,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:95", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:96", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },

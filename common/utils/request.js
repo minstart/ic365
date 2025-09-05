@@ -68,9 +68,9 @@ service.interceptors.request.use(
 							if(typeof newConfig.oldData != "undefined"){
 								newConfig.oldData = newConfig.oldData;
 							}
-							console.log("newConfig.data::",newConfig.data)
+							// console.log("newConfig.data::",newConfig.data)
 						}
-						console.log("请求参数2：newConfig:::", newConfig)
+						// console.log("请求参数2：newConfig:::", newConfig)
 						return newConfig
 					}
 					// } catch (e) {
@@ -176,8 +176,8 @@ async function handleSessionExpired(originalRequest) {
 		store.commit('RESET_CRYPTO') //清除crypto加密储存数据
 	}
 	try {
-		const newCrypto = await refreshKeys()
-		originalRequest.headers['X-Session-Key'] = newCrypto.sessionKey
+		const newCrypto = await refreshKeys();
+		newCrypto.sessionKey && (originalRequest.headers['X-Session-Key'] = newCrypto.sessionKey);
 		if (originalRequest.oldData) {
 			console.log("333333333333", originalRequest.oldData, newCrypto.aesKey)
 			let arr = Object.assign({},originalRequest.oldData)

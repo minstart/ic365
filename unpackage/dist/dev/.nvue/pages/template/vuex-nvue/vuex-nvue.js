@@ -305,6 +305,8 @@ const store = createStore({
     //任务奖励、成就奖励弹窗是否显示
     rewardPopUpList: [],
     //任务奖励、成就奖励弹窗列表
+    openDebug: true,
+    //是否开启调试模式
     hasLogin: false,
     isUniverifyLogin: false,
     loginProvider: "",
@@ -344,7 +346,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:95", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:96", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },
@@ -582,7 +584,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
+const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
 export {
   vuexNvue as default
 };
