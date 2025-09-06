@@ -15,22 +15,18 @@
 						<view class="reward">
 							<h3 class="title">邀请1位好友</h3>
 							<view class="reward-list-wrap">
-								<view class="reward-list" type="stone">
-									<view class="icon"></view>
-									<h3 class="reward-text">奖励起名时20</h3>
+								<view class="reward-list" v-for="item in reward[0].rewardList">
+									<image class="icon" :src="rewardIcon(item.currencyTypeId).icon3"></image>
+									<h3 class="reward-text">奖励{{item.name.replace(/\d/g, '')}}{{item.quantity}}</h3>
 								</view>
 							</view>
 						</view>
 						<view class="reward">
 							<h3 class="title">邀请2位好友</h3>
 							<view class="reward-list-wrap">
-								<view class="reward-list" type="star">
-									<view class="icon"></view>
-									<h3 class="reward-text">奖励起名时20</h3>
-								</view>
-								<view class="reward-list" type="dust">
-									<view class="icon"></view>
-									<h3 class="reward-text">奖励起名时20</h3>
+								<view class="reward-list" v-for="item in reward[1].rewardList">
+									<image class="icon" :src="rewardIcon(item.currencyTypeId).icon3"></image>
+									<h3 class="reward-text">奖励{{item.name.replace(/\d/g, '')}}{{item.quantity}}</h3>
 								</view>
 							</view>
 						</view>
@@ -62,7 +58,8 @@
 
 		data() {
 			return {
-				invitationCode: ""
+				invitationCode: "",
+				reward:[]
 			}
 		},
 		onLoad() {
@@ -73,7 +70,16 @@
 				}).then(res => {
 					this.qrCode = res.data;
 				})
+				this.commonRequest({
+					url: "/api/mission/getInviteMission",
+					notLoading: true
+				}).then(res => {
+					console.log("获取邀请奖励",res.data)
+					this.reward = res.data;
+				})
 			})
+				
+			
 		},
 		onReady() {
 
@@ -241,27 +247,6 @@
 							color: #000;
 						}
 
-						.reward-list-wrap {
-							.reward-list {
-								&[type='star'] {
-									.icon {
-										background: url("/static/icons/star3.png") no-repeat center / 100% 100%;
-									}
-								}
-								
-								&[type='stone'] {
-									.icon {
-										background: url("/static/icons/stone3.png") no-repeat center / 100% 100%;
-									}
-								}
-								
-								&[type='dust'] {
-									.icon {
-										// background: url("/static/icons/dust3.png") no-repeat center / 100% 100%;
-									}
-								}
-							}
-						}
 						&:nth-child(1) {
 							margin-right: 66rpx;
 
@@ -274,14 +259,19 @@
 							.reward-text {
 								color: #fff;
 								font-size: 24rpx;
-								margin-top: -6rpx;
+								margin-top: -16rpx;
 							}
 						}
 
 						&:nth-child(2) {
+							.reward-list{
+								text-align: left;
+								margin-left: 20rpx;
+							}
 							.icon {
 								width: 34rpx;
 								height: 46rpx;
+								margin-right: 8rpx;
 								display: inline-block;
 							}
 

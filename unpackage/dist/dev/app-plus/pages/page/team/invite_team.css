@@ -199,12 +199,6 @@
   margin: 0.4375rem 0 0.3125rem 0;
   color: #000;
 }
-.banner-wrap .user-info-wrap .reward-wrap .reward-flex-wrap .reward .reward-list-wrap .reward-list[type=star] .icon[data-v-bc1c30b9] {
-  background: url("../../../static/icons/star3.png") no-repeat center/100% 100%;
-}
-.banner-wrap .user-info-wrap .reward-wrap .reward-flex-wrap .reward .reward-list-wrap .reward-list[type=stone] .icon[data-v-bc1c30b9] {
-  background: url("../../../static/icons/stone3.png") no-repeat center/100% 100%;
-}
 .banner-wrap .user-info-wrap .reward-wrap .reward-flex-wrap .reward[data-v-bc1c30b9]:nth-child(1) {
   margin-right: 2.0625rem;
 }
@@ -216,11 +210,16 @@
 .banner-wrap .user-info-wrap .reward-wrap .reward-flex-wrap .reward:nth-child(1) .reward-text[data-v-bc1c30b9] {
   color: #fff;
   font-size: 0.75rem;
-  margin-top: -0.1875rem;
+  margin-top: -0.5rem;
+}
+.banner-wrap .user-info-wrap .reward-wrap .reward-flex-wrap .reward:nth-child(2) .reward-list[data-v-bc1c30b9] {
+  text-align: left;
+  margin-left: 0.625rem;
 }
 .banner-wrap .user-info-wrap .reward-wrap .reward-flex-wrap .reward:nth-child(2) .icon[data-v-bc1c30b9] {
   width: 1.0625rem;
   height: 1.4375rem;
+  margin-right: 0.25rem;
   display: inline-block;
 }
 .banner-wrap .user-info-wrap .reward-wrap .reward-flex-wrap .reward:nth-child(2) .reward-text[data-v-bc1c30b9] {

@@ -30085,7 +30085,8 @@ ${o3}
     components: {},
     data() {
       return {
-        invitationCode: ""
+        invitationCode: "",
+        reward: []
       };
     },
     onLoad() {
@@ -30095,6 +30096,13 @@ ${o3}
           notLoading: true
         }).then((res2) => {
           this.qrCode = res2.data;
+        });
+        this.commonRequest({
+          url: "/api/mission/getInviteMission",
+          notLoading: true
+        }).then((res2) => {
+          formatAppLog("log", "at pages/page/team/invite_team.vue:77", "获取邀请奖励", res2.data);
+          this.reward = res2.data;
         });
       });
     },
@@ -30118,7 +30126,7 @@ ${o3}
         this.commonRequest({
           url: "/api/team/generateTeamCode"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/invite_team.vue:106", "获取组队邀请码", res2.data);
+          formatAppLog("log", "at pages/page/team/invite_team.vue:112", "获取组队邀请码", res2.data);
           this.invitationCode = res2.data;
         });
       },
@@ -30141,7 +30149,7 @@ ${o3}
             });
           },
           fail: function(err) {
-            formatAppLog("error", "at pages/page/team/invite_team.vue:129", "复制失败:", err);
+            formatAppLog("error", "at pages/page/team/invite_team.vue:135", "复制失败:", err);
           }
         });
       }
@@ -30175,32 +30183,53 @@ ${o3}
                   vue.createElementVNode("view", { class: "reward" }, [
                     vue.createElementVNode("h3", { class: "title" }, "邀请1位好友"),
                     vue.createElementVNode("view", { class: "reward-list-wrap" }, [
-                      vue.createElementVNode("view", {
-                        class: "reward-list",
-                        type: "stone"
-                      }, [
-                        vue.createElementVNode("view", { class: "icon" }),
-                        vue.createElementVNode("h3", { class: "reward-text" }, "奖励起名时20")
-                      ])
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList($data.reward[0].rewardList, (item) => {
+                          return vue.openBlock(), vue.createElementBlock("view", { class: "reward-list" }, [
+                            vue.createElementVNode("image", {
+                              class: "icon",
+                              src: _ctx.rewardIcon(item.currencyTypeId).icon3
+                            }, null, 8, ["src"]),
+                            vue.createElementVNode(
+                              "h3",
+                              { class: "reward-text" },
+                              "奖励" + vue.toDisplayString(item.name.replace(/\d/g, "")) + vue.toDisplayString(item.quantity),
+                              1
+                              /* TEXT */
+                            )
+                          ]);
+                        }),
+                        256
+                        /* UNKEYED_FRAGMENT */
+                      ))
                     ])
                   ]),
                   vue.createElementVNode("view", { class: "reward" }, [
                     vue.createElementVNode("h3", { class: "title" }, "邀请2位好友"),
                     vue.createElementVNode("view", { class: "reward-list-wrap" }, [
-                      vue.createElementVNode("view", {
-                        class: "reward-list",
-                        type: "star"
-                      }, [
-                        vue.createElementVNode("view", { class: "icon" }),
-                        vue.createElementVNode("h3", { class: "reward-text" }, "奖励起名时20")
-                      ]),
-                      vue.createElementVNode("view", {
-                        class: "reward-list",
-                        type: "dust"
-                      }, [
-                        vue.createElementVNode("view", { class: "icon" }),
-                        vue.createElementVNode("h3", { class: "reward-text" }, "奖励起名时20")
-                      ])
+                      (vue.openBlock(true), vue.createElementBlock(
+                        vue.Fragment,
+                        null,
+                        vue.renderList($data.reward[1].rewardList, (item) => {
+                          return vue.openBlock(), vue.createElementBlock("view", { class: "reward-list" }, [
+                            vue.createElementVNode("image", {
+                              class: "icon",
+                              src: _ctx.rewardIcon(item.currencyTypeId).icon3
+                            }, null, 8, ["src"]),
+                            vue.createElementVNode(
+                              "h3",
+                              { class: "reward-text" },
+                              "奖励" + vue.toDisplayString(item.name.replace(/\d/g, "")) + vue.toDisplayString(item.quantity),
+                              1
+                              /* TEXT */
+                            )
+                          ]);
+                        }),
+                        256
+                        /* UNKEYED_FRAGMENT */
+                      ))
                     ])
                   ])
                 ])
