@@ -79,15 +79,6 @@ export default {
 		this.pageMask = true;
 	},
 	methods: {
-		// 打印数据
-		consoleLog(data, data2, data3) {
-			let conText = '';
-			data && (conText = conText + JSON.stringify(data));
-			data2 && (conText = conText + JSON.stringify(data2));
-			data3 && (conText = conText + JSON.stringify(data3));
-			// console.log(conText)
-			return conText;
-		},
 		// 设置登录token状态及数据
 		setLogin(data) {
 			if (!data) return console.log("没有data");
@@ -146,7 +137,7 @@ export default {
 		// .catch() //失败返回
 		// .finally()
 		commonRequest(data) {
-			// this.consoleLog("请求前的传参：", data);
+			// console.log("请求前的传参：", data);
 			!data.notLoading && uni.showLoading();
 			return fetchData(data)
 		},
@@ -194,8 +185,8 @@ export default {
 		// type uni 跳转页面函数("navigateTo","redirectTo","reLaunch") - 默认navigateTo
 		jumpPage(data) {
 			// console.log("jumpPage:::::", data)
-			if (!data) return this.consoleLog("jumpPage()没有传参")
-			if (!data.url) return this.consoleLog("url没有传参"), uni.showToast({
+			if (!data) return console.log("jumpPage()没有传参")
+			if (!data.url) return console.log("url没有传参"), uni.showToast({
 				title: "没有填写跳转地址",
 				icon: "none"
 			})

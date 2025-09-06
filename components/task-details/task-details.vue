@@ -42,22 +42,7 @@
 		},
 		data() {
 			return {
-				a: {
-					"missionId": 7,
-					"missionTypeId": 1,
-					"name": "每日口算",
-					"subTitle": "完成10道口算题",
-					"typeName": "日常",
-					"startTime": 0,
-					"endTime": 0,
-					"rewardName": "15知识尘",
-					"currencyTypeId": 2,
-					"status": "FINISHED",
-					"processTotal": 100,
-					"finishedTime": 0,
-					"cover": "https://ic365.ajulye.com/material/mission/9999FF.png",
-					"colorScheme": 1
-				}
+				
 			}
 		},
 		mounted() {},

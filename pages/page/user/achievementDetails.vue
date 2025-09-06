@@ -114,7 +114,7 @@
 					}
 					this.getProducts()
 				}).catch(error => {
-					this.consoleLog("兑换资源类型(Tab)报错：：", error)
+					console.log("兑换资源类型(Tab)报错：：", error)
 				})
 			})
 		},
@@ -192,7 +192,7 @@
 						this.productsList["products" + this.selectProductsId].requested = true;
 						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
 					}).catch(error => {
-						this.consoleLog("获取兑换商品列表报错：：", error)
+						console.log("获取兑换商品列表报错：：", error)
 					})
 				}
 			}

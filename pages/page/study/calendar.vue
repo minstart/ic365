@@ -101,10 +101,10 @@
 						})
 					} catch (e) {}
 				}).catch(error => {
-					this.consoleLog("获取已答题的日期失败：：", error)
+					console.log("获取已答题的日期失败：：", error)
 				})
 			}).catch(error => {
-				this.consoleLog("没有登录：：", error)
+				console.log("没有登录：：", error)
 			})
 			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
 		},

@@ -24,7 +24,7 @@
 								type: "reLaunch"
 							})
 						}).catch(error => {
-							this.consoleLog("没有登录judge：：", error)
+							console.log("没有登录judge：：", error)
 						})
 					} else { //没有缓存进入启动页引导页
 						// console.log('去引导页');

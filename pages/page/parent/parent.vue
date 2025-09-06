@@ -9,7 +9,9 @@
 				<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
 			</view>
 			<view class="user-info">
-				<h3 class="name">{{userInfo.nickname}}同学</h3>
+				<h3 class="name">{{userInfo.nickname}}同学
+				<span class="achievement" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
+				</h3>
 				<ul class="cumulative-list">
 					<li class="list">
 						<view class="icon" type="star"></view>
@@ -289,7 +291,7 @@
 						});
 					}
 				}).catch(error => {
-					this.consoleLog("获取家长版报告数据(统计图)失败：：", error)
+					console.log("获取家长版报告数据(统计图)失败：：", error)
 				})
 			
 				// 获取提升建议和其他
@@ -332,11 +334,11 @@
 						});
 					}
 				}).catch(error => {
-					this.consoleLog("获取提升建议和其他失败：：", error)
+					console.log("获取提升建议和其他失败：：", error)
 				})
 			
 			}).catch(error => {
-				this.consoleLog("没有登录：：", error)
+				console.log("没有登录：：", error)
 			})
 			this.pageOnShowSet({
 				uniHide: "all"
@@ -396,6 +398,18 @@
 			.user-info {
 				.name {
 					margin: 8rpx 0;
+					line-height: 50rpx;
+					font-size: 40rpx;
+					.achievement {
+						margin-left: 8rpx;
+						padding: 0 16rpx;
+						color: #eb7d1e;
+						font-size: 26rpx;
+						background: #FFFBDB;
+						line-height: 50rpx;
+						display: inline-block;
+						vertical-align: top;
+					}
 				}
 
 				.cumulative-list {

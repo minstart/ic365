@@ -15,11 +15,7 @@
 					<view class="user-info">
 						<h3 class="name">{{userInfo.nickname||""}}同学</h3>
 						<view class="school">{{userInfo.school||""}} {{userInfo.className||""}}</view>
-						<ul class="title-wrap">
-							<li class="title" v-for="item in userInfo.showAchievementName">
-								{{item.showAchievementName}}
-							</li>
-						</ul>
+						<span class="title" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
 					</view>
 					<view class="flex-center">
 						<view class="qr-code" @click="jumpPage({url:'/pages/page/team/invite_team'})"></view>
@@ -121,7 +117,7 @@
 				</view>
 				<view class="skin-tab-content">
 					<view class="tab-list" v-for="(item,i) in skinList" :current='i' v-show="skinCurrent === i">
-						<view class="skin-list" v-for="item in skinList[skinCurrent].resourceDetails">
+						<view class="skin-list" v-for="item in skinList[skinCurrent].resourceDetails" @tap.stop="jumpPage({url:'/pages/page/user/exchangeDetails?' + objectToQueryString(item)})">
 							<image class="list-icon" :src="item.icon" mode=""></image>
 							<view class="list-info ">
 								<view>
@@ -481,23 +477,21 @@
 
 				.name {
 					margin: 8rpx 0;
+					line-height: 50rpx;
+					font-size: 40rpx;
 				}
-
 				.school {
 					font-size: 0.8125rem;
 					color: #999;
 				}
 
-				.title-wrap {
+				.title {
 					margin-top: 0.375rem;
-
-					.title {
-						display: inline-block;
-						font-size: 0.8125rem;
-						color: #eb7d1e;
-						padding: 0.25rem 0.5rem;
-						background: #FFFBDB;
-					}
+					display: inline-block;
+					font-size: 0.8125rem;
+					color: #eb7d1e;
+					padding: 0.25rem 0.5rem;
+					background: #FFFBDB;
 				}
 			}
 

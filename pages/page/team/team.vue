@@ -9,7 +9,9 @@
 					<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
 				</view>
 				<view class="user-info">
-					<h3 class="name">{{userInfo.nickname}}同学</h3>
+					<h3 class="name">{{userInfo.nickname}}同学
+						<span class="achievement" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
+					</h3>
 					<ul class="cumulative-list">
 						<li class="list">
 							<view class="icon" type="star"></view>
@@ -105,7 +107,7 @@
 						<view class="list-time green">{{item.isCaptain?"队长":"队员"}}</view>
 					</li>
 					<li class="team-list" v-for="item in placeholderMembers">
-						<image class="list-avatar back-white"></image>
+						<image class="list-avatar" :src="item.avatar"></image>
 						<h3 class="list-nickname">待邀请</h3>
 						<view class="list-time green"></view>
 					</li>
@@ -432,8 +434,25 @@
 								}
 							})
 							this.placeholderMembers = [];
-							for (let i = 0; i <= 2 - this.members.length; i++) {
-								this.placeholderMembers.push({})
+							let teamDefault = [{
+									avatar: "/static/image/placehold_avatar1.png",
+									isCaptain: true
+								},
+								{
+									avatar: "/static/image/placehold_avatar2.png",
+									isCaptain: false
+								},
+								{
+									avatar: "/static/image/placehold_avatar3.png",
+									isCaptain: false
+								}
+							]
+							if (this.members.length == 0) {
+								this.placeholderMembers = teamDefault;
+							} else if (this.members.length == 1) {
+								this.placeholderMembers.push(teamDefault[1],teamDefault[2])
+							} else if (this.members.length == 2) {
+								this.placeholderMembers.push(teamDefault[2])
 							}
 
 							// 队伍日志
@@ -503,6 +522,19 @@
 			.user-info {
 				.name {
 					margin: 8rpx 0;
+					line-height: 50rpx;
+					font-size: 40rpx;
+
+					.achievement {
+						margin-left: 8rpx;
+						padding: 0 16rpx;
+						color: #eb7d1e;
+						font-size: 26rpx;
+						background: #FFFBDB;
+						line-height: 50rpx;
+						display: inline-block;
+						vertical-align: top;
+					}
 				}
 
 				.cumulative-list {
@@ -818,9 +850,7 @@
 					border-radius: 50%;
 					margin-top: -1.7rem;
 					display: inline-block;
-				}
-				.back-white{
-					background: #fff;
+					border: 4rpx solid #fff;
 				}
 
 				.list-nickname {
@@ -886,6 +916,7 @@
 
 				.list-info-wrap {
 					flex: 1;
+
 					.list-info {
 						line-height: 1.56rem;
 						color: #222;

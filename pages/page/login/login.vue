@@ -57,13 +57,13 @@
 							})
 						} catch (e) {}
 
-						// this.consoleLog("不具备一键登录网络环境 - 跳转到账号密码登录", data)
+						// console.log("不具备一键登录网络环境 - 跳转到账号密码登录", data)
 					} else {
-						// this.consoleLog("具备一键登录网络环境", data)
+						// console.log("具备一键登录网络环境", data)
 					}
 				})
 			} else {
-				// this.consoleLog("初始化失败", data)
+				// console.log("初始化失败", data)
 			}
 		});
 		// #endif
@@ -102,7 +102,7 @@
 				})
 			},
 			onLoad() {
-				// this.consoleLog("neOneLogin::", neOneLogin)
+				// console.log("neOneLogin::", neOneLogin)
 				// neOneLogin.getToken();
 
 				// this.pageHeadTitle = "修改后的标题"
@@ -143,12 +143,12 @@
 								ydLogin.cucmctAuthorizeLoginCompletion(data => {
 									console.log("data::", data)
 									if (!data.success && !data.cancel) {
-										this.consoleLog('授权失败', data)
+										console.log('授权失败', data)
 									} else if (data.cancel) {
-										this.consoleLog('用户取消', data)
+										console.log('用户取消', data)
 									} else {
 										// TODO: 授权成功处理，可以进行关闭授权页、服务端验证等
-										this.consoleLog('授权成功：：', data)
+										console.log('授权成功：：', data)
 										const _this = this;
 										this.commonRequest({
 											url: '/api/auth/oneClickLogin',

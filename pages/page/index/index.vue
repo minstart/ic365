@@ -9,7 +9,9 @@
 					<image class="head-pic" :src='userInfo.avatar || defaultHeadPic' @error="defaultHeadPicUrl" alt=""></image>
 				</view>
 				<view class="user-info">
-					<h3 class="name">{{userInfo.nickname}}同学</h3>
+					<h3 class="name">{{userInfo.nickname}}同学
+						<span class="achievement" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
+					</h3>
 					<ul class="cumulative-list">
 						<li class="list">
 							<view class="icon" type="star"></view>
@@ -230,7 +232,7 @@
 			}).catch(error => {
 				// console.log("记录用户设备信息报错：：", error)
 			})
-			
+
 		},
 		onShow() {
 			this.verifLogin().then(data => {
@@ -306,18 +308,18 @@
 						if (res.data.length > 0) {
 							this.$store.state.rewardPopUpList = res.data;
 							this.$refs.rewardPopUp.open('center')
-						}else{
+						} else {
 							this.closeRewardPopUp()
 						}
 					} catch (e) {}
 				}).catch(error => {
 					console.log("通知消息失败：：", error)
 				})
-				
+
 			}).catch(error => {
 				console.log("没有登录：：", error)
 			})
-			
+
 			// this.jumpPage({url:"/pages/page/study/answerQuestions?pageType=errorList"})
 			this.pageOnShowSet({
 				uniHide: "all"
@@ -381,7 +383,7 @@
 			// 打开任务详情
 			openTaskDetails(item) {
 				let isOther = this.openTask(item);
-				if(isOther){
+				if (isOther) {
 					// 已经做完了或其他情况，查看任务详情
 					this.taskDetails = item;
 					this.$refs.taskPopUp.open("bottom")
@@ -429,6 +431,18 @@
 			.user-info {
 				.name {
 					margin: 8rpx 0;
+					line-height: 50rpx;
+					font-size: 40rpx;
+					.achievement {
+						margin-left: 8rpx;
+						padding: 0 16rpx;
+						color: #eb7d1e;
+						font-size: 26rpx;
+						background: #FFFBDB;
+						line-height: 50rpx;
+						display: inline-block;
+						vertical-align: top;
+					}
 				}
 
 				.cumulative-list {

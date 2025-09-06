@@ -671,6 +671,18 @@ body {
 }
 .banner-wrap .user-info-wrap .user-info .name[data-v-5040744a] {
   margin: 0.25rem 0;
+  line-height: 1.5625rem;
+  font-size: 1.25rem;
+}
+.banner-wrap .user-info-wrap .user-info .name .achievement[data-v-5040744a] {
+  margin-left: 0.25rem;
+  padding: 0 0.5rem;
+  color: #eb7d1e;
+  font-size: 0.8125rem;
+  background: #FFFBDB;
+  line-height: 1.5625rem;
+  display: inline-block;
+  vertical-align: top;
 }
 .banner-wrap .user-info-wrap .user-info .cumulative-list[data-v-5040744a] {
   overflow: hidden;

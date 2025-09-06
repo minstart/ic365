@@ -35,7 +35,7 @@
 		components: {},
 		data() {
 			return {
-				pageHeadTitle: '补充用户信息',
+				pageHeadTitle: '修改用户信息',
 				baseFormData: {},
 				gradeRange: [{
 						value: 1,
@@ -107,14 +107,14 @@
 			this.commonRequest({
 				url: "/api/student/info"
 			}).then(res => {
-				this.consoleLog("获取用户信息::", JSON.stringify(res))
+				console.log("获取用户信息::", res)
 				try {
 					store.commit("Update_UserInfo", res.data)
 					this.baseFormData = res.data;
 					!this.baseFormData.grade && (this.baseFormData.grade = "");
 				} catch (e) {}
 			}).catch(error => {
-				this.consoleLog("获取用户信息报错：：", error)
+				console.log("获取用户信息报错：：", error)
 			})
 		},
 		onHide() {
@@ -131,7 +131,7 @@
 			// 提交数据
 			submit(ref) {
 				let _this = this;
-				console.log(this.$refs[ref].validate())
+				console.log("this.baseFormData::",this.baseFormData)
 				this.$refs[ref].validate().then(res => {
 					// 校验通过
 					this.commonRequest({

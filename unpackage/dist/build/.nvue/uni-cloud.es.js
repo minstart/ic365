@@ -144,6 +144,13 @@ const pages = [
     }
   },
   {
+    path: "pages/page/user/exchangeDetails",
+    style: {
+      navigationBarTitleText: "商品详情",
+      navigationStyle: "custom"
+    }
+  },
+  {
     path: "pages/page/user/taskList",
     style: {
       navigationBarTitleText: "任务列表",

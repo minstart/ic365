@@ -119,7 +119,7 @@
 						this.commodity.commodityList[year + '-' + month].data.push(item)
 					})
 				}).catch(error => {
-					this.consoleLog("已兑换商品列表报错：：", error)
+					console.log("已兑换商品列表报错：：", error)
 				})
 			}
 		}

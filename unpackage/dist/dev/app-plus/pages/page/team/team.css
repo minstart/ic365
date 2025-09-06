@@ -297,6 +297,18 @@
 }
 .banner-wrap .user-info-wrap .user-info .name[data-v-d282c156] {
   margin: 0.25rem 0;
+  line-height: 1.5625rem;
+  font-size: 1.25rem;
+}
+.banner-wrap .user-info-wrap .user-info .name .achievement[data-v-d282c156] {
+  margin-left: 0.25rem;
+  padding: 0 0.5rem;
+  color: #eb7d1e;
+  font-size: 0.8125rem;
+  background: #FFFBDB;
+  line-height: 1.5625rem;
+  display: inline-block;
+  vertical-align: top;
 }
 .banner-wrap .user-info-wrap .user-info .cumulative-list[data-v-d282c156] {
   overflow: hidden;
@@ -549,9 +561,7 @@
   border-radius: 50%;
   margin-top: -1.7rem;
   display: inline-block;
-}
-.my-team-wrap .team-list-wrap .team-list .back-white[data-v-d282c156] {
-  background: #fff;
+  border: 0.125rem solid #fff;
 }
 .my-team-wrap .team-list-wrap .team-list .list-nickname[data-v-d282c156] {
   font-size: 1rem;

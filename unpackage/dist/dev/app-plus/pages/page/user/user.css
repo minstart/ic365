@@ -153,15 +153,15 @@ uni-page-body[data-v-351444bc] {
 }
 .banner-wrap .user-info-wrap .user-info .name[data-v-351444bc] {
   margin: 0.25rem 0;
+  line-height: 1.5625rem;
+  font-size: 1.25rem;
 }
 .banner-wrap .user-info-wrap .user-info .school[data-v-351444bc] {
   font-size: 0.8125rem;
   color: #999;
 }
-.banner-wrap .user-info-wrap .user-info .title-wrap[data-v-351444bc] {
+.banner-wrap .user-info-wrap .user-info .title[data-v-351444bc] {
   margin-top: 0.375rem;
-}
-.banner-wrap .user-info-wrap .user-info .title-wrap .title[data-v-351444bc] {
   display: inline-block;
   font-size: 0.8125rem;
   color: #eb7d1e;

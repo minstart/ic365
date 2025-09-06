@@ -79,7 +79,7 @@
 								type:"reLaunch"
 							})
 						}).catch(error => {
-							_this.consoleLog("没有登录：：", error)
+							_console.log("没有登录：：", error)
 						})
 					}
 				});
