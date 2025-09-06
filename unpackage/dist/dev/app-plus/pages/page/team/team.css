@@ -383,7 +383,7 @@
   color: #999;
   line-height: 1.25rem;
 }
-.challenge-wrap .progress-info[data-v-d282c156]::after {
+.challenge-wrap .jumpTask[data-v-d282c156]::after {
   content: " ";
   position: absolute;
   right: 0.625rem;
@@ -428,6 +428,7 @@
   padding: 1.25rem;
   display: flex;
   margin-bottom: 0.75rem;
+  position: relative;
   background-color: #B4E4FD;
 }
 .team-task-wrap .team-task-list-wrap .team-task-list .list-info[data-v-d282c156] {
@@ -483,6 +484,24 @@
 }
 .team-task-wrap .team-task-list-wrap .team-task-list .flex-center[data-v-d282c156] {
   flex: 1;
+}
+.team-task-wrap .team-task-list-wrap .team-task-list .open-task[data-v-d282c156] {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 8.375rem;
+  margin: auto;
+  background: #fff1bd;
+  border-radius: 0.375rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  font-size: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.25rem solid #F5A623;
+  line-height: 1;
 }
 .team-task-wrap .team-task-list-wrap .team-task-list .list-icon[data-v-d282c156] {
   width: 6.625rem;

@@ -37,7 +37,7 @@
 					<span v-if="currentMission.missionId">{{currentMission.processTotal}} / {{currentMission.conditionCount}}</span>
 					<span v-else>— —</span>
 				</h3>
-				<view class="progress-info" @tap.stop="openTask(currentMission)">
+				<view class="progress-info" :class="currentMission.missionId ? 'jumpTask' : ''" @tap.stop="currentMission.missionId&&openTask(currentMission)">
 					<image class="info-icon" :src="currentMission.coverImage"></image>
 					<view class="info-wrap">
 						<h3 class="info-title">{{currentMission.name}}</h3>
@@ -62,7 +62,7 @@
 				</view>
 				<view class="no-list-tip" v-if="teamTask.length==0">暂无数据</view>
 				<ul class="team-task-list-wrap">
-					<li class="team-task-list" v-for="item in teamTask" :colorScheme="item.colorScheme" @click="openTaskDetails(item)">
+					<li class="team-task-list" v-for="item in teamTask" :colorScheme="item.colorScheme">
 						<div class="flex-center">
 							<view class="list-info">
 								<h3 class="info-title">{{item.name}}</h3>
@@ -75,6 +75,7 @@
 								</view>
 							</view>
 						</div>
+						<view class="open-task" @click="openTaskDetails(item)">开始<br>挑战</view>
 						<image class="list-icon" :src="item.coverImage" mode=""></image>
 					</li>
 				</ul>
@@ -332,6 +333,14 @@
 				// 	let isOther = this.openTask(item);
 				// 	return false;
 				// }
+				if(this.members.length==0){
+					uni.showToast({
+						title: "请点击邀请好友或加入队伍，组建队伍再开始挑战任务",
+						icon: "none",
+						duration: 5000
+					})
+					return false;
+				}
 				if (!this.isCaptain) {
 					uni.showToast({
 						title: "只有队长才能开启任务" + ((this.currentMission && this.currentMission.name) ? ",且当前挑战任务未完成" : ""),
@@ -493,6 +502,7 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.banner-wrap {
 		border-radius: 0.6rem;
 		padding: 20rpx 24rpx 0 24rpx;
@@ -626,7 +636,9 @@
 					line-height: 1.25rem;
 				}
 			}
-
+			
+		}
+		.jumpTask{
 			&::after {
 				content: " ";
 				position: absolute;
@@ -682,7 +694,7 @@
 				padding: 1.25rem;
 				display: flex;
 				margin-bottom: 0.75rem;
-
+				position: relative;
 				.list-info {
 					flex: 1;
 
@@ -746,11 +758,28 @@
 				.flex-center {
 					flex: 1;
 				}
-
+				.open-task{
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					right: 268rpx;
+					margin: auto;
+					background: #fff1bd;
+					border-radius: 12rpx;
+					width: 120rpx;
+					height: 120rpx;
+					font-size: 32rpx;
+					border-radius: 50%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border: 8rpx solid $ThemeColor;
+					line-height: 1;
+				}
 				.list-icon {
-					width: 6.625rem;
-					height: 6.9375rem;
-					margin-left: 1.4375rem;
+					width: 212rpx;
+					height: 222rpx;
+					margin-left: 46rpx;
 					border-radius: 0.5rem;
 				}
 

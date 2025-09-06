@@ -6,11 +6,11 @@
 		<view class="details-wrap">
 			<view class="details-info">
 				<h3 class="info-title">{{exchangeData.name||exchangeData.productName}}</h3>
-				<!-- <h3 class="info-subTitle">{{exchangeData.productName}}</h3> -->
+				<h3 class="info-subTitle">{{exchangeData.subtitle}}</h3>
 				<view class="info-img-wrap flex-center">
 					<image class="info-img" :src="exchangeData.icon"></image>
 				</view>
-				<h3 class="info-text">{{exchangeData.subtitle}}</h3>
+				<h3 class="info-text">{{exchangeData.description}}</h3>
 			</view>
 		</view>
 	</view>
@@ -89,10 +89,16 @@
 			.info-title {
 				font-size: 100rpx;
 				color: #22538e;
-				padding: 72rpx 0 110rpx 0;
+				padding-top: 70rpx;
 			}
-
-			.info-subTitle {}
+			.info-subTitle {
+				font-size: 40rpx;
+				color: #0067e4;
+				padding: 0 20rpx;
+				text-align: center;
+				margin: 0 auto;
+				margin-bottom: 60rpx;
+			}
 
 			.info-img-wrap {
 				width: 382rpx;

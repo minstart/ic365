@@ -201,7 +201,7 @@
 
 				skinCurrent: 0,
 				skinList: [],
-				exchangeList: []
+				// exchangeList: []
 			}
 		},
 
@@ -246,18 +246,18 @@
 					console.log("获取我资源(战衣/皮肤/名人堂...)报错：：", error)
 				})
 
-				// 获取兑换商品列表
-				this.commonRequest({
-					url: "/api/exchange/products",
-					data: {
-						size: 3
-					}
-				}).then(res => {
-					console.log("获取兑换商品列表:", res.data)
-					this.exchangeList = res.data;
-				}).catch(error => {
-					console.log("获取兑换商品列表报错：：", error)
-				})
+				// // 获取兑换商品列表
+				// this.commonRequest({
+				// 	url: "/api/exchange/products",
+				// 	data: {
+				// 		size: 3
+				// 	}
+				// }).then(res => {
+				// 	console.log("获取兑换商品列表:", res.data)
+				// 	this.exchangeList = res.data;
+				// }).catch(error => {
+				// 	console.log("获取兑换商品列表报错：：", error)
+				// })
 
 				// 获取最近题目和收藏题目数量
 				this.commonRequest({
