@@ -3778,6 +3778,20 @@ ul, li {
   background: #fff;
   z-index: 100000000000000010000000000000;
 }
+.next-icon {
+  position: relative;
+}
+.next-icon::after {
+  content: " ";
+  position: absolute;
+  right: 0.625rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 0.5rem;
+  height: 0.875rem;
+  background: url("static/icons/next.png") no-repeat right/100% 100%;
+}
 .item-title-wrap {
   margin: 1.875rem 0 1.125rem 0;
   font-weight: 700;

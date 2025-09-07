@@ -84,7 +84,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     /* STYLE */
   )) : createCommentVNode("v-if", true);
 }
-const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-grid/components/uni-grid-item/uni-grid-item.vue"]]);
+const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-grid/components/uni-grid-item/uni-grid-item.vue"]]);
 const _style_0$1 = { "uni-grid-wrap": { "": { "flex": 1, "flexDirection": "column" } }, "uni-grid": { "": { "flexDirection": "row", "flexWrap": "wrap" } }, "uni-grid--border": { "": { "position": "relative", "borderLeftColor": "#D2D2D2", "borderLeftStyle": "solid", "borderLeftWidth": 0.5 } } };
 const dom = requireNativePlugin("dom");
 const _sfc_main$1 = {
@@ -172,7 +172,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     ], 14, ["id"])
   ]);
 }
-const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-grid/components/uni-grid/uni-grid.vue"]]);
+const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-grid/components/uni-grid/uni-grid.vue"]]);
 const _imports_0 = "/static/c1.png";
 const _imports_1 = "/static/c2.png";
 const _imports_2 = "/static/c3.png";
@@ -818,7 +818,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const grid = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/grid/grid.nvue"]]);
+const grid = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/grid/grid.nvue"]]);
 export {
   grid as default
 };

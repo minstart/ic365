@@ -5,9 +5,9 @@
 		<div class="uni-padding-wrap">
 			<view class="task-back">
 				<view class="task-back-icon"></view>
-				<h3 class="task-back-title">{{typeName.indexOf("任务")==-1?typeName + "任务": typeName}}</h3>
+				<h3 class="task-back-title">学习任务</h3>
 			</view>
-			<scroll-view class="task-wrap" scroll-y="true" :scroll-into-view="selectMissionId" :scroll-with-animation="true" @scrolltolower="GetNextVideoList">
+			<scroll-view class="task-wrap" scroll-y="true" :scroll-into-view="selectMissionId" :scroll-with-animation="true" @scrolltolower="getTaskList">
 				<view :id="'task-list-'+item.missionId" class="task-list" v-for="(item,i) in taskList" @click="openTaskDetails(item)">
 					<image lazy-load class="task-list-icon" :src="item.cover"></image>
 					<view class="task-list-content">
@@ -15,7 +15,7 @@
 						<view class="content-time"></view>
 					</view>
 					<view class="task-right">
-						<view class="task-list-btn" v-if="!item.finishedTime" @tap.stop="completeTask(item)">做任务</view>
+						<view class="task-list-btn" v-if="!item.finishedTime" @tap.stop="completeTask(item)">去完成</view>
 						<view class="task-list-complete-icon" v-if="item.finishedTime"></view>
 					</view>
 
@@ -46,29 +46,17 @@
 				taskDetails: "", //任务详情
 				missionTypeId: "", //任务类型id
 				typeName: "", //任务类型名称
-				taskList: []
+				taskList: [],
+				page: 0, //页码
+				noData: false, //没更多数据了
 			}
 		},
 		onLoad(option) {
 			option.missionTypeId && (this.missionTypeId = option.missionTypeId);
-			option.typeName && (this.typeName = option.typeName);
-			this.verifLogin().then(data => {
-				// 获取任务列表
-				this.commonRequest({
-					url: "/api/mission/getAll",
-					data: {
-						size: 15,
-						missionTypeId: this.missionTypeId
-					}
-				}).then(res => {
-					console.log("任务列表::", res)
-					try {
-						this.taskList = res.data.list;
-					} catch (e) {}
+			option.typeName ? (this.typeName = option.typeName) : (this.typeName = "我的");
 
-				}).catch(error => {
-					console.log("获取任务列表报错：：", error)
-				})
+			this.verifLogin().then(data => {
+				this.getTaskList()
 			})
 		},
 		onReady() {
@@ -115,14 +103,38 @@
 					})
 				} else {
 					uni.showToast({
-						title:"匹配任务类型失败，无法跳转",
-						icon:"none"
+						title: "匹配任务类型失败，无法跳转",
+						icon: "none"
 					})
 				}
 			},
 			closeTaskPopUp() {
 				this.$refs.taskPopUp.close()
 			},
+			getTaskList() {
+				if (this.noData) return false;
+				let postData = {
+					size: 15,
+					page: this.page + 1
+				}
+				this.missionTypeId && (postData.missionTypeId = this.missionTypeId)
+				// 获取任务列表
+				this.commonRequest({
+					url: "/api/mission/getAll",
+					data: postData,
+				}).then(res => {
+					console.log("任务列表::", res)
+					try {
+						if (res.data.list.length == 0) {
+							this.noData = true;
+						}
+						this.taskList = res.data.list;
+					} catch (e) {}
+
+				}).catch(error => {
+					console.log("获取任务列表报错：：", error)
+				})
+			}
 		}
 	}
 </script>
@@ -156,6 +168,7 @@
 	}
 
 	.task-wrap {
+		height: calc(100vh - 600rpx);
 		.task-list {
 			display: flex;
 			align-items: center;
@@ -183,8 +196,8 @@
 						content: "";
 						display: inline-block;
 						margin-left: 6rpx;
-						width: 20rpx;
-						height: 20rpx;
+						width: 30rpx;
+						height: 30rpx;
 						background: url("/static/icons/doubt.png") no-repeat center / 100% 100%;
 					}
 				}

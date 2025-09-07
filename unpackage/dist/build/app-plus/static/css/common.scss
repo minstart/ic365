@@ -49,6 +49,21 @@ ul,li{
 	background: #fff;
 	z-index: 99999999999999999999999999999;
 }
+// 向右箭头
+.next-icon{
+	position: relative;
+	&::after {
+		content: " ";
+		position: absolute;
+		right: 20rpx;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		width: 16rpx;
+		height: 28rpx;
+		background: url("/static/icons/next.png") no-repeat right / 100% 100%;
+	}
+}
 // 单一类型样式 ------End
 
 // 列表标题

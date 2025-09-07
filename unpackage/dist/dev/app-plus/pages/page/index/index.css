@@ -801,26 +801,30 @@ body {
   display: inline-block;
   font-size: 1.125rem;
   font-weight: 700;
+  line-height: 1.5rem;
 }
 .plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward[data-v-5040744a] {
   display: inline-block;
-  padding: 0.375rem 0.5rem;
+  vertical-align: top;
+  height: 1.5rem;
   background-color: #fff;
   font-size: 0.75rem;
   line-height: 1;
   font-weight: 500;
   margin-left: 0.4rem;
+  padding: 0 0.5rem;
 }
 .plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward .plan-reward-icon[data-v-5040744a] {
   width: 0.75rem;
   height: 0.75rem;
   display: inline-block;
+  margin: 0.375rem 0;
   margin-right: 0.2rem;
 }
 .plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
   display: inline-block;
   vertical-align: top;
-  line-height: 0.75rem;
+  line-height: 1.5rem;
 }
 .plan-wrap .plan-list-wrap .plan-list .plan-list-require[data-v-5040744a] {
   position: absolute;

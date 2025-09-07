@@ -42,12 +42,15 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">今日学习目标</h3>
 				<view class="item-subtitle">AI智能推荐</view>
-				<view class="item-more" style="color: #999999;">{{plan.finished}}/{{plan.total}} 完成</view>
+				<view class="item-more">
+					<view class="text icon-more" @click="jumpPage({url:'/pages/page/user/taskList'})">更多任务</view>
+				</view>
+				<!-- {{plan.finished}}/{{plan.total}} 完成 -->
 			</view>
 			<!-- 暂无数据 -->
 			<view class="no-list-tip" v-if="plan.list && plan.list.length==0">暂无数据</view>
 			<ul class="plan-list-wrap">
-				<li class="plan-list" v-for="(item,i) in plan.list" :key="item.missionId" :type="item.missionTypeId" :colorScheme="item.colorScheme" @click="openTaskDetails(item)">
+				<li class="plan-list next-icon" v-for="(item,i) in plan.list" :key="item.missionId" :type="item.missionTypeId" :colorScheme="item.colorScheme" @click="openTaskDetails(item)">
 					<!-- <image class="plan-background" :src="planBackground(item.missionTypeId)"></image> -->
 					<view class="plan-background"></view>
 					<view class="plan-list-type-back">
@@ -68,9 +71,9 @@
 					<view class="progress-wrap" v-if="item.startTime==0">
 						<progress :percent="item.processTotal" activeColor="#77D182" backgroundColor="#ffffff" stroke-width="8" />
 					</view>
-					<view class="time-limited-wrap" v-else="calculateDaysUntilDeadline(changeTime(item.endTime))>0">
+					<view class="time-limited-wrap" v-else>
 						<view class="time-limited">
-							限时活动 剩余{{calculateDaysUntilDeadline(changeTime(item.endTime))}}天
+							限时活动 剩余{{calculateTimeDifference(item.endTime*1000).days}}天 {{calculateTimeDifference(item.endTime*1000).hours}}小时
 						</view>
 					</view>
 				</li>
@@ -590,28 +593,31 @@
 						display: inline-block;
 						font-size: 1.125rem;
 						font-weight: 700;
+						line-height: 48rpx;
 					}
 
 					.plan-reward {
 						display: inline-block;
-						padding: 0.375rem 0.5rem;
+						vertical-align: top;
+						height: 48rpx;
 						background-color: #fff;
 						font-size: 0.75rem;
 						line-height: 1;
 						font-weight: 500;
 						margin-left: 0.4rem;
-
+						padding: 0 16rpx;
 						.plan-reward-icon {
-							width: 0.75rem;
-							height: 0.75rem;
+							width:24rpx;
+							height:24rpx;
 							display: inline-block;
+							margin: 12rpx 0;
 							margin-right: 0.2rem;
 						}
 
 						span {
 							display: inline-block;
 							vertical-align: top;
-							line-height: 0.75rem;
+							line-height: 48rpx;
 						}
 
 					}

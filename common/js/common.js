@@ -43,7 +43,7 @@ async function fetchData(data) {
 	} catch (error) {
 		// store.commit('RESET_CRYPTO') //清除crypto加密储存数据
 		console.error('校验加密数据失败:', error);
-		
+
 	}
 }
 
@@ -352,9 +352,9 @@ export default {
 				return {
 					min: "/static/icons/star.png",
 					moderate: "/static/icons/star2.png",
-					icon3:"/static/icons/star3.png",
-					icon4:"/static/icons/star4.png",
-					
+					icon3: "/static/icons/star3.png",
+					icon4: "/static/icons/star4.png",
+
 				};
 			} else if (id == 2) {
 				// 知识尘
@@ -363,7 +363,7 @@ export default {
 					moderate: "/static/icons/dust2.png",
 					icon3: "/static/icons/dust3.png",
 					icon4: "/static/icons/dust4.png",
-					
+
 				};
 			} else if (id == 3) {
 				// 启明石
@@ -427,7 +427,9 @@ export default {
 				date = new Date()
 			}
 			if (typeof date == "number") {
-
+				if (date.toString().length == 10) {
+					date = Number(date.toString() + "000")
+				}
 			} else if (typeof date !== 'object') {
 				date = date.replace(/-/g, '/')
 			}
@@ -449,6 +451,7 @@ export default {
 		// 转换服务端返回的时间转换成YYYY-MM-DD
 		// type不传 返回格式：YYYY-MM-DD，type:1 => YYYY-MM-DD  type:2 直接删除T返回
 		changeTime(time, type) {
+			if (!time) return false;
 			if (typeof type != "undefined" && type == 2) return time.replace("T", "");
 			if (time.indexOf("T") != 1 || time.indexOf(":") != 1) {
 				let date = new Date(time);
@@ -465,6 +468,10 @@ export default {
 			if (endTime.indexOf("-") != -1) {
 				endTime = new Date(endTime).getTime()
 			}
+			if (typeof endTime == "string") {
+				endTime = Number(endTime);
+				if (!endTime) return "";
+			}
 			// 获取当前时间的时间戳
 			const now = new Date().getTime();
 			// 计算两个时间戳的差值（毫秒）
@@ -473,6 +480,18 @@ export default {
 			const daysUntilDeadline = Math.floor(diff / (1000 * 60 * 60 * 24));
 
 			return daysUntilDeadline;
+		},
+		// 计算时间戳距离现在还剩多少
+		calculateTimeDifference(endTime) {
+			const givenDate = new Date(endTime);
+			const currentDate = new Date();
+			const diffMs = givenDate - currentDate; // 绝对值，不考虑正负
+			const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)); // 天数
+			const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // 剩余小时数
+			return {
+				days:diffDays,
+				hours:diffHours
+			}
 		},
 		// 图片路径转换为图片
 		// content : 需要转换的内容
@@ -519,8 +538,8 @@ export default {
 				return false;
 			} else {
 				uni.showToast({
-					title:"匹配不到任务类型",
-					icon:"none"
+					title: "匹配不到任务类型",
+					icon: "none"
 				})
 				return true;
 			}
