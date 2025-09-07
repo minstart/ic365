@@ -129,7 +129,7 @@ ul,li{
 	width: 40rpx;
 	height: 40rpx;
 	z-index: 2;
-	background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
+	// background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
 	&[vipLevel="1"]{
 		background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
 	}
