@@ -790,26 +790,30 @@ body {
   top: 1rem;
   z-index: 2;
 }
-.plan-wrap .plan-list-wrap .plan-list .plan-list-icon[data-v-5040744a] {
+.plan-wrap .plan-list-wrap .plan-list .list-wrap[data-v-5040744a] {
+  display: flex;
+}
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .plan-list-icon[data-v-5040744a] {
   width: 4.4375rem;
   height: 4.4375rem;
-  position: absolute;
-  top: 1rem;
-  left: 1.5625rem;
+  margin: 1rem 1.1875rem 1rem 1.5625rem;
 }
-.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap[data-v-5040744a] {
-  position: absolute;
-  top: 1rem;
-  right: 0.75rem;
-  width: 13.375rem;
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info[data-v-5040744a] {
+  flex: 1;
 }
-.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .plan-list-name-wrap[data-v-5040744a] {
+  position: relative;
+  padding-top: 1rem;
+  left: 0;
+  width: 12.5rem;
+}
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .plan-list-name-wrap .plan-list-name[data-v-5040744a] {
   display: inline-block;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.5rem;
 }
-.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward[data-v-5040744a] {
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .plan-list-name-wrap .plan-reward[data-v-5040744a] {
   display: inline-block;
   vertical-align: top;
   height: 1.5rem;
@@ -820,42 +824,43 @@ body {
   margin-left: 0.4rem;
   padding: 0 0.5rem;
 }
-.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward .plan-reward-icon[data-v-5040744a] {
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .plan-list-name-wrap .plan-reward .plan-reward-icon[data-v-5040744a] {
   width: 0.75rem;
   height: 0.75rem;
   display: inline-block;
   margin: 0.375rem 0;
   margin-right: 0.2rem;
 }
-.plan-wrap .plan-list-wrap .plan-list .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .plan-list-name-wrap .plan-reward span[data-v-5040744a] {
   display: inline-block;
   vertical-align: top;
   line-height: 1.5rem;
 }
-.plan-wrap .plan-list-wrap .plan-list .plan-list-require[data-v-5040744a] {
-  position: absolute;
-  top: 2.8rem;
-  right: 0.75rem;
-  width: 13.375rem;
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .plan-list-require[data-v-5040744a] {
+  position: relative;
+  left: 0;
+  margin-top: 0.125rem;
+  width: 12.5rem;
   font-size: 0.75rem;
 }
-.plan-wrap .plan-list-wrap .plan-list .progress-wrap[data-v-5040744a] {
-  position: absolute;
-  bottom: 1.4rem;
-  right: 0.75rem;
-  width: 13.375rem;
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .progress-wrap[data-v-5040744a] {
+  position: relative;
+  left: 0;
+  margin-top: 0.8125rem;
+  width: 12.5rem;
   overflow: hidden;
   border-radius: 0.5rem;
 }
-.plan-wrap .plan-list-wrap .plan-list .time-limited-wrap[data-v-5040744a] {
-  position: absolute;
-  bottom: 1.1rem;
-  right: 0.75rem;
-  width: 13.375rem;
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .time-limited-wrap[data-v-5040744a] {
+  position: relative;
+  left: 0;
+  padding-top: 0.125rem;
+  width: 12.5rem;
   overflow: hidden;
 }
-.plan-wrap .plan-list-wrap .plan-list .time-limited-wrap .time-limited[data-v-5040744a] {
+.plan-wrap .plan-list-wrap .plan-list .list-wrap .list-info .time-limited-wrap .time-limited[data-v-5040744a] {
   padding: 0 0.3rem 0 1rem;
+  margin: 0.3125rem 0 0.875rem 0;
   font-weight: 700;
   font-size: 0.75rem;
   color: #fff;

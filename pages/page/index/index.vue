@@ -52,28 +52,33 @@
 			<ul class="plan-list-wrap">
 				<li class="plan-list next-icon" v-for="(item,i) in plan.list" :key="item.missionId" :type="item.missionTypeId" :colorScheme="item.colorScheme" @click="openTaskDetails(item)">
 					<!-- <image class="plan-background" :src="planBackground(item.missionTypeId)"></image> -->
-					<view class="plan-background"></view>
+					<!-- <view class="plan-background"></view> -->
 					<view class="plan-list-type-back">
 						{{item.typeName}}
 					</view>
-					<image class="plan-list-icon" :src="item.cover"></image>
-					<view class="plan-list-img"></view>
-					<view class="plan-list-name-wrap">
-						<view class="plan-list-name">{{item.name}}</view>
-						<view class="plan-reward" v-if="item.rewardName">
-							<image class="plan-reward-icon" :src="rewardIcon(item.currencyTypeId).min"></image>
-							<span>{{item.rewardName}}</span>
+					<view class="list-wrap">
+						<view class="flex-center">
+							<image class="plan-list-icon" :src="item.cover"></image>
 						</view>
-					</view>
-					<!-- 任务要求 -->
-					<view class="plan-list-require">{{item.subTitle}}</view>
-					<!-- 进度条 -->
-					<view class="progress-wrap" v-if="item.startTime==0">
-						<progress :percent="item.processTotal" activeColor="#77D182" backgroundColor="#ffffff" stroke-width="8" />
-					</view>
-					<view class="time-limited-wrap" v-else>
-						<view class="time-limited">
-							限时活动 剩余{{calculateTimeDifference(item.endTime*1000).days}}天 {{calculateTimeDifference(item.endTime*1000).hours}}小时
+						<view class="list-info">
+							<view class="plan-list-name-wrap">
+								<view class="plan-list-name">{{item.name}}</view>
+								<view class="plan-reward" v-if="item.rewardName">
+									<image class="plan-reward-icon" :src="rewardIcon(item.currencyTypeId).min"></image>
+									<span>{{item.rewardName}}</span>
+								</view>
+							</view>
+							<!-- 任务要求 -->
+							<view class="plan-list-require">{{item.subTitle}}</view>
+							<!-- 进度条 -->
+							<view class="progress-wrap">
+								<progress :percent="item.processTotal" activeColor="#77D182" backgroundColor="#ffffff" stroke-width="8" />
+							</view>
+							<view class="time-limited-wrap" v-if="item.endTime>0">
+								<view class="time-limited">
+									限时活动 剩余{{calculateTimeDifference(item.endTime*1000).days}}天 {{calculateTimeDifference(item.endTime*1000).hours}}小时
+								</view>
+							</view>
 						</view>
 					</view>
 				</li>
@@ -573,94 +578,116 @@
 					top: 1rem;
 					z-index: 2;
 				}
-
-				.plan-list-icon {
-					width: 142rpx;
-					height: 142rpx;
-					position: absolute;
-					top: 1rem;
-					left: 50rpx;
-				}
-
-				// 列表标题名称 + 奖励
-				.plan-list-name-wrap {
-					position: absolute;
-					top: 1rem;
-					right: 0.75rem;
-					width: 13.375rem;
-
-					.plan-list-name {
-						display: inline-block;
-						font-size: 1.125rem;
-						font-weight: 700;
-						line-height: 48rpx;
+				.list-wrap{
+					display: flex;
+					.plan-list-icon {
+						width: 142rpx;
+						height: 142rpx;
+						margin: 32rpx 38rpx 32rpx 50rpx;
+						// position: absolute;
+						// top: 1rem;
+						// left: 50rpx;
 					}
-
-					.plan-reward {
-						display: inline-block;
-						vertical-align: top;
-						height: 48rpx;
-						background-color: #fff;
-						font-size: 0.75rem;
-						line-height: 1;
-						font-weight: 500;
-						margin-left: 0.4rem;
-						padding: 0 16rpx;
-						.plan-reward-icon {
-							width:24rpx;
-							height:24rpx;
-							display: inline-block;
-							margin: 12rpx 0;
-							margin-right: 0.2rem;
+					.list-info{
+						flex: 1;
+						// 列表标题名称 + 奖励
+						.plan-list-name-wrap {
+							// position: absolute;
+							position: relative;
+							padding-top: 1rem;
+							left: 0;
+							width: 400rpx;
+						
+							.plan-list-name {
+								display: inline-block;
+								font-size: 1.125rem;
+								font-weight: 700;
+								line-height: 48rpx;
+							}
+						
+							.plan-reward {
+								display: inline-block;
+								vertical-align: top;
+								height: 48rpx;
+								background-color: #fff;
+								font-size: 0.75rem;
+								line-height: 1;
+								font-weight: 500;
+								margin-left: 0.4rem;
+								padding: 0 16rpx;
+								.plan-reward-icon {
+									width:24rpx;
+									height:24rpx;
+									display: inline-block;
+									margin: 12rpx 0;
+									margin-right: 0.2rem;
+								}
+						
+								span {
+									display: inline-block;
+									vertical-align: top;
+									line-height: 48rpx;
+								}
+						
+							}
+						
 						}
-
-						span {
-							display: inline-block;
-							vertical-align: top;
-							line-height: 48rpx;
+						
+						// 任务要求
+						.plan-list-require {
+							// position: absolute;
+							position: relative;
+							left: 0;
+							margin-top: 4rpx;
+							// top: 2.8rem;
+							// right: 0.75rem;
+							width: 400rpx;
+							font-size: 0.75rem;
 						}
-
+						
+						//进度条 
+						.progress-wrap {
+							position: relative;
+							left: 0;
+							margin-top: 26rpx;
+							// position: absolute;
+							// bottom: 1.4rem;
+							// right: 0.75rem;
+							width: 400rpx;
+							overflow: hidden;
+							border-radius: 0.5rem;
+						}
+						
+						// 限时倒计时
+						.time-limited-wrap {
+							// position: absolute;
+							position: relative;
+							left: 0;
+							padding-top: 4rpx;
+							// bottom: 1.1rem;
+							// right: 0.75rem;
+							width: 400rpx;
+							overflow: hidden;
+							
+							// 活动倒计时
+							.time-limited {
+								padding: 0 0.3rem 0 1rem;
+								margin:10rpx 0 28rpx 0;
+								font-weight: 700;
+								font-size: 0.75rem;
+								color: #fff;
+								line-height: 1.3rem;
+								display: inline-block;
+								background: url("/static/image/1_time_limited.png") no-repeat left / 100% 100%;
+							}
+						}
+						
 					}
-
 				}
 
-				.plan-list-require {
-					position: absolute;
-					top: 2.8rem;
-					right: 0.75rem;
-					width: 13.375rem;
-					font-size: 0.75rem;
-				}
+				
 
-				.progress-wrap {
-					position: absolute;
-					bottom: 1.4rem;
-					right: 0.75rem;
-					width: 13.375rem;
-					overflow: hidden;
-					border-radius: 0.5rem;
-				}
-
-				//进度条 
-				.time-limited-wrap {
-					position: absolute;
-					bottom: 1.1rem;
-					right: 0.75rem;
-					width: 13.375rem;
-					overflow: hidden;
-
-					// 活动倒计时
-					.time-limited {
-						padding: 0 0.3rem 0 1rem;
-						font-weight: 700;
-						font-size: 0.75rem;
-						color: #fff;
-						line-height: 1.3rem;
-						display: inline-block;
-						background: url("/static/image/1_time_limited.png") no-repeat left / 100% 100%;
-					}
-				}
-
+				
 				&[colorscheme="1"] {
 					background: #FFF2EA;
 

@@ -3848,7 +3848,6 @@ ul, li {
   width: 1.25rem;
   height: 1.25rem;
   z-index: 2;
-  background: url("static/icons/vip.png") no-repeat center/100% 100%;
 }
 .vip-icon[vipLevel="1"] {
   background: url("static/icons/vip.png") no-repeat center/100% 100%;

@@ -133,10 +133,10 @@
 					<span>本周获取</span>
 					<span>{{suggestionImproveOther.currencies._newlyAdded.text}}</span>
 				</view>
-				<view class="statistics" @tap.stop="jumpPage({url:'/pages/page/user/exchangeMall'})" v-if="suggestionImproveOther.currencies.exchanges&&suggestionImproveOther.currencies.exchanges.name">
+				<!-- <view class="statistics" @tap.stop="jumpPage({url:'/pages/page/user/exchangeMall'})" v-if="suggestionImproveOther.currencies.exchanges&&suggestionImproveOther.currencies.exchanges.name">
 					<span>可兑换{{suggestionImproveOther.currencies.exchanges.name}}</span>
 					<span>{{suggestionImproveOther.currencies.exchanges.quantity}}个</span>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="information-wrap">
