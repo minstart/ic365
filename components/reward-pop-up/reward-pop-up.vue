@@ -44,8 +44,8 @@
 					// console.log("默认右侧功能区函数")
 				}
 			},
-			size:{
-				default:1
+			size: {
+				default: 1
 			}
 		},
 		data() {
@@ -88,6 +88,7 @@
 		position: relative;
 		width: 100vw;
 		height: 100vh;
+		z-index: 100000000001;
 	}
 
 	.reward-pop-up-list {
@@ -402,5 +403,10 @@
 				}
 			}
 		}
+	}
+</style>
+<style>
+	.reward-pop-up-list-wrap {
+		z-index: 9999999999;
 	}
 </style>

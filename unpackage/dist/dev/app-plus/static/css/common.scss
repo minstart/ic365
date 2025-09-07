@@ -120,23 +120,23 @@ ul,li{
 // 头像vip
 .head-pic-wrap {
 	position: relative;
-	.vip-icon {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		width: 40rpx;
-		height: 40rpx;
-		z-index: 2;
-		// background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
-		&[vipLevel="1"]{
-			background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
-		}
-		&[vipLevel="2"]{
-			background: url("/static/icons/svip.png") no-repeat center / 100% 100%;
-		}
+}
+//VIP标识
+.vip-icon {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 40rpx;
+	height: 40rpx;
+	z-index: 2;
+	background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
+	&[vipLevel="1"]{
+		background: url("/static/icons/vip.png") no-repeat center / 100% 100%;
+	}
+	&[vipLevel="2"]{
+		background: url("/static/icons/svip.png") no-repeat center / 100% 100%;
 	}
 }
-
 // 修改默认样式颜色为主题色
 uni-button{
 	background-color: $ThemeColor !important;

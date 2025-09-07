@@ -332,6 +332,9 @@ uni-page-body[data-v-351444bc] {
   display: flex;
   padding-right: 0.5rem;
 }
+.tab-wrap .skin-tab-wrap .skin-tab-content .skin-list .list-icon-wrap[data-v-351444bc] {
+  position: relative;
+}
 .tab-wrap .skin-tab-wrap .skin-tab-content .skin-list .list-icon[data-v-351444bc] {
   width: 5.625rem;
   height: 5.625rem;

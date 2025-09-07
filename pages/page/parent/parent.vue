@@ -147,7 +147,7 @@
 				</view>
 			</view>
 			<ul class="information-list-wrap">
-				<li class="information-list" v-for="item in information" @click="jumpPage({url:''})">
+				<li class="information-list" v-for="item in information">
 					<view class="information-list-back"></view>
 					<image class="list-icon" :src="item.icon" mode=""></image>
 					<view class="list-info">

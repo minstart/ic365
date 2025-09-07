@@ -43,7 +43,10 @@
 							</view>
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
 							<view class="tab-list" v-for="item2 in productsList['products' + item.id].list" @tap="jumpPage({url:'/pages/page/user/exchangeDetails?' + objectToQueryString(item2)})">
-								<image class="list-icon" :src="item2.icon" mode=""></image>
+								<div class="list-icon-wrap">
+									<image class="list-icon" :src="item2.icon" mode=""></image>
+									<view class="vip-icon" v-if="item2.vipLevel" :vipLevel='item2.vipLevel'></view>
+								</div>
 								<view class="list-info">
 									<h3 class="info-title">{{item2.productName}}</h3>
 									<view class="item-more" v-if="item2.endTime && calculateDaysUntilDeadline(changeTime(item2.endTime))">
@@ -415,7 +418,15 @@
 						&:last-child {
 							margin-bottom: 0;
 						}
-
+						.list-icon-wrap{
+							position: relative;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						}
+						.vip-icon{
+							right: 12rpx;
+						}
 						.list-icon {
 							width: 5.5rem;
 							height: 6.75rem;

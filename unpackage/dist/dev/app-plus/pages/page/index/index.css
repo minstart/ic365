@@ -109,6 +109,7 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  z-index: 100000000001;
 }
 .reward-pop-up-list[data-v-759cae5c] {
   position: absolute;
@@ -369,6 +370,11 @@
   line-height: 2.75rem;
   border-radius: 1.875rem;
 }
+
+.reward-pop-up-list-wrap[data-v-759cae5c] {
+		z-index: 9999999999;
+}
+
 /**
  * 这里是uni-app内置的常用样式变量
  *

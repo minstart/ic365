@@ -42,7 +42,7 @@
 									'selected' : !answered && i===current,
 									'check-correct' : answered && i===current && item.optionName === topic.answer,
 									'check-error': answered && i===current && item.optionName !== topic.answer,
-								}" :current='i' @click="clickOption(item,i)" v-for="(item,i) in changeOptions(topic.options)" v-html="item.optionName +'.'+ item.option">
+								}" :current='i' @click="clickOption(item,i)" v-for="(item,i) in changeOptions(topic.options)" v-html="'<span class=\options\>'+item.optionName +'</span>'+ item.option">
 								</view>
 							</view>
 							<view class="btn-wrap">
@@ -57,13 +57,13 @@
 									<span class="title-icon"></span>
 									<view class="title">我的答案</view>
 								</view>
-								<view class="answer-text" v-html="answer.optionName + '.' + answer.option"></view>
+								<view class="answer-text" v-html="'<span class=\options\>'+answer.optionName +'</span>'+ answer.option"></view>
 								<view class="analysis-text" @click="textAnalysis">
 									<view class="analysis-icon"></view>
 									<span>{{topic.analysis?(answer.optionName == topic.answer ? '答对了!点这里看看解析来巩固一下!' : '答错了! 点这里看看解析也许会有用!'):(answer.optionName == topic.answer ?"答对了！":"答错了!")}}</span>
 								</view>
 								<!-- 视频解析 -->
-								<view class="other-analysis-wrap" v-if="topic.videoId && pageType == 'everyDay'">
+								<view class="other-analysis-wrap" v-if="topic.videoId && pageType == 'everyDay' && isVideoAnalysis">
 									<view class="analysis-title">
 										<span class="title-icon"></span>
 										<view class="title">视频解析</view>
@@ -102,7 +102,7 @@
 								</view>
 							</view>
 							<view class="topic-options-wrap" v-if="pageType=='recentlyDetails' || pageType=='collectDetails'">
-								<view class="topic-options" v-for="(item,i) in changeOptions(topicDetails.options)" v-html="item.optionName +'.'+ item.option"></view>
+								<view class="topic-options" v-for="(item,i) in changeOptions(topicDetails.options)" v-html="'<span class=\options\>'+item.optionName +'</span>' + item.option"></view>
 							</view>
 							<view class="list-btn-wrap">
 								<view class="list-btn" @click="backList()">返回列表</view>
@@ -171,7 +171,7 @@
 			</view>
 		</template>
 	</l-popup>
-	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
+	<uni-popup style="z-index: 100000;" ref="rewardPopUp" :mask-click="false" type="center">
 		<reward-pop-up :close="closeRewardPopUp" :size="0.8"></reward-pop-up>
 	</uni-popup>
 </template>
@@ -216,6 +216,7 @@
 				context: {},
 				showAnalysis: false, //是否展示文本或图片解析弹窗
 				showAIAnalysis: false, //是否展示AI解析弹窗
+				isVideoAnalysis:false,// 是否显示视频解析按钮（因为通知弹窗的原因，需要先屏蔽，请求玩通知弹窗再显示）
 				videoEl: "",
 				AIanalysisNextBtn: true, //是否显示AI解析下一步按钮
 				selectCategory: { //选中的类目
@@ -232,9 +233,9 @@
 				questionId: "", //精准查询某个题目
 				option: {},
 				topicList: [], //错题本列表、最近答题列表、收藏列表
-				parentPageType:"",//上一级页面类型（错题本详情、收藏练习详情、最近练习详情）
-				topicDetails:{}, //点击题目的详情 （错题本详情、收藏练习详情、最近练习详情）
-				isAnswerOnly:false,//是否只答题，不显示下一题
+				parentPageType: "", //上一级页面类型（错题本详情、收藏练习详情、最近练习详情）
+				topicDetails: {}, //点击题目的详情 （错题本详情、收藏练习详情、最近练习详情）
+				isAnswerOnly: false, //是否只答题，不显示下一题
 			}
 		},
 		onLoad(option) {
@@ -312,7 +313,7 @@
 				uniHide: "all",
 				orientation: "landscape"
 			}).then(data => {
-				
+
 			})
 		},
 		onHide() {
@@ -368,6 +369,7 @@
 				if (this.current !== i && !this.answered) {
 					this.current = i;
 					this.answer = item;
+					console.log(item)
 				}
 			},
 			// 题目赋值后，对数据结构进行过滤
@@ -440,11 +442,12 @@
 							duration: "3000"
 						})
 						let _this = this;
-						setTimeout(()=>{
+						setTimeout(() => {
 							// 通知消息（成就奖励、任务奖励）
 							_this.commonRequest({
 								url: "/api/notice/getAll"
 							}).then(res => {
+								this.isVideoAnalysis = true;
 								console.log("通知消息::", res.data)
 								try {
 									if (res.data.length > 0) {
@@ -455,8 +458,10 @@
 							}).catch(error => {
 								console.log("通知消息失败：：", error)
 							})
-						},3000)
-						
+							setTimeout(()=>{
+								this.isVideoAnalysis = true;
+							},2000)
+						}, 3000)
 					} catch (e) {
 						console.log(e)
 					}
@@ -1069,15 +1074,16 @@
 								font-size: 0.9375rem;
 								line-height: 2rem;
 								color: #000;
-								padding: 0 0.625rem;
+								padding: 8rpx 20rpx;
 								border-radius: 0.5rem;
 								border: 0.08rem solid #C2C2C2;
-								margin: 0 0.75rem 0.75rem 0;
+								margin: 0 24rpx 24rpx 0;
 
 								&:nth-child(2n) {
 									margin-right: 0;
 								}
 							}
+
 
 
 							.selected {
@@ -1263,10 +1269,10 @@
 							font-size: 0.9375rem;
 							line-height: 2rem;
 							color: #000;
-							padding: 0 0.625rem;
+							padding: 8rpx 20rpx;
 							border-radius: 0.5rem;
 							border: 0.08rem solid #C2C2C2;
-							margin: 0 0.75rem 0.75rem 0;
+							margin: 0 24rpx 24rpx 0;
 
 							&:nth-child(2n) {
 								margin-right: 0;
@@ -1579,14 +1585,24 @@
 		height: auto;
 		position: relative;
 	}
-
 </style>
 <style>
-	.options-img {
+	.topic-list-window .topic-list .change-img {
+		max-height: 36rpx;
 		display: inline-block;
 		vertical-align: text-top;
-		max-width: calc(100% - 30rpx) !important;
-		max-height: 200rpx;
+	}
+
+	.topic-text .change-img {
+		display: inline-block;
+		vertical-align: text-top;
+	}
+
+	.options-img {
+		display: inline-block;
+		vertical-align: top;
+		max-width: calc(100% - 62rpx) !important;
+		max-height: 180rpx;
 	}
 
 	.change-img {
@@ -1602,4 +1618,11 @@
 		max-height: 200rpx;
 	}
 
+	.options {
+		padding: 8rpx 12rpx;
+		font-weight: 700;
+		background: #efeef3;
+		color: #222;
+		margin-right: 8rpx;
+	}
 </style>

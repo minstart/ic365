@@ -14,7 +14,7 @@
 					</view>
 					<view class="user-info">
 						<h3 class="name">{{userInfo.nickname||""}}同学</h3>
-						<view class="school">{{userInfo.school||""}} {{userInfo.className||""}}</view>
+						<view class="school">{{userInfo.school||""}} {{userInfo.class_name||""}}</view>
 						<span class="title" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
 					</view>
 					<view class="flex-center">
@@ -118,7 +118,10 @@
 				<view class="skin-tab-content">
 					<view class="tab-list" v-for="(item,i) in skinList" :current='i' v-show="skinCurrent === i">
 						<view class="skin-list" v-for="item in skinList[skinCurrent].resourceDetails" @tap.stop="jumpPage({url:'/pages/page/user/exchangeDetails?' + objectToQueryString(item)})">
-							<image class="list-icon" :src="item.icon" mode=""></image>
+							<div class="list-icon-wrap">
+								<image class="list-icon" :src="item.icon" mode=""></image>
+								<view class="vip-icon" v-if="item.vipLevel" :vipLevel='item.vipLevel'></view>
+							</div>
 							<view class="list-info ">
 								<view>
 									<h3 class="title">{{item.name}}</h3>
@@ -693,7 +696,9 @@
 					margin: 0.5rem;
 					display: flex;
 					padding-right: 0.5rem;
-
+					.list-icon-wrap{
+						position: relative;
+					}
 					.list-icon {
 						width: 180rpx;
 						height: 180rpx;

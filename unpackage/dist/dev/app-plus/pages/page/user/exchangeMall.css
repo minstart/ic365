@@ -222,6 +222,15 @@
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list[data-v-c19752be]:last-child {
   margin-bottom: 0;
 }
+.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-icon-wrap[data-v-c19752be] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .vip-icon[data-v-c19752be] {
+  right: 0.375rem;
+}
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-icon[data-v-c19752be] {
   width: 5.5rem;
   height: 6.75rem;

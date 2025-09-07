@@ -83,7 +83,6 @@
 				position: absolute;
 				right: -60rpx;
 				top: -60rpx;
-				z-index: 1000000;
 				border: 6rpx solid #fff;
 				overflow: hidden;
 				&::after {
