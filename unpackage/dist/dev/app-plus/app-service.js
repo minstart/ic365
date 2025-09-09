@@ -15937,6 +15937,35 @@ if (uni.restoreGlobal) {
         activityList: [],
         // 推荐学习
         videos: [],
+        // 推荐学习背景色默认随机数顺序
+        videosBackArr: [
+          {
+            background: "#DFE6FF",
+            background2: "#879EF6"
+          },
+          {
+            background: "#E5F9E6",
+            background2: "#71D874"
+          },
+          {
+            background: "#F8DE96",
+            background2: "#FF9743"
+          },
+          {
+            background: "#FAD8B9",
+            background2: "#D8A374"
+          },
+          {
+            background: "#F9EBE5",
+            background2: "#FF9696"
+          },
+          {
+            background: "#FFE1FC",
+            background2: "#E48BF8"
+          }
+        ],
+        randomBack: [],
+        //推荐学习背景色随机数后的数组
         // 学习模块
         plan: {
           list: []
@@ -15971,6 +16000,8 @@ if (uni.restoreGlobal) {
         appVersion: appInfo.appVersion,
         uniqueId: deviceInfo.deviceId
       };
+      this.randomBack = this.videosBackArr.sort(() => Math.random() - 0.5);
+      formatAppLog("log", "at pages/page/index/index.vue:263", "this.randomBack", this.randomBack);
       this.commonRequest({
         url: "/api/student/recordActivity",
         notLoading: true,
@@ -15996,18 +16027,18 @@ if (uni.restoreGlobal) {
             });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:266", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:298", "获取用户信息报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:273", "推荐学习::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:305", "推荐学习::", res2.data);
           try {
             this.videos = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:278", "获取推荐学习失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:310", "获取推荐学习失败：：", error2);
         });
         this.commonRequest({
           url: "/api/mission/getAll",
@@ -16015,29 +16046,29 @@ if (uni.restoreGlobal) {
             size: 3
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:288", "首页任务列表::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:320", "首页任务列表::", res2);
           try {
             this.plan = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:294", "获取任务列表报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:326", "获取任务列表报错：：", error2);
         });
         this.commonRequest({
           url: "/api/achievement/mine"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:301", "最新成就::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:333", "最新成就::", res2);
           try {
             this.achievement = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:307", "获取最新成就失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:339", "获取最新成就失败：：", error2);
         });
         this.commonRequest({
           url: "/api/notice/getAll"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:314", "通知消息::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:346", "通知消息::", res2.data);
           try {
             if (res2.data.length > 0) {
               this.$store.state.rewardPopUpList = res2.data;
@@ -16048,10 +16079,10 @@ if (uni.restoreGlobal) {
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:324", "通知消息失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:356", "通知消息失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/index/index.vue:328", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/index/index.vue:360", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -16362,17 +16393,32 @@ if (uni.restoreGlobal) {
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
-                vue.renderList($data.videos, (item) => {
+                vue.renderList($data.videos, (item, i2) => {
                   return vue.openBlock(), vue.createElementBlock("li", {
                     class: "plan-recommend-list",
+                    style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background }),
                     key: item.videoId,
                     onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/study/answerQuestions?pageType=video&categoryId=" + item.categoryId + "&videoId=" + item.videoId })
                   }, [
-                    vue.createElementVNode("image", {
-                      class: "list-icon",
-                      src: item.coverUrl
-                    }, null, 8, ["src"])
-                  ], 8, ["onClick"]);
+                    item.vipLevel > 0 ? (vue.openBlock(), vue.createElementBlock(
+                      "h3",
+                      {
+                        key: 0,
+                        class: "is-vip",
+                        style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background2 })
+                      },
+                      "会员",
+                      4
+                      /* STYLE */
+                    )) : vue.createCommentVNode("v-if", true),
+                    vue.createElementVNode(
+                      "h3",
+                      { class: "title" },
+                      vue.toDisplayString(item.categoryName),
+                      1
+                      /* TEXT */
+                    )
+                  ], 12, ["onClick"]);
                 }),
                 128
                 /* KEYED_FRAGMENT */
@@ -28225,7 +28271,6 @@ ${o3}
             url: "/api/question/today"
           };
           this.changeDate(option.date).fullDate != this.changeDate(/* @__PURE__ */ new Date()).fullDate && (requestData.data = { date: option.date });
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:256", "日期传参：", requestData);
           this.commonRequest(requestData).then((res2) => {
             formatAppLog("log", "at pages/page/study/answerQuestions.vue:259", "获取今日题目::", res2);
             try {

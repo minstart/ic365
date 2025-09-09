@@ -933,7 +933,27 @@ body {
 }
 .plan-recommend-list-wrap .plan-recommend-list[data-v-5040744a] {
   flex: 1;
+  padding: 1.25rem 0.625rem 0.625rem 0.625rem;
   margin-right: 0.68rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: 5.625rem;
+  border-radius: 0.625rem;
+}
+.plan-recommend-list-wrap .plan-recommend-list .title[data-v-5040744a] {
+  text-align: left;
+  font-size: 0.8125rem;
+  color: #323232;
+}
+.plan-recommend-list-wrap .plan-recommend-list .is-vip[data-v-5040744a] {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1rem;
+  color: #fff;
+  padding: 0.125rem 0.6875rem;
+  border-radius: 0 0.625rem 0 0.9375rem;
 }
 .plan-recommend-list-wrap .plan-recommend-list .list-icon[data-v-5040744a] {
   width: 100%;

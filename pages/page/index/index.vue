@@ -90,8 +90,9 @@
 			</view>
 			<view class="no-list-tip" v-if="videos.length==0">暂无数据</view>
 			<ul class="plan-recommend-list-wrap">
-				<li class="plan-recommend-list" :key="item.videoId" v-for="item in videos" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})">
-					<image class="list-icon" :src="item.coverUrl"></image>
+				<li class="plan-recommend-list" :style="{'background-color':randomBack[i].background}" :key="item.videoId" v-for="(item,i) in videos" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})">
+					<h3 class="is-vip" :style="{'background-color':randomBack[i].background2}" v-if="item.vipLevel>0">会员</h3>
+					<h3 class="title">{{item.categoryName}}</h3>
 				</li>
 			</ul>
 		</view>
@@ -189,6 +190,34 @@
 				activityList: [],
 				// 推荐学习
 				videos: [],
+				// 推荐学习背景色默认随机数顺序
+				videosBackArr : [
+					{
+						background:"#DFE6FF",
+						background2:"#879EF6",
+					},
+					{
+						background:"#E5F9E6",
+						background2:"#71D874",
+					},
+					{
+						background:"#F8DE96",
+						background2:"#FF9743",
+					},
+					{
+						background:"#FAD8B9",
+						background2:"#D8A374",
+					},
+					{
+						background:"#F9EBE5",
+						background2:"#FF9696",
+					},
+					{
+						background:"#FFE1FC",
+						background2:"#E48BF8",
+					},
+				],
+				randomBack:[],//推荐学习背景色随机数后的数组
 				// 学习模块
 				plan: {
 					list: []
@@ -210,7 +239,8 @@
 						contentFrom: "- 卡尔·弗里德里希·高斯"
 					}
 				},
-				taskDetails: {} //选中的任务详情
+				taskDetails: {} ,//选中的任务详情
+				
 			};
 		},
 		onLoad() {
@@ -229,6 +259,8 @@
 				appVersion: appInfo.appVersion,
 				uniqueId: deviceInfo.deviceId
 			}
+			this.randomBack = this.videosBackArr.sort(() => Math.random() - 0.5);
+			console.log("this.randomBack",this.randomBack)
 			// 记录用户设备信息
 			this.commonRequest({
 				url: "/api/student/recordActivity",
@@ -793,8 +825,27 @@
 
 		.plan-recommend-list {
 			flex: 1;
+			padding: 40rpx 20rpx 20rpx 20rpx;
 			margin-right: 0.68rem;
-
+			display: flex;
+			align-items: center;
+			position: relative;
+			min-height: 180rpx;
+			border-radius: 20rpx;
+			.title{
+				text-align: left;
+				font-size: 26rpx;
+				color: #323232;
+			}
+			.is-vip{
+				position: absolute;
+				right: 0;
+				top: 0;
+				font-size: 32rpx;
+				color: #fff;
+				padding: 4rpx 22rpx;
+				border-radius: 0 20rpx 0 30rpx;
+			}
 			.list-icon {
 				width: 100%;
 				height: 7.5rem;
