@@ -505,8 +505,9 @@
   display: inline-block;
   width: 0.4375rem;
   height: 0.6875rem;
+  margin-left: 8px;
   vertical-align: top;
-  background: url("../../../static/icons/next.png") no-repeat center 100% 100%;
+  background: url("../../../static/icons/next.png") no-repeat center/100% 100%;
 }
 .team-task-wrap .team-task-list-wrap .team-task-list .list-icon-wrap .list-icon[data-v-d282c156] {
   width: 4.3rem;

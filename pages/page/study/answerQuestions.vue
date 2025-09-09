@@ -252,7 +252,8 @@
 					let requestData = {
 						url: "/api/question/today"
 					}
-					this.changeDate(option.date).fullDate != this.changeDate(new Date()).fullDate && (requestData.date = option.date)
+					this.changeDate(option.date).fullDate != this.changeDate(new Date()).fullDate && (requestData.data = {date : option.date})
+					//console.log("日期传参：",requestData)
 					// 获取今日题目
 					this.commonRequest(requestData).then(res => {
 						console.log("获取今日题目::", res)
