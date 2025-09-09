@@ -75,8 +75,10 @@
 								</view>
 							</view>
 						</div>
-						<view class="open-task" @click="openTaskDetails(item)">开始<br>挑战</view>
-						<image class="list-icon" :src="item.coverImage" mode=""></image>
+						<view class="list-icon-wrap">
+							<image class="list-icon" :src="item.coverImage" mode=""></image>
+							<view class="open-task" @click="openTaskDetails(item)">开始挑战</view>
+						</view>
 					</li>
 				</ul>
 			</view>
@@ -187,7 +189,33 @@
 				stats: {},
 
 				// 组队任务
-				teamTask: [],
+				teamTask: [{
+						"missionId": 168,
+						"name": "速算王者",
+						"subtitle": "完成50道速算题",
+						"coverImage": "https://ic365.ajulye.com/material/team/task/mentalMath.png",
+						"colorScheme": 3,
+						"matchSubTypeId": 1,
+						"rewards": [{
+							"name": "800知识尘",
+							"currencyTypeId": 2,
+							"quantity": 800
+						}]
+					},
+					{
+						"missionId": 231,
+						"name": "数学马拉松",
+						"subtitle": "完成100道计算题",
+						"coverImage": "https://ic365.ajulye.com/material/team/task/marathon.png",
+						"colorScheme": 3,
+						"matchSubTypeId": 1,
+						"rewards": [{
+							"name": "100启明石",
+							"currencyTypeId": 3,
+							"quantity": 100
+						}]
+					}
+				],
 				// 我的队伍
 				members: [],
 				placeholderMembers: [],
@@ -333,7 +361,7 @@
 				// 	let isOther = this.openTask(item);
 				// 	return false;
 				// }
-				if(this.members.length==0){
+				if (this.members.length == 0) {
 					uni.showToast({
 						title: "请点击邀请好友或加入队伍，组建队伍再开始挑战任务",
 						icon: "none",
@@ -459,7 +487,7 @@
 							if (this.members.length == 0) {
 								this.placeholderMembers = teamDefault;
 							} else if (this.members.length == 1) {
-								this.placeholderMembers.push(teamDefault[1],teamDefault[2])
+								this.placeholderMembers.push(teamDefault[1], teamDefault[2])
 							} else if (this.members.length == 2) {
 								this.placeholderMembers.push(teamDefault[2])
 							}
@@ -503,6 +531,7 @@
 
 <style lang="scss" scoped>
 	@import "/static/css/standard.scss";
+
 	.banner-wrap {
 		border-radius: 0.6rem;
 		padding: 20rpx 24rpx 0 24rpx;
@@ -636,9 +665,10 @@
 					line-height: 1.25rem;
 				}
 			}
-			
+
 		}
-		.jumpTask{
+
+		.jumpTask {
 			&::after {
 				content: " ";
 				position: absolute;
@@ -654,12 +684,12 @@
 
 		.no-challenge {
 			position: absolute;
-			top: 120rpx;
+			top: 130rpx;
 			left: 0;
 			right: 0;
 			margin: auto;
 			width: 332rpx;
-			height: 188rpx;
+			height: 160rpx;
 			background: url('/static/image/3_no_challenge.png') no-repeat center / 100% 100%;
 		}
 
@@ -691,10 +721,11 @@
 		.team-task-list-wrap {
 			.team-task-list {
 				border-radius: 1rem;
-				padding: 1.25rem;
+				padding: 40rpx;
 				display: flex;
 				margin-bottom: 0.75rem;
 				position: relative;
+
 				.list-info {
 					flex: 1;
 
@@ -758,43 +789,75 @@
 				.flex-center {
 					flex: 1;
 				}
-				.open-task{
-					position: absolute;
-					top: 0;
-					bottom: 0;
-					right: 268rpx;
-					margin: auto;
-					background: #fff1bd;
-					border-radius: 12rpx;
-					width: 120rpx;
-					height: 120rpx;
-					font-size: 32rpx;
-					border-radius: 50%;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					border: 8rpx solid $ThemeColor;
-					line-height: 1;
+
+				.list-icon-wrap {
+					position: relative;
+
+					.open-task {
+						// position: absolute;
+						width: 200rpx;
+						height: 60rpx;
+						// top: 0;
+						// bottom: 0;
+						// right: 268rpx;
+						// margin: auto;
+						// background: #fff1bd;
+						border-radius: 30rpx;
+						font-size: 32rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						line-height: 60rpx;
+						color: #fff;
+						position: relative;
+						&::after{
+							content: " ";
+							display: inline-block;
+							width: 14rpx;
+							height: 22rpx;
+							margin-left: 8px;
+							vertical-align: top;
+							background: url("/static/icons/next.png") no-repeat center / 100% 100%;
+						}
+					}
+
+					.list-icon {
+						width: 137.6rpx;
+						height: 145.6rpx;
+						margin: 0 31.5rpx;
+						// margin-left: 46rpx;
+						border-radius: 0.5rem;
+						margin-bottom: 10rpx;
+						position: relative;
+						margin-top: -16rpx;
+					}
 				}
-				.list-icon {
-					width: 212rpx;
-					height: 222rpx;
-					margin-left: 46rpx;
-					border-radius: 0.5rem;
-				}
+
 
 				background-color:#B4E4FD;
 
 				&[colorscheme="1"] {
 					background-color: #FAE382;
+
+					.open-task {
+						background-color: #F5A623;
+					}
 				}
 
 				&[colorscheme="2"] {
 					background-color: #B4E4FD;
+
+					.open-task {
+						background-color: #4F91FF;
+					}
 				}
 
 				&[colorscheme="3"] {
 					background-color: #AAE795;
+
+					.open-task {
+						background-color: #529B02;
+					}
 				}
 			}
 		}
