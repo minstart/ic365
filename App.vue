@@ -16,6 +16,7 @@
 	import commonJs from '/common/js/common.js';
 	export default {
 		mixins: [commonJs],
+		
 		onLaunch: function() {
 			store.commit("SET_ENCRYPTENABLED", true) //开启数据加密模式
 
