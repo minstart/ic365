@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="./components/layui/css/layui.css" />
+		<link rel="stylesheet" href="./css/common.css" />
+	</head>
+	<style>
+		.common-padding-wrap {
+			padding: 0.2rem 0.15rem;
+		}
+
+		.user-vip-info-wrap {
+			border-radius: 0.2rem;
+			overflow: hidden;
+			box-shadow: 0px 0px 14px 0px rgba(255, 220, 146, 0.5);
+		}
+
+		.user-vip-info-wrap[type='0'] .vip-info-wrap {
+			padding: 0.25rem 0.18rem;
+			background: linear-gradient(to right, #E2E2E2, #A5A5A5);
+		}
+
+		.user-vip-info-wrap[type='0'] .user-info-wrap {
+			background: #F0F0F0;
+			
+		}
+		.user-vip-info-wrap[type='0'] .vip-icon{
+			background: url('./image/no-vip.png') no-repeat center / 100% 100%;
+		}
+
+		.user-vip-info-wrap[type='1'] .vip-info-wrap {
+			padding: 0.25rem 0.18rem;
+			background: linear-gradient(#FAD961, #F76B1C);
+		}
+
+		.user-vip-info-wrap[type='1'] .user-info-wrap {
+			background: #FFF5C7;
+		}
+		.user-vip-info-wrap[type='1'] .vip-icon{
+			background: url('./image/vip.png') no-repeat center / 100% 100%;
+		}
+		
+		.vip-info-wrap{
+			display: flex;
+		}
+		.vip-title-wrap {
+			height: 1.02rem;
+			color: #fff;
+			flex: 1;
+		}
+
+		.vip-title {
+			font-size: 0.3rem;
+		}
+
+		.vip-subTitle {
+			font-size: 0.2rem;
+		}
+		.vip-icon{
+			width: 1.04rem;
+			height: 1.04rem;
+		}
+		.user-info-wrap{
+			display: flex;
+			padding: 0 0.2rem;
+			line-height: 0.6rem;
+		}
+		.user-info .user-header{
+			width: 0.36rem;
+			height: 0.36rem;
+			border-radius: 50%;
+			overflow: hidden;
+		}
+		.user-info .user-name{
+			display: inline-block;
+		}
+		.user-vip-tip{
+			flex: 1;
+			text-align: right;
+		}
+	</style>
+	<body>
+		<div class="common-head-wrap">
+			<div class="back"></div>
+			<div class="head-title"></div>
+			<div class="more"></div>
+		</div>
+		<div class="common-padding-wrap">
+
+		</div>
+		<script id="userInfo" type="text/html">
+		{{console.log(d)}}
+		<div class="user-vip-info-wrap" type="{{d.vipLevel}}">
+			<div class="vip-info-wrap">
+				<div class="vip-title-wrap">
+					<h3 class="vip-title">vip会员</h3>
+					<div class="vip-subTitle">
+						{{# if(d.vipLevel>0){ }}
+							已开通
+							{{# } else { }}
+								未开通
+								{{# } }}
+					</div>
+				</div>
+				<div class="vip-icon"></div>
+			</div>
+			<div class="user-info-wrap">
+				<div class="user-info">
+					<img class="user-header" src="{{d.header}}" alt="">
+					<div class="user-name">{{d.name}}</div>
+				</div>
+				<div class="user-vip-tip">
+					{{# if(d.vipLevel>0){ }}
+						你已开通VIP会员
+						{{# } else { }}
+							你还不是VIP会员
+							{{# } }}
+				</div>
+			</div>
+			<a href="">《会员服务协议》</a>
+			{{# layui.each(d.combo, function(index, item){ }}
+
+			{{# }); }}
+		</div>
+		</script>
+	</body>
+	<script src="./js/rem.js"></script>
+	<script src="./js/jquery-1.11.1.min.js"></script>
+	<script src="./components/layui/layui.js"></script>
+	<script>
+		$(function() {
+			let url = window.location.href;
+			let code = null;
+			var appid = "wx410cfeb85cd30d9c";
+
+			// 判断 url 中有没有code=字符串，没有跳转到授权页面  
+			if (url.indexOf('code=') == -1) {
+				let currentURL = encodeURIComponent(url);
+				//scope 为 snsapi_userinfo
+				// let redirect_uri = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${currentURL}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+				// window.location.href = redirect_uri;
+			} else {
+				//回调函数已经执行 返回的链接存在code= 地址解析
+				let code = url.split("code=")[1].split("&")[0];
+				console.log(code)
+				//对 getUserOpenid 云函数发送请求传参 code 获取用户信息
+				// const res = await uniCloud.callFunction({
+				// 	name: 'getUserOpenid',
+				// 	data: {
+				// 		code: code
+				// 	},
+				// })
+				// console.log(res.result)
+				// if(res.result.code==200){
+				// 	userInfo.value=res.result.userInfo
+				// }
+			}
+
+			// 点击获取验证码
+			var isSend = false;
+			var timeDate = 60;
+			var _btnName = "发送验证码"
+			// 发送验证码
+			getCode = function() {
+				layer.msg("获取验证码")
+				isSend = true;
+				var _btn = $(".get-code-btn");
+				_btn.html(timeDate + "s")
+				var time = setInterval(function() {
+					timeDate = timeDate - 1;
+					if (timeDate == 0) {
+						clearInterval(time)
+						isSend = false;
+						timeDate = 60;
+						_btn.html(_btnName)
+						return false;
+					}
+					_btn.html(timeDate + "s")
+				}, 1000)
+			}
+
+			layui.use(['form', 'layer', 'laytpl'], function() { //如果只加载一个模块，可以不填数组。如：layui.use('form')
+				var form = layui.form, //获取form模块
+					layer = layui.layer, //获取upload模块
+					laytpl = layui.laytpl
+				var userData = {
+					name: "陈丽丽",
+					header: "",
+					vipLevel: 0,
+					vipTime: "",
+					combo: [{
+						id: 1,
+						title1: "1年vip",
+						title2: "1年VIP",
+						title3: "特惠年卡",
+						title4: "￥ 299",
+						title5: "原价 399"
+					}]
+				}
+				laytpl($("#userInfo").html()).render(userData, function(html) {
+					$(".common-padding-wrap").html(html)
+				});
+			});
+
+		})
+	</script>
+</html>
