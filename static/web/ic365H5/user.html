@@ -6,81 +6,10 @@
 		<title>个人中心</title>
 		<link rel="stylesheet" href="./components/layui/css/layui.css" />
 		<link rel="stylesheet" href="./css/common.css" />
+		<link rel="stylesheet" href="./css/user.css" />
 	</head>
 	<style>
-		.common-padding-wrap {
-			padding: 0.2rem 0.15rem;
-		}
 
-		.user-vip-info-wrap {
-			border-radius: 0.2rem;
-			overflow: hidden;
-			box-shadow: 0px 0px 14px 0px rgba(255, 220, 146, 0.5);
-		}
-
-		.user-vip-info-wrap[type='0'] .vip-info-wrap {
-			padding: 0.25rem 0.18rem;
-			background: linear-gradient(to right, #E2E2E2, #A5A5A5);
-		}
-
-		.user-vip-info-wrap[type='0'] .user-info-wrap {
-			background: #F0F0F0;
-			
-		}
-		.user-vip-info-wrap[type='0'] .vip-icon{
-			background: url('./image/no-vip.png') no-repeat center / 100% 100%;
-		}
-
-		.user-vip-info-wrap[type='1'] .vip-info-wrap {
-			padding: 0.25rem 0.18rem;
-			background: linear-gradient(#FAD961, #F76B1C);
-		}
-
-		.user-vip-info-wrap[type='1'] .user-info-wrap {
-			background: #FFF5C7;
-		}
-		.user-vip-info-wrap[type='1'] .vip-icon{
-			background: url('./image/vip.png') no-repeat center / 100% 100%;
-		}
-		
-		.vip-info-wrap{
-			display: flex;
-		}
-		.vip-title-wrap {
-			height: 1.02rem;
-			color: #fff;
-			flex: 1;
-		}
-
-		.vip-title {
-			font-size: 0.3rem;
-		}
-
-		.vip-subTitle {
-			font-size: 0.2rem;
-		}
-		.vip-icon{
-			width: 1.04rem;
-			height: 1.04rem;
-		}
-		.user-info-wrap{
-			display: flex;
-			padding: 0 0.2rem;
-			line-height: 0.6rem;
-		}
-		.user-info .user-header{
-			width: 0.36rem;
-			height: 0.36rem;
-			border-radius: 50%;
-			overflow: hidden;
-		}
-		.user-info .user-name{
-			display: inline-block;
-		}
-		.user-vip-tip{
-			flex: 1;
-			text-align: right;
-		}
 	</style>
 	<body>
 		<div class="common-head-wrap">
@@ -120,10 +49,67 @@
 							{{# } }}
 				</div>
 			</div>
-			<a href="">《会员服务协议》</a>
-			{{# layui.each(d.combo, function(index, item){ }}
+			<a class="vip-agreement" href="javascript:void(0);">《会员服务协议》</a>
+			<div class="combo-wrap">
+				<div class="combo-title">
+					选择续费套餐 <span>购买后自动延长到期时间</span>
+				</div>
+				<div class="combo-list-window">
+					<ul class="combo-list-wrap">
+						{{# layui.each(d.combo, function(index, item){ }}
+							<li class="combo-list {{# if(index==0){ }}selected{{# } }}">
+								<div class="label">{{item.title1}}</div>
+								<div class="title">{{item.title2}}</div>
+								<div class="subTitle">{{item.title3}}</div>
+								<div class="money">{{item.title4}}</div>
+								<div class="original-price">{{item.title5}}</div>
+							</li>
+							{{# }); }}
+					</ul>
+				</div>
+			</div>
 
-			{{# }); }}
+		</div>
+		<div class="compare-wrap">
+			<div class="compare-banner">
+				<h3 class="compare-title">
+					开通VIP </br>
+					<span>权益对比</span>
+				</h3>
+				<div class="banner"></div>
+			</div>
+			<div class="compare-wrap">
+				<div class="compare-list-wrap" type='noVip'>
+					<h3 class="title">开通前</h3>
+					{{# layui.each(d.compare.noVip, function(index, item){ }}
+						<div class="compare-list">
+							<div class="icon"></div>
+							<div class="compare-info">
+								<div class="info-title">
+									{{item.title}}
+									<span>{{item.situation}}</span>
+								</div>
+								<div class="info-subTitle">{{item.subTitle}}</div>
+							</div>
+						</div>
+						{{# }); }}
+				</div>
+				<div class="compare-list-wrap" type='vip'>
+					<h3 class="title">开通后</h3>
+					{{# layui.each(d.compare.vip, function(index, item){ }}
+						<div class="compare-list">
+							<div class="icon"></div>
+							<div class="compare-info">
+								<div class="info-title">
+									{{item.title}}
+									<span>{{item.situation}}</span>
+								</div>
+								<div class="info-subTitle">{{item.subTitle}}</div>
+							</div>
+						</div>
+						{{# }); }}
+				</div>
+			</div>
 		</div>
 		</script>
 	</body>
@@ -192,13 +178,75 @@
 					vipLevel: 0,
 					vipTime: "",
 					combo: [{
-						id: 1,
-						title1: "1年vip",
-						title2: "1年VIP",
-						title3: "特惠年卡",
-						title4: "￥ 299",
-						title5: "原价 399"
-					}]
+							id: 1,
+							title1: "1年vip",
+							title2: "1年VIP",
+							title3: "特惠年卡",
+							title4: "￥299",
+							title5: "原价399"
+						},
+						{
+							id: 2,
+							title1: "特惠",
+							title2: "3年VIP",
+							title3: "特惠买2年送1年",
+							title4: "￥599",
+							title5: "原价1197"
+						},
+						{
+							id: 3,
+							title1: "限时特惠",
+							title2: "终生VIP",
+							title3: "终身特惠",
+							title4: "￥899",
+							title5: "原价2398"
+						}
+					],
+					compare: {
+						noVip: [{
+								title: "预习环节",
+								subTitle: "基础概念课",
+								situation: "部分开通"
+							},
+							{
+								title: "作业环节",
+								subTitle: "解课题<br>作业精讲课",
+								situation: "部分开通"
+
+							},
+							{
+								title: "复习环节",
+								subTitle: "单元复习",
+								situation: "部分开通"
+							},
+							{
+								title: "奖励环节",
+								subTitle: "普通奖励",
+								situation: "不开通"
+							}
+						],
+						vip: [{
+								title: "预习环节",
+								subTitle: "基础概念课",
+								situation: "全开通"
+							},
+							{
+								title: "作业环节",
+								subTitle: "解课题<br>作业精讲课",
+								situation: "全开通"
+							},
+							{
+								title: "复习环节",
+								subTitle: "单元复习",
+								situation: "全开通"
+							},
+							{
+								title: "奖励环节",
+								subTitle: "普通奖励",
+								situation: "全开通"
+							}
+						]
+					}
 				}
 				laytpl($("#userInfo").html()).render(userData, function(html) {
 					$(".common-padding-wrap").html(html)
