@@ -52,6 +52,7 @@ const store = new Vuex.Store({
 					showRewardPopUp: true, //任务奖励、成就奖励弹窗是否显示
 					rewardPopUpList: [], //任务奖励、成就奖励弹窗列表
 					openDebug:true, //是否开启调试模式
+					officialAccountQRCode:"",//公众号二维码地址
 
 					hasLogin: false,
 					isUniverifyLogin: false,

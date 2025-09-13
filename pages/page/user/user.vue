@@ -21,6 +21,18 @@
 						<view class="qr-code" @click="jumpPage({url:'/pages/page/team/invite_team'})"></view>
 					</view>
 				</view>
+				<view class="vip-banner-wrap">
+					<view class="novip-banner" v-if="userInfo.vipLevel==0">
+						<view class="novip-info-wrap">
+							<view class="novip-info-title">会员中心</view>
+							<view class="become-member">开通VIP会员</view>
+						</view>
+					</view>
+					<view class="vip-banner" v-if="userInfo.vipLevel>0">
+						<h3 class="vip-banner-text">{{userInfo.vipLevel==1?"VIP会员":"超级VIP会员"}}</h3>
+						<div class="vip-time">有效期：2025-10-6{{}}</div>
+					</view>
+				</view>
 				<view class="property">
 					<view class="property-item">
 						<h3 class="item-info-num">{{userInfo.currencies.star}}</h3>
@@ -162,14 +174,14 @@
 								title: "最近练习",
 								introduce: "查看最近的练习记录",
 								unRead: "",
-								jumpUrl:"/pages/page/study/answerQuestions?pageType=recentlyList"
+								jumpUrl: "/pages/page/study/answerQuestions?pageType=recentlyList"
 							},
 							{
 								coverUrl: "/static/icons/collecting_exercises.png",
 								title: "收藏练习",
 								introduce: "",
 								unRead: "",
-								jumpUrl:"/pages/page/study/answerQuestions?pageType=collectList"
+								jumpUrl: "/pages/page/study/answerQuestions?pageType=collectList"
 							}
 
 						]
@@ -452,9 +464,67 @@
 			border-radius: 0.5rem;
 			margin-bottom: 2.5rem;
 
+			.vip-banner-wrap {
+				margin-bottom: 40rpx;
+				color: #725609;
+				font-size: 30rpx;
+
+				.novip-banner {
+					position: relative;
+					// width: 626rpx;
+					margin: 0 auto;
+					height: 100rpx;
+					background: url("/static/image/5_novip_banner.png") no-repeat top / 100% 100%;
+
+					.novip-info-wrap {
+						position: relative;
+						display: flex;
+						margin: 0 60rpx 0 150rpx;
+						line-height: 70rpx;
+
+						.novip-info-title {}
+
+						.become-member {
+							flex: 1;
+							text-align: right;
+
+							&::after {
+								display: inline-block;
+								content: "";
+								width: 14rpx;
+								height: 24rpx;
+								margin-left: 10rpx;
+								background: url("/static/icons/next4.png") no-repeat center / 100% 100%;
+							}
+						}
+					}
+				}
+
+				.vip-banner {
+					position: relative;
+					width: 626rpx;
+					height: 186rpx;
+					margin: 0 auto;
+					background: url("/static/image/5_vip_banner.png") no-repeat center / 100% 100%;
+
+					.vip-banner-text {
+						position: absolute;
+						left: 30rpx;
+						bottom: 20rpx;
+					}
+
+					.vip-time {
+						position: absolute;
+						bottom: 20rpx;
+						right: 20rpx;
+					}
+				}
+			}
+
 			.uni-padding-wrap {
 				display: flex;
 				padding: 1.25rem 0.9375rem;
+
 			}
 
 			.head-pic-wrap {
@@ -483,6 +553,7 @@
 					line-height: 50rpx;
 					font-size: 40rpx;
 				}
+
 				.school {
 					font-size: 0.8125rem;
 					color: #999;
@@ -510,7 +581,7 @@
 		.property {
 			display: flex;
 			margin-bottom: 1.25rem;
-			padding: 0 0.9375rem;
+			padding: 0 24rpx;
 
 			.property-item {
 				flex: 1;
@@ -582,8 +653,9 @@
 				background: url("/static/icons/selected.png") no-repeat bottom / 1.3125rem 0.375rem;
 			}
 		}
-		.tab-list-content{
-			.tab-list{
+
+		.tab-list-content {
+			.tab-list {
 				&[current="1"] {
 					.unRead {
 						color: #5893F3 !important;
@@ -591,6 +663,7 @@
 				}
 			}
 		}
+
 		.practice-list {
 			background: #F9F9F9;
 			border-bottom: 0.16rem solid #F6F6F6;
@@ -696,9 +769,11 @@
 					margin: 0.5rem;
 					display: flex;
 					padding-right: 0.5rem;
-					.list-icon-wrap{
+
+					.list-icon-wrap {
 						position: relative;
 					}
+
 					.list-icon {
 						width: 180rpx;
 						height: 180rpx;

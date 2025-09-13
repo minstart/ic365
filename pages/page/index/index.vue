@@ -2,7 +2,7 @@
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<view class="banner-wrap">
-			<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+			<page-head ref="pageHead" :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
 				<view class="head-pic-wrap">
 					<view class="vip-icon" :vipLevel='userInfo.vipLevel'></view>
@@ -260,7 +260,6 @@
 				uniqueId: deviceInfo.deviceId
 			}
 			this.randomBack = this.videosBackArr.sort(() => Math.random() - 0.5);
-			console.log("this.randomBack",this.randomBack)
 			// 记录用户设备信息
 			this.commonRequest({
 				url: "/api/student/recordActivity",
@@ -280,7 +279,7 @@
 				this.commonRequest({
 					url: "/api/student/info"
 				}).then(res => {
-					// console.log("获取用户信息::", JSON.stringify(res))
+					console.log("获取用户信息::", res)
 					try {
 						store.commit("Update_UserInfo", res.data)
 						this.userInfo = res.data;
@@ -294,6 +293,15 @@
 							url: '/pages/page/index/supplement_info?pageFrom=' + data.pathUrl
 						});
 					}
+					this.verifVip({
+						vip:3,
+						myvip:this.userInfo.vipLevel,
+						msg:"测试弹窗提示"
+					}).then(data => {
+						console.log("校验通过")
+					}).catch(error => {
+						console.log("校验不通过")
+					})
 				}).catch(error => {
 					console.log("获取用户信息报错：：", error)
 				})
@@ -338,7 +346,7 @@
 				}).catch(error => {
 					console.log("获取最新成就失败：：", error)
 				})
-
+				
 				// 通知消息（成就奖励、任务奖励）
 				this.commonRequest({
 					url: "/api/notice/getAll"

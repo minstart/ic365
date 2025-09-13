@@ -17,16 +17,28 @@
 			</view>
 		</view>
 	</view>
-	<view v-if="showRewardPopUp" class="reward-pop-up-wrap" v-for="item in rewardPopUpList">
-		<view class="pop-up-type" :data-type="item.type">
-			<view class="reward-pop-up-back">
-
+	<!-- <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">
+		<view class="become-member-wrap">
+			<view class="title">关注公众号</view>
+			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>
+			<p class="tips">扫码关注 “学养网” 公众号开通会员</p>
+			<view class="btn-wrap">
+				<button class="btn-close" @click.stop="closeBecomeMember">关闭</button>
 			</view>
-			<div class="reward-pop-up-content">
-
-			</div>
 		</view>
-	</view>
+	</view> -->
+	<uni-popup ref="becomeMember" :mask-click="false" type="center">
+		<view class="become-member-window">
+			<view class="become-member-wrap">
+				<view class="title">关注公众号</view>
+				<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>
+				<p class="tips">扫码关注 “学养网” 公众号开通会员</p>
+				<view class="btn-wrap">
+					<button class="btn-close" @click.stop="closeBecomeMember">关闭</button>
+				</view>
+			</view>
+		</view>
+	</uni-popup>
 </template>
 <script>
 	export default {
@@ -63,15 +75,7 @@
 				default: true
 			},
 
-			// 奖励弹窗
-			showRewardPopUp: {
-				default: false
-			},
-			// 奖励列表
-			rewardPopUpList: {
-				default: []
-			},
-			standardTitle:{
+			standardTitle: {
 				default: false
 			}
 		},
@@ -93,7 +97,16 @@
 					animationType: 'none',
 					animationDuration: 1000
 				})
+			},
+			
+			openBecomeMember() {
+				this.$refs.becomeMember.open(); // 打开弹窗
+			},
+			closeBecomeMember() {
+				this.$store.state.officialAccountWindow = false;
+				this.$refs.becomeMember.close(); // 关闭弹窗
 			}
+
 		}
 	}
 </script>
@@ -131,6 +144,7 @@
 			flex: 1;
 			position: relative;
 			min-height: 2rpx;
+
 			* {
 				position: absolute;
 				left: 0;
@@ -154,7 +168,8 @@
 			padding-bottom: 0.1rem;
 			background: url("/static/image/title_back.png") no-repeat bottom center / 5.5rem;
 		}
-		.standard-title{
+
+		.standard-title {
 			font-size: 36rpx;
 			color: #000;
 			font-weight: normal;
@@ -182,30 +197,59 @@
 		z-index: 10000;
 	}
 
-	@keyframes spin {
-		0% {
-			transform: rotate(0deg);
-		}
+	.become-member-window {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 100000000000000;
 
-		100% {
-			transform: rotate(360deg);
+		.become-member-wrap {
+			width: 608rpx;
+			height: 830rpx;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			background: #fff;
+			border-radius: 20rpx;
+			// padding: 20rpx;
+			text-align: center;
+
+			.title {
+				text-align: center;
+				line-height: 88rpx;
+				font-size: 32rpx;
+				border-bottom: 2rpx solid #dfdfdf;
+			}
+
+			.qr-code {
+				width: 400rpx;
+				height: 400rpx;
+				margin: 60rpx auto;
+			}
+
+			.tips {
+				font-size: 30rpx;
+				color: #f00;
+			}
+
+			.btn-wrap {
+				position: absolute;
+				bottom: 0;
+				height: 132rpx;
+				width: 100%;
+				border-top: 2rpx solid #dfdfdf;
+
+				.btn-close {
+					width: 390rpx;
+					margin: 20rpx auto;
+				}
+			}
 		}
 	}
-
-	//奖励列表弹窗 
-	// .reward-pop-up-wrap {
-	// 	position: fixed;
-	// 	overflow: hidden;
-	// 	left: 0;
-	// 	top: 0;
-	// 	width: 100vw;
-	// 	height: 1600rpx;
-	// 	background: rgba(0, 0, 0, 0.5);
-	// 	z-index: 100000;
-	// 	.pop-up-type{
-	// 		width: 80%;
-	// 		height: 80%;
-	// 		background: #fff;
-	// 	}
-	// }
 </style>

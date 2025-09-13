@@ -419,6 +419,47 @@ export default {
 			})
 		},
 
+		verifVip(_data) {
+			let _this = this;
+			return new Promise((resolve, reject) => {
+				typeof _data.vip == "undefined" && (_data.vip = 0);
+				typeof _data.myvip == "undefined" && (_data.myvip = 0);
+				if (_data.myvip >= _data.vip) {
+					// 是会员且符合VIP要求
+					resolve()
+				} else {
+					uni.showModal({
+						// title: '提示',
+						content: _data.msg || '当前会员等级不满足该功能需要的vip会员等级，是否同意展示开通会员渠道？',
+						success: function (res) {
+							if (res.confirm) {
+								_this.openOfficialAccountWindow()
+								console.log('用户点击确定');
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					});
+					reject()
+				}
+			})
+		},
+		openOfficialAccountWindow(){
+			this.$store.state.officialAccountQRCode = "";
+			console.log(this.$refs)
+			// 获取公众号二维码
+			this.commonRequest({
+				url: "/api/common/get-wechat-qr"
+			}).then(res => {
+				// console.log("获取公众号二维码::", res)
+				this.$store.state.officialAccountQRCode = res.data
+				this.$refs.pageHead.openBecomeMember()
+			}).catch(error => {
+				console.log("获取公众号二维码报错：：", error)
+			})
+		},
+		
+
 		/**
 		 * 获取任意时间(转换时间)
 		 */
@@ -489,8 +530,8 @@ export default {
 			const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)); // 天数
 			const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // 剩余小时数
 			return {
-				days:diffDays,
-				hours:diffHours
+				days: diffDays,
+				hours: diffHours
 			}
 		},
 		// 图片路径转换为图片

@@ -1,3 +1,50 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.uni-popup[data-v-4dd3c44b] {
+  position: fixed;
+  z-index: 100;
+}
+.uni-popup.top[data-v-4dd3c44b], .uni-popup.left[data-v-4dd3c44b], .uni-popup.right[data-v-4dd3c44b] {
+  top: 0;
+}
+.uni-popup .uni-popup__wrapper[data-v-4dd3c44b] {
+  display: block;
+  position: relative;
+  /* iphonex 等安全区设置，底部安全区适配 */
+}
+.uni-popup .uni-popup__wrapper.left[data-v-4dd3c44b], .uni-popup .uni-popup__wrapper.right[data-v-4dd3c44b] {
+  padding-top: 0;
+  flex: 1;
+}
+.fixforpc-z-index[data-v-4dd3c44b] {
+  z-index: 999;
+}
+.fixforpc-top[data-v-4dd3c44b] {
+  top: 0;
+}
 .common-page-head-view[data-v-e80b2f0b] {
   position: relative;
   top: 0;
@@ -71,13 +118,53 @@
   background: #fff;
   z-index: 10000;
 }
-@keyframes spin-e80b2f0b {
-0% {
-    transform: rotate(0deg);
+.become-member-window[data-v-e80b2f0b] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100000000000000;
 }
-100% {
-    transform: rotate(360deg);
+.become-member-window .become-member-wrap[data-v-e80b2f0b] {
+  width: 19rem;
+  height: 25.9375rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+  border-radius: 0.625rem;
+  text-align: center;
 }
+.become-member-window .become-member-wrap .title[data-v-e80b2f0b] {
+  text-align: center;
+  line-height: 2.75rem;
+  font-size: 1rem;
+  border-bottom: 0.0625rem solid #dfdfdf;
+}
+.become-member-window .become-member-wrap .qr-code[data-v-e80b2f0b] {
+  width: 12.5rem;
+  height: 12.5rem;
+  margin: 1.875rem auto;
+}
+.become-member-window .become-member-wrap .tips[data-v-e80b2f0b] {
+  font-size: 0.9375rem;
+  color: #f00;
+}
+.become-member-window .become-member-wrap .btn-wrap[data-v-e80b2f0b] {
+  position: absolute;
+  bottom: 0;
+  height: 4.125rem;
+  width: 100%;
+  border-top: 0.0625rem solid #dfdfdf;
+}
+.become-member-window .become-member-wrap .btn-wrap .btn-close[data-v-e80b2f0b] {
+  width: 12.1875rem;
+  margin: 0.625rem auto;
 }
 
 /**
@@ -130,6 +217,52 @@ uni-page-body[data-v-351444bc] {
   border-radius: 0.5rem;
   margin-bottom: 2.5rem;
 }
+.banner-wrap .user-info-wrap .vip-banner-wrap[data-v-351444bc] {
+  margin-bottom: 1.25rem;
+  color: #725609;
+  font-size: 0.9375rem;
+}
+.banner-wrap .user-info-wrap .vip-banner-wrap .novip-banner[data-v-351444bc] {
+  position: relative;
+  margin: 0 auto;
+  height: 3.125rem;
+  background: url("../../../static/image/5_novip_banner.png") no-repeat top/100% 100%;
+}
+.banner-wrap .user-info-wrap .vip-banner-wrap .novip-banner .novip-info-wrap[data-v-351444bc] {
+  position: relative;
+  display: flex;
+  margin: 0 1.875rem 0 4.6875rem;
+  line-height: 2.1875rem;
+}
+.banner-wrap .user-info-wrap .vip-banner-wrap .novip-banner .novip-info-wrap .become-member[data-v-351444bc] {
+  flex: 1;
+  text-align: right;
+}
+.banner-wrap .user-info-wrap .vip-banner-wrap .novip-banner .novip-info-wrap .become-member[data-v-351444bc]::after {
+  display: inline-block;
+  content: "";
+  width: 0.4375rem;
+  height: 0.75rem;
+  margin-left: 0.3125rem;
+  background: url("../../../static/icons/next4.png") no-repeat center/100% 100%;
+}
+.banner-wrap .user-info-wrap .vip-banner-wrap .vip-banner[data-v-351444bc] {
+  position: relative;
+  width: 19.5625rem;
+  height: 5.8125rem;
+  margin: 0 auto;
+  background: url("../../../static/image/5_vip_banner.png") no-repeat center/100% 100%;
+}
+.banner-wrap .user-info-wrap .vip-banner-wrap .vip-banner .vip-banner-text[data-v-351444bc] {
+  position: absolute;
+  left: 0.9375rem;
+  bottom: 0.625rem;
+}
+.banner-wrap .user-info-wrap .vip-banner-wrap .vip-banner .vip-time[data-v-351444bc] {
+  position: absolute;
+  bottom: 0.625rem;
+  right: 0.625rem;
+}
 .banner-wrap .user-info-wrap .uni-padding-wrap[data-v-351444bc] {
   display: flex;
   padding: 1.25rem 0.9375rem;
@@ -178,7 +311,7 @@ uni-page-body[data-v-351444bc] {
 .banner-wrap .property[data-v-351444bc] {
   display: flex;
   margin-bottom: 1.25rem;
-  padding: 0 0.9375rem;
+  padding: 0 0.75rem;
 }
 .banner-wrap .property .property-item[data-v-351444bc] {
   flex: 1;

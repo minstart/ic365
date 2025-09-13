@@ -815,9 +815,9 @@
 							display: inline-block;
 							width: 14rpx;
 							height: 22rpx;
-							margin-left: 8px;
+							margin-left: 6px;
 							vertical-align: top;
-							background: url("/static/icons/next.png") no-repeat center / 100% 100%;
+							background: url("/static/icons/next3.png") no-repeat center / 100% 100%;
 						}
 					}
 

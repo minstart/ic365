@@ -789,6 +789,21 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         },
         disableScroll: true
       }
+    },
+    {
+      path: "uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update",
+      style: {
+        "app-plus": {
+          animationDuration: 200,
+          animationType: "fade-in",
+          background: "transparent",
+          backgroundColorTop: "transparent",
+          popGesture: "none",
+          scrollIndicator: false,
+          titleNView: false
+        },
+        disableScroll: true
+      }
     }
   ];
   var subPackages = [

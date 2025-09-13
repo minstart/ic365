@@ -1,9 +1,9 @@
 {
 	"leftWindow": {
-		
+
 	},
 	"topWindow": {
-		
+
 	},
 	"pages": [
 		// 项目页面 ---------------------------------Start
@@ -194,7 +194,22 @@
 				"navigationStyle": "custom"
 			}
 		},
+		// {
+		// 	"path": "uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update",
+		// 	"style": {
+		// 		"disableScroll": true,
+		// 		"app-plus": {
+		// 			"backgroundColorTop": "transparent",
+		// 			"background": "transparent",
+		// 			"titleNView": false,
+		// 			"scrollIndicator": false,
+		// 			"popGesture": "none",
+		// 			"animationType": "fade-in",
+		// 			"animationDuration": 200
 
+		// 		}
+		// 	}
+		// },
 		// 项目页面 -----------------------------------End
 
 
@@ -542,6 +557,21 @@
 			}
 		}
 		// #endif
+		, {
+			"path": "uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update",
+			"style": {
+				"app-plus": {
+					"animationDuration": 200,
+					"animationType": "fade-in",
+					"background": "transparent",
+					"backgroundColorTop": "transparent",
+					"popGesture": "none",
+					"scrollIndicator": false,
+					"titleNView": false
+				},
+				"disableScroll": true
+			}
+		}
 	],
 	"subPackages": [{
 			"root": "pages/API",
@@ -1573,7 +1603,7 @@
 			"animationType": "none", // 设置为"none"以关闭动画
 			"animationDuration": 0 // 动画持续时间设置为0
 		},
-		"bounce":"none"
+		"bounce": "none"
 	},
 	"tabBar": {
 		"color": "#999999",
