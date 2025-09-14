@@ -430,7 +430,7 @@ export default {
 				} else {
 					uni.showModal({
 						// title: '提示',
-						content: _data.msg || '当前会员等级不满足该功能需要的vip会员等级，是否同意展示开通会员渠道？',
+						content: _data.msg || '当前会员等级不满足该功能需要的vip等级，是否同意显示开通会员渠道？',
 						success: function (res) {
 							if (res.confirm) {
 								_this.openOfficialAccountWindow()

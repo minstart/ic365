@@ -1,7 +1,7 @@
 	<meta content="always" name="referrer" />
 	<template>
 		<view class="page-wrap">
-			<page-head :title='pageHeadTitle' :isBack='false' :background="'transparent'"></page-head>
+			<page-head ref="pageHead" :title='pageHeadTitle' :isBack='false' :background="'transparent'"></page-head>
 			<view class="uni-padding-wrap">
 				<h3 class="page-title">本机号码一键登录</h3>
 				<uni-forms ref="baseForm" :rules="rules" :model="baseFormData" labelWidth="80px">

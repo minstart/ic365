@@ -293,15 +293,6 @@
 							url: '/pages/page/index/supplement_info?pageFrom=' + data.pathUrl
 						});
 					}
-					this.verifVip({
-						vip:3,
-						myvip:this.userInfo.vipLevel,
-						msg:"测试弹窗提示"
-					}).then(data => {
-						console.log("校验通过")
-					}).catch(error => {
-						console.log("校验不通过")
-					})
 				}).catch(error => {
 					console.log("获取用户信息报错：：", error)
 				})

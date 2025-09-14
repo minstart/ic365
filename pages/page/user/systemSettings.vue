@@ -1,7 +1,7 @@
 <template>
 	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='true' :standardTitle='true' :background="'#fff'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :standardTitle='true' :background="'#fff'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="list-wrap">
 				<view class="list" @tap="jumpPage({url:'/pages/page/index/supplement_info'})">

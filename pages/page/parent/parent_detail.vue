@@ -1,7 +1,7 @@
 <template>
 	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
 	</view>
 </template>
 

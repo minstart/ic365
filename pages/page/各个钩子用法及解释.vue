@@ -6,7 +6,7 @@
 	<view class="page-loading" v-if="pageMask"></view>
 	
 	<!-- 公共顶部导航栏组件 -->
-	<page-head :title='pageHeadTitle' :isBack='false'></page-head>
+	<page-head ref="pageHead" :title='pageHeadTitle' :isBack='false'></page-head>
 	
 	<input type="text" v-model="something">
 	<!-- 父页面调用子页面方法 -->

@@ -1,7 +1,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="banner-wrap">
-		<page-head :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="user-info-wrap">
 			<!-- <view class="head-pic"></view> -->
 			<view class="head-pic-wrap">

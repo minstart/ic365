@@ -1,7 +1,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap uni-padding-wrap">
-		<page-head :title='pageHeadTitle' :isBack='false' :background="'transparent'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='false' :background="'transparent'"></page-head>
 		<uni-forms ref="baseForm" :rules="rules" :model="baseFormData" labelWidth="80px">
 			<uni-forms-item label="性别" required name="gender">
 				<uni-data-checkbox v-model="baseFormData.gender" primaryColor="#F5A623" :localdata="genders" />

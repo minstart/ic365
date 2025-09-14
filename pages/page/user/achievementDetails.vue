@@ -2,7 +2,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'#ECEFFF'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'#ECEFFF'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
 				<view class="achievement-statistics">
@@ -178,7 +178,7 @@
 					})
 				}
 				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					// 获取兑换商品列表
+					// 获取成就列表
 					this.commonRequest({
 						url: "/api/achievement/list",
 						data: {
@@ -188,11 +188,11 @@
 						}
 					}).then(res => {
 						// console.log("search:",this.keyword,",groupType:",this.selectProductsId)
-						console.log("获取兑换商品列表:", res.data)
+						console.log("获取成就列表:", res.data)
 						this.productsList["products" + this.selectProductsId].requested = true;
 						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
 					}).catch(error => {
-						console.log("获取兑换商品列表报错：：", error)
+						console.log("获取成就列表报错：：", error)
 					})
 				}
 			}
