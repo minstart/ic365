@@ -210,13 +210,14 @@
 					images: {},
 					video: ""
 				},
+				setInterval : "",
 
 				showVideo: false, //是否展示是视频弹窗（uni-popup 有毒）
 				topic: {}, //题目内容
 				context: {},
 				showAnalysis: false, //是否展示文本或图片解析弹窗
 				showAIAnalysis: false, //是否展示AI解析弹窗
-				isVideoAnalysis:false,// 是否显示视频解析按钮（因为通知弹窗的原因，需要先屏蔽，请求玩通知弹窗再显示）
+				isVideoAnalysis: false, // 是否显示视频解析按钮（因为通知弹窗的原因，需要先屏蔽，请求玩通知弹窗再显示）
 				videoEl: "",
 				AIanalysisNextBtn: true, //是否显示AI解析下一步按钮
 				selectCategory: { //选中的类目
@@ -252,7 +253,9 @@
 					let requestData = {
 						url: "/api/question/today"
 					}
-					this.changeDate(option.date).fullDate != this.changeDate(new Date()).fullDate && (requestData.data = {date : option.date})
+					this.changeDate(option.date).fullDate != this.changeDate(new Date()).fullDate && (requestData.data = {
+						date: option.date
+					})
 					//console.log("日期传参：",requestData)
 					// 获取今日题目
 					this.commonRequest(requestData).then(res => {
@@ -404,12 +407,16 @@
 					text: "",
 					step: 0
 				}
+				try{
+					clearInterval(this.setInterval)
+				}catch(e){}
 				let _this = this;
-				let time = setInterval(() => {
+				this.setInterval = setInterval(() => {
 					if (_this.answered) {
-						clearInterval(time)
+						clearInterval(_this.setInterval)
 					}
 					_this.time = _this.time + 1;
+					console.log(_this.time)
 				}, 1000)
 			},
 
@@ -459,9 +466,9 @@
 							}).catch(error => {
 								console.log("通知消息失败：：", error)
 							})
-							setTimeout(()=>{
+							setTimeout(() => {
 								this.isVideoAnalysis = true;
-							},2000)
+							}, 2000)
 						}, 3000)
 					} catch (e) {
 						console.log(e)
@@ -484,8 +491,8 @@
 				if (item) {
 					// console.log("item", item)
 					this.verifVip({
-						vip:item.vipLevel,
-						myvip:this.userInfo.vipLevel
+						vip: item.vipLevel,
+						myvip: this.userInfo.vipLevel
 					}).then(data => {
 						console.log("校验通过")
 						try {
@@ -652,6 +659,8 @@
 								missionId: this.option.missionId
 							};
 						}
+						this.time = 0;
+						console.log("接口", byCategoryUrl)
 						console.log("获取题目传参：", byCategoryData)
 						// 获取题目
 						this.commonRequest({
@@ -660,8 +669,12 @@
 						}).then(res => {
 							console.log("获取题目:", res.data)
 							if (res.data.length == 0) {
+								this.topic = {
+									content:""
+								};
+								clearInterval(this.setInterval)
 								uni.showToast({
-									title: "获取题目失败",
+									title: "获取题目失败2",
 									icon: "none"
 								})
 								return false;

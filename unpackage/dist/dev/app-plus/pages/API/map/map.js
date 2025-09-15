@@ -63,7 +63,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue = __toESM(require_vue());
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
@@ -73,10 +73,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   }
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
   var import_vue2 = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -85,7 +85,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
   var _style_0 = { "content": { "": { "flex": 1 } }, "map": { "": { "width": "750rpx", "height": 350, "backgroundColor": "#f0f0f0" } }, "scrollview": { "": { "flex": 1, "paddingTop": 10, "paddingRight": 10, "paddingBottom": 10, "paddingLeft": 10 } }, "list-item": { "": { "flexDirection": "row", "flexWrap": "nowrap", "alignItems": "center", "paddingTop": 5, "paddingRight": 0, "paddingBottom": 5, "paddingLeft": 0 } }, "list-text": { "": { "flex": 1 } }, "button": { "": { "marginTop": 5, "marginBottom": 5 } } };
   var testMarkers = [
     {
@@ -480,7 +480,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           class: "scrollview",
           scrollY: "true"
         }, [
-          (0, import_vue2.createCommentVNode)(' <view class="list-item">\r\n                <text class="list-text">\u663E\u793A3D\u697C\u5757</text>\r\n                <switch :checked="enable3D" @change="enableThreeD" />\r\n            </view>\r\n            <view class="list-item">\r\n                <text class="list-text">\u663E\u793A\u6307\u5357\u9488</text>\r\n                <switch :checked="showCompass" @change="changeShowCompass" />\r\n            </view>\r\n            <view class="list-item">\r\n                <text class="list-text">\u5F00\u542F\u4FEF\u89C6</text>\r\n                <switch :checked="enableOverlooking" @change="changeEnableOverlooking" />\r\n            </view>\r\n            <view class="list-item">\r\n                <text class="list-text">\u662F\u5426\u652F\u6301\u7F29\u653E</text>\r\n                <switch :checked="enableZoom" @change="changeEnableZoom" />\r\n            </view>\r\n            <view class="list-item">\r\n                <text class="list-text">\u662F\u5426\u652F\u6301\u62D6\u52A8</text>\r\n                <switch :checked="enableScroll" @change="changeEnableScroll" />\r\n            </view>\r\n            <view class="list-item">\r\n                <text class="list-text">\u662F\u5426\u652F\u6301\u65CB\u8F6C</text>\r\n                <switch :checked="enableRotate" @change="changeEnableRotate" />\r\n            </view>\r\n            <view class="list-item">\r\n                <text class="list-text">\u662F\u5426\u5F00\u542F\u536B\u661F\u56FE</text>\r\n                <switch :checked="enableSatellite" @change="changeEnableSatellite" />\r\n            </view>\r\n            <view class="list-item">\r\n                <text class="list-text">\u662F\u5426\u5F00\u542F\u5B9E\u65F6\u8DEF\u51B5</text>\r\n                <switch :checked="enableTraffic" @change="changeEnableTraffic" />\r\n            </view> '),
+          (0, import_vue2.createCommentVNode)(' <view class="list-item">\n                <text class="list-text">\u663E\u793A3D\u697C\u5757</text>\n                <switch :checked="enable3D" @change="enableThreeD" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">\u663E\u793A\u6307\u5357\u9488</text>\n                <switch :checked="showCompass" @change="changeShowCompass" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">\u5F00\u542F\u4FEF\u89C6</text>\n                <switch :checked="enableOverlooking" @change="changeEnableOverlooking" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">\u662F\u5426\u652F\u6301\u7F29\u653E</text>\n                <switch :checked="enableZoom" @change="changeEnableZoom" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">\u662F\u5426\u652F\u6301\u62D6\u52A8</text>\n                <switch :checked="enableScroll" @change="changeEnableScroll" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">\u662F\u5426\u652F\u6301\u65CB\u8F6C</text>\n                <switch :checked="enableRotate" @change="changeEnableRotate" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">\u662F\u5426\u5F00\u542F\u536B\u661F\u56FE</text>\n                <switch :checked="enableSatellite" @change="changeEnableSatellite" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">\u662F\u5426\u5F00\u542F\u5B9E\u65F6\u8DEF\u51B5</text>\n                <switch :checked="enableTraffic" @change="changeEnableTraffic" />\n            </view> '),
           (0, import_vue2.createVNode)(_component_button, {
             class: "button",
             onClick: $options.changeScale
@@ -575,7 +575,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var map = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/map/map.nvue"]]);
+  var map = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/map/map.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();
