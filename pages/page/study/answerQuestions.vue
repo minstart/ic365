@@ -2,7 +2,7 @@
 	<view class="page-loading" v-if="pageMask"></view>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;">
-		<page-head :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
+		<page-head ref="pageHead" :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
 		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
 			<view class="content-wrap">
 				<!-- 左侧类目 -->
@@ -120,7 +120,7 @@
 							</view>
 							<view class="video-list" v-for="item in videoList.list" @tap.stop="verifyPlayVideo(item)">
 								<div class="video-img-wrap flex-center">
-									<view class="label">会员</view>
+									<view v-if="item.vipLevel>0" class="label">会员</view>
 									<image lazy-load class="video-img" :src="item.coverUrl"></image>
 								</div>
 							</view>
@@ -482,10 +482,18 @@
 			// 教材同步 - 需要校验会员
 			verifyPlayVideo(item) {
 				if (item) {
-					console.log("item", item)
-					try {
-						this.playVideo(item.videoId)
-					} catch (e) {}
+					// console.log("item", item)
+					this.verifVip({
+						vip:item.vipLevel,
+						myvip:this.userInfo.vipLevel
+					}).then(data => {
+						console.log("校验通过")
+						try {
+							this.playVideo(item.videoId)
+						} catch (e) {}
+					}).catch(error => {
+						console.log("校验不通过")
+					})
 				}
 			},
 

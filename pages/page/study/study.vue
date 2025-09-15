@@ -2,7 +2,7 @@
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
 		<view class="banner-wrap">
-			<page-head :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+			<page-head ref="pageHead" :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 			<view class="user-info-wrap">
 				<view class="head-pic-wrap">
 					<view class="vip-icon" :vipLevel='userInfo.vipLevel'></view>

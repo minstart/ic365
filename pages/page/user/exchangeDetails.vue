@@ -1,7 +1,7 @@
 <!-- 商品详情 -->
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
-	<page-head :isBack='true' :background="'#fff'"></page-head>
+	<page-head ref="pageHead" :isBack='true' :background="'#fff'"></page-head>
 	<view class="uni-padding-wrap">
 		<view class="details-wrap">
 			<view class="details-info">

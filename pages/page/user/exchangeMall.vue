@@ -1,7 +1,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'#FFF0DC'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'#FFF0DC'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap ">
 				<view class="achievement-statistics">
@@ -160,39 +160,48 @@
 			// 点击兑换商品
 			exchange(data) {
 				if (data.obtained) return console.log("已拥有：", data.productionId);
-				// 兑换商品
-				this.commonRequest({
-					url: "/api/exchange/redeem",
-					data: {
-						productionId: data.productionId,
-					}
-				}).then(res => {
-					// 点击兑换商品
-					data.obtained = true;
+				console.log(data)
+				this.verifVip({
+					vip:data.vipLevel,
+					myvip:this.userInfo.vipLevel
+				}).then(data => {
+					console.log("校验通过")
+					// 兑换商品
 					this.commonRequest({
-						url: "/api/student/info"
+						url: "/api/exchange/redeem",
+						data: {
+							productionId: data.productionId,
+						}
 					}).then(res => {
-						console.log("获取用户信息::", res)
-						try {
-							store.commit("Update_UserInfo", res.data)
-							this.userInfo = res.data;
-						} catch (e) {}
-						uni.showToast({
-							title: "兑换成功",
-							icon: "success"
-						})
-						setTimeout(() => {
-							this.getProducts({
-								reset: true
+						// 点击兑换商品
+						data.obtained = true;
+						this.commonRequest({
+							url: "/api/student/info"
+						}).then(res => {
+							console.log("获取用户信息::", res)
+							try {
+								store.commit("Update_UserInfo", res.data)
+								this.userInfo = res.data;
+							} catch (e) {}
+							uni.showToast({
+								title: "兑换成功",
+								icon: "success"
 							})
-						}, 1500)
+							setTimeout(() => {
+								this.getProducts({
+									reset: true
+								})
+							}, 1500)
+						}).catch(error => {
+							console.log("获取用户信息报错：：", error)
+						})
 					}).catch(error => {
-						console.log("获取用户信息报错：：", error)
+						console.log("兑换商品报错：：", error)
 					})
 				}).catch(error => {
-					console.log("兑换商品报错：：", error)
+					console.log("校验不通过")
 				})
-
+				return false;
 			},
 			// 获取兑换商品列表
 			getProducts(data) {

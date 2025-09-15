@@ -1,6 +1,6 @@
 <template>
 	<view class="page-wrap">
-		<page-head :standardTitle='true' :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
+		<page-head ref="pageHead" :standardTitle='true' :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
 		<view class="web-view-wrap">
 			<web-view :src="viewUrl"></web-view>
 		</view>

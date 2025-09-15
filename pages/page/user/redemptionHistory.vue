@@ -2,7 +2,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap" style="padding-bottom: 0;">
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'#fff'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'#fff'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="banner-wrap">
 				<h3 class="banner-title">兑换记录</h3>

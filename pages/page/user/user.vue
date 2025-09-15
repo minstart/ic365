@@ -1,7 +1,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
+		<page-head ref="pageHead" :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="banner-wrap">
 			<view class="btn-wrap">
 				<view class="user-set-btn" @click="jumpPage({url:'/pages/page/user/systemSettings'})"></view>

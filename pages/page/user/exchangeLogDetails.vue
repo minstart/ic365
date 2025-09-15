@@ -1,7 +1,7 @@
 <!-- 兑换记录详情 -->
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
-	<page-head :title='pageHeadTitle' :isBack='true' :background="'#fff'"></page-head>
+	<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'#fff'"></page-head>
 	<view class="uni-padding-wrap">
 		<view class="details-wrap">
 			<view class="details-info">

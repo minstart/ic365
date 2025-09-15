@@ -2,7 +2,7 @@
 	<view class="page-loading" v-if="pageMask"></view>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;">
-		<page-head :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
+		<page-head ref="pageHead" :isBack='true' :background="'transparent'" :systemTaskbar="false"></page-head>
 		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
 			<view class="calendar-back"></view>
 			<view class="calendar-wrap" v-if="showCalendar">

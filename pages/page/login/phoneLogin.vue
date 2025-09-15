@@ -1,5 +1,5 @@
 	<template>
-		<page-head :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
 		<h3 class="page-title">输入手机号，验证码登录</h3>
 		<view class="uni-padding-wrap uni-common-mt">
 			<uni-forms ref="baseForm" :rules="rules" :model="baseFormData" labelWidth="80px">

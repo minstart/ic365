@@ -1,7 +1,7 @@
 <template>
 	<view class="page-loading" v-if="pageMask"></view>
 	<view class="page-wrap">
-		<page-head :isBack='true' :background="'transparent'"></page-head>
+		<page-head ref="pageHead" :isBack='true' :background="'transparent'"></page-head>
 		<view class="banner-back"></view>
 		<view class="banner-back2"></view>
 		<view class="banner-wrap">

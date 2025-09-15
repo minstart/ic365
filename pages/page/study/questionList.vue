@@ -2,7 +2,7 @@
 	<!-- 错题本 -->
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head :title='pageInfo.pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
+		<page-head ref="pageHead" :title='pageInfo.pageHeadTitle' :isBack='true' :background="'#FFEEE6'"></page-head>
 		<view class="uni-padding-wrap">
 			<view class="achievement-statistics-wrap">
 				<view class="achievement-statistics" :type="pageType">
