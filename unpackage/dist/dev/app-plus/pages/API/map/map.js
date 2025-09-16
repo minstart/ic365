@@ -63,7 +63,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue = __toESM(require_vue());
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
@@ -73,10 +73,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   }
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
   var import_vue2 = __toESM(require_vue());
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -85,7 +85,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
+  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/API/map/map.js
   var _style_0 = { "content": { "": { "flex": 1 } }, "map": { "": { "width": "750rpx", "height": 350, "backgroundColor": "#f0f0f0" } }, "scrollview": { "": { "flex": 1, "paddingTop": 10, "paddingRight": 10, "paddingBottom": 10, "paddingLeft": 10 } }, "list-item": { "": { "flexDirection": "row", "flexWrap": "nowrap", "alignItems": "center", "paddingTop": 5, "paddingRight": 0, "paddingBottom": 5, "paddingLeft": 0 } }, "list-text": { "": { "flex": 1 } }, "button": { "": { "marginTop": 5, "marginBottom": 5 } } };
   var testMarkers = [
     {
@@ -575,7 +575,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var map = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/map/map.nvue"]]);
+  var map = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/map/map.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();
