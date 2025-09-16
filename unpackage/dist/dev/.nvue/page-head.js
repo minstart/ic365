@@ -831,7 +831,11 @@ const _sfc_main = {
   },
   data() {
     return {
-      taskbarHeight: 0
+      taskbarHeight: 0,
+      tipsData: {
+        type: "center",
+        content: ""
+      }
     };
   },
   mounted() {
@@ -931,7 +935,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         4
         /* STYLE */
       ),
-      createCommentVNode(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\r\n		<view class="become-member-wrap">\r\n			<view class="title">关注公众号</view>\r\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\r\n			<p class="tips">扫码关注 “学养网” 公众号开通会员</p>\r\n			<view class="btn-wrap">\r\n				<button class="btn-close" @click.stop="closeBecomeMember">关闭</button>\r\n			</view>\r\n		</view>\r\n	</view> '),
+      createCommentVNode(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\n		<view class="become-member-wrap">\n			<view class="title">关注公众号</view>\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\n			<p class="tips">扫码关注 “学养网” 公众号开通会员</p>\n			<view class="btn-wrap">\n				<button class="btn-close" @click.stop="closeBecomeMember">关闭</button>\n			</view>\n		</view>\n	</view> '),
       createVNode(
         _component_uni_popup,
         {
@@ -977,7 +981,44 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         512
         /* NEED_PATCH */
-      )
+      ),
+      createVNode(_component_uni_popup, {
+        ref: "popup-tips",
+        "mask-click": false,
+        type: $data.tipsData.type
+      }, {
+        default: withCtx(() => [
+          createElementVNode("view", { class: "popup-tips-wrap" }, [
+            $data.tipsData.title ? (openBlock(), createElementBlock("view", {
+              key: 0,
+              class: "popup-tips-title"
+            }, [
+              createElementVNode(
+                "u-text",
+                null,
+                toDisplayString($data.tipsData.title),
+                1
+                /* TEXT */
+              )
+            ])) : createCommentVNode("v-if", true),
+            createElementVNode("view", { class: "popup-tips-content" }, [
+              createElementVNode(
+                "u-text",
+                null,
+                toDisplayString($data.tipsData.content),
+                1
+                /* TEXT */
+              )
+            ]),
+            createElementVNode("view", { class: "popup-tips-btn-wrap" }, [
+              createElementVNode("view", { class: "tips-btn" }),
+              createElementVNode("view", { class: "tips-btn" })
+            ])
+          ])
+        ]),
+        _: 1
+        /* STABLE */
+      }, 8, ["type"])
     ],
     64
     /* STABLE_FRAGMENT */

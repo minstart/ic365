@@ -79,7 +79,7 @@
 			data() {
 				return {
 					pageHeadTitle: "",
-					baseFormData:{
+					baseFormData: {
 						agreement: ""
 					},
 					agreements: [{
@@ -139,8 +139,7 @@
 										}
 									})
 								} catch (e) {}
-
-								ydLogin.cucmctAuthorizeLoginCompletion(data => {
+								ydLogin.cucmctAuthorizeLoginCompletion((data) => {
 									console.log("data::", data)
 									if (!data.success && !data.cancel) {
 										console.log('授权失败', data)
@@ -182,6 +181,7 @@
 										// 下面是不用加密的
 									}
 								})
+								console.log(456)
 							} else {
 								console.log('预取号失败了:', data)
 								// uni.showToast({
@@ -254,15 +254,15 @@
 			margin: 0rem 5%;
 			line-height: 2;
 		}
-		
+
 		.checkbox-item {
 			position: relative;
 			margin-bottom: 1rem;
-		
+
 			.uni-label-pointer {
 				padding-bottom: 1rem;
 			}
-		
+
 			.agreement-text {
 				position: absolute;
 				top: 3px;
@@ -272,7 +272,7 @@
 				z-index: 2;
 				line-height: 1.5;
 				padding-bottom: 1rem;
-		
+
 				.link-a {
 					color: #0034FF !important;
 					font-size: 0.75rem;
@@ -281,28 +281,29 @@
 				}
 			}
 		}
-		
+
 		.uni-link {
 			color: #0034FF !important;
 		}
+
 		.uni-data-checklist {
 			.checklist-group {
 				.checklist-box {
 					align-items: flex-start !important;
 					margin-right: 0 !important;
 					line-height: 1.5 !important;
-		
+
 					.checkbox__inner {
 						border-radius: 50% !important;
 					}
 				}
-		
+
 				.checklist-box.is--default.is-checked {
 					.checkbox__inner {
 						border-color: $ThemeColor !important;
 						background-color: $ThemeColor !important;
 					}
-		
+
 					.checklist-text {
 						color: $ThemeColor !important;
 					}

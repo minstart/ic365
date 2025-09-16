@@ -59,10 +59,11 @@
 			//#ifdef APP-PLUS 
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid, (inf) => {
-				// console.log(plus.runtime.appid)
-				// console.log(uni.getSystemInfoSync().platform)
-				// console.log(inf.versionCode)
+				console.log(plus.runtime.appid)
+				console.log(uni.getSystemInfoSync().platform)
+				console.log(inf.versionCode)
 				// return false;
+				
 				//获取服务器的版本号
 				this.commonRequest({
 					url: '/api/common/app-version', //示例接口

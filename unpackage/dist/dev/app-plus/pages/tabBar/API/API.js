@@ -972,7 +972,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     },
     data() {
       return {
-        taskbarHeight: 0
+        taskbarHeight: 0,
+        tipsData: {
+          type: "center",
+          content: ""
+        }
       };
     },
     mounted() {
@@ -1072,7 +1076,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           4
           /* STYLE */
         ),
-        (0, import_vue3.createCommentVNode)(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\r\n		<view class="become-member-wrap">\r\n			<view class="title">\u5173\u6CE8\u516C\u4F17\u53F7</view>\r\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\r\n			<p class="tips">\u626B\u7801\u5173\u6CE8 \u201C\u5B66\u517B\u7F51\u201D \u516C\u4F17\u53F7\u5F00\u901A\u4F1A\u5458</p>\r\n			<view class="btn-wrap">\r\n				<button class="btn-close" @click.stop="closeBecomeMember">\u5173\u95ED</button>\r\n			</view>\r\n		</view>\r\n	</view> '),
+        (0, import_vue3.createCommentVNode)(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\n		<view class="become-member-wrap">\n			<view class="title">\u5173\u6CE8\u516C\u4F17\u53F7</view>\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\n			<p class="tips">\u626B\u7801\u5173\u6CE8 \u201C\u5B66\u517B\u7F51\u201D \u516C\u4F17\u53F7\u5F00\u901A\u4F1A\u5458</p>\n			<view class="btn-wrap">\n				<button class="btn-close" @click.stop="closeBecomeMember">\u5173\u95ED</button>\n			</view>\n		</view>\n	</view> '),
         (0, import_vue3.createVNode)(
           _component_uni_popup,
           {
@@ -1118,7 +1122,44 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           },
           512
           /* NEED_PATCH */
-        )
+        ),
+        (0, import_vue3.createVNode)(_component_uni_popup, {
+          ref: "popup-tips",
+          "mask-click": false,
+          type: $data.tipsData.type
+        }, {
+          default: (0, import_vue3.withCtx)(() => [
+            (0, import_vue3.createElementVNode)("view", { class: "popup-tips-wrap" }, [
+              $data.tipsData.title ? ((0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)("view", {
+                key: 0,
+                class: "popup-tips-title"
+              }, [
+                (0, import_vue3.createElementVNode)(
+                  "u-text",
+                  null,
+                  (0, import_vue3.toDisplayString)($data.tipsData.title),
+                  1
+                  /* TEXT */
+                )
+              ])) : (0, import_vue3.createCommentVNode)("v-if", true),
+              (0, import_vue3.createElementVNode)("view", { class: "popup-tips-content" }, [
+                (0, import_vue3.createElementVNode)(
+                  "u-text",
+                  null,
+                  (0, import_vue3.toDisplayString)($data.tipsData.content),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              (0, import_vue3.createElementVNode)("view", { class: "popup-tips-btn-wrap" }, [
+                (0, import_vue3.createElementVNode)("view", { class: "tips-btn" }),
+                (0, import_vue3.createElementVNode)("view", { class: "tips-btn" })
+              ])
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        }, 8, ["type"])
       ],
       64
       /* STABLE_FRAGMENT */
