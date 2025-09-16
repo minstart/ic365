@@ -33,6 +33,7 @@
 					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'">
 						<view class="topic">
 							<span v-if="$store.state.openDebug">题目id:{{topic.questionId}}</span>
+							<view style="float: left;width: 100%;" class="no-list-tip" v-if="!topic.questionId"> - 没有查询到题目 -</view>
 							<h3 class="topic-text" v-html="topic.content"></h3>
 							<view class="topic-image-wrap">
 								<image class="topic-image" :src="item" v-for="item in topic.contentImages"></image>
@@ -416,7 +417,7 @@
 						clearInterval(_this.setInterval)
 					}
 					_this.time = _this.time + 1;
-					console.log(_this.time)
+					// console.log(_this.time)
 				}, 1000)
 			},
 
@@ -659,6 +660,8 @@
 								missionId: this.option.missionId
 							};
 						}
+						// byCategoryData.questionId = "4f874bb88fb511f0acfb0242ac110002" //获取指定题目
+						// 4f874bb88fb511f0acfb0242ac110002
 						this.time = 0;
 						console.log("接口", byCategoryUrl)
 						console.log("获取题目传参：", byCategoryData)
@@ -673,10 +676,6 @@
 									content:""
 								};
 								clearInterval(this.setInterval)
-								uni.showToast({
-									title: "获取题目失败2",
-									icon: "none"
-								})
 								return false;
 							}
 							this.topic = res.data[0];

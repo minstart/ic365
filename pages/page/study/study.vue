@@ -10,7 +10,7 @@
 				</view>
 				<view class="user-info">
 					<h3 class="name">{{userInfo.nickname}}同学
-					<span class="achievement" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
+						<span class="achievement" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
 					</h3>
 					<ul class="cumulative-list">
 						<li class="list">
@@ -80,10 +80,17 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">推荐课堂</h3>
 			</view>
-			<view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
+			<!-- <view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
 			<ul class="classroom-list-wrap" v-if="classroom.length>0">
 				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})" v-for="item in classroom">
 					<image class="list-back" :src='item.coverUrl'></image>
+				</li>
+			</ul> -->
+			<view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
+			<ul class="plan-recommend-list-wrap">
+				<li class="plan-recommend-list" :style="{'background-color':randomBack[i].background}" :key="item.videoId" v-for="(item,i) in classroom" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})">
+					<h3 class="is-vip" :style="{'background-color':randomBack[i].background2}">{{item.vipLevel>0?'会员':'限免'}} </h3>
+					<h3 class="title">{{item.categoryName}}</h3>
 				</li>
 			</ul>
 		</view>
@@ -118,13 +125,41 @@
 				// 知识点学习
 				knowledgePoints: [],
 				classroom: [],
+				videosBackArr : [
+					{
+						background:"#DFE6FF",
+						background2:"#879EF6",
+					},
+					{
+						background:"#E5F9E6",
+						background2:"#71D874",
+					},
+					{
+						background:"#F8DE96",
+						background2:"#FF9743",
+					},
+					{
+						background:"#FAD8B9",
+						background2:"#D8A374",
+					},
+					{
+						background:"#F9EBE5",
+						background2:"#FF9696",
+					},
+					{
+						background:"#FFE1FC",
+						background2:"#E48BF8",
+					},
+				],
+				randomBack:[],//推荐学习背景色随机数后的数组
 			}
 		},
 		onLoad() {
 
 		},
 		onReady() {
-			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
+			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
+			this.randomBack = this.videosBackArr.sort(() => Math.random() - 0.5);
 		},
 		onShow() {
 			this.verifLogin().then(data => {
@@ -146,7 +181,7 @@
 						console.log("获取用户信息报错：：", error)
 					})
 				}
-			
+
 				// 获取用户周报数据
 				this.commonRequest({
 					url: "/api/report/weekly"
@@ -158,7 +193,7 @@
 				}).catch(error => {
 					console.log("获取用户周报数据报错：：", error)
 				})
-			
+
 				// 知识点学习
 				this.commonRequest({
 					url: "/api/recommend/categories"
@@ -170,7 +205,7 @@
 				}).catch(error => {
 					console.log("知识点学习报错：：", error)
 				})
-			
+
 				// 推荐课堂 - 目前使用推荐学习的接口
 				this.commonRequest({
 					url: "/api/recommend/videos"
@@ -249,6 +284,7 @@
 					margin: 8rpx 0;
 					line-height: 50rpx;
 					font-size: 40rpx;
+
 					.achievement {
 						margin-left: 8rpx;
 						padding: 0 16rpx;
@@ -448,72 +484,42 @@
 	}
 
 	// 推荐课堂
-	.classroom-list-wrap {
-		overflow: hidden;
+	.plan-recommend-list-wrap {
 		display: flex;
-		flex-wrap: wrap;
 
-		.classroom-list {
-			width: calc(50% - 0.6875rem / 2);
-			height: 10.375rem;
-			margin: 0 0.6875rem 0.6875rem 0;
-			background: #ccc;
-			border-radius: 1rem;
+		.plan-recommend-list {
+			flex: 1;
+			padding: 40rpx 20rpx 20rpx 20rpx;
+			margin-right: 0.68rem;
+			display: flex;
+			align-items: center;
 			position: relative;
+			min-height: 180rpx;
+			border-radius: 20rpx;
 
-			&:nth-child(2n) {
-				margin-right: 0;
+			.title {
+				text-align: left;
+				font-size: 26rpx;
+				color: #323232;
 			}
 
-			.list-back {
+			.is-vip {
 				position: absolute;
-				width: 100%;
-				height: 100%;
-				z-index: 0;
+				right: 0;
 				top: 0;
-				left: 0;
+				font-size: 32rpx;
+				color: #fff;
+				padding: 4rpx 22rpx;
+				border-radius: 0 20rpx 0 30rpx;
 			}
 
-			.list-title {
-				position: absolute;
-				left: 1rem;
-				right: 1rem;
-				top: 64%;
-				margin: auto;
-				text-align: center;
-				font-size: 1.125rem;
+			.list-icon {
+				width: 100%;
+				height: 7.5rem;
 			}
 
-			&[colorTheme="1"] {
-				background: #EBFDEA;
-
-				.list-title {
-					color: #51750E;
-				}
-			}
-
-			&[colorTheme="2"] {
-				background: #FFEFF3;
-
-				.list-title {
-					color: #F9626D;
-				}
-			}
-
-			&[colorTheme="3"] {
-				background: #FFF2EA;
-
-				.list-title {
-					color: #EF761F;
-				}
-			}
-
-			&[colorTheme="4"] {
-				background: #E8F9FF;
-
-				.list-title {
-					color: #0588AE;
-				}
+			&:last-child {
+				margin-right: 0;
 			}
 		}
 	}

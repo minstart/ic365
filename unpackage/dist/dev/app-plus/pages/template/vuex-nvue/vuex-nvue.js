@@ -107,7 +107,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue = __toESM(require_vue());
   function requireNativePlugin(name) {
     return weex.requireModule(name);
@@ -123,10 +123,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return typeof component === "string" ? easycom : component;
   }
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
   var import_vue2 = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -135,7 +135,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
   var nvueAnimation = requireNativePlugin("animation");
   var MPAnimation = class {
     constructor(options, _this) {
@@ -513,7 +513,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       (0, import_vue2.renderSlot)(_ctx.$slots, "default")
     ], 14, ["animation"])) : (0, import_vue2.createCommentVNode)("v-if", true);
   }
-  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
   var _style_0$1 = { "uni-popup": { "": { "position": "fixed" }, ".top": { "top": 0 }, ".left": { "top": 0 }, ".right": { "top": 0 } }, "uni-popup__wrapper": { ".uni-popup ": { "position": "relative" }, ".uni-popup .left": { "paddingTop": 0, "flex": 1 }, ".uni-popup .right": { "paddingTop": 0, "flex": 1 } }, "fixforpc-top": { "": { "top": 0 } } };
   var _sfc_main$1 = {
     name: "uniPopup",
@@ -922,7 +922,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       /* CLASS */
     )) : (0, import_vue2.createCommentVNode)("v-if", true);
   }
-  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   var _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } } };
   var _sfc_main = {
     name: "page-head",
@@ -962,7 +962,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     },
     data() {
       return {
-        taskbarHeight: 0
+        taskbarHeight: 0,
+        tipsData: {
+          type: "center",
+          content: ""
+        }
       };
     },
     mounted() {
@@ -1108,15 +1112,52 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           },
           512
           /* NEED_PATCH */
-        )
+        ),
+        (0, import_vue2.createVNode)(_component_uni_popup, {
+          ref: "popup-tips",
+          "mask-click": false,
+          type: $data.tipsData.type
+        }, {
+          default: (0, import_vue2.withCtx)(() => [
+            (0, import_vue2.createElementVNode)("view", { class: "popup-tips-wrap" }, [
+              $data.tipsData.title ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("view", {
+                key: 0,
+                class: "popup-tips-title"
+              }, [
+                (0, import_vue2.createElementVNode)(
+                  "u-text",
+                  null,
+                  (0, import_vue2.toDisplayString)($data.tipsData.title),
+                  1
+                  /* TEXT */
+                )
+              ])) : (0, import_vue2.createCommentVNode)("v-if", true),
+              (0, import_vue2.createElementVNode)("view", { class: "popup-tips-content" }, [
+                (0, import_vue2.createElementVNode)(
+                  "u-text",
+                  null,
+                  (0, import_vue2.toDisplayString)($data.tipsData.content),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              (0, import_vue2.createElementVNode)("view", { class: "popup-tips-btn-wrap" }, [
+                (0, import_vue2.createElementVNode)("view", { class: "tips-btn" }),
+                (0, import_vue2.createElementVNode)("view", { class: "tips-btn" })
+              ])
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        }, 8, ["type"])
       ],
       64
       /* STABLE_FRAGMENT */
     );
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/components/page-head/page-head.vue"]]);
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/vuex-nvue/vuex-nvue.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/template/vuex-nvue/vuex-nvue.js
   var import_vue3 = __toESM(require_vue());
   var import_vuex = __toESM(require_vuex());
   var lookup = [
@@ -1700,7 +1741,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main2, [["render", _sfc_render2], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
+  var vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main2, [["render", _sfc_render2], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

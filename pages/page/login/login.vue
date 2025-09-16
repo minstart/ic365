@@ -184,11 +184,25 @@
 								})
 							} else {
 								console.log('预取号失败了:', data)
-								uni.showToast({
-									title: data.msg + "，请重新点击或者切换手机验证码方式登录！" || "一键登陆失败调用预约号失败，请重新点击或者切换手机验证码方式登录！",
-									icon: 'none',
-									duration: 5000
-								})
+								// uni.showToast({
+								// 	title: data.msg || data.desc + "，请重新点击或者切换手机验证码方式登录！" || "一键登陆失败调用预约号失败，请重新点击或者切换手机验证码方式登录！",
+								// 	icon: 'none',
+								// 	duration: 5000
+								// })
+								uni.showModal({
+									content: data.msg || data.desc + '请重新点击或者切换手机验证码方式登录！是否需要跳转到手机验证码登录？',
+									showCancel: true,
+									success: (res) => {
+										if (res.confirm) {
+											// 确认
+											uni.reLaunch({
+												url: '/pages/page/login/phoneLogin'
+											});
+										} else if (res.cancel) {
+											// 取消
+										}
+									}
+								});
 							}
 
 						});

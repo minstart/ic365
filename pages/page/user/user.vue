@@ -25,7 +25,7 @@
 					<view class="novip-banner" v-if="userInfo.vipLevel==0">
 						<view class="novip-info-wrap">
 							<view class="novip-info-title">会员中心</view>
-							<view class="become-member">开通VIP会员</view>
+							<view class="become-member" @click="openOfficialAccountWindow">开通VIP会员</view>
 						</view>
 					</view>
 					<view class="vip-banner" v-if="userInfo.vipLevel>0">

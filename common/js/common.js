@@ -446,7 +446,7 @@ export default {
 		},
 		openOfficialAccountWindow(){
 			this.$store.state.officialAccountQRCode = "";
-			console.log(this.$refs)
+			// console.log(this.$refs)
 			// 获取公众号二维码
 			this.commonRequest({
 				url: "/api/common/get-wechat-qr"

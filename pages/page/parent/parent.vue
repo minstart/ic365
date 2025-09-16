@@ -97,7 +97,7 @@
 			<view class="no-list-tip" v-if="suggestionImproveOther.categories && suggestionImproveOther.categories.length==0">暂无数据</view>
 			<ul class="suggestion-list-wrap">
 				<li class="suggestion-list" v-for="item in suggestionImproveOther.categories">
-					<image class="item-icon" src=""></image>
+					<image class="item-icon" :src="item.coverUrl"></image>
 					<view class="item-info">
 						<h3 class="info-title">{{item.name||""}}</h3>
 						<view class="info-text">正确率：{{item.accuracy}}% | {{suggestionTetx(item.accuracy)}}</view>

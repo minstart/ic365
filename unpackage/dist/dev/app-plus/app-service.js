@@ -14280,7 +14280,6 @@ if (uni.restoreGlobal) {
       },
       openOfficialAccountWindow() {
         this.$store.state.officialAccountQRCode = "";
-        formatAppLog("log", "at common/js/common.js:449", this.$refs);
         this.commonRequest({
           url: "/api/common/get-wechat-qr"
         }).then((res2) => {
@@ -15571,7 +15570,11 @@ if (uni.restoreGlobal) {
     },
     data() {
       return {
-        taskbarHeight: 0
+        taskbarHeight: 0,
+        tipsData: {
+          type: "center",
+          content: ""
+        }
       };
     },
     mounted() {
@@ -15693,7 +15696,40 @@ if (uni.restoreGlobal) {
           },
           512
           /* NEED_PATCH */
-        )
+        ),
+        vue.createVNode(_component_uni_popup, {
+          ref: "popup-tips",
+          "mask-click": false,
+          type: $data.tipsData.type
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "popup-tips-wrap" }, [
+              $data.tipsData.title ? (vue.openBlock(), vue.createElementBlock(
+                "view",
+                {
+                  key: 0,
+                  class: "popup-tips-title"
+                },
+                vue.toDisplayString($data.tipsData.title),
+                1
+                /* TEXT */
+              )) : vue.createCommentVNode("v-if", true),
+              vue.createElementVNode(
+                "view",
+                { class: "popup-tips-content" },
+                vue.toDisplayString($data.tipsData.content),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode("view", { class: "popup-tips-btn-wrap" }, [
+                vue.createElementVNode("view", { class: "tips-btn" }),
+                vue.createElementVNode("view", { class: "tips-btn" })
+              ])
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        }, 8, ["type"])
       ],
       64
       /* STABLE_FRAGMENT */
@@ -15982,6 +16018,8 @@ if (uni.restoreGlobal) {
     data() {
       return {
         pageHeadTitle: "",
+        isSpecial: false,
+        //是否已经检测过app安装包升级
         cumulative: [],
         defaultHeadPic: store.state.defaultHeadPic,
         //默认头像
@@ -16068,7 +16106,7 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:282", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:283", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
@@ -16079,20 +16117,51 @@ if (uni.restoreGlobal) {
             uni.redirectTo({
               url: "/pages/page/index/supplement_info?pageFrom=" + data.pathUrl
             });
+            return false;
+          }
+          if (res2.data.special && !this.isSpecial) {
+            plus.runtime.getProperty(plus.runtime.appid, (inf) => {
+              this.commonRequest({
+                url: "/api/common/app-version",
+                //示例接口
+                data: {
+                  edition_type: plus.runtime.appid,
+                  version_type: uni.getSystemInfoSync().platform,
+                  //android或者ios
+                  edition_number: inf.versionCode,
+                  // 打包时manifest设置的版本号 
+                  user_id: res2.data.userId
+                }
+              }).then((res3) => {
+                this.isSpecial = true;
+                formatAppLog("log", "at pages/page/index/index.vue:318", "检测升级返回的数据：", res3);
+                if (Number(res3.data.edition_number) > Number(inf.versionCode) && res3.data.edition_issue == 1) {
+                  if (res3.data.package_type == 1 && res3.data.edition_silence == 1) {
+                    silenceUpdate(res3.data.edition_url);
+                  } else {
+                    setTimeout(function() {
+                      uni.navigateTo({
+                        url: "/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update?obj=" + JSON.stringify(res3.data)
+                      });
+                    }, 3e3);
+                  }
+                }
+              });
+            });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:297", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:352", "获取用户信息报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:304", "推荐学习::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:359", "推荐学习::", res2.data);
           try {
             this.videos = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:309", "获取推荐学习失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:364", "获取推荐学习失败：：", error2);
         });
         this.commonRequest({
           url: "/api/mission/getAll",
@@ -16100,29 +16169,29 @@ if (uni.restoreGlobal) {
             size: 3
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:319", "首页任务列表::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:374", "首页任务列表::", res2);
           try {
             this.plan = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:325", "获取任务列表报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:380", "获取任务列表报错：：", error2);
         });
         this.commonRequest({
           url: "/api/achievement/mine"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:332", "最新成就::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:387", "最新成就::", res2);
           try {
             this.achievement = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:338", "获取最新成就失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:393", "获取最新成就失败：：", error2);
         });
         this.commonRequest({
           url: "/api/notice/getAll"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:345", "通知消息::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:400", "通知消息::", res2.data);
           try {
             if (res2.data.length > 0) {
               this.$store.state.rewardPopUpList = res2.data;
@@ -16133,10 +16202,10 @@ if (uni.restoreGlobal) {
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:355", "通知消息失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:410", "通知消息失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/index/index.vue:359", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/index/index.vue:414", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -16455,17 +16524,16 @@ if (uni.restoreGlobal) {
                     key: item.videoId,
                     onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/study/answerQuestions?pageType=video&categoryId=" + item.categoryId + "&videoId=" + item.videoId })
                   }, [
-                    item.vipLevel > 0 ? (vue.openBlock(), vue.createElementBlock(
+                    vue.createElementVNode(
                       "h3",
                       {
-                        key: 0,
                         class: "is-vip",
                         style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background2 })
                       },
-                      "会员",
-                      4
-                      /* STYLE */
-                    )) : vue.createCommentVNode("v-if", true),
+                      vue.toDisplayString(item.vipLevel > 0 ? "会员" : "限免"),
+                      5
+                      /* TEXT, STYLE */
+                    ),
                     vue.createElementVNode(
                       "h3",
                       { class: "title" },
@@ -25223,13 +25291,42 @@ ${o3}
         },
         // 知识点学习
         knowledgePoints: [],
-        classroom: []
+        classroom: [],
+        videosBackArr: [
+          {
+            background: "#DFE6FF",
+            background2: "#879EF6"
+          },
+          {
+            background: "#E5F9E6",
+            background2: "#71D874"
+          },
+          {
+            background: "#F8DE96",
+            background2: "#FF9743"
+          },
+          {
+            background: "#FAD8B9",
+            background2: "#D8A374"
+          },
+          {
+            background: "#F9EBE5",
+            background2: "#FF9696"
+          },
+          {
+            background: "#FFE1FC",
+            background2: "#E48BF8"
+          }
+        ],
+        randomBack: []
+        //推荐学习背景色随机数后的数组
       };
     },
     onLoad() {
     },
     onReady() {
       store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
+      this.randomBack = this.videosBackArr.sort(() => Math.random() - 0.5);
     },
     onShow() {
       this.verifLogin().then((data) => {
@@ -25239,42 +25336,42 @@ ${o3}
           this.commonRequest({
             url: "/api/student/info"
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/study.vue:140", "获取用户信息::", res2);
+            formatAppLog("log", "at pages/page/study/study.vue:175", "获取用户信息::", res2);
             try {
               store.commit("Update_UserInfo", res2.data);
               this.userInfo = res2.data;
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/study.vue:146", "获取用户信息报错：：", error2);
+            formatAppLog("log", "at pages/page/study/study.vue:181", "获取用户信息报错：：", error2);
           });
         }
         this.commonRequest({
           url: "/api/report/weekly"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:154", "获取用户周报数据::", res2);
+          formatAppLog("log", "at pages/page/study/study.vue:189", "获取用户周报数据::", res2);
           try {
             res2.data && (this.learningGoal = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:159", "获取用户周报数据报错：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:194", "获取用户周报数据报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/categories"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:166", "知识点学习::", res2);
+          formatAppLog("log", "at pages/page/study/study.vue:201", "知识点学习::", res2);
           try {
             res2.data && (this.knowledgePoints = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:171", "知识点学习报错：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:206", "知识点学习报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:178", "推荐学习::", res2.data);
+          formatAppLog("log", "at pages/page/study/study.vue:213", "推荐学习::", res2.data);
           if (res2.code == 0) {
             try {
               res2.data && (this.classroom = res2.data);
@@ -25287,10 +25384,10 @@ ${o3}
             });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:190", "获取推荐学习失败：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:225", "获取推荐学习失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/study/study.vue:193", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/study/study.vue:228", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -25518,33 +25615,50 @@ ${o3}
             vue.createElementVNode("view", { class: "item-title-wrap" }, [
               vue.createElementVNode("h3", { class: "item-title" }, "推荐课堂")
             ]),
+            vue.createCommentVNode(` <view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>\r
+			<ul class="classroom-list-wrap" v-if="classroom.length>0">\r
+				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})" v-for="item in classroom">\r
+					<image class="list-back" :src='item.coverUrl'></image>\r
+				</li>\r
+			</ul> `),
             $data.classroom.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
               key: 2,
               class: "no-list-tip"
             }, "暂无数据")) : vue.createCommentVNode("v-if", true),
-            $data.classroom.length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", {
-              key: 3,
-              class: "classroom-list-wrap"
-            }, [
+            vue.createElementVNode("ul", { class: "plan-recommend-list-wrap" }, [
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
-                vue.renderList($data.classroom, (item) => {
+                vue.renderList($data.classroom, (item, i2) => {
                   return vue.openBlock(), vue.createElementBlock("li", {
-                    class: "classroom-list",
-                    colorTheme: item.colorScheme,
+                    class: "plan-recommend-list",
+                    style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background }),
+                    key: item.videoId,
                     onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/study/answerQuestions?pageType=video&categoryId=" + item.categoryId + "&videoId=" + item.videoId })
                   }, [
-                    vue.createElementVNode("image", {
-                      class: "list-back",
-                      src: item.coverUrl
-                    }, null, 8, ["src"])
-                  ], 8, ["colorTheme", "onClick"]);
+                    vue.createElementVNode(
+                      "h3",
+                      {
+                        class: "is-vip",
+                        style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background2 })
+                      },
+                      vue.toDisplayString(item.vipLevel > 0 ? "会员" : "限免"),
+                      5
+                      /* TEXT, STYLE */
+                    ),
+                    vue.createElementVNode(
+                      "h3",
+                      { class: "title" },
+                      vue.toDisplayString(item.categoryName),
+                      1
+                      /* TEXT */
+                    )
+                  ], 12, ["onClick"]);
                 }),
-                256
-                /* UNKEYED_FRAGMENT */
+                128
+                /* KEYED_FRAGMENT */
               ))
-            ])) : vue.createCommentVNode("v-if", true)
+            ])
           ])
         ])
       ],
@@ -28361,7 +28475,7 @@ ${o3}
             date: option.date
           });
           this.commonRequest(requestData).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:262", "获取今日题目::", res2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:263", "获取今日题目::", res2);
             try {
               this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(res2.data.grade) + "年级";
               this.categoryTree.category[0] = {
@@ -28375,10 +28489,10 @@ ${o3}
               this.topic = res2.data;
               this.topicFilter();
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:277", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:278", e2);
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:280", "获取今日题目报错：：", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:281", "获取今日题目报错：：", error2);
           });
         } else {
           this.getQuestion().then((res2) => {
@@ -28391,7 +28505,7 @@ ${o3}
                 this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(store.state.userInfo.info.grade) + "年级";
               }
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:294", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:295", e2);
             }
           });
           if (this.pageType == "video")
@@ -28461,7 +28575,7 @@ ${o3}
         if (this.current !== i2 && !this.answered) {
           this.current = i2;
           this.answer = item;
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:376", item);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:377", item);
         }
       },
       // 题目赋值后，对数据结构进行过滤
@@ -28502,7 +28616,6 @@ ${o3}
             clearInterval(_this.setInterval);
           }
           _this.time = _this.time + 1;
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:419", _this.time);
         }, 1e3);
       },
       // 提交答案
@@ -28522,7 +28635,7 @@ ${o3}
         };
         this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId);
         this.option.missionId && (postData.missionId = this.option.missionId);
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:439", "回答问题传参：", postData);
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:440", "回答问题传参：", postData);
         this.commonRequest({
           url: "/api/question/submit",
           method: "POST",
@@ -28540,7 +28653,7 @@ ${o3}
                 url: "/api/notice/getAll"
               }).then((res3) => {
                 this.isVideoAnalysis = true;
-                formatAppLog("log", "at pages/page/study/answerQuestions.vue:459", "通知消息::", res3.data);
+                formatAppLog("log", "at pages/page/study/answerQuestions.vue:460", "通知消息::", res3.data);
                 try {
                   if (res3.data.length > 0) {
                     _this.$store.state.rewardPopUpList = res3.data;
@@ -28549,17 +28662,17 @@ ${o3}
                 } catch (e2) {
                 }
               }).catch((error2) => {
-                formatAppLog("log", "at pages/page/study/answerQuestions.vue:467", "通知消息失败：：", error2);
+                formatAppLog("log", "at pages/page/study/answerQuestions.vue:468", "通知消息失败：：", error2);
               });
               setTimeout(() => {
                 this.isVideoAnalysis = true;
               }, 2e3);
             }, 3e3);
           } catch (e2) {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:474", e2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:475", e2);
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:477", "回答问题接口报错：：", error2);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:478", "回答问题接口报错：：", error2);
         });
       },
       //关闭奖励通知弹窗
@@ -28578,13 +28691,13 @@ ${o3}
             vip: item.vipLevel,
             myvip: this.userInfo.vipLevel
           }).then((data) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:497", "校验通过");
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:498", "校验通过");
             try {
               this.playVideo(item.videoId);
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:502", "校验不通过");
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:503", "校验不通过");
           });
         }
       },
@@ -28601,7 +28714,7 @@ ${o3}
             url: "/api/video/getById",
             data: getByIdData
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:521", "获取视频地址::", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:522", "获取视频地址::", res2.data);
             try {
               this.showVideo = true;
               this.analysis.video = res2.data;
@@ -28611,7 +28724,7 @@ ${o3}
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:531", "获取视频地址报错", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:532", "获取视频地址报错", error2);
           });
         } else {
           this.showVideo = true;
@@ -28632,7 +28745,7 @@ ${o3}
               step: this.topic.AIanalysis.step + 1
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:554", "/api/ai/getAnalysisByStep：：", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:555", "/api/ai/getAnalysisByStep：：", res2.data);
             this.topic.AIanalysis.step = res2.data.currentStep;
             this.topic.AIanalysis.stepCount = res2.data.stepCount;
             res2.data.currentStep < res2.data.stepCount ? this.AIanalysisNextBtn = true : this.AIanalysisNextBtn = false;
@@ -28642,7 +28755,7 @@ ${o3}
               imgClass: "popup-analysis-img"
             });
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:566", "AI析题报错", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:567", "AI析题报错", error2);
           });
         }
       },
@@ -28656,7 +28769,7 @@ ${o3}
               fromType: this.pageType
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:581", "视频、题目类型获取左侧类目目录:", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:582", "视频、题目类型获取左侧类目目录:", res2.data);
             this.resetProblem("all");
             this.categoryTree.category = res2.data.categories;
             this.selectCategory = res2.data.categories[0];
@@ -28678,7 +28791,7 @@ ${o3}
             this.choiceCategory(this.selectCategory, true);
             resolve(res2);
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:603", "视频、题目类型获取左侧类目目录报错", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:604", "视频、题目类型获取左侧类目目录报错", error2);
             reject2(error2);
           });
         });
@@ -28689,24 +28802,24 @@ ${o3}
           questionId: this.topic.questionId
         };
         this.topic.isCollect && (postData.drop = 1);
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:615", postData);
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:616", postData);
         this.commonRequest({
           url: "/api/question/collection",
           data: postData
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:620", "收藏题目", res2.data);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:621", "收藏题目", res2.data);
           this.topic.isCollect = !this.topic.isCollect;
           uni.showToast({
             title: this.topic.isCollect ? "收藏成功" : "取消收藏成功",
             icon: "none"
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:627", "收藏题目报错", error2);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:628", "收藏题目报错", error2);
         });
       },
       // 点击类目之后,获取右侧内容（切换类目）
       choiceCategory(item, isInitialization) {
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:633", this.selectCategory.categoryId, item.categoryId);
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:634", this.selectCategory.categoryId, item.categoryId);
         if (this.selectCategory.categoryId != item.categoryId || this.pageType == "video" || this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList" || typeof isInitialization != "undefined") {
           if (this.selectCategory.categoryId != item.categoryId && item) {
             this.selectCategory = {
@@ -28718,7 +28831,7 @@ ${o3}
           if (this.parentPageType) {
             this.resetProblem(this.pageType);
           }
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:645", "this.pageType:", this.pageType);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:646", "this.pageType:", this.pageType);
           if (this.pageType == "question") {
             let byCategoryData = {
               keyword: this.keyword,
@@ -28734,29 +28847,25 @@ ${o3}
               };
             }
             this.time = 0;
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:663", "接口", byCategoryUrl);
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:664", "获取题目传参：", byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:666", "接口", byCategoryUrl);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:667", "获取题目传参：", byCategoryData);
             this.commonRequest({
               url: byCategoryUrl,
               data: byCategoryData
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:670", "获取题目:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:673", "获取题目:", res2.data);
               if (res2.data.length == 0) {
                 this.topic = {
                   content: ""
                 };
                 clearInterval(this.setInterval);
-                uni.showToast({
-                  title: "获取题目失败2",
-                  icon: "none"
-                });
                 return false;
               }
               this.topic = res2.data[0];
               this.topicFilter();
               this.questionId = "";
             }).catch((error2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:686", "获取题目报错", error2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:685", "获取题目报错", error2);
               reject(error2);
             });
           } else if (this.pageType == "video") {
@@ -28768,7 +28877,7 @@ ${o3}
               size: 24,
               categoryId: item.categoryId
             };
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:697", byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:696", byCategoryData);
             this.videoId && (byCategoryData.videoId = this.videoId);
             let byCategoryUrl = "/api/video/byCategory";
             if (this.option && this.option.missionId) {
@@ -28777,12 +28886,12 @@ ${o3}
               delete byCategoryData.keyword;
               delete byCategoryData.categoryId;
             }
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:707", "获取视频列表传参::", byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:706", "获取视频列表传参::", byCategoryData);
             this.commonRequest({
               url: byCategoryUrl,
               data: byCategoryData
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:713", "获取视频列表:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:712", "获取视频列表:", res2.data);
               if (res2.data.length == 0) {
                 this.videoList.noData = true;
               }
@@ -28791,7 +28900,7 @@ ${o3}
               this.videoList.list = [...this.videoList.list, ...res2.data];
               this.videoId = "";
             }).catch((error2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:722", "获取视频列表报错", error2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:721", "获取视频列表报错", error2);
             });
           } else if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
             if (this.videoList.noData)
@@ -28808,7 +28917,7 @@ ${o3}
             } else if (this.pageType == "collectList") {
               byCategoryUrl = "/api/question/collectionList";
             }
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:738", "获取题目列表传参::", byCategoryUrl, byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:737", "获取题目列表传参::", byCategoryUrl, byCategoryData);
             this.commonRequest({
               url: byCategoryUrl,
               data: byCategoryData
@@ -28816,7 +28925,7 @@ ${o3}
               if (res2.data.length == 0) {
                 this.videoList.noData = true;
               }
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:746", "错题本、最近练习题、收藏练习原始返回数据：", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:745", "错题本、最近练习题、收藏练习原始返回数据：", res2.data);
               this.videoList.page = this.videoList.page + 1;
               this.isLoading = false;
               res2.data.forEach((item2, i2) => {
@@ -28844,13 +28953,13 @@ ${o3}
                 }
               });
               this.topicList = [...this.topicList, ...res2.data];
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:775", "错题本、最近练习题、收藏练习处理后的返回数据：", this.topicList);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:774", "错题本、最近练习题、收藏练习处理后的返回数据：", this.topicList);
             }).catch((error2) => {
               this.isReachedBottom = false;
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:778", "题目列表报错", error2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:777", "题目列表报错", error2);
             });
           } else {
-            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:781", "其他类型的不能点");
+            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:780", "其他类型的不能点");
           }
         }
       },
@@ -29125,6 +29234,11 @@ ${o3}
                         1
                         /* TEXT */
                       )) : vue.createCommentVNode("v-if", true),
+                      !$data.topic.questionId ? (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 1,
+                        style: { "float": "left", "width": "100%" },
+                        class: "no-list-tip"
+                      }, " - 没有查询到题目 -")) : vue.createCommentVNode("v-if", true),
                       vue.createElementVNode("h3", {
                         class: "topic-text",
                         innerHTML: $data.topic.content
@@ -32851,8 +32965,8 @@ ${o3}
                   return vue.openBlock(), vue.createElementBlock("li", { class: "suggestion-list" }, [
                     vue.createElementVNode("image", {
                       class: "item-icon",
-                      src: ""
-                    }),
+                      src: item.coverUrl
+                    }, null, 8, ["src"]),
                     vue.createElementVNode("view", { class: "item-info" }, [
                       vue.createElementVNode(
                         "h3",
@@ -33297,7 +33411,10 @@ ${o3}
                 }, [
                   vue.createElementVNode("view", { class: "novip-info-wrap" }, [
                     vue.createElementVNode("view", { class: "novip-info-title" }, "会员中心"),
-                    vue.createElementVNode("view", { class: "become-member" }, "开通VIP会员")
+                    vue.createElementVNode("view", {
+                      class: "become-member",
+                      onClick: _cache[3] || (_cache[3] = (...args) => _ctx.openOfficialAccountWindow && _ctx.openOfficialAccountWindow(...args))
+                    }, "开通VIP会员")
                   ])
                 ])) : vue.createCommentVNode("v-if", true),
                 _ctx.userInfo.vipLevel > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -33588,7 +33705,7 @@ ${o3}
               vue.createElementVNode("view", { class: "item-more" }, [
                 vue.createElementVNode("view", {
                   class: "text icon-more",
-                  onClick: _cache[3] || (_cache[3] = ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeMall" }))
+                  onClick: _cache[4] || (_cache[4] = ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeMall" }))
                 }, "查看更多")
               ])
             ]),
@@ -34014,7 +34131,7 @@ ${o3}
                                       vue.createElementVNode(
                                         "view",
                                         { class: "time" },
-                                        vue.toDisplayString(_ctx.changeDate(item2.obtainTimeUnix * 1e3).fullDate),
+                                        vue.toDisplayString(item2.obtainTimeUnix ? _ctx.changeDate(item2.obtainTimeUnix * 1e3).fullDate + " 获得" : ""),
                                         1
                                         /* TEXT */
                                       )
@@ -35404,10 +35521,17 @@ ${o3}
               });
             } else {
               formatAppLog("log", "at pages/page/login/login.vue:186", "预取号失败了:", data);
-              uni.showToast({
-                title: data.msg + "，请重新点击或者切换手机验证码方式登录！" || "一键登陆失败调用预约号失败，请重新点击或者切换手机验证码方式登录！",
-                icon: "none",
-                duration: 5e3
+              uni.showModal({
+                content: data.msg || data.desc + "请重新点击或者切换手机验证码方式登录！是否需要跳转到手机验证码登录？",
+                showCancel: true,
+                success: (res3) => {
+                  if (res3.confirm) {
+                    uni.reLaunch({
+                      url: "/pages/page/login/phoneLogin"
+                    });
+                  } else if (res3.cancel)
+                    ;
+                }
               });
             }
           });
@@ -68729,7 +68853,7 @@ This will fail in production if not fixed.`);
       });
     });
   }
-  function silenceUpdate(url) {
+  function silenceUpdate$1(url) {
     uni.downloadFile({
       url,
       success: (res2) => {
@@ -68781,10 +68905,10 @@ This will fail in production if not fixed.`);
             // 打包时manifest设置的版本号 
           }
         }).then((res2) => {
-          formatAppLog("log", "at App.vue:76", "检测升级返回的数据：", res2);
+          formatAppLog("log", "at App.vue:75", "检测升级返回的数据：", res2);
           if (Number(res2.data.edition_number) > Number(inf.versionCode) && res2.data.edition_issue == 1) {
             if (res2.data.package_type == 1 && res2.data.edition_silence == 1) {
-              silenceUpdate(res2.data.edition_url);
+              silenceUpdate$1(res2.data.edition_url);
             } else {
               setTimeout(function() {
                 uni.navigateTo({

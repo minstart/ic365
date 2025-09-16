@@ -57,7 +57,6 @@
 		onShow: function() {
 
 			//#ifdef APP-PLUS 
-
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid, (inf) => {
 				// console.log(plus.runtime.appid)

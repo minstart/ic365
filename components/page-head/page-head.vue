@@ -39,6 +39,17 @@
 			</view>
 		</view>
 	</uni-popup>
+	
+	<uni-popup ref="popup-tips" :mask-click="false" :type="tipsData.type">
+		<view class="popup-tips-wrap">
+			<view class="popup-tips-title" v-if="tipsData.title">{{tipsData.title}}</view>
+			<view class="popup-tips-content">{{tipsData.content}}</view>
+			<view class="popup-tips-btn-wrap">
+				<view class="tips-btn"></view>
+				<view class="tips-btn"></view>
+			</view>
+		</view>
+	</uni-popup>
 </template>
 <script>
 	export default {
@@ -81,7 +92,11 @@
 		},
 		data() {
 			return {
-				taskbarHeight: 0
+				taskbarHeight: 0,
+				tipsData:{
+					type:"center",
+					content:""
+				}
 			}
 		},
 		mounted() {

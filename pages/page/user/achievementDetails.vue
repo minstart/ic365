@@ -55,7 +55,7 @@
 												<image class="icon"></image>
 												<view class="text">{{item2.typeName}}成就</view>
 											</h3>
-											<view class="time">{{changeDate(item2.obtainTimeUnix*1000).fullDate}}</view>
+											<view class="time">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>
 										</view>
 									</view>
 								</view>
