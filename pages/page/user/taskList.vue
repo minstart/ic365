@@ -195,6 +195,7 @@
 					&::after {
 						content: "";
 						display: inline-block;
+						vertical-align: text-top;
 						margin-left: 6rpx;
 						width: 30rpx;
 						height: 30rpx;

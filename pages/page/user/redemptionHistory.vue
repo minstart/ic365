@@ -14,7 +14,7 @@
 					<view class="commodity-list-content-wrap" v-for="(item,i) in commodity.commodityList">
 						<view class="item-title">
 							<h3 class="month-title">{{item.title}}</h3>
-							<h3 class="month-total">{{item.data.length}}</h3>
+							<h3 class="month-total">{{commodity.statistics[i]}}</h3>
 						</view>
 						<view class="commodity-list" v-for="item2 in item.data" @click="jumpPage({url:'/pages/page/user/exchangeLogDetails?' + objectToQueryString(item2)})">
 							<image class="list-icon" :src="item2.icon"></image>
@@ -47,7 +47,8 @@
 				commodity: {
 					page: 0,
 					noData: false,
-					commodityList: {}
+					commodityList: {},
+					statistics:{}
 				},
 			}
 		},
@@ -60,7 +61,17 @@
 			}).catch(error => {
 				console.log("获取我的兑换统计报错：：", error)
 			})
-
+			
+			// 获取月份兑换统计
+			this.commonRequest({
+				url: "/api/exchange/redeem-history-grouped-count"
+			}).then(res => {
+				console.log("获取月份兑换统计:",res.data)
+				this.commodity.statistics = res.data;
+			}).catch(error => {
+				console.log("获取获取月份兑换统计报错：：", error)
+			})
+			
 			this.getCommodity()
 		},
 		onReady() {
@@ -115,7 +126,6 @@
 								data: []
 							}
 						}
-
 						this.commodity.commodityList[year + '-' + month].data.push(item)
 					})
 				}).catch(error => {

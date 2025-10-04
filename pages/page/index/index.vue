@@ -33,6 +33,7 @@
 				<h4 class="banner-text-content">{{pageData.banner.content}}</h4>
 				<h5 class="banner-text-contentFrom">{{pageData.banner.contentFrom}}</h5>
 			</view>
+			<image class="statue" src="/static/image/analysis_image.png"></image>
 			<view class="activity-wrap">
 				<image class="activity" @click="jumpPage({url:'/pages/page/study/calendar'})" src='/static/image/1_challenge.png'></image>
 				<image class="activity" @click="jumpPage({url:'/pages/page/team/team',type:'reLaunch'})" src='/static/image/1_study.png'></image>
@@ -115,13 +116,13 @@
 						<image class="achievement-head-pic" :src="item.imgPath || defaultAchievementIcon" @error="defaultAchievementIconUrl(i)"></image>
 						<view class="achievement-info">
 							<view class="achievement-name">{{item.name}}</view>
-							<view class="achievement-from">{{item.subtitle}}</view>
+							<view class="achievement-from text-ellipsis2">{{item.subtitle}}</view>
 							<view class="achievement-time">
-								<view v-if="item.rare!=0" class="achievement-rare">
-									<image class="achievement-rare-icon" src="/static/icons/achievement.png"></image>
-									稀有成就
+								<view v-if="item.rare!=0" class="achievement-rare" :typeId="item.type">
+									<view class="achievement-rare-icon"></view>
+									<span>{{item.typeName}}成就</span>
 								</view>
-								{{changeDate(item.obtainTimeUnix*1000).fullDate}}
+								<span>{{changeDate(item.obtainTimeUnix*1000).fullDate}}</span>
 							</view>
 						</view>
 					</view>
@@ -183,7 +184,7 @@
 		data() {
 			return {
 				pageHeadTitle: "",
-				isSpecial:false,//是否已经检测过app安装包升级
+				isSpecial: false, //是否已经检测过app安装包升级
 				cumulative: [],
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
 				defaultAchievementIcon: "/static/image/head_pic.png", // 默认成就图标
@@ -192,33 +193,32 @@
 				// 推荐学习
 				videos: [],
 				// 推荐学习背景色默认随机数顺序
-				videosBackArr : [
-					{
-						background:"#DFE6FF",
-						background2:"#879EF6",
+				videosBackArr: [{
+						background: "#DFE6FF",
+						background2: "#879EF6",
 					},
 					{
-						background:"#E5F9E6",
-						background2:"#71D874",
+						background: "#E5F9E6",
+						background2: "#71D874",
 					},
 					{
-						background:"#F8DE96",
-						background2:"#FF9743",
+						background: "#F8DE96",
+						background2: "#FF9743",
 					},
 					{
-						background:"#FAD8B9",
-						background2:"#D8A374",
+						background: "#FAD8B9",
+						background2: "#D8A374",
 					},
 					{
-						background:"#F9EBE5",
-						background2:"#FF9696",
+						background: "#F9EBE5",
+						background2: "#FF9696",
 					},
 					{
-						background:"#FFE1FC",
-						background2:"#E48BF8",
+						background: "#FFE1FC",
+						background2: "#E48BF8",
 					},
 				],
-				randomBack:[],//推荐学习背景色随机数后的数组
+				randomBack: [], //推荐学习背景色随机数后的数组
 				// 学习模块
 				plan: {
 					list: []
@@ -240,12 +240,12 @@
 						contentFrom: "- 卡尔·弗里德里希·高斯"
 					}
 				},
-				taskDetails: {} ,//选中的任务详情
-				
+				taskDetails: {}, //选中的任务详情
+
 			};
 		},
 		onLoad() {
-			
+
 		},
 
 		onReady() {
@@ -296,7 +296,7 @@
 						return false;
 					}
 					// 测试人员，安装新线上测试包
-					if(res.data.special && !this.isSpecial){
+					if (res.data.special && !this.isSpecial) {
 						//#ifdef APP-PLUS
 						// 获取本地应用资源版本号
 						plus.runtime.getProperty(plus.runtime.appid, (inf) => {
@@ -311,30 +311,30 @@
 									edition_type: plus.runtime.appid,
 									version_type: uni.getSystemInfoSync().platform, //android或者ios
 									edition_number: inf.versionCode, // 打包时manifest设置的版本号 
-									user_id:res.data.userId
+									user_id: res.data.userId
 								}
 							}).then(res => {
 								this.isSpecial = true;
-								console.log("检测升级返回的数据：",res)
+								console.log("检测升级返回的数据：", res)
 								//res.data.xxx根据后台返回的数据决定（我这里后端返回的是data），所以是res.data.data
 								//判断后台返回版本号是否大于当前应用版本号 && 是否发行 （上架应用市场时一定不能弹出更新提示）
 								if (Number(res.data.edition_number) > Number(inf.versionCode) && res.data.edition_issue == 1) {
-						
+
 									//如果是wgt升级，并且是静默更新 （注意！！！ 如果是手动检查新版本，就不用判断静默更新，请直接跳转更新页，不然点击检查新版本后会没反应）
 									if (res.data.package_type == 1 && res.data.edition_silence == 1) {
-						
+
 										//调用静默更新方法 传入下载地址
 										silenceUpdate(res.data.edition_url)
-						
+
 									} else {
 										//跳转更新页面 （注意！！！如果pages.json第一页的代码里有一打开就跳转其他页面的操作，下面这行代码最好写在setTimeout里面设置延时3到5秒再执行）
-										setTimeout(function(){
+										setTimeout(function() {
 											uni.navigateTo({
 												url: '/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update?obj=' +
 													JSON.stringify(res.data)
 											});
-										},3000)
-										
+										}, 3000)
+
 									}
 								} else {
 									// 如果是手动检查新版本 需开启以下注释
@@ -392,7 +392,7 @@
 				}).catch(error => {
 					console.log("获取最新成就失败：：", error)
 				})
-				
+
 				// 通知消息（成就奖励、任务奖励）
 				this.commonRequest({
 					url: "/api/notice/getAll"
@@ -495,7 +495,7 @@
 	.banner-wrap {
 		padding: 20rpx 24rpx 0 24rpx;
 		// display: flex;
-		min-height: 760rpx;
+		min-height: 830rpx;
 		background: url("/static/image/1_header_banner.png") no-repeat top / 100%;
 		position: relative;
 
@@ -527,6 +527,7 @@
 					margin: 8rpx 0;
 					line-height: 50rpx;
 					font-size: 40rpx;
+
 					.achievement {
 						margin-left: 8rpx;
 						padding: 0 16rpx;
@@ -591,6 +592,7 @@
 			font-size: 1.1rem;
 			position: absolute;
 			bottom: 300rpx;
+			width: 420rpx;
 
 			* {
 				text-shadow: 0px 2px 3px #fff;
@@ -610,6 +612,14 @@
 			.banner-text-contentFrom {
 				font-size: 0.8rem;
 			}
+		}
+
+		.statue {
+			position: absolute;
+			right: 50rpx;
+			bottom: 310rpx;
+			width: 220rpx;
+			height: 328rpx;
 		}
 
 		.activity-wrap {
@@ -664,8 +674,10 @@
 					top: 1rem;
 					z-index: 2;
 				}
-				.list-wrap{
+
+				.list-wrap {
 					display: flex;
+
 					.plan-list-icon {
 						width: 142rpx;
 						height: 142rpx;
@@ -674,8 +686,10 @@
 						// top: 1rem;
 						// left: 50rpx;
 					}
-					.list-info{
+
+					.list-info {
 						flex: 1;
+
 						// 列表标题名称 + 奖励
 						.plan-list-name-wrap {
 							// position: absolute;
@@ -683,14 +697,14 @@
 							padding-top: 1rem;
 							left: 0;
 							width: 400rpx;
-						
+
 							.plan-list-name {
 								display: inline-block;
 								font-size: 1.125rem;
 								font-weight: 700;
 								line-height: 48rpx;
 							}
-						
+
 							.plan-reward {
 								display: inline-block;
 								vertical-align: top;
@@ -701,24 +715,25 @@
 								font-weight: 500;
 								margin-left: 0.4rem;
 								padding: 0 16rpx;
+
 								.plan-reward-icon {
-									width:24rpx;
-									height:24rpx;
+									width: 24rpx;
+									height: 24rpx;
 									display: inline-block;
 									margin: 12rpx 0;
 									margin-right: 0.2rem;
 								}
-						
+
 								span {
 									display: inline-block;
 									vertical-align: top;
 									line-height: 48rpx;
 								}
-						
+
 							}
-						
+
 						}
-						
+
 						// 任务要求
 						.plan-list-require {
 							// position: absolute;
@@ -730,7 +745,7 @@
 							width: 400rpx;
 							font-size: 0.75rem;
 						}
-						
+
 						//进度条 
 						.progress-wrap {
 							position: relative;
@@ -743,7 +758,7 @@
 							overflow: hidden;
 							border-radius: 0.5rem;
 						}
-						
+
 						// 限时倒计时
 						.time-limited-wrap {
 							// position: absolute;
@@ -754,11 +769,11 @@
 							// right: 0.75rem;
 							width: 400rpx;
 							overflow: hidden;
-							
+
 							// 活动倒计时
 							.time-limited {
 								padding: 0 0.3rem 0 1rem;
-								margin:10rpx 0 28rpx 0;
+								margin: 10rpx 0 28rpx 0;
 								font-weight: 700;
 								font-size: 0.75rem;
 								color: #fff;
@@ -767,13 +782,13 @@
 								background: url("/static/image/1_time_limited.png") no-repeat left / 100% 100%;
 							}
 						}
-						
+
 					}
 				}
 
-				
 
-				
+
+
 				&[colorscheme="1"] {
 					background: #FFF2EA;
 
@@ -886,12 +901,14 @@
 			position: relative;
 			min-height: 180rpx;
 			border-radius: 20rpx;
-			.title{
+
+			.title {
 				text-align: left;
 				font-size: 26rpx;
 				color: #323232;
 			}
-			.is-vip{
+
+			.is-vip {
 				position: absolute;
 				right: 0;
 				top: 0;
@@ -900,6 +917,7 @@
 				padding: 4rpx 22rpx;
 				border-radius: 0 20rpx 0 30rpx;
 			}
+
 			.list-icon {
 				width: 100%;
 				height: 7.5rem;
@@ -969,18 +987,56 @@
 				.achievement-time {
 					color: #065E4F;
 					font-size: 0.81rem;
-
+					span{
+						display: inline-block;
+						vertical-align: top;
+						line-height: 52rpx;
+					}
 					.achievement-rare {
 						color: #EB7D1E;
 						background: #FFFBDB;
 						display: inline-block;
-						padding: 0.25rem 0.5rem;
-						margin-right: 0.2rem;
-
+						padding: 0 16rpx;
+						margin-right: 12rpx; 
+						// span{
+						// 	line-height: 52rpx;
+						// 	display: inline-block;
+						// }
 						.achievement-rare-icon {
-							width: 0.75rem;
-							height: 0.75rem;
-							padding-right: 0.1rem;
+							width: 26rpx;
+							height: 26rpx;
+							margin-right: 8rpx;
+							display: inline-block;
+							margin-top: 12rpx;
+						}
+						&[typeid="0"] {
+							.achievement-rare-icon {
+								background: url("/static/icons/achievement_1.png") no-repeat top/ 100% 100%;
+							}
+						}
+
+						&[typeid="1"] {
+							.achievement-rare-icon {
+								background: url("/static/icons/achievement_2.png") no-repeat top/ 100% 100%;
+							}
+						}
+
+						&[typeid="2"] {
+							.achievement-rare-icon {
+								background: url("/static/icons/achievement_3.png") no-repeat top/ 100% 100%;
+							}
+						}
+
+						&[typeid="3"] {
+							.achievement-rare-icon {
+								background: url("/static/icons/achievement_4.png") no-repeat top/ 100% 100%;
+							}
+						}
+
+						&[typeid="4"] {
+							.achievement-rare-icon {
+								background: url("/static/icons/achievement_5.png") no-repeat top/ 100% 100%;
+							}
 						}
 					}
 				}

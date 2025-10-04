@@ -25,7 +25,7 @@
 /* 文章场景相关 */
 .uni-popup[data-v-4dd3c44b] {
   position: fixed;
-  z-index: 100;
+  z-index: 10000000;
 }
 .uni-popup.top[data-v-4dd3c44b], .uni-popup.left[data-v-4dd3c44b], .uni-popup.right[data-v-4dd3c44b] {
   top: 0;
@@ -45,6 +45,31 @@
 .fixforpc-top[data-v-4dd3c44b] {
   top: 0;
 }
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
 .common-page-head-view[data-v-e80b2f0b] {
   position: relative;
   top: 0;
@@ -93,7 +118,7 @@
   font-weight: 700;
   font-size: 1.375rem;
   padding-bottom: 0.1rem;
-  background: url("../../../static/image/title_back.png") no-repeat bottom center / 5.5rem;
+  background: url("../../../static/image/title_back.png") no-repeat bottom center/5.5rem;
 }
 .common-page-head .standard-title[data-v-e80b2f0b] {
   font-size: 1.125rem;
@@ -102,7 +127,7 @@
   background: transparent;
 }
 .common-page-head .page-head-back-icon[data-v-e80b2f0b] {
-  background: url("../../../static/icons/back_orange.png") no-repeat center / 100% 100%;
+  background: url("../../../static/icons/back_orange.png") no-repeat center/100% 100%;
 }
 .common-page-head .page-head-module-icon[data-v-e80b2f0b] {
   width: 2.125rem;
@@ -166,7 +191,59 @@
   width: 12.1875rem;
   margin: 0.625rem auto;
 }
-
+.popup-tips-wrap[data-v-e80b2f0b] {
+  width: 19.0625rem;
+  background-color: #FFFFFF;
+  border-radius: 0.375rem;
+  overflow: auto;
+}
+.popup-tips-wrap .popup-tips-title[data-v-e80b2f0b] {
+  text-align: center;
+  font-size: 1rem;
+  color: #000;
+  background-color: #FFFAEE;
+  line-height: 2.75rem;
+}
+.popup-tips-wrap .popup-tips-content[data-v-e80b2f0b] {
+  padding: 1.9375rem 1.625rem;
+  font-size: 0.9375rem;
+  color: #000;
+  line-height: 1.375rem;
+}
+.popup-tips-wrap .popup-tips-btn-wrap[data-v-e80b2f0b] {
+  box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.08);
+  height: 2.25rem;
+  padding: 0.9375rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup-tips-wrap .popup-tips-btn-wrap .tips-btn[data-v-e80b2f0b], .popup-tips-wrap .popup-tips-btn-wrap .border[data-v-e80b2f0b] {
+  display: inline-block;
+  vertical-align: middle;
+}
+.popup-tips-wrap .popup-tips-btn-wrap .border[data-v-e80b2f0b] {
+  height: 1.4375rem;
+  width: 0.0625rem;
+  margin: 0 1rem;
+  background-color: #F2F2F2;
+}
+.popup-tips-wrap .popup-tips-btn-wrap .tips-btn[data-v-e80b2f0b] {
+  flex: 1;
+  font-size: 1rem;
+  height: 2rem;
+  line-height: 2rem;
+  color: #000;
+  text-align: center;
+  border-radius: 0.25rem;
+}
+.popup-tips-wrap .popup-tips-btn-wrap .tips-btn[data-v-e80b2f0b]:nth-child(1) {
+  border: 0.125rem solid #303030;
+}
+.popup-tips-wrap .popup-tips-btn-wrap .tips-btn[data-v-e80b2f0b]:nth-child(3) {
+  border: 0.125rem solid #F5A623;
+  background-color: #F5A623;
+}
 
 .direction {
 		position: relative;

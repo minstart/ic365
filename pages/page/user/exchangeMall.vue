@@ -36,7 +36,7 @@
 							</li>
 						</ul>
 					</view>
-					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts">
+					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()">
 						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
@@ -49,8 +49,9 @@
 								</div>
 								<view class="list-info">
 									<h3 class="info-title">{{item2.productName}}</h3>
-									<view class="item-more" v-if="item2.endTime && calculateDaysUntilDeadline(changeTime(item2.endTime))">
-										<view class="text" style="color:#F23E3E;font-weight: 700;">剩余{{calculateDaysUntilDeadline(changeTime(item2.endTime))}}天</view>
+
+									<view class="item-more" v-if="!item2.redeemTime && item2.endTime && calculateTimeDifference(changeTime(item2.endTime,2))">
+										<view class="text" style="color:#F23E3E;font-weight: 700;">限时兑换：剩余{{calculateTimeDifference(changeTime(item2.endTime,2)).days}}天 {{calculateTimeDifference(changeTime(item2.endTime,2)).hours}}小时</view>
 									</view>
 									<view class="info-subtitle">{{item2.subtitle}}</view>
 									<view class="achievement-type">
@@ -62,6 +63,10 @@
 										<view class="exchange-btn not-enough" v-else-if="!item2.isExchange">货币不足</view>
 										<view class="exchange-btn" v-else @click.stop="() => exchange(item2)">立即兑换</view>
 									</view>
+									<p class="redeem-time" v-if="item2.redeemTime">
+										<span class="redeem-time-title">兑换时间：</span>
+										<span class="redeem-time-text">{{changeTime(item2.redeemTime,2)}}</span>
+									</p>
 								</view>
 							</view>
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && productsList['products' + item.id].noData">- 没有更多了 -</view>
@@ -92,7 +97,8 @@
 				selectProductsId: "",
 				productsTab: [],
 				productsList: {},
-				option: {}
+				option: {},
+				isLoading: false
 			}
 		},
 		onLoad(option) {
@@ -123,7 +129,7 @@
 							}
 						} catch (e) {}
 					}
-					this.getProducts()
+					this.getProducts({reset:true})
 				}).catch(error => {
 					console.log("兑换资源类型(Tab)报错：：", error)
 				})
@@ -162,9 +168,9 @@
 				if (data.obtained) return console.log("已拥有：", data.productionId);
 				console.log(data)
 				this.verifVip({
-					vip:data.vipLevel,
-					myvip:this.userInfo.vipLevel
-				}).then(data => {
+					vip: data.vipLevel,
+					myvip: this.userInfo.vipLevel
+				}).then(res => {
 					console.log("校验通过")
 					// 兑换商品
 					this.commonRequest({
@@ -214,33 +220,38 @@
 							list: []
 						}
 					})
+				} else {
+					if (this.productsList["products" + this.selectProductsId].noData) return false;
 				}
-
-				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					this.getProductsDetail()
-				}
+				// if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
+				this.getProductsDetail(data)
+				// }
 			},
 			// 获取兑换商品列表
 			getProductsDetail() {
-				if (this.productsList["products" + this.selectProductsId].noData) return false;
+				// if (this.productsList["products" + this.selectProductsId].noData) return false;
 				// console.log(this.selectProductsId,this.productsList)
+				let number = 15;//一次加载多少条数据
 				let postData = {
 					keyword: this.keyword,
 					page: this.productsList["products" + this.selectProductsId].page + 1,
 					type: this.selectProductsId,
-					size: "10"
+					size: number.toString()
 				}
 				// console.log("获取兑换商品列表请求参数",postData)
 
+				console.log("请求参数：", postData)
 				this.commonRequest({
 					url: "/api/exchange/products",
 					method: "POST",
 					data: postData
 				}).then(res => {
 					console.log("获取兑换商品列表:", res.data)
-					if (res.data.length == 0) {
+					if (res.data.length == 0 ) {
 						this.productsList["products" + this.selectProductsId].noData = true;
 						return false;
+					} else if(res.data.length != number){
+						this.productsList["products" + this.selectProductsId].noData = true;
 					}
 					try {
 						res.data.forEach((item, i) => {
@@ -261,11 +272,11 @@
 					this.productsList["products" + this.selectProductsId].requested = true;
 					this.productsList["products" + this.selectProductsId].page = (this.productsList["products" + this.selectProductsId].page ? this.productsList["products" + this.selectProductsId].page : 0) + 1;
 					this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
-				
+
 					const uniqueItems = Array.from(new Set(this.productsList["products" + this.selectProductsId].list.map(item => item.productionId))).map(id => {
-					  return this.productsList["products" + this.selectProductsId].list.find(item => item.productionId === id);
+						return this.productsList["products" + this.selectProductsId].list.find(item => item.productionId === id);
 					});
-					
+
 					this.productsList["products" + this.selectProductsId].list = uniqueItems;
 				}).catch(error => {
 					console.log("获取兑换商品列表报错：：", error)
@@ -427,15 +438,18 @@
 						&:last-child {
 							margin-bottom: 0;
 						}
-						.list-icon-wrap{
+
+						.list-icon-wrap {
 							position: relative;
 							display: flex;
 							align-items: center;
 							justify-content: center;
 						}
-						.vip-icon{
+
+						.vip-icon {
 							right: 12rpx;
 						}
+
 						.list-icon {
 							width: 5.5rem;
 							height: 6.75rem;
@@ -512,6 +526,21 @@
 									background-color: #f3f3f3;
 									color: #686868;
 									border-color: #6d6d6d;
+								}
+							}
+
+							.redeem-time {
+								color: #616161;
+								font-size: 24rpx;
+								margin-top: 8rpx;
+
+								.redeem-time-title {
+									display: inline-block;
+								}
+
+								.redeem-time-text {
+									display: inline-block;
+									text-align: right;
 								}
 							}
 						}

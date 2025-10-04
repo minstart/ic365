@@ -1055,10 +1055,17 @@ class Calendar {
    */
   dateEqual(before, after) {
     before = new Date(before.replace("-", "/").replace("-", "/"));
-    after = new Date(after.replace("-", "/").replace("-", "/"));
-    if (before.getTime() - after.getTime() === 0) {
-      return true;
-    } else {
+    try {
+      after = new Date(after.replace("-", "/").replace("-", "/"));
+    } catch (e) {
+    }
+    try {
+      if (before.getTime() - after.getTime() === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
       return false;
     }
   }

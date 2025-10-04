@@ -21,7 +21,7 @@ import Cookies from 'js-cookie';
 import request from '/common/utils/request'
 import store from '/store/index.js'
 
-const imageUrlPattern = /https:\/\/[^\s]+\.(png|jpg|jpeg|gif|svg)/gi; //图片校验
+const imageUrlPattern = /https?:\/\/[^\s]+\.(png|jpg|jpeg|gif|svg)/gi; //图片校验
 
 // 校验加密数据
 async function fetchData(data) {
@@ -493,7 +493,9 @@ export default {
 		// type不传 返回格式：YYYY-MM-DD，type:1 => YYYY-MM-DD  type:2 直接删除T返回
 		changeTime(time, type) {
 			if (!time) return false;
-			if (typeof type != "undefined" && type == 2) return time.replace("T", "");
+			try{
+				if (typeof type != "undefined" && type == 2) return time.replace("T", " ");
+			}catch(e){}
 			if (time.indexOf("T") != 1 || time.indexOf(":") != 1) {
 				let date = new Date(time);
 				const y = date.getFullYear()
@@ -552,6 +554,7 @@ export default {
 					})
 					return data.content;
 				} catch (e) {
+					console.log("解析图片错误",e)
 					return data.content;
 				}
 			} else {

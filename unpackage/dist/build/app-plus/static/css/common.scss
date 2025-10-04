@@ -64,6 +64,28 @@ ul,li{
 		background: url("/static/icons/next.png") no-repeat right / 100% 100%;
 	}
 }
+// 1行后超出的...显示
+.text-ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1; /* 注意：line-clamp是新属性，需要添加前缀 */
+  -webkit-line-clamp: 1; /* Chrome和其他WebKit浏览器 */
+  display: -webkit-box; /* 旧语法，WebKit内核的浏览器 */
+  -moz-box-orient: vertical; /* Firefox */
+}
+// 2行后超出的...显示
+.text-ellipsis2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2; /* 注意：line-clamp是新属性，需要添加前缀 */
+  -webkit-line-clamp: 2; /* Chrome和其他WebKit浏览器 */
+  display: -webkit-box; /* 旧语法，WebKit内核的浏览器 */
+  -moz-box-orient: vertical; /* Firefox */
+}
 // 单一类型样式 ------End
 
 // 列表标题

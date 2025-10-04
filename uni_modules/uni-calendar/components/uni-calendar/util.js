@@ -178,7 +178,7 @@ class Calendar {
 			// 禁止日期
 			let datDisable = false;
 			for (let dj = 0; dj < this.disabledDay.length; dj++) {
-				if(this.disabledDay[dj] == nowDate){
+				if (this.disabledDay[dj] == nowDate) {
 					datDisable = true;
 				}
 			}
@@ -253,10 +253,16 @@ class Calendar {
 		// 计算截止时间
 		before = new Date(before.replace('-', '/').replace('-', '/'))
 		// 计算详细项的截止时间
-		after = new Date(after.replace('-', '/').replace('-', '/'))
-		if (before.getTime() - after.getTime() === 0) {
-			return true
-		} else {
+		try {
+			after = new Date(after.replace('-', '/').replace('-', '/'))
+		} catch (e) {}
+		try {
+			if (before.getTime() - after.getTime() === 0) {
+				return true
+			} else {
+				return false
+			}
+		} catch (e) {
 			return false
 		}
 	}
@@ -318,10 +324,10 @@ class Calendar {
 				this.multipleStatus.after = fullDate
 				if (this.dateCompare(this.multipleStatus.before, this.multipleStatus.after)) {
 					this.multipleStatus.data = this.geDateAll(this.multipleStatus.before, this.multipleStatus
-					.after);
+						.after);
 				} else {
 					this.multipleStatus.data = this.geDateAll(this.multipleStatus.after, this.multipleStatus
-					.before);
+						.before);
 				}
 			}
 		}

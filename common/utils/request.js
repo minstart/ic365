@@ -108,7 +108,7 @@ service.interceptors.response.use(
 	 * You can also judge the status by HTTP Status Code
 	 */
 	response => {
-		// console.log("接口返回::", JSON.stringify(response))
+		
 		const res = response.data
 		if (store.state.encrypt_enabled && response.config.url.includes('/crypto') === false && response.data?.data) {
 			// AES KEY EXPIRED.
@@ -128,7 +128,7 @@ service.interceptors.response.use(
 				}
 			}
 		}
-
+		// console.log("接口返回::", JSON.stringify(res))
 		// if the custom code is not 20000, it is judged as an error.
 		if (res.code !== 0) {
 			// 50008: Illegal token 50012: Other clients logged in 50014: Token expired
@@ -179,7 +179,7 @@ async function handleSessionExpired(originalRequest) {
 		const newCrypto = await refreshKeys();
 		newCrypto.sessionKey && (originalRequest.headers['X-Session-Key'] = newCrypto.sessionKey);
 		if (originalRequest.oldData) {
-			console.log("333333333333", originalRequest.oldData, newCrypto.aesKey)
+			// console.log("333333333333", originalRequest.oldData, newCrypto.aesKey)
 			let arr = Object.assign({},originalRequest.oldData)
 			originalRequest.data = {
 				data: aesEncrypt(originalRequest.oldData, newCrypto.aesKey)

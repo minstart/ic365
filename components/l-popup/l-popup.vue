@@ -4,7 +4,7 @@
 			<view class="l-popup-wrap">
 				<view class="l-popup-close-icon" @click.stop="close"></view>
 				<view class="l-popup-content">
-					<slot></slot>
+					<slot style="position: relative;z-index: 10;"></slot>
 				</view>
 			</view>
 		</view>
@@ -56,7 +56,7 @@
 		height: 100%;
 		left: 0;
 		top: 0;
-		z-index: 100;
+		z-index: 1000;
 		background: rgba(0, 0, 0, 0.5);
 	}
 
@@ -69,12 +69,11 @@
 		margin: auto;
 		background: #fff;
 		z-index: 1000;
-
 		.l-popup-wrap {
 			position: relative;
 			width: 100%;
 			height: 100%;
-
+			z-index: 2;
 			.l-popup-close-icon {
 				width: 60rpx;
 				height: 60rpx;

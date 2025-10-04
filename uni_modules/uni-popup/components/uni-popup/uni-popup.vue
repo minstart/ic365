@@ -468,7 +468,7 @@
 	.uni-popup {
 		position: fixed;
 		/* #ifndef APP-NVUE */
-		z-index: 100;
+		z-index: 10000000;
 
 		/* #endif */
 		&.top,

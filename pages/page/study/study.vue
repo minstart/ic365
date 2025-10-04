@@ -217,7 +217,7 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.message || "获取推荐学习失败!",
+							title: res.msg || "获取推荐学习失败!",
 							icon: "none"
 						});
 					}

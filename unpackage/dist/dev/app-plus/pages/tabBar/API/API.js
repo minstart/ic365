@@ -933,7 +933,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     )) : (0, import_vue3.createCommentVNode)("v-if", true);
   }
   var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  var _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } } };
+  var _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center/5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center/100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } }, "popup-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx" } }, "popup-tips-title": { ".popup-tips-wrap ": { "textAlign": "center", "fontSize": "32rpx", "color": "#000000", "backgroundColor": "#FFFAEE", "lineHeight": "88rpx" } }, "popup-tips-content": { ".popup-tips-wrap ": { "paddingTop": "62rpx", "paddingRight": "52rpx", "paddingBottom": "62rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx" } }, "popup-tips-btn-wrap": { ".popup-tips-wrap ": { "boxShadow": "0px -4px 8px 0px rgba(0, 0, 0, 0.08)", "height": "72rpx", "paddingTop": "30rpx", "paddingRight": "48rpx", "paddingBottom": "30rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "tips-btn": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "flex": 1, "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "textAlign": "center", "borderRadius": "8rpx" } }, "border": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "height": "46rpx", "width": "2rpx", "marginTop": "0rpx", "marginRight": "32rpx", "marginBottom": "0rpx", "marginLeft": "32rpx", "backgroundColor": "#F2F2F2" } } };
   var _sfc_main2 = {
     name: "page-head",
     props: {
@@ -968,6 +968,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       standardTitle: {
         default: false
+      },
+      becomeMemberSize: {
+        default: 1
       }
     },
     data() {
@@ -975,7 +978,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         taskbarHeight: 0,
         tipsData: {
           type: "center",
-          content: ""
+          title: "\u63D0\u793A",
+          content: "",
+          success: () => {
+            this.closePopupTips();
+          }
         }
       };
     },
@@ -996,6 +1003,23 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       closeBecomeMember() {
         this.$store.state.officialAccountWindow = false;
         this.$refs.becomeMember.close();
+      },
+      openPopupTips(data) {
+        this.$refs.popupTips.open();
+        formatAppLog("log", "at components/page-head/page-head.vue:137", "\u54A8\u8BE2\u5F39\u7A97\u5E26\u6765\u7684data:", data);
+        this.tipsData = {
+          type: "center",
+          title: "\u63D0\u793A",
+          content: "",
+          success: () => {
+            this.closePopupTips();
+          }
+        };
+        this.tipsData = __spreadValues(__spreadValues({}, this.tipsData), data);
+        formatAppLog("log", "at components/page-head/page-head.vue:147", "\u5408\u5E76\u540E\u7684data", this.tipsData);
+      },
+      closePopupTips() {
+        this.$refs.popupTips.close();
       }
     }
   };
@@ -1087,34 +1111,43 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           {
             default: (0, import_vue3.withCtx)(() => [
               (0, import_vue3.createElementVNode)("view", { class: "become-member-window" }, [
-                (0, import_vue3.createElementVNode)("view", { class: "become-member-wrap" }, [
-                  (0, import_vue3.createElementVNode)("view", { class: "title" }, [
-                    (0, import_vue3.createElementVNode)("u-text", null, "\u5173\u6CE8\u516C\u4F17\u53F7")
-                  ]),
-                  (0, import_vue3.createElementVNode)("u-image", {
-                    class: "qr-code",
-                    src: _ctx.$store.state.officialAccountQRCode
-                  }, null, 8, ["src"]),
-                  (0, import_vue3.createVNode)(_component_p, { class: "tips" }, {
-                    default: (0, import_vue3.withCtx)(() => [
-                      (0, import_vue3.createElementVNode)("u-text", null, "\u626B\u7801\u5173\u6CE8 \u201C\u5B66\u517B\u7F51\u201D \u516C\u4F17\u53F7\u5F00\u901A\u4F1A\u5458")
+                (0, import_vue3.createElementVNode)(
+                  "view",
+                  {
+                    class: "become-member-wrap",
+                    style: (0, import_vue3.normalizeStyle)("transform: scale(" + $props.becomeMemberSize + ");")
+                  },
+                  [
+                    (0, import_vue3.createElementVNode)("view", { class: "title" }, [
+                      (0, import_vue3.createElementVNode)("u-text", null, "\u5173\u6CE8\u516C\u4F17\u53F7")
                     ]),
-                    _: 1
-                    /* STABLE */
-                  }),
-                  (0, import_vue3.createElementVNode)("view", { class: "btn-wrap" }, [
-                    (0, import_vue3.createVNode)(_component_button, {
-                      class: "btn-close",
-                      onClick: (0, import_vue3.withModifiers)($options.closeBecomeMember, ["stop"])
-                    }, {
+                    (0, import_vue3.createElementVNode)("u-image", {
+                      class: "qr-code",
+                      src: _ctx.$store.state.officialAccountQRCode
+                    }, null, 8, ["src"]),
+                    (0, import_vue3.createVNode)(_component_p, { class: "tips" }, {
                       default: (0, import_vue3.withCtx)(() => [
-                        (0, import_vue3.createTextVNode)("\u5173\u95ED")
+                        (0, import_vue3.createElementVNode)("u-text", null, "\u626B\u7801\u5173\u6CE8 \u201C\u5B66\u517B\u7F51\u201D \u516C\u4F17\u53F7\u5F00\u901A\u4F1A\u5458")
                       ]),
                       _: 1
                       /* STABLE */
-                    }, 8, ["onClick"])
-                  ])
-                ])
+                    }),
+                    (0, import_vue3.createElementVNode)("view", { class: "btn-wrap" }, [
+                      (0, import_vue3.createVNode)(_component_button, {
+                        class: "btn-close",
+                        onClick: (0, import_vue3.withModifiers)($options.closeBecomeMember, ["stop"])
+                      }, {
+                        default: (0, import_vue3.withCtx)(() => [
+                          (0, import_vue3.createTextVNode)("\u5173\u95ED")
+                        ]),
+                        _: 1
+                        /* STABLE */
+                      }, 8, ["onClick"])
+                    ])
+                  ],
+                  4
+                  /* STYLE */
+                )
               ])
             ]),
             _: 1
@@ -1123,8 +1156,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           512
           /* NEED_PATCH */
         ),
+        (0, import_vue3.createCommentVNode)(" \u8BE2\u95EE\u5F39\u7A97 "),
+        (0, import_vue3.createCommentVNode)(" tipsDatas\u6570\u636E\u63A7\u5236\uFF0C\u4ECEopenPopupTips\u4F20\u53C2 "),
+        (0, import_vue3.createCommentVNode)(" \u5173\u95ED\u9700\u8981\u5728 \u7236\u7EA7\u9875\u9762\u8C03\u7528this.$refs.pageHead.closePopupTips()\u5173\u95ED "),
         (0, import_vue3.createVNode)(_component_uni_popup, {
-          ref: "popup-tips",
+          ref: "popupTips",
           "mask-click": false,
           type: $data.tipsData.type
         }, {
@@ -1152,8 +1188,19 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 )
               ]),
               (0, import_vue3.createElementVNode)("view", { class: "popup-tips-btn-wrap" }, [
-                (0, import_vue3.createElementVNode)("view", { class: "tips-btn" }),
-                (0, import_vue3.createElementVNode)("view", { class: "tips-btn" })
+                (0, import_vue3.createElementVNode)("view", {
+                  class: "tips-btn",
+                  onClick: _cache[2] || (_cache[2] = (0, import_vue3.withModifiers)((...args) => $options.closePopupTips && $options.closePopupTips(...args), ["stop"]))
+                }, [
+                  (0, import_vue3.createElementVNode)("u-text", null, "\u53D6\u6D88")
+                ]),
+                (0, import_vue3.createElementVNode)("view", { class: "border" }),
+                (0, import_vue3.createElementVNode)("view", {
+                  class: "tips-btn",
+                  onClick: _cache[3] || (_cache[3] = (0, import_vue3.withModifiers)((...args) => $data.tipsData.success && $data.tipsData.success(...args), ["stop"]))
+                }, [
+                  (0, import_vue3.createElementVNode)("u-text", null, "\u786E\u5B9A")
+                ])
               ])
             ])
           ]),

@@ -10,7 +10,7 @@
 			</view>
 			<view class="user-info">
 				<h3 class="name">{{userInfo.nickname}}同学
-				<span class="achievement" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
+					<span class="achievement" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
 				</h3>
 				<ul class="cumulative-list">
 					<li class="list">
@@ -33,32 +33,35 @@
 
 	<view class="plan-recommend-wrap uni-padding-wrap">
 		<view class="study-report-wrap">
+			<h3 class="study-report-title">学习周报</h3>
 			<!-- 设置跳转到详情页面 -->
 			<view class="report-details"></view>
-			<view class="report-info-wrap">
-				<view class="report-info">
-					<h4 class="info-text">{{overallReport.studyMinutes}}小时</h4>
-					<h4 class="info-rowth-rate" :state="growthRate.studyMinutes>=0?'1':'2'">{{growthRate.studyMinutes||0}}%</h4>
+			<div class="report-wrap">
+				<view class="report-info-wrap">
+					<view class="report-info">
+						<h4 class="info-text">{{overallReport.studyMinutes}}小时</h4>
+						<h4 class="info-rowth-rate" :state="growthRate.studyMinutes>=0?'1':'2'">{{growthRate.studyMinutes||0}}%</h4>
+					</view>
+					<view class="report-info">
+						<h4 class="info-text">{{overallReport.completedMissions}}个</h4>
+						<h4 class="info-rowth-rate" :state="growthRate.completedMissions>=0?'1':'2'">{{growthRate.completedMissions||0}}%</h4>
+					</view>
 				</view>
-				<view class="report-info">
-					<h4 class="info-text">{{overallReport.completedMissions}}/{{overallReport.missionCount}} </h4>
-					<h4 class="info-rowth-rate" :state="growthRate.completedMissions>=0?'1':'2'">{{growthRate.completedMissions||0}}%</h4>
+				<view class="report-info-wrap">
+					<view class="report-info">
+						<h4 class="info-text">{{overallReport.questionCount}}题</h4>
+						<h4 class="info-rowth-rate" :state="growthRate.questionCount>=0?'1':'2'">{{growthRate.questionCount||0}}%</h4>
+					</view>
+					<view class="report-info">
+						<h4 class="info-text">{{overallReport.correctRate}}%</h4>
+						<h4 class="info-rowth-rate" :state="growthRate.correctRate>=0?'1':'2'">{{growthRate.correctRate||0}}%</h4>
+					</view>
 				</view>
-			</view>
-			<view class="report-info-wrap">
-				<view class="report-info">
-					<h4 class="info-text">{{overallReport.questionCount}}题</h4>
-					<h4 class="info-rowth-rate" :state="growthRate.questionCount>=0?'1':'2'">{{growthRate.questionCount||0}}%</h4>
+				<view class="trend-title">
+					<span>对比上周</span>
+					<span class="info-rowth-rate" :state="dailyReport.fluctuation>=0?'1':'2'">{{dailyReport.fluctuation||0}}%</span>
 				</view>
-				<view class="report-info">
-					<h4 class="info-text">{{overallReport.correctRate}}</h4>
-					<h4 class="info-rowth-rate" :state="growthRate.correctRate>=0?'1':'2'">{{growthRate.correctRate||0}}%</h4>
-				</view>
-			</view>
-			<view class="trend-title">
-				<span>每日平均</span>
-				<span class="info-rowth-rate" :state="dailyReport.fluctuation>=0?'1':'2'">{{dailyReport.fluctuation||0}}%</span>
-			</view>
+			</div>
 			<view class="charts-box">
 				<qiun-data-charts type="column" :opts="barChartOpts" :chartData="dailyReport" />
 			</view>
@@ -153,7 +156,7 @@
 					<view class="list-info">
 						<h3 class="title">{{item.title}}</h3>
 						<view class="subtitle">{{item.subtitle}}</view>
-						<view class="more-text"  @click="jumpPage({url:''})">{{item.buttonText}}</view>
+						<view class="more-text" @click="jumpPage({url:''})">{{item.buttonText}}</view>
 					</view>
 				</li>
 			</ul>
@@ -178,7 +181,29 @@
 				overallReport: {}, //整体报告
 				growthRate: {}, //对比上周涨幅
 
-				dailyReport: {}, //每日数据(柱状图数据)
+				dailyReport: {
+					"categories": [
+						"一",
+						"二",
+						"三",
+						"四",
+						"五",
+						"六",
+						"日"
+					],
+					"series": [{
+						"name": "做题数量",
+						"data": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						]
+					}]
+				}, //每日数据(柱状图数据)
 				// 柱状图设置
 				barChartOpts: {
 					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
@@ -215,7 +240,36 @@
 					min: {}
 				},
 				// 雷达图数据
-				radarChart: {},
+				radarChart: {
+					"categories": [
+						"计算",
+						"逻辑",
+						"应用",
+						"速度",
+						"空间"
+					],
+					"series": [{
+							"name": "同龄水平",
+							"data": [
+								0,
+								0,
+								0,
+								0,
+								0
+							]
+						},
+						{
+							"name": "当前能力",
+							"data": [
+								0,
+								0,
+								0,
+								0,
+								0
+							]
+						}
+					]
+				},
 				// 雷达图设置
 				RadarChartOpts: {
 					legend: {
@@ -273,7 +327,7 @@
 										score: res.data.radarChart.series[1].data[i]
 									})
 								})
-			
+
 								const sortedArray = [...newRadarChart].sort((x, y) => x.score - y.score);
 								this.radarChartAnalysis = {
 									min: sortedArray[0],
@@ -286,14 +340,14 @@
 						this.parent = res.data;
 					} else {
 						uni.showToast({
-							title: res.message || "获取家长版报告数据(统计图)失败!",
+							title: res.msg || "获取家长版报告数据(统计图)失败!",
 							icon: "none"
 						});
 					}
 				}).catch(error => {
 					console.log("获取家长版报告数据(统计图)失败：：", error)
 				})
-			
+
 				// 获取提升建议和其他
 				this.commonRequest({
 					url: "/api/report/getAdviceAndCurrenciesAndPublish"
@@ -302,7 +356,7 @@
 						console.log("获取提升建议和其他：", res)
 						try {
 							let _currencies = {};
-			
+
 							//处理后端返回的数据拼凑成前端简易展示数据 ------------Start
 							res.data.currencies.current.forEach(item => {
 								item.type == 1 && (_currencies.star = item.quantity)
@@ -329,14 +383,14 @@
 						} catch (e) {}
 					} else {
 						uni.showToast({
-							title: res.message || "获取提升建议和其他失败!",
+							title: res.msg || "获取提升建议和其他失败!",
 							icon: "none"
 						});
 					}
 				}).catch(error => {
 					console.log("获取提升建议和其他失败：：", error)
 				})
-			
+
 			}).catch(error => {
 				console.log("没有登录：：", error)
 			})
@@ -400,6 +454,7 @@
 					margin: 8rpx 0;
 					line-height: 50rpx;
 					font-size: 40rpx;
+
 					.achievement {
 						margin-left: 8rpx;
 						padding: 0 16rpx;
@@ -476,6 +531,14 @@
 		background: url("/static/image/4_banner_background.png") no-repeat center / 100% 100%;
 		position: relative;
 
+		.study-report-title {
+			position: absolute;
+			line-height: 104rpx;
+			font-size: 40rpx;
+			color: #fff;
+			left: 28rpx;
+		}
+
 		.report-details {
 			width: 166rpx;
 			height: 32rpx;
@@ -486,59 +549,67 @@
 			display: none;
 		}
 
-		.report-info-wrap {
-			display: flex;
-			line-height: 1.75rem;
+		.report-wrap {
+			position: relative;
+			top: 222rpx;
+			margin: 0 16rpx;
 
-			.report-info {
-				flex: 1;
+			.report-info-wrap {
+				display: flex;
+				line-height: 1.75rem;
+				margin: 0 46rpx;
 
-				.info-text {
-					float: left;
-					font-size: 1.25rem;
-				}
+				.report-info {
+					flex: 1;
 
-				.info-rowth-rate {
-					float: right;
-					font-size: 0.93rem;
-
-					&[state="1"] {
-						color: #79D183;
-						padding-left: 0.6rem;
-						background: url("/static/icons/rise-green.png") no-repeat left / 0.5rem 0.75rem;
+					.info-text {
+						float: left;
+						font-size: 1.25rem;
 					}
-
-					&[state="2"] {
-						color: #F9626D;
-						padding-left: 0.6rem;
-						background: url("/static/icons/decline-red.png") no-repeat left / 0.5rem 0.75rem;
-					}
-				}
-
-				&:nth-child(1) {
-					margin-right: 0.6875rem;
 
 					.info-rowth-rate {
-						margin-right: 0.625rem;
+						float: right;
+						font-size: 0.93rem;
+
+						&[state="1"] {
+							color: #79D183;
+							padding-left: 0.6rem;
+							background: url("/static/icons/rise-green.png") no-repeat left / 0.5rem 0.75rem;
+						}
+
+						&[state="2"] {
+							color: #F9626D;
+							padding-left: 0.6rem;
+							background: url("/static/icons/decline-red.png") no-repeat left / 0.5rem 0.75rem;
+						}
+					}
+
+					&:nth-child(1) {
+						margin-right: 0.6875rem;
+
+						.info-rowth-rate {
+							margin-right: 0.625rem;
+						}
+					}
+
+					&:nth-child(2) {
+						.info-text {
+							margin-left: 0.625rem;
+						}
 					}
 				}
 
 				&:nth-child(2) {
-					.info-text {
-						margin-left: 0.625rem;
-					}
+					padding-top: 144rpx;
+					margin: 0 2rem 2rem 2rem;
+				}
+
+				&:nth-child(3) {
+					padding-top: 2.5rem;
+					margin: 0 2rem 2rem 2rem;
 				}
 			}
 
-			&:nth-child(2) {
-				padding-top: 6.9375rem;
-				margin: 0 2rem 2rem 2rem;
-			}
-
-			&:nth-child(3) {
-				padding-top: 2.5rem;
-				margin: 0 2rem 2rem 2rem;
-			}
 		}
 
 		.trend-title {
@@ -751,10 +822,12 @@
 	// 系统资讯 ------Start
 	.information-wrap {
 		padding-bottom: 60rpx;
+
 		.information-list-wrap {
 			background: #F9F9F9;
 			border-radius: 20rpx;
-			padding:40rpx 20rpx 20rpx 20rpx;
+			padding: 40rpx 20rpx 20rpx 20rpx;
+
 			.information-list {
 				background: #fff;
 				border-bottom: 0.16rem solid #F6F6F6;
@@ -763,6 +836,7 @@
 				min-height: 158rpx;
 				margin-bottom: 20rpx;
 				position: relative;
+
 				.list-icon {
 					width: 108rpx;
 					height: 108rpx;
@@ -773,6 +847,7 @@
 					padding: 4rpx;
 					border-radius: 108rpx;
 				}
+
 				.list-info {
 					flex: 1;
 					display: inline-block;
@@ -783,7 +858,7 @@
 						line-height: 1;
 						margin-bottom: 8rpx;
 						color: #333;
-						
+
 					}
 
 					.subtitle {
@@ -792,8 +867,9 @@
 						position: relative;
 						padding-left: 24rpx;
 						margin-bottom: 28rpx;
-						&::after{
-							content:"";
+
+						&::after {
+							content: "";
 							width: 12rpx;
 							height: 12rpx;
 							left: 0;
@@ -804,16 +880,18 @@
 						}
 					}
 				}
-				.more-text{
+
+				.more-text {
 					line-height: 34rpx;
 					border-radius: 20rpx;
 					padding: 0 18rpx;
 					color: #4d4d4d;
 					width: 196rpx;
 					font-size: 18rpx;
-					border:2rpx solid #D8D8D8;
+					border: 2rpx solid #D8D8D8;
 					padding-right: 20rpx;
-					&::after{
+
+					&::after {
 						float: right;
 						content: "";
 						width: 14rpx;
@@ -823,38 +901,45 @@
 						background: url("/static/icons/next2.png") no-repeat right / 100% 100%;
 					}
 				}
-				.information-list-back{
+
+				.information-list-back {
 					position: absolute;
 					right: 0;
 					top: 0;
 					height: 100%;
 					width: 196rpx;
 				}
-				&:nth-child(1){
-					.information-list-back{
+
+				&:nth-child(1) {
+					.information-list-back {
 						background: url("/static/image/4_information_back1.png") no-repeat right / 196rpx 100%;
 					}
-					.list-icon{
-						border:2rpx solid #F94559;
+
+					.list-icon {
+						border: 2rpx solid #F94559;
 					}
-					.list-info{
-						.subtitle{
-							&::after{
+
+					.list-info {
+						.subtitle {
+							&::after {
 								background-color: #F94559;
 							}
 						}
 					}
 				}
-				&:nth-child(2){
-					.information-list-back{
+
+				&:nth-child(2) {
+					.information-list-back {
 						background: url("/static/image/4_information_back2.png") no-repeat right / 196rpx 100%;
 					}
-					.list-icon{
-						border:2rpx solid #FFBA31;
+
+					.list-icon {
+						border: 2rpx solid #FFBA31;
 					}
-					.list-info{
-						.subtitle{
-							&::after{
+
+					.list-info {
+						.subtitle {
+							&::after {
 								background-color: #FFBA31;
 							}
 						}

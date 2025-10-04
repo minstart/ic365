@@ -6,13 +6,21 @@
 		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
 			<view class="calendar-back"></view>
 			<view class="calendar-wrap" v-if="showCalendar">
-				<h3 class="month-title">
-					<span>{{new Date().getMonth() + 1}}</span>
-					<span>月</span>
+				<h3 class="month-title-wrap">
+					<view class="placeholder">
+						<view class="last-month" @click.stop="lastMonth" v-if="isLastMonth"></view>
+					</view>
+					<view class="month-title">
+						<span>{{date.getMonth() + 1}}</span>
+						<span>月</span>
+					</view>
+					<view class="placeholder">
+						<view class="next-month" @click.stop="nextMonth" v-if="isNextMonth"></view>
+					</view>
 				</h3>
 				<view class="">
 					<!-- 插入模式 -->
-					<uni-calendar class="uni-calendar--hook" :disabledDay="disabledDays" :selected="info.selected" :errorDay="errorDays" :showMonth="false" @change="change">
+					<uni-calendar id="calendar" :date="date" class="uni-calendar--hook" :disabledDay="disabledDays" :selected="info.selected" :errorDay="errorDays" :showMonth="false" @change="change">
 						<template v-slot:date-content="date">
 							{{date}}
 							<view :class="{'selected': date.isSelected}">
@@ -68,7 +76,10 @@
 				},
 				disabledDays: [],
 				errorDays: [],
-				checkedDate: ""
+				checkedDate: "",
+				isLastMonth: true,
+				isNextMonth: false,
+				date: new Date() // 当前日期
 			}
 		},
 		onLoad() {
@@ -79,34 +90,12 @@
 				this.showCalendar = true
 			})
 			this.verifLogin().then(data => {
-				this.info.date = this.changeDate(new Date(), -30).fullDate
-				this.info.startDate = this.changeDate(new Date(), -60).fullDate
-				this.info.endDate = this.changeDate(new Date(), 30).fullDate
-				// 获取已答题的日期
-				this.commonRequest({
-					url: "/api/question/answeredDates"
-				}).then(res => {
-					console.log("获取已答题的日期::", res)
-					try {
-						res.data.forEach(item=>{
-							for (let i in item) {
-								try {
-									if (item[i] == true) {
-										this.info.selected.push(i)
-									} else {
-										this.errorDays.push(i)
-									}
-								} catch (e) {}
-							}
-						})
-					} catch (e) {}
-				}).catch(error => {
-					console.log("获取已答题的日期失败：：", error)
-				})
+				this.answeredDates()
 			}).catch(error => {
 				console.log("没有登录：：", error)
 			})
 			this.taskbarHeight2 = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
+			this.answeredDates()
 		},
 		onShow() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -159,25 +148,105 @@
 					const month = ('0' + (item.getMonth() + 1)).slice(-2);
 					const day = ('0' + item.getDate()).slice(-2);
 					if (new Date(item) > new Date()) {
-						item = `${year}-${month}-${day}`
+						item = `${year}-${month}-${day}`;
 						dateArray.push(item);
 					} else {
 						if (this.changeDate(item).fullDate == this.changeDate(new Date()).fullDate) {
-							item = `${year}-${month}-${day}`
-							this.checkedDate = item;
+							item = `${year}-${month}-${day}`;
+							!this.checkedDate && (this.checkedDate = item)
 						}
 					}
 				})
-
 				return dateArray; // 返回包含所有日期的数组
 			},
 			change(e) {
 				this.checkedDate = e.fulldate;
 			},
 			doingExercises() {
+				let vipLevel = 0;
+				try {
+					vipLevel = store.state.userInfo.info.vipLevel
+				} catch (e) {}
+				if (new Date(this.changeDate("", -10).fullDate) > new Date(this.checkedDate) && vipLevel == 0) {
+					uni.showToast({
+						title: "非VIP只能补做10天内的题目！",
+						icon: "none",
+						duration: 3000
+					})
+					return false;
+				}
+				console.log(this.checkedDate)
 				this.jumpPage({
 					url: "/pages/page/study/answerQuestions?date=" + this.checkedDate + "&pageType=everyDay"
 				})
+			},
+			// 设置当前月份
+			answeredDates() {
+				// this.info.date = this.changeDate(new Date(), -30).fullDate
+				// this.info.startDate = this.changeDate(new Date(), -60).fullDate
+				// this.info.endDate = this.changeDate(new Date(), 0).fullDate
+
+				// console.log(this.info.date)
+				// console.log(this.info.startDate)
+				// console.log(this.info.endDate)
+				let _year = this.date.getFullYear();
+				let _month = this.date.getMonth() + 1;
+				if (_month < 10) {
+					_month = "0" + _month
+				}
+				this.isLastMonth = false;
+				this.isNextMonth = false;
+				// 获取已答题的日期
+				this.commonRequest({
+					url: "/api/question/answeredDates",
+					data: {
+						month: _year + "-" + _month
+					}
+				}).then(res => {
+					console.log("获取已答题的日期::", res)
+					if (Number(_year) == 2025 && Number(_month) <= 9) {
+						this.isLastMonth = false;
+					} else {
+						this.isLastMonth = true;
+					}
+					if (new Date().getFullYear() == Number(_year) && new Date().getMonth() + 1 <= Number(_month)) {
+						this.isNextMonth = false;
+					} else {
+						this.isNextMonth = true;
+					}
+					try {
+						res.data.forEach(item => {
+							for (let i in item) {
+								try {
+									if (item[i] == true) {
+										this.info.selected.push(i)
+									} else {
+										this.errorDays.push(i)
+									}
+								} catch (e) {}
+							}
+						})
+					} catch (e) {}
+				}).catch(error => {
+					console.log("获取已答题的日期失败：：", error)
+				})
+			},
+
+			// 切换到上一个月
+			lastMonth() {
+				const prevMonth = new Date(this.date);
+				prevMonth.setMonth(prevMonth.getMonth() - 1);
+				this.date = prevMonth; // 更新为上个月
+				this.answeredDates()
+
+			},
+			nextMonth() {
+				console.log("切换到下一个月")
+				const nextMonth = new Date(this.date);
+				nextMonth.setMonth(nextMonth.getMonth() + 1);
+				this.date = nextMonth; // 更新为下个月
+				this.answeredDates()
+
 			}
 		}
 	}
@@ -202,21 +271,44 @@
 	.calendar-wrap {
 		flex: 1;
 
-		.month-title {
+		.month-title-wrap {
 			color: #fff;
 			margin-top: -54rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
-			span {
-				display: inline-block;
-				line-height: 1;
+			.placeholder {
+				width: 120rpx;
+				height: 90rpx;
+			}
 
-				&:nth-child(1) {
-					font-size: 114rpx;
-				}
+			.last-month {
+				width: 120rpx;
+				height: 90rpx;
+				transform: rotate(180deg);
+				background: url('/static/icons/next_month.png') no-repeat center / 20rpx 26rpx;
+			}
 
-				&:nth-child(2) {
-					font-size: 50rpx;
-					vertical-align: text-bottom;
+			.next-month {
+				width: 120rpx;
+				height: 90rpx;
+				background: url('/static/icons/next_month.png') no-repeat center / 20rpx 26rpx;
+			}
+
+			.month-title {
+				span {
+					display: inline-block;
+					line-height: 1;
+
+					&:nth-child(1) {
+						font-size: 114rpx;
+					}
+
+					&:nth-child(2) {
+						font-size: 50rpx;
+						vertical-align: text-bottom;
+					}
 				}
 			}
 		}
@@ -239,54 +331,62 @@
 		position: relative;
 		width: 244rpx;
 		margin: 0 32rpx;
-		.instructions-wrap{
+
+		.instructions-wrap {
 			width: 192rpx;
 			padding: 20rpx 30rpx;
 			background: rgba(255, 255, 255, 0.6);
 			border-radius: 10rpx;
 			position: absolute;
 			top: 60rpx;
-			.title{
+
+			.title {
 				text-align: center;
 				font-size: 24rpx;
 				margin-bottom: 30rpx;
 			}
-			.instructions{
+
+			.instructions {
 				display: flex;
 				align-items: center;
 				// justify-content: center;
 				font-size: 20rpx;
 				margin-bottom: 30rpx;
-				.instructions-icon{
-				}
-				&:nth-child(2){
-					.instructions-icon{
+
+				.instructions-icon {}
+
+				&:nth-child(2) {
+					.instructions-icon {
 						width: 26rpx;
 						height: 26rpx;
 						margin-right: 20rpx;
 						background: url("/static/icons/calendar_selected.png") no-repeat center /100% 100%;
 					}
 				}
-				&:nth-child(3){
-					.instructions-icon{
-						margin:0 20rpx 0 3rpx;
+
+				&:nth-child(3) {
+					.instructions-icon {
+						margin: 0 20rpx 0 3rpx;
 						width: 20rpx;
 						height: 26rpx;
 						background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
 					}
 				}
-				&:nth-child(4){
+
+				&:nth-child(4) {
 					margin-bottom: 0;
-					.instructions-icon{
+
+					.instructions-icon {
 						width: 24rpx;
 						height: 24rpx;
 						margin: 1rpx 20rpx 1rpx 1rpx;
 						background: url("/static/icons/error2.png") no-repeat center /100% 100%;
 					}
 				}
-				
+
 			}
 		}
+
 		.next-btn {
 			width: 244rpx;
 			height: 80rpx;
@@ -402,6 +502,7 @@
 		background: url("/static/icons/calendar_checked.png") no-repeat center /100% 100%;
 		z-index: 2;
 	}
+
 	.new-error-icon {
 		position: absolute;
 		width: 22rpx !important;
@@ -410,7 +511,7 @@
 		right: calc(-22rpx /3) !important;
 		background: url("/static/icons/error2.png") no-repeat center /100% 100%;
 	}
-	
+
 	.calendar-selected {
 		background: #fff !important;
 		opacity: 1;

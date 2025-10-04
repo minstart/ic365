@@ -7,9 +7,9 @@
 			<view class="achievement-statistics-wrap ">
 				<view class="achievement-statistics">
 					<view class="achievement-progress-wrap">
-						<view class="progress-icon" :style="'left:50'+'%'"></view>
+						<view class="progress-icon" :style="'left:'+progress.obtainedCount/progress.totalCount*100+'%'"></view>
 						<view class="progress-wrap">
-							<progress percent="50" activeColor="#9F60FF" backgroundColor="#EFEFEF" stroke-width="10" />
+							<progress :percent="progress.obtainedCount/progress.totalCount*100" activeColor="#9F60FF" backgroundColor="#EFEFEF" stroke-width="10" />
 						</view>
 					</view>
 					<h3 class="achievement-title">成就等级</h3>
@@ -52,7 +52,7 @@
 										<view class="info-subtitle">{{item2.subtitle}}</view>
 										<view class="achievement-type">
 											<h3 class="type" :typeId="item2.type">
-												<image class="icon"></image>
+												<view class="icon"></view>
 												<view class="text">{{item2.typeName}}成就</view>
 											</h3>
 											<view class="time">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>

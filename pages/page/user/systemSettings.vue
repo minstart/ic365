@@ -69,8 +69,11 @@
 			}
 		},
 		onLoad() {
-			const appInfo = uni.getSystemInfoSync()
-			this.appVersion = appInfo.appVersion;
+			plus.runtime.getProperty(plus.runtime.appid, (inf) => {
+			this.appVersion = inf.version;
+			})
+			// const appInfo = uni.getSystemInfoSync()
+			// this.appVersion = appInfo.appVersion;
 		},
 		onReady() {
 

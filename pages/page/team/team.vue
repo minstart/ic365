@@ -77,7 +77,11 @@
 						</div>
 						<view class="list-icon-wrap">
 							<image class="list-icon" :src="item.coverImage" mode=""></image>
-							<view class="open-task" @click="openTaskDetails(item)">开始挑战</view>
+							<view class="open-task" v-if="!currentMission.missionId && item.status == null" @click="openTaskDetails(item)">开始挑战</view>
+							<div class="status-text" v-if="item.status != null" :style="{'background-color':item.statusColor}">
+								{{item.statusName}}
+							</div>
+
 						</view>
 					</li>
 				</ul>
@@ -89,7 +93,7 @@
 				<view class="team-situation-info-wrap">
 					<view class="team-situation-info">
 						<h3 class="info-num">{{stats.completedCount}}</h3>
-						<view class="info-title">组队完成次数</view>
+						<view class="info-title">任务完成次数</view>
 					</view>
 					<view class="team-situation-info">
 						<h3 class="info-num">{{stats.completionRate}}%</h3>
@@ -114,7 +118,7 @@
 						<h3 class="list-nickname">待邀请</h3>
 						<view class="list-time green"></view>
 					</li>
-					<li class="team-list" type='invite' v-if="members.length<=3" @click="jumpPage({url:'/pages/page/team/invite_team'})">
+					<li class="team-list" type='invite' v-if="members.length<3" @click="jumpPage({url:'/pages/page/team/invite_team'})">
 						<view class="list-avatar"></view>
 						<h3 class="list-nickname">邀请好友</h3>
 						<view class="list-time"></view>
@@ -189,33 +193,7 @@
 				stats: {},
 
 				// 组队任务
-				teamTask: [{
-						"missionId": 168,
-						"name": "速算王者",
-						"subtitle": "完成50道速算题",
-						"coverImage": "https://ic365.ajulye.com/material/team/task/mentalMath.png",
-						"colorScheme": 3,
-						"matchSubTypeId": 1,
-						"rewards": [{
-							"name": "800知识尘",
-							"currencyTypeId": 2,
-							"quantity": 800
-						}]
-					},
-					{
-						"missionId": 231,
-						"name": "数学马拉松",
-						"subtitle": "完成100道计算题",
-						"coverImage": "https://ic365.ajulye.com/material/team/task/marathon.png",
-						"colorScheme": 3,
-						"matchSubTypeId": 1,
-						"rewards": [{
-							"name": "100启明石",
-							"currencyTypeId": 3,
-							"quantity": 100
-						}]
-					}
-				],
+				teamTask: [],
 				// 我的队伍
 				members: [],
 				placeholderMembers: [],
@@ -242,12 +220,13 @@
 				console.log("没有登录：：", error)
 			});
 
+
 			this.pageOnShowSet({
 				uniHide: "all"
 			})
 		},
 		onHide() {
-
+			this.$refs.pageHead.closePopupTips()
 		},
 		created() {
 
@@ -276,35 +255,7 @@
 
 				this.getTeamDetails()
 
-				// 获取组队任务
-				this.commonRequest({
-					url: "/api/team-mission/list"
-				}).then(res => {
-					console.log("获取组队任务::", res)
-					this.teamTask = res.data;
 
-					// 没返回数据时的测试数据
-					// this.teamTask = [{
-					// 	"missionId": 12,
-					// 	"name": "团队算术任务",
-					// 	"subtitle": "完成100道算术题目",
-					// 	"coverImage": "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
-					// 	"rewards": [{
-					// 			"name": "100智慧星",
-					// 			"currencyTypeId": 1,
-					// 			"quantity": 100
-					// 		},
-					// 		{
-					// 			"name": "50知识尘",
-					// 			"currencyTypeId": 2,
-					// 			"quantity": 50
-					// 		}
-					// 	]
-					// }]
-
-				}).catch(error => {
-					console.log("获取组队任务报错：：", error)
-				})
 			},
 			joinTeam() {
 				this.$refs.joinTeam.open("center")
@@ -314,32 +265,28 @@
 			},
 			deleteTeammate(item) {
 				let _this = this;
-				uni.showModal({
-					title: '队伍管理',
+				this.$refs.pageHead.openPopupTips({
+					title: "队伍管理",
 					content: '是否确认把' + item.nickname + "同学移出队伍？",
-					success: function(res) {
-						if (res.confirm) {
-							_this.commonRequest({
-								url: "/api/team/kickMember",
-								data: {
-									userId: item.userId
-								}
-							}).then(res => {
-								console.log("移出队员：", res.data)
-								// 获取我的队伍和任务相关信息
-								_this.getTeamDetails()
-
-								uni.showToast({
-									title: "移出队员成功",
-									icon: "none"
-								})
+					success: res => {
+						this.$refs.pageHead.closePopupTips()
+						// 开启任务
+						_this.commonRequest({
+							url: "/api/team/kickMember",
+							data: {
+								userId: item.userId
+							}
+						}).then(res => {
+							console.log("移出队员：", res.data)
+							// 获取我的队伍和任务相关信息
+							_this.getTeamDetails()
+							uni.showToast({
+								title: "移出队员成功",
+								icon: "none"
 							})
-						} else if (res.cancel) {
-							// 取消
-						}
+						})
 					}
-				});
-
+				})
 			},
 			exitTeam(item) {
 				console.log("离开队伍", item)
@@ -356,11 +303,11 @@
 			},
 			// 任务详情处理
 			openTaskDetails(item) {
-				console.log(item)
-				// if (this.currentMission && item.missionId == this.currentMission.missionId) {
-				// 	let isOther = this.openTask(item);
-				// 	return false;
-				// }
+				console.log("任务详情处理:", item)
+				if (this.currentMission && item.missionId == this.currentMission.missionId) {
+					let isOther = this.openTask(item);
+					return false;
+				}
 				if (this.members.length == 0) {
 					uni.showToast({
 						title: "请点击邀请好友或加入队伍，组建队伍再开始挑战任务",
@@ -382,32 +329,29 @@
 					// 校验当前是否有挑战任务
 					if (!this.currentMission || !this.currentMission.name) {
 						let _this = this;
-						uni.showModal({
-							title: '是否开启挑战任务',
-							content: item.name + "（" + item.subtitle + "）",
-							success: function(res) {
-								if (res.confirm) {
-									// console.log('用户点击确定');
-									// 开启任务
-									_this.commonRequest({
-										url: "/api/team-mission/startMission",
-										data: {
-											missionId: item.missionId
-										}
-									}).then(res => {
-										console.log("开启任务:", res.data)
-										// 更新当前挑战任务
-										_this.getTeamDetails()
-										uni.showToast({
-											title: "开启组队任务成功",
-											icon: "none"
-										})
+						this.$refs.pageHead.openPopupTips({
+							title: "是否开启挑战任务",
+							content: item.name + "：" + item.subtitle + "。",
+							success: res => {
+								this.$refs.pageHead.closePopupTips()
+								// 开启任务
+								_this.commonRequest({
+									url: "/api/team-mission/startMission",
+									data: {
+										missionId: item.missionId
+									}
+								}).then(res => {
+									console.log("开启任务:", res.data)
+									// 更新当前挑战任务
+									_this.getTeamDetails()
+									uni.showToast({
+										title: "开启组队任务成功",
+										icon: "none"
 									})
-								} else if (res.cancel) {
-									// 取消
-								}
+								})
 							}
-						});
+						})
+						return false;
 					} else {
 						uni.showToast({
 							title: "已开启挑战任务，请先完成当前组队挑战任务",
@@ -522,6 +466,57 @@
 						resolve(res);
 					}).catch(error => {
 						console.log("获取我的队伍和任务相关信息报错：：", error)
+					})
+
+					// 获取组队任务
+					this.commonRequest({
+						url: "/api/team-mission/list"
+					}).then(res => {
+						console.log("获取组队任务::", res);
+						res.data.forEach((item, i) => {
+							let statusName = "";
+							let statusColor = "";
+							if (item.status == 0) {
+								statusName = "进行中"
+								statusColor = "#F5A623"
+							} else if (item.status == 1) {
+								statusName = "已完成"
+								statusColor = "#25CC05"
+							} else if (item.status == 2) {
+								statusName = "已失败"
+								statusColor = "#D81212"
+							} else if (item.status == 3) {
+								statusName = "已过期"
+								statusColor = "#6E4603"
+							}
+							res.data[i].statusName = statusName;
+							res.data[i].statusColor = statusColor;
+						})
+						this.teamTask = res.data;
+
+						console.log(this.teamTask)
+
+						// 没返回数据时的测试数据
+						// this.teamTask = [{
+						// 	"missionId": 12,
+						// 	"name": "团队算术任务",
+						// 	"subtitle": "完成100道算术题目",
+						// 	"coverImage": "http://ic365.com/material/mission/2508/ff0cda9f79194011957e7829f9a3ad4e.png",
+						// 	"rewards": [{
+						// 			"name": "100智慧星",
+						// 			"currencyTypeId": 1,
+						// 			"quantity": 100
+						// 		},
+						// 		{
+						// 			"name": "50知识尘",
+						// 			"currencyTypeId": 2,
+						// 			"quantity": 50
+						// 		}
+						// 	]
+						// }]
+
+					}).catch(error => {
+						console.log("获取组队任务报错：：", error)
 					})
 				})
 			}
@@ -810,7 +805,8 @@
 						line-height: 60rpx;
 						color: #fff;
 						position: relative;
-						&::after{
+
+						&::after {
 							content: " ";
 							display: inline-block;
 							width: 14rpx;
@@ -819,6 +815,19 @@
 							vertical-align: top;
 							background: url("/static/icons/next3.png") no-repeat center / 100% 100%;
 						}
+					}
+
+					.status-text {
+						width: 200rpx;
+						height: 60rpx;
+						border-radius: 30rpx;
+						font-size: 32rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						line-height: 60rpx;
+						color: #fff;
+						position: relative;
 					}
 
 					.list-icon {
@@ -918,7 +927,8 @@
 			padding: 1.75rem 0.75rem;
 
 			.team-list {
-				float: left;
+				display: inline-block;
+				vertical-align: top;
 				width: calc(100%/3 - 0.35rem);
 				background: #fff;
 				text-align: center;
@@ -951,6 +961,9 @@
 					margin-top: 1rem;
 					margin-bottom: 0.25rem;
 					padding: 4rpx;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 
 				.list-time {

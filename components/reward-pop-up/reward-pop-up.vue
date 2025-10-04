@@ -88,7 +88,7 @@
 		position: relative;
 		width: 100vw;
 		height: 100vh;
-		z-index: 100000000001;
+		z-index: 100000;
 	}
 
 	.reward-pop-up-list {

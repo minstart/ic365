@@ -26,7 +26,7 @@
 		import commonJs from '/common/js/common.js';
 		import Cookies from 'js-cookie';
 		// #ifdef APP-PLUS
-		const ydLogin = uni.requireNativePlugin('YD-Login')
+		const ydLogin = uni.requireNativePlugin('YD-Login');
 		ydLogin.registerWithBusinessID({
 			businessId: '8a0edb8e5b064fffbaf91c2ed8b82930',
 			loginType: 'quickLogin',
@@ -36,25 +36,23 @@
 			if (data.success) {
 				// console.log("初始化成功", data)
 				ydLogin.shouldQuickLogin((data) => {
-					// console.log(data)
+					console.log("检测是否符合条件",data)
 					if (!data.success) {
 						try {
-							this.getLogin().then(data => {}).catch(err => {
-								uni.showModal({
-									content: '不具备一键登录网络环境（请保持手机卡移动数据联网，断开WiFi联网），或者是否需要跳转到手机验证码登录？',
-									showCancel: true,
-									success: (res) => {
-										if (res.confirm) {
-											// 确认
-											uni.reLaunch({
-												url: '/pages/page/login/phoneLogin'
-											});
-										} else if (res.cancel) {
-											// 取消
-										}
-									}
-								});
-							})
+							// uni.showModal({
+							// 	content: '不具备一键登录网络环境（请保持手机卡移动数据联网），或者是否需要跳转到手机验证码登录？',
+							// 	showCancel: true,
+							// 	success: (res) => {
+							// 		if (res.confirm) {
+							// 			// 确认
+							// 			uni.reLaunch({
+							// 				url: '/pages/page/login/phoneLogin'
+							// 			});
+							// 		} else if (res.cancel) {
+							// 			// 取消
+							// 		}
+							// 	}
+							// })
 						} catch (e) {}
 
 						// console.log("不具备一键登录网络环境 - 跳转到账号密码登录", data)
@@ -126,12 +124,17 @@
 						// #ifdef APP-PLUS
 						ydLogin.getPhoneNumberCompletion((data) => {
 							uni.hideLoading()
+							let preNumberData = data;
 							if (data.success) {
 								console.log('预取号成功', data)
-								const config = {}
+								const platform = uni.getSystemInfoSync().platform
+								const config = {
+								}
+								if (platform === 'ios') {
+									config.presentDirectionType = 1;
+								}
 								try {
 									ydLogin.setCustomView(config, (data) => {
-										const platform = uni.getSystemInfoSync().platform
 										if (platform === 'ios') {
 											// console.log("ios自定义页面回调", data)
 										} else if (platform === 'android') {
@@ -139,6 +142,7 @@
 										}
 									})
 								} catch (e) {}
+								
 								ydLogin.cucmctAuthorizeLoginCompletion((data) => {
 									console.log("data::", data)
 									if (!data.success && !data.cancel) {
@@ -153,7 +157,7 @@
 											url: '/api/auth/oneClickLogin',
 											method: "post",
 											data: {
-												yidun_token: data.token,
+												yidun_token: preNumberData.token,
 												telecom_token: data.accessToken
 											}
 										}).then(res => {
@@ -172,7 +176,7 @@
 											}, 2000)
 										}).catch(error => {
 											uni.showToast({
-												title: error || "一键登陆失败",
+												title: "一键登陆失败",
 												icon: 'none'
 											})
 											// console.error('一键登陆失败:', JSON.stringify(error))
@@ -181,7 +185,7 @@
 										// 下面是不用加密的
 									}
 								})
-								console.log(456)
+								// console.log(456)
 							} else {
 								console.log('预取号失败了:', data)
 								// uni.showToast({
@@ -189,22 +193,20 @@
 								// 	icon: 'none',
 								// 	duration: 5000
 								// })
-								uni.showModal({
-									content: data.msg || data.desc + '请重新点击或者切换手机验证码方式登录！是否需要跳转到手机验证码登录？',
-									showCancel: true,
-									success: (res) => {
-										if (res.confirm) {
-											// 确认
-											uni.reLaunch({
-												url: '/pages/page/login/phoneLogin'
-											});
-										} else if (res.cancel) {
-											// 取消
-										}
+								
+								let _this = this;
+								this.$refs.pageHead.openPopupTips({
+									title: "提示",
+									content: data.msg || data.desc + '请关闭WiFi，使用中国移动、中国电信、中国联通数据流量，再点击一键登录！或者是否需要跳转到手机验证码登录？',
+									success: res => {
+										this.$refs.pageHead.closePopupTips()
+										// 确认
+										uni.reLaunch({
+											url: '/pages/page/login/phoneLogin'
+										});
 									}
-								});
+								})
 							}
-
 						});
 						// #endif
 					}).catch(err => {

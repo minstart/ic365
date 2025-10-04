@@ -792,7 +792,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   )) : createCommentVNode("v-if", true);
 }
 const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-const _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center / 5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center / 100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } } };
+const _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center/5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center/100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } }, "popup-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx" } }, "popup-tips-title": { ".popup-tips-wrap ": { "textAlign": "center", "fontSize": "32rpx", "color": "#000000", "backgroundColor": "#FFFAEE", "lineHeight": "88rpx" } }, "popup-tips-content": { ".popup-tips-wrap ": { "paddingTop": "62rpx", "paddingRight": "52rpx", "paddingBottom": "62rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx" } }, "popup-tips-btn-wrap": { ".popup-tips-wrap ": { "boxShadow": "0px -4px 8px 0px rgba(0, 0, 0, 0.08)", "height": "72rpx", "paddingTop": "30rpx", "paddingRight": "48rpx", "paddingBottom": "30rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "tips-btn": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "flex": 1, "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "textAlign": "center", "borderRadius": "8rpx" } }, "border": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "height": "46rpx", "width": "2rpx", "marginTop": "0rpx", "marginRight": "32rpx", "marginBottom": "0rpx", "marginLeft": "32rpx", "backgroundColor": "#F2F2F2" } } };
 const _sfc_main = {
   name: "page-head",
   props: {
@@ -827,6 +827,9 @@ const _sfc_main = {
     },
     standardTitle: {
       default: false
+    },
+    becomeMemberSize: {
+      default: 1
     }
   },
   data() {
@@ -834,7 +837,11 @@ const _sfc_main = {
       taskbarHeight: 0,
       tipsData: {
         type: "center",
-        content: ""
+        title: "提示",
+        content: "",
+        success: () => {
+          this.closePopupTips();
+        }
       }
     };
   },
@@ -855,6 +862,23 @@ const _sfc_main = {
     closeBecomeMember() {
       this.$store.state.officialAccountWindow = false;
       this.$refs.becomeMember.close();
+    },
+    openPopupTips(data) {
+      this.$refs.popupTips.open();
+      formatAppLog("log", "at components/page-head/page-head.vue:137", "咨询弹窗带来的data:", data);
+      this.tipsData = {
+        type: "center",
+        title: "提示",
+        content: "",
+        success: () => {
+          this.closePopupTips();
+        }
+      };
+      this.tipsData = { ...this.tipsData, ...data };
+      formatAppLog("log", "at components/page-head/page-head.vue:147", "合并后的data", this.tipsData);
+    },
+    closePopupTips() {
+      this.$refs.popupTips.close();
     }
   }
 };
@@ -946,34 +970,43 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         {
           default: withCtx(() => [
             createElementVNode("view", { class: "become-member-window" }, [
-              createElementVNode("view", { class: "become-member-wrap" }, [
-                createElementVNode("view", { class: "title" }, [
-                  createElementVNode("u-text", null, "关注公众号")
-                ]),
-                createElementVNode("u-image", {
-                  class: "qr-code",
-                  src: _ctx.$store.state.officialAccountQRCode
-                }, null, 8, ["src"]),
-                createVNode(_component_p, { class: "tips" }, {
-                  default: withCtx(() => [
-                    createElementVNode("u-text", null, "扫码关注 “学养网” 公众号开通会员")
+              createElementVNode(
+                "view",
+                {
+                  class: "become-member-wrap",
+                  style: normalizeStyle("transform: scale(" + $props.becomeMemberSize + ");")
+                },
+                [
+                  createElementVNode("view", { class: "title" }, [
+                    createElementVNode("u-text", null, "关注公众号")
                   ]),
-                  _: 1
-                  /* STABLE */
-                }),
-                createElementVNode("view", { class: "btn-wrap" }, [
-                  createVNode(_component_button, {
-                    class: "btn-close",
-                    onClick: withModifiers($options.closeBecomeMember, ["stop"])
-                  }, {
+                  createElementVNode("u-image", {
+                    class: "qr-code",
+                    src: _ctx.$store.state.officialAccountQRCode
+                  }, null, 8, ["src"]),
+                  createVNode(_component_p, { class: "tips" }, {
                     default: withCtx(() => [
-                      createTextVNode("关闭")
+                      createElementVNode("u-text", null, "扫码关注 “学养网” 公众号开通会员")
                     ]),
                     _: 1
                     /* STABLE */
-                  }, 8, ["onClick"])
-                ])
-              ])
+                  }),
+                  createElementVNode("view", { class: "btn-wrap" }, [
+                    createVNode(_component_button, {
+                      class: "btn-close",
+                      onClick: withModifiers($options.closeBecomeMember, ["stop"])
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode("关闭")
+                      ]),
+                      _: 1
+                      /* STABLE */
+                    }, 8, ["onClick"])
+                  ])
+                ],
+                4
+                /* STYLE */
+              )
             ])
           ]),
           _: 1
@@ -982,8 +1015,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         512
         /* NEED_PATCH */
       ),
+      createCommentVNode(" 询问弹窗 "),
+      createCommentVNode(" tipsDatas数据控制，从openPopupTips传参 "),
+      createCommentVNode(" 关闭需要在 父级页面调用this.$refs.pageHead.closePopupTips()关闭 "),
       createVNode(_component_uni_popup, {
-        ref: "popup-tips",
+        ref: "popupTips",
         "mask-click": false,
         type: $data.tipsData.type
       }, {
@@ -1011,8 +1047,19 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               )
             ]),
             createElementVNode("view", { class: "popup-tips-btn-wrap" }, [
-              createElementVNode("view", { class: "tips-btn" }),
-              createElementVNode("view", { class: "tips-btn" })
+              createElementVNode("view", {
+                class: "tips-btn",
+                onClick: _cache[2] || (_cache[2] = withModifiers((...args) => $options.closePopupTips && $options.closePopupTips(...args), ["stop"]))
+              }, [
+                createElementVNode("u-text", null, "取消")
+              ]),
+              createElementVNode("view", { class: "border" }),
+              createElementVNode("view", {
+                class: "tips-btn",
+                onClick: _cache[3] || (_cache[3] = withModifiers((...args) => $data.tipsData.success && $data.tipsData.success(...args), ["stop"]))
+              }, [
+                createElementVNode("u-text", null, "确定")
+              ])
             ])
           ])
         ]),

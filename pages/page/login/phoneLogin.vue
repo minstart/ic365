@@ -120,22 +120,16 @@
 								url: "/api/sms/forLogin",
 								method: "POST",
 								data: {
-									phone: this.baseFormData.phone
+									phone: this.baseFormData.phone,
+									platform:"app"
 								}
-							})
-							.then(res => {
-								if (res.code == 0) {
+							}).then(res => {
 									uni.showToast({
-										title: res.message || "验证码发送成功!",
+										title: res.msg || "验证码发送成功!",
 										icon: "success",
 										duration: 2000
 									});
-								} else {
-									uni.showToast({
-										title: res.message || "验证码发送失败!",
-										icon: "none"
-									});
-								}
+								
 							}).catch(error => {
 								console.error('验证码发送失败:', error)
 							})
@@ -161,7 +155,7 @@
 								if (res.code == 0) {
 									_this.setLogin(res.data)
 									uni.showToast({
-										title: res.message || "验证码登陆成功!",
+										title: res.msg || "验证码登陆成功!",
 										icon: "success",
 										duration: 2000
 									});
@@ -172,7 +166,7 @@
 									}, 2000)
 								} else {
 									uni.showToast({
-										title: res.message || "验证码登录失败!",
+										title: res.msg || "验证码登录失败!",
 										icon: "none"
 									});
 								}

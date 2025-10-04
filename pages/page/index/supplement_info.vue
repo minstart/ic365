@@ -1,7 +1,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap uni-padding-wrap">
-		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='false' :background="'transparent'"></page-head>
+		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='baseFormData.grade?true:false' :background="'transparent'"></page-head>
 		<uni-forms ref="baseForm" :rules="rules" :model="baseFormData" labelWidth="80px">
 			<uni-forms-item label="性别" required name="gender">
 				<uni-data-checkbox v-model="baseFormData.gender" primaryColor="#F5A623" :localdata="genders" />
@@ -11,13 +11,13 @@
 				</uni-data-select>
 			</uni-forms-item>
 			<uni-forms-item label="昵称" required name="nickname">
-				<uni-easyinput v-model="baseFormData.nickname" primaryColor="#F5A623" placeholder="请输入昵称" />
+				<uni-easyinput v-model="baseFormData.nickname" maxlength="8" primaryColor="#F5A623" placeholder="请输入昵称" />
 			</uni-forms-item>
 			<uni-forms-item label="学校" name="school">
-				<uni-easyinput v-model="baseFormData.school" primaryColor="#F5A623" placeholder="请输入学校" />
+				<uni-easyinput v-model="baseFormData.school" maxlength="12" primaryColor="#F5A623" placeholder="请输入学校" />
 			</uni-forms-item>
 			<uni-forms-item label="班级" name="class_name">
-				<uni-easyinput v-model="baseFormData.class_name" primaryColor="#F5A623" placeholder="请输入班级" />
+				<uni-easyinput v-model="baseFormData.class_name" maxlength="12" primaryColor="#F5A623" placeholder="请输入班级" />
 			</uni-forms-item>
 		</uni-forms>
 		<button class="submit-btn" type="primary" @click="submit('baseForm')">提交</button>
@@ -142,7 +142,7 @@
 						.then(res => {
 							_this.$store.commit("Update_UserInfo", _this.baseFormData)
 							uni.showToast({
-								title: res.message || "更新成功",
+								title: res.msg || "更新成功",
 								icon: "success",
 								duration: 2000
 							});

@@ -14,7 +14,7 @@
 					</view>
 					<view class="user-info">
 						<h3 class="name">{{userInfo.nickname||""}}同学</h3>
-						<view class="school">{{userInfo.school||""}} {{userInfo.class_name||""}}</view>
+						<view class="school">{{userInfo.school||""}}<span style="margin-left: 10rpx;">{{userInfo.class_name||""}}</span></view>
 						<span class="title" v-if="userInfo.showAchievementName">{{userInfo.showAchievementName}}</span>
 					</view>
 					<view class="flex-center">
@@ -30,7 +30,7 @@
 					</view>
 					<view class="vip-banner" v-if="userInfo.vipLevel>0">
 						<h3 class="vip-banner-text">{{userInfo.vipLevel==1?"VIP会员":"超级VIP会员"}}</h3>
-						<div class="vip-time">有效期：2025-10-6{{}}</div>
+						<div class="vip-time">有效期：{{userInfo.vipExpireDate}}</div>
 					</view>
 				</view>
 				<view class="property">
@@ -529,6 +529,7 @@
 
 			.head-pic-wrap {
 				.vip-icon {
+					top: 76rpx;
 					right: 12rpx;
 				}
 			}
