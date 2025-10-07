@@ -102,9 +102,8 @@
 						url: '/pages/page/study/answerQuestions?pageType=video&categoryId=' + item.categoryId + '&missionId=' + item.missionId
 					})
 				} else {
-					uni.showToast({
-						title: "匹配任务类型失败，无法跳转",
-						icon: "none"
+					this.$refs.pageHead.openMsgTips({
+						content: "匹配任务类型失败，无法跳转"
 					})
 				}
 			},

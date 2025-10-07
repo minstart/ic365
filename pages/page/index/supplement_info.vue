@@ -154,18 +154,16 @@
 							}, 2000)
 
 						}).catch(error => {
-							uni.showToast({
-								title: '更新用户信息失败:' + error,
-								icon: "none"
-							});
+							this.$refs.pageHead.openMsgTips({
+								content: '更新用户信息失败:' + error
+							})
 							console.error('更新用户信息失败:', error)
 						})
 				}).catch(err => {
 					// console.log('err', err);
-					uni.showToast({
-						title: err[0].errorMessage,
-						icon: "none"
-					});
+					this.$refs.pageHead.openMsgTips({
+						content: err[0].errorMessage
+					})
 				})
 			}
 		}

@@ -189,9 +189,8 @@
 								store.commit("Update_UserInfo", res.data)
 								this.userInfo = res.data;
 							} catch (e) {}
-							uni.showToast({
-								title: "兑换成功",
-								icon: "success"
+							this.$refs.pageHead.openMsgTips({
+								content: "兑换成功"
 							})
 							setTimeout(() => {
 								this.getProducts({

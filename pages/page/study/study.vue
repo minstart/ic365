@@ -125,33 +125,32 @@
 				// 知识点学习
 				knowledgePoints: [],
 				classroom: [],
-				videosBackArr : [
-					{
-						background:"#DFE6FF",
-						background2:"#879EF6",
+				videosBackArr: [{
+						background: "#DFE6FF",
+						background2: "#879EF6",
 					},
 					{
-						background:"#E5F9E6",
-						background2:"#71D874",
+						background: "#E5F9E6",
+						background2: "#71D874",
 					},
 					{
-						background:"#F8DE96",
-						background2:"#FF9743",
+						background: "#F8DE96",
+						background2: "#FF9743",
 					},
 					{
-						background:"#FAD8B9",
-						background2:"#D8A374",
+						background: "#FAD8B9",
+						background2: "#D8A374",
 					},
 					{
-						background:"#F9EBE5",
-						background2:"#FF9696",
+						background: "#F9EBE5",
+						background2: "#FF9696",
 					},
 					{
-						background:"#FFE1FC",
-						background2:"#E48BF8",
+						background: "#FFE1FC",
+						background2: "#E48BF8",
 					},
 				],
-				randomBack:[],//推荐学习背景色随机数后的数组
+				randomBack: [], //推荐学习背景色随机数后的数组
 			}
 		},
 		onLoad() {
@@ -211,16 +210,9 @@
 					url: "/api/recommend/videos"
 				}).then(res => {
 					console.log("推荐学习::", res.data)
-					if (res.code == 0) {
-						try {
-							res.data && (this.classroom = res.data);
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.msg || "获取推荐学习失败!",
-							icon: "none"
-						});
-					}
+					try {
+						res.data && (this.classroom = res.data);
+					} catch (e) {}
 				}).catch(error => {
 					console.log("获取推荐学习失败：：", error)
 				})

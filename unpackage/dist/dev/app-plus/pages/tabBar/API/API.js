@@ -80,10 +80,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/u-link.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/u-link.js
   var import_vue = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -92,7 +92,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/u-link.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/u-link.js
   var _sfc_main = {
     name: "u-link",
     props: {
@@ -123,12 +123,12 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       inWhiteList: $props.inWhiteList
     }, (0, import_vue.toDisplayString)($props.text), 9, ["href", "inWhiteList"]);
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/components/u-link/u-link.vue"]]);
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/components/u-link/u-link.vue"]]);
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/tabBar/API/API.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/tabBar/API/API.js
   var import_vue4 = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
   var import_vue2 = __toESM(require_vue());
   function requireNativePlugin(name) {
     return weex.requireModule(name);
@@ -144,7 +144,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return typeof component === "string" ? easycom : component;
   }
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/page-head.js
   var import_vue3 = __toESM(require_vue());
   var nvueAnimation = requireNativePlugin("animation");
   var MPAnimation = class {
@@ -523,7 +523,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       (0, import_vue3.renderSlot)(_ctx.$slots, "default")
     ], 14, ["animation"])) : (0, import_vue3.createCommentVNode)("v-if", true);
   }
-  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
   var _style_0$1 = { "uni-popup": { "": { "position": "fixed" }, ".top": { "top": 0 }, ".left": { "top": 0 }, ".right": { "top": 0 } }, "uni-popup__wrapper": { ".uni-popup ": { "position": "relative" }, ".uni-popup .left": { "paddingTop": 0, "flex": 1 }, ".uni-popup .right": { "paddingTop": 0, "flex": 1 } }, "fixforpc-top": { "": { "top": 0 } } };
   var _sfc_main$1 = {
     name: "uniPopup",
@@ -565,6 +565,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       borderRadius: {
         type: String
+      },
+      style: {
+        default: ""
       }
     },
     watch: {
@@ -736,7 +739,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           direction = this.type;
         }
         if (!this.config[direction]) {
-          formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:310", "\u7F3A\u5C11\u7C7B\u578B\uFF1A", direction);
+          formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:313", "\u7F3A\u5C11\u7C7B\u578B\uFF1A", direction);
           return;
         }
         this[this.config[direction]]();
@@ -878,6 +881,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       {
         key: 0,
         class: (0, import_vue3.normalizeClass)(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]]),
+        style: (0, import_vue3.normalizeStyle)($props.style),
         renderWhole: true
       },
       [
@@ -928,12 +932,12 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           /* NEED_HYDRATION */
         )
       ],
-      2
-      /* CLASS */
+      6
+      /* CLASS, STYLE */
     )) : (0, import_vue3.createCommentVNode)("v-if", true);
   }
-  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  var _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center/5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center/100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } }, "popup-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx" } }, "popup-tips-title": { ".popup-tips-wrap ": { "textAlign": "center", "fontSize": "32rpx", "color": "#000000", "backgroundColor": "#FFFAEE", "lineHeight": "88rpx" } }, "popup-tips-content": { ".popup-tips-wrap ": { "paddingTop": "62rpx", "paddingRight": "52rpx", "paddingBottom": "62rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx" } }, "popup-tips-btn-wrap": { ".popup-tips-wrap ": { "boxShadow": "0px -4px 8px 0px rgba(0, 0, 0, 0.08)", "height": "72rpx", "paddingTop": "30rpx", "paddingRight": "48rpx", "paddingBottom": "30rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "tips-btn": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "flex": 1, "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "textAlign": "center", "borderRadius": "8rpx" } }, "border": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "height": "46rpx", "width": "2rpx", "marginTop": "0rpx", "marginRight": "32rpx", "marginBottom": "0rpx", "marginLeft": "32rpx", "backgroundColor": "#F2F2F2" } } };
+  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  var _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center/5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center/100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } }, "popup-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx" } }, "popup-tips-title": { ".popup-tips-wrap ": { "textAlign": "center", "fontSize": "32rpx", "color": "#000000", "backgroundColor": "#FFFAEE", "lineHeight": "88rpx" } }, "popup-tips-content": { ".popup-tips-wrap ": { "paddingTop": "62rpx", "paddingRight": "52rpx", "paddingBottom": "62rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx" } }, "popup-tips-btn-wrap": { ".popup-tips-wrap ": { "boxShadow": "0px -4px 8px 0px rgba(0, 0, 0, 0.08)", "height": "72rpx", "paddingTop": "30rpx", "paddingRight": "48rpx", "paddingBottom": "30rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "tips-btn": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "flex": 1, "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "textAlign": "center", "borderRadius": "8rpx" }, ".msg-tips-wrap .msg-tips-btn-wrap ": { "textAlign": "center", "width": "260rpx", "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "borderRadius": "30rpx", "borderWidth": "2rpx", "borderStyle": "solid", "borderColor": "#F5A623", "letterSpacing": "8rpx", "paddingLeft": "8rpx" } }, "border": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "height": "46rpx", "width": "2rpx", "marginTop": "0rpx", "marginRight": "32rpx", "marginBottom": "0rpx", "marginLeft": "32rpx", "backgroundColor": "#F2F2F2" } }, "msg-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx", "position": "relative" } }, "msg-tips-icon": { ".msg-tips-wrap ": { "width": "80rpx", "height": "118rpx", "background": 'url("/static/icons/tips.png") no-repeat center/100% 100%', "marginTop": "34rpx", "marginBottom": "34rpx" } }, "msg-tips-content": { ".msg-tips-wrap ": { "paddingTop": 0, "paddingRight": "52rpx", "paddingBottom": "50rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx", "position": "relative" } }, "msg-tips-btn-wrap": { ".msg-tips-wrap ": { "paddingTop": 0, "paddingRight": "48rpx", "paddingBottom": "40rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } } };
   var _sfc_main2 = {
     name: "page-head",
     props: {
@@ -976,14 +980,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     data() {
       return {
         taskbarHeight: 0,
-        tipsData: {
-          type: "center",
-          title: "\u63D0\u793A",
-          content: "",
-          success: () => {
-            this.closePopupTips();
-          }
-        }
+        tipsData: {},
+        //询问弹窗参数对象
+        msgData: {}
+        //提示弹窗参数对象
       };
     },
     mounted() {
@@ -1006,7 +1006,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       openPopupTips(data) {
         this.$refs.popupTips.open();
-        formatAppLog("log", "at components/page-head/page-head.vue:137", "\u54A8\u8BE2\u5F39\u7A97\u5E26\u6765\u7684data:", data);
         this.tipsData = {
           type: "center",
           title: "\u63D0\u793A",
@@ -1016,10 +1015,31 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         };
         this.tipsData = __spreadValues(__spreadValues({}, this.tipsData), data);
-        formatAppLog("log", "at components/page-head/page-head.vue:147", "\u5408\u5E76\u540E\u7684data", this.tipsData);
+        formatAppLog("log", "at components/page-head/page-head.vue:157", "\u5408\u5E76\u540E\u7684data", this.tipsData);
       },
       closePopupTips() {
         this.$refs.popupTips.close();
+      },
+      openMsgTips(data) {
+        this.$refs.msgTips.open();
+        formatAppLog("log", "at components/page-head/page-head.vue:165", "\u54A8\u8BE2\u5F39\u7A97\u5E26\u6765\u7684data:", data);
+        this.msgData = {
+          type: "center",
+          icon: "2",
+          content: ""
+        };
+        this.msgData = __spreadValues(__spreadValues({}, this.msgData), data);
+        formatAppLog("log", "at components/page-head/page-head.vue:175", "\u5408\u5E76\u540E\u7684data", this.msgData);
+        if (data.time) {
+          let _this = this;
+          let _time = Number(data.time) - 100 || 0;
+          setTimeout(function() {
+            _this.closeMsgTips();
+          }, _time);
+        }
+      },
+      closeMsgTips() {
+        this.$refs.msgTips.close();
       }
     }
   };
@@ -1100,7 +1120,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           4
           /* STYLE */
         ),
-        (0, import_vue3.createCommentVNode)(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\n		<view class="become-member-wrap">\n			<view class="title">\u5173\u6CE8\u516C\u4F17\u53F7</view>\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\n			<p class="tips">\u626B\u7801\u5173\u6CE8 \u201C\u5B66\u517B\u7F51\u201D \u516C\u4F17\u53F7\u5F00\u901A\u4F1A\u5458</p>\n			<view class="btn-wrap">\n				<button class="btn-close" @click.stop="closeBecomeMember">\u5173\u95ED</button>\n			</view>\n		</view>\n	</view> '),
+        (0, import_vue3.createCommentVNode)(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\r\n		<view class="become-member-wrap">\r\n			<view class="title">\u5173\u6CE8\u516C\u4F17\u53F7</view>\r\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\r\n			<p class="tips">\u626B\u7801\u5173\u6CE8 \u201C\u5B66\u517B\u7F51\u201D \u516C\u4F17\u53F7\u5F00\u901A\u4F1A\u5458</p>\r\n			<view class="btn-wrap">\r\n				<button class="btn-close" @click.stop="closeBecomeMember">\u5173\u95ED</button>\r\n			</view>\r\n		</view>\r\n	</view> '),
         (0, import_vue3.createVNode)(
           _component_uni_popup,
           {
@@ -1178,15 +1198,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                   /* TEXT */
                 )
               ])) : (0, import_vue3.createCommentVNode)("v-if", true),
-              (0, import_vue3.createElementVNode)("view", { class: "popup-tips-content" }, [
-                (0, import_vue3.createElementVNode)(
-                  "u-text",
-                  null,
-                  (0, import_vue3.toDisplayString)($data.tipsData.content),
-                  1
-                  /* TEXT */
-                )
-              ]),
+              (0, import_vue3.createElementVNode)("view", {
+                class: "popup-tips-content",
+                innerHTML: $data.tipsData.content
+              }, null, 8, ["innerHTML"]),
               (0, import_vue3.createElementVNode)("view", { class: "popup-tips-btn-wrap" }, [
                 (0, import_vue3.createElementVNode)("view", {
                   class: "tips-btn",
@@ -1206,15 +1221,50 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           ]),
           _: 1
           /* STABLE */
+        }, 8, ["type"]),
+        (0, import_vue3.createCommentVNode)(" \u5F02\u5E38\u5F39\u7A97 "),
+        (0, import_vue3.createCommentVNode)(" msgData\u6570\u636E\u63A7\u5236 \u4ECEopenMsgTips\u4F20\u53C2"),
+        (0, import_vue3.createCommentVNode)(" \u5173\u95ED\u9700\u8981\u5728 \u7236\u7EA7\u9875\u9762\u8C03\u7528this.$refs.pageHead.closeMsgTips()\u5173\u95ED "),
+        (0, import_vue3.createVNode)(_component_uni_popup, {
+          ref: "msgTips",
+          "mask-click": false,
+          type: $data.msgData.type,
+          style: "z-index:100002 !important;"
+        }, {
+          default: (0, import_vue3.withCtx)(() => [
+            (0, import_vue3.createElementVNode)("view", { class: "msg-tips-wrap" }, [
+              (0, import_vue3.createElementVNode)("view", {
+                class: "msg-tips-icon",
+                type: $data.msgData.icon
+              }, null, 8, ["type"]),
+              (0, import_vue3.createElementVNode)("view", {
+                class: "msg-tips-content",
+                innerHTML: $data.msgData.content
+              }, null, 8, ["innerHTML"]),
+              $data.msgData.icon == "2" ? ((0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)("view", {
+                key: 0,
+                class: "msg-tips-btn-wrap"
+              }, [
+                (0, import_vue3.createElementVNode)("view", {
+                  class: "tips-btn",
+                  onClick: _cache[4] || (_cache[4] = (0, import_vue3.withModifiers)((...args) => $options.closeMsgTips && $options.closeMsgTips(...args), ["stop"]))
+                }, [
+                  (0, import_vue3.createElementVNode)("u-text", null, "\u77E5\u9053\u4E86")
+                ])
+              ])) : (0, import_vue3.createCommentVNode)("v-if", true)
+            ])
+          ]),
+          _: 1
+          /* STABLE */
         }, 8, ["type"])
       ],
       64
       /* STABLE_FRAGMENT */
     );
   }
-  var __easycom_02 = /* @__PURE__ */ _export_sfc(_sfc_main2, [["render", _sfc_render2], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/components/page-head/page-head.vue"]]);
+  var __easycom_02 = /* @__PURE__ */ _export_sfc(_sfc_main2, [["render", _sfc_render2], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/tabBar/API/API.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/tabBar/API/API.js
   var _style_0$12 = { "button": { "": { "marginTop": "30rpx", "marginLeft": 0, "marginRight": 0 } }, "btn-area": { "": { "paddingTop": "30rpx" } } };
   var _sfc_main$12 = {
     data() {
@@ -1436,7 +1486,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var setTabBar = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$12], ["styles", [_style_0$12]], ["__file", "C:/Users/71018/Desktop/ic365/components/api-set-tabbar.nvue"]]);
+  var setTabBar = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$12], ["styles", [_style_0$12]], ["__file", "C:/Users/Administrator/Desktop/ic365/components/api-set-tabbar.nvue"]]);
   var _imports_0 = "/static/apiIndex.png";
   var _style_02 = { "uni-icon": { "": { "fontFamily": "uniicons", "fontWeight": "normal" } }, "uni-container": { "": { "paddingTop": 15, "paddingRight": 15, "paddingBottom": 15, "paddingLeft": 15, "backgroundColor": "#f8f8f8" } }, "uni-header-logo": { "": { "paddingTop": 15, "paddingRight": 15, "paddingBottom": 15, "paddingLeft": 15, "flexDirection": "column", "justifyContent": "center", "alignItems": "center", "marginTop": "10rpx" } }, "uni-header-image": { "": { "width": 80, "height": 80 } }, "uni-hello-text": { "": { "marginBottom": 20 } }, "hello-text": { "": { "color": "#7A7E83", "fontSize": 14, "lineHeight": 20 } }, "hello-link": { "": { "color": "#7A7E83", "fontSize": 14, "lineHeight": 20 } }, "uni-panel": { "": { "marginBottom": 12 } }, "uni-panel-h": { "": { "backgroundColor": "#ffffff", "!flexDirection": "row", "!alignItems": "center", "paddingTop": 12, "paddingRight": 12, "paddingBottom": 12, "paddingLeft": 12 } }, "uni-panel-h-on": { "": { "backgroundColor": "#f0f0f0" } }, "uni-panel-text": { "": { "flex": 1, "color": "#000000", "fontSize": 14, "fontWeight": "normal" } }, "uni-panel-icon": { "": { "marginLeft": 15, "color": "#999999", "fontSize": 14, "fontWeight": "normal", "transform": "rotate(0deg)", "transitionDuration": 0, "transitionProperty": "transform" } }, "uni-panel-icon-on": { "": { "transform": "rotate(180deg)" } }, "uni-navigate-item": { "": { "flexDirection": "row", "alignItems": "center", "backgroundColor": "#FFFFFF", "borderTopStyle": "solid", "borderTopColor": "#f0f0f0", "borderTopWidth": 1, "paddingTop": 12, "paddingRight": 12, "paddingBottom": 12, "paddingLeft": 12, "backgroundColor:active": "#f8f8f8" } }, "uni-navigate-text": { "": { "flex": 1, "color": "#000000", "fontSize": 14, "fontWeight": "normal" } }, "uni-navigate-icon": { "": { "marginLeft": 15, "color": "#999999", "fontSize": 14, "fontWeight": "normal" } }, "@TRANSITION": { "uni-panel-icon": { "duration": 0, "property": "transform" } } };
   var _sfc_main3 = {
@@ -1924,7 +1974,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var API = /* @__PURE__ */ _export_sfc(_sfc_main3, [["render", _sfc_render3], ["styles", [_style_02]], ["__file", "C:/Users/71018/Desktop/ic365/pages/tabBar/API/API.nvue"]]);
+  var API = /* @__PURE__ */ _export_sfc(_sfc_main3, [["render", _sfc_render3], ["styles", [_style_02]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/tabBar/API/API.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

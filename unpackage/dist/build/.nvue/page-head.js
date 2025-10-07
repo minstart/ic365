@@ -424,6 +424,9 @@ const _sfc_main$1 = {
     },
     borderRadius: {
       type: String
+    },
+    style: {
+      default: ""
     }
   },
   watch: {
@@ -595,7 +598,7 @@ const _sfc_main$1 = {
         direction = this.type;
       }
       if (!this.config[direction]) {
-        formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:310", "缺少类型：", direction);
+        formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:313", "缺少类型：", direction);
         return;
       }
       this[this.config[direction]]();
@@ -735,6 +738,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return $data.showPopup ? (openBlock(), createElementBlock("view", {
     key: 0,
     class: normalizeClass(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]]),
+    style: normalizeStyle($props.style),
     renderWhole: true
   }, [
     createElementVNode("view", {
@@ -770,10 +774,10 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         _: 3
       }, 8, ["mode-class", "styles", "duration", "show", "onClick"])
     ], 32)
-  ], 2)) : createCommentVNode("", true);
+  ], 6)) : createCommentVNode("", true);
 }
 const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]]]);
-const _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center/5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center/100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } }, "popup-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx" } }, "popup-tips-title": { ".popup-tips-wrap ": { "textAlign": "center", "fontSize": "32rpx", "color": "#000000", "backgroundColor": "#FFFAEE", "lineHeight": "88rpx" } }, "popup-tips-content": { ".popup-tips-wrap ": { "paddingTop": "62rpx", "paddingRight": "52rpx", "paddingBottom": "62rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx" } }, "popup-tips-btn-wrap": { ".popup-tips-wrap ": { "boxShadow": "0px -4px 8px 0px rgba(0, 0, 0, 0.08)", "height": "72rpx", "paddingTop": "30rpx", "paddingRight": "48rpx", "paddingBottom": "30rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "tips-btn": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "flex": 1, "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "textAlign": "center", "borderRadius": "8rpx" } }, "border": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "height": "46rpx", "width": "2rpx", "marginTop": "0rpx", "marginRight": "32rpx", "marginBottom": "0rpx", "marginLeft": "32rpx", "backgroundColor": "#F2F2F2" } } };
+const _style_0 = { "common-page-head-view": { "": { "position": "relative", "top": 0 } }, "page-head": { "": { "zIndex": 999 } }, "reserve-seat": { "": { "height": "88rpx" } }, "common-page-head": { "": { "display": "flex", "paddingTop": 0, "paddingRight": 0, "paddingBottom": 0, "paddingLeft": 0, "position": "fixed", "top": 0, "width": 100, "backgroundColor": "#ffffff", "zIndex": 99 } }, "common-page-head-back": { ".common-page-head ": { "height": "88rpx", "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-module": { ".common-page-head ": { "flex": 1, "position": "relative", "minHeight": "2rpx" } }, "common-page-head-title": { ".common-page-head ": { "flex": 4, "borderWidth": 0, "color": "#333333", "fontWeight": "700", "fontSize": "44rpx", "paddingBottom": 0.1, "background": 'url("/static/image/title_back.png") no-repeat bottom center/5.5rem' } }, "standard-title": { ".common-page-head ": { "fontSize": "36rpx", "color": "#000000", "fontWeight": "normal", "backgroundColor": "rgba(0,0,0,0)" } }, "page-head-back-icon": { ".common-page-head ": { "background": 'url("/static/icons/back_orange.png") no-repeat center/100% 100%' } }, "page-head-module-icon": { ".common-page-head ": { "width": "68rpx", "height": "68rpx" } }, "page-loading": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "overflow": "hidden", "backgroundColor": "#ffffff", "zIndex": 1e4 } }, "become-member-window": { "": { "position": "fixed", "top": 0, "left": 0, "width": 100, "height": 100, "backgroundColor": "rgba(0,0,0,0.5)", "zIndex": 1e14 } }, "become-member-wrap": { ".become-member-window ": { "width": "608rpx", "height": "830rpx", "position": "absolute", "top": 0, "left": 0, "right": 0, "bottom": 0, "backgroundColor": "#ffffff", "borderRadius": "20rpx", "textAlign": "center" } }, "title": { ".become-member-window .become-member-wrap ": { "textAlign": "center", "lineHeight": "88rpx", "fontSize": "32rpx", "borderBottomWidth": "2rpx", "borderBottomStyle": "solid", "borderBottomColor": "#dfdfdf" } }, "qr-code": { ".become-member-window .become-member-wrap ": { "width": "400rpx", "height": "400rpx", "marginTop": "60rpx", "marginBottom": "60rpx" } }, "tips": { ".become-member-window .become-member-wrap ": { "fontSize": "30rpx", "color": "#ff0000" } }, "btn-wrap": { ".become-member-window .become-member-wrap ": { "position": "absolute", "bottom": 0, "height": "132rpx", "width": 100, "borderTopWidth": "2rpx", "borderTopStyle": "solid", "borderTopColor": "#dfdfdf" } }, "btn-close": { ".become-member-window .become-member-wrap .btn-wrap ": { "width": "390rpx", "marginTop": "20rpx", "marginBottom": "20rpx" } }, "popup-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx" } }, "popup-tips-title": { ".popup-tips-wrap ": { "textAlign": "center", "fontSize": "32rpx", "color": "#000000", "backgroundColor": "#FFFAEE", "lineHeight": "88rpx" } }, "popup-tips-content": { ".popup-tips-wrap ": { "paddingTop": "62rpx", "paddingRight": "52rpx", "paddingBottom": "62rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx" } }, "popup-tips-btn-wrap": { ".popup-tips-wrap ": { "boxShadow": "0px -4px 8px 0px rgba(0, 0, 0, 0.08)", "height": "72rpx", "paddingTop": "30rpx", "paddingRight": "48rpx", "paddingBottom": "30rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "tips-btn": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "flex": 1, "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "textAlign": "center", "borderRadius": "8rpx" }, ".msg-tips-wrap .msg-tips-btn-wrap ": { "textAlign": "center", "width": "260rpx", "fontSize": "32rpx", "height": "64rpx", "lineHeight": "64rpx", "color": "#000000", "borderRadius": "30rpx", "borderWidth": "2rpx", "borderStyle": "solid", "borderColor": "#F5A623", "letterSpacing": "8rpx", "paddingLeft": "8rpx" } }, "border": { ".popup-tips-wrap .popup-tips-btn-wrap ": { "verticalAlign": "middle", "height": "46rpx", "width": "2rpx", "marginTop": "0rpx", "marginRight": "32rpx", "marginBottom": "0rpx", "marginLeft": "32rpx", "backgroundColor": "#F2F2F2" } }, "msg-tips-wrap": { "": { "width": "610rpx", "backgroundColor": "#FFFFFF", "borderRadius": "12rpx", "position": "relative" } }, "msg-tips-icon": { ".msg-tips-wrap ": { "width": "80rpx", "height": "118rpx", "background": 'url("/static/icons/tips.png") no-repeat center/100% 100%', "marginTop": "34rpx", "marginBottom": "34rpx" } }, "msg-tips-content": { ".msg-tips-wrap ": { "paddingTop": 0, "paddingRight": "52rpx", "paddingBottom": "50rpx", "paddingLeft": "52rpx", "fontSize": "30rpx", "color": "#000000", "lineHeight": "44rpx", "position": "relative" } }, "msg-tips-btn-wrap": { ".msg-tips-wrap ": { "paddingTop": 0, "paddingRight": "48rpx", "paddingBottom": "40rpx", "paddingLeft": "48rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } } };
 const _sfc_main = {
   name: "page-head",
   props: {
@@ -816,14 +820,10 @@ const _sfc_main = {
   data() {
     return {
       taskbarHeight: 0,
-      tipsData: {
-        type: "center",
-        title: "提示",
-        content: "",
-        success: () => {
-          this.closePopupTips();
-        }
-      }
+      tipsData: {},
+      //询问弹窗参数对象
+      msgData: {}
+      //提示弹窗参数对象
     };
   },
   mounted() {
@@ -846,7 +846,6 @@ const _sfc_main = {
     },
     openPopupTips(data) {
       this.$refs.popupTips.open();
-      formatAppLog("log", "at components/page-head/page-head.vue:137", "咨询弹窗带来的data:", data);
       this.tipsData = {
         type: "center",
         title: "提示",
@@ -855,11 +854,38 @@ const _sfc_main = {
           this.closePopupTips();
         }
       };
-      this.tipsData = { ...this.tipsData, ...data };
-      formatAppLog("log", "at components/page-head/page-head.vue:147", "合并后的data", this.tipsData);
+      this.tipsData = {
+        ...this.tipsData,
+        ...data
+      };
+      formatAppLog("log", "at components/page-head/page-head.vue:157", "合并后的data", this.tipsData);
     },
     closePopupTips() {
       this.$refs.popupTips.close();
+    },
+    openMsgTips(data) {
+      this.$refs.msgTips.open();
+      formatAppLog("log", "at components/page-head/page-head.vue:165", "咨询弹窗带来的data:", data);
+      this.msgData = {
+        type: "center",
+        icon: "2",
+        content: ""
+      };
+      this.msgData = {
+        ...this.msgData,
+        ...data
+      };
+      formatAppLog("log", "at components/page-head/page-head.vue:175", "合并后的data", this.msgData);
+      if (data.time) {
+        let _this = this;
+        let _time = Number(data.time) - 100 || 0;
+        setTimeout(function() {
+          _this.closeMsgTips();
+        }, _time);
+      }
+    },
+    closeMsgTips() {
+      this.$refs.msgTips.close();
     }
   }
 };
@@ -960,9 +986,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           }, [
             createElementVNode("u-text", null, toDisplayString($data.tipsData.title), 1)
           ])) : createCommentVNode("", true),
-          createElementVNode("view", { class: "popup-tips-content" }, [
-            createElementVNode("u-text", null, toDisplayString($data.tipsData.content), 1)
-          ]),
+          createElementVNode("view", {
+            class: "popup-tips-content",
+            innerHTML: $data.tipsData.content
+          }, null, 8, ["innerHTML"]),
           createElementVNode("view", { class: "popup-tips-btn-wrap" }, [
             createElementVNode("view", {
               class: "tips-btn",
@@ -978,6 +1005,37 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               createElementVNode("u-text", null, "确定")
             ])
           ])
+        ])
+      ]),
+      _: 1
+    }, 8, ["type"]),
+    createVNode(_component_uni_popup, {
+      ref: "msgTips",
+      "mask-click": false,
+      type: $data.msgData.type,
+      style: "z-index:100002 !important;"
+    }, {
+      default: withCtx(() => [
+        createElementVNode("view", { class: "msg-tips-wrap" }, [
+          createElementVNode("view", {
+            class: "msg-tips-icon",
+            type: $data.msgData.icon
+          }, null, 8, ["type"]),
+          createElementVNode("view", {
+            class: "msg-tips-content",
+            innerHTML: $data.msgData.content
+          }, null, 8, ["innerHTML"]),
+          $data.msgData.icon == "2" ? (openBlock(), createElementBlock("view", {
+            key: 0,
+            class: "msg-tips-btn-wrap"
+          }, [
+            createElementVNode("view", {
+              class: "tips-btn",
+              onClick: _cache[4] || (_cache[4] = withModifiers((...args) => $options.closeMsgTips && $options.closeMsgTips(...args), ["stop"]))
+            }, [
+              createElementVNode("u-text", null, "知道了")
+            ])
+          ])) : createCommentVNode("", true)
         ])
       ]),
       _: 1

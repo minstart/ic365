@@ -111,24 +111,7 @@
 					title:"解除绑定"
 				})
 			},
-			privacyPolicy(){
-				// 隐私协议
-				uni.showToast({
-					title:"隐私协议"
-				})
-			},
-			collectionList(){
-				// 个人信息收集清单
-				uni.showToast({
-					title:"个人信息收集清单"
-				})
-			},
-			thirdParty(){
-				//第三方协议SDK
-				uni.showToast({
-					title:"第三方协议SDK"
-				})
-			},
+			
 			logOut(){
 				// 退出登录
 				this.removeLogin()//清除登录状态

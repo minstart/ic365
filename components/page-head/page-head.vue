@@ -39,18 +39,31 @@
 			</view>
 		</view>
 	</uni-popup>
-	
+
 	<!-- 询问弹窗 -->
 	<!-- tipsDatas数据控制，从openPopupTips传参 -->
 	<!-- 关闭需要在 父级页面调用this.$refs.pageHead.closePopupTips()关闭 -->
 	<uni-popup ref="popupTips" :mask-click="false" :type="tipsData.type">
 		<view class="popup-tips-wrap">
 			<view class="popup-tips-title" v-if="tipsData.title">{{tipsData.title}}</view>
-			<view class="popup-tips-content">{{tipsData.content}}</view>
+			<view class="popup-tips-content" v-html="tipsData.content"></view>
 			<view class="popup-tips-btn-wrap">
 				<view class="tips-btn" @click.stop="closePopupTips">取消</view>
 				<view class="border"></view>
 				<view class="tips-btn" @click.stop="tipsData.success">确定</view>
+			</view>
+		</view>
+	</uni-popup>
+
+	<!-- 异常弹窗 -->
+	<!-- msgData数据控制 从openMsgTips传参-->
+	<!-- 关闭需要在 父级页面调用this.$refs.pageHead.closeMsgTips()关闭 -->
+	<uni-popup ref="msgTips" :mask-click="false" :type="msgData.type" :style="'z-index:100002 !important;'">
+		<view class="msg-tips-wrap">
+			<view class="msg-tips-icon" :type="msgData.icon"></view>
+			<view class="msg-tips-content" v-html="msgData.content"></view>
+			<view class="msg-tips-btn-wrap" v-if="msgData.icon=='2'">
+				<view class="tips-btn" @click.stop="closeMsgTips">知道了</view>
 			</view>
 		</view>
 	</uni-popup>
@@ -100,14 +113,8 @@
 		data() {
 			return {
 				taskbarHeight: 0,
-				tipsData:{
-					type:"center",
-					title:"提示",
-					content:"",
-					success:()=>{
-						this.closePopupTips()
-					}
-				}
+				tipsData: {}, //询问弹窗参数对象
+				msgData: {}, //提示弹窗参数对象
 			}
 		},
 		mounted() {
@@ -132,30 +139,57 @@
 				this.$store.state.officialAccountWindow = false;
 				this.$refs.becomeMember.close(); // 关闭弹窗
 			},
-			openPopupTips(data){
+			openPopupTips(data) {
 				this.$refs.popupTips.open(); // 打开消息咨询弹窗
-				console.log("咨询弹窗带来的data:",data)
+				// console.log("咨询弹窗带来的data:",data)
 				this.tipsData = {
-					type:"center",
-					title:"提示",
-					content:"",
-					success:()=>{
+					type: "center",
+					title: "提示",
+					content: "",
+					success: () => {
 						this.closePopupTips()
 					}
 				};
-				this.tipsData = {...this.tipsData,...data};
-				console.log("合并后的data",this.tipsData)
+				this.tipsData = {
+					...this.tipsData,
+					...data
+				};
+				console.log("合并后的data", this.tipsData)
 			},
-			closePopupTips(){
-				this.$refs.popupTips.close();//关闭消息咨询弹窗
-				
-			}
-			
+			closePopupTips() {
+				this.$refs.popupTips.close(); //关闭消息咨询弹窗
+
+			},
+			openMsgTips(data) {
+				this.$refs.msgTips.open(); // 打开消息咨询弹窗
+				console.log("咨询弹窗带来的data:", data)
+				this.msgData = {
+					type: "center",
+					icon: "2",
+					content: ""
+				};
+				this.msgData = {
+					...this.msgData,
+					...data
+				};
+				console.log("合并后的data", this.msgData)
+				if (data.time) {
+					let _this = this;
+					let _time = (Number(data.time) - 100) || 0
+					setTimeout(function() {
+						_this.closeMsgTips()
+					}, _time)
+				}
+			},
+			closeMsgTips() {
+				this.$refs.msgTips.close(); //关闭消息咨询弹窗
+			}			
 		}
 	}
 </script>
 <style lang="scss">
 	@import "/static/css/standard.scss";
+
 	.common-page-head-view {
 		position: relative;
 		top: 0;
@@ -299,57 +333,116 @@
 	}
 
 	// 询问弹窗
-	.popup-tips-wrap{
+	.popup-tips-wrap {
 		width: 610rpx;
 		background-color: #FFFFFF;
 		border-radius: 12rpx;
 		overflow: auto;
-		.popup-tips-title{
+
+		.popup-tips-title {
 			text-align: center;
 			font-size: 32rpx;
 			color: #000;
 			background-color: #FFFAEE;
 			line-height: 88rpx;
 		}
-		.popup-tips-content{
+
+		.popup-tips-content {
 			padding: 62rpx 52rpx;
 			font-size: 30rpx;
 			color: #000;
 			line-height: 44rpx;
 		}
-		.popup-tips-btn-wrap{
-			box-shadow: 0px -4px 8px 0px rgba(0,0,0,0.08);
+
+		.popup-tips-btn-wrap {
+			box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.08);
 			height: 72rpx;
 			padding: 30rpx 48rpx;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			.tips-btn,.border{
+
+			.tips-btn,
+			.border {
 				display: inline-block;
-				vertical-align:middle;
+				vertical-align: middle;
 			}
-			.border{
+
+			.border {
 				height: 46rpx;
 				width: 2rpx;
 				margin: 0rpx 32rpx;
 				background-color: #F2F2F2;
 			}
-		
-			.tips-btn{
+
+			.tips-btn {
 				flex: 1;
-				font-size:32rpx;
+				font-size: 32rpx;
 				height: 64rpx;
 				line-height: 64rpx;
 				color: #000;
 				text-align: center;
 				border-radius: 8rpx;
 			}
-			.tips-btn:nth-child(1){
+
+			.tips-btn:nth-child(1) {
 				border: 4rpx solid #303030;
 			}
-			.tips-btn:nth-child(3){
+
+			.tips-btn:nth-child(3) {
 				border: 4rpx solid $ThemeColor;
 				background-color: $ThemeColor;
+			}
+		}
+	}
+
+	// 提示弹窗
+	.msg-tips-wrap {
+		width: 610rpx;
+		background-color: #FFFFFF;
+		border-radius: 12rpx;
+		overflow: auto;
+		position: relative;
+
+		.msg-tips-icon {
+			width: 80rpx;
+			height: 118rpx;
+			background: url("/static/icons/tips.png") no-repeat center / 100% 100%;
+			&[type="2"] {
+				width: 80rpx;
+				height: 118rpx;
+				background: url("/static/icons/tips.png") no-repeat center / 100% 100%;
+			}
+
+			margin: 34rpx auto 34rpx auto;
+		}
+
+		.msg-tips-content {
+			padding: 0 52rpx 50rpx 52rpx;
+			font-size: 30rpx;
+			color: #000;
+			line-height: 44rpx;
+			position: relative;
+		}
+
+		.msg-tips-btn-wrap {
+			padding:0 48rpx 40rpx 48rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.tips-btn {
+				text-align: center;
+				width: 260rpx;
+				font-size: 32rpx;
+				height: 64rpx;
+				line-height: 64rpx;
+				color: #000;
+				text-align: center;
+				border-radius: 30rpx;
+				border: 2rpx solid $ThemeColor;
+				letter-spacing: 8rpx;
+				padding-left: 8rpx;
 			}
 		}
 	}

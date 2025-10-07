@@ -59,7 +59,7 @@
 		data() {
 			return {
 				invitationCode: "",
-				reward:[]
+				reward: []
 			}
 		},
 		onLoad() {
@@ -74,12 +74,10 @@
 					url: "/api/mission/getInviteMission",
 					notLoading: true
 				}).then(res => {
-					console.log("获取邀请奖励",res.data)
+					console.log("获取邀请奖励", res.data)
 					this.reward = res.data;
 				})
 			})
-				
-			
 		},
 		onReady() {
 
@@ -104,32 +102,28 @@
 
 		},
 		methods: {
-			getInvitationCode(){
+			getInvitationCode() {
 				// 获取组队邀请码
 				this.commonRequest({
-					url:"/api/team/generateTeamCode"
+					url: "/api/team/generateTeamCode"
 				}).then(res => {
-					console.log("获取组队邀请码",res.data)
+					console.log("获取组队邀请码", res.data)
 					this.invitationCode = res.data
 				})
 			},
 			copyBtn() {
-				if(!this.invitationCode){
-					uni.showToast({
-						title: '请先点击生成邀请码按钮，再复制邀请码',
-						icon: 'none',
-						duration: 4000
-					});
+				if (!this.invitationCode) {
+					this.$refs.pageHead.openMsgTips({
+						content: "请先点击生成邀请码按钮，再复制邀请码"
+					})
 					return false;
 				}
 				uni.setClipboardData({
 					data: this.invitationCode,
 					success: function() {
-						uni.showToast({
-							title: '已复制邀请码，发送给好友邀请他/她一起来学习吧！',
-							icon: 'none',
-							duration: 5000
-						});
+						this.$refs.pageHead.openMsgTips({
+							content: "已复制邀请码，发送给好友邀请他/她一起来学习吧！"
+						})
 					},
 					fail: function(err) {
 						console.error('复制失败:', err);
@@ -160,7 +154,8 @@
 		background: linear-gradient(#FFEEE6 0%, #FFEEE6 95%, #fff 100%);
 		border-radius: 0 0 3rem 3rem;
 	}
-	.banner-back2{
+
+	.banner-back2 {
 		position: absolute;
 		bottom: 0;
 		z-index: 0;
@@ -264,10 +259,11 @@
 						}
 
 						&:nth-child(2) {
-							.reward-list{
+							.reward-list {
 								text-align: left;
 								margin-left: 20rpx;
 							}
+
 							.icon {
 								width: 34rpx;
 								height: 46rpx;
@@ -311,7 +307,8 @@
 					font-size: 1.125rem;
 					color: #222;
 					line-height: 1.625rem;
-					span{
+
+					span {
 						display: inline-block;
 						min-width: 200rpx;
 						min-height: 2rpx;

@@ -408,9 +408,8 @@
 					}
 				}).then(res => {
 					// console.log("兑换商品：", res.data)
-					uni.showToast({
-						title: res.data,
-						icon: "none"
+					this.$refs.pageHead.openMsgTips({
+						content: res.data
 					})
 					item.obtained = true
 					this.commonRequest({

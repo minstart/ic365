@@ -27,7 +27,6 @@
 					</li>
 				</ul>
 			</view>
-			<!-- <view class="btn-setUp" @click="jumpPage({url:''})"></view> -->
 		</view>
 	</view>
 
@@ -131,10 +130,18 @@
 					<view class="item-info-title">知识尘</view>
 				</view>
 			</view>
-			<view class="statistics-wrap">
-				<view class="statistics">
-					<span>本周获取</span>
-					<span>{{suggestionImproveOther.currencies._newlyAdded.text}}</span>
+			<view class="statistics-wrap statistical-reward-wrap">
+				<view class="statistics statistical-reward">
+					<view class="statistics-title">
+						<view class="title-text">本周获取</view>
+						<image class="title-icon" src="/static/icons/reward.png" mode=""></image>
+					</view>
+					<view class="statistics-reward">
+						<view class="reward-list" v-for="item in suggestionImproveOther.currencies._newlyAdded">
+							<view class="reward-list-title">{{item.name}}：</view>
+							<view class="reward-list-text">{{item.quantity}}</view>
+						</view>
+					</view>
 				</view>
 				<!-- <view class="statistics" @tap.stop="jumpPage({url:'/pages/page/user/exchangeMall'})" v-if="suggestionImproveOther.currencies.exchanges&&suggestionImproveOther.currencies.exchanges.name">
 					<span>可兑换{{suggestionImproveOther.currencies.exchanges.name}}</span>
@@ -287,9 +294,7 @@
 				// 建议提升和其他
 				suggestionImproveOther: {
 					currencies: {
-						_newlyAdded: {
-							text: ""
-						}
+						_newlyAdded: []
 					}
 
 				},
@@ -312,38 +317,32 @@
 				this.commonRequest({
 					url: "/api/report/parent"
 				}).then(res => {
-					if (res.code == 0) {
-						console.log("获取家长版报告数据(统计图)：", res)
+					console.log("获取家长版报告数据(统计图)：", res)
+					try {
+						this.overallReport = res.data.overallReport;
+						this.growthRate = res.data.growthRate;
+						this.dailyReport = res.data.dailyReport;
+						this.radarChart = res.data.radarChart || {};
 						try {
-							this.overallReport = res.data.overallReport;
-							this.growthRate = res.data.growthRate;
-							this.dailyReport = res.data.dailyReport;
-							this.radarChart = res.data.radarChart || {};
-							try {
-								let newRadarChart = [];
-								res.data.radarChart.categories.forEach((item, i) => {
-									newRadarChart.push({
-										name: item,
-										score: res.data.radarChart.series[1].data[i]
-									})
+							let newRadarChart = [];
+							res.data.radarChart.categories.forEach((item, i) => {
+								newRadarChart.push({
+									name: item,
+									score: res.data.radarChart.series[1].data[i]
 								})
+							})
 
-								const sortedArray = [...newRadarChart].sort((x, y) => x.score - y.score);
-								this.radarChartAnalysis = {
-									min: sortedArray[0],
-									max: sortedArray[sortedArray.length - 1]
-								}
-							} catch (e) {
-								console.log(e)
+							const sortedArray = [...newRadarChart].sort((x, y) => x.score - y.score);
+							this.radarChartAnalysis = {
+								min: sortedArray[0],
+								max: sortedArray[sortedArray.length - 1]
 							}
-						} catch (e) {}
-						this.parent = res.data;
-					} else {
-						uni.showToast({
-							title: res.msg || "获取家长版报告数据(统计图)失败!",
-							icon: "none"
-						});
-					}
+						} catch (e) {
+							console.log(e)
+						}
+					} catch (e) {}
+					this.parent = res.data;
+
 				}).catch(error => {
 					console.log("获取家长版报告数据(统计图)失败：：", error)
 				})
@@ -352,41 +351,35 @@
 				this.commonRequest({
 					url: "/api/report/getAdviceAndCurrenciesAndPublish"
 				}).then(res => {
-					if (res.code == 0) {
-						console.log("获取提升建议和其他：", res)
-						try {
-							let _currencies = {};
+					console.log("获取提升建议和其他：", res)
+					try {
+						let _currencies = {};
 
-							//处理后端返回的数据拼凑成前端简易展示数据 ------------Start
-							res.data.currencies.current.forEach(item => {
-								item.type == 1 && (_currencies.star = item.quantity)
-								item.type == 3 && (_currencies.stone = item.quantity)
-								item.type == 2 && (_currencies.dust = item.quantity)
+						//处理后端返回的数据拼凑成前端简易展示数据 ------------Start
+						res.data.currencies.current.forEach(item => {
+							item.type == 1 && (_currencies.star = item.quantity)
+							item.type == 3 && (_currencies.stone = item.quantity)
+							item.type == 2 && (_currencies.dust = item.quantity)
+						})
+						store.state.userInfo.info.currencies = _currencies;
+						this.userInfo = {
+							...this.userInfo,
+							...store.state.userInfo.info
+						}
+						// console.log(this.userInfo)
+						res.data.currencies._current = _currencies;
+						let addCurrencies = [];
+						res.data.currencies.newlyAdded.forEach(item => {
+							addCurrencies.push({
+								name: item.name || "",
+								quantity: (item.quantity > 0 ? "+" + item.quantity : item.quantity)
 							})
-							store.state.userInfo.info.currencies = _currencies;
-							this.userInfo = {
-								...this.userInfo,
-								...store.state.userInfo.info
-							}
-							console.log(this.userInfo)
-							res.data.currencies._current = _currencies;
-							let addCurrencies = [];
-							res.data.currencies.newlyAdded.forEach(item => {
-								addCurrencies.push((item.quantity > 0 ? "+" + item.quantity : item.quantity) + item.name || "")
-							})
-							res.data.currencies._newlyAdded = {
-								text: addCurrencies.join("，")
-							}
-							this.information = res.data.publishes;
-							//处理后端返回的数据拼凑成前端简易展示数据 ------------End
-							this.suggestionImproveOther = res.data
-						} catch (e) {}
-					} else {
-						uni.showToast({
-							title: res.msg || "获取提升建议和其他失败!",
-							icon: "none"
-						});
-					}
+						})
+						res.data.currencies._newlyAdded = addCurrencies
+						this.information = res.data.publishes;
+						//处理后端返回的数据拼凑成前端简易展示数据 ------------End
+						this.suggestionImproveOther = res.data
+					} catch (e) {}
 				}).catch(error => {
 					console.log("获取提升建议和其他失败：：", error)
 				})
@@ -725,6 +718,70 @@
 		.icon-improve {
 			padding-left: 1.4rem;
 			background: url("/static/icons/improve.png") no-repeat left / 0.875rem 1rem;
+		}
+	}
+
+	.statistical-reward-wrap {
+		padding: 30rpx 0;
+
+		.statistical-reward {
+			display: flex;
+			line-height: 44rpx;
+			font-size: 32rpx;
+
+			.statistics-title {
+				width: 50%;
+
+				.title-text {}
+
+				.title-icon {
+					width: 132rpx;
+					height: 144rpx;
+				}
+			}
+
+			.statistics-reward {
+				flex: 1;
+
+				.reward-list {
+					margin-bottom: 10rpx;
+
+					&:nth-child(1) {
+						.reward-list-title {
+							color: #F3BC58;
+						}
+					}
+
+					&:nth-child(2) {
+						.reward-list-title {
+							color: #72BCFF;
+						}
+					}
+
+					&:nth-child(3) {
+						.reward-list-title {
+							color: #31CE70;
+						}
+					}
+
+					&:nth-child(4) {
+						.reward-list-title {
+							color: #9373ee;
+						}
+					}
+
+					.reward-list-title {
+						display: inline-block;
+					}
+
+					.reward-list-text {
+						display: inline-block;
+						min-width: 180rpx;
+						text-align: center;
+						font-weight: 700;
+					}
+				}
+			}
 		}
 	}
 

@@ -156,7 +156,7 @@
 			</view>
 		</view>
 	</view>
-	<uni-popup ref="joinTeam" :mask-click="false" type="bottom">
+	<uni-popup ref="joinTeam" :mask-click="false" type="bottom" :style="'z-index:10001 !important;'">
 		<div class="joinTeam-wrap">
 			<input type="text" class="joinTeam-input uni-input" placeholder="请输入邀请码" v-model="invitationCode">
 			<view class="tips">输入或者粘贴好友发送的邀请码，点确定加入队伍。</view>
@@ -169,6 +169,7 @@
 	<uni-popup ref="taskPopUp" :mask-click="false" type="bottom">
 		<task-details :details='taskDetails' :close="closeTaskPopUp"></task-details>
 	</uni-popup>
+	
 </template>
 
 <script>
@@ -203,7 +204,7 @@
 			}
 		},
 		onLoad() {
-
+			
 		},
 		onReady() {
 			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
@@ -216,10 +217,10 @@
 				// console.log(store.state.userInfo)
 				// 已经登陆了
 				this.getTeamInfo()
+				
 			}).catch(err => {
 				console.log("没有登录：：", error)
 			});
-
 
 			this.pageOnShowSet({
 				uniHide: "all"
@@ -254,8 +255,6 @@
 				})
 
 				this.getTeamDetails()
-
-
 			},
 			joinTeam() {
 				this.$refs.joinTeam.open("center")
@@ -280,9 +279,8 @@
 							console.log("移出队员：", res.data)
 							// 获取我的队伍和任务相关信息
 							_this.getTeamDetails()
-							uni.showToast({
-								title: "移出队员成功",
-								icon: "none"
+							this.$refs.pageHead.openMsgTips({
+								content: "移出队员成功"
 							})
 						})
 					}
@@ -295,9 +293,8 @@
 				}).then(res => {
 					console.log("离开队伍：", res.data)
 					this.getTeamInfo()
-					uni.showToast({
-						title: "离开队伍成功",
-						icon: "none"
+					this.$refs.pageHead.openMsgTips({
+						content: "离开队伍成功"
 					})
 				})
 			},
@@ -309,18 +306,14 @@
 					return false;
 				}
 				if (this.members.length == 0) {
-					uni.showToast({
-						title: "请点击邀请好友或加入队伍，组建队伍再开始挑战任务",
-						icon: "none",
-						duration: 5000
+					this.$refs.pageHead.openMsgTips({
+						content: "请点击邀请好友或加入队伍，组建队伍再开始挑战任务。"
 					})
 					return false;
 				}
 				if (!this.isCaptain) {
-					uni.showToast({
-						title: "只有队长才能开启任务" + ((this.currentMission && this.currentMission.name) ? ",且当前挑战任务未完成" : ""),
-						icon: "none",
-						duration: 5000
+					this.$refs.pageHead.openMsgTips({
+						content: "只有队长才能开启任务" + ((this.currentMission && this.currentMission.name) ? ",且当前挑战任务未完成。" : "")
 					})
 					return false;
 				}
@@ -344,19 +337,16 @@
 									console.log("开启任务:", res.data)
 									// 更新当前挑战任务
 									_this.getTeamDetails()
-									uni.showToast({
-										title: "开启组队任务成功",
-										icon: "none"
+									this.$refs.pageHead.openMsgTips({
+										content: "开启组队任务成功"
 									})
 								})
 							}
 						})
 						return false;
 					} else {
-						uni.showToast({
-							title: "已开启挑战任务，请先完成当前组队挑战任务",
-							icon: "none",
-							duration: 5000
+						this.$refs.pageHead.openMsgTips({
+							content: "已开启挑战任务，请先完成当前组队挑战任务"
 						})
 					}
 				})
@@ -373,9 +363,8 @@
 			},
 			confirmJoin() {
 				if (!this.invitationCode) {
-					uni.showToast({
-						title: "请输入邀请码",
-						icon: "none"
+					this.$refs.pageHead.openMsgTips({
+						content: '请输入邀请码'
 					})
 					return false;
 				}
@@ -387,9 +376,8 @@
 				}).then(res => {
 					console.log("加入队伍：", res.data)
 					this.getTeamInfo()
-					uni.showToast({
-						title: "加入队伍成功",
-						icon: "none"
+					this.$refs.pageHead.openMsgTips({
+						content: '加入队伍成功'
 					})
 					this.$refs.joinTeam.close()
 				})
@@ -494,7 +482,7 @@
 						})
 						this.teamTask = res.data;
 
-						console.log(this.teamTask)
+						// console.log(this.teamTask)
 
 						// 没返回数据时的测试数据
 						// this.teamTask = [{
@@ -1056,6 +1044,7 @@
 	}
 
 	// 队伍动态 ------End
+	
 	// 加入队伍弹窗
 	.joinTeam-wrap {
 		background: url("/static/image/join_team.png") no-repeat center / 100% 100%;
@@ -1064,7 +1053,6 @@
 		height: 446rpx;
 		padding: 20rpx;
 		position: relative;
-
 		.joinTeam-input {
 			width: 382rpx;
 			border-width: 0;

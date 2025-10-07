@@ -100,21 +100,10 @@
 				})
 			},
 			onLoad() {
-				// console.log("neOneLogin::", neOneLogin)
-				// neOneLogin.getToken();
-
-				// this.pageHeadTitle = "修改后的标题"
-				uni.showToast({
-					title: '登陆成功',
-					icon: 'success',
-					duration: 9000
-				})
+				
 			},
 			onReady() {
-				// this.getLogin()
-				// setTimeout(()=>{
-				// 	console.log("token2:::",store.state.userInfo.token)
-				// },2000)
+				
 			},
 			methods: {
 				// 预取号
@@ -175,9 +164,8 @@
 												ydLogin.closeAuthController()
 											}, 2000)
 										}).catch(error => {
-											uni.showToast({
-												title: "一键登陆失败",
-												icon: 'none'
+											this.$refs.pageHead.openMsgTips({
+												content: "一键登陆失败"
 											})
 											// console.error('一键登陆失败:', JSON.stringify(error))
 										})
@@ -188,12 +176,6 @@
 								// console.log(456)
 							} else {
 								console.log('预取号失败了:', data)
-								// uni.showToast({
-								// 	title: data.msg || data.desc + "，请重新点击或者切换手机验证码方式登录！" || "一键登陆失败调用预约号失败，请重新点击或者切换手机验证码方式登录！",
-								// 	icon: 'none',
-								// 	duration: 5000
-								// })
-								
 								let _this = this;
 								this.$refs.pageHead.openPopupTips({
 									title: "提示",
@@ -211,10 +193,9 @@
 						// #endif
 					}).catch(err => {
 						// console.log('err', err);
-						uni.showToast({
-							title: err[0].errorMessage,
-							icon: "none"
-						});
+						this.$refs.pageHead.openMsgTips({
+							content: err[0].errorMessage
+						})
 					})
 				},
 				changeLogin() {

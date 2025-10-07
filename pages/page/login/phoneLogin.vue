@@ -117,27 +117,25 @@
 							}
 						}, 1000)
 						this.commonRequest({
-								url: "/api/sms/forLogin",
-								method: "POST",
-								data: {
-									phone: this.baseFormData.phone,
-									platform:"app"
-								}
-							}).then(res => {
-									uni.showToast({
-										title: res.msg || "验证码发送成功!",
-										icon: "success",
-										duration: 2000
-									});
-								
-							}).catch(error => {
-								console.error('验证码发送失败:', error)
-							})
+							url: "/api/sms/forLogin",
+							method: "POST",
+							data: {
+								phone: this.baseFormData.phone,
+								platform: "app"
+							}
+						}).then(res => {
+							uni.showToast({
+								title: res.msg || "验证码发送成功!",
+								icon: "success",
+								duration: 2000
+							});
+						}).catch(error => {
+							console.error('验证码发送失败:', error)
+						})
 					}).catch((err) => {
-						uni.showToast({
-							title: err[0].errorMessage,
-							icon: "none"
-						});
+						this.$refs.pageHead.openMsgTips({
+							content: err[0].errorMessage
+						})
 					})
 					return false;
 				},
@@ -165,10 +163,9 @@
 										});
 									}, 2000)
 								} else {
-									uni.showToast({
-										title: res.msg || "验证码登录失败!",
-										icon: "none"
-									});
+									this.$refs.pageHead.openMsgTips({
+										content: res.msg || "验证码登录失败!"
+									})
 								}
 								console.log('/api/sms/forLogin：验证码登录成功:', res)
 							}).catch(error => {
@@ -176,10 +173,9 @@
 							})
 					}).catch(err => {
 						// console.log('err', err);
-						uni.showToast({
-							title: err[0].errorMessage,
-							icon: "none"
-						});
+						this.$refs.pageHead.openMsgTips({
+							content: err[0].errorMessage
+						})
 					})
 				},
 			}

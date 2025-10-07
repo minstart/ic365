@@ -168,10 +168,8 @@
 					vipLevel = store.state.userInfo.info.vipLevel
 				} catch (e) {}
 				if (new Date(this.changeDate("", -10).fullDate) > new Date(this.checkedDate) && vipLevel == 0) {
-					uni.showToast({
-						title: "非VIP只能补做10天内的题目！",
-						icon: "none",
-						duration: 3000
+					this.$refs.pageHead.openMsgTips({
+						content: "非VIP只能补做10天内的题目！"
 					})
 					return false;
 				}
