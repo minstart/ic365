@@ -59,10 +59,10 @@
 			//#ifdef APP-PLUS 
 			// 获取本地应用资源版本号
 			plus.runtime.getProperty(plus.runtime.appid, (inf) => {
-				console.log("app包名称",plus.runtime.appid)
-				console.log("设备是安卓还是IOS",uni.getSystemInfoSync().platform)
-				console.log("当前版本号：",inf.versionCode)
-				console.log("设备基础数据：",inf)
+				// console.log("app包名称",plus.runtime.appid)
+				// console.log("设备是安卓还是IOS",uni.getSystemInfoSync().platform)
+				// console.log("当前版本号：",inf.versionCode)
+				// console.log("设备基础数据：",inf)
 				// return false;
 				
 				//获取服务器的版本号

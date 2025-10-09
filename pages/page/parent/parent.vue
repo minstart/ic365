@@ -372,7 +372,7 @@
 						res.data.currencies.newlyAdded.forEach(item => {
 							addCurrencies.push({
 								name: item.name || "",
-								quantity: (item.quantity > 0 ? "+" + item.quantity : item.quantity)
+								quantity: (item.quantity > 0 ? "+" + item.quantity : ' - ')
 							})
 						})
 						res.data.currencies._newlyAdded = addCurrencies
@@ -730,7 +730,7 @@
 			font-size: 32rpx;
 
 			.statistics-title {
-				width: 50%;
+				width: 60%;
 
 				.title-text {}
 
@@ -776,7 +776,7 @@
 
 					.reward-list-text {
 						display: inline-block;
-						min-width: 180rpx;
+						min-width: 120rpx;
 						text-align: center;
 						font-weight: 700;
 					}

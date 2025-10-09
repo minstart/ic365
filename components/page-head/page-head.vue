@@ -193,7 +193,7 @@
 	.common-page-head-view {
 		position: relative;
 		top: 0;
-		// background: green;
+		// z-index: 999;
 	}
 
 	.page-head {
@@ -213,9 +213,9 @@
 		width: 100%;
 		background: #fff;
 		z-index: 99;
-
 		.common-page-head-back {
 			height: 88rpx;
+			z-index: 1000;
 		}
 
 		.common-page-head-back,
@@ -256,6 +256,7 @@
 		}
 
 		.page-head-back-icon {
+			border-radius: 50%;
 			background: url("/static/icons/back_orange.png") no-repeat center / 100% 100%;
 		}
 
@@ -400,7 +401,7 @@
 	.msg-tips-wrap {
 		width: 610rpx;
 		background-color: #FFFFFF;
-		border-radius: 12rpx;
+		border-radius: 20rpx;
 		overflow: auto;
 		position: relative;
 
@@ -423,6 +424,7 @@
 			color: #000;
 			line-height: 44rpx;
 			position: relative;
+			text-align: center;
 		}
 
 		.msg-tips-btn-wrap {
@@ -430,7 +432,6 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-
 			.tips-btn {
 				text-align: center;
 				width: 260rpx;

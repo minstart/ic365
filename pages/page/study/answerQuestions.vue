@@ -1,9 +1,9 @@
 <template>
 	<view class="page-loading" v-if="pageMask"></view>
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
-	<view style="width: 100vw;height: 100vh;overflow: hidden;">
+	<view style="width: 100vw;height: 100vh;overflow: hidden;" :class='fullscreenMode&&isFullscreen?"fullscreen-wrap":""'>
 		<page-head ref="pageHead" :isBack='true' :background="'transparent'" :becomeMemberSize='0.8' :systemTaskbar="false"></page-head>
-		<view class="page-wrap" :style="'padding-left:'+taskbarHeight2">
+		<view class="page-wrap" :style="'padding-left:'+((fullscreenMode && isFullscreen)?0:taskbarHeight2)">
 			<view class="content-wrap">
 				<!-- 左侧类目 -->
 				<view class="category-wrap">
@@ -31,7 +31,7 @@
 						</view>
 					</view>
 					<!-- 答题右下方内容 -->
-					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'">
+					<view class="topic-content-wrap" v-if="pageType=='everyDay' || pageType=='question'" :style="'padding-left:'+((fullscreenMode && isFullscreen)?taskbarHeight2:0)">
 						<view class="topic">
 							<span v-if="$store.state.openDebug">题目id:{{topic.questionId}}</span>
 							<view style="float: left;width: 100%;" class="no-list-tip" v-if="!topic.questionId"> - 没有查询到题目 -</view>
@@ -54,6 +54,7 @@
 							</view>
 						</view>
 						<view class="analysis-wrap">
+							<view class="fullscreen-btn" :type="fullscreenMode" v-if="isFullscreen" @click.stop="changeFullscreenMode"></view>
 							<view class="analysis" v-if="answered">
 								<view class="analysis-title">
 									<span class="title-icon"></span>
@@ -247,7 +248,17 @@
 				parentPageType: "", //上一级页面类型（错题本详情、收藏练习详情、最近练习详情）
 				topicDetails: {}, //点击题目的详情 （错题本详情、收藏练习详情、最近练习详情）
 				isAnswerOnly: false, //是否只答题，不显示下一题
-				isNextTopic:false,//临时控制下一题显示
+				isNextTopic: false, //临时控制下一题显示
+
+				fullscreenMode: false, //开启全屏答题模式
+				isFullscreen: true, //是否有开启全屏答题的权限
+				isFirstLoad: true, //是否是首次加载
+				
+				answered:true,
+				answer:{
+					option:"A",
+					optionName:"ABC"
+				}
 			}
 		},
 		onLoad(option) {
@@ -267,7 +278,9 @@
 					this.changeDate(option.date).fullDate != this.changeDate(new Date()).fullDate && (requestData.data = {
 						date: option.date
 					})
-
+					this.isFirstLoad = false;
+					this.fullscreenMode = true;
+					this.isFullscreen = true;
 					//console.log("日期传参：",requestData)
 					// 获取今日题目
 					this.commonRequest(requestData).then(res => {
@@ -318,7 +331,7 @@
 		onReady() {
 			this.context = uni.createVideoContext("video1", this);
 			this.taskbarHeight2 = store.state.taskbarHeight
-			// console.log(this.taskbarHeight2)
+			console.log(this.taskbarHeight2)
 		},
 		onShow() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -415,7 +428,7 @@
 						})
 						this.topic.analysis = (this.topic.analysis || "") + this.topic.analysisImages.toString()
 					}
-					
+
 					!this.topic.AIanalysis && (this.topic.AIanalysis = {})
 				} catch (e) {}
 				// 题目答案处理
@@ -499,7 +512,7 @@
 					}
 				}).catch(error => {
 					console.log("回答问题接口报错：：", error)
-				}).finally(()=>{
+				}).finally(() => {
 					this.isNextTopic = false;
 				})
 			},
@@ -680,10 +693,13 @@
 				}).then(res => {
 					console.log("收藏题目", res.data)
 					this.topic.isCollect = !this.topic.isCollect;
-					uni.showToast({
-						title: this.topic.isCollect ? "收藏成功" : "取消收藏成功",
-						icon: "none"
-					});
+					// uni.showToast({
+					// 	title: this.topic.isCollect ? "收藏成功" : "取消收藏成功",
+					// 	icon: "none"
+					// });
+					this.$refs.pageHead.openMsgTips({
+						content: this.topic.isCollect ? "收藏成功" : "已取消收藏"
+					})
 				}).catch(error => {
 					console.log("收藏题目报错", error)
 				})
@@ -737,6 +753,12 @@
 						this.topic = {
 							content: ""
 						};
+						if (this.isFirstLoad) {
+							this.fullscreenMode = true;
+							this.isFullscreen = true;
+							this.isFirstLoad = false;
+						}
+
 						// 获取题目
 						this.commonRequest({
 							url: byCategoryUrl,
@@ -790,6 +812,7 @@
 							console.log("获取视频列表报错", error)
 						})
 					} else if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
+						this.isFullscreen = false; //禁止全屏模式按钮显示
 						if (this.videoList.noData) return false;
 						let byCategoryUrl = "/api/wrong-records/getAll";
 						let byCategoryData = {
@@ -966,14 +989,21 @@
 			// 同类练习（错题本、收藏练习、最近练习）
 			similarExercises(item) {
 				this.isAnswerOnly = false;
+				this.fullscreenMode = true;
+				this.isFullscreen = true;
 				this.pageType = "question";
 				this.choiceCategory(item, true)
 			},
 			reAnswer(item) {
 				this.isAnswerOnly = true;
+				this.fullscreenMode = true;
+				this.isFullscreen = true;
 				this.questionId = item.questionId
 				this.pageType = "question"
 				this.choiceCategory(item, true)
+			},
+			changeFullscreenMode() {
+				this.fullscreenMode = !this.fullscreenMode;
 			}
 		}
 	}
@@ -1041,12 +1071,13 @@
 				margin-top: -2.75rem;
 				background: #fff;
 				position: relative;
-				z-index: 100;
+				// z-index: 100;
 
 				.topic-function-wrap {
 					background: #FFEDBB;
 					height: 2.75rem;
 					position: relative;
+					z-index: 100;
 
 					.search-btn-wrap {
 						background-color: #fff;
@@ -1119,8 +1150,7 @@
 				// 中间答题 ------ Start
 				.topic-content-wrap {
 					display: flex;
-					height: calc(100vh - 2.75rem - 1rem);
-
+					height: calc(100vh - 4.65rem);
 					.topic {
 						height: 100%;
 						width: 600rpx;
@@ -1129,7 +1159,7 @@
 						padding: 0.5rem 1.25rem;
 						border-right: 0.18rem solid #FFF5F3;
 						overflow-y: auto;
-
+						background: url('/static/icons/topicBack.png') repeat;
 						.topic-text {
 							font-size: 1.25rem;
 						}
@@ -1140,9 +1170,11 @@
 							.topic-image {
 								width: 20rem;
 								height: auto;
+
 								div {
 									display: none !important;
 								}
+
 								img {
 									width: 100%;
 									height: auto;
@@ -1166,7 +1198,7 @@
 								border-radius: 0.5rem;
 								border: 0.08rem solid #C2C2C2;
 								margin: 0 24rpx 24rpx 0;
-
+								background-color: #fff;
 								.options {
 									background: red !important;
 								}
@@ -1503,9 +1535,39 @@
 				// 右侧解析 ------ Start
 				.analysis-wrap {
 					width: 10.5rem;
-					height: calc(100% - 40rpx);
+					height: calc(100% - 8rpx);
 					padding: 40rpx 0 0 14rpx;
 					position: relative;
+					z-index: 100;
+					background: url('/static/icons/topicBack.png') repeat;
+					.fullscreen-btn {
+						position: absolute;
+						top: 0;
+						right: 40rpx;
+						border-radius: 0 0 20rpx 20rpx;
+						width: 140rpx;
+						height: 40rpx;
+						background-color: #ffcb74;
+
+						&::after {
+							content: " ";
+							position: absolute;
+							top: 0;
+							left: 0;
+							right: 0;
+							bottom: 0;
+							margin: auto;
+							width: 40rpx;
+							height: 16rpx;
+							background: url("/static/icons/fullscreen.png") no-repeat center / 100% 100%;
+						}
+
+						&[type='true'] {
+							&::after {
+								transform: rotateX(180deg);
+							}
+						}
+					}
 
 					.analysis-title {
 						margin-bottom: 0.8125rem;
@@ -1612,6 +1674,28 @@
 		}
 	}
 
+	// 答题全屏模式
+	.fullscreen-wrap {
+		.category-wrap {
+			display: none;
+		}
+
+		.topic-function-wrap {
+			display: none;
+		}
+
+		.topic-wrap {
+			.topic-content-wrap {
+				height: calc(100vh - 1.8rem) !important;
+
+				.topic {
+					padding-left: 80rpx !important;
+				}
+			}
+		}
+	}
+
+
 	// 解析弹窗样式 ------ Start
 	.video-view {
 		width: 100% !important;
@@ -1645,15 +1729,18 @@
 			width: 100%;
 			margin-bottom: 20rpx;
 		}
+
 		.topic-image-wrap {
 			margin-top: 0.2rem;
-		
+
 			.topic-image {
 				width: 20rem;
 				height: auto;
+
 				div {
 					display: none !important;
 				}
+
 				img {
 					width: 100%;
 					height: auto;
@@ -1734,10 +1821,15 @@
 		display: inline-block;
 		vertical-align: top;
 	}
+
 	.popup-analysis-img {
 		width: auto;
 		max-height: 380rpx;
 		vertical-align: text-top !important;
 		display: inline-block;
+	}
+
+	.fullscreen-wrap .common-page-head-back .page-head-back-icon {
+		box-shadow: 0 0 10rpx #909090;
 	}
 </style>
