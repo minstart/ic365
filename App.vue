@@ -86,12 +86,10 @@
 							silenceUpdate(res.data.edition_url)
 
 						} else {
+							let _this = this;
 							//跳转更新页面 （注意！！！如果pages.json第一页的代码里有一打开就跳转其他页面的操作，下面这行代码最好写在setTimeout里面设置延时3到5秒再执行）
 							setTimeout(function(){
-								uni.navigateTo({
-									url: '/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update?obj=' +
-										JSON.stringify(res.data)
-								});
+								_this.jumpPage({url:'/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update?obj=' + JSON.stringify(res.data)})
 							},3000)
 						}
 					} else {

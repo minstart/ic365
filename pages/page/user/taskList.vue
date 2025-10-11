@@ -1,12 +1,11 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
-		<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
-		<div class="uni-padding-wrap">
-			<view class="task-back">
-				<view class="task-back-icon"></view>
-				<h3 class="task-back-title">学习任务</h3>
-			</view>
+		<view class="task-back">
+			<page-head ref="pageHead" :title='pageHeadTitle' :isBack='true' :background="'transparent'"></page-head>
+			<view class="task-back-icon"></view>
+		</view>
+		<view class="uni-padding-wrap">
 			<scroll-view class="task-wrap" scroll-y="true" :scroll-into-view="selectMissionId" :scroll-with-animation="true" @scrolltolower="getTaskList">
 				<view :id="'task-list-'+item.missionId" class="task-list" v-for="(item,i) in taskList" @click="openTaskDetails(item)">
 					<image lazy-load class="task-list-icon" :src="item.cover"></image>
@@ -21,7 +20,7 @@
 
 				</view>
 			</scroll-view>
-		</div>
+		</view>
 	</view>
 	<uni-popup ref="taskPopUp" :mask-click="false" type="bottom">
 		<task-details :details='taskDetails' :close="closeTaskPopUp"></task-details>
@@ -142,32 +141,28 @@
 	.page-wrap {
 		background-color: #F6F6F6;
 		min-height: 100vh;
-
+		padding-bottom: 0;
 		.task-back {
-			margin-top: 16rpx;
-			height: 160rpx;
-			background: url("/static/image/task_back.png") no-repeat center / 100% 100%;
+			height: 422rpx;
 			position: relative;
-
-			.task-back-title {
-				font-size: 44rpx;
-				color: #222;
-				padding: 30rpx;
-			}
+			background-color: #FFD348;
 
 			.task-back-icon {
 				position: absolute;
-				width: 230rpx;
-				height: 188rpx;
-				top: -60rpx;
+				width: 680rpx;
+				height: 380rpx;
+				bottom: -160rpx;
+				left: 0;
 				right: 0;
+				margin: auto;
 				background: url("/static/image/task_back_icon.png") no-repeat center / 100% 100%;
 			}
 		}
 	}
 
 	.task-wrap {
-		height: calc(100vh - 600rpx);
+		margin-top: 200rpx;
+		height: calc(100vh - 624rpx);
 		.task-list {
 			display: flex;
 			align-items: center;
@@ -214,11 +209,12 @@
 			}
 
 			.task-list-btn {
-				font-style: 24rpx;
-				color: #fff;
+				font-size: 24rpx;
+				font-weight: 700;
+				color: #000;
 				border-radius: 30rpx;
 				line-height: 48rpx;
-				background-color: #79D183;
+				background-color: #FFD348;
 				padding: 0 24rpx;
 				float: right;
 			}

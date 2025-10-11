@@ -3,7 +3,7 @@
 	<page-meta v-model='fontSize' :page-font-size="fontSize+'px'" :root-font-size="fontSize+'px'"></page-meta>
 	<view style="width: 100vw;height: 100vh;overflow: hidden;" :class='fullscreenMode&&isFullscreen?"fullscreen-wrap":""'>
 		<page-head ref="pageHead" :isBack='true' :background="'transparent'" :becomeMemberSize='0.8' :systemTaskbar="false"></page-head>
-		<view class="page-wrap" :style="'padding-left:'+((fullscreenMode && isFullscreen)?0:taskbarHeight2)">
+		<view class="page-wrap" :style="'padding-left:'+((fullscreenMode && isFullscreen)?0:taskbarHeight2)" :pageType='pageType'>
 			<view class="content-wrap">
 				<!-- 左侧类目 -->
 				<view class="category-wrap">
@@ -254,11 +254,6 @@
 				isFullscreen: true, //是否有开启全屏答题的权限
 				isFirstLoad: true, //是否是首次加载
 				
-				answered:true,
-				answer:{
-					option:"A",
-					optionName:"ABC"
-				}
 			}
 		},
 		onLoad(option) {
@@ -287,6 +282,7 @@
 						console.log("获取今日题目::", res)
 						try {
 							this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(res.data.grade) + "年级";
+							
 							// this.categoryTree.semester = res.data.semester == "fall" ? "上册" : (res.data.semester == "spring" ? "下册" : "");
 							this.categoryTree.category[0] = {
 								categoryId: res.data.categoryId,
@@ -307,7 +303,6 @@
 					// 每日一题 ------ End
 				} else {
 					this.getQuestion().then(res => {
-						console.log(pageType)
 						try {
 							if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
 								this.categoryTree.grade = "错题本";
@@ -331,7 +326,6 @@
 		onReady() {
 			this.context = uni.createVideoContext("video1", this);
 			this.taskbarHeight2 = store.state.taskbarHeight
-			console.log(this.taskbarHeight2)
 		},
 		onShow() {
 			/* #ifndef APP-PLUS-NVUE */
@@ -625,6 +619,8 @@
 						postData = {
 							type: _type
 						}
+					}else{
+						this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(this.$store.state.userInfo.info.grade) + "年级";
 					}
 
 					this.commonRequest({
@@ -633,6 +629,17 @@
 					}).then(res => {
 						console.log("视频、题目类型获取左侧类目目录:", res.data)
 						this.resetProblem("all")
+						try {
+							if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
+								this.categoryTree.grade = "错题本";
+								this.pageType == "recentlyList" && (this.categoryTree.grade = "最近练习")
+								this.pageType == "collectList" && (this.categoryTree.grade = "收藏练习")
+							} else {
+								this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(store.state.userInfo.info.grade) + "年级";
+							}
+						} catch (e) {
+							console.log(e)
+						}
 						// 类目数据兼容处理
 						if (this.pageType == "errorList" || this.pageType == "errorDetails" || this.pageType == "recentlyList" || this.pageType == "recentlyDetails" || this.pageType == "collectList" || this.pageType == "collectDetails") {
 							let arr = [];
@@ -707,7 +714,6 @@
 
 			// 点击类目之后,获取右侧内容（切换类目）
 			choiceCategory(item, isInitialization) {
-				console.log("this.pageType:", this.pageType)
 				if (this.selectCategory && !this.selectCategory.categoryId) return false;
 				// this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList"
 				if (this.pageType == "errorDetails") {
@@ -729,7 +735,6 @@
 					if (this.parentPageType) {
 						this.resetProblem(this.pageType)
 					}
-					console.log("this.pageType:", this.pageType)
 					// console.log("categoryId：：",item.categoryId)
 					if (this.pageType == "question") {
 						let byCategoryData = {
@@ -1019,7 +1024,6 @@
 		height: calc(100vh - 2.75rem);
 		margin-top: -2.75rem;
 		padding-top: 2.75rem;
-
 		.content-wrap {
 			display: flex;
 			width: 100vw;
@@ -1035,8 +1039,8 @@
 				.subject-grade-wrap {
 					font-size: 0.75rem;
 					color: #000;
-					margin-top: 1.25rem;
-					margin-bottom: 1.625rem;
+					margin-top: 1rem;
+					margin-bottom: 1.2rem;
 				}
 
 				.tree-wrap {
@@ -1151,15 +1155,15 @@
 				.topic-content-wrap {
 					display: flex;
 					height: calc(100vh - 4.65rem);
+					background: url('/static/icons/topicBack.png') repeat;
 					.topic {
 						height: 100%;
 						width: 600rpx;
 						flex: 1;
 						position: relative;
-						padding: 0.5rem 1.25rem;
+						padding: 1rem 1.25rem;
 						border-right: 0.18rem solid #FFF5F3;
 						overflow-y: auto;
-						background: url('/static/icons/topicBack.png') repeat;
 						.topic-text {
 							font-size: 1.25rem;
 						}
@@ -1199,6 +1203,7 @@
 								border: 0.08rem solid #C2C2C2;
 								margin: 0 24rpx 24rpx 0;
 								background-color: #fff;
+								
 								.options {
 									background: red !important;
 								}
@@ -1539,7 +1544,7 @@
 					padding: 40rpx 0 0 14rpx;
 					position: relative;
 					z-index: 100;
-					background: url('/static/icons/topicBack.png') repeat;
+					// background: url('/static/icons/topicBack.png') repeat;
 					.fullscreen-btn {
 						position: absolute;
 						top: 0;
@@ -1676,12 +1681,44 @@
 
 	// 答题全屏模式
 	.fullscreen-wrap {
+		.page-wrap {
+			&[pageType='everyDay']{
+				// .category-wrap{
+				// 	display: none !important;
+				// }
+				.topic-wrap {
+					// .topic-content-wrap {
+					// 	.topic {
+					// 		padding-left: 2.4rem !important;
+					// 	}
+					// }
+					// .topic-function-wrap{
+					// 	display: none !important;
+					// }
+					.fullscreen-btn{
+						display: none;
+					}
+				}
+			}
+		}
+		
 		.category-wrap {
-			display: none;
+			// display: none;
+			width: 1.2rem !important;
+			overflow: hidden;
+			.subject-grade-wrap,.tree-wrap{
+				display: none !important;
+			}
 		}
 
 		.topic-function-wrap {
-			display: none;
+			height: 0.4rem !important;
+			overflow: hidden;
+			background: linear-gradient(to right, transparent 0%, transparent 20%,#FFEDBB 21%, #FFEDBB 100%) !important; 
+			.search-btn-wrap,.collect-btn-wrap{
+				display: none !important;
+			}
+			// display: none;
 		}
 
 		.topic-wrap {
@@ -1689,7 +1726,7 @@
 				height: calc(100vh - 1.8rem) !important;
 
 				.topic {
-					padding-left: 80rpx !important;
+					padding-left: 1.2rem !important;
 				}
 			}
 		}

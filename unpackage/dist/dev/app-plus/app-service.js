@@ -28649,13 +28649,8 @@ ${o3}
         //开启全屏答题模式
         isFullscreen: true,
         //是否有开启全屏答题的权限
-        isFirstLoad: true,
+        isFirstLoad: true
         //是否是首次加载
-        answered: true,
-        answer: {
-          option: "A",
-          optionName: "ABC"
-        }
       };
     },
     onLoad(option) {
@@ -28676,7 +28671,7 @@ ${o3}
           this.fullscreenMode = true;
           this.isFullscreen = true;
           this.commonRequest(requestData).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:287", "获取今日题目::", res2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:282", "获取今日题目::", res2);
             try {
               this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(res2.data.grade) + "年级";
               this.categoryTree.category[0] = {
@@ -28690,14 +28685,13 @@ ${o3}
               this.topic = res2.data;
               this.topicFilter();
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:302", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:298", e2);
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:305", "获取今日题目报错：：", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:301", "获取今日题目报错：：", error2);
           });
         } else {
           this.getQuestion().then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:310", pageType);
             try {
               if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
                 this.categoryTree.grade = "错题本";
@@ -28707,7 +28701,7 @@ ${o3}
                 this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(store.state.userInfo.info.grade) + "年级";
               }
             } catch (e2) {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:320", e2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:315", e2);
             }
           });
           if (this.pageType == "video")
@@ -28718,7 +28712,6 @@ ${o3}
     onReady() {
       this.context = uni.createVideoContext("video1", this);
       this.taskbarHeight2 = store.state.taskbarHeight;
-      formatAppLog("log", "at pages/page/study/answerQuestions.vue:334", this.taskbarHeight2);
     },
     onShow() {
       try {
@@ -28847,7 +28840,7 @@ ${o3}
         };
         this.answer.optionName != this.topic.answer && (postData.wrong_record_id = this.topic.questionId);
         this.option.missionId && (postData.missionId = this.option.missionId);
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:476", "回答问题传参：", postData);
+        formatAppLog("log", "at pages/page/study/answerQuestions.vue:470", "回答问题传参：", postData);
         this.commonRequest({
           url: "/api/question/submit",
           method: "POST",
@@ -28865,7 +28858,7 @@ ${o3}
                 url: "/api/notice/getAll"
               }).then((res3) => {
                 this.isVideoAnalysis = true;
-                formatAppLog("log", "at pages/page/study/answerQuestions.vue:496", "通知消息::", res3.data);
+                formatAppLog("log", "at pages/page/study/answerQuestions.vue:490", "通知消息::", res3.data);
                 try {
                   if (res3.data.length > 0) {
                     _this.$store.state.rewardPopUpList = res3.data;
@@ -28874,17 +28867,17 @@ ${o3}
                 } catch (e2) {
                 }
               }).catch((error2) => {
-                formatAppLog("log", "at pages/page/study/answerQuestions.vue:504", "通知消息失败：：", error2);
+                formatAppLog("log", "at pages/page/study/answerQuestions.vue:498", "通知消息失败：：", error2);
               });
               setTimeout(() => {
                 this.isVideoAnalysis = true;
               }, 2e3);
             }, 3e3);
           } catch (e2) {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:511", e2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:505", e2);
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:514", "回答问题接口报错：：", error2);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:508", "回答问题接口报错：：", error2);
         }).finally(() => {
           this.isNextTopic = false;
         });
@@ -28905,13 +28898,13 @@ ${o3}
             vip: item.vipLevel,
             myvip: this.userInfo.vipLevel
           }).then((data) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:536", "校验通过");
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:530", "校验通过");
             try {
               this.playVideo(item.videoId);
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:541", "校验不通过");
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:535", "校验不通过");
           });
         }
       },
@@ -28928,7 +28921,7 @@ ${o3}
             url: "/api/video/getById",
             data: getByIdData
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:560", "获取视频地址::", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:554", "获取视频地址::", res2.data);
             try {
               this.showVideo = true;
               this.analysis.video = res2.data;
@@ -28938,7 +28931,7 @@ ${o3}
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:569", "获取视频地址报错", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:563", "获取视频地址报错", error2);
           });
         } else {
           this.showVideo = true;
@@ -28959,7 +28952,7 @@ ${o3}
               step: this.topic.AIanalysis.step + 1
             }
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:592", "/api/ai/getAnalysisByStep：：", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:586", "/api/ai/getAnalysisByStep：：", res2.data);
             this.topic.AIanalysis.step = res2.data.currentStep;
             this.topic.AIanalysis.stepCount = res2.data.stepCount;
             res2.data.currentStep < res2.data.stepCount ? this.AIanalysisNextBtn = true : this.AIanalysisNextBtn = false;
@@ -28969,7 +28962,7 @@ ${o3}
               imgClass: "popup-analysis-img"
             });
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:604", "AI析题报错", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:598", "AI析题报错", error2);
             this.AIanalysisNextBtn = true;
           }).finally(() => {
             this.AIanalysisNextBtn = true;
@@ -28992,13 +28985,26 @@ ${o3}
             postData = {
               type: _type
             };
+          } else {
+            this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(this.$store.state.userInfo.info.grade) + "年级";
           }
           this.commonRequest({
             url,
             data: postData
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:634", "视频、题目类型获取左侧类目目录:", res2.data);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:630", "视频、题目类型获取左侧类目目录:", res2.data);
             this.resetProblem("all");
+            try {
+              if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
+                this.categoryTree.grade = "错题本";
+                this.pageType == "recentlyList" && (this.categoryTree.grade = "最近练习");
+                this.pageType == "collectList" && (this.categoryTree.grade = "收藏练习");
+              } else {
+                this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(store.state.userInfo.info.grade) + "年级";
+              }
+            } catch (e2) {
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:641", e2);
+            }
             if (this.pageType == "errorList" || this.pageType == "errorDetails" || this.pageType == "recentlyList" || this.pageType == "recentlyDetails" || this.pageType == "collectList" || this.pageType == "collectDetails") {
               res2.data.categories = res2.data;
             }
@@ -29027,7 +29033,7 @@ ${o3}
             }
             resolve(res2);
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:677", "视频、题目类型获取左侧类目目录报错", error2);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:684", "视频、题目类型获取左侧类目目录报错", error2);
             reject2(error2);
           });
         });
@@ -29042,18 +29048,17 @@ ${o3}
           url: "/api/question/collection",
           data: postData
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:694", "收藏题目", res2.data);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:701", "收藏题目", res2.data);
           this.topic.isCollect = !this.topic.isCollect;
           this.$refs.pageHead.openMsgTips({
             content: this.topic.isCollect ? "收藏成功" : "已取消收藏"
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:704", "收藏题目报错", error2);
+          formatAppLog("log", "at pages/page/study/answerQuestions.vue:711", "收藏题目报错", error2);
         });
       },
       // 点击类目之后,获取右侧内容（切换类目）
       choiceCategory(item, isInitialization) {
-        formatAppLog("log", "at pages/page/study/answerQuestions.vue:710", "this.pageType:", this.pageType);
         if (this.selectCategory && !this.selectCategory.categoryId)
           return false;
         if (this.pageType == "errorDetails") {
@@ -29074,7 +29079,6 @@ ${o3}
           if (this.parentPageType) {
             this.resetProblem(this.pageType);
           }
-          formatAppLog("log", "at pages/page/study/answerQuestions.vue:732", "this.pageType:", this.pageType);
           if (this.pageType == "question") {
             let byCategoryData = {
               keyword: this.keyword,
@@ -29090,8 +29094,8 @@ ${o3}
               };
             }
             this.time = 0;
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:751", "接口", byCategoryUrl);
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:752", "获取题目传参：", byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:756", "接口", byCategoryUrl);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:757", "获取题目传参：", byCategoryData);
             this.topic = {
               content: ""
             };
@@ -29104,7 +29108,7 @@ ${o3}
               url: byCategoryUrl,
               data: byCategoryData
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:767", "获取题目:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:772", "获取题目:", res2.data);
               if (res2.data.length == 0) {
                 clearInterval(this.setInterval);
                 return false;
@@ -29113,7 +29117,7 @@ ${o3}
               this.topicFilter();
               this.questionId = "";
             }).catch((error2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:776", "获取题目报错", error2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:781", "获取题目报错", error2);
               reject(error2);
             });
           } else if (this.pageType == "video") {
@@ -29125,7 +29129,7 @@ ${o3}
               size: 24,
               categoryId: item.categoryId
             };
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:787", byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:792", byCategoryData);
             this.videoId && (byCategoryData.videoId = this.videoId);
             let byCategoryUrl = "/api/video/byCategory";
             if (this.option && this.option.missionId) {
@@ -29134,12 +29138,12 @@ ${o3}
               delete byCategoryData.keyword;
               delete byCategoryData.categoryId;
             }
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:797", "获取视频列表传参::", byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:802", "获取视频列表传参::", byCategoryData);
             this.commonRequest({
               url: byCategoryUrl,
               data: byCategoryData
             }).then((res2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:803", "获取视频列表:", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:808", "获取视频列表:", res2.data);
               if (res2.data.length == 0) {
                 this.videoList.noData = true;
               }
@@ -29148,7 +29152,7 @@ ${o3}
               this.videoList.list = [...this.videoList.list, ...res2.data];
               this.videoId = "";
             }).catch((error2) => {
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:812", "获取视频列表报错", error2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:817", "获取视频列表报错", error2);
             });
           } else if (this.pageType == "errorList" || this.pageType == "recentlyList" || this.pageType == "collectList") {
             this.isFullscreen = false;
@@ -29166,7 +29170,7 @@ ${o3}
             } else if (this.pageType == "collectList") {
               byCategoryUrl = "/api/question/collectionList";
             }
-            formatAppLog("log", "at pages/page/study/answerQuestions.vue:829", "获取题目列表传参::", byCategoryUrl, byCategoryData);
+            formatAppLog("log", "at pages/page/study/answerQuestions.vue:834", "获取题目列表传参::", byCategoryUrl, byCategoryData);
             this.commonRequest({
               url: byCategoryUrl,
               data: byCategoryData
@@ -29174,7 +29178,7 @@ ${o3}
               if (res2.data.length == 0) {
                 this.videoList.noData = true;
               }
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:837", "错题本、最近练习题、收藏练习原始返回数据：", res2.data);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:842", "错题本、最近练习题、收藏练习原始返回数据：", res2.data);
               this.videoList.page = this.videoList.page + 1;
               this.isLoading = false;
               res2.data.forEach((item2, i2) => {
@@ -29202,13 +29206,13 @@ ${o3}
                 }
               });
               this.topicList = [...this.topicList, ...res2.data];
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:866", "错题本、最近练习题、收藏练习处理后的返回数据：", this.topicList);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:871", "错题本、最近练习题、收藏练习处理后的返回数据：", this.topicList);
             }).catch((error2) => {
               this.isReachedBottom = false;
-              formatAppLog("log", "at pages/page/study/answerQuestions.vue:869", "题目列表报错", error2);
+              formatAppLog("log", "at pages/page/study/answerQuestions.vue:874", "题目列表报错", error2);
             });
           } else {
-            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:872", "其他类型的不能点");
+            return formatAppLog("log", "at pages/page/study/answerQuestions.vue:877", "其他类型的不能点");
           }
         }
       },
@@ -29392,425 +29396,420 @@ ${o3}
               512
               /* NEED_PATCH */
             ),
-            vue.createElementVNode(
-              "view",
-              {
-                class: "page-wrap",
-                style: vue.normalizeStyle("padding-left:" + ($data.fullscreenMode && $data.isFullscreen ? 0 : $data.taskbarHeight2))
-              },
-              [
-                vue.createElementVNode("view", { class: "content-wrap" }, [
-                  vue.createCommentVNode(" 左侧类目 "),
-                  vue.createElementVNode("view", { class: "category-wrap" }, [
-                    vue.createElementVNode("view", { class: "subject-grade-wrap" }, [
-                      vue.createElementVNode(
-                        "span",
-                        { class: "grade" },
-                        vue.toDisplayString($data.categoryTree.grade),
-                        1
-                        /* TEXT */
-                      )
-                    ]),
-                    !$data.option.missionId ? (vue.openBlock(), vue.createElementBlock("scroll-view", {
-                      key: 0,
-                      class: "tree-wrap",
-                      "scroll-y": "true",
-                      "scroll-into-view": $data.treeID,
-                      "scroll-with-animation": true
-                    }, [
-                      (vue.openBlock(true), vue.createElementBlock(
-                        vue.Fragment,
-                        null,
-                        vue.renderList($data.categoryTree.category, (item, i2) => {
-                          return vue.openBlock(), vue.createElementBlock("view", {
-                            id: "tree-list-" + item.categoryId,
-                            class: vue.normalizeClass(["tree-list", $data.selectCategory.categoryId == item.categoryId ? "tree-selected" : ""]),
-                            onClick: vue.withModifiers(($event) => $options.choiceCategory(item), ["stop"])
-                          }, [
-                            vue.createElementVNode(
-                              "view",
-                              { class: "tree-list-title" },
-                              vue.toDisplayString(item.name),
-                              1
-                              /* TEXT */
-                            )
-                          ], 10, ["id", "onClick"]);
-                        }),
-                        256
-                        /* UNKEYED_FRAGMENT */
-                      ))
-                    ], 8, ["scroll-into-view"])) : vue.createCommentVNode("v-if", true)
+            vue.createElementVNode("view", {
+              class: "page-wrap",
+              style: vue.normalizeStyle("padding-left:" + ($data.fullscreenMode && $data.isFullscreen ? 0 : $data.taskbarHeight2)),
+              pageType: $data.pageType
+            }, [
+              vue.createElementVNode("view", { class: "content-wrap" }, [
+                vue.createCommentVNode(" 左侧类目 "),
+                vue.createElementVNode("view", { class: "category-wrap" }, [
+                  vue.createElementVNode("view", { class: "subject-grade-wrap" }, [
+                    vue.createElementVNode(
+                      "span",
+                      { class: "grade" },
+                      vue.toDisplayString($data.categoryTree.grade),
+                      1
+                      /* TEXT */
+                    )
                   ]),
-                  vue.createElementVNode("view", { class: "topic-wrap" }, [
-                    vue.createCommentVNode(" 右侧顶部功能区 "),
-                    vue.createElementVNode("view", { class: "topic-function-wrap" }, [
-                      $data.pageType != "everyDay" && !$data.option.missionId ? (vue.openBlock(), vue.createElementBlock("view", {
-                        key: 0,
-                        class: "search-btn-wrap"
-                      }, [
-                        vue.withDirectives(vue.createElementVNode(
-                          "input",
-                          {
-                            class: "search-input",
-                            type: "text",
-                            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.keyword = $event),
-                            placeholder: "你想学什么"
-                          },
-                          null,
-                          512
-                          /* NEED_PATCH */
-                        ), [
-                          [vue.vModelText, $data.keyword]
-                        ]),
-                        vue.createElementVNode("view", {
-                          class: "search-btn",
-                          onClick: _cache[2] || (_cache[2] = (...args) => $options.getQuestion && $options.getQuestion(...args))
-                        })
-                      ])) : vue.createCommentVNode("v-if", true),
-                      $data.pageType == "question" && $data.topic.questionId ? (vue.openBlock(), vue.createElementBlock("view", {
-                        key: 1,
-                        class: "collect-btn-wrap"
-                      }, [
-                        vue.createElementVNode("view", {
-                          class: "collect-btn",
-                          isCollect: $data.topic.isCollect,
-                          onClick: _cache[3] || (_cache[3] = vue.withModifiers(($event) => $options.collectTopic(), ["stop"]))
+                  !$data.option.missionId ? (vue.openBlock(), vue.createElementBlock("scroll-view", {
+                    key: 0,
+                    class: "tree-wrap",
+                    "scroll-y": "true",
+                    "scroll-into-view": $data.treeID,
+                    "scroll-with-animation": true
+                  }, [
+                    (vue.openBlock(true), vue.createElementBlock(
+                      vue.Fragment,
+                      null,
+                      vue.renderList($data.categoryTree.category, (item, i2) => {
+                        return vue.openBlock(), vue.createElementBlock("view", {
+                          id: "tree-list-" + item.categoryId,
+                          class: vue.normalizeClass(["tree-list", $data.selectCategory.categoryId == item.categoryId ? "tree-selected" : ""]),
+                          onClick: vue.withModifiers(($event) => $options.choiceCategory(item), ["stop"])
                         }, [
-                          vue.createElementVNode("view", { class: "collect-icon" }),
-                          vue.createTextVNode(
-                            " " + vue.toDisplayString($data.topic.isCollect ? "已收藏" : "收藏"),
+                          vue.createElementVNode(
+                            "view",
+                            { class: "tree-list-title" },
+                            vue.toDisplayString(item.name),
                             1
                             /* TEXT */
                           )
-                        ], 8, ["isCollect"])
-                      ])) : vue.createCommentVNode("v-if", true)
-                    ]),
-                    vue.createCommentVNode(" 答题右下方内容 "),
-                    $data.pageType == "everyDay" || $data.pageType == "question" ? (vue.openBlock(), vue.createElementBlock(
-                      "view",
-                      {
-                        key: 0,
-                        class: "topic-content-wrap",
-                        style: vue.normalizeStyle("padding-left:" + ($data.fullscreenMode && $data.isFullscreen ? $data.taskbarHeight2 : 0))
-                      },
-                      [
-                        vue.createElementVNode("view", { class: "topic" }, [
-                          _ctx.$store.state.openDebug ? (vue.openBlock(), vue.createElementBlock(
-                            "span",
-                            { key: 0 },
-                            "题目id:" + vue.toDisplayString($data.topic.questionId),
-                            1
-                            /* TEXT */
-                          )) : vue.createCommentVNode("v-if", true),
-                          !$data.topic.questionId ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 1,
-                            style: { "float": "left", "width": "100%" },
-                            class: "no-list-tip"
-                          }, " - 没有查询到题目 -")) : vue.createCommentVNode("v-if", true),
-                          vue.createElementVNode("h3", {
-                            class: "topic-text",
-                            innerHTML: $data.topic.content
-                          }, null, 8, ["innerHTML"]),
-                          vue.createElementVNode("view", { class: "topic-image-wrap" }, [
-                            (vue.openBlock(true), vue.createElementBlock(
-                              vue.Fragment,
-                              null,
-                              vue.renderList($data.topic.contentImages, (item) => {
-                                return vue.openBlock(), vue.createElementBlock("image", {
-                                  class: "topic-image",
-                                  src: item
-                                }, null, 8, ["src"]);
-                              }),
-                              256
-                              /* UNKEYED_FRAGMENT */
-                            ))
-                          ]),
-                          vue.createElementVNode("view", { class: "topic-options-wrap" }, [
-                            (vue.openBlock(true), vue.createElementBlock(
-                              vue.Fragment,
-                              null,
-                              vue.renderList($options.changeOptions($data.topic.options), (item, i2) => {
-                                return vue.openBlock(), vue.createElementBlock("view", {
-                                  class: vue.normalizeClass(["topic-options", {
-                                    "selected": !$data.answered && i2 === $data.current,
-                                    "check-correct": $data.answered && i2 === $data.current && item.optionName === $data.topic.answer,
-                                    "check-error": $data.answered && i2 === $data.current && item.optionName !== $data.topic.answer
-                                  }]),
-                                  current: i2,
-                                  onClick: ($event) => $options.clickOption(item, i2),
-                                  innerHTML: "<span class=options>" + item.optionName + "</span>" + item.option
-                                }, null, 10, ["current", "onClick", "innerHTML"]);
-                              }),
-                              256
-                              /* UNKEYED_FRAGMENT */
-                            ))
-                          ]),
-                          vue.createElementVNode("view", { class: "btn-wrap" }, [
-                            $data.pageType == "question" && $data.answered && !$data.isAnswerOnly && !$data.isNextTopic ? (vue.openBlock(), vue.createElementBlock("button", {
-                              key: 0,
-                              class: "topic-next",
-                              onClick: _cache[4] || (_cache[4] = (...args) => $options.nextTopic && $options.nextTopic(...args))
-                            }, "下一题")) : vue.createCommentVNode("v-if", true),
-                            !$data.answered && $data.topic.questionId ? (vue.openBlock(), vue.createElementBlock("button", {
-                              key: 1,
-                              class: "topic-submit",
-                              onClick: _cache[5] || (_cache[5] = (...args) => $options.submitTopic && $options.submitTopic(...args))
-                            }, "提交")) : vue.createCommentVNode("v-if", true),
-                            $data.parentPageType ? (vue.openBlock(), vue.createElementBlock("view", {
-                              key: 2,
-                              class: "back-list-btn",
-                              onClick: _cache[6] || (_cache[6] = ($event) => $options.backList())
-                            }, "返回列表")) : vue.createCommentVNode("v-if", true)
-                          ])
-                        ]),
-                        vue.createElementVNode("view", { class: "analysis-wrap" }, [
-                          $data.isFullscreen ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 0,
-                            class: "fullscreen-btn",
-                            type: $data.fullscreenMode,
-                            onClick: _cache[7] || (_cache[7] = vue.withModifiers((...args) => $options.changeFullscreenMode && $options.changeFullscreenMode(...args), ["stop"]))
-                          }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true),
-                          $data.answered ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 1,
-                            class: "analysis"
-                          }, [
-                            vue.createElementVNode("view", { class: "analysis-title" }, [
-                              vue.createElementVNode("span", { class: "title-icon" }),
-                              vue.createElementVNode("view", { class: "title" }, "我的答案")
-                            ]),
-                            vue.createElementVNode("view", {
-                              class: "answer-text",
-                              innerHTML: "<span class=options>" + $data.answer.optionName + "</span>" + $data.answer.option
-                            }, null, 8, ["innerHTML"]),
-                            vue.createElementVNode("view", {
-                              class: "analysis-text",
-                              onClick: _cache[8] || (_cache[8] = (...args) => $options.textAnalysis && $options.textAnalysis(...args))
-                            }, [
-                              vue.createElementVNode("view", { class: "analysis-icon" }),
-                              vue.createElementVNode(
-                                "span",
-                                null,
-                                vue.toDisplayString($data.topic.analysis || $data.topic.analysisImages.length > 0 ? $data.answer.optionName == $data.topic.answer ? "答对了!点这里看看解析来巩固一下!" : "答错了! 点这里看看解析也许会有用!" : $data.answer.optionName == $data.topic.answer ? "答对了！" : "答错了!"),
-                                1
-                                /* TEXT */
-                              )
-                            ]),
-                            vue.createCommentVNode(" 视频解析 "),
-                            $data.topic.videoId && $data.pageType == "everyDay" ? (vue.openBlock(), vue.createElementBlock("view", {
-                              key: 0,
-                              class: "other-analysis-wrap"
-                            }, [
-                              vue.createElementVNode("view", { class: "analysis-title" }, [
-                                vue.createElementVNode("span", { class: "title-icon" }),
-                                vue.createElementVNode("view", { class: "title" }, "视频解析")
-                              ]),
-                              vue.createElementVNode("view", {
-                                class: "play-video-btn",
-                                onClick: _cache[9] || (_cache[9] = ($event) => $options.playVideo())
-                              })
-                            ])) : vue.createCommentVNode("v-if", true),
-                            vue.createCommentVNode(" AI析题 "),
-                            $data.pageType == "everyDay" && $data.topic.hasAiAnalysis ? (vue.openBlock(), vue.createElementBlock("view", {
-                              key: 1,
-                              class: "lingbao-wrap"
-                            }, [
-                              vue.createElementVNode("view", {
-                                class: "lingbao-icon",
-                                onClick: _cache[10] || (_cache[10] = ($event) => $options.AIAnalysis())
-                              }),
-                              vue.createElementVNode("view", { class: "lingbao-image" })
-                            ])) : vue.createCommentVNode("v-if", true)
-                          ])) : vue.createCommentVNode("v-if", true)
-                        ])
-                      ],
-                      4
-                      /* STYLE */
-                    )) : vue.createCommentVNode("v-if", true),
-                    vue.createCommentVNode(" 错题本列表 、 收藏列表 、 最近练习列表 "),
-                    vue.withDirectives(vue.createElementVNode(
-                      "view",
-                      { class: "topic-list-wrap" },
-                      [
-                        vue.createElementVNode(
-                          "scroll-view",
-                          {
-                            class: "topic-list-window",
-                            "scroll-y": "true",
-                            onScrolltolower: _cache[11] || (_cache[11] = (...args) => $options.GetNextList && $options.GetNextList(...args))
-                          },
-                          [
-                            vue.createElementVNode("view", null, [
-                              (vue.openBlock(true), vue.createElementBlock(
-                                vue.Fragment,
-                                null,
-                                vue.renderList($data.topicList, (item) => {
-                                  return vue.openBlock(), vue.createElementBlock("view", {
-                                    class: "topic-list",
-                                    innerHTML: item.content,
-                                    onClick: vue.withModifiers(($event) => $options.getTopicDetails(item), ["stop"])
-                                  }, null, 8, ["innerHTML", "onClick"]);
-                                }),
-                                256
-                                /* UNKEYED_FRAGMENT */
-                              )),
-                              $data.videoList.noData ? (vue.openBlock(), vue.createElementBlock("view", {
-                                key: 0,
-                                style: { "float": "left", "width": "100%" },
-                                class: "no-list-tip"
-                              }, " - 没有更多题目了 -")) : vue.createCommentVNode("v-if", true)
-                            ])
-                          ],
-                          32
-                          /* NEED_HYDRATION */
-                        )
-                      ],
-                      512
-                      /* NEED_PATCH */
-                    ), [
-                      [vue.vShow, $data.pageType == "recentlyList" || $data.pageType == "errorList" || $data.pageType == "collectList"]
-                    ]),
-                    vue.createCommentVNode(" 详情 "),
-                    $data.pageType == "errorDetails" || $data.pageType == "recentlyDetails" || $data.pageType == "collectDetails" ? (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 1,
-                      class: "topic-details-wrap"
+                        ], 10, ["id", "onClick"]);
+                      }),
+                      256
+                      /* UNKEYED_FRAGMENT */
+                    ))
+                  ], 8, ["scroll-into-view"])) : vue.createCommentVNode("v-if", true)
+                ]),
+                vue.createElementVNode("view", { class: "topic-wrap" }, [
+                  vue.createCommentVNode(" 右侧顶部功能区 "),
+                  vue.createElementVNode("view", { class: "topic-function-wrap" }, [
+                    $data.pageType != "everyDay" && !$data.option.missionId ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 0,
+                      class: "search-btn-wrap"
                     }, [
-                      vue.createElementVNode(
-                        "scroll-view",
+                      vue.withDirectives(vue.createElementVNode(
+                        "input",
                         {
-                          class: "topic-details-window",
-                          "scroll-y": "true",
-                          onScrolltolower: _cache[15] || (_cache[15] = (...args) => $options.GetNextList && $options.GetNextList(...args))
+                          class: "search-input",
+                          type: "text",
+                          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.keyword = $event),
+                          placeholder: "你想学什么"
                         },
-                        [
-                          vue.createElementVNode("h3", {
-                            class: "topic-text",
-                            innerHTML: $data.topicDetails.content
-                          }, null, 8, ["innerHTML"]),
-                          $data.pageType == "errorDetails" ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 0,
-                            class: "details-error-wrap"
-                          }, [
-                            vue.createElementVNode("view", { class: "details-error-answer" }, [
-                              vue.createElementVNode("view", { class: "topic-answer-title" }, "你的答案"),
-                              vue.createElementVNode("view", {
-                                class: "answer",
-                                innerHTML: $data.topicDetails.userAnswer
-                              }, null, 8, ["innerHTML"])
-                            ]),
-                            vue.createElementVNode("view", { class: "details-error-answer" }, [
-                              vue.createElementVNode("view", { class: "topic-answer-title" }, "正确答案"),
-                              vue.createElementVNode("view", {
-                                class: "answer",
-                                innerHTML: $data.topicDetails.correctAnswer
-                              }, null, 8, ["innerHTML"])
-                            ])
-                          ])) : vue.createCommentVNode("v-if", true),
-                          $data.pageType == "recentlyDetails" || $data.pageType == "collectDetails" ? (vue.openBlock(), vue.createElementBlock("view", {
-                            key: 1,
-                            class: "topic-options-wrap"
-                          }, [
-                            (vue.openBlock(true), vue.createElementBlock(
-                              vue.Fragment,
-                              null,
-                              vue.renderList($options.changeOptions($data.topicDetails.options), (item, i2) => {
-                                return vue.openBlock(), vue.createElementBlock("view", {
-                                  class: "topic-options",
-                                  innerHTML: "<span class=options>" + item.optionName + "</span>" + item.option
-                                }, null, 8, ["innerHTML"]);
-                              }),
-                              256
-                              /* UNKEYED_FRAGMENT */
-                            ))
-                          ])) : vue.createCommentVNode("v-if", true),
-                          vue.createElementVNode("view", { class: "list-btn-wrap" }, [
-                            vue.createElementVNode("view", {
-                              class: "list-btn",
-                              onClick: _cache[12] || (_cache[12] = ($event) => $options.backList())
-                            }, "返回列表"),
-                            vue.createElementVNode("view", {
-                              class: "list-btn",
-                              onClick: _cache[13] || (_cache[13] = ($event) => $options.similarExercises($data.topicDetails))
-                            }, "同类练习"),
-                            vue.createElementVNode(
-                              "view",
-                              {
-                                class: "list-btn",
-                                onClick: _cache[14] || (_cache[14] = ($event) => $options.reAnswer($data.topicDetails))
-                              },
-                              vue.toDisplayString($data.pageType == "errorDetails" ? "重新作答" : "回答题目"),
-                              1
-                              /* TEXT */
-                            ),
-                            vue.createCommentVNode(' <view class="list-btn" @click="print(item2)">打印</view> ')
-                          ])
-                        ],
-                        32
-                        /* NEED_HYDRATION */
-                      )
+                        null,
+                        512
+                        /* NEED_PATCH */
+                      ), [
+                        [vue.vModelText, $data.keyword]
+                      ]),
+                      vue.createElementVNode("view", {
+                        class: "search-btn",
+                        onClick: _cache[2] || (_cache[2] = (...args) => $options.getQuestion && $options.getQuestion(...args))
+                      })
                     ])) : vue.createCommentVNode("v-if", true),
-                    vue.createCommentVNode(" 视频列表 "),
-                    $data.pageType == "video" ? (vue.openBlock(), vue.createElementBlock("view", {
-                      key: 2,
-                      class: "video-list-wrap"
+                    $data.pageType == "question" && $data.topic.questionId ? (vue.openBlock(), vue.createElementBlock("view", {
+                      key: 1,
+                      class: "collect-btn-wrap"
                     }, [
-                      vue.createElementVNode(
-                        "scroll-view",
-                        {
-                          class: "video-list-window",
-                          "scroll-y": "true",
-                          onScrolltolower: _cache[16] || (_cache[16] = (...args) => $options.GetNextList && $options.GetNextList(...args))
-                        },
-                        [
-                          vue.createElementVNode("view", { class: "name-wrap" }, [
-                            vue.createElementVNode("view", { class: "name" }, [
-                              vue.createTextVNode(
-                                vue.toDisplayString($data.selectCategory.name) + " ",
-                                1
-                                /* TEXT */
-                              ),
-                              vue.createElementVNode("span", { class: "border" })
-                            ])
-                          ]),
+                      vue.createElementVNode("view", {
+                        class: "collect-btn",
+                        isCollect: $data.topic.isCollect,
+                        onClick: _cache[3] || (_cache[3] = vue.withModifiers(($event) => $options.collectTopic(), ["stop"]))
+                      }, [
+                        vue.createElementVNode("view", { class: "collect-icon" }),
+                        vue.createTextVNode(
+                          " " + vue.toDisplayString($data.topic.isCollect ? "已收藏" : "收藏"),
+                          1
+                          /* TEXT */
+                        )
+                      ], 8, ["isCollect"])
+                    ])) : vue.createCommentVNode("v-if", true)
+                  ]),
+                  vue.createCommentVNode(" 答题右下方内容 "),
+                  $data.pageType == "everyDay" || $data.pageType == "question" ? (vue.openBlock(), vue.createElementBlock(
+                    "view",
+                    {
+                      key: 0,
+                      class: "topic-content-wrap",
+                      style: vue.normalizeStyle("padding-left:" + ($data.fullscreenMode && $data.isFullscreen ? $data.taskbarHeight2 : 0))
+                    },
+                    [
+                      vue.createElementVNode("view", { class: "topic" }, [
+                        _ctx.$store.state.openDebug ? (vue.openBlock(), vue.createElementBlock(
+                          "span",
+                          { key: 0 },
+                          "题目id:" + vue.toDisplayString($data.topic.questionId),
+                          1
+                          /* TEXT */
+                        )) : vue.createCommentVNode("v-if", true),
+                        !$data.topic.questionId ? (vue.openBlock(), vue.createElementBlock("view", {
+                          key: 1,
+                          style: { "float": "left", "width": "100%" },
+                          class: "no-list-tip"
+                        }, " - 没有查询到题目 -")) : vue.createCommentVNode("v-if", true),
+                        vue.createElementVNode("h3", {
+                          class: "topic-text",
+                          innerHTML: $data.topic.content
+                        }, null, 8, ["innerHTML"]),
+                        vue.createElementVNode("view", { class: "topic-image-wrap" }, [
                           (vue.openBlock(true), vue.createElementBlock(
                             vue.Fragment,
                             null,
-                            vue.renderList($data.videoList.list, (item) => {
-                              return vue.openBlock(), vue.createElementBlock("view", {
-                                class: "video-list",
-                                onClick: vue.withModifiers(($event) => $options.verifyPlayVideo(item), ["stop"])
-                              }, [
-                                vue.createElementVNode("div", { class: "video-img-wrap flex-center" }, [
-                                  item.vipLevel > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                                    key: 0,
-                                    class: "label"
-                                  }, "会员")) : vue.createCommentVNode("v-if", true),
-                                  vue.createElementVNode("image", {
-                                    "lazy-load": "",
-                                    class: "video-img",
-                                    src: item.coverUrl
-                                  }, null, 8, ["src"])
-                                ])
-                              ], 8, ["onClick"]);
+                            vue.renderList($data.topic.contentImages, (item) => {
+                              return vue.openBlock(), vue.createElementBlock("image", {
+                                class: "topic-image",
+                                src: item
+                              }, null, 8, ["src"]);
                             }),
                             256
                             /* UNKEYED_FRAGMENT */
-                          )),
-                          $data.videoList.noData ? (vue.openBlock(), vue.createElementBlock("view", {
+                          ))
+                        ]),
+                        vue.createElementVNode("view", { class: "topic-options-wrap" }, [
+                          (vue.openBlock(true), vue.createElementBlock(
+                            vue.Fragment,
+                            null,
+                            vue.renderList($options.changeOptions($data.topic.options), (item, i2) => {
+                              return vue.openBlock(), vue.createElementBlock("view", {
+                                class: vue.normalizeClass(["topic-options", {
+                                  "selected": !$data.answered && i2 === $data.current,
+                                  "check-correct": $data.answered && i2 === $data.current && item.optionName === $data.topic.answer,
+                                  "check-error": $data.answered && i2 === $data.current && item.optionName !== $data.topic.answer
+                                }]),
+                                current: i2,
+                                onClick: ($event) => $options.clickOption(item, i2),
+                                innerHTML: "<span class=options>" + item.optionName + "</span>" + item.option
+                              }, null, 10, ["current", "onClick", "innerHTML"]);
+                            }),
+                            256
+                            /* UNKEYED_FRAGMENT */
+                          ))
+                        ]),
+                        vue.createElementVNode("view", { class: "btn-wrap" }, [
+                          $data.pageType == "question" && $data.answered && !$data.isAnswerOnly && !$data.isNextTopic ? (vue.openBlock(), vue.createElementBlock("button", {
                             key: 0,
-                            style: { "float": "left", "width": "100%" },
-                            class: "no-list-tip"
-                          }, " - 没有更多视频了 -")) : vue.createCommentVNode("v-if", true)
+                            class: "topic-next",
+                            onClick: _cache[4] || (_cache[4] = (...args) => $options.nextTopic && $options.nextTopic(...args))
+                          }, "下一题")) : vue.createCommentVNode("v-if", true),
+                          !$data.answered && $data.topic.questionId ? (vue.openBlock(), vue.createElementBlock("button", {
+                            key: 1,
+                            class: "topic-submit",
+                            onClick: _cache[5] || (_cache[5] = (...args) => $options.submitTopic && $options.submitTopic(...args))
+                          }, "提交")) : vue.createCommentVNode("v-if", true),
+                          $data.parentPageType ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 2,
+                            class: "back-list-btn",
+                            onClick: _cache[6] || (_cache[6] = ($event) => $options.backList())
+                          }, "返回列表")) : vue.createCommentVNode("v-if", true)
+                        ])
+                      ]),
+                      vue.createElementVNode("view", { class: "analysis-wrap" }, [
+                        $data.isFullscreen ? (vue.openBlock(), vue.createElementBlock("view", {
+                          key: 0,
+                          class: "fullscreen-btn",
+                          type: $data.fullscreenMode,
+                          onClick: _cache[7] || (_cache[7] = vue.withModifiers((...args) => $options.changeFullscreenMode && $options.changeFullscreenMode(...args), ["stop"]))
+                        }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true),
+                        $data.answered ? (vue.openBlock(), vue.createElementBlock("view", {
+                          key: 1,
+                          class: "analysis"
+                        }, [
+                          vue.createElementVNode("view", { class: "analysis-title" }, [
+                            vue.createElementVNode("span", { class: "title-icon" }),
+                            vue.createElementVNode("view", { class: "title" }, "我的答案")
+                          ]),
+                          vue.createElementVNode("view", {
+                            class: "answer-text",
+                            innerHTML: "<span class=options>" + $data.answer.optionName + "</span>" + $data.answer.option
+                          }, null, 8, ["innerHTML"]),
+                          vue.createElementVNode("view", {
+                            class: "analysis-text",
+                            onClick: _cache[8] || (_cache[8] = (...args) => $options.textAnalysis && $options.textAnalysis(...args))
+                          }, [
+                            vue.createElementVNode("view", { class: "analysis-icon" }),
+                            vue.createElementVNode(
+                              "span",
+                              null,
+                              vue.toDisplayString($data.topic.analysis || $data.topic.analysisImages.length > 0 ? $data.answer.optionName == $data.topic.answer ? "答对了!点这里看看解析来巩固一下!" : "答错了! 点这里看看解析也许会有用!" : $data.answer.optionName == $data.topic.answer ? "答对了！" : "答错了!"),
+                              1
+                              /* TEXT */
+                            )
+                          ]),
+                          vue.createCommentVNode(" 视频解析 "),
+                          $data.topic.videoId && $data.pageType == "everyDay" ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "other-analysis-wrap"
+                          }, [
+                            vue.createElementVNode("view", { class: "analysis-title" }, [
+                              vue.createElementVNode("span", { class: "title-icon" }),
+                              vue.createElementVNode("view", { class: "title" }, "视频解析")
+                            ]),
+                            vue.createElementVNode("view", {
+                              class: "play-video-btn",
+                              onClick: _cache[9] || (_cache[9] = ($event) => $options.playVideo())
+                            })
+                          ])) : vue.createCommentVNode("v-if", true),
+                          vue.createCommentVNode(" AI析题 "),
+                          $data.pageType == "everyDay" && $data.topic.hasAiAnalysis ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 1,
+                            class: "lingbao-wrap"
+                          }, [
+                            vue.createElementVNode("view", {
+                              class: "lingbao-icon",
+                              onClick: _cache[10] || (_cache[10] = ($event) => $options.AIAnalysis())
+                            }),
+                            vue.createElementVNode("view", { class: "lingbao-image" })
+                          ])) : vue.createCommentVNode("v-if", true)
+                        ])) : vue.createCommentVNode("v-if", true)
+                      ])
+                    ],
+                    4
+                    /* STYLE */
+                  )) : vue.createCommentVNode("v-if", true),
+                  vue.createCommentVNode(" 错题本列表 、 收藏列表 、 最近练习列表 "),
+                  vue.withDirectives(vue.createElementVNode(
+                    "view",
+                    { class: "topic-list-wrap" },
+                    [
+                      vue.createElementVNode(
+                        "scroll-view",
+                        {
+                          class: "topic-list-window",
+                          "scroll-y": "true",
+                          onScrolltolower: _cache[11] || (_cache[11] = (...args) => $options.GetNextList && $options.GetNextList(...args))
+                        },
+                        [
+                          vue.createElementVNode("view", null, [
+                            (vue.openBlock(true), vue.createElementBlock(
+                              vue.Fragment,
+                              null,
+                              vue.renderList($data.topicList, (item) => {
+                                return vue.openBlock(), vue.createElementBlock("view", {
+                                  class: "topic-list",
+                                  innerHTML: item.content,
+                                  onClick: vue.withModifiers(($event) => $options.getTopicDetails(item), ["stop"])
+                                }, null, 8, ["innerHTML", "onClick"]);
+                              }),
+                              256
+                              /* UNKEYED_FRAGMENT */
+                            )),
+                            $data.videoList.noData ? (vue.openBlock(), vue.createElementBlock("view", {
+                              key: 0,
+                              style: { "float": "left", "width": "100%" },
+                              class: "no-list-tip"
+                            }, " - 没有更多题目了 -")) : vue.createCommentVNode("v-if", true)
+                          ])
                         ],
                         32
                         /* NEED_HYDRATION */
                       )
-                    ])) : vue.createCommentVNode("v-if", true)
-                  ])
+                    ],
+                    512
+                    /* NEED_PATCH */
+                  ), [
+                    [vue.vShow, $data.pageType == "recentlyList" || $data.pageType == "errorList" || $data.pageType == "collectList"]
+                  ]),
+                  vue.createCommentVNode(" 详情 "),
+                  $data.pageType == "errorDetails" || $data.pageType == "recentlyDetails" || $data.pageType == "collectDetails" ? (vue.openBlock(), vue.createElementBlock("view", {
+                    key: 1,
+                    class: "topic-details-wrap"
+                  }, [
+                    vue.createElementVNode(
+                      "scroll-view",
+                      {
+                        class: "topic-details-window",
+                        "scroll-y": "true",
+                        onScrolltolower: _cache[15] || (_cache[15] = (...args) => $options.GetNextList && $options.GetNextList(...args))
+                      },
+                      [
+                        vue.createElementVNode("h3", {
+                          class: "topic-text",
+                          innerHTML: $data.topicDetails.content
+                        }, null, 8, ["innerHTML"]),
+                        $data.pageType == "errorDetails" ? (vue.openBlock(), vue.createElementBlock("view", {
+                          key: 0,
+                          class: "details-error-wrap"
+                        }, [
+                          vue.createElementVNode("view", { class: "details-error-answer" }, [
+                            vue.createElementVNode("view", { class: "topic-answer-title" }, "你的答案"),
+                            vue.createElementVNode("view", {
+                              class: "answer",
+                              innerHTML: $data.topicDetails.userAnswer
+                            }, null, 8, ["innerHTML"])
+                          ]),
+                          vue.createElementVNode("view", { class: "details-error-answer" }, [
+                            vue.createElementVNode("view", { class: "topic-answer-title" }, "正确答案"),
+                            vue.createElementVNode("view", {
+                              class: "answer",
+                              innerHTML: $data.topicDetails.correctAnswer
+                            }, null, 8, ["innerHTML"])
+                          ])
+                        ])) : vue.createCommentVNode("v-if", true),
+                        $data.pageType == "recentlyDetails" || $data.pageType == "collectDetails" ? (vue.openBlock(), vue.createElementBlock("view", {
+                          key: 1,
+                          class: "topic-options-wrap"
+                        }, [
+                          (vue.openBlock(true), vue.createElementBlock(
+                            vue.Fragment,
+                            null,
+                            vue.renderList($options.changeOptions($data.topicDetails.options), (item, i2) => {
+                              return vue.openBlock(), vue.createElementBlock("view", {
+                                class: "topic-options",
+                                innerHTML: "<span class=options>" + item.optionName + "</span>" + item.option
+                              }, null, 8, ["innerHTML"]);
+                            }),
+                            256
+                            /* UNKEYED_FRAGMENT */
+                          ))
+                        ])) : vue.createCommentVNode("v-if", true),
+                        vue.createElementVNode("view", { class: "list-btn-wrap" }, [
+                          vue.createElementVNode("view", {
+                            class: "list-btn",
+                            onClick: _cache[12] || (_cache[12] = ($event) => $options.backList())
+                          }, "返回列表"),
+                          vue.createElementVNode("view", {
+                            class: "list-btn",
+                            onClick: _cache[13] || (_cache[13] = ($event) => $options.similarExercises($data.topicDetails))
+                          }, "同类练习"),
+                          vue.createElementVNode(
+                            "view",
+                            {
+                              class: "list-btn",
+                              onClick: _cache[14] || (_cache[14] = ($event) => $options.reAnswer($data.topicDetails))
+                            },
+                            vue.toDisplayString($data.pageType == "errorDetails" ? "重新作答" : "回答题目"),
+                            1
+                            /* TEXT */
+                          ),
+                          vue.createCommentVNode(' <view class="list-btn" @click="print(item2)">打印</view> ')
+                        ])
+                      ],
+                      32
+                      /* NEED_HYDRATION */
+                    )
+                  ])) : vue.createCommentVNode("v-if", true),
+                  vue.createCommentVNode(" 视频列表 "),
+                  $data.pageType == "video" ? (vue.openBlock(), vue.createElementBlock("view", {
+                    key: 2,
+                    class: "video-list-wrap"
+                  }, [
+                    vue.createElementVNode(
+                      "scroll-view",
+                      {
+                        class: "video-list-window",
+                        "scroll-y": "true",
+                        onScrolltolower: _cache[16] || (_cache[16] = (...args) => $options.GetNextList && $options.GetNextList(...args))
+                      },
+                      [
+                        vue.createElementVNode("view", { class: "name-wrap" }, [
+                          vue.createElementVNode("view", { class: "name" }, [
+                            vue.createTextVNode(
+                              vue.toDisplayString($data.selectCategory.name) + " ",
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode("span", { class: "border" })
+                          ])
+                        ]),
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList($data.videoList.list, (item) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              class: "video-list",
+                              onClick: vue.withModifiers(($event) => $options.verifyPlayVideo(item), ["stop"])
+                            }, [
+                              vue.createElementVNode("div", { class: "video-img-wrap flex-center" }, [
+                                item.vipLevel > 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                                  key: 0,
+                                  class: "label"
+                                }, "会员")) : vue.createCommentVNode("v-if", true),
+                                vue.createElementVNode("image", {
+                                  "lazy-load": "",
+                                  class: "video-img",
+                                  src: item.coverUrl
+                                }, null, 8, ["src"])
+                              ])
+                            ], 8, ["onClick"]);
+                          }),
+                          256
+                          /* UNKEYED_FRAGMENT */
+                        )),
+                        $data.videoList.noData ? (vue.openBlock(), vue.createElementBlock("view", {
+                          key: 0,
+                          style: { "float": "left", "width": "100%" },
+                          class: "no-list-tip"
+                        }, " - 没有更多视频了 -")) : vue.createCommentVNode("v-if", true)
+                      ],
+                      32
+                      /* NEED_HYDRATION */
+                    )
+                  ])) : vue.createCommentVNode("v-if", true)
                 ])
-              ],
-              4
-              /* STYLE */
-            )
+              ])
+            ], 12, ["pageType"])
           ],
           2
           /* CLASS */
@@ -34978,7 +34977,7 @@ ${o3}
     data() {
       return {
         pageHeadTitle: "",
-        exchangeTotal: "",
+        exchangeTotal: "0",
         commodity: {
           page: 0,
           noData: false,
@@ -34993,19 +34992,20 @@ ${o3}
       }).then((res2) => {
         this.exchangeTotal = res2.data.exchangeTotal;
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/user/redemptionHistory.vue:62", "获取我的兑换统计报错：：", error2);
+        formatAppLog("log", "at pages/page/user/redemptionHistory.vue:71", "获取我的兑换统计报错：：", error2);
       });
       this.commonRequest({
         url: "/api/exchange/redeem-history-grouped-count"
       }).then((res2) => {
-        formatAppLog("log", "at pages/page/user/redemptionHistory.vue:69", "获取月份兑换统计:", res2.data);
+        formatAppLog("log", "at pages/page/user/redemptionHistory.vue:78", "获取月份兑换统计:", res2.data);
         this.commodity.statistics = res2.data;
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/user/redemptionHistory.vue:72", "获取获取月份兑换统计报错：：", error2);
+        formatAppLog("log", "at pages/page/user/redemptionHistory.vue:81", "获取获取月份兑换统计报错：：", error2);
       });
       this.getCommodity();
     },
     onReady() {
+      store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
     },
     onShow() {
       this.pageOnShowSet({
@@ -35036,7 +35036,7 @@ ${o3}
             size: "10"
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/redemptionHistory.vue:115", "已兑换商品列表", res2.data);
+          formatAppLog("log", "at pages/page/user/redemptionHistory.vue:124", "已兑换商品列表", res2.data);
           if (res2.data.length == 0) {
             this.commodity.noData = true;
             return false;
@@ -35053,7 +35053,7 @@ ${o3}
             this.commodity.commodityList[year + "-" + month].data.push(item);
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/redemptionHistory.vue:132", "已兑换商品列表报错：：", error2);
+          formatAppLog("log", "at pages/page/user/redemptionHistory.vue:141", "已兑换商品列表报错：：", error2);
         });
       }
     }
@@ -35069,101 +35069,117 @@ ${o3}
           class: "page-wrap",
           style: { "padding-bottom": "0" }
         }, [
-          vue.createVNode(_component_page_head, {
-            ref: "pageHead",
-            title: $data.pageHeadTitle,
-            isBack: true,
-            background: "#fff"
-          }, null, 8, ["title"]),
+          vue.createElementVNode(
+            "view",
+            {
+              class: "banner-wrap",
+              style: vue.normalizeStyle("padding-top:" + _ctx.$store.state.taskbarHeight)
+            },
+            [
+              vue.createVNode(_component_page_head, {
+                ref: "pageHead",
+                title: $data.pageHeadTitle,
+                isBack: true,
+                background: "transparent"
+              }, null, 8, ["title"])
+            ],
+            4
+            /* STYLE */
+          ),
           vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
-            vue.createElementVNode("view", { class: "banner-wrap" }, [
-              vue.createElementVNode("h3", { class: "banner-title" }, "兑换记录"),
-              vue.createElementVNode(
-                "h3",
-                { class: "exchange-total" },
-                vue.toDisplayString($data.exchangeTotal),
-                1
-                /* TEXT */
-              )
-            ]),
             vue.createElementVNode("view", { class: "commodity-wrap" }, [
+              vue.createElementVNode("view", { class: "banner-info-wrap" }, [
+                vue.createElementVNode("view", { class: "banner-back" }),
+                vue.createElementVNode("view", { class: "banner-text" }, "商品兑换记录是用户通过智慧星、启明石、知识尘等虚拟币获得以下商品。"),
+                vue.createElementVNode("h3", { class: "exchange-total" }, [
+                  vue.createElementVNode("span", { class: "total-title" }, "已兑换："),
+                  vue.createTextVNode(
+                    " " + vue.toDisplayString($data.exchangeTotal),
+                    1
+                    /* TEXT */
+                  )
+                ])
+              ]),
               vue.createElementVNode(
                 "scroll-view",
                 {
                   "scroll-y": "true",
                   class: "commodity-list-wrap",
-                  onScrolltolower: _cache[0] || (_cache[0] = (...args) => $options.getCommodity && $options.getCommodity(...args))
+                  onScrolltolower: _cache[0] || (_cache[0] = (...args) => $options.getCommodity && $options.getCommodity(...args)),
+                  style: vue.normalizeStyle("height: calc(100vh - 420rpx - " + _ctx.$store.state.taskbarHeight + ");")
                 },
                 [
                   $data.commodity.commodityList && $data.commodity.commodityList.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
                     key: 0,
                     class: "no-list-tip"
                   }, "暂无数据")) : vue.createCommentVNode("v-if", true),
-                  (vue.openBlock(true), vue.createElementBlock(
-                    vue.Fragment,
-                    null,
-                    vue.renderList($data.commodity.commodityList, (item, i2) => {
-                      return vue.openBlock(), vue.createElementBlock("view", { class: "commodity-list-content-wrap" }, [
-                        vue.createElementVNode("view", { class: "item-title" }, [
-                          vue.createElementVNode(
-                            "h3",
-                            { class: "month-title" },
-                            vue.toDisplayString(item.title),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode(
-                            "h3",
-                            { class: "month-total" },
-                            vue.toDisplayString($data.commodity.statistics[i2]),
-                            1
-                            /* TEXT */
-                          )
-                        ]),
-                        (vue.openBlock(true), vue.createElementBlock(
-                          vue.Fragment,
-                          null,
-                          vue.renderList(item.data, (item2) => {
-                            return vue.openBlock(), vue.createElementBlock("view", {
-                              class: "commodity-list",
-                              onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeLogDetails?" + _ctx.objectToQueryString(item2) })
-                            }, [
-                              vue.createElementVNode("image", {
-                                class: "list-icon",
-                                src: item2.icon
-                              }, null, 8, ["src"]),
-                              vue.createElementVNode(
-                                "h3",
-                                { class: "list-title" },
-                                vue.toDisplayString(item2.productName),
-                                1
-                                /* TEXT */
-                              ),
-                              vue.createElementVNode(
-                                "view",
-                                { class: "list-time" },
-                                "兑换时间：" + vue.toDisplayString(this.changeTime(item2.redeemTime) || ""),
-                                1
-                                /* TEXT */
-                              )
-                            ], 8, ["onClick"]);
-                          }),
-                          256
-                          /* UNKEYED_FRAGMENT */
-                        ))
-                      ]);
-                    }),
-                    256
-                    /* UNKEYED_FRAGMENT */
-                  )),
+                  vue.createElementVNode("view", null, [
+                    (vue.openBlock(true), vue.createElementBlock(
+                      vue.Fragment,
+                      null,
+                      vue.renderList($data.commodity.commodityList, (item, i2) => {
+                        return vue.openBlock(), vue.createElementBlock("view", { class: "commodity-list-content-wrap" }, [
+                          vue.createElementVNode("view", { class: "item-title" }, [
+                            vue.createElementVNode(
+                              "h3",
+                              { class: "month-title" },
+                              vue.toDisplayString(item.title),
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode(
+                              "h3",
+                              { class: "month-total" },
+                              "兑换：" + vue.toDisplayString($data.commodity.statistics[i2]),
+                              1
+                              /* TEXT */
+                            )
+                          ]),
+                          (vue.openBlock(true), vue.createElementBlock(
+                            vue.Fragment,
+                            null,
+                            vue.renderList(item.data, (item2) => {
+                              return vue.openBlock(), vue.createElementBlock("view", {
+                                class: "commodity-list",
+                                onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeLogDetails?" + _ctx.objectToQueryString(item2) })
+                              }, [
+                                vue.createElementVNode("image", {
+                                  class: "list-icon",
+                                  src: item2.icon
+                                }, null, 8, ["src"]),
+                                vue.createElementVNode(
+                                  "h3",
+                                  { class: "list-title" },
+                                  vue.toDisplayString(item2.productName),
+                                  1
+                                  /* TEXT */
+                                ),
+                                vue.createElementVNode(
+                                  "view",
+                                  { class: "list-time" },
+                                  "兑换时间：" + vue.toDisplayString(this.changeTime(item2.redeemTime) || ""),
+                                  1
+                                  /* TEXT */
+                                )
+                              ], 8, ["onClick"]);
+                            }),
+                            256
+                            /* UNKEYED_FRAGMENT */
+                          ))
+                        ]);
+                      }),
+                      256
+                      /* UNKEYED_FRAGMENT */
+                    ))
+                  ]),
                   $data.commodity.noData ? (vue.openBlock(), vue.createElementBlock("view", {
                     key: 1,
                     style: { "float": "left", "width": "100%" },
                     class: "no-list-tip"
                   }, " - 没有更多了 -")) : vue.createCommentVNode("v-if", true)
                 ],
-                32
-                /* NEED_HYDRATION */
+                36
+                /* STYLE, NEED_HYDRATION */
               )
             ])
           ])
@@ -35446,7 +35462,7 @@ ${o3}
           url: "/api/mission/getAll",
           data: postData
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/taskList.vue:125", "任务列表::", res2);
+          formatAppLog("log", "at pages/page/user/taskList.vue:124", "任务列表::", res2);
           try {
             if (res2.data.list.length == 0) {
               this.noData = true;
@@ -35455,7 +35471,7 @@ ${o3}
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/taskList.vue:134", "获取任务列表报错：：", error2);
+          formatAppLog("log", "at pages/page/user/taskList.vue:133", "获取任务列表报错：：", error2);
         });
       }
     }
@@ -35470,17 +35486,16 @@ ${o3}
       [
         vue.createCommentVNode(' <view class="page-loading" v-if="pageMask"></view> '),
         vue.createElementVNode("view", { class: "page-wrap" }, [
-          vue.createVNode(_component_page_head, {
-            ref: "pageHead",
-            title: $data.pageHeadTitle,
-            isBack: true,
-            background: "transparent"
-          }, null, 8, ["title"]),
-          vue.createElementVNode("div", { class: "uni-padding-wrap" }, [
-            vue.createElementVNode("view", { class: "task-back" }, [
-              vue.createElementVNode("view", { class: "task-back-icon" }),
-              vue.createElementVNode("h3", { class: "task-back-title" }, "学习任务")
-            ]),
+          vue.createElementVNode("view", { class: "task-back" }, [
+            vue.createVNode(_component_page_head, {
+              ref: "pageHead",
+              title: $data.pageHeadTitle,
+              isBack: true,
+              background: "transparent"
+            }, null, 8, ["title"]),
+            vue.createElementVNode("view", { class: "task-back-icon" })
+          ]),
+          vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
             vue.createElementVNode("scroll-view", {
               class: "task-wrap",
               "scroll-y": "true",
@@ -40202,7 +40217,9 @@ ${o3}
           //0是整包升级 1是wgt升级
           edition_name: "1.0.1"
           //后端返回的版本名称
-        }
+        },
+        isUpdate: true
+        //是否显示更新弹窗
       };
     },
     onHide() {
@@ -40211,11 +40228,17 @@ ${o3}
         delta: 1
       });
     },
-    onLoad({ obj }) {
+    onLoad({
+      obj
+    }) {
       this.data = JSON.parse(obj);
+      formatAppLog("log", "at uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update.vue:65", this.data);
       if (this.data.edition_force == 0) {
         this.cancleBtn = true;
+      } else {
+        this.cancleBtn = false;
       }
+      this.isUpdate = true;
       plus.runtime.getProperty(plus.runtime.appid, (inf) => {
         this.version = inf.version;
       });
@@ -40228,10 +40251,18 @@ ${o3}
     methods: {
       cancel() {
         try {
+          let _this = this;
+          this.isUpdate = false;
           uni.navigateBack({
             delta: 1
           });
+          setTimeout(() => {
+            uni.reLaunch({
+              url: "/pages/page/index/index"
+            });
+          }, 500);
         } catch (e2) {
+          formatAppLog("log", "at uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update.vue:101", "报错", e2);
         }
       },
       confirm() {
@@ -40299,7 +40330,10 @@ ${o3}
     }
   };
   function _sfc_render$2l(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "update-mask flex-center" }, [
+    return $data.isUpdate ? (vue.openBlock(), vue.createElementBlock("view", {
+      key: 0,
+      class: "update-mask flex-center"
+    }, [
       vue.createElementVNode("view", { class: "content botton-radius" }, [
         vue.createElementVNode("view", { class: "content-top" }, [
           vue.createElementVNode("view", { class: "content-top-text" }, [
@@ -40381,7 +40415,7 @@ ${o3}
           onClick: _cache[1] || (_cache[1] = vue.withModifiers((...args) => $options.cancel && $options.cancel(...args), ["stop"]))
         })) : vue.createCommentVNode("v-if", true)
       ])
-    ]);
+    ])) : vue.createCommentVNode("v-if", true);
   }
   const UniModulesRtUniUpdateComponentsRtUniUpdateRtUniUpdate = /* @__PURE__ */ _export_sfc(_sfc_main$2m, [["render", _sfc_render$2l], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update.vue"]]);
   const _sfc_main$2l = {};
@@ -69269,10 +69303,9 @@ This will fail in production if not fixed.`);
             if (res2.data.package_type == 1 && res2.data.edition_silence == 1) {
               silenceUpdate$1(res2.data.edition_url);
             } else {
+              let _this = this;
               setTimeout(function() {
-                uni.navigateTo({
-                  url: "/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update?obj=" + JSON.stringify(res2.data)
-                });
+                _this.jumpPage({ url: "/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update?obj=" + JSON.stringify(res2.data) });
               }, 3e3);
             }
           }

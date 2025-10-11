@@ -1,5 +1,5 @@
 <template>
-	<view class="update-mask flex-center">
+	<view class="update-mask flex-center" v-if="isUpdate">
 		<view class="content botton-radius">
 			<view class="content-top">
 				<view class="content-top-text">
@@ -47,7 +47,8 @@
 					edition_force: 1, //是否强制更新 0代表否 1代表是
 					package_type: 0, //0是整包升级 1是wgt升级
 					edition_name: '1.0.1' //后端返回的版本名称
-				}
+				},
+				isUpdate: true //是否显示更新弹窗
 			};
 		},
 		onHide() { //解决应用切换到后台再次打开更新弹窗叠加多个的问题
@@ -57,11 +58,17 @@
 				delta: 1
 			})
 		},
-		onLoad({obj}) {
+		onLoad({
+			obj
+		}) {
 			this.data = JSON.parse(obj);
+			console.log(this.data)
 			if (this.data.edition_force == 0) {
 				this.cancleBtn = true;
+			} else {
+				this.cancleBtn = false;
 			}
+			this.isUpdate = true;
 			plus.runtime.getProperty(plus.runtime.appid, (inf) => {
 				this.version = inf.version;
 			})
@@ -78,11 +85,20 @@
 			cancel() {
 				//取消升级 返回上一页
 				try {
+					// console.log("返回上一级")
+					let _this = this;
+					this.isUpdate = false;
 					uni.navigateBack({
 						delta: 1
 					});
-				} catch (e) {
+					setTimeout(() => {
+						uni.reLaunch({
+							url: '/pages/page/index/index'
+						});
+					}, 500);
 
+				} catch (e) {
+					console.log("报错", e)
 				}
 
 			},
@@ -154,7 +170,6 @@
 					this.downloadedSize = (res.totalBytesWritten / Math.pow(1024, 2)).toFixed(2);
 					this.packageFileSize = (res.totalBytesExpectedToWrite / Math.pow(1024, 2)).toFixed(2);
 				});
-
 			}
 		}
 	};
