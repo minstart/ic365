@@ -33,7 +33,8 @@
 				<h4 class="banner-text-content">{{pageData.banner.content}}</h4>
 				<h5 class="banner-text-contentFrom">{{pageData.banner.contentFrom}}</h5>
 			</view>
-			<image class="statue" src="/static/image/analysis_image.png"></image>
+			<image class="statue" :src="userInfo.showCurrencyImg||'/static/image/analysis_image2.png'"></image>
+			<view class="disc"></view>
 			<view class="activity-wrap">
 				<image class="activity" @click="jumpPage({url:'/pages/page/study/calendar'})" src='/static/image/1_challenge.png'></image>
 				<image class="activity" @click="jumpPage({url:'/pages/page/team/team',type:'reLaunch'})" src='/static/image/1_study.png'></image>
@@ -618,8 +619,21 @@
 			position: absolute;
 			right: 50rpx;
 			bottom: 310rpx;
-			width: 220rpx;
-			height: 328rpx;
+			width: 218rpx;
+			height: 268rpx;
+			z-index: 2;
+		}
+		.disc{
+			position: absolute;
+			right: 70rpx;
+			bottom: 230rpx;
+			width: 180rpx;
+			height: 180rpx;
+			z-index: 1;
+			border-radius: 218rpx;
+			transform: rotateX(75deg);
+			background-color: #145C35;
+			opacity: 0.4;
 		}
 
 		.activity-wrap {

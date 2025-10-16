@@ -36,29 +36,7 @@
 			if (data.success) {
 				// console.log("初始化成功", data)
 				ydLogin.shouldQuickLogin((data) => {
-					console.log("检测是否符合条件",data)
-					if (!data.success) {
-						try {
-							// uni.showModal({
-							// 	content: '不具备一键登录网络环境（请保持手机卡移动数据联网），或者是否需要跳转到手机验证码登录？',
-							// 	showCancel: true,
-							// 	success: (res) => {
-							// 		if (res.confirm) {
-							// 			// 确认
-							// 			uni.reLaunch({
-							// 				url: '/pages/page/login/phoneLogin'
-							// 			});
-							// 		} else if (res.cancel) {
-							// 			// 取消
-							// 		}
-							// 	}
-							// })
-						} catch (e) {}
-
-						// console.log("不具备一键登录网络环境 - 跳转到账号密码登录", data)
-					} else {
-						// console.log("具备一键登录网络环境", data)
-					}
+					console.log("检测是否符合条件", data)
 				})
 			} else {
 				// console.log("初始化失败", data)
@@ -100,10 +78,10 @@
 				})
 			},
 			onLoad() {
-				
+
 			},
 			onReady() {
-				
+
 			},
 			methods: {
 				// 预取号
@@ -111,75 +89,14 @@
 					this.$refs['baseForm'].validate().then(res => {
 						uni.showLoading();
 						// #ifdef APP-PLUS
-						ydLogin.getPhoneNumberCompletion((data) => {
+						ydLogin.shouldQuickLogin((data) => {
+							console.log("检测是否符合条件", data)
 							uni.hideLoading()
-							let preNumberData = data;
-							if (data.success) {
-								console.log('预取号成功', data)
-								const platform = uni.getSystemInfoSync().platform
-								const config = {
-								}
-								if (platform === 'ios') {
-									config.presentDirectionType = 1;
-								}
-								try {
-									ydLogin.setCustomView(config, (data) => {
-										if (platform === 'ios') {
-											// console.log("ios自定义页面回调", data)
-										} else if (platform === 'android') {
-											// console.log("android自定义页面回调", data)
-										}
-									})
-								} catch (e) {}
-								
-								ydLogin.cucmctAuthorizeLoginCompletion((data) => {
-									console.log("data::", data)
-									if (!data.success && !data.cancel) {
-										console.log('授权失败', data)
-									} else if (data.cancel) {
-										console.log('用户取消', data)
-									} else {
-										// TODO: 授权成功处理，可以进行关闭授权页、服务端验证等
-										console.log('授权成功：：', data)
-										const _this = this;
-										this.commonRequest({
-											url: '/api/auth/oneClickLogin',
-											method: "post",
-											data: {
-												yidun_token: preNumberData.token,
-												telecom_token: data.accessToken
-											}
-										}).then(res => {
-											_this.setLogin(res.data)
-											console.log('/api/sms/forLogin：一键登陆成功:', res)
-											uni.showToast({
-												title: '登陆成功',
-												icon: 'success',
-												duration: 3000
-											})
-											setTimeout(() => {
-												uni.reLaunch({
-													url: "/pages/page/index/index"
-												});
-												ydLogin.closeAuthController()
-											}, 2000)
-										}).catch(error => {
-											this.$refs.pageHead.openMsgTips({
-												content: "一键登陆失败"
-											})
-											// console.error('一键登陆失败:', JSON.stringify(error))
-										})
-										return false;
-										// 下面是不用加密的
-									}
-								})
-								// console.log(456)
-							} else {
-								console.log('预取号失败了:', data)
+							if (!data.success) {
 								let _this = this;
 								this.$refs.pageHead.openPopupTips({
 									title: "提示",
-									content: data.msg || data.desc + '请关闭WiFi，使用中国移动、中国电信、中国联通数据流量，再点击一键登录！或者是否需要跳转到手机验证码登录？',
+									content: '不具备一键登录网络环境，请关闭WiFi，使用中国移动、中国联通、中国电信数据流量，再点击一键登录！或者是否需要跳转到手机验证码登录？',
 									success: res => {
 										this.$refs.pageHead.closePopupTips()
 										// 确认
@@ -188,8 +105,87 @@
 										});
 									}
 								})
+							} else {
+								ydLogin.getPhoneNumberCompletion((data) => {
+									uni.hideLoading()
+									let preNumberData = data;
+									if (data.success) {
+										console.log('预取号成功', data)
+										const platform = uni.getSystemInfoSync().platform
+										const config = {}
+										if (platform === 'ios') {
+											config.presentDirectionType = 1;
+										}
+										try {
+											ydLogin.setCustomView(config, (data) => {
+												if (platform === 'ios') {
+													// console.log("ios自定义页面回调", data)
+												} else if (platform === 'android') {
+													// console.log("android自定义页面回调", data)
+												}
+											})
+										} catch (e) {}
+
+										ydLogin.cucmctAuthorizeLoginCompletion((data) => {
+											console.log("data::", data)
+											if (!data.success && !data.cancel) {
+												console.log('授权失败', data)
+											} else if (data.cancel) {
+												console.log('用户取消', data)
+											} else {
+												// TODO: 授权成功处理，可以进行关闭授权页、服务端验证等
+												console.log('授权成功：：', data)
+												const _this = this;
+												this.commonRequest({
+													url: '/api/auth/oneClickLogin',
+													method: "post",
+													data: {
+														yidun_token: preNumberData.token,
+														telecom_token: data.accessToken
+													}
+												}).then(res => {
+													_this.setLogin(res.data)
+													console.log('/api/sms/forLogin：一键登陆成功:', res)
+													uni.showToast({
+														title: '登陆成功',
+														icon: 'success',
+														duration: 3000
+													})
+													setTimeout(() => {
+														uni.reLaunch({
+															url: "/pages/page/index/index"
+														});
+														ydLogin.closeAuthController()
+													}, 2000)
+												}).catch(error => {
+													this.$refs.pageHead.openMsgTips({
+														content: "一键登陆失败"
+													})
+													// console.error('一键登陆失败:', JSON.stringify(error))
+												})
+												return false;
+												// 下面是不用加密的
+											}
+										})
+										// console.log(456)
+									} else {
+										console.log('预取号失败了:', data)
+										let _this = this;
+										this.$refs.pageHead.openPopupTips({
+											title: "提示",
+											content: data.msg || data.desc + '请关闭WiFi，使用中国移动、中国电信、中国联通数据流量，再点击一键登录！或者是否需要跳转到手机验证码登录？',
+											success: res => {
+												this.$refs.pageHead.closePopupTips()
+												// 确认
+												uni.reLaunch({
+													url: '/pages/page/login/phoneLogin'
+												});
+											}
+										})
+									}
+								});
 							}
-						});
+						})
 						// #endif
 					}).catch(err => {
 						// console.log('err', err);

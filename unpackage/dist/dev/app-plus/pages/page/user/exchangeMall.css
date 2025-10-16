@@ -320,6 +320,7 @@
 .page-wrap[data-v-c19752be] {
   background: linear-gradient(#FFF0DC 0%, #F4F4F4 40%, #F4F4F4 100%);
   min-height: 100vh;
+  padding-bottom: 0;
 }
 .item-title-wrap[data-v-c19752be] {
   margin-top: 1rem;
@@ -420,9 +421,6 @@
 }
 .search-wrap .search-content-wrap .tab-overflow-bar .search-tab-wrap .selected[data-v-c19752be] {
   background: #FFE084;
-}
-.search-wrap .search-content-wrap .tab-content-wrap[data-v-c19752be] {
-  max-height: calc(100vh - 18.75rem);
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list[data-v-c19752be] {
   display: flex;

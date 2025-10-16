@@ -15841,7 +15841,7 @@ if (uni.restoreGlobal) {
   const _imports_0$8 = "/static/image/reward_back1.png";
   const _imports_1$3 = "/static/image/reward_back2.png";
   const _imports_2$3 = "/static/image/reward_back3.png";
-  const _imports_3$1 = "/static/image/reward_back4.png";
+  const _imports_3 = "/static/image/reward_back4.png";
   const _sfc_main$3z = {
     mixins: [commonJs],
     props: {
@@ -15922,7 +15922,7 @@ if (uni.restoreGlobal) {
                   }),
                   vue.createElementVNode("image", {
                     class: "back4",
-                    src: _imports_3$1,
+                    src: _imports_3,
                     mode: ""
                   }),
                   vue.createElementVNode("view", { class: "back5" }),
@@ -16088,10 +16088,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3y, [["render", _sfc_render$3x], ["__scopeId", "data-v-6a6cf342"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/task-details/task-details.vue"]]);
-  const _imports_0$7 = "/static/image/analysis_image.png";
-  const _imports_1$2 = "/static/image/1_challenge.png";
-  const _imports_2$2 = "/static/image/1_study.png";
-  const _imports_3 = "/static/image/1_achievement_back.png";
+  const _imports_0$7 = "/static/image/1_challenge.png";
+  const _imports_1$2 = "/static/image/1_study.png";
+  const _imports_2$2 = "/static/image/1_achievement_back.png";
   function getTimeOfDay() {
     const now2 = /* @__PURE__ */ new Date();
     const hours = now2.getHours();
@@ -16208,7 +16207,7 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:283", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:284", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
@@ -16236,7 +16235,7 @@ if (uni.restoreGlobal) {
                 }
               }).then((res3) => {
                 this.isSpecial = true;
-                formatAppLog("log", "at pages/page/index/index.vue:318", "检测升级返回的数据：", res3);
+                formatAppLog("log", "at pages/page/index/index.vue:319", "检测升级返回的数据：", res3);
                 if (Number(res3.data.edition_number) > Number(inf.versionCode) && res3.data.edition_issue == 1) {
                   if (res3.data.package_type == 1 && res3.data.edition_silence == 1) {
                     silenceUpdate(res3.data.edition_url);
@@ -16252,18 +16251,18 @@ if (uni.restoreGlobal) {
             });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:352", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:353", "获取用户信息报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:359", "推荐学习::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:360", "推荐学习::", res2.data);
           try {
             this.videos = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:364", "获取推荐学习失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:365", "获取推荐学习失败：：", error2);
         });
         this.commonRequest({
           url: "/api/mission/getAll",
@@ -16271,29 +16270,29 @@ if (uni.restoreGlobal) {
             size: 3
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:374", "首页任务列表::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:375", "首页任务列表::", res2);
           try {
             this.plan = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:380", "获取任务列表报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:381", "获取任务列表报错：：", error2);
         });
         this.commonRequest({
           url: "/api/achievement/mine"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:387", "最新成就::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:388", "最新成就::", res2);
           try {
             this.achievement = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:393", "获取最新成就失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:394", "获取最新成就失败：：", error2);
         });
         this.commonRequest({
           url: "/api/notice/getAll"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:400", "通知消息::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:401", "通知消息::", res2.data);
           try {
             if (res2.data.length > 0) {
               this.$store.state.rewardPopUpList = res2.data;
@@ -16304,10 +16303,10 @@ if (uni.restoreGlobal) {
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:410", "通知消息失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:411", "通知消息失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/index/index.vue:414", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/index/index.vue:415", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -16487,18 +16486,19 @@ if (uni.restoreGlobal) {
             ]),
             vue.createElementVNode("image", {
               class: "statue",
-              src: _imports_0$7
-            }),
+              src: $data.userInfo.showCurrencyImg || "/static/image/analysis_image2.png"
+            }, null, 8, ["src"]),
+            vue.createElementVNode("view", { class: "disc" }),
             vue.createElementVNode("view", { class: "activity-wrap" }, [
               vue.createElementVNode("image", {
                 class: "activity",
                 onClick: _cache[1] || (_cache[1] = ($event) => _ctx.jumpPage({ url: "/pages/page/study/calendar" })),
-                src: _imports_1$2
+                src: _imports_0$7
               }),
               vue.createElementVNode("image", {
                 class: "activity",
                 onClick: _cache[2] || (_cache[2] = ($event) => _ctx.jumpPage({ url: "/pages/page/team/team", type: "reLaunch" })),
-                src: _imports_2$2
+                src: _imports_1$2
               })
             ])
           ]),
@@ -16667,7 +16667,7 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "achievement-wrap" }, [
               vue.createElementVNode("image", {
                 class: "achievement-back",
-                src: _imports_3
+                src: _imports_2$2
               }),
               vue.createElementVNode(
                 "view",
@@ -33553,7 +33553,7 @@ ${o3}
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:237", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/user/user.vue:252", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
@@ -33565,49 +33565,49 @@ ${o3}
             });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:251", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:266", "获取用户信息报错：：", error2);
         });
         this.commonRequest({
           url: "/api/student/getResourcesGroups"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:258", "获取我资源(战衣/皮肤/名人堂...)", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:273", "获取我资源(战衣/皮肤/名人堂...)", res2.data);
           this.skinList = res2.data.currencies;
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:261", "获取我资源(战衣/皮肤/名人堂...)报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:276", "获取我资源(战衣/皮肤/名人堂...)报错：：", error2);
         });
         this.commonRequest({
           url: "/api/question/getRecentlyAndCollection"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:281", "获取最近题目和收藏题目数量", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:296", "获取最近题目和收藏题目数量", res2.data);
           res2.data.recently > 0 ? this.practiceList[1].list[0].unRead = res2.data.recently + "条新记录" : this.practiceList[1].list[0].unRead = "";
           this.practiceList[1].list[1].introduce = "已收藏" + (res2.data.collection || 0) + "个练习";
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:285", "获取最近题目和收藏题目数量报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:300", "获取最近题目和收藏题目数量报错：：", error2);
         });
         this.commonRequest({
           url: "/api/wrong-records/stats"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:292", "错题统计::", JSON.stringify(res2));
+          formatAppLog("log", "at pages/page/user/user.vue:307", "错题统计::", JSON.stringify(res2));
           try {
             res2.data.highFrequencyErrCount && (this.practiceList[2].list[0].unRead = res2.data.highFrequencyErrCount + "道高频错题");
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:297", "错题统计报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:312", "错题统计报错：：", error2);
         });
         this.commonRequest({
           url: "/api/exchange/stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:324", "获取我的兑换统计：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:339", "获取我的兑换统计：", res2.data);
           this.practiceList[3].list[0].introduce = "已兑换" + (res2.data.exchangeTotal || 0) + "件物品";
           this.practiceList[3].list[1].introduce = (res2.data.availableExchangeCount || 0) + "件商品可兑换";
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:330", "获取我的兑换统计报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:345", "获取我的兑换统计报错：：", error2);
         });
         this.commonRequest({
           url: "/api/mission/mine-stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:337", "我的任务：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:352", "我的任务：", res2.data);
           this.practiceList[0].list = [];
           res2.data.forEach((item) => {
             this.practiceList[0].list.push({
@@ -33621,7 +33621,7 @@ ${o3}
             });
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:351", "我的任务报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:366", "我的任务报错：：", error2);
         });
       });
       this.pageOnShowSet({
@@ -33677,17 +33677,17 @@ ${o3}
           this.commonRequest({
             url: "/api/student/info"
           }).then((res3) => {
-            formatAppLog("log", "at pages/page/user/user.vue:418", "获取用户信息::", res3);
+            formatAppLog("log", "at pages/page/user/user.vue:433", "获取用户信息::", res3);
             try {
               store.commit("Update_UserInfo", res3.data);
               this.userInfo = res3.data;
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/user/user.vue:425", "获取用户信息报错：：", error2);
+            formatAppLog("log", "at pages/page/user/user.vue:440", "获取用户信息报错：：", error2);
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:428", "兑换商品报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:443", "兑换商品报错：：", error2);
         });
       }
     }
@@ -33838,8 +33838,32 @@ ${o3}
                   ),
                   vue.createElementVNode("view", { class: "item-info-title" }, "知识尘")
                 ])
+              ])
+            ])
+          ]),
+          vue.createElementVNode("view", { class: "uni-padding-wrap" }, [
+            vue.createElementVNode("view", { class: "change-wear-wrap flex-center" }, [
+              vue.createElementVNode("view", {
+                class: "change-wear",
+                onClick: _cache[4] || (_cache[4] = ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeMall" }))
+              }, [
+                vue.createElementVNode("view", { class: "wear-icon" }),
+                vue.createElementVNode("view", { class: "wear-title-wrap" }, [
+                  vue.createElementVNode("h3", { class: "wear-title" }, "称号"),
+                  vue.createElementVNode("p", { class: "wear-subTitle" }, "更换称号展示")
+                ])
               ]),
-              vue.createCommentVNode(' <view class="user-id">\r\n					<view class="userId-title">守护者ID</view>\r\n					<h3 class="userId">{{userInfo.userId}}</h3>\r\n				</view> ')
+              vue.createElementVNode("view", { class: "border" }),
+              vue.createElementVNode("view", {
+                class: "change-wear",
+                onClick: _cache[5] || (_cache[5] = ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeMall" }))
+              }, [
+                vue.createElementVNode("view", { class: "wear-icon" }),
+                vue.createElementVNode("view", { class: "wear-title-wrap" }, [
+                  vue.createElementVNode("h3", { class: "wear-title" }, "萌宝"),
+                  vue.createElementVNode("p", { class: "wear-subTitle" }, "更换萌宝展示")
+                ])
+              ])
             ])
           ]),
           vue.createElementVNode("view", { class: "uni-padding-wrap uni-common-mt tab-wrap" }, [
@@ -34075,7 +34099,7 @@ ${o3}
               vue.createElementVNode("view", { class: "item-more" }, [
                 vue.createElementVNode("view", {
                   class: "text icon-more",
-                  onClick: _cache[4] || (_cache[4] = ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeMall" }))
+                  onClick: _cache[6] || (_cache[6] = ($event) => _ctx.jumpPage({ url: "/pages/page/user/exchangeMall" }))
                 }, "查看更多")
               ])
             ]),
@@ -34211,15 +34235,22 @@ ${o3}
         current: 0,
         selectProductsId: "",
         productsTab: [],
-        productsList: {}
+        productsList: {},
+        option: {},
+        isLoading: false
       };
     },
-    onLoad() {
+    onLoad(option) {
+      option && (this.option = option);
+      if (option && option.tabId) {
+        this.selectProductsId = option.tabId;
+        this.current = 1;
+      }
       this.verifLogin().then((data) => {
         this.commonRequest({
           url: "/api/achievement/group-types"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/achievementDetails.vue:100", "兑换资源类型(Tab)::", res2);
+          formatAppLog("log", "at pages/page/user/achievementDetails.vue:107", "兑换资源类型(Tab)::", res2);
           for (let i2 in res2.data) {
             try {
               !this.selectProductsId && (this.selectProductsId = i2);
@@ -34235,9 +34266,11 @@ ${o3}
             } catch (e2) {
             }
           }
-          this.getProducts();
+          this.getProducts({
+            reset: true
+          });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/achievementDetails.vue:117", "兑换资源类型(Tab)报错：：", error2);
+          formatAppLog("log", "at pages/page/user/achievementDetails.vue:126", "兑换资源类型(Tab)报错：：", error2);
         });
       });
     },
@@ -34247,14 +34280,16 @@ ${o3}
       this.pageOnShowSet({
         uniHide: "all"
       }).then((res2) => {
-        formatAppLog("log", "at pages/page/user/achievementDetails.vue:126", "this.selectProductsId:", this.selectProductsId);
+        formatAppLog("log", "at pages/page/user/achievementDetails.vue:135", "this.selectProductsId:", this.selectProductsId);
         if (this.selectProductsId) {
-          this.getProducts();
+          this.getProducts({
+            reset: true
+          });
         }
         this.commonRequest({
           url: "/api/achievement/stats"
         }).then((res3) => {
-          formatAppLog("log", "at pages/page/user/achievementDetails.vue:134", "成就统计:", res3.data);
+          formatAppLog("log", "at pages/page/user/achievementDetails.vue:145", "成就统计:", res3.data);
           this.progress = res3.data;
           this.progress.list = [];
           this.progress.list.push(res3.data.groupTypeCounts["铜质"] || 0);
@@ -34283,35 +34318,69 @@ ${o3}
         if (this.current !== i2) {
           this.selectProductsId = item.id;
           this.current = i2;
-          this.getProducts();
+          this.getProducts({
+            changeType: "tab"
+          });
         }
       },
       // 获取商品
       getProducts(data) {
-        if (!this.selectProductsId)
-          return;
         if (data && data.reset) {
           this.productsTab.forEach((item) => {
-            this.productsList["products" + item.id].requested = false;
-            this.productsList["products" + item.id].list = [];
+            this.productsList["products" + item.id] = {
+              requested: false,
+              page: 0,
+              noData: false,
+              list: []
+            };
           });
+        } else {
+          if (this.productsList["products" + this.selectProductsId].noData)
+            return false;
         }
-        if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-          this.commonRequest({
-            url: "/api/achievement/list",
-            data: {
-              search: this.keyword,
-              groupType: this.selectProductsId,
-              size: "20"
+        this.getProductsDetail(data);
+      },
+      getProductsDetail(data) {
+        let number = 10;
+        let page = Number(this.productsList["products" + this.selectProductsId].page);
+        if (data && data.changeType) {
+          if (data.changeType == "tab") {
+            if (page == 0) {
+              page = page + 1;
+            } else {
+              return false;
             }
-          }).then((res2) => {
-            formatAppLog("log", "at pages/page/user/achievementDetails.vue:191", "获取成就列表:", res2.data);
-            this.productsList["products" + this.selectProductsId].requested = true;
-            this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res2.data);
-          }).catch((error2) => {
-            formatAppLog("log", "at pages/page/user/achievementDetails.vue:195", "获取成就列表报错：：", error2);
-          });
+          }
+        } else {
+          page = page + 1;
         }
+        let postData = {
+          search: this.keyword,
+          page,
+          groupType: this.selectProductsId,
+          size: number.toString()
+        };
+        this.isLoading = true;
+        formatAppLog("log", "at pages/page/user/achievementDetails.vue:222", "请求参数：", postData);
+        this.commonRequest({
+          url: "/api/achievement/list",
+          data: postData
+        }).then((res2) => {
+          this.isLoading = false;
+          if (res2.data.length == 0) {
+            this.productsList["products" + this.selectProductsId].noData = true;
+            return false;
+          } else if (res2.data.length != number) {
+            this.productsList["products" + this.selectProductsId].noData = true;
+          }
+          formatAppLog("log", "at pages/page/user/achievementDetails.vue:236", "获取成就列表:", res2.data);
+          this.productsList["products" + this.selectProductsId].requested = true;
+          this.productsList["products" + this.selectProductsId].page = (this.productsList["products" + this.selectProductsId].page ? this.productsList["products" + this.selectProductsId].page : 0) + 1;
+          this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res2.data);
+          formatAppLog("log", "at pages/page/user/achievementDetails.vue:240", this.productsList["products" + this.selectProductsId]);
+        }).catch((error2) => {
+          formatAppLog("log", "at pages/page/user/achievementDetails.vue:242", "获取成就列表报错：：", error2);
+        });
       }
     }
   };
@@ -34430,106 +34499,108 @@ ${o3}
                     ))
                   ])
                 ]),
-                vue.createElementVNode("view", { class: "tab-content-wrap" }, [
-                  (vue.openBlock(true), vue.createElementBlock(
-                    vue.Fragment,
-                    null,
-                    vue.renderList($data.productsTab, (item, i2) => {
-                      return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
-                        class: "table-list-wrap",
-                        current: $data.current
-                      }, [
-                        vue.createElementVNode("view", { class: "item-title-wrap" }, [
-                          vue.createElementVNode(
-                            "h3",
-                            { class: "item-title" },
-                            vue.toDisplayString(item.name),
-                            1
-                            /* TEXT */
-                          )
-                        ]),
-                        $data.productsList["products" + item.id] && $data.productsList["products" + item.id].list.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                          key: 0,
-                          class: "no-list-tip"
-                        }, "暂无数据")) : vue.createCommentVNode("v-if", true),
-                        vue.createElementVNode(
-                          "scroll-view",
-                          {
-                            "scroll-y": "true",
-                            class: "scroll-Y",
-                            onScrolltoupper: _cache[2] || (_cache[2] = (...args) => _ctx.upper && _ctx.upper(...args)),
-                            onScrolltolower: _cache[3] || (_cache[3] = (...args) => _ctx.lower && _ctx.lower(...args)),
-                            onScroll: _cache[4] || (_cache[4] = (...args) => _ctx.scroll && _ctx.scroll(...args))
-                          },
-                          [
-                            (vue.openBlock(true), vue.createElementBlock(
-                              vue.Fragment,
-                              null,
-                              vue.renderList($data.productsList["products" + item.id].list, (item2) => {
-                                return vue.openBlock(), vue.createElementBlock("view", { class: "tab-list" }, [
-                                  vue.createElementVNode("div", { class: "list-icon-wrap flex-center" }, [
-                                    vue.createElementVNode("image", {
-                                      "lazy-load": "",
-                                      class: "list-icon",
-                                      src: item2.imgPath,
-                                      mode: ""
-                                    }, null, 8, ["src"])
-                                  ]),
-                                  vue.createElementVNode("view", { class: "list-info" }, [
-                                    vue.createElementVNode(
-                                      "h3",
-                                      { class: "info-title" },
-                                      vue.toDisplayString(item2.name),
-                                      1
-                                      /* TEXT */
-                                    ),
-                                    vue.createElementVNode(
-                                      "view",
-                                      { class: "info-subtitle" },
-                                      vue.toDisplayString(item2.subtitle),
-                                      1
-                                      /* TEXT */
-                                    ),
-                                    vue.createElementVNode("view", { class: "achievement-type" }, [
-                                      vue.createElementVNode("h3", {
-                                        class: "type",
-                                        typeId: item2.type
-                                      }, [
-                                        vue.createElementVNode("view", { class: "icon" }),
-                                        vue.createElementVNode(
-                                          "view",
-                                          { class: "text" },
-                                          vue.toDisplayString(item2.typeName) + "成就",
-                                          1
-                                          /* TEXT */
-                                        )
-                                      ], 8, ["typeId"]),
+                vue.createElementVNode(
+                  "scroll-view",
+                  {
+                    class: "tab-content-wrap",
+                    "scroll-y": "true",
+                    onScrolltolower: _cache[2] || (_cache[2] = ($event) => $options.getProducts()),
+                    style: vue.normalizeStyle("max-height: calc(100vh - 1070rpx - " + _ctx.$store.state.taskbarHeight + ");")
+                  },
+                  [
+                    (vue.openBlock(true), vue.createElementBlock(
+                      vue.Fragment,
+                      null,
+                      vue.renderList($data.productsTab, (item, i2) => {
+                        return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
+                          class: "table-list-wrap",
+                          current: $data.current
+                        }, [
+                          vue.createElementVNode("view", { class: "item-title-wrap" }, [
+                            vue.createElementVNode(
+                              "h3",
+                              { class: "item-title" },
+                              vue.toDisplayString(item.name),
+                              1
+                              /* TEXT */
+                            )
+                          ]),
+                          $data.productsList["products" + item.id] && $data.productsList["products" + item.id].list.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 0,
+                            class: "no-list-tip"
+                          }, "暂无数据")) : vue.createCommentVNode("v-if", true),
+                          (vue.openBlock(true), vue.createElementBlock(
+                            vue.Fragment,
+                            null,
+                            vue.renderList($data.productsList["products" + item.id].list, (item2) => {
+                              return vue.openBlock(), vue.createElementBlock("view", { class: "tab-list" }, [
+                                vue.createElementVNode("div", { class: "list-icon-wrap flex-center" }, [
+                                  vue.createElementVNode("image", {
+                                    "lazy-load": "",
+                                    class: "list-icon",
+                                    src: item2.imgPath,
+                                    mode: ""
+                                  }, null, 8, ["src"])
+                                ]),
+                                vue.createElementVNode("view", { class: "list-info" }, [
+                                  vue.createElementVNode(
+                                    "h3",
+                                    { class: "info-title" },
+                                    vue.toDisplayString(item2.name),
+                                    1
+                                    /* TEXT */
+                                  ),
+                                  vue.createElementVNode(
+                                    "view",
+                                    { class: "info-subtitle" },
+                                    vue.toDisplayString(item2.subtitle),
+                                    1
+                                    /* TEXT */
+                                  ),
+                                  vue.createElementVNode("view", { class: "achievement-type" }, [
+                                    vue.createElementVNode("h3", {
+                                      class: "type",
+                                      typeId: item2.type
+                                    }, [
+                                      vue.createElementVNode("view", { class: "icon" }),
                                       vue.createElementVNode(
                                         "view",
-                                        { class: "time" },
-                                        vue.toDisplayString(item2.obtainTimeUnix ? _ctx.changeDate(item2.obtainTimeUnix * 1e3).fullDate + " 获得" : ""),
+                                        { class: "text" },
+                                        vue.toDisplayString(item2.typeName) + "成就",
                                         1
                                         /* TEXT */
                                       )
-                                    ])
+                                    ], 8, ["typeId"]),
+                                    vue.createElementVNode(
+                                      "view",
+                                      { class: "time" },
+                                      vue.toDisplayString(item2.obtainTimeUnix ? _ctx.changeDate(item2.obtainTimeUnix * 1e3).fullDate + " 获得" : ""),
+                                      1
+                                      /* TEXT */
+                                    )
                                   ])
-                                ]);
-                              }),
-                              256
-                              /* UNKEYED_FRAGMENT */
-                            ))
-                          ],
-                          32
-                          /* NEED_HYDRATION */
-                        )
-                      ], 8, ["current"])), [
-                        [vue.vShow, $data.current == i2]
-                      ]);
-                    }),
-                    256
-                    /* UNKEYED_FRAGMENT */
-                  ))
-                ])
+                                ])
+                              ]);
+                            }),
+                            256
+                            /* UNKEYED_FRAGMENT */
+                          )),
+                          vue.createCommentVNode(` <view v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && !productsList['products' + item.id].noData && !isLoading" class="get-more-btn" @click="getProducts()"></view> `),
+                          $data.productsList["products" + item.id] && $data.productsList["products" + item.id].list.length > 0 && $data.productsList["products" + item.id].noData ? (vue.openBlock(), vue.createElementBlock("view", {
+                            key: 1,
+                            class: "no-list-tip"
+                          }, "- 没有更多了 -")) : vue.createCommentVNode("v-if", true)
+                        ], 8, ["current"])), [
+                          [vue.vShow, $data.current == i2]
+                        ]);
+                      }),
+                      256
+                      /* UNKEYED_FRAGMENT */
+                    ))
+                  ],
+                  36
+                  /* STYLE, NEED_HYDRATION */
+                )
               ])
             ])
           ])
@@ -34558,7 +34629,7 @@ ${o3}
     },
     onLoad(option) {
       option && (this.option = option);
-      if (option.tabId) {
+      if (option && option.tabId) {
         this.selectProductsId = option.tabId;
         this.current = 1;
       }
@@ -34568,7 +34639,7 @@ ${o3}
         this.commonRequest({
           url: "/api/exchange/group-types"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/exchangeMall.vue:117", "兑换资源类型(Tab)::", res2);
+          formatAppLog("log", "at pages/page/user/exchangeMall.vue:119", "兑换资源类型(Tab)::", res2);
           for (let i2 in res2.data) {
             try {
               !this.selectProductsId && (this.selectProductsId = i2);
@@ -34584,9 +34655,11 @@ ${o3}
             } catch (e2) {
             }
           }
-          this.getProducts({ reset: true });
+          this.getProducts({
+            reset: true
+          });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/exchangeMall.vue:134", "兑换资源类型(Tab)报错：：", error2);
+          formatAppLog("log", "at pages/page/user/exchangeMall.vue:138", "兑换资源类型(Tab)报错：：", error2);
         });
       });
     },
@@ -34611,19 +34684,20 @@ ${o3}
         if (this.current !== i2) {
           this.selectProductsId = item.id;
           this.current = i2;
-          this.getProducts();
+          this.getProducts({
+            changeType: "tab"
+          });
         }
       },
       // 点击兑换商品
       exchange(data) {
         if (data.obtained)
-          return formatAppLog("log", "at pages/page/user/exchangeMall.vue:168", "已拥有：", data.productionId);
-        formatAppLog("log", "at pages/page/user/exchangeMall.vue:169", data);
+          return formatAppLog("log", "at pages/page/user/exchangeMall.vue:174", "已拥有：", data.productionId);
         this.verifVip({
           vip: data.vipLevel,
           myvip: this.userInfo.vipLevel
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/exchangeMall.vue:174", "校验通过");
+          formatAppLog("log", "at pages/page/user/exchangeMall.vue:179", "校验通过");
           this.commonRequest({
             url: "/api/exchange/redeem",
             data: {
@@ -34634,7 +34708,7 @@ ${o3}
             this.commonRequest({
               url: "/api/student/info"
             }).then((res4) => {
-              formatAppLog("log", "at pages/page/user/exchangeMall.vue:187", "获取用户信息::", res4);
+              formatAppLog("log", "at pages/page/user/exchangeMall.vue:192", "获取用户信息::", res4);
               try {
                 store.commit("Update_UserInfo", res4.data);
                 this.userInfo = res4.data;
@@ -34649,13 +34723,13 @@ ${o3}
                 });
               }, 1500);
             }).catch((error2) => {
-              formatAppLog("log", "at pages/page/user/exchangeMall.vue:201", "获取用户信息报错：：", error2);
+              formatAppLog("log", "at pages/page/user/exchangeMall.vue:206", "获取用户信息报错：：", error2);
             });
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/user/exchangeMall.vue:204", "兑换商品报错：：", error2);
+            formatAppLog("log", "at pages/page/user/exchangeMall.vue:209", "兑换商品报错：：", error2);
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/exchangeMall.vue:207", "校验不通过");
+          formatAppLog("log", "at pages/page/user/exchangeMall.vue:212", "校验不通过");
         });
         return false;
       },
@@ -34677,21 +34751,34 @@ ${o3}
         this.getProductsDetail(data);
       },
       // 获取兑换商品列表
-      getProductsDetail() {
-        let number = 15;
+      getProductsDetail(data) {
+        let number = 10;
+        let page = Number(this.productsList["products" + this.selectProductsId].page);
+        if (data && data.changeType) {
+          if (data.changeType == "tab") {
+            if (page == 0) {
+              page = page + 1;
+            } else {
+              return false;
+            }
+          }
+        } else {
+          page = page + 1;
+        }
         let postData = {
           keyword: this.keyword,
-          page: this.productsList["products" + this.selectProductsId].page + 1,
+          page,
           type: this.selectProductsId,
           size: number.toString()
         };
-        formatAppLog("log", "at pages/page/user/exchangeMall.vue:242", "请求参数：", postData);
+        this.isLoading = true;
+        formatAppLog("log", "at pages/page/user/exchangeMall.vue:256", "请求参数：", postData);
         this.commonRequest({
           url: "/api/exchange/products",
-          method: "POST",
           data: postData
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/exchangeMall.vue:248", "获取兑换商品列表:", res2.data);
+          formatAppLog("log", "at pages/page/user/exchangeMall.vue:261", "获取兑换商品列表:", res2.data);
+          this.isLoading = false;
           if (res2.data.length == 0) {
             this.productsList["products" + this.selectProductsId].noData = true;
             return false;
@@ -34711,7 +34798,7 @@ ${o3}
               res2.data[i2].isExchange = myCurrency >= item.quantity;
             });
           } catch (e2) {
-            formatAppLog("log", "at pages/page/user/exchangeMall.vue:268", e2);
+            formatAppLog("log", "at pages/page/user/exchangeMall.vue:282", e2);
           }
           this.productsList["products" + this.selectProductsId].requested = true;
           this.productsList["products" + this.selectProductsId].page = (this.productsList["products" + this.selectProductsId].page ? this.productsList["products" + this.selectProductsId].page : 0) + 1;
@@ -34721,7 +34808,7 @@ ${o3}
           });
           this.productsList["products" + this.selectProductsId].list = uniqueItems;
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/exchangeMall.vue:281", "获取兑换商品列表报错：：", error2);
+          formatAppLog("log", "at pages/page/user/exchangeMall.vue:295", "获取兑换商品列表报错：：", error2);
         });
       }
     }
@@ -34818,12 +34905,14 @@ ${o3}
                     ))
                   ])
                 ]),
+                vue.createCommentVNode('  scroll-y="true" @scrolltolower="getProducts()" '),
                 vue.createElementVNode(
                   "scroll-view",
                   {
                     class: "tab-content-wrap",
                     "scroll-y": "true",
-                    onScrolltolower: _cache[2] || (_cache[2] = ($event) => $options.getProducts())
+                    onScrolltolower: _cache[2] || (_cache[2] = ($event) => $options.getProducts()),
+                    style: vue.normalizeStyle("max-height: calc(100vh - 810rpx - " + _ctx.$store.state.taskbarHeight + ");")
                   },
                   [
                     (vue.openBlock(true), vue.createElementBlock(
@@ -34945,6 +35034,7 @@ ${o3}
                             256
                             /* UNKEYED_FRAGMENT */
                           )),
+                          vue.createCommentVNode(` <view v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && !productsList['products' + item.id].noData && !isLoading" class="get-more-btn" @click="getProducts()"></view> `),
                           $data.productsList["products" + item.id] && $data.productsList["products" + item.id].list.length > 0 && $data.productsList["products" + item.id].noData ? (vue.openBlock(), vue.createElementBlock("view", {
                             key: 1,
                             class: "no-list-tip"
@@ -34957,8 +35047,8 @@ ${o3}
                       /* UNKEYED_FRAGMENT */
                     ))
                   ],
-                  32
-                  /* NEED_HYDRATION */
+                  36
+                  /* STYLE, NEED_HYDRATION */
                 )
               ])
             ])
@@ -35803,8 +35893,6 @@ ${o3}
     if (data.success) {
       ydLogin.shouldQuickLogin((data2) => {
         formatAppLog("log", "at pages/page/login/login.vue:39", "检测是否符合条件", data2);
-        if (!data2.success)
-          ;
       });
     }
   });
@@ -35846,71 +35934,88 @@ ${o3}
       verifyNumber() {
         this.$refs["baseForm"].validate().then((res2) => {
           uni.showLoading();
-          ydLogin.getPhoneNumberCompletion((data) => {
+          ydLogin.shouldQuickLogin((data) => {
+            formatAppLog("log", "at pages/page/login/login.vue:93", "检测是否符合条件", data);
             uni.hideLoading();
-            let preNumberData = data;
-            if (data.success) {
-              formatAppLog("log", "at pages/page/login/login.vue:118", "预取号成功", data);
-              const platform2 = uni.getSystemInfoSync().platform;
-              const config = {};
-              if (platform2 === "ios") {
-                config.presentDirectionType = 1;
-              }
-              try {
-                ydLogin.setCustomView(config, (data2) => {
-                  if (platform2 === "ios") {
-                  } else if (platform2 === "android") {
-                  }
-                });
-              } catch (e2) {
-              }
-              ydLogin.cucmctAuthorizeLoginCompletion((data2) => {
-                formatAppLog("log", "at pages/page/login/login.vue:136", "data::", data2);
-                if (!data2.success && !data2.cancel) {
-                  formatAppLog("log", "at pages/page/login/login.vue:138", "授权失败", data2);
-                } else if (data2.cancel) {
-                  formatAppLog("log", "at pages/page/login/login.vue:140", "用户取消", data2);
-                } else {
-                  formatAppLog("log", "at pages/page/login/login.vue:143", "授权成功：：", data2);
-                  const _this = this;
-                  this.commonRequest({
-                    url: "/api/auth/oneClickLogin",
-                    method: "post",
-                    data: {
-                      yidun_token: preNumberData.token,
-                      telecom_token: data2.accessToken
-                    }
-                  }).then((res3) => {
-                    _this.setLogin(res3.data);
-                    formatAppLog("log", "at pages/page/login/login.vue:154", "/api/sms/forLogin：一键登陆成功:", res3);
-                    uni.showToast({
-                      title: "登陆成功",
-                      icon: "success",
-                      duration: 3e3
-                    });
-                    setTimeout(() => {
-                      uni.reLaunch({
-                        url: "/pages/page/index/index"
-                      });
-                      ydLogin.closeAuthController();
-                    }, 2e3);
-                  }).catch((error2) => {
-                    this.$refs.pageHead.openMsgTips({
-                      content: "一键登陆失败"
-                    });
-                  });
-                  return false;
-                }
-              });
-            } else {
-              formatAppLog("log", "at pages/page/login/login.vue:178", "预取号失败了:", data);
+            if (!data.success) {
               this.$refs.pageHead.openPopupTips({
                 title: "提示",
-                content: data.msg || data.desc + "请关闭WiFi，使用中国移动、中国电信、中国联通数据流量，再点击一键登录！或者是否需要跳转到手机验证码登录？",
+                content: "不具备一键登录网络环境，请关闭WiFi，使用中国移动、中国联通、中国电信数据流量，再点击一键登录！或者是否需要跳转到手机验证码登录？",
                 success: (res3) => {
                   this.$refs.pageHead.closePopupTips();
                   uni.reLaunch({
                     url: "/pages/page/login/phoneLogin"
+                  });
+                }
+              });
+            } else {
+              ydLogin.getPhoneNumberCompletion((data2) => {
+                uni.hideLoading();
+                let preNumberData = data2;
+                if (data2.success) {
+                  formatAppLog("log", "at pages/page/login/login.vue:113", "预取号成功", data2);
+                  const platform2 = uni.getSystemInfoSync().platform;
+                  const config = {};
+                  if (platform2 === "ios") {
+                    config.presentDirectionType = 1;
+                  }
+                  try {
+                    ydLogin.setCustomView(config, (data3) => {
+                      if (platform2 === "ios") {
+                      } else if (platform2 === "android") {
+                      }
+                    });
+                  } catch (e2) {
+                  }
+                  ydLogin.cucmctAuthorizeLoginCompletion((data3) => {
+                    formatAppLog("log", "at pages/page/login/login.vue:130", "data::", data3);
+                    if (!data3.success && !data3.cancel) {
+                      formatAppLog("log", "at pages/page/login/login.vue:132", "授权失败", data3);
+                    } else if (data3.cancel) {
+                      formatAppLog("log", "at pages/page/login/login.vue:134", "用户取消", data3);
+                    } else {
+                      formatAppLog("log", "at pages/page/login/login.vue:137", "授权成功：：", data3);
+                      const _this = this;
+                      this.commonRequest({
+                        url: "/api/auth/oneClickLogin",
+                        method: "post",
+                        data: {
+                          yidun_token: preNumberData.token,
+                          telecom_token: data3.accessToken
+                        }
+                      }).then((res3) => {
+                        _this.setLogin(res3.data);
+                        formatAppLog("log", "at pages/page/login/login.vue:148", "/api/sms/forLogin：一键登陆成功:", res3);
+                        uni.showToast({
+                          title: "登陆成功",
+                          icon: "success",
+                          duration: 3e3
+                        });
+                        setTimeout(() => {
+                          uni.reLaunch({
+                            url: "/pages/page/index/index"
+                          });
+                          ydLogin.closeAuthController();
+                        }, 2e3);
+                      }).catch((error2) => {
+                        this.$refs.pageHead.openMsgTips({
+                          content: "一键登陆失败"
+                        });
+                      });
+                      return false;
+                    }
+                  });
+                } else {
+                  formatAppLog("log", "at pages/page/login/login.vue:172", "预取号失败了:", data2);
+                  this.$refs.pageHead.openPopupTips({
+                    title: "提示",
+                    content: data2.msg || data2.desc + "请关闭WiFi，使用中国移动、中国电信、中国联通数据流量，再点击一键登录！或者是否需要跳转到手机验证码登录？",
+                    success: (res3) => {
+                      this.$refs.pageHead.closePopupTips();
+                      uni.reLaunch({
+                        url: "/pages/page/login/phoneLogin"
+                      });
+                    }
                   });
                 }
               });

@@ -918,8 +918,21 @@ body {
   position: absolute;
   right: 1.5625rem;
   bottom: 9.6875rem;
-  width: 6.875rem;
-  height: 10.25rem;
+  width: 6.8125rem;
+  height: 8.375rem;
+  z-index: 2;
+}
+.banner-wrap .disc[data-v-5040744a] {
+  position: absolute;
+  right: 2.1875rem;
+  bottom: 7.1875rem;
+  width: 5.625rem;
+  height: 5.625rem;
+  z-index: 1;
+  border-radius: 6.8125rem;
+  transform: rotateX(75deg);
+  background-color: #145C35;
+  opacity: 0.4;
 }
 .banner-wrap .activity-wrap[data-v-5040744a] {
   margin-top: 3.9375rem;

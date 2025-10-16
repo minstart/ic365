@@ -28,6 +28,26 @@ ul,li{
 	padding: 1.125rem 0;
 	color: #999;
 }
+// 加载更多按钮
+.get-more-btn{
+	text-align: center;
+	width: 100%;
+	height: 56rpx;
+	position: relative;
+	&::after{
+		content: "加载更多";
+		display: block;
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 160rpx;
+		border-radius: 12rpx;
+		line-height: 2;
+		background-color: $ThemeColor;
+		color: #fff;
+	}
+}
 .btn-yellow{
 	background: $ThemeColor;
 	color: #fff;

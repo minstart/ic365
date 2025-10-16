@@ -322,6 +322,8 @@
 }
 .page-wrap[data-v-70c707a8] {
   background: linear-gradient(#ECEFFF 0%, #F4F4F4 40%, #F4F4F4 100%);
+  min-height: 100vh;
+  padding-bottom: 0;
 }
 .achievement-statistics-wrap .achievement-statistics[data-v-70c707a8] {
   min-height: 22.06rem;
@@ -417,6 +419,12 @@
 }
 .search-wrap .search-content-wrap .tab-overflow-bar .search-tab-wrap .selected[data-v-70c707a8] {
   background: #FFE084;
+}
+.search-wrap .search-content-wrap .tab-content-wrap[data-v-70c707a8] {
+  position: absolute;
+  left: 0;
+  width: calc(100% - 2.5rem);
+  padding: 0 1.25rem;
 }
 .search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list[data-v-70c707a8] {
   display: flex;

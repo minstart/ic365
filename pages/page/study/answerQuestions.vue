@@ -1726,7 +1726,7 @@
 				height: calc(100vh - 1.8rem) !important;
 
 				.topic {
-					padding-left: 1.2rem !important;
+					padding-left: 2rem !important;
 				}
 			}
 		}

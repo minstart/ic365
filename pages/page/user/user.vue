@@ -47,10 +47,25 @@
 						<view class="item-info-title">知识尘</view>
 					</view>
 				</view>
-				<!-- <view class="user-id">
-					<view class="userId-title">守护者ID</view>
-					<h3 class="userId">{{userInfo.userId}}</h3>
-				</view> -->
+			</view>
+		</view>
+		<view class="uni-padding-wrap">
+			<view class="change-wear-wrap flex-center">
+				<view class="change-wear" @click="jumpPage({url:'/pages/page/user/exchangeMall'})">
+					<view class="wear-icon"></view>
+					<view class="wear-title-wrap">
+						<h3 class="wear-title">称号</h3>
+						<p class="wear-subTitle">更换称号展示</p>
+					</view>
+				</view>
+				<view class="border"></view>
+				<view class="change-wear" @click="jumpPage({url:'/pages/page/user/exchangeMall'})">
+					<view class="wear-icon"></view>
+					<view class="wear-title-wrap">
+						<h3 class="wear-title">萌宝</h3>
+						<p class="wear-subTitle">更换萌宝展示</p>
+					</view>
+				</view>
 			</view>
 		</view>
 		<view class="uni-padding-wrap uni-common-mt tab-wrap">
@@ -461,7 +476,6 @@
 			background: #fff;
 			margin: 0 auto;
 			border-radius: 0.5rem;
-			margin-bottom: 2.5rem;
 
 			.vip-banner-wrap {
 				margin-bottom: 40rpx;
@@ -580,7 +594,6 @@
 
 		.property {
 			display: flex;
-			margin-bottom: 1.25rem;
 			padding: 0 24rpx;
 
 			.property-item {
@@ -629,6 +642,60 @@
 			.userId {
 				color: #666;
 			}
+		}
+	}
+
+	.change-wear-wrap {
+		margin: 20rpx 0;
+		background-color: #fff;
+		border-radius: 20rpx;
+		padding: 28rpx 18rpx;
+
+		.change-wear {
+			flex: 1;
+			display: flex;
+			align-items: center;
+
+			.wear-icon {
+				width: 120rpx;
+				height: 132rpx;
+				display: inline-block;
+				margin-right: 16rpx;
+			}
+
+			.wear-title-wrap {
+				display: inline-block;
+
+				.wear-title {
+					font-size: 32rpx;
+					color: #484848;
+				}
+
+				.wear-subTitle {
+					font-size: 24rpx;
+					color: #999;
+				}
+			}
+
+			&:nth-child(1) {
+				.wear-icon {
+
+					background: url('/static/icons/5_change_title.png') no-repeat center / 100% 100%;
+				}
+			}
+
+			&:nth-child(3) {
+				.wear-icon {
+					background: url('/static/icons/5_change_pet.png') no-repeat center / 100% 100%;
+				}
+			}
+		}
+
+		.border {
+			width: 4rpx;
+			height: 102rpx;
+			background: #EBEBEB;
+			margin: 0 26rpx;
 		}
 	}
 

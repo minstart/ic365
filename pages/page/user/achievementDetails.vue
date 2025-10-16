@@ -36,32 +36,32 @@
 							</li>
 						</ul>
 					</view>
-					<view class="tab-content-wrap">
+					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()" :style="'max-height: calc(100vh - 1070rpx - '+$store.state.taskbarHeight+');'">
 						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
 							</view>
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length==0">暂无数据</view>
-							<scroll-view scroll-y="true" class="scroll-Y" @scrolltoupper="upper" @scrolltolower="lower" @scroll="scroll">
-								<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
-									<div class="list-icon-wrap flex-center">
-										<image lazy-load class="list-icon" :src="item2.imgPath" mode=""></image>
-									</div>
-									<view class="list-info">
-										<h3 class="info-title">{{item2.name}}</h3>
-										<view class="info-subtitle">{{item2.subtitle}}</view>
-										<view class="achievement-type">
-											<h3 class="type" :typeId="item2.type">
-												<view class="icon"></view>
-												<view class="text">{{item2.typeName}}成就</view>
-											</h3>
-											<view class="time">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>
-										</view>
+							<view class="tab-list" v-for="item2 in productsList['products' + item.id].list">
+								<div class="list-icon-wrap flex-center">
+									<image lazy-load class="list-icon" :src="item2.imgPath" mode=""></image>
+								</div>
+								<view class="list-info">
+									<h3 class="info-title">{{item2.name}}</h3>
+									<view class="info-subtitle">{{item2.subtitle}}</view>
+									<view class="achievement-type">
+										<h3 class="type" :typeId="item2.type">
+											<view class="icon"></view>
+											<view class="text">{{item2.typeName}}成就</view>
+										</h3>
+										<view class="time">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>
 									</view>
 								</view>
-							</scroll-view>
+							</view>
+							<!-- <view v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && !productsList['products' + item.id].noData && !isLoading" class="get-more-btn" @click="getProducts()"></view> -->
+							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && productsList['products' + item.id].noData">- 没有更多了 -</view>
 						</view>
-					</view>
+					</scroll-view>
 				</view>
 			</view>
 		</view>
@@ -88,10 +88,17 @@
 				current: 0,
 				selectProductsId: "",
 				productsTab: [],
-				productsList: {}
+				productsList: {},
+				option: {},
+				isLoading: false
 			}
 		},
-		onLoad() {
+		onLoad(option) {
+			option && (this.option = option);
+			if (option && option.tabId) {
+				this.selectProductsId = option.tabId;
+				this.current = 1
+			}
 			this.verifLogin().then(data => {
 				// 兑换资源类型(Tab)
 				this.commonRequest({
@@ -112,7 +119,9 @@
 							}
 						} catch (e) {}
 					}
-					this.getProducts()
+					this.getProducts({
+						reset: true
+					})
 				}).catch(error => {
 					console.log("兑换资源类型(Tab)报错：：", error)
 				})
@@ -123,15 +132,17 @@
 			this.pageOnShowSet({
 				uniHide: "all"
 			}).then(res => {
-				console.log("this.selectProductsId:",this.selectProductsId)
-				if(this.selectProductsId){
-					this.getProducts()
+				console.log("this.selectProductsId:", this.selectProductsId)
+				if (this.selectProductsId) {
+					this.getProducts({
+						reset: true
+					})
 				}
 				// 成就统计
 				this.commonRequest({
 					url: "/api/achievement/stats"
 				}).then(res => {
-					console.log("成就统计:",res.data)
+					console.log("成就统计:", res.data)
 					this.progress = res.data
 					this.progress.list = [];
 					this.progress.list.push(res.data.groupTypeCounts["铜质"] || 0)
@@ -165,37 +176,72 @@
 				if (this.current !== i) {
 					this.selectProductsId = item.id;
 					this.current = i;
-					this.getProducts()
+					this.getProducts({
+						changeType: "tab"
+					})
 				}
 			},
 			// 获取商品
 			getProducts(data) {
-				if (!this.selectProductsId) return;
 				if (data && data.reset) {
 					this.productsTab.forEach(item => {
-						this.productsList["products" + item.id].requested = false;
-						this.productsList["products" + item.id].list = [];
-					})
-				}
-				if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
-					// 获取成就列表
-					this.commonRequest({
-						url: "/api/achievement/list",
-						data: {
-							search: this.keyword,
-							groupType: this.selectProductsId,
-							size: "20"
+						this.productsList["products" + item.id] = {
+							requested: false,
+							page: 0,
+							noData: false,
+							list: []
 						}
-					}).then(res => {
-						// console.log("search:",this.keyword,",groupType:",this.selectProductsId)
-						console.log("获取成就列表:", res.data)
-						this.productsList["products" + this.selectProductsId].requested = true;
-						this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
-					}).catch(error => {
-						console.log("获取成就列表报错：：", error)
 					})
+				} else {
+					if (this.productsList["products" + this.selectProductsId].noData) return false;
 				}
-			}
+				this.getProductsDetail(data)
+			},
+			getProductsDetail(data) {
+				let number = 10; //一次加载多少条数据
+				let page = Number(this.productsList["products" + this.selectProductsId].page)
+				if (data && data.changeType) {
+					// 如果是tab切换的
+					if (data.changeType == "tab") {
+						if (page == 0) {
+							page = page + 1;
+						} else {
+							return false;
+						}
+					}
+				} else {
+					page = page + 1;
+				}
+				let postData = {
+					search: this.keyword,
+					page: page,
+					groupType: this.selectProductsId,
+					size: number.toString()
+				}
+				this.isLoading = true;
+				console.log("请求参数：", postData)
+				// 获取成就列表
+				this.commonRequest({
+					url: "/api/achievement/list",
+					data: postData
+				}).then(res => {
+					this.isLoading = false;
+					if (res.data.length == 0) {
+						this.productsList["products" + this.selectProductsId].noData = true;
+						return false;
+					} else if (res.data.length != number) {
+						this.productsList["products" + this.selectProductsId].noData = true;
+					}
+					// console.log("search:",this.keyword,",groupType:",this.selectProductsId)
+					console.log("获取成就列表:", res.data)
+					this.productsList["products" + this.selectProductsId].requested = true;
+					this.productsList["products" + this.selectProductsId].page = (this.productsList["products" + this.selectProductsId].page ? this.productsList["products" + this.selectProductsId].page : 0) + 1;
+					this.productsList["products" + this.selectProductsId].list = this.productsList["products" + this.selectProductsId].list.concat(res.data);
+					console.log(this.productsList["products" + this.selectProductsId])
+				}).catch(error => {
+					console.log("获取成就列表报错：：", error)
+				})
+			},
 		}
 	}
 </script>
@@ -209,6 +255,8 @@
 
 	.page-wrap {
 		background: linear-gradient(#ECEFFF 0%, #F4F4F4 40%, #F4F4F4 100%);
+		min-height: 100vh;
+		padding-bottom: 0;
 	}
 
 	// 成就中心 ------Start
@@ -332,6 +380,10 @@
 			}
 
 			.tab-content-wrap {
+				position: absolute;
+				left: 0;
+				width: calc(100% - 80rpx);
+				padding:0 40rpx;
 				.table-list-wrap {
 					.tab-list {
 						display: flex;
@@ -339,11 +391,13 @@
 						background-color: #fff;
 						border-radius: 1rem;
 						margin-bottom: 0.75rem;
-						.list-icon-wrap{
+
+						.list-icon-wrap {
 							height: 100%;
 							float: left;
 							margin: auto 0;
 						}
+
 						.list-icon {
 							width: 5.5rem;
 							height: 5.5rem;
@@ -353,6 +407,7 @@
 
 						.list-info {
 							flex: 1;
+
 							.info-title {
 								margin-top: 0.5rem;
 								line-height: 1.56rem;
@@ -367,6 +422,7 @@
 
 							.achievement-type {
 								overflow: hidden;
+
 								.type {
 									display: inline-block;
 									margin-right: 1.25rem;

@@ -36,7 +36,8 @@
 							</li>
 						</ul>
 					</view>
-					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()">
+					<!--  scroll-y="true" @scrolltolower="getProducts()" -->
+					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()" :style="'max-height: calc(100vh - 810rpx - '+$store.state.taskbarHeight+');'">
 						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
@@ -69,6 +70,7 @@
 									</p>
 								</view>
 							</view>
+							<!-- <view v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && !productsList['products' + item.id].noData && !isLoading" class="get-more-btn" @click="getProducts()"></view> -->
 							<view class="no-list-tip" v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && productsList['products' + item.id].noData">- 没有更多了 -</view>
 						</view>
 					</scroll-view>
@@ -103,7 +105,7 @@
 		},
 		onLoad(option) {
 			option && (this.option = option);
-			if (option.tabId) {
+			if (option && option.tabId) {
 				this.selectProductsId = option.tabId;
 				this.current = 1
 			}
@@ -129,7 +131,9 @@
 							}
 						} catch (e) {}
 					}
-					this.getProducts({reset:true})
+					this.getProducts({
+						reset: true
+					})
 				}).catch(error => {
 					console.log("兑换资源类型(Tab)报错：：", error)
 				})
@@ -160,13 +164,14 @@
 				if (this.current !== i) {
 					this.selectProductsId = item.id;
 					this.current = i;
-					this.getProducts()
+					this.getProducts({
+						changeType: "tab"
+					})
 				}
 			},
 			// 点击兑换商品
 			exchange(data) {
 				if (data.obtained) return console.log("已拥有：", data.productionId);
-				console.log(data)
 				this.verifVip({
 					vip: data.vipLevel,
 					myvip: this.userInfo.vipLevel
@@ -222,34 +227,43 @@
 				} else {
 					if (this.productsList["products" + this.selectProductsId].noData) return false;
 				}
-				// if (!this.productsList["products" + this.selectProductsId].requested && this.productsList["products" + this.selectProductsId].list.length == 0) {
 				this.getProductsDetail(data)
-				// }
 			},
 			// 获取兑换商品列表
-			getProductsDetail() {
-				// if (this.productsList["products" + this.selectProductsId].noData) return false;
-				// console.log(this.selectProductsId,this.productsList)
-				let number = 15;//一次加载多少条数据
+			getProductsDetail(data) {
+				let number = 10; //一次加载多少条数据
+				let page = Number(this.productsList["products" + this.selectProductsId].page)
+				if (data && data.changeType) {
+					// 如果是tab切换的
+					if (data.changeType == "tab") {
+						if (page == 0) {
+							page = page + 1;
+						} else {
+							return false;
+						}
+					}
+				} else {
+					page = page + 1;
+				}
 				let postData = {
 					keyword: this.keyword,
-					page: this.productsList["products" + this.selectProductsId].page + 1,
+					page: page,
 					type: this.selectProductsId,
 					size: number.toString()
 				}
 				// console.log("获取兑换商品列表请求参数",postData)
-
+				this.isLoading = true;
 				console.log("请求参数：", postData)
 				this.commonRequest({
 					url: "/api/exchange/products",
-					method: "POST",
 					data: postData
 				}).then(res => {
 					console.log("获取兑换商品列表:", res.data)
-					if (res.data.length == 0 ) {
+					this.isLoading = false;
+					if (res.data.length == 0) {
 						this.productsList["products" + this.selectProductsId].noData = true;
 						return false;
-					} else if(res.data.length != number){
+					} else if (res.data.length != number) {
 						this.productsList["products" + this.selectProductsId].noData = true;
 					}
 					try {
@@ -280,9 +294,7 @@
 				}).catch(error => {
 					console.log("获取兑换商品列表报错：：", error)
 				})
-			}
-
-
+			},
 		}
 	}
 </script>
@@ -293,6 +305,7 @@
 	.page-wrap {
 		background: linear-gradient(#FFF0DC 0%, #F4F4F4 40%, #F4F4F4 100%);
 		min-height: 100vh;
+		padding-bottom: 0;
 	}
 
 	.item-title-wrap {
@@ -400,7 +413,6 @@
 
 		.search-content-wrap {
 			margin-top: 40rpx;
-
 			.tab-overflow-bar {
 				.search-tab-wrap {
 					.tab {
@@ -422,10 +434,7 @@
 					}
 				}
 			}
-
 			.tab-content-wrap {
-				max-height: calc(100vh - 600rpx);
-
 				.table-list-wrap {
 					.tab-list {
 						display: flex;

@@ -90,9 +90,9 @@
 
 			.info-img {
 				width: 208rpx;
-				height: 212rpx;
+				height: 255rpx;
 				margin-bottom: 16rpx;
-				padding: 20rpx;
+				padding: 22rpx 44rpx;
 				background-color: #f1f4fb;
 				border-radius: 20rpx;
 			}
