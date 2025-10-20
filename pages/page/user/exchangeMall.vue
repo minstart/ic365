@@ -37,7 +37,7 @@
 						</ul>
 					</view>
 					<!--  scroll-y="true" @scrolltolower="getProducts()" -->
-					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()" :style="'max-height: calc(100vh - 810rpx - '+$store.state.taskbarHeight+');'">
+					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()" :style="'max-height: calc(100vh - 760rpx - '+$store.state.taskbarHeight+');'">
 						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
@@ -111,6 +111,7 @@
 			}
 		},
 		onReady() {
+			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
 			this.verifLogin().then(data => {
 				// 兑换资源类型(Tab)
 				this.commonRequest({
@@ -303,7 +304,7 @@
 	@import "/static/css/standard.scss";
 
 	.page-wrap {
-		background: linear-gradient(#FFF0DC 0%, #F4F4F4 40%, #F4F4F4 100%);
+		background: linear-gradient(#FFF0DC 0%, #FFF0DC 30%, #F4F4F4 40%, #F4F4F4 100%);
 		min-height: 100vh;
 		padding-bottom: 0;
 	}
@@ -315,7 +316,7 @@
 	// 兑换商城 ------Start
 	.achievement-statistics-wrap {
 		.achievement-statistics {
-			min-height: 14rem;
+			height: 390rpx;
 			background: url("/static/image/5_2_banner_back.png") no-repeat top /100%;
 			position: relative;
 			margin-top: 36rpx;

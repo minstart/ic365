@@ -1,6 +1,7 @@
 <template>
 	<!-- <view class="page-loading" v-if="pageMask"></view> -->
 	<view class="page-wrap">
+		<view class="banner-back"></view>
 		<page-head ref="pageHead" :isHide='true' :isBack='false' :isModule="false" :background="'transparent'"></page-head>
 		<view class="banner-wrap">
 			<view class="btn-wrap">
@@ -447,16 +448,22 @@
 	}
 </script>
 <style lang="scss" scoped>
-	uni-page-body {
+	.banner-back{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 460rpx;
+		z-index: 0;
+		background: url("/static/image/5_user_back.png") no-repeat top / 100%;
+	}
+	.page-wrap {
 		background-color: #F4F4F4 !important;
 	}
 
-	.page-wrap {
-		background: url("/static/image/5_user_back.png") no-repeat top / 100%;
-	}
-
 	.banner-wrap {
-
+		position: relative;
+		z-index: 1;
 		.btn-wrap {
 			overflow: hidden;
 			width: 21.4375rem;
@@ -722,6 +729,8 @@
 		}
 
 		.tab-list-content {
+			border-radius: 16rpx;
+			overflow: hidden;
 			.tab-list {
 				&[current="1"] {
 					.unRead {
@@ -732,7 +741,7 @@
 		}
 
 		.practice-list {
-			background: #F9F9F9;
+			background: #fff;
 			border-bottom: 0.16rem solid #F6F6F6;
 			display: flex;
 			padding: 1.375rem 1.125rem;

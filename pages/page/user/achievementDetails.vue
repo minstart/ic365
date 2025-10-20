@@ -15,8 +15,8 @@
 					<h3 class="achievement-title">成就等级</h3>
 					<h3 class="statistics">{{progress.obtainedCount}}/{{progress.totalCount}} 完成</h3>
 					<ul class="progress-list-wrap">
-						<li class="progress-list" v-for="(item,i) in progress.list" :style="'margin-top:'+ -i * 1.2 + 'rem'">
-							<i>{{item}}</i>
+						<li class="progress-list" v-for="(item,i) in progress.list" :style="'margin-top:'+ -i * 0.6 + 'rem'">
+							<i>{{item}}个</i>
 						</li>
 					</ul>
 				</view>
@@ -36,7 +36,7 @@
 							</li>
 						</ul>
 					</view>
-					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()" :style="'max-height: calc(100vh - 1070rpx - '+$store.state.taskbarHeight+');'">
+					<scroll-view class="tab-content-wrap" scroll-y="true" @scrolltolower="getProducts()" :style="'max-height: calc(100vh - 960rpx - '+$store.state.taskbarHeight+');'">
 						<view class="table-list-wrap" v-for="(item,i) in productsTab" :current='current' v-show='current == i'>
 							<view class="item-title-wrap">
 								<h3 class="item-title">{{item.name}}</h3>
@@ -54,8 +54,8 @@
 											<view class="icon"></view>
 											<view class="text">{{item2.typeName}}成就</view>
 										</h3>
-										<view class="time">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>
 									</view>
+									<view class="time">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>
 								</view>
 							</view>
 							<!-- <view v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && !productsList['products' + item.id].noData && !isLoading" class="get-more-btn" @click="getProducts()"></view> -->
@@ -127,7 +127,9 @@
 				})
 			})
 		},
-		onReady() {},
+		onReady() {
+			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
+		},
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
@@ -262,22 +264,29 @@
 	// 成就中心 ------Start
 	.achievement-statistics-wrap {
 		.achievement-statistics {
-			min-height: 22.06rem;
-			background: url("/static/image/5_achievement_back.png") no-repeat top /100%;
+			min-height: 610rpx;
+			background: url("/static/image/5_achievement_back.png") no-repeat top /100% 100%;
 			position: relative;
-			margin-top: 36rpx;
+			margin-top: 20rpx;
 
 			.achievement-title {
 				color: #fff;
-				font-size: 1.25rem;
+				font-size: 40rpx;
 				position: absolute;
-				top: 1.375rem;
+				top: 60rpx;
 				left: 1.25rem;
+			}
+
+			.statistics {
+				position: absolute;
+				top: 60rpx;
+				right: 1.0625rem;
+				font-size: 1rem;
 			}
 
 			.achievement-progress-wrap {
 				position: absolute;
-				margin: 4.6875rem 1.0625rem 0 1.0625rem;
+				margin: 180rpx 1.0625rem 0 1.0625rem;
 				width: calc(100% - 2.125rem);
 
 				.progress-icon {
@@ -295,19 +304,12 @@
 				}
 			}
 
-			.statistics {
-				position: absolute;
-				top: 1.25rem;
-				right: 1.0625rem;
-				font-size: 1rem;
-			}
-
 			.progress-list-wrap {
 				display: flex;
 				width: calc(100% - 1.5rem);
 				margin: 0 0.75rem;
 				position: absolute;
-				top: 19rem;
+				top: 520rpx;
 
 				.progress-list {
 					flex: 1;
@@ -382,15 +384,18 @@
 			.tab-content-wrap {
 				position: absolute;
 				left: 0;
-				width: calc(100% - 80rpx);
-				padding:0 40rpx;
+				width: 100%;
+
 				.table-list-wrap {
+					padding: 0 40rpx;
+
 					.tab-list {
 						display: flex;
 						padding: 1rem;
 						background-color: #fff;
 						border-radius: 1rem;
 						margin-bottom: 0.75rem;
+						position: relative;
 
 						.list-icon-wrap {
 							height: 100%;
@@ -399,8 +404,8 @@
 						}
 
 						.list-icon {
-							width: 5.5rem;
-							height: 5.5rem;
+							width: 176rpx;
+							height: 176rpx;
 							margin-right: 0.75rem;
 							border-radius: 16rpx;
 						}
@@ -417,12 +422,14 @@
 							.info-subtitle {
 								color: #999;
 								font-size: 0.875rem;
-								margin: 0.125rem 0 1.125rem 0;
+								margin: 0.125rem 0 20rpx 0;
 							}
 
 							.achievement-type {
 								overflow: hidden;
-
+								position: absolute;
+								right: -60rpx;
+								top: 0;
 								.type {
 									display: inline-block;
 									margin-right: 1.25rem;
@@ -484,14 +491,13 @@
 										}
 									}
 								}
+							}
 
-								.time {
-									float: right;
-									font-size: 0.68rem;
-									color: #676767;
-									vertical-align: bottom;
-									margin-top: 1rem;
-								}
+							.time {
+								float: right;
+								font-size: 0.68rem;
+								color: #676767;
+								vertical-align: bottom;
 							}
 						}
 					}

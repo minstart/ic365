@@ -318,7 +318,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .page-wrap[data-v-c19752be] {
-  background: linear-gradient(#FFF0DC 0%, #F4F4F4 40%, #F4F4F4 100%);
+  background: linear-gradient(#FFF0DC 0%, #FFF0DC 30%, #F4F4F4 40%, #F4F4F4 100%);
   min-height: 100vh;
   padding-bottom: 0;
 }
@@ -326,7 +326,7 @@
   margin-top: 1rem;
 }
 .achievement-statistics-wrap .achievement-statistics[data-v-c19752be] {
-  min-height: 14rem;
+  height: 12.1875rem;
   background: url("../../../static/image/5_2_banner_back.png") no-repeat top/100%;
   position: relative;
   margin-top: 1.125rem;
