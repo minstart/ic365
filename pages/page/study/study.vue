@@ -80,17 +80,14 @@
 			<view class="item-title-wrap">
 				<h3 class="item-title">推荐课堂</h3>
 			</view>
-			<!-- <view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
-			<ul class="classroom-list-wrap" v-if="classroom.length>0">
-				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})" v-for="item in classroom">
-					<image class="list-back" :src='item.coverUrl'></image>
-				</li>
-			</ul> -->
 			<view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>
 			<ul class="plan-recommend-list-wrap">
-				<li class="plan-recommend-list" :style="{'background-color':randomBack[i].background}" :key="item.videoId" v-for="(item,i) in classroom" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})">
-					<h3 class="is-vip" :style="{'background-color':randomBack[i].background2}">{{item.vipLevel>0?'会员':'限免'}} </h3>
-					<h3 class="title">{{item.categoryName}}</h3>
+				<li class="plan-recommend-list" :key="item.videoId" v-for="(item,i) in classroom" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})">
+					<view class="is-vip" :vipLevel='item.vipLevel'></view>
+					<view class="list-icon"></view>
+					<view class="title-wrap">
+						<view class="title">{{item.categoryName}}</view>
+					</view>
 				</li>
 			</ul>
 		</view>
@@ -478,41 +475,79 @@
 	// 推荐课堂
 	.plan-recommend-list-wrap {
 		display: flex;
-
+	
 		.plan-recommend-list {
-			flex: 1;
-			padding: 40rpx 20rpx 20rpx 20rpx;
-			margin-right: 0.68rem;
-			display: flex;
-			align-items: center;
 			position: relative;
+			flex: 1;
+			padding: 20rpx 20rpx 20rpx 20rpx;
+			margin-right: 0.68rem;
 			min-height: 180rpx;
-			border-radius: 20rpx;
-
-			.title {
-				text-align: left;
+			border-radius: 40rpx;
+			.title-wrap {
+				display: flex;
+				align-items: center;
+				position: relative;
+				width: 100%;
+				height: 60rpx;
+				text-align: center;
 				font-size: 26rpx;
 				color: #323232;
+				.title {
+					flex: 1;
+				}
 			}
-
+	
+			.list-icon {
+				width: 132rpx;
+				height: 132rpx;
+				margin: 0 auto;
+				border-radius: 132rpx;
+				margin-bottom: 12rpx;
+			}
+	
 			.is-vip {
 				position: absolute;
-				right: 0;
-				top: 0;
-				font-size: 32rpx;
-				color: #fff;
-				padding: 4rpx 22rpx;
-				border-radius: 0 20rpx 0 30rpx;
+				right: 2rpx;
+				top: 2rpx;
+				width: 58rpx;
+				height: 50rpx;
+	
+				&[vipLevel='0'] {
+					background: url('/static/icons/recommend_video_novip.png') no-repeat center / 100% 100%;
+				}
+	
+				&[vipLevel='1'],
+				&[vipLevel='2'],
+				&[vipLevel='3'] {
+					background: url('/static/icons/recommend_video_vip.png') no-repeat center / 100% 100%;
+				}
 			}
-
-			.list-icon {
-				width: 100%;
-				height: 7.5rem;
+	
+			&:nth-child(1) {
+				box-shadow: 0 0 12rpx #b2dffd;
+	
+				.list-icon {
+					background: url("/static/icons/recommend_video1.png") no-repeat center / 100% 100%;
+				}
 			}
-
+	
+			&:nth-child(2) {
+				box-shadow: 0 0 12rpx #fdd1a0;
+				.list-icon {
+					background: url("/static/icons/recommend_video2.png") no-repeat center / 100% 100%;
+				}
+			}
+	
+			&:nth-child(3) {
+				box-shadow: 0 0 12rpx #fdf391;
+				.list-icon {
+					background: url("/static/icons/recommend_video3.png") no-repeat center / 100% 100%;
+				}
+			}
 			&:last-child {
 				margin-right: 0;
 			}
 		}
 	}
+	
 </style>

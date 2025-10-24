@@ -14455,7 +14455,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$3D(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, "加载处理页面（测试用）");
   }
-  const PagesPageGuideJudge = /* @__PURE__ */ _export_sfc(_sfc_main$3E, [["render", _sfc_render$3D], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/guide/judge.vue"]]);
+  const PagesPageGuideJudge = /* @__PURE__ */ _export_sfc(_sfc_main$3E, [["render", _sfc_render$3D], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/guide/judge.vue"]]);
   const animation = weex.requireModule("animation");
   const _sfc_main$3D = {
     data() {
@@ -14741,7 +14741,7 @@ if (uni.restoreGlobal) {
       )
     ]);
   }
-  const PagesPageGuideGuide = /* @__PURE__ */ _export_sfc(_sfc_main$3D, [["render", _sfc_render$3C], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/guide/guide.vue"]]);
+  const PagesPageGuideGuide = /* @__PURE__ */ _export_sfc(_sfc_main$3D, [["render", _sfc_render$3C], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/guide/guide.vue"]]);
   class MPAnimation {
     constructor(options, _this) {
       this.options = options;
@@ -15120,7 +15120,7 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_1$q = /* @__PURE__ */ _export_sfc(_sfc_main$3C, [["render", _sfc_render$3B], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const __easycom_1$q = /* @__PURE__ */ _export_sfc(_sfc_main$3C, [["render", _sfc_render$3B], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
   const _sfc_main$3B = {
     name: "uniPopup",
     components: {},
@@ -15538,7 +15538,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_2$b = /* @__PURE__ */ _export_sfc(_sfc_main$3B, [["render", _sfc_render$3A], ["__scopeId", "data-v-4dd3c44b"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_2$b = /* @__PURE__ */ _export_sfc(_sfc_main$3B, [["render", _sfc_render$3A], ["__scopeId", "data-v-4dd3c44b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   const _sfc_main$3A = {
     name: "page-head",
     props: {
@@ -15837,7 +15837,7 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3A, [["render", _sfc_render$3z], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/71018/Desktop/ic365/components/page-head/page-head.vue"]]);
+  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$3A, [["render", _sfc_render$3z], ["__scopeId", "data-v-e80b2f0b"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/page-head/page-head.vue"]]);
   const _imports_0$8 = "/static/image/reward_back1.png";
   const _imports_1$3 = "/static/image/reward_back2.png";
   const _imports_2$3 = "/static/image/reward_back3.png";
@@ -16005,7 +16005,7 @@ if (uni.restoreGlobal) {
       ))
     ]);
   }
-  const __easycom_3$4 = /* @__PURE__ */ _export_sfc(_sfc_main$3z, [["render", _sfc_render$3y], ["__scopeId", "data-v-759cae5c"], ["__file", "C:/Users/71018/Desktop/ic365/components/reward-pop-up/reward-pop-up.vue"]]);
+  const __easycom_3$4 = /* @__PURE__ */ _export_sfc(_sfc_main$3z, [["render", _sfc_render$3y], ["__scopeId", "data-v-759cae5c"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/reward-pop-up/reward-pop-up.vue"]]);
   const _sfc_main$3y = {
     mixins: [commonJs],
     props: {
@@ -16087,7 +16087,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3y, [["render", _sfc_render$3x], ["__scopeId", "data-v-6a6cf342"], ["__file", "C:/Users/71018/Desktop/ic365/components/task-details/task-details.vue"]]);
+  const __easycom_1$p = /* @__PURE__ */ _export_sfc(_sfc_main$3y, [["render", _sfc_render$3x], ["__scopeId", "data-v-6a6cf342"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/task-details/task-details.vue"]]);
   const _imports_0$7 = "/static/image/1_challenge.png";
   const _imports_1$2 = "/static/image/1_study.png";
   const _imports_2$2 = "/static/image/1_achievement_back.png";
@@ -16207,7 +16207,7 @@ if (uni.restoreGlobal) {
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:284", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:287", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
@@ -16235,7 +16235,7 @@ if (uni.restoreGlobal) {
                 }
               }).then((res3) => {
                 this.isSpecial = true;
-                formatAppLog("log", "at pages/page/index/index.vue:319", "检测升级返回的数据：", res3);
+                formatAppLog("log", "at pages/page/index/index.vue:322", "检测升级返回的数据：", res3);
                 if (Number(res3.data.edition_number) > Number(inf.versionCode) && res3.data.edition_issue == 1) {
                   if (res3.data.package_type == 1 && res3.data.edition_silence == 1) {
                     silenceUpdate(res3.data.edition_url);
@@ -16251,18 +16251,18 @@ if (uni.restoreGlobal) {
             });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:353", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:356", "获取用户信息报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:360", "推荐学习::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:363", "推荐学习::", res2.data);
           try {
             this.videos = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:365", "获取推荐学习失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:368", "获取推荐学习失败：：", error2);
         });
         this.commonRequest({
           url: "/api/mission/getAll",
@@ -16270,29 +16270,29 @@ if (uni.restoreGlobal) {
             size: 3
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:375", "首页任务列表::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:378", "首页任务列表::", res2);
           try {
             this.plan = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:381", "获取任务列表报错：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:384", "获取任务列表报错：：", error2);
         });
         this.commonRequest({
           url: "/api/achievement/mine"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:388", "最新成就::", res2);
+          formatAppLog("log", "at pages/page/index/index.vue:391", "最新成就::", res2);
           try {
             this.achievement = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:394", "获取最新成就失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:397", "获取最新成就失败：：", error2);
         });
         this.commonRequest({
           url: "/api/notice/getAll"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:401", "通知消息::", res2.data);
+          formatAppLog("log", "at pages/page/index/index.vue:404", "通知消息::", res2.data);
           try {
             if (res2.data.length > 0) {
               this.$store.state.rewardPopUpList = res2.data;
@@ -16303,10 +16303,10 @@ if (uni.restoreGlobal) {
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/index/index.vue:411", "通知消息失败：：", error2);
+          formatAppLog("log", "at pages/page/index/index.vue:414", "通知消息失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/index/index.vue:415", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/index/index.vue:418", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -16626,28 +16626,24 @@ if (uni.restoreGlobal) {
                 vue.renderList($data.videos, (item, i2) => {
                   return vue.openBlock(), vue.createElementBlock("li", {
                     class: "plan-recommend-list",
-                    style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background }),
                     key: item.videoId,
                     onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/study/answerQuestions?pageType=video&categoryId=" + item.categoryId + "&videoId=" + item.videoId })
                   }, [
-                    vue.createElementVNode(
-                      "h3",
-                      {
-                        class: "is-vip",
-                        style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background2 })
-                      },
-                      vue.toDisplayString(item.vipLevel > 0 ? "会员" : "限免"),
-                      5
-                      /* TEXT, STYLE */
-                    ),
-                    vue.createElementVNode(
-                      "h3",
-                      { class: "title" },
-                      vue.toDisplayString(item.categoryName),
-                      1
-                      /* TEXT */
-                    )
-                  ], 12, ["onClick"]);
+                    vue.createElementVNode("view", {
+                      class: "is-vip",
+                      vipLevel: item.vipLevel
+                    }, null, 8, ["vipLevel"]),
+                    vue.createElementVNode("view", { class: "list-icon" }),
+                    vue.createElementVNode("view", { class: "title-wrap" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "title" },
+                        vue.toDisplayString(item.categoryName),
+                        1
+                        /* TEXT */
+                      )
+                    ])
+                  ], 8, ["onClick"]);
                 }),
                 128
                 /* KEYED_FRAGMENT */
@@ -16817,7 +16813,7 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3x, [["render", _sfc_render$3w], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/index/index.vue"]]);
+  const PagesPageIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$3x, [["render", _sfc_render$3w], ["__scopeId", "data-v-5040744a"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/index.vue"]]);
   const leftWindow = {};
   const topWindow = {};
   const pages = [
@@ -21693,7 +21689,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3w, [["render", _sfc_render$3v], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$3w, [["render", _sfc_render$3v], ["__scopeId", "data-v-9245e42c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
   const _sfc_main$3v = {
     name: "uniDataChecklist",
     mixins: [tr.mixinDatacom || {}],
@@ -22254,7 +22250,7 @@ ${o3}
       /* STYLE */
     );
   }
-  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3v, [["render", _sfc_render$3u], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
+  const __easycom_1$o = /* @__PURE__ */ _export_sfc(_sfc_main$3v, [["render", _sfc_render$3u], ["__scopeId", "data-v-2f788efd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.vue"]]);
   const _sfc_main$3u = {
     name: "uniFormsItem",
     options: {
@@ -22643,7 +22639,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_2$a = /* @__PURE__ */ _export_sfc(_sfc_main$3u, [["render", _sfc_render$3t], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_2$a = /* @__PURE__ */ _export_sfc(_sfc_main$3u, [["render", _sfc_render$3t], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   const fontData = [
     {
       "font_class": "arrow-down",
@@ -23363,7 +23359,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3t, [["render", _sfc_render$3s], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_1$n = /* @__PURE__ */ _export_sfc(_sfc_main$3t, [["render", _sfc_render$3s], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const _sfc_main$3s = {
     name: "uni-data-select",
     mixins: [tr.mixinDatacom || {}],
@@ -23756,7 +23752,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3s, [["render", _sfc_render$3r], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
+  const __easycom_1$m = /* @__PURE__ */ _export_sfc(_sfc_main$3s, [["render", _sfc_render$3r], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -24257,7 +24253,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$l = /* @__PURE__ */ _export_sfc(_sfc_main$3r, [["render", _sfc_render$3q], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const __easycom_1$l = /* @__PURE__ */ _export_sfc(_sfc_main$3r, [["render", _sfc_render$3q], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -25130,7 +25126,7 @@ ${o3}
       ])
     ]);
   }
-  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3q, [["render", _sfc_render$3p], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$3q, [["render", _sfc_render$3p], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
   const _sfc_main$3p = {
     mixins: [commonJs],
     props: {},
@@ -25383,7 +25379,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3p, [["render", _sfc_render$3o], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
+  const PagesPageIndexSupplementInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3p, [["render", _sfc_render$3o], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/index/supplement_info.vue"]]);
   const _sfc_main$3o = {
     mixins: [commonJs],
     props: {},
@@ -25449,51 +25445,51 @@ ${o3}
           this.commonRequest({
             url: "/api/student/info"
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/study.vue:174", "获取用户信息::", res2);
+            formatAppLog("log", "at pages/page/study/study.vue:171", "获取用户信息::", res2);
             try {
               store.commit("Update_UserInfo", res2.data);
               this.userInfo = res2.data;
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/study.vue:180", "获取用户信息报错：：", error2);
+            formatAppLog("log", "at pages/page/study/study.vue:177", "获取用户信息报错：：", error2);
           });
         }
         this.commonRequest({
           url: "/api/report/weekly"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:188", "获取用户周报数据::", res2);
+          formatAppLog("log", "at pages/page/study/study.vue:185", "获取用户周报数据::", res2);
           try {
             res2.data && (this.learningGoal = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:193", "获取用户周报数据报错：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:190", "获取用户周报数据报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/categories"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:200", "知识点学习::", res2);
+          formatAppLog("log", "at pages/page/study/study.vue:197", "知识点学习::", res2);
           try {
             res2.data && (this.knowledgePoints = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:205", "知识点学习报错：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:202", "知识点学习报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:212", "推荐学习::", res2.data);
+          formatAppLog("log", "at pages/page/study/study.vue:209", "推荐学习::", res2.data);
           try {
             res2.data && (this.classroom = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:217", "获取推荐学习失败：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:214", "获取推荐学习失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/study/study.vue:220", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/study/study.vue:217", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -25721,12 +25717,6 @@ ${o3}
             vue.createElementVNode("view", { class: "item-title-wrap" }, [
               vue.createElementVNode("h3", { class: "item-title" }, "推荐课堂")
             ]),
-            vue.createCommentVNode(` <view class="no-list-tip" v-if="classroom.length==0">暂无数据</view>\r
-			<ul class="classroom-list-wrap" v-if="classroom.length>0">\r
-				<li class="classroom-list" :colorTheme="item.colorScheme" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId+'&videoId='+item.videoId})" v-for="item in classroom">\r
-					<image class="list-back" :src='item.coverUrl'></image>\r
-				</li>\r
-			</ul> `),
             $data.classroom.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
               key: 2,
               class: "no-list-tip"
@@ -25738,28 +25728,24 @@ ${o3}
                 vue.renderList($data.classroom, (item, i2) => {
                   return vue.openBlock(), vue.createElementBlock("li", {
                     class: "plan-recommend-list",
-                    style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background }),
                     key: item.videoId,
                     onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/study/answerQuestions?pageType=video&categoryId=" + item.categoryId + "&videoId=" + item.videoId })
                   }, [
-                    vue.createElementVNode(
-                      "h3",
-                      {
-                        class: "is-vip",
-                        style: vue.normalizeStyle({ "background-color": $data.randomBack[i2].background2 })
-                      },
-                      vue.toDisplayString(item.vipLevel > 0 ? "会员" : "限免"),
-                      5
-                      /* TEXT, STYLE */
-                    ),
-                    vue.createElementVNode(
-                      "h3",
-                      { class: "title" },
-                      vue.toDisplayString(item.categoryName),
-                      1
-                      /* TEXT */
-                    )
-                  ], 12, ["onClick"]);
+                    vue.createElementVNode("view", {
+                      class: "is-vip",
+                      vipLevel: item.vipLevel
+                    }, null, 8, ["vipLevel"]),
+                    vue.createElementVNode("view", { class: "list-icon" }),
+                    vue.createElementVNode("view", { class: "title-wrap" }, [
+                      vue.createElementVNode(
+                        "view",
+                        { class: "title" },
+                        vue.toDisplayString(item.categoryName),
+                        1
+                        /* TEXT */
+                      )
+                    ])
+                  ], 8, ["onClick"]);
                 }),
                 128
                 /* KEYED_FRAGMENT */
@@ -25772,7 +25758,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3o, [["render", _sfc_render$3n], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/study/study.vue"]]);
+  const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$3o, [["render", _sfc_render$3n], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
   const _sfc_main$3n = {
     mixins: [commonJs],
     props: {},
@@ -26173,7 +26159,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const PagesPageStudyQuestionList = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-d2d57ffb"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/study/questionList.vue"]]);
+  const PagesPageStudyQuestionList = /* @__PURE__ */ _export_sfc(_sfc_main$3n, [["render", _sfc_render$3m], ["__scopeId", "data-v-d2d57ffb"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/questionList.vue"]]);
   const _sfc_main$3m = {
     name: "PageMeta",
     setup(props, { emit }) {
@@ -26307,7 +26293,7 @@ ${o3}
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__file", "E:/前端软件/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/page-meta/page-meta.vue"]]);
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$3m, [["render", _sfc_render$3l], ["__file", "D:/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/page-meta/page-meta.vue"]]);
   var calendar$1 = {
     /**
         * 农历1900-2100的润大小信息表
@@ -27685,7 +27671,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const CalendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-65626c58"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item.vue"]]);
+  const CalendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$3l, [["render", _sfc_render$3k], ["__scopeId", "data-v-65626c58"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item.vue"]]);
   const {
     t: t$7
   } = initVueI18n(i18nMessages$1);
@@ -28184,7 +28170,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__scopeId", "data-v-b6ab2cfb"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar.vue"]]);
+  const __easycom_2$9 = /* @__PURE__ */ _export_sfc(_sfc_main$3k, [["render", _sfc_render$3j], ["__scopeId", "data-v-b6ab2cfb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-calendar/components/uni-calendar/uni-calendar.vue"]]);
   const _sfc_main$3j = {
     mixins: [commonJs],
     props: {},
@@ -28491,7 +28477,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageStudyCalendar = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-3f5d8074"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/study/calendar.vue"]]);
+  const PagesPageStudyCalendar = /* @__PURE__ */ _export_sfc(_sfc_main$3j, [["render", _sfc_render$3i], ["__scopeId", "data-v-3f5d8074"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/calendar.vue"]]);
   const _sfc_main$3i = {
     name: "uni-popup",
     props: {
@@ -28554,7 +28540,7 @@ ${o3}
       )
     ])) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_2$8 = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__scopeId", "data-v-b138c4d7"], ["__file", "C:/Users/71018/Desktop/ic365/components/l-popup/l-popup.vue"]]);
+  const __easycom_2$8 = /* @__PURE__ */ _export_sfc(_sfc_main$3i, [["render", _sfc_render$3h], ["__scopeId", "data-v-b138c4d7"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/l-popup/l-popup.vue"]]);
   const _sfc_main$3h = {
     mixins: [commonJs],
     props: {},
@@ -29950,7 +29936,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageStudyAnswerQuestions = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__scopeId", "data-v-9e40ef6f"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/study/answerQuestions.vue"]]);
+  const PagesPageStudyAnswerQuestions = /* @__PURE__ */ _export_sfc(_sfc_main$3h, [["render", _sfc_render$3g], ["__scopeId", "data-v-9e40ef6f"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/answerQuestions.vue"]]);
   const _sfc_main$3g = {
     mixins: [commonJs],
     props: {},
@@ -30740,7 +30726,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageTeamTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__scopeId", "data-v-d282c156"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/team/team.vue"]]);
+  const PagesPageTeamTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3g, [["render", _sfc_render$3f], ["__scopeId", "data-v-d282c156"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/team.vue"]]);
   const _sfc_main$3f = {
     mixins: [commonJs],
     props: {},
@@ -30929,7 +30915,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageTeamInviteTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-bc1c30b9"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/team/invite_team.vue"]]);
+  const PagesPageTeamInviteTeam = /* @__PURE__ */ _export_sfc(_sfc_main$3f, [["render", _sfc_render$3e], ["__scopeId", "data-v-bc1c30b9"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/team/invite_team.vue"]]);
   const _sfc_main$3e = {
     name: "loading1",
     data() {
@@ -30944,7 +30930,7 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__scopeId", "data-v-0e645258"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
+  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$3e, [["render", _sfc_render$3d], ["__scopeId", "data-v-0e645258"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
   const _sfc_main$3d = {
     name: "loading2",
     data() {
@@ -30959,7 +30945,7 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$3d, [["render", _sfc_render$3c], ["__scopeId", "data-v-3df48dc2"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
+  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$3d, [["render", _sfc_render$3c], ["__scopeId", "data-v-3df48dc2"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
   const _sfc_main$3c = {
     name: "loading3",
     data() {
@@ -30974,7 +30960,7 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$3c, [["render", _sfc_render$3b], ["__scopeId", "data-v-27a8293c"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
+  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$3c, [["render", _sfc_render$3b], ["__scopeId", "data-v-27a8293c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
   const _sfc_main$3b = {
     name: "loading5",
     data() {
@@ -30989,7 +30975,7 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$3b, [["render", _sfc_render$3a], ["__scopeId", "data-v-2e7deb83"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
+  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$3b, [["render", _sfc_render$3a], ["__scopeId", "data-v-2e7deb83"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
   const _sfc_main$3a = {
     name: "loading6",
     data() {
@@ -31004,7 +30990,7 @@ ${o3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$3a, [["render", _sfc_render$39], ["__scopeId", "data-v-ef674bbb"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
+  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$3a, [["render", _sfc_render$39], ["__scopeId", "data-v-ef674bbb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
   const _sfc_main$39 = {
     components: { Loading1, Loading2, Loading3, Loading4, Loading5 },
     name: "qiun-loading",
@@ -31032,7 +31018,7 @@ ${o3}
       $props.loadingType == 5 ? (vue.openBlock(), vue.createBlock(_component_Loading5, { key: 4 })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$39, [["render", _sfc_render$38], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$39, [["render", _sfc_render$38], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
   const _sfc_main$38 = {
     name: "qiun-error",
     props: {
@@ -31057,7 +31043,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$k = /* @__PURE__ */ _export_sfc(_sfc_main$38, [["render", _sfc_render$37], ["__scopeId", "data-v-a99d579b"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
+  const __easycom_1$k = /* @__PURE__ */ _export_sfc(_sfc_main$38, [["render", _sfc_render$37], ["__scopeId", "data-v-a99d579b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
   const color$1 = ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"];
   const formatDateTime = (timeStamp, returnType) => {
     var date = /* @__PURE__ */ new Date();
@@ -32838,7 +32824,7 @@ ${o3}
   }
   if (typeof block0$3 === "function")
     block0$3(_sfc_main$37);
-  const __easycom_1$j = /* @__PURE__ */ _export_sfc(_sfc_main$37, [["render", _sfc_render$36], ["__scopeId", "data-v-0ca34aee"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
+  const __easycom_1$j = /* @__PURE__ */ _export_sfc(_sfc_main$37, [["render", _sfc_render$36], ["__scopeId", "data-v-0ca34aee"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
   const _imports_0$6 = "/static/icons/reward.png";
   const _sfc_main$36 = {
     mixins: [commonJs],
@@ -33476,7 +33462,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageParentParent = /* @__PURE__ */ _export_sfc(_sfc_main$36, [["render", _sfc_render$35], ["__scopeId", "data-v-1185e19c"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/parent/parent.vue"]]);
+  const PagesPageParentParent = /* @__PURE__ */ _export_sfc(_sfc_main$36, [["render", _sfc_render$35], ["__scopeId", "data-v-1185e19c"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/parent/parent.vue"]]);
   const _sfc_main$35 = {
     mixins: [commonJs],
     data() {
@@ -34202,7 +34188,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const PagesPageUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$35, [["render", _sfc_render$34], ["__scopeId", "data-v-351444bc"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/user.vue"]]);
+  const PagesPageUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$35, [["render", _sfc_render$34], ["__scopeId", "data-v-351444bc"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/user.vue"]]);
   const _sfc_main$34 = {
     data() {
       return {
@@ -34222,7 +34208,7 @@ ${o3}
   function _sfc_render$33(_ctx, _cache, $props, $setup, $data, $options) {
     return null;
   }
-  const PagesPageUserUserSet = /* @__PURE__ */ _export_sfc(_sfc_main$34, [["render", _sfc_render$33], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/userSet.vue"]]);
+  const PagesPageUserUserSet = /* @__PURE__ */ _export_sfc(_sfc_main$34, [["render", _sfc_render$33], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/userSet.vue"]]);
   const _sfc_main$33 = {
     mixins: [commonJs],
     props: {},
@@ -34612,7 +34598,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const PagesPageUserAchievementDetails = /* @__PURE__ */ _export_sfc(_sfc_main$33, [["render", _sfc_render$32], ["__scopeId", "data-v-70c707a8"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/achievementDetails.vue"]]);
+  const PagesPageUserAchievementDetails = /* @__PURE__ */ _export_sfc(_sfc_main$33, [["render", _sfc_render$32], ["__scopeId", "data-v-70c707a8"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/achievementDetails.vue"]]);
   const _sfc_main$32 = {
     mixins: [commonJs],
     props: {},
@@ -35062,7 +35048,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const PagesPageUserExchangeMall = /* @__PURE__ */ _export_sfc(_sfc_main$32, [["render", _sfc_render$31], ["__scopeId", "data-v-c19752be"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/exchangeMall.vue"]]);
+  const PagesPageUserExchangeMall = /* @__PURE__ */ _export_sfc(_sfc_main$32, [["render", _sfc_render$31], ["__scopeId", "data-v-c19752be"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/exchangeMall.vue"]]);
   const _sfc_main$31 = {
     mixins: [commonJs],
     props: {},
@@ -35282,7 +35268,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const PagesPageUserRedemptionHistory = /* @__PURE__ */ _export_sfc(_sfc_main$31, [["render", _sfc_render$30], ["__scopeId", "data-v-13dfdb91"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/redemptionHistory.vue"]]);
+  const PagesPageUserRedemptionHistory = /* @__PURE__ */ _export_sfc(_sfc_main$31, [["render", _sfc_render$30], ["__scopeId", "data-v-13dfdb91"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/redemptionHistory.vue"]]);
   const _sfc_main$30 = {
     mixins: [commonJs],
     props: {},
@@ -35380,7 +35366,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageUserExchangeLogDetails = /* @__PURE__ */ _export_sfc(_sfc_main$30, [["render", _sfc_render$2$], ["__scopeId", "data-v-7e25877f"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/exchangeLogDetails.vue"]]);
+  const PagesPageUserExchangeLogDetails = /* @__PURE__ */ _export_sfc(_sfc_main$30, [["render", _sfc_render$2$], ["__scopeId", "data-v-7e25877f"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/exchangeLogDetails.vue"]]);
   const _sfc_main$2$ = {
     mixins: [commonJs],
     props: {},
@@ -35473,7 +35459,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageUserExchangeDetails = /* @__PURE__ */ _export_sfc(_sfc_main$2$, [["render", _sfc_render$2_], ["__scopeId", "data-v-bf5823cf"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/exchangeDetails.vue"]]);
+  const PagesPageUserExchangeDetails = /* @__PURE__ */ _export_sfc(_sfc_main$2$, [["render", _sfc_render$2_], ["__scopeId", "data-v-bf5823cf"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/exchangeDetails.vue"]]);
   const _sfc_main$2_ = {
     mixins: [commonJs],
     props: {},
@@ -35664,7 +35650,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageUserTaskList = /* @__PURE__ */ _export_sfc(_sfc_main$2_, [["render", _sfc_render$2Z], ["__scopeId", "data-v-9d092690"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/taskList.vue"]]);
+  const PagesPageUserTaskList = /* @__PURE__ */ _export_sfc(_sfc_main$2_, [["render", _sfc_render$2Z], ["__scopeId", "data-v-9d092690"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/taskList.vue"]]);
   const _sfc_main$2Z = {
     mixins: [commonJs],
     props: {},
@@ -35802,7 +35788,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageUserSystemSettings = /* @__PURE__ */ _export_sfc(_sfc_main$2Z, [["render", _sfc_render$2Y], ["__scopeId", "data-v-818c42c9"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/systemSettings.vue"]]);
+  const PagesPageUserSystemSettings = /* @__PURE__ */ _export_sfc(_sfc_main$2Z, [["render", _sfc_render$2Y], ["__scopeId", "data-v-818c42c9"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/systemSettings.vue"]]);
   const _sfc_main$2Y = {
     mixins: [commonJs],
     props: {},
@@ -35885,7 +35871,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageUserWebView = /* @__PURE__ */ _export_sfc(_sfc_main$2Y, [["render", _sfc_render$2X], ["__scopeId", "data-v-1b0ac69f"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/user/webView.vue"]]);
+  const PagesPageUserWebView = /* @__PURE__ */ _export_sfc(_sfc_main$2Y, [["render", _sfc_render$2X], ["__scopeId", "data-v-1b0ac69f"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/webView.vue"]]);
   const ydLogin = requireNativePlugin("YD-Login");
   ydLogin.registerWithBusinessID({
     businessId: "8a0edb8e5b064fffbaf91c2ed8b82930",
@@ -36113,7 +36099,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesPageLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2X, [["render", _sfc_render$2W], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/login/login.vue"]]);
+  const PagesPageLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2X, [["render", _sfc_render$2W], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/login/login.vue"]]);
   const _sfc_main$2W = {
     mixins: [commonJs],
     components: {},
@@ -36381,7 +36367,7 @@ ${o3}
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesPageLoginPhoneLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2W, [["render", _sfc_render$2V], ["__scopeId", "data-v-3933e925"], ["__file", "C:/Users/71018/Desktop/ic365/pages/page/login/phoneLogin.vue"]]);
+  const PagesPageLoginPhoneLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2W, [["render", _sfc_render$2V], ["__scopeId", "data-v-3933e925"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/login/phoneLogin.vue"]]);
   const _imports_0$5 = "/static/plus.png";
   const _sfc_main$2V = {
     data() {
@@ -36556,7 +36542,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentViewView = /* @__PURE__ */ _export_sfc(_sfc_main$2V, [["render", _sfc_render$2U], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/view/view.vue"]]);
+  const PagesComponentViewView = /* @__PURE__ */ _export_sfc(_sfc_main$2V, [["render", _sfc_render$2U], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/view/view.vue"]]);
   const _sfc_main$2U = {
     data() {
       return {
@@ -36660,7 +36646,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentScrollViewScrollView = /* @__PURE__ */ _export_sfc(_sfc_main$2U, [["render", _sfc_render$2T], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/scroll-view/scroll-view.vue"]]);
+  const PagesComponentScrollViewScrollView = /* @__PURE__ */ _export_sfc(_sfc_main$2U, [["render", _sfc_render$2T], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/scroll-view/scroll-view.vue"]]);
   const _sfc_main$2T = {
     data() {
       return {
@@ -36762,7 +36748,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentSwiperSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$2T, [["render", _sfc_render$2S], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/swiper/swiper.vue"]]);
+  const PagesComponentSwiperSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$2T, [["render", _sfc_render$2S], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/swiper/swiper.vue"]]);
   const _sfc_main$2S = {
     data() {
       return {
@@ -36888,7 +36874,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentMovableViewMovableView = /* @__PURE__ */ _export_sfc(_sfc_main$2S, [["render", _sfc_render$2R], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/movable-view/movable-view.vue"]]);
+  const PagesComponentMovableViewMovableView = /* @__PURE__ */ _export_sfc(_sfc_main$2S, [["render", _sfc_render$2R], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/movable-view/movable-view.vue"]]);
   const _sfc_main$2R = {
     data() {
       return {
@@ -36963,7 +36949,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentTextText = /* @__PURE__ */ _export_sfc(_sfc_main$2R, [["render", _sfc_render$2Q], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/text/text.vue"]]);
+  const PagesComponentTextText = /* @__PURE__ */ _export_sfc(_sfc_main$2R, [["render", _sfc_render$2Q], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/text/text.vue"]]);
   const _sfc_main$2Q = {
     data() {
       return {
@@ -37011,7 +36997,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentRichTextRichText = /* @__PURE__ */ _export_sfc(_sfc_main$2Q, [["render", _sfc_render$2P], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/rich-text/rich-text.vue"]]);
+  const PagesComponentRichTextRichText = /* @__PURE__ */ _export_sfc(_sfc_main$2Q, [["render", _sfc_render$2P], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/rich-text/rich-text.vue"]]);
   const _sfc_main$2P = {
     data() {
       return {
@@ -37078,7 +37064,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentProgressProgress = /* @__PURE__ */ _export_sfc(_sfc_main$2P, [["render", _sfc_render$2O], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/progress/progress.vue"]]);
+  const PagesComponentProgressProgress = /* @__PURE__ */ _export_sfc(_sfc_main$2P, [["render", _sfc_render$2O], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/progress/progress.vue"]]);
   const _sfc_main$2O = {
     data() {
       return {
@@ -37172,7 +37158,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentButtonButton = /* @__PURE__ */ _export_sfc(_sfc_main$2O, [["render", _sfc_render$2N], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/button/button.vue"]]);
+  const PagesComponentButtonButton = /* @__PURE__ */ _export_sfc(_sfc_main$2O, [["render", _sfc_render$2N], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/button/button.vue"]]);
   const _sfc_main$2N = {
     data() {
       return {
@@ -37310,7 +37296,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentCheckboxCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$2N, [["render", _sfc_render$2M], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/checkbox/checkbox.vue"]]);
+  const PagesComponentCheckboxCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$2N, [["render", _sfc_render$2M], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/checkbox/checkbox.vue"]]);
   const graceChecker = {
     error: "",
     check: function(data, rule) {
@@ -37544,7 +37530,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentFormForm = /* @__PURE__ */ _export_sfc(_sfc_main$2M, [["render", _sfc_render$2L], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/form/form.vue"]]);
+  const PagesComponentFormForm = /* @__PURE__ */ _export_sfc(_sfc_main$2M, [["render", _sfc_render$2L], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/form/form.vue"]]);
   const _sfc_main$2L = {
     data() {
       return {
@@ -37705,7 +37691,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentLabelLabel = /* @__PURE__ */ _export_sfc(_sfc_main$2L, [["render", _sfc_render$2K], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/label/label.vue"]]);
+  const PagesComponentLabelLabel = /* @__PURE__ */ _export_sfc(_sfc_main$2L, [["render", _sfc_render$2K], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/label/label.vue"]]);
   function getDate$2(type) {
     const date = /* @__PURE__ */ new Date();
     let year = date.getFullYear();
@@ -37897,7 +37883,7 @@ ${o3}
       vue.createElementVNode("view", { class: "uni-picker-tips" }, " 注：选择当前时间 ±10 年之间的时间, 不在区间内不能选中 ")
     ]);
   }
-  const PagesComponentPickerPicker = /* @__PURE__ */ _export_sfc(_sfc_main$2K, [["render", _sfc_render$2J], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/picker/picker.vue"]]);
+  const PagesComponentPickerPicker = /* @__PURE__ */ _export_sfc(_sfc_main$2K, [["render", _sfc_render$2J], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/picker/picker.vue"]]);
   const _sfc_main$2J = {
     data() {
       const date = /* @__PURE__ */ new Date();
@@ -38026,7 +38012,7 @@ ${o3}
       ], 40, ["indicator-style", "mask-style", "value"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesComponentPickerViewPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$2J, [["render", _sfc_render$2I], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/picker-view/picker-view.vue"]]);
+  const PagesComponentPickerViewPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$2J, [["render", _sfc_render$2I], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/picker-view/picker-view.vue"]]);
   const _sfc_main$2I = {
     data() {
       return {
@@ -38161,7 +38147,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentRadioRadio = /* @__PURE__ */ _export_sfc(_sfc_main$2I, [["render", _sfc_render$2H], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/radio/radio.vue"]]);
+  const PagesComponentRadioRadio = /* @__PURE__ */ _export_sfc(_sfc_main$2I, [["render", _sfc_render$2H], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/radio/radio.vue"]]);
   const _sfc_main$2H = {
     data() {
       return {
@@ -38243,7 +38229,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentSliderSlider = /* @__PURE__ */ _export_sfc(_sfc_main$2H, [["render", _sfc_render$2G], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/slider/slider.vue"]]);
+  const PagesComponentSliderSlider = /* @__PURE__ */ _export_sfc(_sfc_main$2H, [["render", _sfc_render$2G], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/slider/slider.vue"]]);
   const _sfc_main$2G = {
     data() {
       return {
@@ -38312,7 +38298,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentSwitchSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$2G, [["render", _sfc_render$2F], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/switch/switch.vue"]]);
+  const PagesComponentSwitchSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$2G, [["render", _sfc_render$2F], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/switch/switch.vue"]]);
   const _sfc_main$2F = {
     data() {
       return {
@@ -38352,7 +38338,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentTextareaTextarea = /* @__PURE__ */ _export_sfc(_sfc_main$2F, [["render", _sfc_render$2E], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/textarea/textarea.vue"]]);
+  const PagesComponentTextareaTextarea = /* @__PURE__ */ _export_sfc(_sfc_main$2F, [["render", _sfc_render$2E], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/textarea/textarea.vue"]]);
   const _sfc_main$2E = {
     data() {
       return {
@@ -38770,7 +38756,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentEditorEditor = /* @__PURE__ */ _export_sfc(_sfc_main$2E, [["render", _sfc_render$2D], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/editor/editor.vue"]]);
+  const PagesComponentEditorEditor = /* @__PURE__ */ _export_sfc(_sfc_main$2E, [["render", _sfc_render$2D], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/editor/editor.vue"]]);
   const _sfc_main$2D = {
     data() {
       return {
@@ -38814,7 +38800,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentNavigatorNavigator = /* @__PURE__ */ _export_sfc(_sfc_main$2D, [["render", _sfc_render$2C], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/navigator/navigator.vue"]]);
+  const PagesComponentNavigatorNavigator = /* @__PURE__ */ _export_sfc(_sfc_main$2D, [["render", _sfc_render$2C], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/navigator.vue"]]);
   const _sfc_main$2C = {
     data() {
       return {
@@ -38828,7 +38814,7 @@ ${o3}
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"])
     ]);
   }
-  const PagesComponentNavigatorNavigateNavigate = /* @__PURE__ */ _export_sfc(_sfc_main$2C, [["render", _sfc_render$2B], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/navigator/navigate/navigate.vue"]]);
+  const PagesComponentNavigatorNavigateNavigate = /* @__PURE__ */ _export_sfc(_sfc_main$2C, [["render", _sfc_render$2B], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/navigate/navigate.vue"]]);
   const _sfc_main$2B = {
     data() {
       return {
@@ -38842,7 +38828,7 @@ ${o3}
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"])
     ]);
   }
-  const PagesComponentNavigatorRedirectRedirect = /* @__PURE__ */ _export_sfc(_sfc_main$2B, [["render", _sfc_render$2A], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/navigator/redirect/redirect.vue"]]);
+  const PagesComponentNavigatorRedirectRedirect = /* @__PURE__ */ _export_sfc(_sfc_main$2B, [["render", _sfc_render$2A], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/navigator/redirect/redirect.vue"]]);
   const _imports_0$4 = "/static/uni.png";
   const _sfc_main$2A = {
     data() {
@@ -38887,7 +38873,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentImageImage = /* @__PURE__ */ _export_sfc(_sfc_main$2A, [["render", _sfc_render$2z], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/image/image.vue"]]);
+  const PagesComponentImageImage = /* @__PURE__ */ _export_sfc(_sfc_main$2A, [["render", _sfc_render$2z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/image/image.vue"]]);
   const block0$2 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("animate");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["animate"] = "39c049d8";
@@ -38930,7 +38916,7 @@ ${o3}
   }
   if (typeof block0$2 === "function")
     block0$2(_sfc_main$2z);
-  const PagesComponentCanvasCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$2z, [["render", _sfc_render$2y], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/canvas/canvas.vue"]]);
+  const PagesComponentCanvasCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$2z, [["render", _sfc_render$2y], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/canvas/canvas.vue"]]);
   const _sfc_main$2y = {
     data() {
       return {
@@ -38959,7 +38945,7 @@ ${o3}
       }, null, 40, ["src"])
     ]);
   }
-  const PagesComponentWebViewWebView = /* @__PURE__ */ _export_sfc(_sfc_main$2y, [["render", _sfc_render$2x], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/web-view/web-view.vue"]]);
+  const PagesComponentWebViewWebView = /* @__PURE__ */ _export_sfc(_sfc_main$2y, [["render", _sfc_render$2x], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view/web-view.vue"]]);
   const _sfc_main$2x = {
     data() {
       return {
@@ -39024,7 +39010,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesComponentAdAd = /* @__PURE__ */ _export_sfc(_sfc_main$2x, [["render", _sfc_render$2w], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/ad/ad.vue"]]);
+  const PagesComponentAdAd = /* @__PURE__ */ _export_sfc(_sfc_main$2x, [["render", _sfc_render$2w], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/ad/ad.vue"]]);
   const _sfc_main$2w = {
     methods: {
       getMessage(e2) {
@@ -39049,7 +39035,7 @@ ${o3}
       )
     ]);
   }
-  const PagesComponentWebViewLocalWebViewLocal = /* @__PURE__ */ _export_sfc(_sfc_main$2w, [["render", _sfc_render$2v], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/web-view-local/web-view-local.vue"]]);
+  const PagesComponentWebViewLocalWebViewLocal = /* @__PURE__ */ _export_sfc(_sfc_main$2w, [["render", _sfc_render$2v], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view-local/web-view-local.vue"]]);
   const _sfc_main$2v = {
     data() {
       return {
@@ -39085,7 +39071,7 @@ ${o3}
       )
     ]);
   }
-  const PagesComponentWebViewLocalIssue17581 = /* @__PURE__ */ _export_sfc(_sfc_main$2v, [["render", _sfc_render$2u], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/web-view-local/issue-17581.vue"]]);
+  const PagesComponentWebViewLocalIssue17581 = /* @__PURE__ */ _export_sfc(_sfc_main$2v, [["render", _sfc_render$2u], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/web-view-local/issue-17581.vue"]]);
   var isIOS;
   function album() {
     var result = 0;
@@ -39407,7 +39393,7 @@ ${o3}
       ])
     ]);
   }
-  const PlatformsAppPlusSpeechSpeech = /* @__PURE__ */ _export_sfc(_sfc_main$2u, [["render", _sfc_render$2t], ["__file", "C:/Users/71018/Desktop/ic365/platforms/app-plus/speech/speech.vue"]]);
+  const PlatformsAppPlusSpeechSpeech = /* @__PURE__ */ _export_sfc(_sfc_main$2u, [["render", _sfc_render$2t], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/speech/speech.vue"]]);
   var id$1 = null;
   const _sfc_main$2t = {
     data() {
@@ -39476,7 +39462,7 @@ ${o3}
       ])
     ]);
   }
-  const PlatformsAppPlusOrientationOrientation = /* @__PURE__ */ _export_sfc(_sfc_main$2t, [["render", _sfc_render$2s], ["__file", "C:/Users/71018/Desktop/ic365/platforms/app-plus/orientation/orientation.vue"]]);
+  const PlatformsAppPlusOrientationOrientation = /* @__PURE__ */ _export_sfc(_sfc_main$2t, [["render", _sfc_render$2s], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/orientation/orientation.vue"]]);
   var id = null;
   var bright = null;
   const _sfc_main$2s = {
@@ -39548,7 +39534,7 @@ ${o3}
       ])
     ]);
   }
-  const PlatformsAppPlusProximityProximity = /* @__PURE__ */ _export_sfc(_sfc_main$2s, [["render", _sfc_render$2r], ["__file", "C:/Users/71018/Desktop/ic365/platforms/app-plus/proximity/proximity.vue"]]);
+  const PlatformsAppPlusProximityProximity = /* @__PURE__ */ _export_sfc(_sfc_main$2s, [["render", _sfc_render$2r], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/proximity/proximity.vue"]]);
   const _sfc_main$2r = {
     data() {
       return {
@@ -39643,7 +39629,7 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PlatformsAppPlusPushPush = /* @__PURE__ */ _export_sfc(_sfc_main$2r, [["render", _sfc_render$2q], ["__file", "C:/Users/71018/Desktop/ic365/platforms/app-plus/push/push.vue"]]);
+  const PlatformsAppPlusPushPush = /* @__PURE__ */ _export_sfc(_sfc_main$2r, [["render", _sfc_render$2q], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/push/push.vue"]]);
   const _sfc_main$2q = {
     data() {
       return {
@@ -39744,7 +39730,7 @@ ${o3}
       /* STYLE */
     );
   }
-  const PlatformsAppPlusShakeShake = /* @__PURE__ */ _export_sfc(_sfc_main$2q, [["render", _sfc_render$2p], ["__file", "C:/Users/71018/Desktop/ic365/platforms/app-plus/shake/shake.vue"]]);
+  const PlatformsAppPlusShakeShake = /* @__PURE__ */ _export_sfc(_sfc_main$2q, [["render", _sfc_render$2p], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/shake/shake.vue"]]);
   const _sfc_main$2p = {
     name: "UniRate",
     props: {
@@ -40010,7 +39996,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$2p, [["render", _sfc_render$2o], ["__scopeId", "data-v-5c8fbdf3"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-rate/components/uni-rate/uni-rate.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$2p, [["render", _sfc_render$2o], ["__scopeId", "data-v-5c8fbdf3"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-rate/components/uni-rate/uni-rate.vue"]]);
   const _sfc_main$2o = {
     data() {
       return {
@@ -40292,12 +40278,12 @@ ${o3}
       ])
     ]);
   }
-  const PlatformsAppPlusFeedbackFeedback = /* @__PURE__ */ _export_sfc(_sfc_main$2o, [["render", _sfc_render$2n], ["__file", "C:/Users/71018/Desktop/ic365/platforms/app-plus/feedback/feedback.vue"]]);
+  const PlatformsAppPlusFeedbackFeedback = /* @__PURE__ */ _export_sfc(_sfc_main$2o, [["render", _sfc_render$2n], ["__file", "C:/Users/Administrator/Desktop/ic365/platforms/app-plus/feedback/feedback.vue"]]);
   const _sfc_main$2n = {};
   function _sfc_render$2m(_ctx, _cache) {
     return null;
   }
-  const UniModulesUniUpgradeCenterAppPagesUpgradePopup = /* @__PURE__ */ _export_sfc(_sfc_main$2n, [["render", _sfc_render$2m], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-upgrade-center-app/pages/upgrade-popup.vue"]]);
+  const UniModulesUniUpgradeCenterAppPagesUpgradePopup = /* @__PURE__ */ _export_sfc(_sfc_main$2n, [["render", _sfc_render$2m], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-upgrade-center-app/pages/upgrade-popup.vue"]]);
   const _imports_0$3 = "/uni_modules/rt-uni-update/static/bg_top.png";
   const _imports_1$1 = "/uni_modules/rt-uni-update/static/app_update_close.png";
   const _sfc_main$2m = {
@@ -40525,12 +40511,12 @@ ${o3}
       ])
     ])) : vue.createCommentVNode("v-if", true);
   }
-  const UniModulesRtUniUpdateComponentsRtUniUpdateRtUniUpdate = /* @__PURE__ */ _export_sfc(_sfc_main$2m, [["render", _sfc_render$2l], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update.vue"]]);
+  const UniModulesRtUniUpdateComponentsRtUniUpdateRtUniUpdate = /* @__PURE__ */ _export_sfc(_sfc_main$2m, [["render", _sfc_render$2l], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update.vue"]]);
   const _sfc_main$2l = {};
   function _sfc_render$2k(_ctx, _cache) {
     return null;
   }
-  const PagesAPILoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2l, [["render", _sfc_render$2k], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/login/login.vue"]]);
+  const PagesAPILoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2l, [["render", _sfc_render$2k], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/login/login.vue"]]);
   const _sfc_main$2k = {
     data() {
       return {
@@ -40640,12 +40626,12 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPISubnvueSubnvue = /* @__PURE__ */ _export_sfc(_sfc_main$2k, [["render", _sfc_render$2j], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/subnvue/subnvue.vue"]]);
+  const PagesAPISubnvueSubnvue = /* @__PURE__ */ _export_sfc(_sfc_main$2k, [["render", _sfc_render$2j], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/subnvue/subnvue.vue"]]);
   const _sfc_main$2j = {};
   function _sfc_render$2i(_ctx, _cache) {
     return null;
   }
-  const PagesAPIGetUserInfoGetUserInfo = /* @__PURE__ */ _export_sfc(_sfc_main$2j, [["render", _sfc_render$2i], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/get-user-info/get-user-info.vue"]]);
+  const PagesAPIGetUserInfoGetUserInfo = /* @__PURE__ */ _export_sfc(_sfc_main$2j, [["render", _sfc_render$2i], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/get-user-info/get-user-info.vue"]]);
   const _sfc_main$2i = {
     data() {
       return {
@@ -40851,7 +40837,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIRequestPaymentRequestPayment = /* @__PURE__ */ _export_sfc(_sfc_main$2i, [["render", _sfc_render$2h], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/request-payment/request-payment.vue"]]);
+  const PagesAPIRequestPaymentRequestPayment = /* @__PURE__ */ _export_sfc(_sfc_main$2i, [["render", _sfc_render$2h], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/request-payment/request-payment.vue"]]);
   const _sfc_main$2h = {
     data() {
       return {
@@ -41163,7 +41149,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIShareShare = /* @__PURE__ */ _export_sfc(_sfc_main$2h, [["render", _sfc_render$2g], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/share/share.vue"]]);
+  const PagesAPIShareShare = /* @__PURE__ */ _export_sfc(_sfc_main$2h, [["render", _sfc_render$2g], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/share/share.vue"]]);
   const _sfc_main$2g = {
     data() {
       return {
@@ -41207,7 +41193,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPISetNavigationBarTitleSetNavigationBarTitle = /* @__PURE__ */ _export_sfc(_sfc_main$2g, [["render", _sfc_render$2f], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/set-navigation-bar-title/set-navigation-bar-title.vue"]]);
+  const PagesAPISetNavigationBarTitleSetNavigationBarTitle = /* @__PURE__ */ _export_sfc(_sfc_main$2g, [["render", _sfc_render$2f], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/set-navigation-bar-title/set-navigation-bar-title.vue"]]);
   const _sfc_main$2f = {
     data() {
       return {
@@ -41243,7 +41229,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIShowLoadingShowLoading = /* @__PURE__ */ _export_sfc(_sfc_main$2f, [["render", _sfc_render$2e], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/show-loading/show-loading.vue"]]);
+  const PagesAPIShowLoadingShowLoading = /* @__PURE__ */ _export_sfc(_sfc_main$2f, [["render", _sfc_render$2e], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/show-loading/show-loading.vue"]]);
   const preloadPageUrl = "/pages/extUI/calendar/calendar";
   const _sfc_main$2e = {
     data() {
@@ -41359,7 +41345,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPINavigatorNavigator = /* @__PURE__ */ _export_sfc(_sfc_main$2e, [["render", _sfc_render$2d], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/navigator/navigator.vue"]]);
+  const PagesAPINavigatorNavigator = /* @__PURE__ */ _export_sfc(_sfc_main$2e, [["render", _sfc_render$2d], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/navigator/navigator.vue"]]);
   const _sfc_main$2d = {
     data() {
       return {
@@ -41438,7 +41424,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPINavigatorNewPageNewVuePage1 = /* @__PURE__ */ _export_sfc(_sfc_main$2d, [["render", _sfc_render$2c], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/navigator/new-page/new-vue-page-1.vue"]]);
+  const PagesAPINavigatorNewPageNewVuePage1 = /* @__PURE__ */ _export_sfc(_sfc_main$2d, [["render", _sfc_render$2c], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/navigator/new-page/new-vue-page-1.vue"]]);
   const _sfc_main$2c = {
     data() {
       return {};
@@ -41484,7 +41470,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPINavigatorNewPageNewVuePage2 = /* @__PURE__ */ _export_sfc(_sfc_main$2c, [["render", _sfc_render$2b], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/navigator/new-page/new-vue-page-2.vue"]]);
+  const PagesAPINavigatorNewPageNewVuePage2 = /* @__PURE__ */ _export_sfc(_sfc_main$2c, [["render", _sfc_render$2b], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/navigator/new-page/new-vue-page-2.vue"]]);
   const _sfc_main$2b = {
     data() {
       return {
@@ -41577,7 +41563,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIPullDownRefreshPullDownRefresh = /* @__PURE__ */ _export_sfc(_sfc_main$2b, [["render", _sfc_render$2a], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/pull-down-refresh/pull-down-refresh.vue"]]);
+  const PagesAPIPullDownRefreshPullDownRefresh = /* @__PURE__ */ _export_sfc(_sfc_main$2b, [["render", _sfc_render$2a], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/pull-down-refresh/pull-down-refresh.vue"]]);
   const _sfc_main$2a = {
     data() {
       return {
@@ -41687,7 +41673,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIAnimationAnimation = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/animation/animation.vue"]]);
+  const PagesAPIAnimationAnimation = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/animation/animation.vue"]]);
   const _sfc_main$29 = {
     data() {
       return {
@@ -41782,7 +41768,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIGetNodeInfoGetNodeInfo = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/get-node-info/get-node-info.vue"]]);
+  const PagesAPIGetNodeInfoGetNodeInfo = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/get-node-info/get-node-info.vue"]]);
   let observer = null;
   const _sfc_main$28 = {
     data() {
@@ -41831,7 +41817,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIIntersectionObserverIntersectionObserver = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/intersection-observer/intersection-observer.vue"]]);
+  const PagesAPIIntersectionObserverIntersectionObserver = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/intersection-observer/intersection-observer.vue"]]);
   var context = null;
   const _sfc_main$27 = {
     data() {
@@ -42192,7 +42178,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPICanvasCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$27, [["render", _sfc_render$26], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/canvas/canvas.vue"]]);
+  const PagesAPICanvasCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$27, [["render", _sfc_render$26], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/canvas/canvas.vue"]]);
   const _sfc_main$26 = {
     data() {
       return {
@@ -42237,7 +42223,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIActionSheetActionSheet = /* @__PURE__ */ _export_sfc(_sfc_main$26, [["render", _sfc_render$25], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/action-sheet/action-sheet.vue"]]);
+  const PagesAPIActionSheetActionSheet = /* @__PURE__ */ _export_sfc(_sfc_main$26, [["render", _sfc_render$25], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/action-sheet/action-sheet.vue"]]);
   const _sfc_main$25 = {
     data() {
       return {
@@ -42282,7 +42268,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIModalModal = /* @__PURE__ */ _export_sfc(_sfc_main$25, [["render", _sfc_render$24], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/modal/modal.vue"]]);
+  const PagesAPIModalModal = /* @__PURE__ */ _export_sfc(_sfc_main$25, [["render", _sfc_render$24], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/modal/modal.vue"]]);
   const _sfc_main$24 = {
     data() {
       return {
@@ -42359,7 +42345,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIToastToast = /* @__PURE__ */ _export_sfc(_sfc_main$24, [["render", _sfc_render$23], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/toast/toast.vue"]]);
+  const PagesAPIToastToast = /* @__PURE__ */ _export_sfc(_sfc_main$24, [["render", _sfc_render$23], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/toast/toast.vue"]]);
   const _sfc_main$23 = {
     data() {
       return {
@@ -42439,7 +42425,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIGetNetworkTypeGetNetworkType = /* @__PURE__ */ _export_sfc(_sfc_main$23, [["render", _sfc_render$22], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/get-network-type/get-network-type.vue"]]);
+  const PagesAPIGetNetworkTypeGetNetworkType = /* @__PURE__ */ _export_sfc(_sfc_main$23, [["render", _sfc_render$22], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/get-network-type/get-network-type.vue"]]);
   const _sfc_main$22 = {
     data() {
       return {
@@ -42682,7 +42668,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIGetSystemInfoGetSystemInfo = /* @__PURE__ */ _export_sfc(_sfc_main$22, [["render", _sfc_render$21], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/get-system-info/get-system-info.vue"]]);
+  const PagesAPIGetSystemInfoGetSystemInfo = /* @__PURE__ */ _export_sfc(_sfc_main$22, [["render", _sfc_render$21], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/get-system-info/get-system-info.vue"]]);
   const _sfc_main$21 = {
     data() {
       return {
@@ -42788,7 +42774,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIAddPhoneContactAddPhoneContact = /* @__PURE__ */ _export_sfc(_sfc_main$21, [["render", _sfc_render$20], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/add-phone-contact/add-phone-contact.vue"]]);
+  const PagesAPIAddPhoneContactAddPhoneContact = /* @__PURE__ */ _export_sfc(_sfc_main$21, [["render", _sfc_render$20], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/add-phone-contact/add-phone-contact.vue"]]);
   const _sfc_main$20 = {
     data() {
       return {
@@ -42845,7 +42831,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIOnAccelerometerChangeOnAccelerometerChange = /* @__PURE__ */ _export_sfc(_sfc_main$20, [["render", _sfc_render$1$], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/on-accelerometer-change/on-accelerometer-change.vue"]]);
+  const PagesAPIOnAccelerometerChangeOnAccelerometerChange = /* @__PURE__ */ _export_sfc(_sfc_main$20, [["render", _sfc_render$1$], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/on-accelerometer-change/on-accelerometer-change.vue"]]);
   const _imports_0$2 = "/static/compass.png";
   const _sfc_main$1$ = {
     data() {
@@ -42900,7 +42886,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIOnCompassChangeOnCompassChange = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/on-compass-change/on-compass-change.vue"]]);
+  const PagesAPIOnCompassChangeOnCompassChange = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/on-compass-change/on-compass-change.vue"]]);
   const _sfc_main$1_ = {
     data() {
       return {
@@ -42955,7 +42941,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIMakePhoneCallMakePhoneCall = /* @__PURE__ */ _export_sfc(_sfc_main$1_, [["render", _sfc_render$1Z], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/make-phone-call/make-phone-call.vue"]]);
+  const PagesAPIMakePhoneCallMakePhoneCall = /* @__PURE__ */ _export_sfc(_sfc_main$1_, [["render", _sfc_render$1Z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/make-phone-call/make-phone-call.vue"]]);
   const _sfc_main$1Z = {
     data() {
       return {
@@ -43025,7 +43011,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIScanCodeScanCode = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/scan-code/scan-code.vue"]]);
+  const PagesAPIScanCodeScanCode = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/scan-code/scan-code.vue"]]);
   const _sfc_main$1Y = {
     data() {
       return {
@@ -43105,7 +43091,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIClipboardClipboard = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/clipboard/clipboard.vue"]]);
+  const PagesAPIClipboardClipboard = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/clipboard/clipboard.vue"]]);
   const requestUrl = "https://unidemo.dcloud.net.cn/ajax/echo/text?name=uni-app";
   const duration = 2e3;
   const _sfc_main$1X = {
@@ -43248,7 +43234,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIRequestRequest = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/request/request.vue"]]);
+  const PagesAPIRequestRequest = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/request/request.vue"]]);
   const _sfc_main$1W = {
     data() {
       return {
@@ -43318,7 +43304,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIUploadFileUploadFile = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/upload-file/upload-file.vue"]]);
+  const PagesAPIUploadFileUploadFile = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/upload-file/upload-file.vue"]]);
   const _sfc_main$1V = {
     data() {
       return {
@@ -43385,7 +43371,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIDownloadFileDownloadFile = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/download-file/download-file.vue"]]);
+  const PagesAPIDownloadFileDownloadFile = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/download-file/download-file.vue"]]);
   var sourceType$1 = [
     ["camera"],
     ["album"],
@@ -43615,7 +43601,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIImageImage = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/image/image.vue"]]);
+  const PagesAPIImageImage = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/image/image.vue"]]);
   function formatTime(time) {
     if (typeof time !== "number" || time < 0) {
       return time;
@@ -43943,7 +43929,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIVoiceVoice = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/voice/voice.vue"]]);
+  const PagesAPIVoiceVoice = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/voice/voice.vue"]]);
   const audioUrl = "https://web-ext-storage.dcloud.net.cn/uni-app/ForElise.mp3";
   const _sfc_main$1S = {
     data() {
@@ -44051,7 +44037,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIInnerAudioInnerAudio = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/inner-audio/inner-audio.vue"]]);
+  const PagesAPIInnerAudioInnerAudio = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/inner-audio/inner-audio.vue"]]);
   const _imports_1 = "/static/pause.png";
   const _sfc_main$1R = {
     data() {
@@ -44194,7 +44180,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIBackgroundAudioBackgroundAudio = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/background-audio/background-audio.vue"]]);
+  const PagesAPIBackgroundAudioBackgroundAudio = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/background-audio/background-audio.vue"]]);
   var sourceType = [
     ["camera"],
     ["album"],
@@ -44319,7 +44305,7 @@ ${o3}
       }, null, 8, ["src"]))
     ]);
   }
-  const PagesAPIVideoVideo = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/video/video.vue"]]);
+  const PagesAPIVideoVideo = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/video/video.vue"]]);
   const _sfc_main$1P = {
     data() {
       return {
@@ -44429,7 +44415,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIFileFile = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/file/file.vue"]]);
+  const PagesAPIFileFile = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/file/file.vue"]]);
   var formatLocation$1 = formatLocation$2;
   const _sfc_main$1O = {
     data() {
@@ -44608,7 +44594,7 @@ ${o3}
       }, 8, ["show"])
     ]);
   }
-  const PagesAPIGetLocationGetLocation = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/get-location/get-location.vue"]]);
+  const PagesAPIGetLocationGetLocation = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/get-location/get-location.vue"]]);
   const _sfc_main$1N = {
     data() {
       return {
@@ -44712,7 +44698,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIOpenLocationOpenLocation = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/open-location/open-location.vue"]]);
+  const PagesAPIOpenLocationOpenLocation = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/open-location/open-location.vue"]]);
   var formatLocation = formatLocation$2;
   const _sfc_main$1M = {
     data() {
@@ -44794,7 +44780,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIChooseLocationChooseLocation = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/choose-location/choose-location.vue"]]);
+  const PagesAPIChooseLocationChooseLocation = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/choose-location/choose-location.vue"]]);
   const _sfc_main$1L = {
     data() {
       return {
@@ -44934,7 +44920,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIStorageStorage = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/storage/storage.vue"]]);
+  const PagesAPIStorageStorage = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/storage/storage.vue"]]);
   const _sfc_main$1K = {
     data() {
       return {
@@ -45070,7 +45056,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPISqliteSqlite = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/sqlite/sqlite.vue"]]);
+  const PagesAPISqliteSqlite = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/sqlite/sqlite.vue"]]);
   const ERROR_CODE = [-5001, -5002, -5003, -5004, -5005, -5006];
   const _sfc_main$1J = {
     data() {
@@ -45161,7 +45147,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIRewardedVideoAdRewardedVideoAd = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/rewarded-video-ad/rewarded-video-ad.vue"]]);
+  const PagesAPIRewardedVideoAdRewardedVideoAd = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/rewarded-video-ad/rewarded-video-ad.vue"]]);
   const _sfc_main$1I = {
     data() {
       return {
@@ -45232,7 +45218,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIFullScreenVideoAdFullScreenVideoAd = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/full-screen-video-ad/full-screen-video-ad.vue"]]);
+  const PagesAPIFullScreenVideoAdFullScreenVideoAd = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/full-screen-video-ad/full-screen-video-ad.vue"]]);
   const _sfc_main$1H = {
     data() {
       return {
@@ -45308,7 +45294,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIBrightnessBrightness = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/brightness/brightness.vue"]]);
+  const PagesAPIBrightnessBrightness = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/brightness/brightness.vue"]]);
   const _sfc_main$1G = {
     data() {
       return {
@@ -45422,7 +45408,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPISaveMediaSaveMedia = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/save-media/save-media.vue"]]);
+  const PagesAPISaveMediaSaveMedia = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/save-media/save-media.vue"]]);
   const _sfc_main$1F = {
     data() {
       return {
@@ -46155,7 +46141,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesAPIBluetoothBluetooth = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/bluetooth/bluetooth.vue"]]);
+  const PagesAPIBluetoothBluetooth = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/bluetooth/bluetooth.vue"]]);
   const _sfc_main$1E = {
     data() {
       return {
@@ -46313,7 +46299,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPISoterSoter = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["render", _sfc_render$1D], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/soter/soter.vue"]]);
+  const PagesAPISoterSoter = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["render", _sfc_render$1D], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/soter/soter.vue"]]);
   const DEVICE_UUID_WEICHAT = "FDA50693-A4E2-4FB1-AFCF-C6EB07647825";
   const _sfc_main$1D = {
     data() {
@@ -46572,7 +46558,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIIbeaconIbeacon = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["render", _sfc_render$1C], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/ibeacon/ibeacon.vue"]]);
+  const PagesAPIIbeaconIbeacon = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["render", _sfc_render$1C], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/ibeacon/ibeacon.vue"]]);
   const _sfc_main$1C = {
     data() {
       return {
@@ -46620,7 +46606,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIVibrateVibrate = /* @__PURE__ */ _export_sfc(_sfc_main$1C, [["render", _sfc_render$1B], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/vibrate/vibrate.vue"]]);
+  const PagesAPIVibrateVibrate = /* @__PURE__ */ _export_sfc(_sfc_main$1C, [["render", _sfc_render$1B], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/vibrate/vibrate.vue"]]);
   let platform$2 = uni.getSystemInfoSync().platform;
   const _sfc_main$1B = {
     data() {
@@ -46765,7 +46751,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIWebsocketSocketTaskWebsocketSocketTask = /* @__PURE__ */ _export_sfc(_sfc_main$1B, [["render", _sfc_render$1A], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/websocket-socketTask/websocket-socketTask.vue"]]);
+  const PagesAPIWebsocketSocketTaskWebsocketSocketTask = /* @__PURE__ */ _export_sfc(_sfc_main$1B, [["render", _sfc_render$1A], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/websocket-socketTask/websocket-socketTask.vue"]]);
   let platform$1 = uni.getSystemInfoSync().platform;
   const _sfc_main$1A = {
     data() {
@@ -46903,7 +46889,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesAPIWebsocketGlobalWebsocketGlobal = /* @__PURE__ */ _export_sfc(_sfc_main$1A, [["render", _sfc_render$1z], ["__file", "C:/Users/71018/Desktop/ic365/pages/API/websocket-global/websocket-global.vue"]]);
+  const PagesAPIWebsocketGlobalWebsocketGlobal = /* @__PURE__ */ _export_sfc(_sfc_main$1A, [["render", _sfc_render$1z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/API/websocket-global/websocket-global.vue"]]);
   const _sfc_main$1z = {
     name: "UniCard",
     emits: ["click"],
@@ -47066,7 +47052,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["render", _sfc_render$1y], ["__scopeId", "data-v-ae4bee67"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["render", _sfc_render$1y], ["__scopeId", "data-v-ae4bee67"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -47513,7 +47499,7 @@ ${o3}
       /* CLASS, NEED_HYDRATION */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["render", _sfc_render$1x], ["__scopeId", "data-v-3c762a01"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["render", _sfc_render$1x], ["__scopeId", "data-v-3c762a01"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const en$4 = {
     "uni-datetime-picker.selectDate": "select date",
     "uni-datetime-picker.selectTime": "select time",
@@ -48469,7 +48455,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["render", _sfc_render$1w], ["__scopeId", "data-v-1d532b70"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["render", _sfc_render$1w], ["__scopeId", "data-v-1d532b70"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const {
     t: t$5
   } = initVueI18n(i18nMessages);
@@ -49247,7 +49233,7 @@ ${o3}
       /* NEED_HYDRATION */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["render", _sfc_render$1v], ["__scopeId", "data-v-1d379219"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["render", _sfc_render$1v], ["__scopeId", "data-v-1d379219"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
   const _sfc_main$1v = {
     name: "UniDatetimePicker",
     options: {
@@ -50248,7 +50234,7 @@ ${o3}
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose", "onChange"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2$7 = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["render", _sfc_render$1u], ["__scopeId", "data-v-9802168a"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const __easycom_2$7 = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["render", _sfc_render$1u], ["__scopeId", "data-v-9802168a"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
   const dataPicker = {
     props: {
       localdata: {
@@ -50987,7 +50973,7 @@ ${o3}
       ])
     ]);
   }
-  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$1u, [["render", _sfc_render$1t], ["__scopeId", "data-v-91ec6a82"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
+  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$1u, [["render", _sfc_render$1t], ["__scopeId", "data-v-91ec6a82"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
   const _sfc_main$1t = {
     name: "UniDataPicker",
     emits: ["popupopened", "popupclosed", "nodeclick", "input", "change", "update:modelValue", "inputclick"],
@@ -51358,7 +51344,7 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_5$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1t, [["render", _sfc_render$1s], ["__scopeId", "data-v-2653531e"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
+  const __easycom_5$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1t, [["render", _sfc_render$1s], ["__scopeId", "data-v-2653531e"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
   const _sfc_main$1s = {
     name: "UniSection",
     emits: ["click"],
@@ -51475,7 +51461,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$i = /* @__PURE__ */ _export_sfc(_sfc_main$1s, [["render", _sfc_render$1r], ["__scopeId", "data-v-637fd36b"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  const __easycom_1$i = /* @__PURE__ */ _export_sfc(_sfc_main$1s, [["render", _sfc_render$1r], ["__scopeId", "data-v-637fd36b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
   const _sfc_main$1r = {
     name: "UniSegmentedControl",
     emits: ["clickItem"],
@@ -51574,7 +51560,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$h = /* @__PURE__ */ _export_sfc(_sfc_main$1r, [["render", _sfc_render$1q], ["__scopeId", "data-v-86aa1171"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const __easycom_1$h = /* @__PURE__ */ _export_sfc(_sfc_main$1r, [["render", _sfc_render$1q], ["__scopeId", "data-v-86aa1171"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
   const _sfc_main$1q = {
     data() {
       return {
@@ -52213,7 +52199,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIFormsForms = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["render", _sfc_render$1p], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/forms/forms.vue"]]);
+  const PagesExtUIFormsForms = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["render", _sfc_render$1p], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/forms/forms.vue"]]);
   const _sfc_main$1p = {
     name: "uniGroup",
     emits: ["click"],
@@ -52320,7 +52306,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$g = /* @__PURE__ */ _export_sfc(_sfc_main$1p, [["render", _sfc_render$1o], ["__scopeId", "data-v-210c3f0c"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-group/components/uni-group/uni-group.vue"]]);
+  const __easycom_1$g = /* @__PURE__ */ _export_sfc(_sfc_main$1p, [["render", _sfc_render$1o], ["__scopeId", "data-v-210c3f0c"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-group/components/uni-group/uni-group.vue"]]);
   const _sfc_main$1o = {
     components: {},
     data() {
@@ -52418,7 +52404,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIGroupGroup = /* @__PURE__ */ _export_sfc(_sfc_main$1o, [["render", _sfc_render$1n], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/group/group.vue"]]);
+  const PagesExtUIGroupGroup = /* @__PURE__ */ _export_sfc(_sfc_main$1o, [["render", _sfc_render$1n], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/group/group.vue"]]);
   const _sfc_main$1n = {
     name: "UniBadge",
     emits: ["click"],
@@ -52559,7 +52545,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$f = /* @__PURE__ */ _export_sfc(_sfc_main$1n, [["render", _sfc_render$1m], ["__scopeId", "data-v-c97cb896"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  const __easycom_1$f = /* @__PURE__ */ _export_sfc(_sfc_main$1n, [["render", _sfc_render$1m], ["__scopeId", "data-v-c97cb896"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
   const _sfc_main$1m = {
     components: {},
     data() {
@@ -52774,7 +52760,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIBadgeBadge = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["render", _sfc_render$1l], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/badge/badge.vue"]]);
+  const PagesExtUIBadgeBadge = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["render", _sfc_render$1l], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/badge/badge.vue"]]);
   const _sfc_main$1l = {
     data() {
       return {
@@ -52871,7 +52857,7 @@ ${o3}
       ))
     ]);
   }
-  const __easycom_1$e = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["render", _sfc_render$1k], ["__scopeId", "data-v-bb946fce"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-breadcrumb/components/uni-breadcrumb-item/uni-breadcrumb-item.vue"]]);
+  const __easycom_1$e = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["render", _sfc_render$1k], ["__scopeId", "data-v-bb946fce"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-breadcrumb/components/uni-breadcrumb-item/uni-breadcrumb-item.vue"]]);
   const _sfc_main$1k = {
     options: {
       virtualHost: true
@@ -52897,7 +52883,7 @@ ${o3}
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_2$6 = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["render", _sfc_render$1j], ["__scopeId", "data-v-d05e4f24"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-breadcrumb/components/uni-breadcrumb/uni-breadcrumb.vue"]]);
+  const __easycom_2$6 = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["render", _sfc_render$1j], ["__scopeId", "data-v-d05e4f24"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-breadcrumb/components/uni-breadcrumb/uni-breadcrumb.vue"]]);
   const _sfc_main$1j = {
     components: {},
     data() {
@@ -53009,7 +52995,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIBreadcrumbBreadcrumb = /* @__PURE__ */ _export_sfc(_sfc_main$1j, [["render", _sfc_render$1i], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/breadcrumb/breadcrumb.vue"]]);
+  const PagesExtUIBreadcrumbBreadcrumb = /* @__PURE__ */ _export_sfc(_sfc_main$1j, [["render", _sfc_render$1i], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/breadcrumb/breadcrumb.vue"]]);
   const _sfc_main$1i = {
     name: "UniDrawer",
     components: {},
@@ -53118,7 +53104,7 @@ ${o3}
       /* CLASS, NEED_HYDRATION */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$d = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__scopeId", "data-v-f7c32d22"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-drawer/components/uni-drawer/uni-drawer.vue"]]);
+  const __easycom_1$d = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__scopeId", "data-v-f7c32d22"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-drawer/components/uni-drawer/uni-drawer.vue"]]);
   const _sfc_main$1h = {
     data() {
       return {
@@ -53295,7 +53281,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIDrawerDrawer = /* @__PURE__ */ _export_sfc(_sfc_main$1h, [["render", _sfc_render$1g], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/drawer/drawer.vue"]]);
+  const PagesExtUIDrawerDrawer = /* @__PURE__ */ _export_sfc(_sfc_main$1h, [["render", _sfc_render$1g], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/drawer/drawer.vue"]]);
   const popup = {
     data() {
       return {};
@@ -53393,7 +53379,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_3$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1g, [["render", _sfc_render$1f], ["__scopeId", "data-v-a4566996"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup-message/uni-popup-message.vue"]]);
+  const __easycom_3$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1g, [["render", _sfc_render$1f], ["__scopeId", "data-v-a4566996"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup-message/uni-popup-message.vue"]]);
   const en$3 = {
     "uni-popup.cancel": "cancel",
     "uni-popup.ok": "ok",
@@ -53637,7 +53623,7 @@ ${o3}
       ])
     ]);
   }
-  const __easycom_4$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["render", _sfc_render$1e], ["__scopeId", "data-v-d78c88b7"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue"]]);
+  const __easycom_4$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["render", _sfc_render$1e], ["__scopeId", "data-v-d78c88b7"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue"]]);
   const { t: t$3 } = initVueI18n(messages$3);
   const _sfc_main$1e = {
     name: "UniPopupShare",
@@ -53776,7 +53762,7 @@ ${o3}
       ])
     ]);
   }
-  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["render", _sfc_render$1d], ["__scopeId", "data-v-0b5fd906"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-popup/components/uni-popup-share/uni-popup-share.vue"]]);
+  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["render", _sfc_render$1d], ["__scopeId", "data-v-0b5fd906"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup-share/uni-popup-share.vue"]]);
   const _sfc_main$1d = {
     data() {
       return {
@@ -54133,7 +54119,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesExtUIPopupPopup = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["render", _sfc_render$1c], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/popup/popup.vue"]]);
+  const PagesExtUIPopupPopup = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["render", _sfc_render$1c], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/popup/popup.vue"]]);
   const _sfc_main$1c = {
     components: {},
     data() {
@@ -54319,7 +54305,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesExtUISegmentedControlSegmentedControl = /* @__PURE__ */ _export_sfc(_sfc_main$1c, [["render", _sfc_render$1b], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/segmented-control/segmented-control.vue"]]);
+  const PagesExtUISegmentedControlSegmentedControl = /* @__PURE__ */ _export_sfc(_sfc_main$1c, [["render", _sfc_render$1b], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/segmented-control/segmented-control.vue"]]);
   const _sfc_main$1b = {
     name: "uniCollapseItem",
     props: {
@@ -54567,7 +54553,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$c = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["render", _sfc_render$1a], ["__scopeId", "data-v-3d2dde9f"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
+  const __easycom_1$c = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["render", _sfc_render$1a], ["__scopeId", "data-v-3d2dde9f"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
   const _sfc_main$1a = {
     name: "uniCollapse",
     emits: ["change", "activeItem", "input", "update:modelValue"],
@@ -54684,7 +54670,7 @@ ${o3}
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_2$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["render", _sfc_render$19], ["__scopeId", "data-v-3f050360"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
+  const __easycom_2$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["render", _sfc_render$19], ["__scopeId", "data-v-3f050360"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
   const _sfc_main$19 = {
     name: "UniListItem",
     emits: ["click", "switchChange"],
@@ -55051,7 +55037,7 @@ ${o3}
       })) : vue.createCommentVNode("v-if", true)
     ], 14, ["hover-class"]);
   }
-  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["render", _sfc_render$18], ["__scopeId", "data-v-c7524739"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["render", _sfc_render$18], ["__scopeId", "data-v-c7524739"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
   const _sfc_main$18 = {
     name: "uniList",
     "mp-weixin": {
@@ -55111,7 +55097,7 @@ ${o3}
       })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2$4 = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["render", _sfc_render$17], ["__scopeId", "data-v-c2f1266a"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const __easycom_2$4 = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["render", _sfc_render$17], ["__scopeId", "data-v-c2f1266a"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
   const _sfc_main$17 = {
     components: {},
     data() {
@@ -55429,7 +55415,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUICollapseCollapse = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["render", _sfc_render$16], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/collapse/collapse.vue"]]);
+  const PagesExtUICollapseCollapse = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["render", _sfc_render$16], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/collapse/collapse.vue"]]);
   const en$2 = {
     "uni-pagination.prevText": "prev",
     "uni-pagination.nextText": "next",
@@ -55807,7 +55793,7 @@ ${o3}
       ], 10, ["hover-class"])
     ]);
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["render", _sfc_render$15], ["__scopeId", "data-v-88b7506d"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-pagination/components/uni-pagination/uni-pagination.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["render", _sfc_render$15], ["__scopeId", "data-v-88b7506d"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-pagination/components/uni-pagination/uni-pagination.vue"]]);
   const _sfc_main$15 = {
     components: {},
     data() {
@@ -55945,7 +55931,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIPaginationPagination = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["render", _sfc_render$14], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/pagination/pagination.vue"]]);
+  const PagesExtUIPaginationPagination = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["render", _sfc_render$14], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/pagination/pagination.vue"]]);
   const _sfc_main$14 = {
     name: "UniSteps",
     props: {
@@ -56136,7 +56122,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["render", _sfc_render$13], ["__scopeId", "data-v-c0a11c53"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-steps/components/uni-steps/uni-steps.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["render", _sfc_render$13], ["__scopeId", "data-v-c0a11c53"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-steps/components/uni-steps/uni-steps.vue"]]);
   const _sfc_main$13 = {
     components: {},
     data() {
@@ -56248,7 +56234,7 @@ ${o3}
       }, "改变状态")
     ]);
   }
-  const PagesExtUIStepsSteps = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["render", _sfc_render$12], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/steps/steps.vue"]]);
+  const PagesExtUIStepsSteps = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["render", _sfc_render$12], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/steps/steps.vue"]]);
   const _sfc_main$12 = {
     name: "UniNoticeBar",
     emits: ["click", "getmore", "close"],
@@ -56490,7 +56476,7 @@ ${o3}
       /* STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$b = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$11], ["__scopeId", "data-v-c3453ea3"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar.vue"]]);
+  const __easycom_1$b = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$11], ["__scopeId", "data-v-c3453ea3"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar.vue"]]);
   const _sfc_main$11 = {
     components: {},
     data() {
@@ -56630,7 +56616,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUINoticeBarNoticeBar = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["render", _sfc_render$10], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/notice-bar/notice-bar.vue"]]);
+  const PagesExtUINoticeBarNoticeBar = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["render", _sfc_render$10], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/notice-bar/notice-bar.vue"]]);
   let mpMixins = {};
   mpMixins = {
     data() {
@@ -56872,7 +56858,7 @@ ${o3}
     block0$1(_sfc_main$10);
   if (typeof block1 === "function")
     block1(_sfc_main$10);
-  const __easycom_2$3 = /* @__PURE__ */ _export_sfc(_sfc_main$10, [["render", _sfc_render$$], ["__scopeId", "data-v-8ff2a577"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
+  const __easycom_2$3 = /* @__PURE__ */ _export_sfc(_sfc_main$10, [["render", _sfc_render$$], ["__scopeId", "data-v-8ff2a577"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue"]]);
   const _sfc_main$$ = {
     name: "uniSwipeAction",
     data() {
@@ -56904,7 +56890,7 @@ ${o3}
       vue.renderSlot(_ctx.$slots, "default")
     ]);
   }
-  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["render", _sfc_render$_], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
+  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["render", _sfc_render$_], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue"]]);
   const _sfc_main$_ = {
     components: {},
     data() {
@@ -57285,7 +57271,7 @@ ${o3}
       )
     ]);
   }
-  const PagesExtUISwipeActionSwipeAction = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["render", _sfc_render$Z], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/swipe-action/swipe-action.vue"]]);
+  const PagesExtUISwipeActionSwipeAction = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["render", _sfc_render$Z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/swipe-action/swipe-action.vue"]]);
   const en$1 = {
     "uni-search-bar.cancel": "cancel",
     "uni-search-bar.placeholder": "Search enter content"
@@ -57524,7 +57510,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$a = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["render", _sfc_render$Y], ["__scopeId", "data-v-f07ef577"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue"]]);
+  const __easycom_1$a = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["render", _sfc_render$Y], ["__scopeId", "data-v-f07ef577"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue"]]);
   const _sfc_main$Y = {
     data() {
       return {
@@ -57707,7 +57693,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUISearchBarSearchBar = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$X], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/search-bar/search-bar.vue"]]);
+  const PagesExtUISearchBarSearchBar = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$X], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/search-bar/search-bar.vue"]]);
   let platform = "other";
   const _sfc_main$X = {
     name: "UniFab",
@@ -57969,7 +57955,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["render", _sfc_render$W], ["__scopeId", "data-v-85f34dfc"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-fab/components/uni-fab/uni-fab.vue"]]);
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["render", _sfc_render$W], ["__scopeId", "data-v-85f34dfc"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-fab/components/uni-fab/uni-fab.vue"]]);
   const _sfc_main$W = {
     components: {},
     data() {
@@ -58135,7 +58121,7 @@ ${o3}
       }, null, 8, ["pattern", "content", "horizontal", "vertical", "direction", "onTrigger", "onFabClick"])
     ]);
   }
-  const PagesExtUIFabFab = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$V], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/fab/fab.vue"]]);
+  const PagesExtUIFabFab = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$V], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/fab/fab.vue"]]);
   const en = {
     "uni-fav.collect": "collect",
     "uni-fav.collected": "collected"
@@ -58259,7 +58245,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$9 = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$U], ["__scopeId", "data-v-8252a6d7"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-fav/components/uni-fav/uni-fav.vue"]]);
+  const __easycom_1$9 = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$U], ["__scopeId", "data-v-8252a6d7"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-fav/components/uni-fav/uni-fav.vue"]]);
   const _sfc_main$U = {
     name: "UniStatusBar",
     data() {
@@ -58282,7 +58268,7 @@ ${o3}
       /* STYLE */
     );
   }
-  const statusBar = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$T], ["__scopeId", "data-v-7920e3e0"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-status-bar.vue"]]);
+  const statusBar = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$T], ["__scopeId", "data-v-7920e3e0"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-status-bar.vue"]]);
   const getVal = (val) => typeof val === "number" ? val + "px" : val;
   const _sfc_main$T = {
     name: "UniNavBar",
@@ -58559,7 +58545,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$S], ["__scopeId", "data-v-26544265"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue"]]);
+  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$S], ["__scopeId", "data-v-26544265"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue"]]);
   const _sfc_main$S = {
     components: {},
     data() {
@@ -58682,7 +58668,7 @@ ${o3}
       vue.createElementVNode("view", { class: "example-body example-body-fullWidth" })
     ]);
   }
-  const PagesExtUIFavFav = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$R], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/fav/fav.vue"]]);
+  const PagesExtUIFavFav = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$R], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/fav/fav.vue"]]);
   const _sfc_main$R = {
     data() {
       return {};
@@ -58751,7 +58737,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUISectionSection = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/section/section.vue"]]);
+  const PagesExtUISectionSection = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/section/section.vue"]]);
   const _sfc_main$Q = {
     components: {},
     data() {
@@ -58892,7 +58878,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUITransitionTransition = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/transition/transition.vue"]]);
+  const PagesExtUITransitionTransition = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/transition/transition.vue"]]);
   const _sfc_main$P = {
     name: "UniTitle",
     props: {
@@ -59000,7 +58986,7 @@ ${o3}
       /* STYLE */
     );
   }
-  const __easycom_1$8 = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-0335e46a"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-title/components/uni-title/uni-title.vue"]]);
+  const __easycom_1$8 = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-0335e46a"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-title/components/uni-title/uni-title.vue"]]);
   const _sfc_main$O = {
     components: {},
     data() {
@@ -59206,7 +59192,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUITitleTitle = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/title/title.vue"]]);
+  const PagesExtUITitleTitle = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/title/title.vue"]]);
   const _sfc_main$N = {
     name: "uni-tooltip",
     data() {
@@ -59288,7 +59274,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-5fb5c624"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-tooltip/components/uni-tooltip/uni-tooltip.vue"]]);
+  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-5fb5c624"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-tooltip/components/uni-tooltip/uni-tooltip.vue"]]);
   const _sfc_main$M = {
     components: {},
     data() {
@@ -59413,7 +59399,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUITooltipTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/tooltip/tooltip.vue"]]);
+  const PagesExtUITooltipTooltip = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/tooltip/tooltip.vue"]]);
   const _sfc_main$L = {
     name: "uniLink",
     props: {
@@ -59514,7 +59500,7 @@ ${o3}
       /* CLASS, STYLE */
     ));
   }
-  const __easycom_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-5db80ddb"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-link/components/uni-link/uni-link.vue"]]);
+  const __easycom_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-5db80ddb"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-link/components/uni-link/uni-link.vue"]]);
   const _sfc_main$K = {
     components: {},
     data() {
@@ -59621,7 +59607,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUILinkLink = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/link/link.vue"]]);
+  const PagesExtUILinkLink = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/link/link.vue"]]);
   const _sfc_main$J = {
     name: "uniCombox",
     emits: ["input", "update:modelValue"],
@@ -59825,7 +59811,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-e602780e"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-combox/components/uni-combox/uni-combox.vue"]]);
+  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-e602780e"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-combox/components/uni-combox/uni-combox.vue"]]);
   const _sfc_main$I = {
     components: {},
     data() {
@@ -59912,7 +59898,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIComboxCombox = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/combox/combox.vue"]]);
+  const PagesExtUIComboxCombox = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/combox/combox.vue"]]);
   const avatarWidth = 45;
   const _sfc_main$H = {
     name: "UniListChat",
@@ -60242,7 +60228,7 @@ ${o3}
       ])
     ], 8, ["hover-class"]);
   }
-  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-20df4ef0"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-list/components/uni-list-chat/uni-list-chat.vue"]]);
+  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-20df4ef0"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-list/components/uni-list-chat/uni-list-chat.vue"]]);
   const _sfc_main$G = {
     components: {},
     data() {
@@ -60543,7 +60529,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIListChat = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/list/chat.vue"]]);
+  const PagesExtUIListChat = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/list/chat.vue"]]);
   const _sfc_main$F = {
     name: "uniTh",
     options: {
@@ -60719,7 +60705,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-bf970acd"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-table/components/uni-th/uni-th.vue"]]);
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-bf970acd"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-table/components/uni-th/uni-th.vue"]]);
   const _sfc_main$E = {
     name: "TableCheckbox",
     emits: ["checkboxSelected"],
@@ -60809,7 +60795,7 @@ ${o3}
       ]))
     ]);
   }
-  const tableCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-25e435b1"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-table/components/uni-tr/table-checkbox.vue"]]);
+  const tableCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-25e435b1"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-table/components/uni-tr/table-checkbox.vue"]]);
   const _sfc_main$D = {
     name: "uniTr",
     components: {
@@ -60926,7 +60912,7 @@ ${o3}
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-b48b3e32"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-table/components/uni-tr/uni-tr.vue"]]);
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-b48b3e32"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-table/components/uni-tr/uni-tr.vue"]]);
   const _sfc_main$C = {
     name: "uniTd",
     options: {
@@ -60999,7 +60985,7 @@ ${o3}
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-edae4802"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-table/components/uni-td/uni-td.vue"]]);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-edae4802"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-table/components/uni-td/uni-td.vue"]]);
   const _sfc_main$B = {
     name: "uniTable",
     options: {
@@ -61291,7 +61277,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-c1ea9b5d"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-table/components/uni-table/uni-table.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-c1ea9b5d"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-table/components/uni-table/uni-table.vue"]]);
   const tableData = [{
     "date": "2020-09-01",
     "name": "Dcloud1",
@@ -61736,7 +61722,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesExtUITableTable = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/table/table.vue"]]);
+  const PagesExtUITableTable = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/table/table.vue"]]);
   function pad(str, length = 2) {
     str += "";
     while (str.length < length) {
@@ -62004,7 +61990,7 @@ ${o3}
       /* TEXT */
     );
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.vue"]]);
   const _sfc_main$y = {
     data() {
       return {
@@ -62094,7 +62080,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIDateformatDateformat = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/dateformat/dateformat.vue"]]);
+  const PagesExtUIDateformatDateformat = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/dateformat/dateformat.vue"]]);
   const _sfc_main$x = {
     data() {
       return {
@@ -62416,7 +62402,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIDataCheckboxDataCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/data-checkbox/data-checkbox.vue"]]);
+  const PagesExtUIDataCheckboxDataCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/data-checkbox/data-checkbox.vue"]]);
   const _sfc_main$w = {
     data() {
       return {
@@ -62659,7 +62645,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIEasyinputEasyinput = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/easyinput/easyinput.vue"]]);
+  const PagesExtUIEasyinputEasyinput = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/easyinput/easyinput.vue"]]);
   const _sfc_main$v = {
     data() {
       return {
@@ -62775,7 +62761,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIDataSelectDataSelect = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/data-select/data-select.vue"]]);
+  const PagesExtUIDataSelectDataSelect = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/data-select/data-select.vue"]]);
   const _sfc_main$u = {
     data() {
       return {
@@ -62974,7 +62960,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesExtUIDatetimePickerDatetimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/datetime-picker/datetime-picker.vue"]]);
+  const PagesExtUIDatetimePickerDatetimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/datetime-picker/datetime-picker.vue"]]);
   const ComponentClass$1 = "uni-col";
   const _sfc_main$t = {
     name: "uniCol",
@@ -63097,7 +63083,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-28ff6624"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-row/components/uni-col/uni-col.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-28ff6624"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-row/components/uni-col/uni-col.vue"]]);
   const ComponentClass = "uni-row";
   const modifierSeparator = "--";
   const _sfc_main$s = {
@@ -63157,7 +63143,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-097353af"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-row/components/uni-row/uni-row.vue"]]);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-097353af"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-row/components/uni-row/uni-row.vue"]]);
   const _sfc_main$r = {
     data() {
       return {
@@ -63626,7 +63612,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIRowRow = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/row/row.vue"]]);
+  const PagesExtUIRowRow = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/row/row.vue"]]);
   const ERR_MSG_OK = "chooseAndUploadFile:ok";
   const ERR_MSG_FAIL = "chooseAndUploadFile:fail";
   function chooseImage(opts) {
@@ -64148,7 +64134,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const uploadImage = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-bdfc07e0"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-file-picker/components/uni-file-picker/upload-image.vue"]]);
+  const uploadImage = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-bdfc07e0"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-file-picker/components/uni-file-picker/upload-image.vue"]]);
   const _sfc_main$p = {
     name: "uploadFile",
     emits: ["uploadFiles", "choose", "delFile"],
@@ -64367,7 +64353,7 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const uploadFile = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-a54939c6"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-file-picker/components/uni-file-picker/upload-file.vue"]]);
+  const uploadFile = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-a54939c6"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-file-picker/components/uni-file-picker/upload-file.vue"]]);
   const _sfc_main$o = {
     name: "uniFilePicker",
     components: {
@@ -64945,7 +64931,7 @@ ${o3}
       }, 8, ["readonly", "list-styles", "files-list", "showType", "delIcon", "onUploadFiles", "onChoose", "onDelFile"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-6223573f"], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-6223573f"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker.vue"]]);
   const _sfc_main$n = {
     data() {
       return {
@@ -65111,7 +65097,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIFilePickerFilePicker = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/file-picker/file-picker.vue"]]);
+  const PagesExtUIFilePickerFilePicker = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/file-picker/file-picker.vue"]]);
   const _sfc_main$m = {
     data() {
       return {};
@@ -65447,7 +65433,7 @@ ${o3}
       })
     ]);
   }
-  const PagesExtUIButtonButton = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "C:/Users/71018/Desktop/ic365/pages/extUI/button/button.vue"]]);
+  const PagesExtUIButtonButton = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/extUI/button/button.vue"]]);
   const _sfc_main$l = {
     data() {
       return {
@@ -65491,7 +65477,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateNavDefaultNavDefault = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-default/nav-default.vue"]]);
+  const PagesTemplateNavDefaultNavDefault = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-default/nav-default.vue"]]);
   const _sfc_main$k = {
     data() {
       return {
@@ -65521,7 +65507,7 @@ ${o3}
       )
     ]);
   }
-  const reciver = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-30c8048e"], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/component-communication/reciver.vue"]]);
+  const reciver = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-30c8048e"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/component-communication/reciver.vue"]]);
   const _sfc_main$j = {
     methods: {
       send() {
@@ -65540,7 +65526,7 @@ ${o3}
       }, "点击发送消息")
     ]);
   }
-  const sender = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-8facf9b7"], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/component-communication/sender.vue"]]);
+  const sender = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-8facf9b7"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/component-communication/sender.vue"]]);
   const _sfc_main$i = {
     methods: {
       send() {
@@ -65559,7 +65545,7 @@ ${o3}
       }, "自定义EventBus")
     ]);
   }
-  const senderBus = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-d4d1bc33"], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/component-communication/sender-bus.vue"]]);
+  const senderBus = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-d4d1bc33"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/component-communication/sender-bus.vue"]]);
   const _sfc_main$h = {
     components: {
       reciver,
@@ -65587,7 +65573,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateComponentCommunicationComponentCommunication = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/component-communication/component-communication.vue"]]);
+  const PagesTemplateComponentCommunicationComponentCommunication = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/component-communication/component-communication.vue"]]);
   const _sfc_main$g = {
     data() {
       return {
@@ -65692,7 +65678,7 @@ ${o3}
       vue.createElementVNode("view", { style: { "height": "1000rpx" } })
     ]);
   }
-  const PagesTemplateNavTransparentNavTransparent = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-transparent/nav-transparent.vue"]]);
+  const PagesTemplateNavTransparentNavTransparent = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-transparent/nav-transparent.vue"]]);
   const _sfc_main$f = {
     data() {
       return {
@@ -65726,7 +65712,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateNavButtonNavButton = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-button/nav-button.vue"]]);
+  const PagesTemplateNavButtonNavButton = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-button/nav-button.vue"]]);
   const _sfc_main$e = {
     data() {
       return {
@@ -65754,7 +65740,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateNavImageNavImage = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-image/nav-image.vue"]]);
+  const PagesTemplateNavImageNavImage = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-image/nav-image.vue"]]);
   const _sfc_main$d = {
     data() {
       return {
@@ -65838,7 +65824,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateNavCityDropdownNavCityDropdown = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-city-dropdown/nav-city-dropdown.vue"]]);
+  const PagesTemplateNavCityDropdownNavCityDropdown = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-city-dropdown/nav-city-dropdown.vue"]]);
   const _sfc_main$c = {
     data() {
       return {
@@ -65902,7 +65888,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateNavDotNavDot = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-dot/nav-dot.vue"]]);
+  const PagesTemplateNavDotNavDot = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-dot/nav-dot.vue"]]);
   const _sfc_main$b = {
     data() {
       return {
@@ -65970,7 +65956,7 @@ ${o3}
       vue.createElementVNode("view", { style: { "height": "1000rpx" } })
     ]);
   }
-  const PagesTemplateNavSearchInputNavSearchInput = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-search-input/nav-search-input.vue"]]);
+  const PagesTemplateNavSearchInputNavSearchInput = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-search-input/nav-search-input.vue"]]);
   function AMapWX(a2) {
     this.key = a2.key, this.requestConfig = { key: a2.key, s: "rsx", platform: "WXJS", appname: a2.key, sdkversion: "1.2.0", logversion: "2.0" };
   }
@@ -66444,7 +66430,7 @@ ${o3}
       ]))
     ]);
   }
-  const PagesTemplateNavSearchInputDetailDetail = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/nav-search-input/detail/detail.vue"]]);
+  const PagesTemplateNavSearchInputDetailDetail = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/nav-search-input/detail/detail.vue"]]);
   const _sfc_main$9 = {
     data() {
       return {
@@ -66645,7 +66631,7 @@ ${o3}
       }, null, 8, ["status", "content-text"])
     ]);
   }
-  const PagesTemplateList2detailListList2detailList = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/list2detail-list/list2detail-list.vue"]]);
+  const PagesTemplateList2detailListList2detailList = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/list2detail-list/list2detail-list.vue"]]);
   var startTag = /^<([-A-Za-z0-9_]+)((?:\s+[a-zA-Z_:][-a-zA-Z0-9_:.]*(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/;
   var endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/;
   var attr = /([a-zA-Z_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
@@ -67002,7 +66988,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateList2detailDetailList2detailDetail = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/list2detail-detail/list2detail-detail.vue"]]);
+  const PagesTemplateList2detailDetailList2detailDetail = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/list2detail-detail/list2detail-detail.vue"]]);
   const _sfc_main$7 = {
     data() {
       return {
@@ -67027,7 +67013,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateTabbarDetailDetail = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/tabbar/detail/detail.vue"]]);
+  const PagesTemplateTabbarDetailDetail = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/tabbar/detail/detail.vue"]]);
   const _sfc_main$6 = {
     data() {
       return {};
@@ -67203,7 +67189,7 @@ ${o3}
       ])
     ]);
   }
-  const PagesTemplateSchemeScheme = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/scheme/scheme.vue"]]);
+  const PagesTemplateSchemeScheme = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/scheme/scheme.vue"]]);
   const block0 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderjs");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderjs"] = "5be2ab59";
@@ -67245,7 +67231,7 @@ ${o3}
   }
   if (typeof block0 === "function")
     block0(_sfc_main$5);
-  const PagesTemplateRenderjsRenderjs = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/renderjs/renderjs.vue"]]);
+  const PagesTemplateRenderjsRenderjs = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/renderjs/renderjs.vue"]]);
   const _sfc_main$4 = {
     data() {
       return {
@@ -67311,7 +67297,7 @@ ${o3}
       }, "修改上述值为false")
     ]);
   }
-  const PagesTemplateGlobalGlobal = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/global/global.vue"]]);
+  const PagesTemplateGlobalGlobal = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/global/global.vue"]]);
   var isVue2 = false;
   function set(target, key, val) {
     if (Array.isArray(target)) {
@@ -68995,7 +68981,7 @@ This will fail in production if not fixed.`);
       }, "通过actions中的decrement减少计数")
     ]);
   }
-  const PagesTemplatePiniaPinia = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/pinia/pinia.vue"]]);
+  const PagesTemplatePiniaPinia = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/pinia/pinia.vue"]]);
   const _sfc_main$2 = {
     data() {
       return {};
@@ -69077,7 +69063,7 @@ This will fail in production if not fixed.`);
       }, "重置")
     ]);
   }
-  const PagesTemplateVuexVueVuexVue = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/vuex-vue/vuex-vue.vue"]]);
+  const PagesTemplateVuexVueVuexVue = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/vuex-vue/vuex-vue.vue"]]);
   const _sfc_main$1 = {
     data() {
       return {
@@ -69113,7 +69099,7 @@ This will fail in production if not fixed.`);
       }, "crypto.getRandomValues")
     ]);
   }
-  const PagesTemplateCryptoApiCryptoApi = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/crypto-api/crypto-api.vue"]]);
+  const PagesTemplateCryptoApiCryptoApi = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/crypto-api/crypto-api.vue"]]);
   __definePage("pages/page/guide/judge", PagesPageGuideJudge);
   __definePage("pages/page/guide/guide", PagesPageGuideGuide);
   __definePage("pages/page/index/index", PagesPageIndexIndex);
@@ -69429,7 +69415,7 @@ This will fail in production if not fixed.`);
       ...mapMutations(["setUniverifyErrorMsg"])
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "C:/Users/71018/Desktop/ic365/App.vue"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "C:/Users/Administrator/Desktop/ic365/App.vue"]]);
   function createApp() {
     const app = vue.createVueApp(App);
     app.use(store);
