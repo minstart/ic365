@@ -171,8 +171,9 @@
 </script>
 
 <style lang="scss">
+	@import "/static/css/standard.scss";
 	.page-wrap {
-		background: url("/static/image/0_login_back.png") no-repeat top / 100%;
+		background: url($imgSrc+"/image/0_login_back.png") no-repeat top / 100%;
 	}
 
 	.uni-form-item {

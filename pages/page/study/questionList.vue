@@ -286,7 +286,7 @@
 	.achievement-statistics-wrap {
 		.achievement-statistics {
 			min-height: 14rem;
-			background: url("/static/image/2_2_banner_back.png") no-repeat top /100%;
+			background: url($imgSrc+"/image/2_2_banner_back.png") no-repeat top /100%;
 			position: relative;
 			margin-top: 36rpx;
 

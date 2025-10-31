@@ -181,6 +181,20 @@
 			}
 		},
 		{
+			"path": "pages/page/user/changeTitle",
+			"style": {
+				"navigationBarTitleText": "更换称号",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/page/user/changePet",
+			"style": {
+				"navigationBarTitleText": "更换萌宝",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/page/login/login",
 			"style": {
 				"navigationBarTitleText": "登录",

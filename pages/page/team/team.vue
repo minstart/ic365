@@ -573,21 +573,21 @@
 							margin-right: 0.56rem;
 
 							&[type="star"] {
-								background-image: url("/static/icons/star.png");
+								background-image: url($imgSrc+"/icons/star.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="stone"] {
-								background-image: url("/static/icons/stone.png");
+								background-image: url($imgSrc+"/icons/stone.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="dust"] {
-								background-image: url("/static/icons/dust.png");
+								background-image: url($imgSrc+"/icons/dust.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
@@ -607,7 +607,7 @@
 	}
 
 	.challenge-wrap {
-		background: url("/static/image/3_challenge_back.png") no-repeat top / 100%;
+		background: url($imgSrc+"/image/3_challenge_back.png") no-repeat top / 100%;
 		height: 16.75rem;
 		position: relative;
 
@@ -661,7 +661,7 @@
 				margin: auto;
 				width: 16rpx;
 				height: 28rpx;
-				background: url("/static/icons/next.png") no-repeat right / 100% 100%;
+				background: url($imgSrc+"/icons/next.png") no-repeat right / 100% 100%;
 			}
 		}
 
@@ -673,7 +673,7 @@
 			margin: auto;
 			width: 332rpx;
 			height: 160rpx;
-			background: url('/static/image/3_no_challenge.png') no-repeat center / 100% 100%;
+			background: url($imgSrc+'/image/3_no_challenge.png') no-repeat center / 100% 100%;
 		}
 
 		.progress-reward-wrap {
@@ -801,7 +801,7 @@
 							height: 22rpx;
 							margin-left: 6px;
 							vertical-align: top;
-							background: url("/static/icons/next3.png") no-repeat center / 100% 100%;
+							background: url($imgSrc+"/icons/next3.png") no-repeat center / 100% 100%;
 						}
 					}
 
@@ -931,7 +931,7 @@
 					top: -24rpx;
 					width: 48rpx;
 					height: 48rpx;
-					background: url("/static/icons/delete.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/icons/delete.png") no-repeat center / 100% 100%;
 				}
 
 				.list-avatar {
@@ -969,19 +969,19 @@
 
 				&[type="invite"] {
 					.list-avatar {
-						background: url("/static/icons/team_invite.png") no-repeat top /100% 100%;
+						background: url($imgSrc+"/icons/team_invite.png") no-repeat top /100% 100%;
 					}
 				}
 
 				&[type="join"] {
 					.list-avatar {
-						background: url("/static/icons/team_join.png") no-repeat top /100% 100%;
+						background: url($imgSrc+"/icons/team_join.png") no-repeat top /100% 100%;
 					}
 				}
 
 				&[type="exit"] {
 					.list-avatar {
-						background: url("/static/icons/team_exit.png") no-repeat top /100% 100%;
+						background: url($imgSrc+"/icons/team_exit.png") no-repeat top /100% 100%;
 					}
 				}
 			}
@@ -1047,7 +1047,7 @@
 	
 	// 加入队伍弹窗
 	.joinTeam-wrap {
-		background: url("/static/image/join_team.png") no-repeat center / 100% 100%;
+		background: url($imgSrc+"/image/join_team.png") no-repeat center / 100% 100%;
 		border-radius: 30rpx;
 		width: 658rpx;
 		height: 446rpx;

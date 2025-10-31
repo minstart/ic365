@@ -761,7 +761,7 @@
 		height: 0.6875rem !important;
 		top: calc(-0.5625rem / 3) !important;
 		right: calc(-0.6875rem /3) !important;
-		background: url("../../../static/icons/calendar_disable.png") no-repeat center /100% 100%;
+		background: url($imgSrc+"/icons/calendar_disable.png") no-repeat center /100% 100%;
 }
 .checked-icon {
 		position: absolute;
@@ -769,7 +769,7 @@
 		height: 0.6875rem !important;
 		top: calc(-0.6875rem /3) !important;
 		right: calc(-0.6875rem /3) !important;
-		background: url("../../../static/icons/calendar_checked.png") no-repeat center /100% 100%;
+		background: url($imgSrc+"/icons/calendar_checked.png") no-repeat center /100% 100%;
 		z-index: 2;
 }
 .new-error-icon {
@@ -778,7 +778,7 @@
 		height: 0.6875rem !important;
 		top: calc(-0.6875rem /3) !important;
 		right: calc(-0.6875rem /3) !important;
-		background: url("../../../static/icons/error2.png") no-repeat center /100% 100%;
+		background: url($imgSrc+"/icons/error2.png") no-repeat center /100% 100%;
 }
 .calendar-selected {
 		background: #fff !important;
@@ -790,7 +790,7 @@
 		height: 0.875rem !important;
 		top: calc(-0.875rem / 3) !important;
 		right: calc(-0.875rem / 3) !important;
-		background: url("../../../static/icons/calendar_selected.png") no-repeat top / 100% 100%;
+		background: url($imgSrc+"/icons/calendar_selected.png") no-repeat top / 100% 100%;
 }
 .uni-calendar-item__weeks-box-circle {
 		background-color: transparent !important;

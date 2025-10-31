@@ -68,7 +68,8 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.page-wrap {
 		background: linear-gradient(to right, #FFDA8F 0%, #FFDA8F 40%, #F4F4F4 100%);
 		display: flex;

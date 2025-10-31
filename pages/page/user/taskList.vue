@@ -138,6 +138,7 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.page-wrap {
 		background-color: #F6F6F6;
 		min-height: 100vh;
@@ -155,7 +156,7 @@
 				left: 0;
 				right: 0;
 				margin: auto;
-				background: url("/static/image/task_back_icon.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/image/task_back_icon.png") no-repeat center / 100% 100%;
 			}
 		}
 	}
@@ -193,7 +194,7 @@
 						margin-left: 6rpx;
 						width: 30rpx;
 						height: 30rpx;
-						background: url("/static/icons/doubt.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/icons/doubt.png") no-repeat center / 100% 100%;
 					}
 				}
 
@@ -225,7 +226,7 @@
 				right: 0;
 				width: 140rpx;
 				height: 140rpx;
-				background: url("/static/icons/task_complete.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/icons/task_complete.png") no-repeat center / 100% 100%;
 			}
 		}
 	}

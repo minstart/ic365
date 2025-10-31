@@ -241,7 +241,8 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.banner-wrap {
 		border-radius: 0.6rem;
 		padding: 20rpx 24rpx 0 24rpx;

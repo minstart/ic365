@@ -251,6 +251,7 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.page-wrap {
 		background: linear-gradient(to right, #FFDA8F 0%, #FFDA8F 40%, #F4F4F4 100%);
 		display: flex;
@@ -263,7 +264,7 @@
 	.calendar-back {
 		width: 412rpx;
 		height: 100%;
-		background: url("/static/image/1_2_calendar_back.png") no-repeat center / 100%;
+		background: url($imgSrc+"/image/1_2_calendar_back.png") no-repeat center / 100%;
 	}
 
 	.calendar-wrap {
@@ -285,13 +286,13 @@
 				width: 120rpx;
 				height: 90rpx;
 				transform: rotate(180deg);
-				background: url('/static/icons/next_month.png') no-repeat center / 20rpx 26rpx;
+				background: url($imgSrc+'/icons/next_month.png') no-repeat center / 20rpx 26rpx;
 			}
 
 			.next-month {
 				width: 120rpx;
 				height: 90rpx;
-				background: url('/static/icons/next_month.png') no-repeat center / 20rpx 26rpx;
+				background: url($imgSrc+'/icons/next_month.png') no-repeat center / 20rpx 26rpx;
 			}
 
 			.month-title {
@@ -358,7 +359,7 @@
 						width: 26rpx;
 						height: 26rpx;
 						margin-right: 20rpx;
-						background: url("/static/icons/calendar_selected.png") no-repeat center /100% 100%;
+						background: url($imgSrc+"/icons/calendar_selected.png") no-repeat center /100% 100%;
 					}
 				}
 
@@ -367,7 +368,7 @@
 						margin: 0 20rpx 0 3rpx;
 						width: 20rpx;
 						height: 26rpx;
-						background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
+						background: url($imgSrc+"/icons/calendar_disable.png") no-repeat center /100% 100%;
 					}
 				}
 
@@ -378,7 +379,7 @@
 						width: 24rpx;
 						height: 24rpx;
 						margin: 1rpx 20rpx 1rpx 1rpx;
-						background: url("/static/icons/error2.png") no-repeat center /100% 100%;
+						background: url($imgSrc+"/icons/error2.png") no-repeat center /100% 100%;
 					}
 				}
 
@@ -488,7 +489,7 @@
 		height: 22rpx !important;
 		top: calc(-18rpx / 3) !important;
 		right: calc(-22rpx /3) !important;
-		background: url("/static/icons/calendar_disable.png") no-repeat center /100% 100%;
+		background: url($imgSrc+"/icons/calendar_disable.png") no-repeat center /100% 100%;
 	}
 
 	.checked-icon {
@@ -497,7 +498,7 @@
 		height: 22rpx !important;
 		top: calc(-22rpx /3) !important;
 		right: calc(-22rpx /3) !important;
-		background: url("/static/icons/calendar_checked.png") no-repeat center /100% 100%;
+		background: url($imgSrc+"/icons/calendar_checked.png") no-repeat center /100% 100%;
 		z-index: 2;
 	}
 
@@ -507,7 +508,7 @@
 		height: 22rpx !important;
 		top: calc(-22rpx /3) !important;
 		right: calc(-22rpx /3) !important;
-		background: url("/static/icons/error2.png") no-repeat center /100% 100%;
+		background: url($imgSrc+"/icons/error2.png") no-repeat center /100% 100%;
 	}
 
 	.calendar-selected {
@@ -521,7 +522,7 @@
 		height: 28rpx !important;
 		top: calc(-28rpx / 3) !important;
 		right: calc(-28rpx / 3) !important;
-		background: url("/static/icons/calendar_selected.png") no-repeat top / 100% 100%;
+		background: url($imgSrc+"/icons/calendar_selected.png") no-repeat top / 100% 100%;
 	}
 
 	:global(.uni-calendar-item__weeks-box-circle) {

@@ -135,6 +135,7 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	@import '/static/css/standard.scss';
 
 	.page-wrap {
@@ -161,7 +162,7 @@
 		z-index: 0;
 		width: 100%;
 		height: 750rpx;
-		background: url("/static/image/3_2_back.png") no-repeat center / 100% 100%;
+		background: url($imgSrc+"/image/3_2_back.png") no-repeat center / 100% 100%;
 	}
 
 	.banner-wrap {
@@ -178,7 +179,7 @@
 				width: 1.25rem;
 				height: 1.25rem;
 				float: right;
-				background: url("/static/icons/setUp-white.png") no-repeat center/100% 100%;
+				background: url($imgSrc+"/icons/setUp-white.png") no-repeat center/100% 100%;
 			}
 		}
 
@@ -198,7 +199,7 @@
 				left: 1.5rem;
 				width: 4.5rem;
 				height: 5.1875rem;
-				background: url("/static/image/3_3_invite_team_icon.png") no-repeat top / 100% 100%;
+				background: url($imgSrc+"/image/3_3_invite_team_icon.png") no-repeat top / 100% 100%;
 			}
 
 			.info-title {
@@ -220,7 +221,7 @@
 					width: 100%;
 					height: 420rpx;
 					margin: 40rpx 0 60rpx 0;
-					background: url("/static/image/3_2_banner.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/3_2_banner.png") no-repeat center / 100% 100%;
 				}
 
 				.reward-flex-wrap {

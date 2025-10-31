@@ -172,7 +172,7 @@
 				left: 0;
 				right: 0;
 				margin: auto;
-				background: url("/static/image/5_1_back.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/image/5_1_back.png") no-repeat center / 100% 100%;
 			}
 
 			.banner-text {

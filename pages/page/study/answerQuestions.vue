@@ -1105,7 +1105,7 @@
 							width: 80rpx;
 							height: 48rpx;
 							display: inline-block;
-							background: url("/static/icons/search.png") no-repeat center / 36rpx 36rpx;
+							background: url($imgSrc+"/icons/search.png") no-repeat center / 36rpx 36rpx;
 						}
 					}
 
@@ -1132,13 +1132,13 @@
 
 							&[isCollect="true"] {
 								.collect-icon {
-									background: url("/static/icons/collect.png") no-repeat center / 100% 100%;
+									background: url($imgSrc+"/icons/collect.png") no-repeat center / 100% 100%;
 								}
 							}
 
 							&[isCollect="false"] {
 								.collect-icon {
-									background: url("/static/icons/un_collect.png") no-repeat center / 100% 100%;
+									background: url($imgSrc+"/icons/un_collect.png") no-repeat center / 100% 100%;
 								}
 							}
 
@@ -1155,7 +1155,7 @@
 				.topic-content-wrap {
 					display: flex;
 					height: calc(100vh - 4.65rem);
-					background: url('/static/icons/topicBack.png') repeat;
+					background: url($imgSrc+'/icons/topicBack.png') repeat;
 					.topic {
 						height: 100%;
 						width: 600rpx;
@@ -1229,7 +1229,7 @@
 									top: -0.625rem;
 									width: 1.25rem;
 									height: 1.25rem;
-									background: url('/static/icons/correct.png') no-repeat center /100% 100%;
+									background: url($imgSrc+'/icons/correct.png') no-repeat center /100% 100%;
 								}
 							}
 
@@ -1245,7 +1245,7 @@
 									top: -0.625rem;
 									width: 1.25rem;
 									height: 1.25rem;
-									background: url('/static/icons/error.png') no-repeat center /100% 100%;
+									background: url($imgSrc+'/icons/error.png') no-repeat center /100% 100%;
 								}
 							}
 						}
@@ -1336,7 +1336,7 @@
 							margin: auto;
 							width: 16rpx;
 							height: 28rpx;
-							background: url("/static/icons/next.png") no-repeat right / 100% 100%;
+							background: url($imgSrc+"/icons/next.png") no-repeat right / 100% 100%;
 						}
 					}
 				}
@@ -1483,7 +1483,7 @@
 								left: 0;
 								width: 16rpx;
 								height: 18rpx;
-								background: url("/static/icons/positioning.png") no-repeat center / 100% 100%;
+								background: url($imgSrc+"/icons/positioning.png") no-repeat center / 100% 100%;
 							}
 
 							.border {
@@ -1544,7 +1544,7 @@
 					padding: 40rpx 0 0 14rpx;
 					position: relative;
 					z-index: 100;
-					// background: url('/static/icons/topicBack.png') repeat;
+					// background: url($imgSrc+'/icons/topicBack.png') repeat;
 					.fullscreen-btn {
 						position: absolute;
 						top: 0;
@@ -1564,7 +1564,7 @@
 							margin: auto;
 							width: 40rpx;
 							height: 16rpx;
-							background: url("/static/icons/fullscreen.png") no-repeat center / 100% 100%;
+							background: url($imgSrc+"/icons/fullscreen.png") no-repeat center / 100% 100%;
 						}
 
 						&[type='true'] {
@@ -1613,7 +1613,7 @@
 							width: 0.875rem;
 							height: 0.875rem;
 							margin-right: 0.3125rem;
-							background: url("/static/icons/expand.png") no-repeat top / 100% 100%;
+							background: url($imgSrc+"/icons/expand.png") no-repeat top / 100% 100%;
 						}
 
 						span {
@@ -1629,7 +1629,7 @@
 						.play-video-btn {
 							width: 6rem;
 							height: 4rem;
-							background: url('/static/image/play_video_btn.png') no-repeat center / 100% 100%;
+							background: url($imgSrc+'/image/play_video_btn.png') no-repeat center / 100% 100%;
 						}
 					}
 
@@ -1644,7 +1644,7 @@
 							bottom: 6rem;
 							width: 5.5rem;
 							height: 4.75rem;
-							background: url("/static/image/analysis_icon.png") no-repeat bottom / 100%;
+							background: url($imgSrc+"/image/analysis_icon.png") no-repeat bottom / 100%;
 							animation: shake 2s ease-in-out infinite;
 							transform-origin: bottom right;
 						}
@@ -1667,7 +1667,7 @@
 							bottom: 0;
 							width: 4rem;
 							height: 6rem;
-							background: url("/static/image/analysis_image.png") no-repeat bottom / 100%;
+							background: url($imgSrc+"/image/analysis_image.png") no-repeat bottom / 100%;
 						}
 					}
 				}

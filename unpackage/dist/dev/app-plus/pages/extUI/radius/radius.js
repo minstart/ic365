@@ -463,6 +463,20 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     },
     {
+      path: "pages/page/user/changeTitle",
+      style: {
+        navigationBarTitleText: "\u66F4\u6362\u79F0\u53F7",
+        navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/page/user/changePet",
+      style: {
+        navigationBarTitleText: "\u66F4\u6362\u840C\u5B9D",
+        navigationStyle: "custom"
+      }
+    },
+    {
       path: "pages/page/login/login",
       style: {
         navigationBarTitleText: "\u767B\u5F55",

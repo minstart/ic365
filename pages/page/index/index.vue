@@ -495,12 +495,14 @@
 	@import '../../../common/uni-nvue.css';
 </style>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
+
 	.banner-wrap {
 		padding: 20rpx 24rpx 0 24rpx;
 		// display: flex;
 		min-height: 830rpx;
-		background: url("/static/image/1_header_banner.png") no-repeat top / 100%;
+		background: url($imgSrc+'/image/1_header_banner.png') no-repeat top / 100%;
 		position: relative;
 
 		.user-info-wrap {
@@ -558,26 +560,25 @@
 							margin-right: 0.56rem;
 
 							&[type="star"] {
-								background-image: url("/static/icons/star.png");
+								background-image: url($imgSrc+"/icons/star.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="stone"] {
-								background-image: url("/static/icons/stone.png");
+								background-image: url($imgSrc+"/icons/stone.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="dust"] {
-								background-image: url("/static/icons/dust.png");
+								background-image: url($imgSrc+"/icons/dust.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
-
 						}
 
 						.number {
@@ -797,7 +798,7 @@
 								color: #fff;
 								line-height: 1.3rem;
 								display: inline-block;
-								background: url("/static/image/1_time_limited.png") no-repeat left / 100% 100%;
+								background: url($imgSrc+"/image/1_time_limited.png") no-repeat left / 100% 100%;
 							}
 						}
 
@@ -811,7 +812,7 @@
 					background: #FFF2EA;
 
 					.plan-list-type-back {
-						background: url("/static/image/1_plan_label1.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/image/1_plan_label1.png") no-repeat center / 100% 100%;
 					}
 
 					.plan-list-name-wrap {
@@ -835,7 +836,7 @@
 					background: #FFEFF3;
 
 					.plan-list-type-back {
-						background: url("/static/image/1_plan_label2.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/image/1_plan_label2.png") no-repeat center / 100% 100%;
 					}
 
 					.plan-list-name-wrap {
@@ -859,7 +860,7 @@
 					background: #EBFDEA;
 
 					.plan-list-type-back {
-						background: url("/static/image/1_plan_label3.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/image/1_plan_label3.png") no-repeat center / 100% 100%;
 					}
 
 					.plan-list-name-wrap {
@@ -883,7 +884,7 @@
 					background: #EBFDEA;
 
 					.plan-list-type-back {
-						background: url("/static/image/1_plan_label4.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/image/1_plan_label4.png") no-repeat center / 100% 100%;
 					}
 
 					.plan-list-name-wrap {
@@ -917,6 +918,7 @@
 			margin-right: 0.68rem;
 			min-height: 180rpx;
 			border-radius: 40rpx;
+
 			.title-wrap {
 				display: flex;
 				align-items: center;
@@ -926,6 +928,7 @@
 				text-align: center;
 				font-size: 26rpx;
 				color: #323232;
+
 				.title {
 					flex: 1;
 				}
@@ -947,13 +950,13 @@
 				height: 50rpx;
 
 				&[vipLevel='0'] {
-					background: url('/static/icons/recommend_video_novip.png') no-repeat center / 100% 100%;
+					background: url($imgSrc+'/icons/recommend_video_novip.png') no-repeat center / 100% 100%;
 				}
 
 				&[vipLevel='1'],
 				&[vipLevel='2'],
 				&[vipLevel='3'] {
-					background: url('/static/icons/recommend_video_vip.png') no-repeat center / 100% 100%;
+					background: url($imgSrc+'/icons/recommend_video_vip.png') no-repeat center / 100% 100%;
 				}
 			}
 
@@ -961,23 +964,26 @@
 				box-shadow: 0 0 12rpx #b2dffd;
 
 				.list-icon {
-					background: url("/static/icons/recommend_video1.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/icons/recommend_video1.png") no-repeat center / 100% 100%;
 				}
 			}
 
 			&:nth-child(2) {
 				box-shadow: 0 0 12rpx #fdd1a0;
+
 				.list-icon {
-					background: url("/static/icons/recommend_video2.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/icons/recommend_video2.png") no-repeat center / 100% 100%;
 				}
 			}
 
 			&:nth-child(3) {
 				box-shadow: 0 0 12rpx #fdf391;
+
 				.list-icon {
-					background: url("/static/icons/recommend_video3.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/icons/recommend_video3.png") no-repeat center / 100% 100%;
 				}
 			}
+
 			&:last-child {
 				margin-right: 0;
 			}
@@ -1070,31 +1076,31 @@
 
 						&[typeid="0"] {
 							.achievement-rare-icon {
-								background: url("/static/icons/achievement_1.png") no-repeat top/ 100% 100%;
+								background: url($imgSrc+"/icons/achievement_1.png") no-repeat top/ 100% 100%;
 							}
 						}
 
 						&[typeid="1"] {
 							.achievement-rare-icon {
-								background: url("/static/icons/achievement_2.png") no-repeat top/ 100% 100%;
+								background: url($imgSrc+"/icons/achievement_2.png") no-repeat top/ 100% 100%;
 							}
 						}
 
 						&[typeid="2"] {
 							.achievement-rare-icon {
-								background: url("/static/icons/achievement_3.png") no-repeat top/ 100% 100%;
+								background: url($imgSrc+"/icons/achievement_3.png") no-repeat top/ 100% 100%;
 							}
 						}
 
 						&[typeid="3"] {
 							.achievement-rare-icon {
-								background: url("/static/icons/achievement_4.png") no-repeat top/ 100% 100%;
+								background: url($imgSrc+"/icons/achievement_4.png") no-repeat top/ 100% 100%;
 							}
 						}
 
 						&[typeid="4"] {
 							.achievement-rare-icon {
-								background: url("/static/icons/achievement_5.png") no-repeat top/ 100% 100%;
+								background: url($imgSrc+"/icons/achievement_5.png") no-repeat top/ 100% 100%;
 							}
 						}
 					}
@@ -1130,19 +1136,19 @@
 
 				&:nth-child(1) {
 					.achievement-list-pic-wrap {
-						background: url("/static/image/1_achievement_back1.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/image/1_achievement_back1.png") no-repeat center / 100% 100%;
 					}
 				}
 
 				&:nth-child(2) {
 					.achievement-list-pic-wrap {
-						background: url("/static/image/1_achievement_back2.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/image/1_achievement_back2.png") no-repeat center / 100% 100%;
 					}
 				}
 
 				&:nth-child(3) {
 					.achievement-list-pic-wrap {
-						background: url("/static/image/1_achievement_back3.png") no-repeat center / 100% 100%;
+						background: url($imgSrc+"/image/1_achievement_back3.png") no-repeat center / 100% 100%;
 					}
 				}
 

@@ -31,7 +31,7 @@
 				<view class="tab-wrap search-content-wrap">
 					<view class="tab-overflow-bar">
 						<ul class="tab-wrap search-tab-wrap">
-							<li class="tab search-tab" :class="tabSelected(i)" v-for="(item,i) in productsTab" :current='i' @click="clickTab(item,i)">
+							<li class="tab search-tab" :class="{'selected':  i == current}" v-for="(item,i) in productsTab" :current='i' @click="clickTab(item,i)">
 								{{item.name}}
 							</li>
 						</ul>
@@ -118,12 +118,17 @@
 					url: "/api/exchange/group-types"
 				}).then(res => {
 					console.log("兑换资源类型(Tab)::", res)
-					for (let i in res.data) {
+					for (let i in res.data.groupTypes) {
 						try {
-							!this.selectProductsId && (this.selectProductsId = i);
+							let item = res.data.groupTypes[i]
+							if(!this.selectProductsId){
+								if(res.data.defaultTab == i){
+									this.selectProductsId = i
+								}
+							}
 							this.productsTab.push({
 								id: i,
-								name: res.data[i],
+								name: item,
 								page: 1
 							})
 							this.productsList["products" + i] = {
@@ -132,6 +137,16 @@
 							}
 						} catch (e) {}
 					}
+					for(let i in this.productsTab){
+						try {
+							let item = this.productsTab[i]
+							if(item.id == this.selectProductsId){
+								this.current = i;
+								break;
+							}
+						} catch (e) {}
+					}
+					this.selectProductsId
 					this.getProducts({
 						reset: true
 					})
@@ -155,10 +170,7 @@
 
 		},
 		computed: {
-			tabSelected() {
-				// 根据current的值返回选中状态的class
-				return index => index === this.current ? 'selected' : '';
-			},
+			
 		},
 		methods: {
 			clickTab(item, i) {
@@ -317,7 +329,7 @@
 	.achievement-statistics-wrap {
 		.achievement-statistics {
 			height: 390rpx;
-			background: url("/static/image/5_2_banner_back.png") no-repeat top /100%;
+			background: url($imgSrc+"/image/5_2_banner_back.png") no-repeat top /100%;
 			position: relative;
 			margin-top: 36rpx;
 

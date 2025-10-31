@@ -521,3 +521,12 @@
   color: #676767;
   vertical-align: bottom;
 }
+.search-wrap .search-content-wrap .tab-content-wrap .table-list-wrap .tab-list .list-info .no-icon[data-v-70c707a8] {
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: url("../../../static/icons/not_obtained.png") no-repeat center/100% 100%;
+}

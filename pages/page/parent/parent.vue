@@ -163,7 +163,7 @@
 					<view class="list-info">
 						<h3 class="title">{{item.title}}</h3>
 						<view class="subtitle">{{item.subtitle}}</view>
-						<view class="more-text" @click="jumpPage({url:''})">{{item.buttonText}}</view>
+						<view class="more-text" @click="jumpPage({url:'/pages/page/user/webView?webViewType=5&url='+item.content})">{{item.buttonText}}</view>
 					</view>
 				</li>
 			</ul>
@@ -414,7 +414,8 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.banner-wrap {
 		border-radius: 0.6rem;
 		padding: 20rpx 24rpx 0 24rpx;
@@ -900,9 +901,8 @@
 					display: inline-block;
 					margin-right: 20rpx;
 					// background: #ccc;
-					border-radius: 0.2rem;
 					padding: 4rpx;
-					border-radius: 108rpx;
+					// border-radius: 108rpx;
 				}
 
 				.list-info {
@@ -973,7 +973,8 @@
 					}
 
 					.list-icon {
-						border: 2rpx solid #F94559;
+						border: 2rpx solid  transparent ;//#F94559
+						
 					}
 
 					.list-info {
@@ -991,7 +992,7 @@
 					}
 
 					.list-icon {
-						border: 2rpx solid #FFBA31;
+						border: 2rpx solid transparent ; //#FFBA31
 					}
 
 					.list-info {

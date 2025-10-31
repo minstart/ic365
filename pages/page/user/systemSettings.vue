@@ -127,6 +127,7 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.page-wrap {
 		min-height: 100vh;
 		background-color: #F2F2F2;
@@ -164,7 +165,7 @@
 					display: inline-block;
 					width: 16rpx;
 					height: 28rpx;
-					background: url("/static/icons/next.png") no-repeat right / 100% 100%;
+					background: url($imgSrc+"/icons/next.png") no-repeat right / 100% 100%;
 				}
 			}
 		}

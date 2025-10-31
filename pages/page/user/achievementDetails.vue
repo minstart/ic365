@@ -55,7 +55,8 @@
 											<view class="text">{{item2.typeName}}成就</view>
 										</h3>
 									</view>
-									<view class="time">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>
+									<view class="time" v-if="item2.obtainTimeUnix">{{item2.obtainTimeUnix ? changeDate(item2.obtainTimeUnix*1000).fullDate + " 获得": ""}}</view>
+									<view class="no-icon" v-else></view>
 								</view>
 							</view>
 							<!-- <view v-if="productsList['products' + item.id] && productsList['products' + item.id].list.length>0 && !productsList['products' + item.id].noData && !isLoading" class="get-more-btn" @click="getProducts()"></view> -->
@@ -188,10 +189,10 @@
 				if (data && data.reset) {
 					this.productsTab.forEach(item => {
 						this.productsList["products" + item.id] = {
-							requested: false,
-							page: 0,
-							noData: false,
-							list: []
+							requested: false, //是否已经初始化
+							page: 0, //默认页码（请求前会+1）
+							noData: false, //是否后续没数据了
+							list: [] //请求的列表合集
 						}
 					})
 				} else {
@@ -265,7 +266,7 @@
 	.achievement-statistics-wrap {
 		.achievement-statistics {
 			min-height: 610rpx;
-			background: url("/static/image/5_achievement_back.png") no-repeat top /100% 100%;
+			background: url($imgSrc+"/image/5_achievement_back.png") no-repeat top /100% 100%;
 			position: relative;
 			margin-top: 20rpx;
 
@@ -295,7 +296,7 @@
 					height: 2rem;
 					top: calc(-1rem + 5px);
 					margin-left: -0.937rem;
-					background: url("/static/icons/progress.png") no-repeat top / 100% 100%;
+					background: url($imgSrc+"/icons/progress.png") no-repeat top / 100% 100%;
 				}
 
 				.progress-wrap {
@@ -412,7 +413,6 @@
 
 						.list-info {
 							flex: 1;
-
 							.info-title {
 								margin-top: 0.5rem;
 								line-height: 1.56rem;
@@ -430,6 +430,7 @@
 								position: absolute;
 								right: -60rpx;
 								top: 0;
+
 								.type {
 									display: inline-block;
 									margin-right: 1.25rem;
@@ -455,7 +456,7 @@
 										background-color: #FFE7DA;
 
 										.icon {
-											background: url("/static/icons/achievement_1.png") no-repeat top/ 100% 100%;
+											background: url($imgSrc+"/icons/achievement_1.png") no-repeat top/ 100% 100%;
 										}
 									}
 
@@ -463,7 +464,7 @@
 										background-color: #E9E9E9;
 
 										.icon {
-											background: url("/static/icons/achievement_2.png") no-repeat top/ 100% 100%;
+											background: url($imgSrc+"/icons/achievement_2.png") no-repeat top/ 100% 100%;
 										}
 									}
 
@@ -471,7 +472,7 @@
 										background-color: #FFF5E5;
 
 										.icon {
-											background: url("/static/icons/achievement_3.png") no-repeat top/ 100% 100%;
+											background: url($imgSrc+"/icons/achievement_3.png") no-repeat top/ 100% 100%;
 										}
 									}
 
@@ -479,7 +480,7 @@
 										background-color: #FFF7E2;
 
 										.icon {
-											background: url("/static/icons/achievement_4.png") no-repeat top/ 100% 100%;
+											background: url($imgSrc+"/icons/achievement_4.png") no-repeat top/ 100% 100%;
 										}
 									}
 
@@ -487,7 +488,7 @@
 										background-color: #EFFFE5;
 
 										.icon {
-											background: url("/static/icons/achievement_5.png") no-repeat top/ 100% 100%;
+											background: url($imgSrc+"/icons/achievement_5.png") no-repeat top/ 100% 100%;
 										}
 									}
 								}
@@ -498,6 +499,15 @@
 								font-size: 0.68rem;
 								color: #676767;
 								vertical-align: bottom;
+							}
+							.no-icon{
+								width: 128rpx;
+								height: 128rpx;
+								position: absolute;
+								right: 0;
+								bottom: 0;
+								margin: auto;
+								background: url($imgSrc+'/icons/not_obtained.png') no-repeat center / 100% 100%;
 							}
 						}
 					}

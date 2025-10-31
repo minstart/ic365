@@ -184,10 +184,11 @@
 
 
 	<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 		@import "/static/css/standard.scss";
 
 		uni-page-body {
-			background: url("/static/image/0_login_back.png") no-repeat top / 100%;
+			background: url($imgSrc+"/image/0_login_back.png") no-repeat top / 100%;
 		}
 
 		.page-title {

@@ -43,6 +43,11 @@
 					this.pageHeadTitle = "儿童隐私协议"
 					this.viewUrl = "/hybrid/html/privacyChildren.html"
 					break;
+				case "5":
+					if(option.url){
+						this.viewUrl = option.url;
+					}
+					break;
 			}
 
 			let height = 0; // 定义动态的高度变量
@@ -66,8 +71,8 @@
 				
 				// 动态调整 WebView 的布局
 				wv.setStyle({
-					top: statusbar + 44 / 375 * width, // WebView 距离顶部的距离（状态栏高度）
-					height: height - statusbar, // WebView 的高度（屏幕高度减去状态栏高度）
+					top: (statusbar + 50) / 375 * width, // WebView 距离顶部的距离（状态栏高度）
+					height: height - (statusbar + 50) / 375 * width, // WebView 的高度（屏幕高度减去状态栏高度）
 				});
 			}, 200); // 延迟 200ms，确保页面初始化完成
 
@@ -99,7 +104,8 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.web-view-wrap {
 		display: flex;
 		flex-direction: column;

@@ -209,7 +209,7 @@
 		.page-wrap {
 			width: 100%;
 			height: calc(100vh - 88rpx);
-			background: url("/static/image/0_login_back.png") no-repeat top / 100%;
+			background: url($imgSrc+"/image/0_login_back.png") no-repeat top / 100%;
 		}
 
 		.page-title {

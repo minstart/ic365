@@ -137,10 +137,11 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	// 背景图用法
 	.background {
-		background-image: url("/static/icons/star.png");
+		background-image: url($imgSrc+"/icons/star.png");
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 100% 100%;

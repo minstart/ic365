@@ -52,7 +52,7 @@
 		</view>
 		<view class="uni-padding-wrap">
 			<view class="change-wear-wrap flex-center">
-				<view class="change-wear" @click="jumpPage({url:'/pages/page/user/exchangeMall'})">
+				<view class="change-wear" @click="jumpPage({url:'/pages/page/user/changeTitle'})">
 					<view class="wear-icon"></view>
 					<view class="wear-title-wrap">
 						<h3 class="wear-title">称号</h3>
@@ -60,7 +60,7 @@
 					</view>
 				</view>
 				<view class="border"></view>
-				<view class="change-wear" @click="jumpPage({url:'/pages/page/user/exchangeMall'})">
+				<view class="change-wear" @click="jumpPage({url:'/pages/page/user/changePet'})">
 					<view class="wear-icon"></view>
 					<view class="wear-title-wrap">
 						<h3 class="wear-title">萌宝</h3>
@@ -448,6 +448,7 @@
 	}
 </script>
 <style lang="scss" scoped>
+	@import "/static/css/standard.scss";
 	.banner-back{
 		position: absolute;
 		top: 0;
@@ -455,7 +456,7 @@
 		width: 100%;
 		height: 460rpx;
 		z-index: 0;
-		background: url("/static/image/5_user_back.png") no-repeat top / 100%;
+		background: url($imgSrc+"/image/5_user_back.png") no-repeat top / 100%;
 	}
 	.page-wrap {
 		background-color: #F4F4F4 !important;
@@ -474,7 +475,7 @@
 				width: 1.25rem;
 				height: 1.25rem;
 				float: right;
-				background: url("/static/icons/setUp-white.png") no-repeat center/100% 100%;
+				background: url($imgSrc+"/icons/setUp-white.png") no-repeat center/100% 100%;
 			}
 		}
 
@@ -494,7 +495,7 @@
 					// width: 626rpx;
 					margin: 0 auto;
 					height: 100rpx;
-					background: url("/static/image/5_novip_banner.png") no-repeat top / 100% 100%;
+					background: url($imgSrc+"/image/5_novip_banner.png") no-repeat top / 100% 100%;
 
 					.novip-info-wrap {
 						position: relative;
@@ -514,7 +515,7 @@
 								width: 14rpx;
 								height: 24rpx;
 								margin-left: 10rpx;
-								background: url("/static/icons/next4.png") no-repeat center / 100% 100%;
+								background: url($imgSrc+"/icons/next4.png") no-repeat center / 100% 100%;
 							}
 						}
 					}
@@ -525,7 +526,7 @@
 					width: 626rpx;
 					height: 186rpx;
 					margin: 0 auto;
-					background: url("/static/image/5_vip_banner.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/5_vip_banner.png") no-repeat center / 100% 100%;
 
 					.vip-banner-text {
 						position: absolute;
@@ -593,7 +594,7 @@
 			.qr-code {
 				width: 2rem;
 				height: 2rem;
-				background: url("/static/icons/QR_code.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/icons/QR_code.png") no-repeat center / 100% 100%;
 				border-radius: 0.5rem;
 				margin-left: 0.5rem;
 			}
@@ -611,15 +612,15 @@
 				text-align: center;
 
 				&:nth-child(1) {
-					background: url("/static/image/4_property_item1.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/4_property_item1.png") no-repeat center / 100% 100%;
 				}
 
 				&:nth-child(2) {
-					background: url("/static/image/4_property_item2.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/4_property_item2.png") no-repeat center / 100% 100%;
 				}
 
 				&:nth-child(3) {
-					background: url("/static/image/4_property_item3.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/4_property_item3.png") no-repeat center / 100% 100%;
 					margin-right: 0;
 				}
 
@@ -687,13 +688,13 @@
 			&:nth-child(1) {
 				.wear-icon {
 
-					background: url('/static/icons/5_change_title.png') no-repeat center / 100% 100%;
+					background: url($imgSrc+'/icons/5_change_title.png') no-repeat center / 100% 100%;
 				}
 			}
 
 			&:nth-child(3) {
 				.wear-icon {
-					background: url('/static/icons/5_change_pet.png') no-repeat center / 100% 100%;
+					background: url($imgSrc+'/icons/5_change_pet.png') no-repeat center / 100% 100%;
 				}
 			}
 		}
@@ -724,7 +725,7 @@
 				font-weight: 700;
 				font-size: 1.2rem;
 				padding-top: 0;
-				background: url("/static/icons/selected.png") no-repeat bottom / 1.3125rem 0.375rem;
+				background: url($imgSrc+"/icons/selected.png") no-repeat bottom / 1.3125rem 0.375rem;
 			}
 		}
 
@@ -758,7 +759,7 @@
 				position: relative;
 				flex: 1;
 				display: inline-block;
-				background: url("/static/icons/next.png") no-repeat right / 0.5rem 0.85rem;
+				background: url($imgSrc+"/icons/next.png") no-repeat right / 0.5rem 0.85rem;
 
 				.title {
 					font-size: 1.125rem;
