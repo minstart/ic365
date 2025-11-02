@@ -2,8 +2,8 @@
     "name" : "智算365",
     "appid" : "__UNI__F94F8DE",
     "description" : "应用描述",
-    "versionName" : "1.4.1",
-    "versionCode" : 141,
+    "versionName" : "1.4.2",
+    "versionCode" : 142,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,

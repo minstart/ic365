@@ -398,7 +398,8 @@
 	}
 </style>
 <!-- 以下是修改日历样式 -->
-<style>
+<style lang="scss">
+	@import "/static/css/standard.scss";
 	:global(.uni-calendar__header) {
 		display: none !important;
 	}

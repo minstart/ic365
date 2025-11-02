@@ -161,6 +161,7 @@ service.interceptors.response.use(
 		if (error.response && (error.response.data.code === 407 || error.response.data.status === 412)) {
 			return handleSessionExpired(error.config)
 		}
+		
 		uni.showToast({
 			title: error.message || error.msg,
 			icon: "none"

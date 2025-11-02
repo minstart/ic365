@@ -223,7 +223,7 @@
 								coverUrl: "/static/icons/exchange_mall.png",
 								title: "可兑商品",
 								introduce: "",
-								jumpUrl: "/pages/page/user/exchangeMall"
+								jumpUrl: "/pages/page/user/exchangeMall?tabId=1"
 							}
 						]
 					}

@@ -178,11 +178,21 @@
 		computed: {
 			newAchievement() {
 				this.achievement.list.map(img => img.imgPath || this.defaultAchievementIcon);
-				return this.achievement.list.slice(0, 1)
+				return this.achievement.list.slice(this.achievement.list.length - 1, this.achievement.list.length)
 			},
 			otherAchievement() {
 				this.achievement.list.map(img => img.imgPath || this.defaultAchievementIcon);
-				return this.achievement.list.slice(0, 3)
+				let listLangth = this.achievement.list.length;
+				let startLangth = 0,
+					endLength = 0;
+				if (listLangth == 0 || listLangth == 1 || listLangth == 2 || listLangth == 3) {
+					startLangth = 0;
+					endLength = 3;
+				} else {
+					startLangth = listLangth - 3;
+					endLength = listLangth;
+				}
+				return this.achievement.list.slice(startLangth, endLength)
 			},
 		},
 		data() {

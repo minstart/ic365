@@ -751,7 +751,7 @@
 								missionId: this.option.missionId
 							};
 						}
-						// byCategoryData.questionId = "4f87feb28fb511f0acfb0242ac110002" //获取指定题目
+						// byCategoryData.questionId = "4f930eff8fb511f0acfb0242ac110002" //获取指定题目
 						this.time = 0;
 						console.log("接口", byCategoryUrl)
 						console.log("获取题目传参：", byCategoryData)

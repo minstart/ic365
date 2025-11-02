@@ -107,7 +107,6 @@
 			option && (this.option = option);
 			if (option && option.tabId) {
 				this.selectProductsId = option.tabId;
-				this.current = 1
 			}
 		},
 		onReady() {
@@ -121,7 +120,7 @@
 					for (let i in res.data.groupTypes) {
 						try {
 							let item = res.data.groupTypes[i]
-							if(!this.selectProductsId){
+							if(!this.option.tabId){
 								if(res.data.defaultTab == i){
 									this.selectProductsId = i
 								}
@@ -146,7 +145,8 @@
 							}
 						} catch (e) {}
 					}
-					this.selectProductsId
+					
+					
 					this.getProducts({
 						reset: true
 					})
