@@ -265,8 +265,10 @@ function init(converter, defaultAttributes) {
 }
 var api = init(defaultConverter, { path: "/" });
 const configData = {
-  staticUrl: "https://ic365.ajulye.com"
+  staticUrl: "https://ic365.ajulye.com",
   //请求接口地址
+  imgSrc: "/static"
+  //图片请求路径
 };
 const store = createStore({
   // 在Vuex中，store的state属性用于存储全局状态数据，通过mutations和actions进行修改
@@ -275,7 +277,7 @@ const store = createStore({
     // 状态数据
     configData,
     //接口请求路径
-    defaultHeadPic: "/static/image/head_pic.png",
+    defaultHeadPic: configData.imgSrc + "/image/head_pic.png",
     //默认用户头像
     requestHead: {
       Authorization: ""
@@ -309,6 +311,8 @@ const store = createStore({
     //是否开启调试模式
     officialAccountQRCode: "",
     //公众号二维码地址
+    $imgSrc: configData.imgSrc,
+    // 图片路径地址
     hasLogin: false,
     isUniverifyLogin: false,
     loginProvider: "",
@@ -348,7 +352,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:97", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:99", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },

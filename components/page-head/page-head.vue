@@ -97,7 +97,7 @@
 				default: false
 			},
 			moduleIcon: {
-				default: "/static/icons/nav-bar.png"
+				default: ""
 			},
 			systemTaskbar: {
 				default: true

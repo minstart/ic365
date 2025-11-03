@@ -1,6 +1,6 @@
 const configData = {
 	staticUrl: "https://ic365.ajulye.com", //请求接口地址
-	imgSrc:"/static"
+	imgSrc:"/static"//图片请求路径
 }
 import Cookies from 'js-cookie';
 // #ifndef VUE3
