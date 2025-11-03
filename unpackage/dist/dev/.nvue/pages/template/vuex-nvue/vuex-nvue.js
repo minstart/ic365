@@ -265,8 +265,9 @@ function init(converter, defaultAttributes) {
 }
 var api = init(defaultConverter, { path: "/" });
 const configData = {
-  staticUrl: "https://ic365.ajulye.com"
+  staticUrl: "https://ic365.ajulye.com",
   //请求接口地址
+  imgSrc: "/static"
 };
 const store = createStore({
   // 在Vuex中，store的state属性用于存储全局状态数据，通过mutations和actions进行修改
@@ -275,7 +276,7 @@ const store = createStore({
     // 状态数据
     configData,
     //接口请求路径
-    defaultHeadPic: "/static/image/head_pic.png",
+    defaultHeadPic: configData.imgSrc + "/image/head_pic.png",
     //默认用户头像
     requestHead: {
       Authorization: ""
@@ -309,6 +310,8 @@ const store = createStore({
     //是否开启调试模式
     officialAccountQRCode: "",
     //公众号二维码地址
+    $imgSrc: configData.imgSrc,
+    // 图片路径地址
     hasLogin: false,
     isUniverifyLogin: false,
     loginProvider: "",
@@ -348,7 +351,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:97", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:99", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },
@@ -586,7 +589,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/71018/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
+const vuexNvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/vuex-nvue/vuex-nvue.nvue"]]);
 export {
   vuexNvue as default
 };

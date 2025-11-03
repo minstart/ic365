@@ -33,11 +33,11 @@
 				<h4 class="banner-text-content">{{pageData.banner.content}}</h4>
 				<h5 class="banner-text-contentFrom">{{pageData.banner.contentFrom}}</h5>
 			</view>
-			<image class="statue" :src="userInfo.showCurrencyImg||'/static/image/analysis_image2.png'"></image>
+			<image class="statue" :src="userInfo.showCurrencyImg||$store.state.$imgSrc+'/image/analysis_image2.png'"></image>
 			<view class="disc"></view>
 			<view class="activity-wrap">
-				<image class="activity" @click="jumpPage({url:'/pages/page/study/calendar'})" src='/static/image/1_challenge.png'></image>
-				<image class="activity" @click="jumpPage({url:'/pages/page/team/team',type:'reLaunch'})" src='/static/image/1_study.png'></image>
+				<image class="activity" @click="jumpPage({url:'/pages/page/study/calendar'})" :src="$store.state.$imgSrc+'/image/1_challenge.png'"></image>
+				<image class="activity" @click="jumpPage({url:'/pages/page/team/team',type:'reLaunch'})" :src="$store.state.$imgSrc+'/image/1_study.png'"></image>
 			</view>
 		</view>
 		<view class="plan-wrap uni-padding-wrap">
@@ -109,7 +109,7 @@
 				</view>
 			</view>
 			<view class="achievement-wrap">
-				<image class="achievement-back" src="/static/image/1_achievement_back.png"></image>
+				<image class="achievement-back" :src="$store.state.$imgSrc+'/image/1_achievement_back.png'"></image>
 				<view class="achievement-statistics">
 					{{achievement.obtained}}
 					/
@@ -178,21 +178,11 @@
 		computed: {
 			newAchievement() {
 				this.achievement.list.map(img => img.imgPath || this.defaultAchievementIcon);
-				return this.achievement.list.slice(this.achievement.list.length - 1, this.achievement.list.length)
+				return this.achievement.list.slice(0, 1)
 			},
 			otherAchievement() {
 				this.achievement.list.map(img => img.imgPath || this.defaultAchievementIcon);
-				let listLangth = this.achievement.list.length;
-				let startLangth = 0,
-					endLength = 0;
-				if (listLangth == 0 || listLangth == 1 || listLangth == 2 || listLangth == 3) {
-					startLangth = 0;
-					endLength = 3;
-				} else {
-					startLangth = listLangth - 3;
-					endLength = listLangth;
-				}
-				return this.achievement.list.slice(startLangth, endLength)
+				return this.achievement.list.slice(0, 3)
 			},
 		},
 		data() {
@@ -201,7 +191,7 @@
 				isSpecial: false, //是否已经检测过app安装包升级
 				cumulative: [],
 				defaultHeadPic: store.state.defaultHeadPic, //默认头像
-				defaultAchievementIcon: "/static/image/head_pic.png", // 默认成就图标
+				defaultAchievementIcon: this.$store.state.$imgSrc + "/image/head_pic.png", // 默认成就图标
 				// 活动列表
 				activityList: [],
 				// 推荐学习
@@ -436,14 +426,12 @@
 		onHide() {
 
 		},
-		watch: {
-
-		},
+		watch: {},
 		methods: {
 			// 用户头像默认图标
 			defaultHeadPicUrl() {
-				this.userInfo.avatar = '/static/image/head_pic.png';
-				return '/static/image/head_pic.png';
+				this.userInfo.avatar = this.$store.state.$imgSrc + '/image/head_pic.png';
+				return this.$store.state.$imgSrc + '/image/head_pic.png';
 			},
 			// 成就默认图标
 			defaultAchievementIconUrl(i) {
@@ -457,7 +445,7 @@
 				switch (id) {
 					case 1:
 						// 每日口算
-						return "/static/image/1_task_arithmetic.png";
+						return this.$store.state.$imgSrc + "/image/1_task_arithmetic.png";
 						break;
 					case 2:
 						break;
@@ -467,17 +455,17 @@
 						break;
 					case 5:
 						// 圣诞欢乐颂
-						return "/static/image/1_task_christmas.png";
+						return this.$store.state.$imgSrc + "/image/1_task_christmas.png";
 						break;
 					case 6:
 						break;
 					case 7:
 						// 分数认识
-						return "/static/image/1_task_fraction.png";
+						return this.$store.state.$imgSrc + "/image/1_task_fraction.png";
 						break;
 					case 8:
 						// 图形拼图
-						return "/static/image/1_task_jigsaw.png";
+						return this.$store.state.$imgSrc + "/image/1_task_jigsaw.png";
 						break;
 				}
 			},

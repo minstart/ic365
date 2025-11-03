@@ -21,7 +21,7 @@
 					<view class="topic-function-wrap">
 						<view class="search-btn-wrap" v-if="pageType!='everyDay' && !option.missionId">
 							<input class="search-input" type="text" v-model="keyword" placeholder="你想学什么" />
-							<view class="search-btn" @click="getQuestion"></view>
+							<view class="search-btn" @click="getQuestion({type:'search'})"></view>
 						</view>
 						<view class="collect-btn-wrap" v-if="pageType=='question' && topic.questionId">
 							<view class="collect-btn" :isCollect="topic.isCollect" @click.stop="collectTopic()">
@@ -604,7 +604,7 @@
 			},
 
 			// 视频、题目类型获取左侧类目目录
-			getQuestion() {
+			getQuestion(data) {
 				return new Promise((resolve, reject) => {
 					let url = "/api/category/getCategoryWithQuestionCountByGrade";
 					let postData = {
@@ -622,7 +622,12 @@
 					}else{
 						this.categoryTree.grade = this.categoryTree.subject + " · " + this.changeGrade(this.$store.state.userInfo.info.grade) + "年级";
 					}
-
+					
+					if(data && data.type && data.type == "search"){
+						this.categoryId = this.selectCategory.categoryId;
+					}
+					
+					console.log("获取类目传参：",postData)
 					this.commonRequest({
 						url: url,
 						data: postData

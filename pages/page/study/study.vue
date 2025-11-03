@@ -234,15 +234,14 @@
 		methods: {
 			// 用户头像默认图标
 			defaultHeadPicUrl() {
-				this.userInfo.avatar = '/static/image/head_pic.png';
-				return '/static/image/head_pic.png';
+				this.userInfo.avatar = this.$store.state.$imgSrc + '/image/head_pic.png';
+				return this.$store.state.$imgSrc + '/image/head_pic.png';
 			},
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
-	@import "/static/css/standard.scss";
+<style lang="scss" scoped>	@import "/static/css/standard.scss";
 	.banner-wrap {
 		border-radius: 0.6rem;
 		padding: 20rpx 24rpx 0 24rpx;
@@ -301,21 +300,21 @@
 							margin-right: 0.56rem;
 
 							&[type="star"] {
-								background-image: url("/static/icons/star.png");
+								background-image: url($imgSrc+"/icons/star.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="stone"] {
-								background-image: url("/static/icons/stone.png");
+								background-image: url($imgSrc+"/icons/stone.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="dust"] {
-								background-image: url("/static/icons/dust.png");
+								background-image: url($imgSrc+"/icons/dust.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
@@ -337,7 +336,7 @@
 	// 学习目标
 	.learning-goal-wrap {
 		min-height: 14.18rem;
-		background: url('/static/image/2_header_banner.png') no-repeat top / 100%;
+		background: url($imgSrc+'/image/2_header_banner.png') no-repeat top / 100%;
 		position: relative;
 		margin-bottom: 1.2rem;
 
@@ -391,7 +390,7 @@
 
 			.method_left {
 				height: 100%;
-				background: url("/static/image/2_method_1.png") no-repeat top / 100% 100%;
+				background: url($imgSrc+"/image/2_method_1.png") no-repeat top / 100% 100%;
 			}
 
 			.method_right {
@@ -400,11 +399,11 @@
 
 				&:nth-child(1) {
 					margin-bottom: 0.6875rem;
-					background: url("/static/image/2_method_2.png") no-repeat top / 100% 100%;
+					background: url($imgSrc+"/image/2_method_2.png") no-repeat top / 100% 100%;
 				}
 
 				&:nth-child(2) {
-					background: url("/static/image/2_method_3.png") no-repeat top / 100% 100%;
+					background: url($imgSrc+"/image/2_method_3.png") no-repeat top / 100% 100%;
 				}
 			}
 
@@ -427,15 +426,15 @@
 			text-align: center;
 
 			&:nth-child(1) {
-				background: url("/static/image/2_knowledge_points1.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/image/2_knowledge_points1.png") no-repeat center / 100% 100%;
 			}
 
 			&:nth-child(2) {
-				background: url("/static/image/2_knowledge_points2.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/image/2_knowledge_points2.png") no-repeat center / 100% 100%;
 			}
 
 			&:nth-child(3) {
-				background: url("/static/image/2_knowledge_points3.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/image/2_knowledge_points3.png") no-repeat center / 100% 100%;
 			}
 
 			.list-icon {
@@ -514,13 +513,13 @@
 				height: 50rpx;
 	
 				&[vipLevel='0'] {
-					background: url('/static/icons/recommend_video_novip.png') no-repeat center / 100% 100%;
+					background: url($imgSrc+'/icons/recommend_video_novip.png') no-repeat center / 100% 100%;
 				}
 	
 				&[vipLevel='1'],
 				&[vipLevel='2'],
 				&[vipLevel='3'] {
-					background: url('/static/icons/recommend_video_vip.png') no-repeat center / 100% 100%;
+					background: url($imgSrc+'/icons/recommend_video_vip.png') no-repeat center / 100% 100%;
 				}
 			}
 	
@@ -528,21 +527,21 @@
 				box-shadow: 0 0 12rpx #b2dffd;
 	
 				.list-icon {
-					background: url("/static/icons/recommend_video1.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/icons/recommend_video1.png") no-repeat center / 100% 100%;
 				}
 			}
 	
 			&:nth-child(2) {
 				box-shadow: 0 0 12rpx #fdd1a0;
 				.list-icon {
-					background: url("/static/icons/recommend_video2.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/icons/recommend_video2.png") no-repeat center / 100% 100%;
 				}
 			}
 	
 			&:nth-child(3) {
 				box-shadow: 0 0 12rpx #fdf391;
 				.list-icon {
-					background: url("/static/icons/recommend_video3.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/icons/recommend_video3.png") no-repeat center / 100% 100%;
 				}
 			}
 			&:last-child {

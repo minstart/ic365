@@ -1,5 +1,6 @@
 const configData = {
-	staticUrl: "https://ic365.ajulye.com" //请求接口地址
+	staticUrl: "https://ic365.ajulye.com", //请求接口地址
+	imgSrc:"/static"
 }
 import Cookies from 'js-cookie';
 // #ifndef VUE3
@@ -31,7 +32,7 @@ const store = new Vuex.Store({
 				state: {
 					// 状态数据
 					configData: configData, //接口请求路径
-					defaultHeadPic: "/static/image/head_pic.png", //默认用户头像
+					defaultHeadPic: configData.imgSrc + "/image/head_pic.png", //默认用户头像
 					requestHead: {
 						Authorization: ""
 					},
@@ -41,7 +42,7 @@ const store = new Vuex.Store({
 						info: {} //登录用户信息数据存储
 					},
 					crypto: crypto,
-					refreshPromise:null,
+					refreshPromise: null,
 					encrypt_enabled: process.env.VUE_APP_ENCRYPT_ENABLED === 'true',
 					formRules: { //uni-forms校验必填
 						phone: /^1[3456789]\d{9}$/
@@ -51,8 +52,9 @@ const store = new Vuex.Store({
 					taskbarHeight: "0rpx", //任务栏高度，从首页获取
 					showRewardPopUp: true, //任务奖励、成就奖励弹窗是否显示
 					rewardPopUpList: [], //任务奖励、成就奖励弹窗列表
-					openDebug:true, //是否开启调试模式
-					officialAccountQRCode:"",//公众号二维码地址
+					openDebug: true, //是否开启调试模式
+					officialAccountQRCode: "", //公众号二维码地址
+					$imgSrc: configData.imgSrc, // 图片路径地址
 
 					hasLogin: false,
 					isUniverifyLogin: false,

@@ -404,15 +404,15 @@
 							})
 							this.placeholderMembers = [];
 							let teamDefault = [{
-									avatar: "/static/image/placehold_avatar1.png",
+									avatar: this.$store.state.$imgSrc + "/image/placehold_avatar1.png",
 									isCaptain: true
 								},
 								{
-									avatar: "/static/image/placehold_avatar2.png",
+									avatar: this.$store.state.$imgSrc + "/image/placehold_avatar2.png",
 									isCaptain: false
 								},
 								{
-									avatar: "/static/image/placehold_avatar3.png",
+									avatar: this.$store.state.$imgSrc + "/image/placehold_avatar3.png",
 									isCaptain: false
 								}
 							]

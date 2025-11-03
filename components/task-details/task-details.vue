@@ -78,7 +78,7 @@
 				margin: auto;
 				width: 32rpx;
 				height: 22rpx;
-				background: url("/static/icons/task_type.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/icons/task_type.png") no-repeat center / 100% 100%;
 			}
 		}
 		.task-content-wrap{

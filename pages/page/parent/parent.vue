@@ -134,7 +134,7 @@
 				<view class="statistics statistical-reward">
 					<view class="statistics-title">
 						<view class="title-text">本周获取</view>
-						<image class="title-icon" src="/static/icons/reward.png" mode=""></image>
+						<image class="title-icon" :src="$store.state.$imgSrc + '/icons/reward.png'" mode=""></image>
 					</view>
 					<view class="statistics-reward">
 						<view class="reward-list" v-for="item in suggestionImproveOther.currencies._newlyAdded">
@@ -414,7 +414,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>
 	@import "/static/css/standard.scss";
 	.banner-wrap {
 		border-radius: 0.6rem;
@@ -475,21 +475,21 @@
 							margin-right: 0.56rem;
 
 							&[type="star"] {
-								background-image: url("/static/icons/star.png");
+								background-image: url($imgSrc+"/icons/star.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="stone"] {
-								background-image: url("/static/icons/stone.png");
+								background-image: url($imgSrc+"/icons/stone.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
 							}
 
 							&[type="dust"] {
-								background-image: url("/static/icons/dust.png");
+								background-image: url($imgSrc+"/icons/dust.png");
 								background-repeat: no-repeat;
 								background-position: center;
 								background-size: 100% 100%;
@@ -513,7 +513,7 @@
 				margin: auto;
 				width: 1.25rem;
 				height: 1.25rem;
-				background: url("/static/icons/setUp.png") no-repeat top / 100% 100%;
+				background: url($imgSrc+"/icons/setUp.png") no-repeat top / 100% 100%;
 			}
 		}
 	}
@@ -522,7 +522,7 @@
 	.study-report-wrap {
 		width: 100%;
 		height: 34.75rem;
-		background: url("/static/image/4_banner_background.png") no-repeat center / 100% 100%;
+		background: url($imgSrc+"/image/4_banner_background.png") no-repeat center / 100% 100%;
 		position: relative;
 
 		.study-report-title {
@@ -539,7 +539,7 @@
 			position: absolute;
 			top: 0.625rem;
 			right: 0.875rem;
-			background: url('/static/image/4_banner_details.png') no-repeat center / 100% 100%;
+			background: url($imgSrc+'/image/4_banner_details.png') no-repeat center / 100% 100%;
 			display: none;
 		}
 
@@ -568,13 +568,13 @@
 						&[state="1"] {
 							color: #79D183;
 							padding-left: 0.6rem;
-							background: url("/static/icons/rise-green.png") no-repeat left / 0.5rem 0.75rem;
+							background: url($imgSrc+"/icons/rise-green.png") no-repeat left / 0.5rem 0.75rem;
 						}
 
 						&[state="2"] {
 							color: #F9626D;
 							padding-left: 0.6rem;
-							background: url("/static/icons/decline-red.png") no-repeat left / 0.5rem 0.75rem;
+							background: url($imgSrc+"/icons/decline-red.png") no-repeat left / 0.5rem 0.75rem;
 						}
 					}
 
@@ -626,13 +626,13 @@
 					&[state="1"] {
 						color: #5893F3;
 						padding-left: 0.6rem;
-						background: url("/static/icons/rise-blue.png") no-repeat left / 0.5rem 0.75rem;
+						background: url($imgSrc+"/icons/rise-blue.png") no-repeat left / 0.5rem 0.75rem;
 					}
 
 					&[state="2"] {
 						color: #F9626D;
 						padding-left: 0.6rem;
-						background: url("/static/icons/decline-red.png") no-repeat left / 0.5rem 0.75rem;
+						background: url($imgSrc+"/icons/decline-red.png") no-repeat left / 0.5rem 0.75rem;
 					}
 				}
 			}
@@ -656,7 +656,7 @@
 		.charts-box-wrap {
 			margin: 1.125rem 0 2rem 0;
 			padding-bottom: 1rem;
-			background: url("/static/image/4_ability_analysis_back.png") no-repeat top / 100% 100%;
+			background: url($imgSrc+"/image/4_ability_analysis_back.png") no-repeat top / 100% 100%;
 
 			.charts-box {
 				padding: 1rem 0;
@@ -713,12 +713,12 @@
 
 		.icon-advantage {
 			padding-left: 1.4rem;
-			background: url("/static/icons/advantage.png") no-repeat left / 0.875rem 1rem;
+			background: url($imgSrc+"/icons/advantage.png") no-repeat left / 0.875rem 1rem;
 		}
 
 		.icon-improve {
 			padding-left: 1.4rem;
-			background: url("/static/icons/improve.png") no-repeat left / 0.875rem 1rem;
+			background: url($imgSrc+"/icons/improve.png") no-repeat left / 0.875rem 1rem;
 		}
 	}
 
@@ -850,15 +850,15 @@
 				text-align: center;
 
 				&:nth-child(1) {
-					background: url("/static/image/4_property_item1.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/4_property_item1.png") no-repeat center / 100% 100%;
 				}
 
 				&:nth-child(2) {
-					background: url("/static/image/4_property_item2.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/4_property_item2.png") no-repeat center / 100% 100%;
 				}
 
 				&:nth-child(3) {
-					background: url("/static/image/4_property_item3.png") no-repeat center / 100% 100%;
+					background: url($imgSrc+"/image/4_property_item3.png") no-repeat center / 100% 100%;
 					margin-right: 0;
 				}
 
@@ -908,7 +908,7 @@
 				.list-info {
 					flex: 1;
 					display: inline-block;
-					// background: url("/static/icons/next.png") no-repeat right / 0.5rem 0.85rem;
+					// background: url($imgSrc+"/icons/next.png") no-repeat right / 0.5rem 0.85rem;
 
 					.title {
 						font-size: 30rpx;
@@ -955,7 +955,7 @@
 						height: 10rpx;
 						margin: 12rpx 0;
 						font-weight: 700;
-						background: url("/static/icons/next2.png") no-repeat right / 100% 100%;
+						background: url($imgSrc+"/icons/next2.png") no-repeat right / 100% 100%;
 					}
 				}
 
@@ -969,7 +969,7 @@
 
 				&:nth-child(1) {
 					.information-list-back {
-						background: url("/static/image/4_information_back1.png") no-repeat right / 196rpx 100%;
+						background: url($imgSrc+"/image/4_information_back1.png") no-repeat right / 196rpx 100%;
 					}
 
 					.list-icon {
@@ -988,7 +988,7 @@
 
 				&:nth-child(2) {
 					.information-list-back {
-						background: url("/static/image/4_information_back2.png") no-repeat right / 196rpx 100%;
+						background: url($imgSrc+"/image/4_information_back2.png") no-repeat right / 196rpx 100%;
 					}
 
 					.list-icon {

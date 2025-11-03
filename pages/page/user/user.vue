@@ -186,14 +186,14 @@
 					{
 						title: "我的练习",
 						list: [{
-								coverUrl: "/static/icons/recently_practiced.png",
+								coverUrl: this.$store.state.$imgSrc + "/icons/recently_practiced.png",
 								title: "最近练习",
 								introduce: "查看最近的练习记录",
 								unRead: "",
 								jumpUrl: "/pages/page/study/answerQuestions?pageType=recentlyList"
 							},
 							{
-								coverUrl: "/static/icons/collecting_exercises.png",
+								coverUrl: this.$store.state.$imgSrc + "/icons/collecting_exercises.png",
 								title: "收藏练习",
 								introduce: "",
 								unRead: "",
@@ -205,7 +205,7 @@
 					{
 						title: "我的错题",
 						list: [{
-							coverUrl: "/static/icons/mistake.png",
+							coverUrl: this.$store.state.$imgSrc + "/icons/mistake.png",
 							title: "错题本",
 							introduce: "查看历史错题记录",
 							jumpUrl: "/pages/page/study/answerQuestions?pageType=errorList"
@@ -214,13 +214,13 @@
 					{
 						title: "我的兑换",
 						list: [{
-								coverUrl: "/static/icons/exchange_records.png",
+								coverUrl: this.$store.state.$imgSrc + "/icons/exchange_records.png",
 								title: "兑换物品",
 								introduce: "",
 								jumpUrl: "/pages/page/user/exchangeMall?tabId=2"
 							},
 							{
-								coverUrl: "/static/icons/exchange_mall.png",
+								coverUrl: this.$store.state.$imgSrc + "/icons/exchange_mall.png",
 								title: "可兑商品",
 								introduce: "",
 								jumpUrl: "/pages/page/user/exchangeMall?tabId=1"
@@ -401,8 +401,8 @@
 		methods: {
 			// 用户头像默认图标
 			defaultHeadPicUrl() {
-				this.userInfo.avatar = '/static/image/head_pic.png';
-				return '/static/image/head_pic.png';
+				this.userInfo.avatar = this.$store.state.$imgSrc + '/image/head_pic.png';
+				return this.$store.state.$imgSrc + '/image/head_pic.png';
 			},
 			clickTab(i) {
 				if (this.current !== i) {
@@ -449,7 +449,8 @@
 </script>
 <style lang="scss" scoped>
 	@import "/static/css/standard.scss";
-	.banner-back{
+
+	.banner-back {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -458,6 +459,7 @@
 		z-index: 0;
 		background: url($imgSrc+"/image/5_user_back.png") no-repeat top / 100%;
 	}
+
 	.page-wrap {
 		background-color: #F4F4F4 !important;
 	}
@@ -465,6 +467,7 @@
 	.banner-wrap {
 		position: relative;
 		z-index: 1;
+
 		.btn-wrap {
 			overflow: hidden;
 			width: 21.4375rem;
@@ -732,6 +735,7 @@
 		.tab-list-content {
 			border-radius: 16rpx;
 			overflow: hidden;
+
 			.tab-list {
 				&[current="1"] {
 					.unRead {

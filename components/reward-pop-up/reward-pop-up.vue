@@ -3,10 +3,10 @@
 		<view class="reward-pop-up-list" v-for="item in $store.state.rewardPopUpList" :rewardType="item.type">
 			<view class="reward-wrap" :style="'transform: scale('+size+');'">
 				<view class="reward-back-wrap">
-					<image class="back1" src="/static/image/reward_back1.png" mode=""></image>
-					<image class="back2" src="/static/image/reward_back2.png" mode=""></image>
-					<image class="back3" src="/static/image/reward_back3.png" mode=""></image>
-					<image class="back4" src="/static/image/reward_back4.png" mode=""></image>
+					<image class="back1" :src="$store.state.$imgSrc + '/image/reward_back1.png'" mode=""></image>
+					<image class="back2" :src="$store.state.$imgSrc + '/image/reward_back2.png'" mode=""></image>
+					<image class="back3" :src="$store.state.$imgSrc + '/image/reward_back3.png'" mode=""></image>
+					<image class="back4" :src="$store.state.$imgSrc + '/image/reward_back4.png'" mode=""></image>
 					<view class="back5"></view>
 					<view class="back6"></view>
 					<view class="back7"></view>
@@ -84,6 +84,7 @@
 	}
 </script>
 <style lang="scss">
+	@import "/static/css/standard.scss";
 	.reward-pop-up-list-wrap {
 		position: relative;
 		width: 100vw;
@@ -316,7 +317,7 @@
 			.reward-wrap {
 				width: 656rpx;
 				height: 838rpx;
-				background: url("/static/image/reward_content_back.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/image/reward_content_back.png") no-repeat center / 100% 100%;
 
 				.reward-content-wrap {
 					.reward-content {

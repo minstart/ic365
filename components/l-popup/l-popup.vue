@@ -50,6 +50,7 @@
 	}
 </script>
 <style lang="scss">
+	@import "/static/css/standard.scss";
 	.l-popup-background {
 		position: fixed;
 		width: 100%;
@@ -89,7 +90,7 @@
 					height: 100%;
 					content: "";
 					display: block;
-					background: url('/static/icons/close.png') no-repeat center / 100% 100%;
+					background: url($imgSrc+'/icons/close.png') no-repeat center / 100% 100%;
 				}
 			}
 

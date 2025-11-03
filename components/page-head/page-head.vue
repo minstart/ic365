@@ -245,7 +245,7 @@
 			font-size: 44rpx;
 			// line-height: ;
 			padding-bottom: 0.1rem;
-			background: url("/static/image/title_back.png") no-repeat bottom center / 5.5rem;
+			background: url($imgSrc+"/image/title_back.png") no-repeat bottom center / 5.5rem;
 		}
 
 		.standard-title {
@@ -257,7 +257,7 @@
 
 		.page-head-back-icon {
 			border-radius: 50%;
-			background: url("/static/icons/back_orange.png") no-repeat center / 100% 100%;
+			background: url($imgSrc+"/icons/back_orange.png") no-repeat center / 100% 100%;
 		}
 
 		.page-head-module-icon {
@@ -408,11 +408,11 @@
 		.msg-tips-icon {
 			width: 80rpx;
 			height: 118rpx;
-			background: url("/static/icons/tips.png") no-repeat center / 100% 100%;
+			background: url($imgSrc+"/icons/tips.png") no-repeat center / 100% 100%;
 			&[type="2"] {
 				width: 80rpx;
 				height: 118rpx;
-				background: url("/static/icons/tips.png") no-repeat center / 100% 100%;
+				background: url($imgSrc+"/icons/tips.png") no-repeat center / 100% 100%;
 			}
 
 			margin: 34rpx auto 34rpx auto;

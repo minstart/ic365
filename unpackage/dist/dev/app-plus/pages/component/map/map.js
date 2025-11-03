@@ -63,10 +63,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   });
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-icons.js
-  var import_vue = __toESM(require_vue());
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/component/map/map.js
+  var import_vue2 = __toESM(require_vue());
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/_plugin-vue_export-helper.js
   var _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -75,7 +75,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-icons.js
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
+  var import_vue = __toESM(require_vue());
+  function resolveEasycom(component, easycom) {
+    return typeof component === "string" ? easycom : component;
+  }
+
+  // C:/Users/Administrator/Desktop/ic365/unpackage/dist/dev/.nvue/pages/component/map/map.js
   var fontData = [
     {
       "font_class": "arrow-down",
@@ -723,7 +729,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   ];
   var iconUrl = "/assets/uniicons.32e978a5.ttf";
-  var _style_0 = { "uni-icons": { "": { "fontFamily": "uniicons", "textDecoration": "none", "textAlign": "center" } } };
+  var _style_0$4 = { "uni-icons": { "": { "fontFamily": "uniicons", "textDecoration": "none", "textAlign": "center" } } };
   var getVal = (val) => {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
@@ -733,7 +739,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     "fontFamily": "uniicons",
     "src": "url('" + iconUrl + "')"
   });
-  var _sfc_main = {
+  var _sfc_main$4 = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -787,34 +793,22 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     }
   };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return (0, import_vue.openBlock)(), (0, import_vue.createElementBlock)(
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
       "u-text",
       {
-        style: (0, import_vue.normalizeStyle)($options.styleObj),
+        style: (0, import_vue2.normalizeStyle)($options.styleObj),
         class: "uni-icons",
         onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
       },
-      (0, import_vue.toDisplayString)($options.unicode),
+      (0, import_vue2.toDisplayString)($options.unicode),
       5
       /* TEXT, STYLE */
     );
   }
-  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-list.js
-  var import_vue4 = __toESM(require_vue());
-
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-app.es.js
-  var import_vue2 = __toESM(require_vue());
-  function resolveEasycom(component, easycom) {
-    return typeof component === "string" ? easycom : component;
-  }
-
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-badge.js
-  var import_vue3 = __toESM(require_vue());
-  var _style_02 = { "uni-badge--x": { "": { "position": "relative" } }, "uni-badge--absolute": { "": { "position": "absolute" } }, "uni-badge--small": { "": { "transform": "scale(0.8)", "transformOrigin": "center center" } }, "uni-badge": { "": { "justifyContent": "center", "flexDirection": "row", "height": 20, "paddingTop": 0, "paddingRight": 4, "paddingBottom": 0, "paddingLeft": 4, "lineHeight": 18, "color": "#ffffff", "borderRadius": 100, "backgroundColor": "rgba(0,0,0,0)", "borderWidth": 1, "borderStyle": "solid", "borderColor": "#ffffff", "textAlign": "center", "fontFamily": '"Helvetica Neue", Helvetica, sans-serif', "fontSize": 12 } }, "uni-badge--info": { "": { "color": "#ffffff", "backgroundColor": "#909399" } }, "uni-badge--primary": { "": { "backgroundColor": "#2979ff" } }, "uni-badge--success": { "": { "backgroundColor": "#4cd964" } }, "uni-badge--warning": { "": { "backgroundColor": "#f0ad4e" } }, "uni-badge--error": { "": { "backgroundColor": "#dd524d" } }, "uni-badge--inverted": { "": { "paddingTop": 0, "paddingRight": 5, "paddingBottom": 0, "paddingLeft": 0, "color": "#909399" } }, "uni-badge--info-inverted": { "": { "color": "#909399", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--primary-inverted": { "": { "color": "#2979ff", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--success-inverted": { "": { "color": "#4cd964", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--warning-inverted": { "": { "color": "#f0ad4e", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--error-inverted": { "": { "color": "#dd524d", "backgroundColor": "rgba(0,0,0,0)" } } };
-  var _sfc_main2 = {
+  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["styles", [_style_0$4]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  var _style_0$3 = { "uni-badge--x": { "": { "position": "relative" } }, "uni-badge--absolute": { "": { "position": "absolute" } }, "uni-badge--small": { "": { "transform": "scale(0.8)", "transformOrigin": "center center" } }, "uni-badge": { "": { "justifyContent": "center", "flexDirection": "row", "height": 20, "paddingTop": 0, "paddingRight": 4, "paddingBottom": 0, "paddingLeft": 4, "lineHeight": 18, "color": "#ffffff", "borderRadius": 100, "backgroundColor": "rgba(0,0,0,0)", "borderWidth": 1, "borderStyle": "solid", "borderColor": "#ffffff", "textAlign": "center", "fontFamily": '"Helvetica Neue", Helvetica, sans-serif', "fontSize": 12 } }, "uni-badge--info": { "": { "color": "#ffffff", "backgroundColor": "#909399" } }, "uni-badge--primary": { "": { "backgroundColor": "#2979ff" } }, "uni-badge--success": { "": { "backgroundColor": "#4cd964" } }, "uni-badge--warning": { "": { "backgroundColor": "#f0ad4e" } }, "uni-badge--error": { "": { "backgroundColor": "#dd524d" } }, "uni-badge--inverted": { "": { "paddingTop": 0, "paddingRight": 5, "paddingBottom": 0, "paddingLeft": 0, "color": "#909399" } }, "uni-badge--info-inverted": { "": { "color": "#909399", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--primary-inverted": { "": { "color": "#2979ff", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--success-inverted": { "": { "color": "#4cd964", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--warning-inverted": { "": { "color": "#f0ad4e", "backgroundColor": "rgba(0,0,0,0)" } }, "uni-badge--error-inverted": { "": { "color": "#dd524d", "backgroundColor": "rgba(0,0,0,0)" } } };
+  var _sfc_main$3 = {
     name: "UniBadge",
     emits: ["click"],
     props: {
@@ -937,31 +931,29 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     }
   };
-  function _sfc_render2(_ctx, _cache, $props, $setup, $data, $options) {
-    return (0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)("view", {
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("view", {
       class: "uni-badge--x",
       renderWhole: true
     }, [
-      (0, import_vue3.renderSlot)(_ctx.$slots, "default"),
-      $props.text ? ((0, import_vue3.openBlock)(), (0, import_vue3.createElementBlock)(
+      (0, import_vue2.renderSlot)(_ctx.$slots, "default"),
+      $props.text ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
         "u-text",
         {
           key: 0,
-          class: (0, import_vue3.normalizeClass)([$options.classNames, "uni-badge"]),
-          style: (0, import_vue3.normalizeStyle)([$options.positionStyle, $props.customStyle, $options.dotStyle]),
+          class: (0, import_vue2.normalizeClass)([$options.classNames, "uni-badge"]),
+          style: (0, import_vue2.normalizeStyle)([$options.positionStyle, $props.customStyle, $options.dotStyle]),
           onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick())
         },
-        (0, import_vue3.toDisplayString)($options.displayValue),
+        (0, import_vue2.toDisplayString)($options.displayValue),
         7
         /* TEXT, CLASS, STYLE */
-      )) : (0, import_vue3.createCommentVNode)("v-if", true)
+      )) : (0, import_vue2.createCommentVNode)("v-if", true)
     ]);
   }
-  var __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main2, [["render", _sfc_render2], ["styles", [_style_02]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
-
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/uni-list.js
-  var _style_0$1 = { "uni-list-item": { "": { "fontSize": 16, "position": "relative", "justifyContent": "space-between", "alignItems": "center", "backgroundColor": "#ffffff", "flexDirection": "row" } }, "uni-list-item--disabled": { "": { "opacity": 0.3 } }, "uni-list-item--hover": { "": { "backgroundColor": "#f1f1f1" } }, "uni-list-item__container": { "": { "position": "relative", "flexDirection": "row", "paddingTop": 12, "paddingRight": 15, "paddingBottom": 12, "paddingLeft": 15, "flex": 1, "overflow": "hidden" } }, "container--right": { "": { "paddingRight": 0 } }, "uni-list--border": { "": { "position": "absolute", "top": 0, "right": 0, "left": 0, "borderTopColor": "#e5e5e5", "borderTopStyle": "solid", "borderTopWidth": 0.5 } }, "uni-list-item__content": { "": { "paddingRight": 8, "flex": 1, "color": "#3b4144", "flexDirection": "column", "justifyContent": "space-between", "overflow": "hidden" } }, "uni-list-item__content--center": { "": { "justifyContent": "center" } }, "uni-list-item__content-title": { "": { "fontSize": 14, "color": "#3b4144", "overflow": "hidden" } }, "uni-list-item__content-note": { "": { "marginTop": "6rpx", "color": "#999999", "fontSize": 12, "overflow": "hidden" } }, "uni-list-item__extra": { "": { "flexDirection": "row", "justifyContent": "flex-end", "alignItems": "center" } }, "uni-list-item__header": { "": { "flexDirection": "row", "alignItems": "center" } }, "uni-list-item__icon": { "": { "marginRight": "18rpx", "flexDirection": "row", "justifyContent": "center", "alignItems": "center" } }, "uni-list-item__icon-img": { "": { "height": 26, "width": 26, "marginRight": 10 } }, "uni-icon-wrapper": { "": { "alignItems": "center", "paddingTop": 0, "paddingRight": 10, "paddingBottom": 0, "paddingLeft": 10 } }, "flex--direction": { "": { "flexDirection": "column" } }, "uni-list--lg": { "": { "height": 40, "width": 40 } }, "uni-list--base": { "": { "height": 26, "width": 26 } }, "uni-list--sm": { "": { "height": 20, "width": 20 } }, "uni-list-item__extra-text": { "": { "color": "#999999", "fontSize": 12 } }, "uni-ellipsis-1": { "": { "lines": 1, "textOverflow": "ellipsis" } }, "uni-ellipsis-2": { "": { "lines": 2, "textOverflow": "ellipsis" } } };
-  var _sfc_main$1 = {
+  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["styles", [_style_0$3]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  var _style_0$2 = { "uni-list-item": { "": { "fontSize": 16, "position": "relative", "justifyContent": "space-between", "alignItems": "center", "backgroundColor": "#ffffff", "flexDirection": "row" } }, "uni-list-item--disabled": { "": { "opacity": 0.3 } }, "uni-list-item--hover": { "": { "backgroundColor": "#f1f1f1" } }, "uni-list-item__container": { "": { "position": "relative", "flexDirection": "row", "paddingTop": 12, "paddingRight": 15, "paddingBottom": 12, "paddingLeft": 15, "flex": 1, "overflow": "hidden" } }, "container--right": { "": { "paddingRight": 0 } }, "uni-list--border": { "": { "position": "absolute", "top": 0, "right": 0, "left": 0, "borderTopColor": "#e5e5e5", "borderTopStyle": "solid", "borderTopWidth": 0.5 } }, "uni-list-item__content": { "": { "paddingRight": 8, "flex": 1, "color": "#3b4144", "flexDirection": "column", "justifyContent": "space-between", "overflow": "hidden" } }, "uni-list-item__content--center": { "": { "justifyContent": "center" } }, "uni-list-item__content-title": { "": { "fontSize": 14, "color": "#3b4144", "overflow": "hidden" } }, "uni-list-item__content-note": { "": { "marginTop": "6rpx", "color": "#999999", "fontSize": 12, "overflow": "hidden" } }, "uni-list-item__extra": { "": { "flexDirection": "row", "justifyContent": "flex-end", "alignItems": "center" } }, "uni-list-item__header": { "": { "flexDirection": "row", "alignItems": "center" } }, "uni-list-item__icon": { "": { "marginRight": "18rpx", "flexDirection": "row", "justifyContent": "center", "alignItems": "center" } }, "uni-list-item__icon-img": { "": { "height": 26, "width": 26, "marginRight": 10 } }, "uni-icon-wrapper": { "": { "alignItems": "center", "paddingTop": 0, "paddingRight": 10, "paddingBottom": 0, "paddingLeft": 10 } }, "flex--direction": { "": { "flexDirection": "column" } }, "uni-list--lg": { "": { "height": 40, "width": 40 } }, "uni-list--base": { "": { "height": 26, "width": 26 } }, "uni-list--sm": { "": { "height": 20, "width": 20 } }, "uni-list-item__extra-text": { "": { "color": "#999999", "fontSize": 12 } }, "uni-ellipsis-1": { "": { "lines": 1, "textOverflow": "ellipsis" } }, "uni-ellipsis-2": { "": { "lines": 2, "textOverflow": "ellipsis" } } };
+  var _sfc_main$2 = {
     name: "UniListItem",
     emits: ["click", "switchChange"],
     props: {
@@ -1198,141 +1190,141 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom((0, import_vue4.resolveDynamicComponent)("uni-icons"), __easycom_1);
-    const _component_uni_badge = resolveEasycom((0, import_vue4.resolveDynamicComponent)("uni-badge"), __easycom_5);
-    const _component_switch = (0, import_vue4.resolveComponent)("switch");
-    return (0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)("cell", { keepScrollPosition: $props.keepScrollPosition }, [
-      (0, import_vue4.createElementVNode)("view", {
-        class: (0, import_vue4.normalizeClass)([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
-        style: (0, import_vue4.normalizeStyle)({ "background-color": $props.customStyle.backgroundColor }),
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom((0, import_vue2.resolveDynamicComponent)("uni-icons"), __easycom_0$1);
+    const _component_uni_badge = resolveEasycom((0, import_vue2.resolveDynamicComponent)("uni-badge"), __easycom_1$1);
+    const _component_switch = (0, import_vue2.resolveComponent)("switch");
+    return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("cell", { keepScrollPosition: $props.keepScrollPosition }, [
+      (0, import_vue2.createElementVNode)("view", {
+        class: (0, import_vue2.normalizeClass)([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
+        style: (0, import_vue2.normalizeStyle)({ "background-color": $props.customStyle.backgroundColor }),
         hoverClass: !$props.clickable && !$props.link || $props.disabled || $props.showSwitch ? "" : "uni-list-item--hover",
         onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
       }, [
-        !$data.isFirstChild ? ((0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)(
+        !$data.isFirstChild ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
           "view",
           {
             key: 0,
-            class: (0, import_vue4.normalizeClass)(["border--left", { "uni-list--border": $props.border }])
+            class: (0, import_vue2.normalizeClass)(["border--left", { "uni-list--border": $props.border }])
           },
           null,
           2
           /* CLASS */
-        )) : (0, import_vue4.createCommentVNode)("v-if", true),
-        (0, import_vue4.createElementVNode)(
+        )) : (0, import_vue2.createCommentVNode)("v-if", true),
+        (0, import_vue2.createElementVNode)(
           "view",
           {
-            class: (0, import_vue4.normalizeClass)(["uni-list-item__container", { "container--right": $props.showArrow || $props.link, "flex--direction": $props.direction === "column" }]),
-            style: (0, import_vue4.normalizeStyle)({ paddingTop: $data.padding.top, paddingLeft: $data.padding.left, paddingRight: $data.padding.right, paddingBottom: $data.padding.bottom })
+            class: (0, import_vue2.normalizeClass)(["uni-list-item__container", { "container--right": $props.showArrow || $props.link, "flex--direction": $props.direction === "column" }]),
+            style: (0, import_vue2.normalizeStyle)({ paddingTop: $data.padding.top, paddingLeft: $data.padding.left, paddingRight: $data.padding.right, paddingBottom: $data.padding.bottom })
           },
           [
-            (0, import_vue4.renderSlot)(_ctx.$slots, "header", {}, () => [
-              (0, import_vue4.createElementVNode)("view", { class: "uni-list-item__header" }, [
-                $props.thumb ? ((0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)("view", {
+            (0, import_vue2.renderSlot)(_ctx.$slots, "header", {}, () => [
+              (0, import_vue2.createElementVNode)("view", { class: "uni-list-item__header" }, [
+                $props.thumb ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("view", {
                   key: 0,
                   class: "uni-list-item__icon"
                 }, [
-                  (0, import_vue4.createElementVNode)("u-image", {
+                  (0, import_vue2.createElementVNode)("u-image", {
                     src: $props.thumb,
-                    class: (0, import_vue4.normalizeClass)(["uni-list-item__icon-img", ["uni-list--" + $props.thumbSize]])
+                    class: (0, import_vue2.normalizeClass)(["uni-list-item__icon-img", ["uni-list--" + $props.thumbSize]])
                   }, null, 10, ["src"])
-                ])) : $props.showExtraIcon ? ((0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)("view", {
+                ])) : $props.showExtraIcon ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("view", {
                   key: 1,
                   class: "uni-list-item__icon"
                 }, [
-                  (0, import_vue4.createVNode)(_component_uni_icons, {
+                  (0, import_vue2.createVNode)(_component_uni_icons, {
                     customPrefix: $props.extraIcon.customPrefix,
                     color: $props.extraIcon.color,
                     size: $props.extraIcon.size,
                     type: $props.extraIcon.type
                   }, null, 8, ["customPrefix", "color", "size", "type"])
-                ])) : (0, import_vue4.createCommentVNode)("v-if", true)
+                ])) : (0, import_vue2.createCommentVNode)("v-if", true)
               ])
             ]),
-            (0, import_vue4.renderSlot)(_ctx.$slots, "body", {}, () => [
-              (0, import_vue4.createElementVNode)(
+            (0, import_vue2.renderSlot)(_ctx.$slots, "body", {}, () => [
+              (0, import_vue2.createElementVNode)(
                 "view",
                 {
-                  class: (0, import_vue4.normalizeClass)(["uni-list-item__content", { "uni-list-item__content--center": $props.thumb || $props.showExtraIcon || $props.showBadge || $props.showSwitch }])
+                  class: (0, import_vue2.normalizeClass)(["uni-list-item__content", { "uni-list-item__content--center": $props.thumb || $props.showExtraIcon || $props.showBadge || $props.showSwitch }])
                 },
                 [
-                  $props.title ? ((0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)(
+                  $props.title ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
                     "u-text",
                     {
                       key: 0,
-                      class: (0, import_vue4.normalizeClass)(["uni-list-item__content-title", [$props.ellipsis !== 0 && $props.ellipsis <= 2 ? "uni-ellipsis-" + $props.ellipsis : ""]])
+                      class: (0, import_vue2.normalizeClass)(["uni-list-item__content-title", [$props.ellipsis !== 0 && $props.ellipsis <= 2 ? "uni-ellipsis-" + $props.ellipsis : ""]])
                     },
-                    (0, import_vue4.toDisplayString)($props.title),
+                    (0, import_vue2.toDisplayString)($props.title),
                     3
                     /* TEXT, CLASS */
-                  )) : (0, import_vue4.createCommentVNode)("v-if", true),
-                  $props.note ? ((0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)(
+                  )) : (0, import_vue2.createCommentVNode)("v-if", true),
+                  $props.note ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
                     "u-text",
                     {
                       key: 1,
                       class: "uni-list-item__content-note"
                     },
-                    (0, import_vue4.toDisplayString)($props.note),
+                    (0, import_vue2.toDisplayString)($props.note),
                     1
                     /* TEXT */
-                  )) : (0, import_vue4.createCommentVNode)("v-if", true)
+                  )) : (0, import_vue2.createCommentVNode)("v-if", true)
                 ],
                 2
                 /* CLASS */
               )
             ]),
-            (0, import_vue4.renderSlot)(_ctx.$slots, "footer", {}, () => [
-              $props.rightText || $props.showBadge || $props.showSwitch ? ((0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)(
+            (0, import_vue2.renderSlot)(_ctx.$slots, "footer", {}, () => [
+              $props.rightText || $props.showBadge || $props.showSwitch ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
                 "view",
                 {
                   key: 0,
-                  class: (0, import_vue4.normalizeClass)(["uni-list-item__extra", { "flex--justify": $props.direction === "column" }])
+                  class: (0, import_vue2.normalizeClass)(["uni-list-item__extra", { "flex--justify": $props.direction === "column" }])
                 },
                 [
-                  $props.rightText ? ((0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)(
+                  $props.rightText ? ((0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
                     "u-text",
                     {
                       key: 0,
                       class: "uni-list-item__extra-text"
                     },
-                    (0, import_vue4.toDisplayString)($props.rightText),
+                    (0, import_vue2.toDisplayString)($props.rightText),
                     1
                     /* TEXT */
-                  )) : (0, import_vue4.createCommentVNode)("v-if", true),
-                  $props.showBadge ? ((0, import_vue4.openBlock)(), (0, import_vue4.createBlock)(_component_uni_badge, {
+                  )) : (0, import_vue2.createCommentVNode)("v-if", true),
+                  $props.showBadge ? ((0, import_vue2.openBlock)(), (0, import_vue2.createBlock)(_component_uni_badge, {
                     key: 1,
                     type: $props.badgeType,
                     text: $props.badgeText,
                     "custom-style": $props.badgeStyle
-                  }, null, 8, ["type", "text", "custom-style"])) : (0, import_vue4.createCommentVNode)("v-if", true),
-                  $props.showSwitch ? ((0, import_vue4.openBlock)(), (0, import_vue4.createBlock)(_component_switch, {
+                  }, null, 8, ["type", "text", "custom-style"])) : (0, import_vue2.createCommentVNode)("v-if", true),
+                  $props.showSwitch ? ((0, import_vue2.openBlock)(), (0, import_vue2.createBlock)(_component_switch, {
                     key: 2,
                     disabled: $props.disabled,
                     checked: $props.switchChecked,
                     onChange: $options.onSwitchChange
-                  }, null, 8, ["disabled", "checked", "onChange"])) : (0, import_vue4.createCommentVNode)("v-if", true)
+                  }, null, 8, ["disabled", "checked", "onChange"])) : (0, import_vue2.createCommentVNode)("v-if", true)
                 ],
                 2
                 /* CLASS */
-              )) : (0, import_vue4.createCommentVNode)("v-if", true)
+              )) : (0, import_vue2.createCommentVNode)("v-if", true)
             ])
           ],
           6
           /* CLASS, STYLE */
         ),
-        $props.showArrow || $props.link ? ((0, import_vue4.openBlock)(), (0, import_vue4.createBlock)(_component_uni_icons, {
+        $props.showArrow || $props.link ? ((0, import_vue2.openBlock)(), (0, import_vue2.createBlock)(_component_uni_icons, {
           key: 1,
           size: 16,
           class: "uni-icon-wrapper",
           color: "#bbb",
           type: "arrowright"
-        })) : (0, import_vue4.createCommentVNode)("v-if", true)
+        })) : (0, import_vue2.createCommentVNode)("v-if", true)
       ], 14, ["hoverClass"])
     ], 8, ["keepScrollPosition"]);
   }
-  var __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
-  var _style_03 = { "uni-list": { "": { "backgroundColor": "#ffffff", "position": "relative", "flexDirection": "column" } }, "uni-list--border": { "": { "position": "relative", "borderTopColor": "#e5e5e5", "borderTopStyle": "solid", "borderTopWidth": 0.5, "borderBottomColor": "#e5e5e5", "borderBottomStyle": "solid", "borderBottomWidth": 0.5, "zIndex": -1 } } };
-  var _sfc_main3 = {
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  var _style_0$1 = { "uni-list": { "": { "backgroundColor": "#ffffff", "position": "relative", "flexDirection": "column" } }, "uni-list--border": { "": { "position": "relative", "borderTopColor": "#e5e5e5", "borderTopStyle": "solid", "borderTopWidth": 0.5, "borderBottomColor": "#e5e5e5", "borderBottomStyle": "solid", "borderBottomWidth": 0.5, "zIndex": -1 } } };
+  var _sfc_main$1 = {
     name: "uniList",
     "mp-weixin": {
       options: {
@@ -1378,26 +1370,23 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     }
   };
-  function _sfc_render3(_ctx, _cache, $props, $setup, $data, $options) {
-    return (0, import_vue4.openBlock)(), (0, import_vue4.createElementBlock)("list", {
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("list", {
       bounce: false,
       scrollable: true,
       showScrollbar: "",
       renderReverse: $props.renderReverse,
       onScroll: _cache[0] || (_cache[0] = (...args) => $options.scroll && $options.scroll(...args)),
-      class: (0, import_vue4.normalizeClass)(["uni-list", { "uni-list--border": $props.border }]),
+      class: (0, import_vue2.normalizeClass)(["uni-list", { "uni-list--border": $props.border }]),
       enableBackToTop: $props.enableBackToTop,
       loadmoreoffset: "15"
     }, [
-      (0, import_vue4.renderSlot)(_ctx.$slots, "default")
+      (0, import_vue2.renderSlot)(_ctx.$slots, "default")
     ], 42, ["renderReverse", "enableBackToTop"]);
   }
-  var __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main3, [["render", _sfc_render3], ["styles", [_style_03]], ["__file", "C:/Users/71018/Desktop/ic365/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
-
-  // C:/Users/71018/Desktop/ic365/unpackage/dist/dev/.nvue/pages/component/map/map.js
-  var import_vue5 = __toESM(require_vue());
-  var _style_04 = { "content": { "": { "flex": 1 } }, "map": { "": { "width": "750rpx", "height": 250, "backgroundColor": "#f0f0f0" } }, "line": { "": { "height": 4 } }, "scrollview": { "": { "flex": 1 } } };
-  var _sfc_main4 = {
+  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  var _style_0 = { "content": { "": { "flex": 1 } }, "map": { "": { "width": "750rpx", "height": 250, "backgroundColor": "#f0f0f0" } }, "line": { "": { "height": 4 } }, "scrollview": { "": { "flex": 1 } } };
+  var _sfc_main = {
     data() {
       return {
         location: {
@@ -1472,18 +1461,18 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       }
     }
   };
-  function _sfc_render4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_list_item = resolveEasycom((0, import_vue5.resolveDynamicComponent)("uni-list-item"), __easycom_3);
-    const _component_uni_list = resolveEasycom((0, import_vue5.resolveDynamicComponent)("uni-list"), __easycom_4);
-    return (0, import_vue5.openBlock)(), (0, import_vue5.createElementBlock)("scroll-view", {
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_list_item = resolveEasycom((0, import_vue2.resolveDynamicComponent)("uni-list-item"), __easycom_0);
+    const _component_uni_list = resolveEasycom((0, import_vue2.resolveDynamicComponent)("uni-list"), __easycom_1);
+    return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("scroll-view", {
       scrollY: true,
       showScrollbar: true,
       enableBackToTop: true,
       bubble: "true",
       style: { flexDirection: "column" }
     }, [
-      (0, import_vue5.createElementVNode)("view", { class: "content" }, [
-        (0, import_vue5.createElementVNode)("map", {
+      (0, import_vue2.createElementVNode)("view", { class: "content" }, [
+        (0, import_vue2.createElementVNode)("map", {
           class: "map",
           ref: "map1",
           controls: $data.controls,
@@ -1507,53 +1496,53 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           polygons: $data.polygons,
           includePoints: $data.includePoints
         }, null, 8, ["controls", "scale", "longitude", "latitude", "showLocation", "enable3D", "rotate", "skew", "showCompass", "enableOverlooking", "enableZoom", "enableScroll", "enableRotate", "enableSatellite", "enableTraffic", "markers", "polyline", "circles", "polygons", "includePoints"]),
-        (0, import_vue5.createElementVNode)("view", { class: "line" }),
-        (0, import_vue5.createVNode)(_component_uni_list, { class: "scrollview" }, {
-          default: (0, import_vue5.withCtx)(() => [
-            (0, import_vue5.createVNode)(_component_uni_list_item, {
+        (0, import_vue2.createElementVNode)("view", { class: "line" }),
+        (0, import_vue2.createVNode)(_component_uni_list, { class: "scrollview" }, {
+          default: (0, import_vue2.withCtx)(() => [
+            (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,
               "switch-checked": $data.enable3D,
               title: "\u663E\u793A3D\u697C\u5757",
               onSwitchChange: $options.enableThreeD
             }, null, 8, ["switch-checked", "onSwitchChange"]),
-            (0, import_vue5.createVNode)(_component_uni_list_item, {
+            (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,
               "switch-checked": $data.showCompass,
               title: "\u663E\u793A\u6307\u5357\u9488",
               onSwitchChange: $options.changeShowCompass
             }, null, 8, ["switch-checked", "onSwitchChange"]),
-            (0, import_vue5.createCommentVNode)(' <uni-list-item :show-arrow="false" :show-switch="true" :switch-checked="enableOverlooking" title="\u5F00\u542F\u4FEF\u89C6" @switchChange="changeEnableOverlooking" /> '),
-            (0, import_vue5.createVNode)(_component_uni_list_item, {
+            (0, import_vue2.createCommentVNode)(' <uni-list-item :show-arrow="false" :show-switch="true" :switch-checked="enableOverlooking" title="\u5F00\u542F\u4FEF\u89C6" @switchChange="changeEnableOverlooking" /> '),
+            (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,
               "switch-checked": $data.enableZoom,
               title: "\u662F\u5426\u652F\u6301\u7F29\u653E",
               onSwitchChange: $options.changeEnableZoom
             }, null, 8, ["switch-checked", "onSwitchChange"]),
-            (0, import_vue5.createVNode)(_component_uni_list_item, {
+            (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,
               "switch-checked": $data.enableScroll,
               title: "\u662F\u5426\u652F\u6301\u62D6\u52A8",
               onSwitchChange: $options.changeEnableScroll
             }, null, 8, ["switch-checked", "onSwitchChange"]),
-            (0, import_vue5.createVNode)(_component_uni_list_item, {
+            (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,
               "switch-checked": $data.enableRotate,
               title: "\u662F\u5426\u652F\u6301\u65CB\u8F6C",
               onSwitchChange: $options.changeEnableRotate
             }, null, 8, ["switch-checked", "onSwitchChange"]),
-            (0, import_vue5.createVNode)(_component_uni_list_item, {
+            (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,
               "switch-checked": $data.enableSatellite,
               title: "\u662F\u5426\u5F00\u542F\u536B\u661F\u56FE",
               onSwitchChange: $options.changeEnableSatellite
             }, null, 8, ["switch-checked", "onSwitchChange"]),
-            (0, import_vue5.createVNode)(_component_uni_list_item, {
+            (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,
               "switch-checked": $data.enableTraffic,
@@ -1567,7 +1556,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       ])
     ]);
   }
-  var map = /* @__PURE__ */ _export_sfc(_sfc_main4, [["render", _sfc_render4], ["styles", [_style_04]], ["__file", "C:/Users/71018/Desktop/ic365/pages/component/map/map.nvue"]]);
+  var map = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/component/map/map.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();

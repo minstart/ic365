@@ -350,34 +350,34 @@ export default {
 			if (id == 1) {
 				// 智慧星
 				return {
-					min: "/static/icons/star.png",
-					moderate: "/static/icons/star2.png",
-					icon3: "/static/icons/star3.png",
-					icon4: "/static/icons/star4.png",
+					min: this.$store.state.$imgSrc+"/icons/star.png",
+					moderate: this.$store.state.$imgSrc+"/icons/star2.png",
+					icon3: this.$store.state.$imgSrc+"/icons/star3.png",
+					icon4: this.$store.state.$imgSrc+"/icons/star4.png",
 
 				};
 			} else if (id == 2) {
 				// 知识尘
 				return {
-					min: "/static/icons/dust.png",
-					moderate: "/static/icons/dust2.png",
-					icon3: "/static/icons/dust3.png",
-					icon4: "/static/icons/dust4.png",
+					min: this.$store.state.$imgSrc+"/icons/dust.png",
+					moderate: this.$store.state.$imgSrc+"/icons/dust2.png",
+					icon3: this.$store.state.$imgSrc+"/icons/dust3.png",
+					icon4: this.$store.state.$imgSrc+"/icons/dust4.png",
 
 				};
 			} else if (id == 3) {
 				// 启明石
 				return {
-					min: "/static/icons/stone.png",
-					moderate: "/static/icons/stone2.png",
-					icon3: "/static/icons/stone3.png",
-					icon4: "/static/icons/stone4.png",
+					min: this.$store.state.$imgSrc+"/icons/stone.png",
+					moderate: this.$store.state.$imgSrc+"/icons/stone2.png",
+					icon3: this.$store.state.$imgSrc+"/icons/stone3.png",
+					icon4: this.$store.state.$imgSrc+"/icons/stone4.png",
 				};
 			} else if (id == 4) {
 				// 丰硕穗
 			} else if (id == 5) {
 				return {
-					min: "/static/icons/christmas.png",
+					min: this.$store.state.$imgSrc+"/icons/christmas.png",
 					moderate: ""
 				};
 			}
