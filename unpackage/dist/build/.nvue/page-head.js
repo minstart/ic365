@@ -858,7 +858,6 @@ const _sfc_main = {
         ...this.tipsData,
         ...data
       };
-      formatAppLog("log", "at components/page-head/page-head.vue:157", "合并后的data", this.tipsData);
     },
     closePopupTips() {
       this.$refs.popupTips.close();

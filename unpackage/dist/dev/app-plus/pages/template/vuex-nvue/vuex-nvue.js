@@ -1005,7 +1005,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         };
         this.tipsData = __spreadValues(__spreadValues({}, this.tipsData), data);
-        formatAppLog("log", "at components/page-head/page-head.vue:157", "\u5408\u5E76\u540E\u7684data", this.tipsData);
       },
       closePopupTips() {
         this.$refs.popupTips.close();
@@ -1566,6 +1565,8 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       //公众号二维码地址
       $imgSrc: configData.imgSrc,
       // 图片路径地址
+      cacheSize: "",
+      //app缓存数据大小
       hasLogin: false,
       isUniverifyLogin: false,
       loginProvider: "",
@@ -1578,11 +1579,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       leftWinActive: "/pages/page/index/index",
       activeOpen: "",
       menu: [],
-      univerifyErrorMsg: "",
-      // vuex测试例使用
-      username: "foo",
-      sex: "\u7537",
-      age: 10
+      univerifyErrorMsg: ""
     },
     // Mutations: 同步修改 State 的方法
     mutations: {
@@ -1605,7 +1602,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         state.userInfo.token = "";
       },
       SET_LOGIN: (state, data) => {
-        formatAppLog("log", "at store/index.js:99", "data.token::", data.token);
+        formatAppLog("log", "at store/index.js:96", "data.token::", data.token);
         state.userInfo.token = data.token;
         state.userInfo.info = data;
       },

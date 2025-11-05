@@ -180,6 +180,29 @@ export default {
 		uniClearStorage() {
 			uni.clearStorageSync()
 		},
+		checkCache() {
+			// 使用plus.cache.calculate 获取应用的缓存大小
+			let self = this;
+			// #ifdef APP-PLUS
+			plus.cache.calculate(function(size) { //size是多少个字节单位是b
+				if (size < 1024) {
+					self.$store.state.cacheSize = size + 'B';
+				} else if (size / 1024 >= 1 && size / 1024 / 1024 < 1) {
+					self.$store.state.cacheSize = Math.floor(size / 1024 * 100) / 100 + 'KB';
+				} else if (size / 1024 / 1024 >= 1) {
+					self.$store.state.cacheSize = Math.floor(size / 1024 / 1024 * 100) / 100 + 'M';
+				}
+			});
+			// #endif
+		},
+		clearStorage() {
+			var self = this;
+			//使用plus.cache.clear 清除应用中的缓存数据
+			// #ifdef APP-PLUS
+			plus.cache.clear(function() {});
+			// #endif
+			this.checkCache();
+		},
 		// 跳转页面
 		// url 跳转页面地址
 		// type uni 跳转页面函数("navigateTo","redirectTo","reLaunch") - 默认navigateTo
@@ -563,12 +586,20 @@ export default {
 		},
 		// 处理任务跳转数据
 		openTask(item) {
-			// 返回true,页面处理 false 当前逻辑处理
-			if (item.processTotal && item.processTotal == 100) {
-				return true;
-			}
+			try{
+				// 返回true,页面处理 false 当前逻辑处理
+				if (item.processTotal && item.processTotal == 100) {
+					return true;
+				}
+			}catch(e){}
+			console.log(this.$refs.pageHead)
 			// 没有做完，跳转到任务界面
 			if (item.matchSubTypeId == 1) {
+				if(item.isRequire){
+					// 跳转到日历
+					this.jumpPage({url:'/pages/page/study/calendar'})
+					return false;
+				}
 				// 任务做题
 				this.jumpPage({
 					url: '/pages/page/study/answerQuestions?pageType=question&missionId=' + item.missionId

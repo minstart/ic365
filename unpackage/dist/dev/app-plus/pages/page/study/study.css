@@ -483,10 +483,11 @@
 }
 .plan-list-wrap .plan-list .list-title[data-v-ff8615f1] {
   position: absolute;
-  bottom: 1.6875rem;
+  bottom: 1.875rem;
   color: #fff;
   width: 100%;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1.2;
 }
 .plan-list-wrap .plan-list .list-subtitle[data-v-ff8615f1] {
   position: absolute;

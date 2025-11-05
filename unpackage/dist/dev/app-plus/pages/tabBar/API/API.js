@@ -1015,7 +1015,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         };
         this.tipsData = __spreadValues(__spreadValues({}, this.tipsData), data);
-        formatAppLog("log", "at components/page-head/page-head.vue:157", "\u5408\u5E76\u540E\u7684data", this.tipsData);
       },
       closePopupTips() {
         this.$refs.popupTips.close();

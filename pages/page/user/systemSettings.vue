@@ -25,6 +25,11 @@
 					<view class="list-title">版本号</view>
 					<view class="list-text">{{appVersion}}</view>
 				</view>
+				<view class="list" @click="clearCache">
+					<view class="list-title">本地缓存</view>
+					<view class="list-text">{{$store.state.cacheSize}}</view>
+					<view class="list-icon"></view>
+				</view>
 				<view class="list" @tap="jumpPage({url:'/pages/page/user/webView?webViewType=4'})">
 					<view class="list-title">儿童隐私协议</view>
 					<view class="list-text"></view>
@@ -65,15 +70,14 @@
 		data() {
 			return {
 				pageHeadTitle: "设置",
-				appVersion:""
+				appVersion:"",//app版本号
+				appCache:""//app缓存
 			}
 		},
 		onLoad() {
 			plus.runtime.getProperty(plus.runtime.appid, (inf) => {
-			this.appVersion = inf.version;
+				this.appVersion = inf.version;
 			})
-			// const appInfo = uni.getSystemInfoSync()
-			// this.appVersion = appInfo.appVersion;
 		},
 		onReady() {
 
@@ -81,7 +85,10 @@
 		onShow() {
 			this.pageOnShowSet({
 				uniHide: "all"
+			}).then(res => {
+				
 			})
+			this.checkCache();
 		},
 		onHide() {
 
@@ -120,6 +127,21 @@
 				this.jumpPage({
 					url:"/pages/page/login/login",
 					type:"reLaunch"
+				})
+			},
+			clearCache(){
+				this.$refs.pageHead.openPopupTips({
+					title: "是否清除本地缓存数据？",
+					content: "确认是否清除所有本地缓存数据？",
+					success: res => {
+						this.clearStorage();
+						this.$refs.pageHead.closePopupTips()
+						uni.showToast({
+							title: '清除成功',
+							icon: 'success',
+							duration: 3000
+						})
+					}
 				})
 			}
 		}
@@ -163,6 +185,7 @@
 				}
 				.list-icon{
 					display: inline-block;
+					margin-left: 12rpx;
 					width: 16rpx;
 					height: 28rpx;
 					background: url($imgSrc+"/icons/next.png") no-repeat right / 100% 100%;

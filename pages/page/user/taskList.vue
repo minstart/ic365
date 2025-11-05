@@ -14,7 +14,7 @@
 						<view class="content-time"></view>
 					</view>
 					<view class="task-right">
-						<view class="task-list-btn" v-if="!item.finishedTime" @tap.stop="completeTask(item)">去完成</view>
+						<view class="task-list-btn" v-if="!item.finishedTime" @tap.stop="openTask(item)">去完成</view>
 						<view class="task-list-complete-icon" v-if="item.finishedTime"></view>
 					</view>
 
@@ -91,6 +91,11 @@
 			completeTask(item) {
 				// 没有做完，跳转到任务界面
 				if (item.matchSubTypeId == 1) {
+					if(item.isRequire){
+						// 跳转到日历
+						this.jumpPage({url:'/pages/page/study/calendar'})
+						return false;
+					}
 					// 任务做题
 					this.jumpPage({
 						url: '/pages/page/study/answerQuestions?pageType=question&missionId=' + item.missionId

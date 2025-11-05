@@ -67,11 +67,11 @@
 				</view>
 			</view>
 			<view class="item-title-wrap">
-				<h3 class="item-title">知识点学习</h3>
+				<h3 class="item-title">知识点练习</h3>
 			</view>
 			<view class="no-list-tip" v-if="knowledgePoints.length==0">暂无数据</view>
 			<ul class="plan-list-wrap" v-if="knowledgePoints.length>0">
-				<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=video&categoryId='+item.categoryId})">
+				<li class="plan-list" v-for="item in knowledgePoints" @click="jumpPage({url:'/pages/page/study/answerQuestions?pageType=question&categoryId=' + item.categoryId})">
 					<image class="list-icon" :src='item.coverUrl'></image>
 					<h3 class="list-title">{{item.name}}</h3>
 					<view class="list-subtitle">{{item.subtitle}}</view>
@@ -106,7 +106,7 @@
 		components: {},
 		data() {
 			return {
-				defaultHeadPic: store.state.defaultHeadPic, //默认头像
+				defaultHeadPic: "", //默认头像
 				userInfo: {
 					nickname: "",
 					currencies: {
@@ -119,7 +119,7 @@
 					questionCount: "",
 					accuracy: ""
 				},
-				// 知识点学习
+				// 知识点练习
 				knowledgePoints: [],
 				classroom: [],
 				videosBackArr: [{
@@ -190,28 +190,28 @@
 					console.log("获取用户周报数据报错：：", error)
 				})
 
-				// 知识点学习
+				// 知识点练习
 				this.commonRequest({
 					url: "/api/recommend/categories"
 				}).then(res => {
-					console.log("知识点学习::", res)
+					console.log("知识点练习::", res)
 					try {
 						res.data && (this.knowledgePoints = res.data);
 					} catch (e) {}
 				}).catch(error => {
-					console.log("知识点学习报错：：", error)
+					console.log("知识点练习报错：：", error)
 				})
 
 				// 推荐课堂 - 目前使用推荐学习的接口
 				this.commonRequest({
 					url: "/api/recommend/videos"
 				}).then(res => {
-					console.log("推荐学习::", res.data)
+					console.log("推荐课堂::", res.data)
 					try {
 						res.data && (this.classroom = res.data);
 					} catch (e) {}
 				}).catch(error => {
-					console.log("获取推荐学习失败：：", error)
+					console.log("获取推荐课堂失败：：", error)
 				})
 			}).catch(error => {
 				console.log("没有登录：：", error)
@@ -413,7 +413,7 @@
 		}
 	}
 
-	// 知识点学习
+	// 知识点练习
 	.plan-list-wrap {
 		display: flex;
 		height: 9.06rem;
@@ -451,10 +451,11 @@
 
 			.list-title {
 				position: absolute;
-				bottom: 54rpx;
+				bottom: 60rpx;
 				color: #fff;
 				width: 100%;
-				font-size: 1.25rem;
+				font-size: 36rpx;
+				line-height: 1.2;
 			}
 
 			.list-subtitle {

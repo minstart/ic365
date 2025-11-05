@@ -617,6 +617,7 @@
 						(this.pageType == "collectList" || this.pageType == "collectDetails") && (_type = 1);
 						url = "/api/category/getCategoriesByScene"
 						postData = {
+							keyword: this.keyword,
 							type: _type
 						}
 					}else{

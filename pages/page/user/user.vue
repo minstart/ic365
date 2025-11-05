@@ -177,7 +177,7 @@
 		mixins: [commonJs],
 		data() {
 			return {
-				defaultHeadPic: store.state.defaultHeadPic, //默认头像
+				defaultHeadPic: "", //默认头像
 				current: 0, //选项卡显示下标
 				practiceList: [{
 						title: "我的任务",

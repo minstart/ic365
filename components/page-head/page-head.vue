@@ -154,7 +154,7 @@
 					...this.tipsData,
 					...data
 				};
-				console.log("合并后的data", this.tipsData)
+				// console.log("合并后的data", this.tipsData)
 			},
 			closePopupTips() {
 				this.$refs.popupTips.close(); //关闭消息咨询弹窗

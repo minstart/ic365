@@ -55,6 +55,7 @@ const store = new Vuex.Store({
 					openDebug: true, //是否开启调试模式
 					officialAccountQRCode: "", //公众号二维码地址
 					$imgSrc: configData.imgSrc, // 图片路径地址
+					cacheSize:"",//app缓存数据大小
 
 					hasLogin: false,
 					isUniverifyLogin: false,
@@ -68,11 +69,7 @@ const store = new Vuex.Store({
 					leftWinActive: '/pages/page/index/index',
 					activeOpen: '',
 					menu: [],
-					univerifyErrorMsg: '',
-					// vuex测试例使用
-					username: "foo",
-					sex: "男",
-					age: 10
+					univerifyErrorMsg: ''
 				},
 				// Mutations: 同步修改 State 的方法
 				mutations: {

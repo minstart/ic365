@@ -186,7 +186,7 @@
 		data() {
 			return {
 				invitationCode: "", //加入队伍输入的邀请码
-				defaultHeadPic: store.state.defaultHeadPic, //默认头像
+				defaultHeadPic: "", //默认头像
 				// 当前挑战
 				currentMission: {},
 

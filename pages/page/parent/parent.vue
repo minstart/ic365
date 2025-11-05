@@ -183,7 +183,7 @@
 		data() {
 			return {
 				pageHeadTitle: "",
-				defaultHeadPic: store.state.defaultHeadPic, //默认头像
+				defaultHeadPic: "", //默认头像
 
 				overallReport: {}, //整体报告
 				growthRate: {}, //对比上周涨幅

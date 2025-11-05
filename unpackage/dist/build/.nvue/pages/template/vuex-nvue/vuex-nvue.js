@@ -313,6 +313,8 @@ const store = createStore({
     //公众号二维码地址
     $imgSrc: configData.imgSrc,
     // 图片路径地址
+    cacheSize: "",
+    //app缓存数据大小
     hasLogin: false,
     isUniverifyLogin: false,
     loginProvider: "",
@@ -325,11 +327,7 @@ const store = createStore({
     leftWinActive: "/pages/page/index/index",
     activeOpen: "",
     menu: [],
-    univerifyErrorMsg: "",
-    // vuex测试例使用
-    username: "foo",
-    sex: "男",
-    age: 10
+    univerifyErrorMsg: ""
   },
   // Mutations: 同步修改 State 的方法
   mutations: {
@@ -352,7 +350,7 @@ const store = createStore({
       state.userInfo.token = "";
     },
     SET_LOGIN: (state, data) => {
-      formatAppLog("log", "at store/index.js:99", "data.token::", data.token);
+      formatAppLog("log", "at store/index.js:96", "data.token::", data.token);
       state.userInfo.token = data.token;
       state.userInfo.info = data;
     },

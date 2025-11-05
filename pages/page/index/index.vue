@@ -33,7 +33,7 @@
 				<h4 class="banner-text-content">{{pageData.banner.content}}</h4>
 				<h5 class="banner-text-contentFrom">{{pageData.banner.contentFrom}}</h5>
 			</view>
-			<image class="statue" :src="userInfo.showCurrencyImg||$store.state.$imgSrc+'/image/analysis_image2.png'"></image>
+			<image class="statue" :src="userInfo.showCurrencyImg"></image>
 			<view class="disc"></view>
 			<view class="activity-wrap">
 				<image class="activity" @click="jumpPage({url:'/pages/page/study/calendar'})" :src="$store.state.$imgSrc+'/image/1_challenge.png'"></image>
@@ -190,7 +190,7 @@
 				pageHeadTitle: "",
 				isSpecial: false, //是否已经检测过app安装包升级
 				cumulative: [],
-				defaultHeadPic: store.state.defaultHeadPic, //默认头像
+				defaultHeadPic: "", //默认头像
 				defaultAchievementIcon: this.$store.state.$imgSrc + "/image/head_pic.png", // 默认成就图标
 				// 活动列表
 				activityList: [],
