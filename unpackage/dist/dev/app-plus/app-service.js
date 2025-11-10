@@ -15565,7 +15565,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$2p, [["render", _sfc_render$2o], ["__scopeId", "data-v-4dd3c44b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$2p, [["render", _sfc_render$2o], ["__scopeId", "data-v-4dd3c44b"], ["__file", "C:/Users/Administrator/Desktop/ic365/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   const _sfc_main$2o = {
     name: "page-head",
     props: {
@@ -15677,7 +15677,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$2n(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -16027,7 +16027,7 @@ if (uni.restoreGlobal) {
       ))
     ]);
   }
-  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$2n, [["render", _sfc_render$2m], ["__scopeId", "data-v-759cae5c"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/reward-pop-up/reward-pop-up.vue"]]);
+  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$2n, [["render", _sfc_render$2m], ["__scopeId", "data-v-759cae5c"], ["__file", "C:/Users/Administrator/Desktop/ic365/components/reward-pop-up/reward-pop-up.vue"]]);
   const _sfc_main$2m = {
     mixins: [commonJs],
     props: {
@@ -16333,6 +16333,7 @@ if (uni.restoreGlobal) {
       });
     },
     onHide() {
+      this.closeRewardPopUp();
     },
     watch: {},
     methods: {
@@ -16388,8 +16389,8 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$2k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
-    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_3$2);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$5);
+    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     const _component_task_details = resolveEasycom(vue.resolveDynamicComponent("task-details"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -25112,51 +25113,67 @@ ${o3}
           this.commonRequest({
             url: "/api/student/info"
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/study/study.vue:171", "获取用户信息::", res2);
+            formatAppLog("log", "at pages/page/study/study.vue:174", "获取用户信息::", res2);
             try {
               store.commit("Update_UserInfo", res2.data);
               this.userInfo = res2.data;
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/study/study.vue:177", "获取用户信息报错：：", error2);
+            formatAppLog("log", "at pages/page/study/study.vue:180", "获取用户信息报错：：", error2);
           });
         }
         this.commonRequest({
+          url: "/api/notice/getAll"
+        }).then((res2) => {
+          formatAppLog("log", "at pages/page/study/study.vue:188", "通知消息::", res2.data);
+          try {
+            if (res2.data.length > 0) {
+              this.$store.state.rewardPopUpList = res2.data;
+              this.$refs.rewardPopUp.open("center");
+            } else {
+              this.closeRewardPopUp();
+            }
+          } catch (e2) {
+          }
+        }).catch((error2) => {
+          formatAppLog("log", "at pages/page/study/study.vue:198", "通知消息失败：：", error2);
+        });
+        this.commonRequest({
           url: "/api/report/weekly"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:185", "获取用户周报数据::", res2);
+          formatAppLog("log", "at pages/page/study/study.vue:205", "获取用户周报数据::", res2);
           try {
             res2.data && (this.learningGoal = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:190", "获取用户周报数据报错：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:210", "获取用户周报数据报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/categories"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:197", "知识点练习::", res2);
+          formatAppLog("log", "at pages/page/study/study.vue:217", "知识点练习::", res2);
           try {
             res2.data && (this.knowledgePoints = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:202", "知识点练习报错：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:222", "知识点练习报错：：", error2);
         });
         this.commonRequest({
           url: "/api/recommend/videos"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:209", "推荐课堂::", res2.data);
+          formatAppLog("log", "at pages/page/study/study.vue:229", "推荐课堂::", res2.data);
           try {
             res2.data && (this.classroom = res2.data);
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/study/study.vue:214", "获取推荐课堂失败：：", error2);
+          formatAppLog("log", "at pages/page/study/study.vue:234", "获取推荐课堂失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/study/study.vue:217", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/study/study.vue:237", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
@@ -25164,6 +25181,7 @@ ${o3}
       });
     },
     onHide() {
+      this.closeRewardPopUp();
     },
     created() {
     },
@@ -25174,11 +25192,17 @@ ${o3}
       defaultHeadPicUrl() {
         this.userInfo.avatar = this.$store.state.$imgSrc + "/image/head_pic.png";
         return this.$store.state.$imgSrc + "/image/head_pic.png";
+      },
+      //关闭弹窗 
+      closeRewardPopUp() {
+        this.$refs.rewardPopUp.close();
       }
     }
   };
   function _sfc_render$2b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
+    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -25419,10 +25443,27 @@ ${o3}
               ))
             ])
           ])
-        ])
+        ]),
+        vue.createVNode(
+          _component_uni_popup,
+          {
+            ref: "rewardPopUp",
+            "mask-click": false,
+            type: "center"
+          },
+          {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_reward_pop_up, { close: $options.closeRewardPopUp }, null, 8, ["close"])
+            ]),
+            _: 1
+            /* STABLE */
+          },
+          512
+          /* NEED_PATCH */
+        )
       ],
-      2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+      64
+      /* STABLE_FRAGMENT */
     );
   }
   const PagesPageStudyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$2c, [["render", _sfc_render$2b], ["__scopeId", "data-v-ff8615f1"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/study/study.vue"]]);
@@ -29018,8 +29059,8 @@ ${o3}
     const _component_page_meta = resolveEasycom(vue.resolveDynamicComponent("page-meta"), __easycom_0$2);
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
     const _component_l_popup = resolveEasycom(vue.resolveDynamicComponent("l-popup"), __easycom_2);
-    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_3$2);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$5);
+    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -29645,14 +29686,31 @@ ${o3}
       route[route.length - 1].route;
       this.verifLogin().then((data) => {
         this.getTeamInfo();
+        this.commonRequest({
+          url: "/api/notice/getAll"
+        }).then((res2) => {
+          formatAppLog("log", "at pages/page/team/team.vue:227", "通知消息::", res2.data);
+          try {
+            if (res2.data.length > 0) {
+              this.$store.state.rewardPopUpList = res2.data;
+              this.$refs.rewardPopUp.open("center");
+            } else {
+              this.closeRewardPopUp();
+            }
+          } catch (e2) {
+          }
+        }).catch((error2) => {
+          formatAppLog("log", "at pages/page/team/team.vue:237", "通知消息失败：：", error2);
+        });
       }).catch((err) => {
-        formatAppLog("log", "at pages/page/team/team.vue:222", "没有登录：：", error);
+        formatAppLog("log", "at pages/page/team/team.vue:240", "没有登录：：", error);
       });
       this.pageOnShowSet({
         uniHide: "all"
       });
     },
     onHide() {
+      this.closeRewardPopUp();
       this.$refs.pageHead.closePopupTips();
     },
     created() {
@@ -29666,14 +29724,14 @@ ${o3}
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:248", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/team/team.vue:267", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:254", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/team/team.vue:273", "获取用户信息报错：：", error2);
         });
         this.getTeamDetails();
       },
@@ -29696,7 +29754,7 @@ ${o3}
                 userId: item.userId
               }
             }).then((res3) => {
-              formatAppLog("log", "at pages/page/team/team.vue:279", "移出队员：", res3.data);
+              formatAppLog("log", "at pages/page/team/team.vue:298", "移出队员：", res3.data);
               _this.getTeamDetails();
               this.$refs.pageHead.openMsgTips({
                 content: "移出队员成功"
@@ -29706,11 +29764,11 @@ ${o3}
         });
       },
       exitTeam(item) {
-        formatAppLog("log", "at pages/page/team/team.vue:290", "离开队伍", item);
+        formatAppLog("log", "at pages/page/team/team.vue:309", "离开队伍", item);
         this.commonRequest({
           url: "/api/team/leaveTeam"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:294", "离开队伍：", res2.data);
+          formatAppLog("log", "at pages/page/team/team.vue:313", "离开队伍：", res2.data);
           this.getTeamInfo();
           this.$refs.pageHead.openMsgTips({
             content: "离开队伍成功"
@@ -29719,7 +29777,7 @@ ${o3}
       },
       // 任务详情处理
       openTaskDetails(item) {
-        formatAppLog("log", "at pages/page/team/team.vue:303", "任务详情处理:", item);
+        formatAppLog("log", "at pages/page/team/team.vue:322", "任务详情处理:", item);
         if (this.currentMission && item.missionId == this.currentMission.missionId) {
           this.openTask(item);
           return false;
@@ -29750,7 +29808,7 @@ ${o3}
                     missionId: item.missionId
                   }
                 }).then((res4) => {
-                  formatAppLog("log", "at pages/page/team/team.vue:337", "开启任务:", res4.data);
+                  formatAppLog("log", "at pages/page/team/team.vue:356", "开启任务:", res4.data);
                   _this.getTeamDetails();
                   this.$refs.pageHead.openMsgTips({
                     content: "开启组队任务成功"
@@ -29765,6 +29823,10 @@ ${o3}
             });
           }
         });
+      },
+      //关闭弹窗
+      closeRewardPopUp() {
+        this.$refs.rewardPopUp.close();
       },
       closeTaskPopUp() {
         this.$refs.taskPopUp.close();
@@ -29782,7 +29844,7 @@ ${o3}
             code: this.invitationCode
           }
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/team/team.vue:377", "加入队伍：", res2.data);
+          formatAppLog("log", "at pages/page/team/team.vue:400", "加入队伍：", res2.data);
           this.getTeamInfo();
           this.$refs.pageHead.openMsgTips({
             content: "加入队伍成功"
@@ -29795,7 +29857,7 @@ ${o3}
           this.commonRequest({
             url: "/api/team-mission/details"
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/team/team.vue:391", "获取我的队伍和任务相关信息::", res2);
+            formatAppLog("log", "at pages/page/team/team.vue:414", "获取我的队伍和任务相关信息::", res2);
             try {
               this.currentMission = res2.data.currentMission || {};
               this.stats = res2.data.stats;
@@ -29845,18 +29907,18 @@ ${o3}
                   }
                 });
               } catch (e2) {
-                formatAppLog("log", "at pages/page/team/team.vue:451", e2);
+                formatAppLog("log", "at pages/page/team/team.vue:474", e2);
               }
             } catch (e2) {
             }
             resolve(res2);
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/team/team.vue:456", "获取我的队伍和任务相关信息报错：：", error2);
+            formatAppLog("log", "at pages/page/team/team.vue:479", "获取我的队伍和任务相关信息报错：：", error2);
           });
           this.commonRequest({
             url: "/api/team-mission/list"
           }).then((res2) => {
-            formatAppLog("log", "at pages/page/team/team.vue:463", "获取组队任务::", res2);
+            formatAppLog("log", "at pages/page/team/team.vue:486", "获取组队任务::", res2);
             res2.data.forEach((item, i2) => {
               let statusName = "";
               let statusColor = "";
@@ -29878,7 +29940,7 @@ ${o3}
             });
             this.teamTask = res2.data;
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/team/team.vue:507", "获取组队任务报错：：", error2);
+            formatAppLog("log", "at pages/page/team/team.vue:530", "获取组队任务报错：：", error2);
           });
         });
       }
@@ -29886,8 +29948,9 @@ ${o3}
   };
   function _sfc_render$23(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     const _component_task_details = resolveEasycom(vue.resolveDynamicComponent("task-details"), __easycom_1$4);
+    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_1$5);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -30386,6 +30449,23 @@ ${o3}
                 details: $data.taskDetails,
                 close: $options.closeTaskPopUp
               }, null, 8, ["details", "close"])
+            ]),
+            _: 1
+            /* STABLE */
+          },
+          512
+          /* NEED_PATCH */
+        ),
+        vue.createVNode(
+          _component_uni_popup,
+          {
+            ref: "rewardPopUp",
+            "mask-click": false,
+            type: "center"
+          },
+          {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_reward_pop_up, { close: $options.closeRewardPopUp }, null, 8, ["close"])
             ]),
             _: 1
             /* STABLE */
@@ -32643,7 +32723,7 @@ ${o3}
         this.commonRequest({
           url: "/api/report/parent"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/parent/parent.vue:320", "获取家长版报告数据(统计图)：", res2);
+          formatAppLog("log", "at pages/page/parent/parent.vue:323", "获取家长版报告数据(统计图)：", res2);
           try {
             this.overallReport = res2.data.overallReport;
             this.growthRate = res2.data.growthRate;
@@ -32663,18 +32743,34 @@ ${o3}
                 max: sortedArray[sortedArray.length - 1]
               };
             } catch (e2) {
-              formatAppLog("log", "at pages/page/parent/parent.vue:341", e2);
+              formatAppLog("log", "at pages/page/parent/parent.vue:344", e2);
             }
           } catch (e2) {
           }
           this.parent = res2.data;
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/parent/parent.vue:347", "获取家长版报告数据(统计图)失败：：", error2);
+          formatAppLog("log", "at pages/page/parent/parent.vue:350", "获取家长版报告数据(统计图)失败：：", error2);
+        });
+        this.commonRequest({
+          url: "/api/notice/getAll"
+        }).then((res2) => {
+          formatAppLog("log", "at pages/page/parent/parent.vue:357", "通知消息::", res2.data);
+          try {
+            if (res2.data.length > 0) {
+              this.$store.state.rewardPopUpList = res2.data;
+              this.$refs.rewardPopUp.open("center");
+            } else {
+              this.closeRewardPopUp();
+            }
+          } catch (e2) {
+          }
+        }).catch((error2) => {
+          formatAppLog("log", "at pages/page/parent/parent.vue:367", "通知消息失败：：", error2);
         });
         this.commonRequest({
           url: "/api/report/getAdviceAndCurrenciesAndPublish"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/parent/parent.vue:354", "获取提升建议和其他：", res2);
+          formatAppLog("log", "at pages/page/parent/parent.vue:374", "获取提升建议和其他：", res2);
           try {
             let _currencies = {};
             res2.data.currencies.current.forEach((item) => {
@@ -32701,22 +32797,27 @@ ${o3}
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/parent/parent.vue:384", "获取提升建议和其他失败：：", error2);
+          formatAppLog("log", "at pages/page/parent/parent.vue:404", "获取提升建议和其他失败：：", error2);
         });
       }).catch((error2) => {
-        formatAppLog("log", "at pages/page/parent/parent.vue:388", "没有登录：：", error2);
+        formatAppLog("log", "at pages/page/parent/parent.vue:408", "没有登录：：", error2);
       });
       this.pageOnShowSet({
         uniHide: "all"
       });
     },
     onHide() {
+      this.closeRewardPopUp();
     },
     created() {
     },
     mounted() {
     },
     methods: {
+      //关闭弹窗 
+      closeRewardPopUp() {
+        this.$refs.rewardPopUp.close();
+      },
       suggestionTetx(num) {
         if (num >= 0 && num <= 50) {
           return "建议练习";
@@ -32731,6 +32832,8 @@ ${o3}
   function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
     const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_1);
+    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -33121,7 +33224,24 @@ ${o3}
               ))
             ])
           ])
-        ])
+        ]),
+        vue.createVNode(
+          _component_uni_popup,
+          {
+            ref: "rewardPopUp",
+            "mask-click": false,
+            type: "center"
+          },
+          {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_reward_pop_up, { close: $options.closeRewardPopUp }, null, 8, ["close"])
+            ]),
+            _: 1
+            /* STABLE */
+          },
+          512
+          /* NEED_PATCH */
+        )
       ],
       64
       /* STABLE_FRAGMENT */
@@ -33204,7 +33324,7 @@ ${o3}
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:253", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/user/user.vue:255", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
@@ -33216,49 +33336,65 @@ ${o3}
             });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:267", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:269", "获取用户信息报错：：", error2);
+        });
+        this.commonRequest({
+          url: "/api/notice/getAll"
+        }).then((res2) => {
+          formatAppLog("log", "at pages/page/user/user.vue:276", "通知消息::", res2.data);
+          try {
+            if (res2.data.length > 0) {
+              this.$store.state.rewardPopUpList = res2.data;
+              this.$refs.rewardPopUp.open("center");
+            } else {
+              this.closeRewardPopUp();
+            }
+          } catch (e2) {
+          }
+        }).catch((error2) => {
+          formatAppLog("log", "at pages/page/user/user.vue:286", "通知消息失败：：", error2);
         });
         this.commonRequest({
           url: "/api/student/getResourcesGroups"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:274", "获取我资源(战衣/皮肤/名人堂...)", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:293", "获取我资源(战衣/皮肤/名人堂...)", res2.data);
           this.skinList = res2.data.currencies;
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:277", "获取我资源(战衣/皮肤/名人堂...)报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:296", "获取我资源(战衣/皮肤/名人堂...)报错：：", error2);
         });
         this.commonRequest({
           url: "/api/question/getRecentlyAndCollection"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:297", "获取最近题目和收藏题目数量", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:316", "获取最近题目和收藏题目数量", res2.data);
           res2.data.recently > 0 ? this.practiceList[1].list[0].unRead = res2.data.recently + "条新记录" : this.practiceList[1].list[0].unRead = "";
           this.practiceList[1].list[1].introduce = "已收藏" + (res2.data.collection || 0) + "个练习";
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:301", "获取最近题目和收藏题目数量报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:320", "获取最近题目和收藏题目数量报错：：", error2);
         });
         this.commonRequest({
           url: "/api/wrong-records/stats"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:308", "错题统计::", JSON.stringify(res2));
+          formatAppLog("log", "at pages/page/user/user.vue:327", "错题统计::", JSON.stringify(res2));
           try {
             res2.data.highFrequencyErrCount && (this.practiceList[2].list[0].unRead = res2.data.highFrequencyErrCount + "道高频错题");
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:313", "错题统计报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:332", "错题统计报错：：", error2);
         });
         this.commonRequest({
           url: "/api/exchange/stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:340", "获取我的兑换统计：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:359", "获取我的兑换统计：", res2.data);
           this.practiceList[3].list[0].introduce = "已兑换" + (res2.data.exchangeTotal || 0) + "件物品";
           this.practiceList[3].list[1].introduce = (res2.data.availableExchangeCount || 0) + "件商品可兑换";
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:346", "获取我的兑换统计报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:365", "获取我的兑换统计报错：：", error2);
         });
         this.commonRequest({
           url: "/api/mission/mine-stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:353", "我的任务：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:372", "我的任务：", res2.data);
           this.practiceList[0].list = [];
           res2.data.forEach((item) => {
             this.practiceList[0].list.push({
@@ -33272,7 +33408,7 @@ ${o3}
             });
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:367", "我的任务报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:386", "我的任务报错：：", error2);
         });
       });
       this.pageOnShowSet({
@@ -33281,6 +33417,7 @@ ${o3}
       });
     },
     onHide() {
+      this.closeRewardPopUp();
     },
     // watch {
     // },
@@ -33312,6 +33449,10 @@ ${o3}
           this.skinCurrent = i2;
         }
       },
+      //关闭弹窗
+      closeRewardPopUp() {
+        this.$refs.rewardPopUp.close();
+      },
       exchange(item) {
         if (item.obtained)
           return false;
@@ -33328,23 +33469,25 @@ ${o3}
           this.commonRequest({
             url: "/api/student/info"
           }).then((res3) => {
-            formatAppLog("log", "at pages/page/user/user.vue:434", "获取用户信息::", res3);
+            formatAppLog("log", "at pages/page/user/user.vue:457", "获取用户信息::", res3);
             try {
               store.commit("Update_UserInfo", res3.data);
               this.userInfo = res3.data;
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/user/user.vue:441", "获取用户信息报错：：", error2);
+            formatAppLog("log", "at pages/page/user/user.vue:464", "获取用户信息报错：：", error2);
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:444", "兑换商品报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:467", "兑换商品报错：：", error2);
         });
       }
     }
   };
   function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
+    const _component_reward_pop_up = resolveEasycom(vue.resolveDynamicComponent("reward-pop-up"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -33847,10 +33990,27 @@ ${o3}
             ]),
             vue.createCommentVNode(" 皮肤tab ------End ")
           ])
-        ])
+        ]),
+        vue.createVNode(
+          _component_uni_popup,
+          {
+            ref: "rewardPopUp",
+            "mask-click": false,
+            type: "center"
+          },
+          {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_reward_pop_up, { close: $options.closeRewardPopUp }, null, 8, ["close"])
+            ]),
+            _: 1
+            /* STABLE */
+          },
+          512
+          /* NEED_PATCH */
+        )
       ],
-      2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+      64
+      /* STABLE_FRAGMENT */
     );
   }
   const PagesPageUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__scopeId", "data-v-351444bc"], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/page/user/user.vue"]]);
@@ -35247,7 +35407,7 @@ ${o3}
   function _sfc_render$1N(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
     const _component_task_details = resolveEasycom(vue.resolveDynamicComponent("task-details"), __easycom_1$4);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -44621,7 +44781,7 @@ ${o3}
   };
   function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_page_head = resolveEasycom(vue.resolveDynamicComponent("page-head"), __easycom_0$4);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$5);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$6);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_page_head, { title: $data.title }, null, 8, ["title"]),
       vue.createElementVNode("view", { class: "uni-padding-wrap" }, [

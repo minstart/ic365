@@ -166,7 +166,9 @@
 			<!-- 皮肤tab ------End -->
 		</view>
 	</view>
-
+	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
+		<reward-pop-up :close="closeRewardPopUp"></reward-pop-up>
+	</uni-popup>
 </template>
 
 <script>
@@ -265,6 +267,23 @@
 
 				}).catch(error => {
 					console.log("获取用户信息报错：：", error)
+				})
+				
+				// 通知消息（成就奖励、任务奖励）
+				this.commonRequest({
+					url: "/api/notice/getAll"
+				}).then(res => {
+					console.log("通知消息::", res.data)
+					try {
+						if (res.data.length > 0) {
+							this.$store.state.rewardPopUpList = res.data;
+							this.$refs.rewardPopUp.open('center')
+						} else {
+							this.closeRewardPopUp()
+						}
+					} catch (e) {}
+				}).catch(error => {
+					console.log("通知消息失败：：", error)
 				})
 
 				// 获取我资源(战衣/皮肤/名人堂...)
@@ -377,7 +396,7 @@
 			})
 		},
 		onHide() {
-
+			this.closeRewardPopUp()
 		},
 		// watch {
 
@@ -413,6 +432,10 @@
 				if (this.skinCurrent !== i) {
 					this.skinCurrent = i
 				}
+			},
+			//关闭弹窗
+			closeRewardPopUp() {
+				this.$refs.rewardPopUp.close()
 			},
 			exchange(item) {
 				if (item.obtained) return false;

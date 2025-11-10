@@ -169,6 +169,9 @@
 			</ul>
 		</view>
 	</view>
+	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
+		<reward-pop-up :close="closeRewardPopUp"></reward-pop-up>
+	</uni-popup>
 </template>
 
 <script>
@@ -346,6 +349,23 @@
 				}).catch(error => {
 					console.log("获取家长版报告数据(统计图)失败：：", error)
 				})
+				
+				// 通知消息（成就奖励、任务奖励）
+				this.commonRequest({
+					url: "/api/notice/getAll"
+				}).then(res => {
+					console.log("通知消息::", res.data)
+					try {
+						if (res.data.length > 0) {
+							this.$store.state.rewardPopUpList = res.data;
+							this.$refs.rewardPopUp.open('center')
+						} else {
+							this.closeRewardPopUp()
+						}
+					} catch (e) {}
+				}).catch(error => {
+					console.log("通知消息失败：：", error)
+				})
 
 				// 获取提升建议和其他
 				this.commonRequest({
@@ -392,7 +412,7 @@
 			})
 		},
 		onHide() {
-
+			this.closeRewardPopUp()
 		},
 		created() {
 
@@ -401,6 +421,10 @@
 
 		},
 		methods: {
+			//关闭弹窗 
+			closeRewardPopUp() {
+				this.$refs.rewardPopUp.close()
+			},
 			suggestionTetx(num) {
 				if (num >= 0 && num <= 50) {
 					return "建议练习"

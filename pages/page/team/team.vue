@@ -169,7 +169,9 @@
 	<uni-popup ref="taskPopUp" :mask-click="false" type="bottom">
 		<task-details :details='taskDetails' :close="closeTaskPopUp"></task-details>
 	</uni-popup>
-	
+	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
+		<reward-pop-up :close="closeRewardPopUp"></reward-pop-up>
+	</uni-popup>
 </template>
 
 <script>
@@ -218,6 +220,22 @@
 				// 已经登陆了
 				this.getTeamInfo()
 				
+				// 通知消息（成就奖励、任务奖励）
+				this.commonRequest({
+					url: "/api/notice/getAll"
+				}).then(res => {
+					console.log("通知消息::", res.data)
+					try {
+						if (res.data.length > 0) {
+							this.$store.state.rewardPopUpList = res.data;
+							this.$refs.rewardPopUp.open('center')
+						} else {
+							this.closeRewardPopUp()
+						}
+					} catch (e) {}
+				}).catch(error => {
+					console.log("通知消息失败：：", error)
+				})
 			}).catch(err => {
 				console.log("没有登录：：", error)
 			});
@@ -227,6 +245,7 @@
 			})
 		},
 		onHide() {
+			this.closeRewardPopUp()
 			this.$refs.pageHead.closePopupTips()
 		},
 		created() {
@@ -357,6 +376,10 @@
 				// 	this.taskDetails = item;
 				// 	this.$refs.taskPopUp.open("bottom")
 				// }
+			},
+			//关闭弹窗
+			closeRewardPopUp() {
+				this.$refs.rewardPopUp.close()
 			},
 			closeTaskPopUp() {
 				this.$refs.taskPopUp.close()

@@ -424,7 +424,7 @@
 			}).then(res => {})
 		},
 		onHide() {
-
+			this.closeRewardPopUp()
 		},
 		watch: {},
 		methods: {

@@ -92,6 +92,9 @@
 			</ul>
 		</view>
 	</view>
+	<uni-popup ref="rewardPopUp" :mask-click="false" type="center">
+		<reward-pop-up :close="closeRewardPopUp"></reward-pop-up>
+	</uni-popup>
 </template>
 
 <script>
@@ -177,6 +180,23 @@
 						console.log("获取用户信息报错：：", error)
 					})
 				}
+				
+				// 通知消息（成就奖励、任务奖励）
+				this.commonRequest({
+					url: "/api/notice/getAll"
+				}).then(res => {
+					console.log("通知消息::", res.data)
+					try {
+						if (res.data.length > 0) {
+							this.$store.state.rewardPopUpList = res.data;
+							this.$refs.rewardPopUp.open('center')
+						} else {
+							this.closeRewardPopUp()
+						}
+					} catch (e) {}
+				}).catch(error => {
+					console.log("通知消息失败：：", error)
+				})
 
 				// 获取用户周报数据
 				this.commonRequest({
@@ -223,7 +243,7 @@
 			})
 		},
 		onHide() {
-
+			this.closeRewardPopUp()
 		},
 		created() {
 
@@ -237,11 +257,17 @@
 				this.userInfo.avatar = this.$store.state.$imgSrc + '/image/head_pic.png';
 				return this.$store.state.$imgSrc + '/image/head_pic.png';
 			},
+			//关闭弹窗 
+			closeRewardPopUp() {
+				this.$refs.rewardPopUp.close()
+			},
 		}
 	}
 </script>
 
-<style lang="scss" scoped>	@import "/static/css/standard.scss";
+<style lang="scss" scoped>
+	@import "/static/css/standard.scss";
+
 	.banner-wrap {
 		border-radius: 0.6rem;
 		padding: 20rpx 24rpx 0 24rpx;
@@ -476,7 +502,7 @@
 	// 推荐课堂
 	.plan-recommend-list-wrap {
 		display: flex;
-	
+
 		.plan-recommend-list {
 			position: relative;
 			flex: 1;
@@ -484,6 +510,7 @@
 			margin-right: 0.68rem;
 			min-height: 180rpx;
 			border-radius: 40rpx;
+
 			.title-wrap {
 				display: flex;
 				align-items: center;
@@ -493,11 +520,12 @@
 				text-align: center;
 				font-size: 26rpx;
 				color: #323232;
+
 				.title {
 					flex: 1;
 				}
 			}
-	
+
 			.list-icon {
 				width: 132rpx;
 				height: 132rpx;
@@ -505,50 +533,52 @@
 				border-radius: 132rpx;
 				margin-bottom: 12rpx;
 			}
-	
+
 			.is-vip {
 				position: absolute;
 				right: 2rpx;
 				top: 2rpx;
 				width: 58rpx;
 				height: 50rpx;
-	
+
 				&[vipLevel='0'] {
 					background: url($imgSrc+'/icons/recommend_video_novip.png') no-repeat center / 100% 100%;
 				}
-	
+
 				&[vipLevel='1'],
 				&[vipLevel='2'],
 				&[vipLevel='3'] {
 					background: url($imgSrc+'/icons/recommend_video_vip.png') no-repeat center / 100% 100%;
 				}
 			}
-	
+
 			&:nth-child(1) {
 				box-shadow: 0 0 12rpx #b2dffd;
-	
+
 				.list-icon {
 					background: url($imgSrc+"/icons/recommend_video1.png") no-repeat center / 100% 100%;
 				}
 			}
-	
+
 			&:nth-child(2) {
 				box-shadow: 0 0 12rpx #fdd1a0;
+
 				.list-icon {
 					background: url($imgSrc+"/icons/recommend_video2.png") no-repeat center / 100% 100%;
 				}
 			}
-	
+
 			&:nth-child(3) {
 				box-shadow: 0 0 12rpx #fdf391;
+
 				.list-icon {
 					background: url($imgSrc+"/icons/recommend_video3.png") no-repeat center / 100% 100%;
 				}
 			}
+
 			&:last-child {
 				margin-right: 0;
 			}
 		}
 	}
-	
 </style>
