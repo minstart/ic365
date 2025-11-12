@@ -80,14 +80,14 @@
 				<view class="tab-list" :current='current' v-if="current === 0">
 					<view class="no-list-tip" v-if="practiceList[current].list.length==0">暂无数据</view>
 					<!-- 我的任务 -->
-					<view class="practice-list" v-for="item in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
+					<view class="practice-list" v-for="(item,i) in practiceList[current].list" @click="jumpPage({url:item.jumpUrl})">
 						<image class="list-icon" :src="item.coverUrl" mode=""></image>
 						<view class="list-info">
 							<h3 class="title">{{item.title}}</h3>
 							<view class="introduce">
 								<span>{{item.introduce}}</span>
 								<view class="progress-wrap">
-									<progress :percent="item.completedCount / item.totalCount * 100" :activeColor="item.colorValue||'#77D182'" backgroundColor="#ffffff" stroke-width="10" />
+									<progress :percent="item.completedCount / item.totalCount * 100" :activeColor="randomBack[i].background2" :backgroundColor="randomBack[i].background" stroke-width="10" />
 								</view>
 							</view>
 						</view>
@@ -181,6 +181,32 @@
 			return {
 				defaultHeadPic: "", //默认头像
 				current: 0, //选项卡显示下标
+				backArr: [{
+						background: "#DFE6FF",
+						background2: "#879EF6",
+					},
+					{
+						background: "#E5F9E6",
+						background2: "#71D874",
+					},
+					{
+						background: "#F8DE96",
+						background2: "#FF9743",
+					},
+					{
+						background: "#FAD8B9",
+						background2: "#D8A374",
+					},
+					{
+						background: "#F9EBE5",
+						background2: "#FF9696",
+					},
+					{
+						background: "#FFE1FC",
+						background2: "#E48BF8",
+					},
+				],
+				randomBack: [], //推荐学习背景色随机数后的数组
 				practiceList: [{
 						title: "我的任务",
 						list: []
@@ -242,6 +268,7 @@
 
 		},
 		onReady() {
+			this.randomBack = this.backArr.sort(() => Math.random() - 0.5);
 			store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx"
 		},
 		onShow() {
@@ -428,6 +455,7 @@
 					this.current = i
 				}
 			},
+			
 			clickTab2(i) {
 				if (this.skinCurrent !== i) {
 					this.skinCurrent = i

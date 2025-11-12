@@ -1,5 +1,57 @@
 var __renderjsModules={};
 
+__renderjsModules["5be2ab59"] = (() => {
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+  // <stdin>
+  var stdin_exports = {};
+  __export(stdin_exports, {
+    default: () => stdin_default
+  });
+  var stdin_default = {
+    data() {
+      return {
+        value: "renderjsData",
+        newValue: "",
+        oldValue: ""
+      };
+    },
+    methods: {
+      // 监听 service 层数据变更
+      getServiceData(newValue, oldValue, ownerVm, vm) {
+        this.newValue = newValue;
+        this.oldValue = oldValue;
+      },
+      // 调用 service 层的方法
+      sendRenderjsData(event, ownerInstance) {
+        if (ownerInstance) {
+          ownerInstance.callMethod("getRenderData", this.value);
+        } else {
+          this.$ownerInstance.callMethod("getRenderData", this.value);
+        }
+      }
+    }
+  };
+  return __toCommonJS(stdin_exports);
+})();
+
+
 __renderjsModules["39c049d8"] = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -101,58 +153,6 @@ __renderjsModules["39c049d8"] = (() => {
           });
         }
         animate(ballList);
-      }
-    }
-  };
-  return __toCommonJS(stdin_exports);
-})();
-
-
-__renderjsModules["5be2ab59"] = (() => {
-  var __defProp = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __export = (target, all) => {
-    for (var name in all)
-      __defProp(target, name, { get: all[name], enumerable: true });
-  };
-  var __copyProps = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames(from))
-        if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-    }
-    return to;
-  };
-  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-  // <stdin>
-  var stdin_exports = {};
-  __export(stdin_exports, {
-    default: () => stdin_default
-  });
-  var stdin_default = {
-    data() {
-      return {
-        value: "renderjsData",
-        newValue: "",
-        oldValue: ""
-      };
-    },
-    methods: {
-      // 监听 service 层数据变更
-      getServiceData(newValue, oldValue, ownerVm, vm) {
-        this.newValue = newValue;
-        this.oldValue = oldValue;
-      },
-      // 调用 service 层的方法
-      sendRenderjsData(event, ownerInstance) {
-        if (ownerInstance) {
-          ownerInstance.callMethod("getRenderData", this.value);
-        } else {
-          this.$ownerInstance.callMethod("getRenderData", this.value);
-        }
       }
     }
   };

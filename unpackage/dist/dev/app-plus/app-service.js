@@ -33256,6 +33256,34 @@ ${o3}
         //默认头像
         current: 0,
         //选项卡显示下标
+        backArr: [
+          {
+            background: "#DFE6FF",
+            background2: "#879EF6"
+          },
+          {
+            background: "#E5F9E6",
+            background2: "#71D874"
+          },
+          {
+            background: "#F8DE96",
+            background2: "#FF9743"
+          },
+          {
+            background: "#FAD8B9",
+            background2: "#D8A374"
+          },
+          {
+            background: "#F9EBE5",
+            background2: "#FF9696"
+          },
+          {
+            background: "#FFE1FC",
+            background2: "#E48BF8"
+          }
+        ],
+        randomBack: [],
+        //推荐学习背景色随机数后的数组
         practiceList: [
           {
             title: "我的任务",
@@ -33315,6 +33343,7 @@ ${o3}
     onLoad() {
     },
     onReady() {
+      this.randomBack = this.backArr.sort(() => Math.random() - 0.5);
       store.state.taskbarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + "rpx";
     },
     onShow() {
@@ -33324,7 +33353,7 @@ ${o3}
         this.commonRequest({
           url: "/api/student/info"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:255", "获取用户信息::", res2);
+          formatAppLog("log", "at pages/page/user/user.vue:282", "获取用户信息::", res2);
           try {
             store.commit("Update_UserInfo", res2.data);
             this.userInfo = res2.data;
@@ -33336,12 +33365,12 @@ ${o3}
             });
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:269", "获取用户信息报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:296", "获取用户信息报错：：", error2);
         });
         this.commonRequest({
           url: "/api/notice/getAll"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:276", "通知消息::", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:303", "通知消息::", res2.data);
           try {
             if (res2.data.length > 0) {
               this.$store.state.rewardPopUpList = res2.data;
@@ -33352,49 +33381,49 @@ ${o3}
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:286", "通知消息失败：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:313", "通知消息失败：：", error2);
         });
         this.commonRequest({
           url: "/api/student/getResourcesGroups"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:293", "获取我资源(战衣/皮肤/名人堂...)", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:320", "获取我资源(战衣/皮肤/名人堂...)", res2.data);
           this.skinList = res2.data.currencies;
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:296", "获取我资源(战衣/皮肤/名人堂...)报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:323", "获取我资源(战衣/皮肤/名人堂...)报错：：", error2);
         });
         this.commonRequest({
           url: "/api/question/getRecentlyAndCollection"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:316", "获取最近题目和收藏题目数量", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:343", "获取最近题目和收藏题目数量", res2.data);
           res2.data.recently > 0 ? this.practiceList[1].list[0].unRead = res2.data.recently + "条新记录" : this.practiceList[1].list[0].unRead = "";
           this.practiceList[1].list[1].introduce = "已收藏" + (res2.data.collection || 0) + "个练习";
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:320", "获取最近题目和收藏题目数量报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:347", "获取最近题目和收藏题目数量报错：：", error2);
         });
         this.commonRequest({
           url: "/api/wrong-records/stats"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:327", "错题统计::", JSON.stringify(res2));
+          formatAppLog("log", "at pages/page/user/user.vue:354", "错题统计::", JSON.stringify(res2));
           try {
             res2.data.highFrequencyErrCount && (this.practiceList[2].list[0].unRead = res2.data.highFrequencyErrCount + "道高频错题");
           } catch (e2) {
           }
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:332", "错题统计报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:359", "错题统计报错：：", error2);
         });
         this.commonRequest({
           url: "/api/exchange/stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:359", "获取我的兑换统计：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:386", "获取我的兑换统计：", res2.data);
           this.practiceList[3].list[0].introduce = "已兑换" + (res2.data.exchangeTotal || 0) + "件物品";
           this.practiceList[3].list[1].introduce = (res2.data.availableExchangeCount || 0) + "件商品可兑换";
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:365", "获取我的兑换统计报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:392", "获取我的兑换统计报错：：", error2);
         });
         this.commonRequest({
           url: "/api/mission/mine-stat"
         }).then((res2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:372", "我的任务：", res2.data);
+          formatAppLog("log", "at pages/page/user/user.vue:399", "我的任务：", res2.data);
           this.practiceList[0].list = [];
           res2.data.forEach((item) => {
             this.practiceList[0].list.push({
@@ -33408,7 +33437,7 @@ ${o3}
             });
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:386", "我的任务报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:413", "我的任务报错：：", error2);
         });
       });
       this.pageOnShowSet({
@@ -33469,17 +33498,17 @@ ${o3}
           this.commonRequest({
             url: "/api/student/info"
           }).then((res3) => {
-            formatAppLog("log", "at pages/page/user/user.vue:457", "获取用户信息::", res3);
+            formatAppLog("log", "at pages/page/user/user.vue:485", "获取用户信息::", res3);
             try {
               store.commit("Update_UserInfo", res3.data);
               this.userInfo = res3.data;
             } catch (e2) {
             }
           }).catch((error2) => {
-            formatAppLog("log", "at pages/page/user/user.vue:464", "获取用户信息报错：：", error2);
+            formatAppLog("log", "at pages/page/user/user.vue:492", "获取用户信息报错：：", error2);
           });
         }).catch((error2) => {
-          formatAppLog("log", "at pages/page/user/user.vue:467", "兑换商品报错：：", error2);
+          formatAppLog("log", "at pages/page/user/user.vue:495", "兑换商品报错：：", error2);
         });
       }
     }
@@ -33692,7 +33721,7 @@ ${o3}
                 (vue.openBlock(true), vue.createElementBlock(
                   vue.Fragment,
                   null,
-                  vue.renderList($data.practiceList[$data.current].list, (item) => {
+                  vue.renderList($data.practiceList[$data.current].list, (item, i2) => {
                     return vue.openBlock(), vue.createElementBlock("view", {
                       class: "practice-list",
                       onClick: ($event) => _ctx.jumpPage({ url: item.jumpUrl })
@@ -33721,10 +33750,10 @@ ${o3}
                           vue.createElementVNode("view", { class: "progress-wrap" }, [
                             vue.createElementVNode("progress", {
                               percent: item.completedCount / item.totalCount * 100,
-                              activeColor: item.colorValue || "#77D182",
-                              backgroundColor: "#ffffff",
+                              activeColor: $data.randomBack[i2].background2,
+                              backgroundColor: $data.randomBack[i2].background,
                               "stroke-width": "10"
-                            }, null, 8, ["percent", "activeColor"])
+                            }, null, 8, ["percent", "activeColor", "backgroundColor"])
                           ])
                         ])
                       ])
