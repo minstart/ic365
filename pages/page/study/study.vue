@@ -506,6 +506,7 @@
 		.plan-recommend-list {
 			position: relative;
 			flex: 1;
+			max-width: calc(100% / 3 - 0.68rem - 40rpx);
 			padding: 20rpx 20rpx 20rpx 20rpx;
 			margin-right: 0.68rem;
 			min-height: 180rpx;

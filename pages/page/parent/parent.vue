@@ -157,13 +157,13 @@
 				</view>
 			</view>
 			<ul class="information-list-wrap">
-				<li class="information-list" v-for="item in information">
+				<li class="information-list" v-for="item in information"  @click="jumpPage({url:'/pages/page/user/webView?webViewType=5&url='+item.content})">
 					<view class="information-list-back"></view>
 					<image class="list-icon" :src="item.icon" mode=""></image>
 					<view class="list-info">
 						<h3 class="title">{{item.title}}</h3>
 						<view class="subtitle">{{item.subtitle}}</view>
-						<view class="more-text" @click="jumpPage({url:'/pages/page/user/webView?webViewType=5&url='+item.content})">{{item.buttonText}}</view>
+						<view class="more-text">{{item.buttonText}}</view>
 					</view>
 				</li>
 			</ul>

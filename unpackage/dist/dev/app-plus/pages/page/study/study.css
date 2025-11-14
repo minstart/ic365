@@ -800,6 +800,7 @@
 .plan-recommend-list-wrap .plan-recommend-list[data-v-ff8615f1] {
   position: relative;
   flex: 1;
+  max-width: calc(33.3333333333% - 0.68rem - 1.25rem);
   padding: 0.625rem 0.625rem 0.625rem 0.625rem;
   margin-right: 0.68rem;
   min-height: 5.625rem;

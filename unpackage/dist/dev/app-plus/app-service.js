@@ -33190,7 +33190,10 @@ ${o3}
                 vue.Fragment,
                 null,
                 vue.renderList($data.information, (item) => {
-                  return vue.openBlock(), vue.createElementBlock("li", { class: "information-list" }, [
+                  return vue.openBlock(), vue.createElementBlock("li", {
+                    class: "information-list",
+                    onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/user/webView?webViewType=5&url=" + item.content })
+                  }, [
                     vue.createElementVNode("view", { class: "information-list-back" }),
                     vue.createElementVNode("image", {
                       class: "list-icon",
@@ -33212,12 +33215,15 @@ ${o3}
                         1
                         /* TEXT */
                       ),
-                      vue.createElementVNode("view", {
-                        class: "more-text",
-                        onClick: ($event) => _ctx.jumpPage({ url: "/pages/page/user/webView?webViewType=5&url=" + item.content })
-                      }, vue.toDisplayString(item.buttonText), 9, ["onClick"])
+                      vue.createElementVNode(
+                        "view",
+                        { class: "more-text" },
+                        vue.toDisplayString(item.buttonText),
+                        1
+                        /* TEXT */
+                      )
                     ])
-                  ]);
+                  ], 8, ["onClick"]);
                 }),
                 256
                 /* UNKEYED_FRAGMENT */
