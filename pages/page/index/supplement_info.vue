@@ -131,7 +131,7 @@
 			// 提交数据
 			submit(ref) {
 				let _this = this;
-				console.log("this.baseFormData::",this.baseFormData)
+				console.log("this.baseFormData::", this.baseFormData)
 				this.$refs[ref].validate().then(res => {
 					// 校验通过
 					this.commonRequest({
@@ -153,18 +153,14 @@
 								})
 							}, 2000)
 
-						}).catch(error => {
-							this.$refs.pageHead.openMsgTips({
-								content: '更新用户信息失败:' + error
-							})
-							console.error('更新用户信息失败:', error)
 						})
-				}).catch(err => {
-					// console.log('err', err);
-					this.$refs.pageHead.openMsgTips({
-						content: err[0].errorMessage
-					})
 				})
+				// .catch(err => {
+				// 	// console.log('err', err);
+				// 	this.$refs.pageHead.openMsgTips({
+				// 		content: err[0].errorMessage
+				// 	})
+				// })
 			}
 		}
 	}
@@ -172,6 +168,7 @@
 
 <style lang="scss">
 	@import "/static/css/standard.scss";
+
 	.page-wrap {
 		background: url($imgSrc+"/image/0_login_back.png") no-repeat top / 100%;
 	}
