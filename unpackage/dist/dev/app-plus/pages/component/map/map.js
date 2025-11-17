@@ -1513,7 +1513,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
               title: "\u663E\u793A\u6307\u5357\u9488",
               onSwitchChange: $options.changeShowCompass
             }, null, 8, ["switch-checked", "onSwitchChange"]),
-            (0, import_vue2.createCommentVNode)(' <uni-list-item :show-arrow="false" :show-switch="true" :switch-checked="enableOverlooking" title="\u5F00\u542F\u4FEF\u89C6" @switchChange="changeEnableOverlooking" /> '),
             (0, import_vue2.createVNode)(_component_uni_list_item, {
               "show-arrow": false,
               "show-switch": true,

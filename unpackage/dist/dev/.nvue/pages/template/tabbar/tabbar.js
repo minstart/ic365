@@ -1,4 +1,4 @@
-import { openBlock, createElementBlock, Fragment, createCommentVNode, createElementVNode, normalizeStyle, normalizeClass, toDisplayString, renderList, withModifiers, resolveComponent, createVNode, withCtx, createBlock } from "vue";
+import { openBlock, createElementBlock, createElementVNode, normalizeStyle, normalizeClass, toDisplayString, createCommentVNode, Fragment, renderList, withModifiers, resolveComponent, createVNode, withCtx, createBlock } from "vue";
 import { _ as _export_sfc } from "../../../_plugin-vue_export-helper.js";
 const _style_0$1 = { "view": { "": { "flexDirection": "column" } }, "flex-row": { "": { "flexDirection": "row" } }, "flex-col": { "": { "flexDirection": "column" } }, "list-cell": { "": { "width": "750rpx", "paddingTop": 0, "paddingRight": "30rpx", "paddingBottom": 0, "paddingLeft": "30rpx" } }, "uni-list-cell-hover": { "": { "backgroundColor": "#eeeeee" } }, "media-item": { "": { "position": "relative", "flex": 1, "flexDirection": "column", "paddingTop": "20rpx", "paddingRight": "30rpx", "paddingBottom": "21rpx", "paddingLeft": "30rpx" } }, "media-item-hover": { "": { "backgroundColor": "#eeeeee" } }, "media-item-line": { "": { "position": "absolute", "left": "30rpx", "right": "30rpx", "bottom": 0, "height": "1rpx", "backgroundColor": "#ebebeb" } }, "media-image-right": { "": { "flexDirection": "row" } }, "media-image-left": { "": { "flexDirection": "row-reverse" } }, "media-title": { "": { "flex": 1, "lines": 3, "textOverflow": "ellipsis", "fontSize": "30rpx", "color": "#555555" } }, "media-title2": { "": { "flex": 1, "marginTop": "6rpx", "lineHeight": "40rpx" } }, "image-section": { "": { "marginTop": "20rpx", "flexDirection": "row", "justifyContent": "space-between" } }, "image-section-right": { "": { "marginTop": "0rpx", "marginLeft": "10rpx", "width": "225rpx", "height": "146rpx" } }, "image-section-left": { "": { "marginTop": "0rpx", "marginRight": "10rpx", "width": "225rpx", "height": "146rpx" } }, "image-list1": { "": { "width": "690rpx", "height": "481rpx" } }, "image-list2": { "": { "width": "225rpx", "height": "146rpx" } }, "image-list3": { "": { "width": "225rpx", "height": "146rpx" } }, "media-info": { "": { "flexDirection": "row", "alignItems": "center" } }, "info-text": { "": { "marginRight": "20rpx", "color": "#999999", "fontSize": "24rpx" } }, "media-foot": { "": { "marginTop": "25rpx", "flexDirection": "row", "alignItems": "center", "justifyContent": "space-between" } }, "max-close-view": { "": { "position": "relative", "alignItems": "center", "flexDirection": "row", "width": "40rpx", "height": "30rpx", "lineHeight": "30rpx", "borderWidth": "1rpx", "borderStyle": "solid", "borderColor": "#aaaaaa", "borderRadius": 4, "justifyContent": "center", "textAlign": "center" } }, "close-l": { "": { "position": "absolute", "width": "18rpx", "height": "1rpx", "backgroundColor": "#aaaaaa" } }, "close-h": { "": { "transform": "rotate(45deg)" } }, "close-v": { "": { "transform": "rotate(-45deg)" } } };
 const _sfc_main$1 = {
@@ -20,117 +20,106 @@ const _sfc_main$1 = {
   }
 };
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock(
-    Fragment,
-    null,
-    [
-      createCommentVNode(" remove list-cell layer fix android 4.x overflow limit error: 28 layers! "),
-      createCommentVNode(' <view class="list-cell view" @click="click"></view> '),
-      $props.options.title ? (openBlock(), createElementBlock("view", {
-        key: 0,
-        class: "media-item view",
-        hoverClass: "media-item-hover",
-        onClick: _cache[1] || (_cache[1] = (...args) => $options.click && $options.click(...args))
-      }, [
-        createCommentVNode(` <view class="view" :style="options.article_type === 2 ? 'flex-direction: row';" :class="{'media-image-right': options.article_type === 2, 'media-image-left': options.article_type === 1}"> `),
-        createCommentVNode(" TODO 在支付宝小程序下 需要用 style 覆盖标签的默认样式 "),
+  return $props.options.title ? (openBlock(), createElementBlock("view", {
+    key: 0,
+    class: "media-item view",
+    hoverClass: "media-item-hover",
+    onClick: _cache[1] || (_cache[1] = (...args) => $options.click && $options.click(...args)),
+    renderWhole: true
+  }, [
+    createElementVNode(
+      "view",
+      {
+        class: "view",
+        style: normalizeStyle({ flexDirection: $props.options.article_type === 1 || $props.options.article_type === 2 ? $props.options.article_type === 2 ? "row" : "row-reverse" : "column" })
+      },
+      [
         createElementVNode(
+          "u-text",
+          {
+            class: normalizeClass(["media-title", { "media-title2": $props.options.article_type === 1 || $props.options.article_type === 2 }])
+          },
+          toDisplayString($props.options.title),
+          3
+          /* TEXT, CLASS */
+        ),
+        $props.options.image_list || $props.options.image_url ? (openBlock(), createElementBlock(
           "view",
           {
-            class: "view",
-            style: normalizeStyle({ flexDirection: $props.options.article_type === 1 || $props.options.article_type === 2 ? $props.options.article_type === 2 ? "row" : "row-reverse" : "column" })
+            key: 0,
+            class: normalizeClass(["image-section flex-row", { "image-section-right": $props.options.article_type === 2, "image-section-left": $props.options.article_type === 1 }]),
+            style: { flexDirection: "row" }
           },
           [
-            createElementVNode(
-              "u-text",
-              {
-                class: normalizeClass(["media-title", { "media-title2": $props.options.article_type === 1 || $props.options.article_type === 2 }])
-              },
-              toDisplayString($props.options.title),
-              3
-              /* TEXT, CLASS */
-            ),
-            $props.options.image_list || $props.options.image_url ? (openBlock(), createElementBlock(
-              "view",
-              {
-                key: 0,
-                class: normalizeClass(["image-section flex-row", { "image-section-right": $props.options.article_type === 2, "image-section-left": $props.options.article_type === 1 }]),
-                style: { flexDirection: "row" }
-              },
-              [
-                $props.options.image_url ? (openBlock(), createElementBlock("u-image", {
-                  key: 0,
-                  class: normalizeClass(["image-list1", { "image-list2": $props.options.article_type === 1 || $props.options.article_type === 2 }]),
-                  src: $props.options.image_url
-                }, null, 10, ["src"])) : createCommentVNode("v-if", true),
-                $props.options.image_list ? (openBlock(true), createElementBlock(
-                  Fragment,
-                  { key: 1 },
-                  renderList($props.options.image_list, (source, i) => {
-                    return openBlock(), createElementBlock("u-image", {
-                      class: "image-list3",
-                      src: source.url,
-                      key: i
-                    }, null, 8, ["src"]);
-                  }),
-                  128
-                  /* KEYED_FRAGMENT */
-                )) : createCommentVNode("v-if", true)
-              ],
-              2
-              /* CLASS */
+            $props.options.image_url ? (openBlock(), createElementBlock("u-image", {
+              key: 0,
+              class: normalizeClass(["image-list1", { "image-list2": $props.options.article_type === 1 || $props.options.article_type === 2 }]),
+              src: $props.options.image_url
+            }, null, 10, ["src"])) : createCommentVNode("v-if", true),
+            $props.options.image_list ? (openBlock(true), createElementBlock(
+              Fragment,
+              { key: 1 },
+              renderList($props.options.image_list, (source, i) => {
+                return openBlock(), createElementBlock("u-image", {
+                  class: "image-list3",
+                  src: source.url,
+                  key: i
+                }, null, 8, ["src"]);
+              }),
+              128
+              /* KEYED_FRAGMENT */
             )) : createCommentVNode("v-if", true)
           ],
-          4
-          /* STYLE */
+          2
+          /* CLASS */
+        )) : createCommentVNode("v-if", true)
+      ],
+      4
+      /* STYLE */
+    ),
+    createElementVNode("view", {
+      class: "media-foot flex-row",
+      style: { "flex-direction": "row" }
+    }, [
+      createElementVNode("view", {
+        class: "media-info flex-row",
+        style: { "flex-direction": "row" }
+      }, [
+        createElementVNode(
+          "u-text",
+          { class: "info-text" },
+          toDisplayString($props.options.source),
+          1
+          /* TEXT */
         ),
-        createElementVNode("view", {
-          class: "media-foot flex-row",
-          style: { "flex-direction": "row" }
-        }, [
-          createElementVNode("view", {
-            class: "media-info flex-row",
-            style: { "flex-direction": "row" }
-          }, [
-            createElementVNode(
-              "u-text",
-              { class: "info-text" },
-              toDisplayString($props.options.source),
-              1
-              /* TEXT */
-            ),
-            createElementVNode(
-              "u-text",
-              { class: "info-text" },
-              toDisplayString($props.options.comment_count) + "条评论",
-              1
-              /* TEXT */
-            ),
-            createElementVNode(
-              "u-text",
-              { class: "info-text" },
-              toDisplayString($props.options.datetime),
-              1
-              /* TEXT */
-            )
-          ]),
-          createElementVNode("view", {
-            class: "max-close-view",
-            onClick: _cache[0] || (_cache[0] = withModifiers((...args) => $options.close && $options.close(...args), ["stop"]))
-          }, [
-            createElementVNode("view", { class: "close-l close-h" }),
-            createElementVNode("view", { class: "close-l close-v" })
-          ])
-        ]),
-        createElementVNode("view", {
-          class: "media-item-line",
-          style: { "position": "absolute" }
-        })
-      ])) : createCommentVNode("v-if", true)
-    ],
-    2112
-    /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  );
+        createElementVNode(
+          "u-text",
+          { class: "info-text" },
+          toDisplayString($props.options.comment_count) + "条评论",
+          1
+          /* TEXT */
+        ),
+        createElementVNode(
+          "u-text",
+          { class: "info-text" },
+          toDisplayString($props.options.datetime),
+          1
+          /* TEXT */
+        )
+      ]),
+      createElementVNode("view", {
+        class: "max-close-view",
+        onClick: _cache[0] || (_cache[0] = withModifiers((...args) => $options.close && $options.close(...args), ["stop"]))
+      }, [
+        createElementVNode("view", { class: "close-l close-h" }),
+        createElementVNode("view", { class: "close-l close-v" })
+      ])
+    ]),
+    createElementVNode("view", {
+      class: "media-item-line",
+      style: { "position": "absolute" }
+    })
+  ])) : createCommentVNode("v-if", true);
 }
 const mediaItem = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/tabbar/news-item.nvue"]]);
 const _style_0 = { "tabs": { "": { "flex": 1, "flexDirection": "column", "overflow": "hidden", "backgroundColor": "#ffffff" } }, "scroll-h": { "": { "width": "750rpx", "height": "80rpx", "flexDirection": "row" } }, "line-h": { "": { "height": "1rpx", "backgroundColor": "#cccccc" } }, "uni-tab-item": { "": { "flexWrap": "nowrap", "paddingLeft": "34rpx", "paddingRight": "34rpx" } }, "uni-tab-item-title": { "": { "color": "#555555", "fontSize": "30rpx", "height": "80rpx", "lineHeight": "80rpx", "flexWrap": "nowrap" } }, "uni-tab-item-title-active": { "": { "color": "#007AFF" } }, "swiper-box": { "": { "flex": 1 } }, "swiper-item": { "": { "flex": 1, "flexDirection": "row" } }, "scroll-v": { "": { "flex": 1, "flexDirection": "column", "width": 100 } }, "update-tips": { "": { "position": "absolute", "left": 0, "top": 41, "right": 0, "paddingTop": 5, "paddingBottom": 5, "backgroundColor": "#FDDD9B", "alignItems": "center", "justifyContent": "center", "textAlign": "center" } }, "update-tips-text": { "": { "fontSize": 14, "color": "#ffffff" } }, "refresh": { "": { "width": 100, "height": 64, "justifyContent": "center" } }, "refresh-view": { "": { "flexDirection": "row", "flexWrap": "nowrap", "alignItems": "center", "justifyContent": "center" } }, "refresh-icon": { "": { "width": 30, "height": 30, "transitionDuration": 500, "transitionProperty": "transform", "transform": "rotate(0deg)", "transformOrigin": "15px 15px" } }, "refresh-icon-active": { "": { "transform": "rotate(180deg)" } }, "loading-icon": { "": { "width": 20, "height": 20, "marginRight": 5, "color": "#999999" } }, "loading-text": { "": { "marginLeft": 2, "fontSize": 16, "color": "#999999" } }, "loading-more": { "": { "alignItems": "center", "justifyContent": "center", "paddingTop": 10, "paddingBottom": 10, "textAlign": "center" } }, "loading-more-text": { "": { "fontSize": "28rpx", "color": "#999999" } }, "@TRANSITION": { "refresh-icon": { "duration": 500, "property": "transform" } } };

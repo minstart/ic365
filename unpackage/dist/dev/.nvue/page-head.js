@@ -984,7 +984,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         4
         /* STYLE */
       ),
-      createCommentVNode(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\r\n		<view class="become-member-wrap">\r\n			<view class="title">关注公众号</view>\r\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\r\n			<p class="tips">扫码关注 “学养网” 公众号开通会员</p>\r\n			<view class="btn-wrap">\r\n				<button class="btn-close" @click.stop="closeBecomeMember">关闭</button>\r\n			</view>\r\n		</view>\r\n	</view> '),
       createVNode(
         _component_uni_popup,
         {
@@ -1040,9 +1039,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         512
         /* NEED_PATCH */
       ),
-      createCommentVNode(" 询问弹窗 "),
-      createCommentVNode(" tipsDatas数据控制，从openPopupTips传参 "),
-      createCommentVNode(" 关闭需要在 父级页面调用this.$refs.pageHead.closePopupTips()关闭 "),
       createVNode(_component_uni_popup, {
         ref: "popupTips",
         "mask-click": false,
@@ -1086,9 +1082,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
       }, 8, ["type"]),
-      createCommentVNode(" 异常弹窗 "),
-      createCommentVNode(" msgData数据控制 从openMsgTips传参"),
-      createCommentVNode(" 关闭需要在 父级页面调用this.$refs.pageHead.closeMsgTips()关闭 "),
       createVNode(_component_uni_popup, {
         ref: "msgTips",
         "mask-click": false,

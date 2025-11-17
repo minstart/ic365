@@ -96,117 +96,106 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     }
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    return (0, import_vue.openBlock)(), (0, import_vue.createElementBlock)(
-      import_vue.Fragment,
-      null,
-      [
-        (0, import_vue.createCommentVNode)(" remove list-cell layer fix android 4.x overflow limit error: 28 layers! "),
-        (0, import_vue.createCommentVNode)(' <view class="list-cell view" @click="click"></view> '),
-        $props.options.title ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("view", {
-          key: 0,
-          class: "media-item view",
-          hoverClass: "media-item-hover",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.click && $options.click(...args))
-        }, [
-          (0, import_vue.createCommentVNode)(` <view class="view" :style="options.article_type === 2 ? 'flex-direction: row';" :class="{'media-image-right': options.article_type === 2, 'media-image-left': options.article_type === 1}"> `),
-          (0, import_vue.createCommentVNode)(" TODO \u5728\u652F\u4ED8\u5B9D\u5C0F\u7A0B\u5E8F\u4E0B \u9700\u8981\u7528 style \u8986\u76D6\u6807\u7B7E\u7684\u9ED8\u8BA4\u6837\u5F0F "),
+    return $props.options.title ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("view", {
+      key: 0,
+      class: "media-item view",
+      hoverClass: "media-item-hover",
+      onClick: _cache[1] || (_cache[1] = (...args) => $options.click && $options.click(...args)),
+      renderWhole: true
+    }, [
+      (0, import_vue.createElementVNode)(
+        "view",
+        {
+          class: "view",
+          style: (0, import_vue.normalizeStyle)({ flexDirection: $props.options.article_type === 1 || $props.options.article_type === 2 ? $props.options.article_type === 2 ? "row" : "row-reverse" : "column" })
+        },
+        [
           (0, import_vue.createElementVNode)(
+            "u-text",
+            {
+              class: (0, import_vue.normalizeClass)(["media-title", { "media-title2": $props.options.article_type === 1 || $props.options.article_type === 2 }])
+            },
+            (0, import_vue.toDisplayString)($props.options.title),
+            3
+            /* TEXT, CLASS */
+          ),
+          $props.options.image_list || $props.options.image_url ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)(
             "view",
             {
-              class: "view",
-              style: (0, import_vue.normalizeStyle)({ flexDirection: $props.options.article_type === 1 || $props.options.article_type === 2 ? $props.options.article_type === 2 ? "row" : "row-reverse" : "column" })
+              key: 0,
+              class: (0, import_vue.normalizeClass)(["image-section flex-row", { "image-section-right": $props.options.article_type === 2, "image-section-left": $props.options.article_type === 1 }]),
+              style: { flexDirection: "row" }
             },
             [
-              (0, import_vue.createElementVNode)(
-                "u-text",
-                {
-                  class: (0, import_vue.normalizeClass)(["media-title", { "media-title2": $props.options.article_type === 1 || $props.options.article_type === 2 }])
-                },
-                (0, import_vue.toDisplayString)($props.options.title),
-                3
-                /* TEXT, CLASS */
-              ),
-              $props.options.image_list || $props.options.image_url ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)(
-                "view",
-                {
-                  key: 0,
-                  class: (0, import_vue.normalizeClass)(["image-section flex-row", { "image-section-right": $props.options.article_type === 2, "image-section-left": $props.options.article_type === 1 }]),
-                  style: { flexDirection: "row" }
-                },
-                [
-                  $props.options.image_url ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("u-image", {
-                    key: 0,
-                    class: (0, import_vue.normalizeClass)(["image-list1", { "image-list2": $props.options.article_type === 1 || $props.options.article_type === 2 }]),
-                    src: $props.options.image_url
-                  }, null, 10, ["src"])) : (0, import_vue.createCommentVNode)("v-if", true),
-                  $props.options.image_list ? ((0, import_vue.openBlock)(true), (0, import_vue.createElementBlock)(
-                    import_vue.Fragment,
-                    { key: 1 },
-                    (0, import_vue.renderList)($props.options.image_list, (source, i) => {
-                      return (0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("u-image", {
-                        class: "image-list3",
-                        src: source.url,
-                        key: i
-                      }, null, 8, ["src"]);
-                    }),
-                    128
-                    /* KEYED_FRAGMENT */
-                  )) : (0, import_vue.createCommentVNode)("v-if", true)
-                ],
-                2
-                /* CLASS */
+              $props.options.image_url ? ((0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("u-image", {
+                key: 0,
+                class: (0, import_vue.normalizeClass)(["image-list1", { "image-list2": $props.options.article_type === 1 || $props.options.article_type === 2 }]),
+                src: $props.options.image_url
+              }, null, 10, ["src"])) : (0, import_vue.createCommentVNode)("v-if", true),
+              $props.options.image_list ? ((0, import_vue.openBlock)(true), (0, import_vue.createElementBlock)(
+                import_vue.Fragment,
+                { key: 1 },
+                (0, import_vue.renderList)($props.options.image_list, (source, i) => {
+                  return (0, import_vue.openBlock)(), (0, import_vue.createElementBlock)("u-image", {
+                    class: "image-list3",
+                    src: source.url,
+                    key: i
+                  }, null, 8, ["src"]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
               )) : (0, import_vue.createCommentVNode)("v-if", true)
             ],
-            4
-            /* STYLE */
+            2
+            /* CLASS */
+          )) : (0, import_vue.createCommentVNode)("v-if", true)
+        ],
+        4
+        /* STYLE */
+      ),
+      (0, import_vue.createElementVNode)("view", {
+        class: "media-foot flex-row",
+        style: { "flex-direction": "row" }
+      }, [
+        (0, import_vue.createElementVNode)("view", {
+          class: "media-info flex-row",
+          style: { "flex-direction": "row" }
+        }, [
+          (0, import_vue.createElementVNode)(
+            "u-text",
+            { class: "info-text" },
+            (0, import_vue.toDisplayString)($props.options.source),
+            1
+            /* TEXT */
           ),
-          (0, import_vue.createElementVNode)("view", {
-            class: "media-foot flex-row",
-            style: { "flex-direction": "row" }
-          }, [
-            (0, import_vue.createElementVNode)("view", {
-              class: "media-info flex-row",
-              style: { "flex-direction": "row" }
-            }, [
-              (0, import_vue.createElementVNode)(
-                "u-text",
-                { class: "info-text" },
-                (0, import_vue.toDisplayString)($props.options.source),
-                1
-                /* TEXT */
-              ),
-              (0, import_vue.createElementVNode)(
-                "u-text",
-                { class: "info-text" },
-                (0, import_vue.toDisplayString)($props.options.comment_count) + "\u6761\u8BC4\u8BBA",
-                1
-                /* TEXT */
-              ),
-              (0, import_vue.createElementVNode)(
-                "u-text",
-                { class: "info-text" },
-                (0, import_vue.toDisplayString)($props.options.datetime),
-                1
-                /* TEXT */
-              )
-            ]),
-            (0, import_vue.createElementVNode)("view", {
-              class: "max-close-view",
-              onClick: _cache[0] || (_cache[0] = (0, import_vue.withModifiers)((...args) => $options.close && $options.close(...args), ["stop"]))
-            }, [
-              (0, import_vue.createElementVNode)("view", { class: "close-l close-h" }),
-              (0, import_vue.createElementVNode)("view", { class: "close-l close-v" })
-            ])
-          ]),
-          (0, import_vue.createElementVNode)("view", {
-            class: "media-item-line",
-            style: { "position": "absolute" }
-          })
-        ])) : (0, import_vue.createCommentVNode)("v-if", true)
-      ],
-      2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-    );
+          (0, import_vue.createElementVNode)(
+            "u-text",
+            { class: "info-text" },
+            (0, import_vue.toDisplayString)($props.options.comment_count) + "\u6761\u8BC4\u8BBA",
+            1
+            /* TEXT */
+          ),
+          (0, import_vue.createElementVNode)(
+            "u-text",
+            { class: "info-text" },
+            (0, import_vue.toDisplayString)($props.options.datetime),
+            1
+            /* TEXT */
+          )
+        ]),
+        (0, import_vue.createElementVNode)("view", {
+          class: "max-close-view",
+          onClick: _cache[0] || (_cache[0] = (0, import_vue.withModifiers)((...args) => $options.close && $options.close(...args), ["stop"]))
+        }, [
+          (0, import_vue.createElementVNode)("view", { class: "close-l close-h" }),
+          (0, import_vue.createElementVNode)("view", { class: "close-l close-v" })
+        ])
+      ]),
+      (0, import_vue.createElementVNode)("view", {
+        class: "media-item-line",
+        style: { "position": "absolute" }
+      })
+    ])) : (0, import_vue.createCommentVNode)("v-if", true);
   }
   var mediaItem = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "C:/Users/Administrator/Desktop/ic365/pages/template/tabbar/news-item.nvue"]]);
   var _style_0 = { "tabs": { "": { "flex": 1, "flexDirection": "column", "overflow": "hidden", "backgroundColor": "#ffffff" } }, "scroll-h": { "": { "width": "750rpx", "height": "80rpx", "flexDirection": "row" } }, "line-h": { "": { "height": "1rpx", "backgroundColor": "#cccccc" } }, "uni-tab-item": { "": { "flexWrap": "nowrap", "paddingLeft": "34rpx", "paddingRight": "34rpx" } }, "uni-tab-item-title": { "": { "color": "#555555", "fontSize": "30rpx", "height": "80rpx", "lineHeight": "80rpx", "flexWrap": "nowrap" } }, "uni-tab-item-title-active": { "": { "color": "#007AFF" } }, "swiper-box": { "": { "flex": 1 } }, "swiper-item": { "": { "flex": 1, "flexDirection": "row" } }, "scroll-v": { "": { "flex": 1, "flexDirection": "column", "width": 100 } }, "update-tips": { "": { "position": "absolute", "left": 0, "top": 41, "right": 0, "paddingTop": 5, "paddingBottom": 5, "backgroundColor": "#FDDD9B", "alignItems": "center", "justifyContent": "center", "textAlign": "center" } }, "update-tips-text": { "": { "fontSize": 14, "color": "#ffffff" } }, "refresh": { "": { "width": 100, "height": 64, "justifyContent": "center" } }, "refresh-view": { "": { "flexDirection": "row", "flexWrap": "nowrap", "alignItems": "center", "justifyContent": "center" } }, "refresh-icon": { "": { "width": 30, "height": 30, "transitionDuration": 500, "transitionProperty": "transform", "transform": "rotate(0deg)", "transformOrigin": "15px 15px" } }, "refresh-icon-active": { "": { "transform": "rotate(180deg)" } }, "loading-icon": { "": { "width": 20, "height": 20, "marginRight": 5, "color": "#999999" } }, "loading-text": { "": { "marginLeft": 2, "fontSize": 16, "color": "#999999" } }, "loading-more": { "": { "alignItems": "center", "justifyContent": "center", "paddingTop": 10, "paddingBottom": 10, "textAlign": "center" } }, "loading-more-text": { "": { "fontSize": "28rpx", "color": "#999999" } }, "@TRANSITION": { "refresh-icon": { "duration": 500, "property": "transform" } } };

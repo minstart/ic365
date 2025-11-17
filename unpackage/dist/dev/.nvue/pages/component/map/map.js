@@ -1432,7 +1432,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             title: "显示指南针",
             onSwitchChange: $options.changeShowCompass
           }, null, 8, ["switch-checked", "onSwitchChange"]),
-          createCommentVNode(' <uni-list-item :show-arrow="false" :show-switch="true" :switch-checked="enableOverlooking" title="开启俯视" @switchChange="changeEnableOverlooking" /> '),
           createVNode(_component_uni_list_item, {
             "show-arrow": false,
             "show-switch": true,

@@ -1119,7 +1119,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           4
           /* STYLE */
         ),
-        (0, import_vue3.createCommentVNode)(' <view class="become-member-window" @touchstart="touchstart" v-if="$store.state.officialAccountWindow">\r\n		<view class="become-member-wrap">\r\n			<view class="title">\u5173\u6CE8\u516C\u4F17\u53F7</view>\r\n			<image class="qr-code" :src="$store.state.officialAccountQRCode"></image>\r\n			<p class="tips">\u626B\u7801\u5173\u6CE8 \u201C\u5B66\u517B\u7F51\u201D \u516C\u4F17\u53F7\u5F00\u901A\u4F1A\u5458</p>\r\n			<view class="btn-wrap">\r\n				<button class="btn-close" @click.stop="closeBecomeMember">\u5173\u95ED</button>\r\n			</view>\r\n		</view>\r\n	</view> '),
         (0, import_vue3.createVNode)(
           _component_uni_popup,
           {
@@ -1175,9 +1174,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           512
           /* NEED_PATCH */
         ),
-        (0, import_vue3.createCommentVNode)(" \u8BE2\u95EE\u5F39\u7A97 "),
-        (0, import_vue3.createCommentVNode)(" tipsDatas\u6570\u636E\u63A7\u5236\uFF0C\u4ECEopenPopupTips\u4F20\u53C2 "),
-        (0, import_vue3.createCommentVNode)(" \u5173\u95ED\u9700\u8981\u5728 \u7236\u7EA7\u9875\u9762\u8C03\u7528this.$refs.pageHead.closePopupTips()\u5173\u95ED "),
         (0, import_vue3.createVNode)(_component_uni_popup, {
           ref: "popupTips",
           "mask-click": false,
@@ -1221,9 +1217,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           _: 1
           /* STABLE */
         }, 8, ["type"]),
-        (0, import_vue3.createCommentVNode)(" \u5F02\u5E38\u5F39\u7A97 "),
-        (0, import_vue3.createCommentVNode)(" msgData\u6570\u636E\u63A7\u5236 \u4ECEopenMsgTips\u4F20\u53C2"),
-        (0, import_vue3.createCommentVNode)(" \u5173\u95ED\u9700\u8981\u5728 \u7236\u7EA7\u9875\u9762\u8C03\u7528this.$refs.pageHead.closeMsgTips()\u5173\u95ED "),
         (0, import_vue3.createVNode)(_component_uni_popup, {
           ref: "msgTips",
           "mask-click": false,

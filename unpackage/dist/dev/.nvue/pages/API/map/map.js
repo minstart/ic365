@@ -1,5 +1,5 @@
 import { f as formatAppLog } from "../../../uni-app.es.js";
-import { resolveComponent, openBlock, createElementBlock, createElementVNode, createCommentVNode, createVNode, withCtx, createTextVNode } from "vue";
+import { resolveComponent, openBlock, createElementBlock, createElementVNode, createVNode, withCtx, createTextVNode } from "vue";
 import { _ as _export_sfc } from "../../../_plugin-vue_export-helper.js";
 const _style_0 = { "content": { "": { "flex": 1 } }, "map": { "": { "width": "750rpx", "height": 350, "backgroundColor": "#f0f0f0" } }, "scrollview": { "": { "flex": 1, "paddingTop": 10, "paddingRight": 10, "paddingBottom": 10, "paddingLeft": 10 } }, "list-item": { "": { "flexDirection": "row", "flexWrap": "nowrap", "alignItems": "center", "paddingTop": 5, "paddingRight": 0, "paddingBottom": 5, "paddingLeft": 0 } }, "list-text": { "": { "flex": 1 } }, "button": { "": { "marginTop": 5, "marginBottom": 5 } } };
 const testMarkers = [
@@ -395,7 +395,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         class: "scrollview",
         scrollY: "true"
       }, [
-        createCommentVNode(' <view class="list-item">\n                <text class="list-text">显示3D楼块</text>\n                <switch :checked="enable3D" @change="enableThreeD" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">显示指南针</text>\n                <switch :checked="showCompass" @change="changeShowCompass" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">开启俯视</text>\n                <switch :checked="enableOverlooking" @change="changeEnableOverlooking" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">是否支持缩放</text>\n                <switch :checked="enableZoom" @change="changeEnableZoom" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">是否支持拖动</text>\n                <switch :checked="enableScroll" @change="changeEnableScroll" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">是否支持旋转</text>\n                <switch :checked="enableRotate" @change="changeEnableRotate" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">是否开启卫星图</text>\n                <switch :checked="enableSatellite" @change="changeEnableSatellite" />\n            </view>\n            <view class="list-item">\n                <text class="list-text">是否开启实时路况</text>\n                <switch :checked="enableTraffic" @change="changeEnableTraffic" />\n            </view> '),
         createVNode(_component_button, {
           class: "button",
           onClick: $options.changeScale

@@ -152,7 +152,6 @@
 									type: "reLaunch"
 								})
 							}, 2000)
-
 						})
 				})
 				// .catch(err => {
